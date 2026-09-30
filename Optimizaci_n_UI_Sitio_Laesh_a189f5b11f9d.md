@@ -7,9 +7,9 @@
 | **Trajectory ID** | `6e357b7e-c91b-4705-961b-75dfa5c7e94c` |
 | **Cascade ID** | `707376e8-5501-46d1-bf86-a189f5b11f9d` |
 | **Type** | Agent Conversation |
-| **Total Steps** | 9845 |
+| **Total Steps** | 11055 |
 | **Started** | 21 Sept 2026, 3:55 pm |
-| **Completed** | 27 Sept 2026, 12:14 pm |
+| **Completed** | 27 Sept 2026, 9:25 pm |
 
 ---
 
@@ -11290,6703 +11290,2698 @@
 
 ---
 
-<details>
-<summary>Conversation History</summary>
-
-# Conversation History
-Here are the conversation IDs, titles, and summaries of your most recent 2 conversations, in reverse chronological order:
-
-<conversation_summaries>
-## Conversation a2281d84-95f3-4fa5-9da6-a6c9d7e38d1a: Pruebas WhatzMeApi Caelitandem 2026
-- Created: 2026-09-18T13:54:47Z
-- Last modified: 2026-09-27T00:34:38Z
-
-## Conversation 7e9d2ff0-deb9-465a-9e04-fdb13823ced4: Consultar Estados Solicitudes Digitales
-- Created: 2026-09-24T15:13:22Z
-- Last modified: 2026-09-25T23:14:40Z
-
-### USER Objective:
-Consultar Estados Solicitudes Digitales
-
-</conversation_summaries>
-
-</details>
-
----
-
 ### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 12:12 am
 
 ---
 
-## Agent Response
+### Local File Search
 
-### Thinking
-
-The previous request concerns the behavior when selecting a notification related to an order updated today, but initially placed the prior day, while a grid with a date-based search and autocomplete text is active.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `ws-client.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.071538457s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:13 am
 
 ---
 
-<details>
-<summary>File: `Unknown file`</summary>
+### Terminal Command Execution
 
-**Path:** `Unknown file`
-
-```
-/**
- * ws-client.js — Cliente WebSocket Swoole v6 + Fallback Polling para Notificaciones en Vivo (LAESH)
- * 
- * Funcionalidades:
- * 1. Agrupación en abanicos descendentes: "📅 Hoy" y "🕒 Ayer y Anteriores".
- * 2. Globito rojo visible (bell-badge con .show .pulse y opacity:1) y contador en título (N) Recepción.
- * 3. Supresión de advertencias Autoplay/AudioContext inicializando audio exclusivamente tras gesto de usuario.
- */
-(function() {
-    'use strict';
-
-    var ws = null;
-    var reconnectInterval = 3000;
-    var maxReconnects = 3;
-    var reconnectAttempts = 0;
-    var pollingTimer = null;
-    var lastTimestamp = 0;
-    var seenNotifIds = {};
-    var unreadCount = 0;
-    var originalTitle = document.title;
-
-    // Control de AudioContext seguro (cero advertencias Autoplay)
-    var hasUserGesture = false;
-    var sharedAudioCtx = null;
-
-    function registerUserGesture() {
-        if (hasUserGesture) return;
-        hasUserGesture = true;
-        try {
-            var AudioCtx = window.AudioContext || window.webkitAudioContext;
-            if (AudioCtx && !sharedAudioCtx) {
-                sharedAudioCtx = new AudioCtx();
-            }
-        } catch (e) {}
-    }
-
-    ['click', 'keydown', 'touchstart', 'pointerdown'].forEach(function(evtName) {
-        document.addEventListener(evtName, registerUserGesture, { once: true, capture: true });
-    });
-
-    function getWsUrl() {
-        var host = window.location.hostname || 'localhost';
-        var protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-        return protocol + '//' + host + (window.location.port ? ':' + window.location.port : '') + '/ws/';
-    }
-
-    function getApiBaseDir() {
-        return window.location.pathname.replace(/\/index\.php\/?$/, '').replace(/\/+$/, '');
-    }
-
-    function pollNotifications() {
-        var endpoint = getApiBaseDir() + '/api/notificaciones?since=' + lastTimestamp;
-        fetch(endpoint, { cache: 'no-store' })
-            .then(function(res) { return res.json(); })
-            .then(function(data) {
-                if (data && data.success && Array.isArray(data.notificaciones)) {
-                    var newTs = data.timestamp || data.server_time;
-                    if (newTs) lastTimestamp = newTs;
-
-                    /* Servidor devuelve DESC (más reciente primero); invertir para que
-                       el prepend secuencial deje el más nuevo arriba al terminar. */
-                    data.notificaciones.slice().reverse().forEach(function(n) {
-                        if (n.id && seenNotifIds[n.id]) return;
-                        if (n.id) seenNotifIds[n.id] = true;
-
-                        handleWsEvent({
-                            id: n.id,
-                            event: n.tipo,
-                            folio: n.folio_referencia || '',
-                            folio_referencia: n.folio_referencia || '',
-                            orden_id: n.orden_id || null,
-                            titulo: (n.tipo === 'nueva_orden') ? 'Nueva Solicitud Médica Digital (' + (n.folio_referencia || '') + ')' : 'Actualización de Solicitud',
-                            mensaje: n.mensaje,
-                            creado_en: n.creado_en,
-                            // 2026-09-25: estado_id ACTUAL de la orden (LEFT JOIN en
-                            // GET /api/notificaciones) — sin esto, el fallback de
-                            // navegarYResaltarOrden() (PDF de resultados vs solicitud
-                            // digital) asumía siempre "sin PDF" para cualquier
-                            // notificación entregada por este camino de polling.
-                            estado: n.estado,
-                            // 2026-09-24: ya no se filtra por leido en el backend (ver
-                            // GET /api/notificaciones) — se pasa el estado para que el
-                            // panel distinga visualmente leída/no leída en vez de
-                            // ocultar por completo lo ya leído.
-                            leido: (n.leido === undefined || n.leido === null) ? 0 : n.leido
-                        });
-                    });
-                }
-            })
-            .catch(function(err) {});
-    }
-
-    function startPollingFallback() {
-        if (pollingTimer) return;
-        console.info('[LAESH Notif] Swoole WS no disponible. Polling HTTP activo cada 4s (MariaDB)');
-        pollingTimer = setInterval(pollNotifications, 4000);
-        pollNotifications();
-    }
-
-    // Corrección 2026-09-22: bug real encontrado en producción (RC no recibía
-    // notificaciones en vivo, requería refresh manual). El servidor cierra la
-    // conexión de inmediato si falla la validación del JWT/JTI al abrir (ver
-    // swoole_server.php on('open')) — pero onopen SIEMPRE se dispara primero
-    // (el handshake WS ya se completó) y reseteaba reconnectAttempts a 0 antes
-    // de que llegara el close casi instantáneo. Resultado: reconexión infinita
-    // cada 3s sin jamás alcanzar maxReconnects, así que startPollingFallback()
-    // nunca se activaba — cero actualizaciones en vivo ni por WS ni por polling.
-    // Se distingue una conexión "flapping" (cerrada casi de inmediato) de una
-    // estable: solo una conexión que duró >= MIN_STABLE_MS resetea el contador;
-    // una que "flapea" activa el polling de inmediato (no espera a agotar
-    // maxReconnects) mientras sigue reintentando WS en segundo plano.
-    var MIN_STABLE_MS = 2000;
-    var wsOpenedAt = 0;
-
-    function initWebSocket() {
-        if (ws && (ws.readyState === WebSocket.OPEN || ws.readyState === WebSocket.CONNECTING)) {
-            return;
-        }
-
-        try {
-            ws = new WebSocket(getWsUrl());
-
-            ws.onopen = function() {
-                wsOpenedAt = Date.now();
-                reconnectAttempts = 0;
-                if (pollingTimer) {
-                    clearInterval(pollingTimer);
-                    pollingTimer = null;
-                }
-                console.log('[LAESH WS] Conectado al servidor Swoole v6');
-            };
-
-            ws.onmessage = function(evt) {
-                try {
-                    var data = JSON.parse(evt.data);
-                    // "ACK QoS Nivel 2" (auditoría 2026-09-20): eliminado — el servidor
-                    // (swoole_server.php on('message')) nunca procesó este ack desde que
-                    // se escribió; la condición para dispararlo tampoco se cumplía nunca
-                    // hasta el fix de A5 (el payload no llevaba 'id'). Con A5 ya sí se
-                    // cumpliría, pero el servidor lo seguiría descartando en silencio —
-                    // tráfico sin ningún efecto. Implementar la confirmación real
-                    // requeriría un puente HTTP inverso Swoole→PHP-FPM (Swoole no tiene
-                    // conexión a BD por diseño, ver Notifier — comentarios Gap 6/§4.7 de
-                    // Tecnica_Seguridad_Integral.html); eso es una feature nueva, no un
-                    // fix de este código muerto. Se quita en vez de dejarlo a medias.
-                    handleWsEvent(data);
-                } catch (e) {
-                    console.warn('[LAESH WS] Payload no JSON:', evt.data);
-                }
-            };
-
-            ws.onerror = function() {
-                startPollingFallback();
-            };
-
-            ws.onclose = function() {
-                var wasStable = wsOpenedAt && (Date.now() - wsOpenedAt) >= MIN_STABLE_MS;
-                wsOpenedAt = 0;
-                if (!wasStable) {
-                    // Conexión "flapping" — el servidor la cerró casi de inmediato
-                    // (típicamente falla de autenticación WS). No cuenta como
-                    // reintento sano; activa el respaldo de polling ya mismo.
-                    startPollingFallback();
-                }
-                if (reconnectAttempts < maxReconnects) {
-                    reconnectAttempts++;
-                    setTimeout(initWebSocket, reconnectInterval);
-                } else {
-                    startPollingFallback();
-                }
-            };
-        } catch (e) {
-            startPollingFallback();
-        }
-    }
-
-    function updateTitleCounter() {
-        if (unreadCount > 0) {
-            document.title = '(' + unreadCount + ') ' + originalTitle;
-        } else {
-            document.title = originalTitle;
-        }
-    }
-
-    // Asegurar estructura visual de abanicos en la barra lateral de notificaciones.
-    // 2026-09-24 (pedido explícito del usuario): el Portal Médico tenía un 3er
-    // abanico dedicado "Catálogo Actualizado" (2026-09-21) — se elimina por
-    // completo, junto con todo el código que lo creaba/enrutaba/renderizaba
-    // (ver handleWsEvent más abajo). catalogo_actualizado deja de generar
-    // CUALQUIER notificación visible para médico — RC/Admin no se tocan,
-    // conservan su comportamiento original (catalogo_actualizado dentro de
-    // Hoy/Ayer). El refresco silencioso de catalog-compiled.js que este mismo
-    // evento dispara (ver más abajo, fuera de este bloque) NO se toca — sigue
-    // aplicando para médico, es lo que mantiene sincronizada su lista de
-    // estudios en "Nueva Orden"; no es parte de la notificación que se quita.
-    function ensureAccordionStructure(container) {
-        if (container.querySelector('.notif-accordion-group')) return;
-
-        container.innerHTML =
-            '<div class="notif-accordion-group" style="display:flex; flex-direction:column; gap:8px;">' +
-```
-
-</details>
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:13 am
 
 ---
 
-## Agent Response
+### Terminal Command Execution
 
-### Actions
-
-**Tool:** `view_file`
-**File:** `ws-client.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L699-1072)</summary>
-
-**Path:** `Unknown file`
-
-```
-        }
-
-        /* Dedup path WS: el path polling ya añade a seenNotifIds antes de llamar handleWsEvent.
-           El path WS llama handleWsEvent directo (ws.onmessage) sin pasar por ese check,
-           así que se duplicaría si la misma notificación ya llegó por polling.
-           Swoole inyecta data.id por conexión (A5 auditoría 2026-09-20). */
-        if (data.id) {
-            if (seenNotifIds[data.id]) return;
-            seenNotifIds[data.id] = true;
-        }
-
-        var isMedicoPortal = !!document.getElementById('tabla-medico');
-        var isCatalogoEvent = (data.event === 'catalogo_actualizado');
-        // 2026-09-24: catalogo_actualizado ya no genera NINGUNA notificación
-        // visible en el Portal Médico (pedido explícito del usuario, elimina
-        // el abanico dedicado que existía desde 2026-09-21). RC/Admin no se
-        // tocan. El refresco de catalog-compiled.js (más abajo) sigue
-        // aplicando para médico independientemente de este flag.
-        var skipNotifItem = (isMedicoPortal && isCatalogoEvent);
-
-        // GAP-NOTIF-01 (2026-09-22): catalogo_actualizado es sincronización
-        // administrativa en segundo plano ("no requiere acción suya", ver
-        // comentario de ensureAccordionStructure) — se sigue registrando en
-        // su propio abanico para trazabilidad, pero YA NO enciende la
-        // campanita/globito rojo ni el contador de pestaña. Diagnóstico real
-        // (2026-09-22): médicos/recepción reportaban una "alerta falsa" en
-        // cada login — el badge se encendía por un catalogo_actualizado
-        // genuinamente sin leer (acumulado de ediciones de catálogo de
-        // otros usuarios), pero como cae en un abanico colapsado por
-        // defecto y no en Hoy/Ayer (lo que el usuario revisa primero),
-        // percibía la alerta como "sin mensajes". Ver también el fix de
-        // actor_user_id en CatalogBuilder::build() — evita que Recepción/
-        // Admin se autonotifique al editar el catálogo.
-        // 2026-09-24: desde que el panel deja de filtrar por leido=0, este
-        // handler también recibe ítems que YA estaban marcados leídos (ej. se
-        // abrió el panel en otra pestaña, o se marcó "leer todo" antes de este
-        // poll) — esos no deben volver a sumar al contador de no-leídos.
-        var yaLeidoParaContador = !!(data.leido && Number(data.leido) === 1);
-        if (!isCatalogoEvent && !yaLeidoParaContador) {
-            // Incrementar contador de pestaña
-            unreadCount++;
-            updateTitleCounter();
-
-            // Actualizar globitos rojos de notificación con animación
-            var badges = document.querySelectorAll('#badge-recepcion, #badge-resultados, .bell-badge');
-            badges.forEach(function(b) {
-                var count = parseInt(b.textContent || '0', 10) + 1;
-                b.textContent = count;
-                b.classList.add('show', 'pulse');
-                b.style.display = 'inline-flex';
-                b.style.opacity = '1';
-            });
-        }
-
-        // Inyectar ítem visual en los abanicos del panel lateral — se omite
-        // por completo para catalogo_actualizado en médico (skipNotifItem).
-        var notifLists = skipNotifItem ? [] : document.querySelectorAll('.sidebar-right-body, .sidebar-right .sidebar-right-body, .sidebar-right .modal-body, #sidebar-right .sidebar-right-body, #sidebar-right .modal-body');
-        notifLists.forEach(function(container) {
-            ensureAccordionStructure(container);
-
-            var isToday = isCreatedToday(data.creado_en);
-            var targetBody = isToday ? container.querySelector('.notif-body-hoy') : container.querySelector('.notif-body-anteriores');
-            var cntBadge   = isToday ? container.querySelector('.badge-cnt-hoy') : container.querySelector('.badge-cnt-anteriores');
-
-            if (!targetBody) return;
-
-            var yaLeido = !!(data.leido && Number(data.leido) === 1);
-
-            var item = document.createElement('div');
-            item.className = 'card card-sm border-left-primary notif-item-clickable' + (yaLeido ? ' notif-leido' : '');
-            if (data.id) {
-                item.dataset.notifId = data.id;
-            }
-            item.style.padding = '8px 12px';
-            item.style.fontSize = '0.82rem';
-            item.style.background = isToday ? '#ffffff' : '#f8fafc';
-            item.style.borderLeft = isToday ? '3px solid #0052b7' : '3px solid #94a3b8';
-            item.style.borderRadius = '6px';
-            item.style.boxShadow = '0 1px 3px rgba(0,0,0,0.05)';
-            item.style.cursor = 'pointer';
-            item.style.transition = 'transform 0.15s ease, box-shadow 0.15s ease';
-            // 2026-09-24: si ya llega marcada leída (ej. se abrió el panel y se
-            // marcó todo, o se leyó en otra pestaña/dispositivo), se muestra
-            // atenuada desde el inicio en vez de a full opacidad — mismo
-            // tratamiento visual que al hacer clic (ver abajo), pero sin
-            // ocultarla ni tratarla como "nunca pasó".
-            if (yaLeido) item.style.opacity = '0.55';
-
-            var folioRef = data.folio || data.folio_referencia || '';
-            if (folioRef) {
-                item.title = 'Haz clic para ir a la solicitud ' + folioRef + (yaLeido ? ' (leído)' : '');
-            }
-
-            var timeStr = data.creado_en ? new Date(data.creado_en).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-            item.innerHTML = '<strong style="color: #0f172a;">' + escapeHtml(data.titulo || 'Nueva Notificación') + '</strong><br>' +
-                             '<span class="txt-muted-sm" style="color: #475569; font-size: 0.78rem;">' + escapeHtml(data.mensaje || 'Se ha registrado una nueva actividad.') + '</span>' +
-                             '<div style="font-size:0.7rem; color:#94a3b8; margin-top:2px;">' + timeStr + '</div>';
-
-            // Hover UX
-            item.addEventListener('mouseenter', function() {
-                item.style.transform = 'translateY(-1px)';
-                item.style.boxShadow = '0 3px 6px rgba(0,0,0,0.1)';
-            });
-            item.addEventListener('mouseleave', function() {
-                item.style.transform = 'none';
-                item.style.boxShadow = '0 1px 3px rgba(0,0,0,0.05)';
-            });
-
-            // Click Handler: Navegar a la pestaña (Hoy / Anteriores) y resaltar el renglón correspondiente.
-            // 2026-09-24: la rama "isMedicoPortal && isCatalogoEvent" que colapsaba
-            // el panel sin navegar se eliminó — ese combo ya no llega aquí, el ítem
-            // ni siquiera se crea para médico (ver skipNotifItem arriba).
-            item.addEventListener('click', function() {
-                // 2026-09-21 (corrección del usuario): el ítem NO se elimina del
-                // abanico — se queda visible como historial, pero se marca "leído"
-                // (visualmente atenuado) y deja de contar como no-leído. El contador
-                // de la sección (Hoy / Ayer y Anteriores) y el globito de la
-                // campanita reflejan solo los no-leídos. Idempotente: un segundo
-                // clic sobre el mismo ítem ya leído no vuelve a decrementar.
-                if (!item.classList.contains('notif-leido')) {
-                    item.classList.add('notif-leido');
-                    item.style.opacity = '0.55';
-                    item.title = (item.title || '') + ' (leído)';
-
-                    if (cntBadge) {
-                        cntBadge.textContent = Math.max(0, parseInt(cntBadge.textContent || '0', 10) - 1);
-                    }
-
-                    // catalogo_actualizado (Recepción/Admin — médico ya no llega
-                    // aquí) nunca incrementó unreadCount/campanita (ver GAP-NOTIF-01
-                    // arriba) — decrementarlos aquí restaría de cuenta real de otros
-                    // eventos sí-contados. Solo el contador de sección (cntBadge,
-                    // arriba) aplica para este tipo de ítem.
-                    if (!isCatalogoEvent) {
-                        unreadCount = Math.max(0, unreadCount - 1);
-                        updateTitleCounter();
-
-                        var bellBadges = document.querySelectorAll('#badge-recepcion, #badge-resultados, .bell-badge');
-                        bellBadges.forEach(function(b) {
-                            var nuevo = Math.max(0, parseInt(b.textContent || '0', 10) - 1);
-                            b.textContent = nuevo;
-                            if (nuevo === 0) {
-                                b.classList.remove('show', 'pulse');
-                                b.style.opacity = '0';
-                            }
-                        });
-                    }
-
-                    // Sincronización SSOT en MariaDB: persistir marcado de lectura
-                    var notifId = item.dataset.notifId || data.id;
-                    var payload = {};
-                    if (notifId) payload.id = parseInt(notifId, 10);
-                    if (folioRef) payload.folio = folioRef;
-
-                    if (payload.id || payload.folio) {
-                        fetch(getApiBaseDir() + '/api/notificaciones/marcar-leida', {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify(payload)
-                        }).catch(function(err) {
-                            console.warn('[LAESH Notif] Error al persistir lectura:', err);
-                        });
-                    }
-                }
-
-                var folioTarget  = folioRef;
-                if (!folioTarget && data.titulo) {
-                    var m = data.titulo.match(/\(([^)]+)\)/);
-                    if (m && m[1]) folioTarget = m[1].trim();
-                }
-
-                // 2026-09-25: lógica de navegar+resaltar extraída a
-                // navegarYResaltarOrden() (arriba en este mismo archivo),
-                // reutilizada aquí y desde la lupita. Gap cerrado (retomado
-                // tras validar el enfoque con la lupita): se agrega
-                // filtrarBusquedaPrimero para que una notificación de una
-                // orden que no esté en la página actualmente cargada
-                // (paginación) también se ubique — antes esto se quedaba en
-                // silencio tras 6 intentos. Sin onNoEncontrado explícito —
-                // usa el respaldo por defecto de la función (abre el
-                // documento correcto según el estado real de la orden), no
-                // hace falta repetirlo aquí. data.estado viaja en
-                // orden_actualizada y resultado_disponible (2026-09-25); si
-                // el evento no lo trae (ej. nueva_orden), queda undefined y
-                // el respaldo por defecto asume "sin PDF" — correcto también
-                // en ese caso.
-                if (folioTarget) {
-                    navegarYResaltarOrden(folioTarget, isToday, { filtrarBusquedaPrimero: true, estadoId: data.estado });
-                }
-            });
-
-            // Inserción en orden descendente (más nueva arriba)
-            targetBody.insertBefore(item, targetBody.firstChild);
-
-            // El badge de sección cuenta NO-LEÍDOS, no el total de ítems del
-            // historial — se incrementa desde su valor actual, no se recalcula
-            // desde targetBody.children.length (eso incluiría los ya leídos).
-            // 2026-09-24: tampoco cuenta ítems que ya llegan marcados leídos.
-            if (cntBadge && !yaLeido) {
-                cntBadge.textContent = parseInt(cntBadge.textContent || '0', 10) + 1;
-            }
-        });
-
-        // Refrescar el catálogo compilado en memoria (catalog-compiled.js) cuando el Admin / Recepción modifica MariaDB
-        if (data.event === 'catalogo_actualizado') {
-            var oldScript = document.getElementById('script-catalog-compiled');
-            if (oldScript) oldScript.remove();
-            var s = document.createElement('script');
-            s.id = 'script-catalog-compiled';
-            s.src = '/laesh-web-assets-uipv1a/js/catalog-compiled.js?v=' + Date.now();
-            s.onload = function() {
-                // Portal Médico: re-poblar grilla "20 Est.Med" con los datos frescos
-                if (typeof window.populateMandatoryGrid === 'function') window.populateMandatoryGrid();
-            };
-            document.head.appendChild(s);
-            console.info('[LAESH Notif] Catálogo compilado sincronizado en memoria (catalog-compiled.js)');
-        }
-
-        // Refrescar automáticamente la tabla de recepción o médicos (Hoy y Anteriores)
-        // Gap 4 (auditoría 2026-09-18): 'resultados_listos' es el nombre real del `tipo`
-        // en BD (commons/notifier.php) — cuando la notificación llega vía polling fallback
-        // (no WS en vivo), n.tipo trae ese valor, no 'resultado_disponible'. Sin esta rama,
-        // el badge/panel sí aparecía pero la tabla de resultados no se refrescaba sola.
-        if (data.event === 'nueva_orden' || data.event === 'orden_actualizada' || data.event === 'resultado_disponible' || data.event === 'resultados_listos') {
-            // FIX-SPASM (generalizado 2026-09-23): un refresh de tabla por WS en
-            // vivo (llega de la acción de OTRO usuario, no de esta pestaña) no debe
-            // robar el cursor/texto de un input activo — ni el form de Nueva Orden
-            // ni el motivo de cancelación inline (que vive DENTRO de la fila de la
-            // tabla misma). Antes esta protección solo cubría #form-orden en
-            // médico; recepción no tenía ninguna, y ninguno de los 2 cubría su
-            // propio input de motivo de cancelación (vive fuera de #form-orden).
-            // Ahora: si el foco activo está dentro de LA TABLA que se va a
-            // refrescar, o dentro del formulario de creación de orden del mismo
-            // portal, se difiere el refresh hasta que el usuario suelte el campo.
-            // 2026-09-25 (gap reportado por el usuario: "a veces muestra el
-            // registro único y a veces varios"): tabla.id → id del campo de
-            // búsqueda que la filtra. htmx.trigger(tabla, 'refresh') dispara
-            // el hx-get BASE de la tabla — SIN el parámetro de filtro, porque
-            // ese hx-get vive en la TABLA, no en el input (el que sí incluye
-            // el valor vía su propio hx-get). Si llega OTRA notificación
-            // mientras el usuario tiene un filtro activo (por haber llegado
-            // desde una notificación o desde la lupita), este refresh
-            // automático deshacía el filtro sin que el usuario hiciera nada
-            // — mostraba todos los registros de golpe. Ahora, si el campo de
-            // búsqueda asociado tiene un valor, el refresh se dispara EN EL
-            // INPUT (mismo "search" que ya usa filtrarBusquedaPrimero) para
-            // que la petición SIGA incluyendo el filtro — datos al día sin
-            // perder lo que el usuario estaba viendo.
-            var TABLA_A_BUSCADOR = {
-                'tabla-recepcion':           'input-buscar-orden-rc',
-                'tabla-recepcion-anteriores':'input-buscar-orden-anteriores-rc',
-                'tabla-medico':              'input-buscar-orden-hoy-md',
-                'tabla-historial-completo':  'input-buscar-orden-anteriores-md'
-            };
-
-            var refreshDeferrable = function(tabla, formOrdenId) {
-                if (!tabla) return;
-                var activeEl = document.activeElement;
-                var formOrden = formOrdenId ? document.getElementById(formOrdenId) : null;
-                var userIsTyping = activeEl &&
-                    (activeEl.tagName === 'INPUT' || activeEl.tagName === 'TEXTAREA') &&
-                    (tabla.contains(activeEl) || (formOrden && formOrden.contains(activeEl)));
-
-                var doRefresh = function() {
-                    var searchId = TABLA_A_BUSCADOR[tabla.id];
-                    var searchInput = searchId ? document.getElementById(searchId) : null;
-                    if (searchInput && searchInput.value.trim() !== '') {
-                        searchInput.dispatchEvent(new Event('search', { bubbles: true }));
-                        return;
-                    }
-                    if (typeof htmx !== 'undefined') {
-                        htmx.trigger(tabla, 'refresh');
-                    } else {
-                        var btnRefresh = document.getElementById('btn-refrescar-tabla');
-                        if (btnRefresh) btnRefresh.click();
-                    }
-                };
-
-                if (userIsTyping) {
-                    if (!activeEl._hasPendingRefresh) {
-                        activeEl._hasPendingRefresh = true;
-                        var _onBlur = function() {
-                            activeEl._hasPendingRefresh = false;
-                            activeEl.removeEventListener('blur', _onBlur);
-                            doRefresh();
-                        };
-                        activeEl.addEventListener('blur', _onBlur);
-                    }
-                } else {
-                    doRefresh();
-                }
-            };
-
-            refreshDeferrable(document.getElementById('tabla-recepcion'), null);
-            refreshDeferrable(document.getElementById('tabla-recepcion-anteriores'), null);
-            refreshDeferrable(document.getElementById('tabla-medico'), 'form-orden');
-            refreshDeferrable(document.getElementById('tabla-historial-completo'), 'form-orden');
-        }
-
-        // Feedback auditivo (solo si ya existió interacción de usuario) —
-        // catalogo_actualizado no suena, mismo criterio que el badge arriba.
-        if (!isCatalogoEvent && !isMedicoPortal) playChime();
-    }
-
-    function playChime() {
-        if (!hasUserGesture || !sharedAudioCtx) return;
-        try {
-            if (sharedAudioCtx.state === 'suspended') {
-                var p = sharedAudioCtx.resume();
-                if (p && typeof p.then === 'function') {
-                    p.then(function() { triggerTone(sharedAudioCtx); }).catch(function() {});
-                }
-            } else {
-                triggerTone(sharedAudioCtx);
-            }
-        } catch (e) {}
-    }
-
-    function triggerTone(audioCtx) {
-        try {
-            var osc = audioCtx.createOscillator();
-            var gain = audioCtx.createGain();
-            osc.type = 'sine';
-            osc.frequency.setValueAtTime(587.33, audioCtx.currentTime);
-            gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
-            osc.connect(gain);
-            gain.connect(audioCtx.destination);
-            osc.start();
-            osc.stop(audioCtx.currentTime + 0.15);
-        } catch (e) {}
-    }
-
-    document.addEventListener('DOMContentLoaded', function() {
-        pollNotifications();
-        initWebSocket();
-
-        // 2026-09-25 (corrección reportada por el usuario, dos síntomas del
-        // mismo gap): antes, CUALQUIER clic en la campana superior
-        // (#bell-wrap-notif) o en el toggle "<" del panel
-        // (#sidebar-right-toggle) marcaba TODAS las notificaciones como
-        // leídas de inmediato (resetNotifBadges) — sin abrir ni mostrar el
-        // panel en ningún momento. Por eso la campana superior "no hacía
-        // nada visible" (no llevaba al panel) mientras que cualquier
-        // interacción con el panel (incluido solo colapsarlo/expandirlo)
-        // marcaba todo leído sin que el usuario lo pidiera. Ahora la campana
-        // SOLO abre/muestra el panel — desktop: expande el rail derecho vía
-        // sidebar-rail.js (window.laeshSidebarRail.setRightExpanded); móvil:
-        // scroll hacia #sidebar-right, igual que ya hacía #bell-wrap-mob
-        // (app.js) — y el marcado de leído queda exclusivamente a cargo del
-        // clic individual en cada notificación (ya implementado en el
-        // listener de cada .notif-item-clickable, más abajo en este mismo
-        // archivo). #sidebar-right-toggle conserva su propio manejador de
-        // expandir/colapsar en sidebar-rail.js — aquí solo se le quita el
-        // marcado-leído-automático que tenía de más.
-        function abrirPanelNotificaciones() {
-            var sidebarRight = document.getElementById('sidebar-right') || document.querySelector('.sidebar-right');
-            if (!sidebarRight) return;
-            if (window.laeshSidebarRail && typeof window.laeshSidebarRail.setRightExpanded === 'function') {
-                window.laeshSidebarRail.setRightExpanded(true);
-            }
-            sidebarRight.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-
-        var bellTop = document.getElementById('bell-wrap-notif');
-        if (bellTop) {
-            bellTop.addEventListener('click', abrirPanelNotificaciones);
-            bellTop.addEventListener('touchend', function(e) {
-                if (e.cancelable) e.preventDefault();
-                abrirPanelNotificaciones();
-            });
-        }
-    });
-})();
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `navegarYResaltarOrden`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:13 am
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 12:13 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `ws-client.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L439-704)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-                if (inpAntRc) {
-                    inpAntRc.value = snap.textoAnt;
-                    inpAntRc.dispatchEvent(new Event('search', { bubbles: true }));
-                    inpAntRc.dispatchEvent(new Event('keyup', { bubbles: true }));
-                }
-            }
-        }
-    }
-
-    // ── Navegar a la pestaña correcta y resaltar un renglón por folio ──────────
-    function navegarYResaltarOrden(folioTarget, esHoy, opciones) {
-        opciones = opciones || {};
-        var cleanTarget = String(folioTarget || '').trim();
-        if (!cleanTarget) return;
-
-        // 1. Ocultar o colapsar el panel lateral de notificaciones (si está abierto)
-        var sidebarRight = document.querySelector('.sidebar-right, #sidebar-right');
-        if (sidebarRight) {
-            sidebarRight.classList.remove('active', 'show', 'open');
-        }
-
-        // 2. Identificar portal
-        var isMedicoPortal   = !!document.getElementById('tabla-medico') || !!document.getElementById('panel-nueva-orden');
-        var isRecepcionAdmin = !!document.getElementById('tabla-recepcion') || !!document.getElementById('panel-ordenes');
-
-        // Capturar instantánea de la búsqueda en curso si el operador estaba trabajando en una
-        capturarEstadoBusquedaPrevia(isMedicoPortal);
-
-        function resolverDestino(paraHoy) {
-            if (isMedicoPortal) {
-                return paraHoy ? {
-                    panelFn: function() {
-                        if (typeof window.cambiarTabMedico === 'function') window.cambiarTabMedico('panel-nueva-orden');
-                        if (typeof window.switchSubTab === 'function') window.switchSubTab('ordenes-hoy');
-                    },
-                    tableId: 'tabla-medico',
-                    searchId: 'input-buscar-orden-hoy-md'
-                } : {
-                    panelFn: function() {
-                        if (typeof window.cambiarTabMedico === 'function') window.cambiarTabMedico('panel-historial-medico');
-                    },
-                    tableId: 'tabla-historial-completo',
-                    searchId: 'input-buscar-orden-anteriores-md'
-                };
-            } else if (isRecepcionAdmin) {
-                return paraHoy ? {
-                    panelFn: function() {
-                        if (typeof window.cambiarTabAdmin === 'function') window.cambiarTabAdmin('panel-ordenes');
-                    },
-                    tableId: 'tabla-recepcion',
-                    searchId: 'input-buscar-orden-rc'
-                } : {
-                    panelFn: function() {
-                        if (typeof window.cambiarTabAdmin === 'function') window.cambiarTabAdmin('panel-ordenes-anteriores');
-                    },
-                    tableId: 'tabla-recepcion-anteriores',
-                    searchId: 'input-buscar-orden-anteriores-rc'
-                };
-            }
-            return null;
-        }
-
-        var destinoInicial = resolverDestino(esHoy);
-        if (!destinoInicial) return;
-
-        // 2026-09-27 (pedido explícito del usuario): NO abrir de forma forzada
-        // la Solicitud Digital ni el PDF de Resultados en overlay para no interrumpir
-        // ni ocultar la pantalla de trabajo del operador. En su lugar, un aviso no intrusivo.
-        var onNoEncontrado = opciones.onNoEncontrado || function() {
-            console.log('[LAESH Notif] Solicitud #' + cleanTarget + ' no localizada en grilla.');
-        };
-
-        // 3-4. Intenta localizar y resaltar el renglón en un destino dado
-        // (Hoy o Anteriores). Si agota los reintentos sin encontrarlo Y aún
-        // no se probó la pestaña opuesta, cambia a esa pestaña y reintenta
-        // ahí antes de rendirse al fallback — ver nota de "corrección de
-        // raíz" arriba de resolverDestino().
-        function intentarEn(destino, yaProboOpuesta) {
-            destino.panelFn();
-
-            if (opciones.filtrarBusquedaPrimero && destino.searchId) {
-                var searchInput = document.getElementById(destino.searchId);
-                if (searchInput) {
-                    searchInput.value = cleanTarget;
-                    // Trigger "search" nombrado explícito en el hx-trigger de estos
-                    // inputs (aparte de "keyup changed delay:250ms") — dispara la
-                    // búsqueda HTMX de inmediato, sin depender de comparar contra un
-                    // valor anterior ni esperar el delay de 250ms del keyup.
-                    searchInput.dispatchEvent(new Event('search', { bubbles: true }));
-                    // 2026-09-25 (gap reportado por el usuario): fijar .value
-                    // directamente y disparar solo "search" deja el rastreo
-                    // interno de HTMX para el modificador "changed" (del
-                    // trigger "keyup changed") desincronizado — HTMX solo
-                    // actualiza ese último valor conocido al procesar un
-                    // "keyup" real, nunca al disparar "search". Si luego el
-                    // usuario borra el campo a mano, el valor final ("") suele
-                    // coincidir con ese último valor desactualizado (vacío,
-                    // de antes de este filtro) y HTMX concluye "no cambió" —
-                    // omite la petición y la grilla se queda con el filtro
-                    // aplicado hasta que se recarga toda la página. Se
-                    // sincroniza disparando también un "keyup" real — HTMX lo
-                    // usa para registrar el valor actual como conocido, sin
-                    // el cual cualquier edición manual posterior del usuario
-                    // vuelve a comparar contra un estado obsoleto.
-                    searchInput.dispatchEvent(new Event('keyup', { bubbles: true }));
-                }
-            }
-
-            // Busca el renglón dentro de `table` y, si lo encuentra, le aplica
-            // el resaltado. Devuelve el <tr> encontrado o null — extraído a su
-            // propia función para poder reutilizarlo también desde el listener
-            // de re-sincronización de abajo (ver "GAP: swap redundante").
-            function buscarYResaltarEn(table) {
-                var foundRow = null;
-
-                // Prioridad 1: selector data-folio en tr
-                foundRow = table.querySelector('tbody tr[data-folio="' + cleanTarget + '"]');
-
-                // Prioridad 2: selector de enlace de folio data-id
-                if (!foundRow) {
-                    var linkFolio = table.querySelector('tbody td.td-folio-hist a[data-id="' + cleanTarget + '"], tbody a.lnk-folio[data-id="' + cleanTarget + '"]');
-                    if (linkFolio) {
-                        foundRow = linkFolio.closest('tr');
-                    }
-                }
-
-                // Prioridad 3: coincidencia exacta en celda td.td-folio-hist
-                if (!foundRow) {
-                    var tdFolios = table.querySelectorAll('tbody td.td-folio-hist');
-                    for (var i = 0; i < tdFolios.length; i++) {
-                        var txt = (tdFolios[i].textContent || '').replace(/[^\w-]/g, '').trim();
-                        if (txt === cleanTarget) {
-                            foundRow = tdFolios[i].closest('tr');
-                            break;
-                        }
-                    }
-                }
-
-                // Prioridad 4: selector id si es numérico (anclado con sufijo exacto para evitar falsos positivos con folios de pocos dígitos ej: "1")
-                if (!foundRow && /^\d+$/.test(cleanTarget)) {
-                    foundRow = table.querySelector('tbody tr[id="row-orden-' + cleanTarget + '"], tbody tr[id="row-orden-ant-' + cleanTarget + '"], tbody tr[id="orden-row-' + cleanTarget + '"], tbody tr[id="orden-row-ant-' + cleanTarget + '"], tbody tr[id$="-' + cleanTarget + '"]');
-                }
-
-                if (foundRow) {
-                    foundRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    try { foundRow.focus(); } catch (e) {}
-                    foundRow.classList.remove('row-notif-highlight');
-                    void foundRow.offsetWidth; // Forzar reflow CSS para reiniciar la animación
-                    foundRow.classList.add('row-notif-highlight');
-                    setTimeout(function() {
-                        foundRow.classList.remove('row-notif-highlight');
-                    }, 3500);
-                }
-                return foundRow;
-            }
-
-            // GAP (reportado por el usuario, 2026-09-25 — diagnosticado con
-            // instrumentación real, no por inferencia): cualquier refresh
-            // posterior de esta tabla (el "keyup" sintético de arriba con su
-            // propio delay:250ms, o una notificación concurrente real vía WS
-            // o polling) hace outerHTML swap de la MISMA tabla poco después
-            // de que este código ya la encontró y resaltó. La causa raíz NO
-            // era solo "el swap reemplaza el <tr>" — el <tr> con el MISMO id
-            // (ej. "orden-row-ant-102") sí persiste entre swaps, pero HTMX
-            // tiene una fase de "settle" (htmx:afterSettle, ~20ms después del
-            // swap por defecto) donde, para elementos que casa por id entre
-            // el HTML viejo y el nuevo, RESTAURA el atributo "class" al valor
-            // del HTML recién llegado del servidor (attributesToSettle
-            // incluye "class" — mecanismo de HTMX pensado para permitir
-            // transiciones CSS, no para preservar clases añadidas por JS).
-            // Aplicar la clase en "htmx:afterSwap" (como se hacía antes)
-            // pierde la carrera: HTMX la sobrescribe ~20ms después durante su
-            // propio settle. La corrección es aplicar el resaltado en
-            // "htmx:afterSettle" — que se dispara DESPUÉS de que HTMX termina
-            // de restaurar esos atributos, así que ya no hay nada que lo
-            // vuelva a pisar. Se escucha dentro de una ventana breve tras
-            // resaltar y NO se desengancha tras el primer resync — dentro de
-            // la ventana pueden llegar varios refreshes concurrentes (el
-            // "keyup" propio Y una notificación real casi al mismo tiempo) y
-            // cada uno debe volver a resaltar el renglón en el DOM nuevo.
-            var resyncWindowMs = 4500;
-            var resyncDeadline = 0;
-            function onAfterSettle(evt) {
-                if (!evt || !evt.target || evt.target.id !== destino.tableId) return;
-                if (Date.now() > resyncDeadline) {
-                    document.removeEventListener('htmx:afterSettle', onAfterSettle);
-                    return;
-                }
-                var freshTable = document.getElementById(destino.tableId);
-                if (freshTable) buscarYResaltarEn(freshTable);
-            }
-
-            var attempts = 0;
-            var maxAttempts = 6;
-            var highlightRow = function() {
-                attempts++;
-                var table = document.getElementById(destino.tableId);
-                if (!table && attempts < maxAttempts) {
-                    setTimeout(highlightRow, 150);
-                    return;
-                }
-                if (!table) {
-                    agotado();
-                    return;
-                }
-
-                var foundRow = buscarYResaltarEn(table);
-
-                if (foundRow) {
-                    mostrarBarraRetorno(cleanTarget);
-                    if (opciones.filtrarBusquedaPrimero) {
-                        resyncDeadline = Date.now() + resyncWindowMs;
-                        document.addEventListener('htmx:afterSettle', onAfterSettle);
-                        // Limpieza de respaldo — si nunca llega otro swap en
-                        // esta tabla tras el deadline, el listener igual se
-                        // desengancha (evita acumular listeners indefinidos).
-                        setTimeout(function() {
-                            document.removeEventListener('htmx:afterSettle', onAfterSettle);
-                        }, resyncWindowMs + 200);
-                    }
-                } else if (attempts < maxAttempts) {
-                    // Reintentar si la tabla aún se está refrescando/renderizando por HTMX
-                    setTimeout(highlightRow, 200 * attempts);
-                } else {
-                    agotado();
-                }
-            };
-
-            function agotado() {
-                if (!yaProboOpuesta) {
-                    var destinoOpuesto = resolverDestino(!esHoy);
-                    if (destinoOpuesto) {
-                        intentarEn(destinoOpuesto, true);
-                        return;
-                    }
-                }
-                onNoEncontrado();
-            }
-
-            // Ejecutar de inmediato y con reintentos escalonados para absorber
-            // asincronía de pestañas y HTMX. Con filtro proactivo, se da un poco
-            // más de margen inicial (300ms vs 50ms) porque ahora hay una petición
-            // HTMX real de por medio antes del primer intento útil.
-            setTimeout(highlightRow, opciones.filtrarBusquedaPrimero ? 300 : 50);
-        }
-
-        intentarEn(destinoInicial, false);
-    }
-    window.laeshNavegarYResaltarOrden = navegarYResaltarOrden;
-
-    function handleWsEvent(data) {
-        if (!data || !data.event) return;
-
-        // Regla de retención: Notificaciones con antigüedad > 30 días no se procesan ni muestran
-        if (data.creado_en) {
-            var notifTime = new Date(data.creado_en).getTime();
-            if (!isNaN(notifTime) && (Date.now() - notifTime) > (30 * 24 * 60 * 60 * 1000)) {
-                return;
-            }
-        }
-
-        /* Dedup path WS: el path polling ya añade a seenNotifIds antes de llamar handleWsEvent.
-           El path WS llama handleWsEvent directo (ws.onmessage) sin pasar por ese check,
-           así que se duplicaría si la misma notificación ya llegó por polling.
-           Swoole inyecta data.id por conexión (A5 auditoría 2026-09-20). */
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `ws-client.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L339-449)</summary>
-
-**Path:** `Unknown file`
-
-```
-            '</div>' +
-            '<div style="display: flex; align-items: center; gap: 6px;">' +
-                '<button type="button" id="btn-volver-busqueda-notif" style="padding: 4px 12px; font-size: 0.8rem; font-weight: 600; color: #ffffff; background: #0052b7; border: 1px solid #004394; border-radius: 5px; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; box-shadow: 0 1px 2px rgba(0,0,0,0.08);">' +
-                    '<span>⬅ Volver a mi búsqueda (' + escapeHtml(resumenTexto) + ')</span>' +
-                '</button>' +
-                '<button type="button" id="btn-cerrar-banner-notif" title="Descartar aviso" style="background: transparent; border: none; font-size: 1rem; color: #64748b; cursor: pointer; line-height: 1; padding: 2px 6px;">✕</button>' +
-            '</div>';
-
-        var targetCard = null;
-        if (snap.isMedico) {
-            targetCard = document.querySelector('#subtab-ordenes-hoy .card, #panel-historial-medico .card');
-        } else {
-            targetCard = document.querySelector('#panel-ordenes .card, #panel-ordenes-anteriores .card');
-        }
-
-        if (targetCard && targetCard.parentNode) {
-            targetCard.parentNode.insertBefore(bar, targetCard);
-        } else {
-            var header = document.querySelector('.cms-panel-header');
-            if (header && header.parentNode) {
-                header.parentNode.insertBefore(bar, header.nextSibling);
-            }
-        }
-
-        var btnVolver = document.getElementById('btn-volver-busqueda-notif');
-        if (btnVolver) {
-            btnVolver.addEventListener('click', function(e) {
-                e.preventDefault();
-                restaurarEstadoBusquedaPrevia();
-            });
-        }
-        var btnCerrar = document.getElementById('btn-cerrar-banner-notif');
-        if (btnCerrar) {
-            btnCerrar.addEventListener('click', function(e) {
-                e.preventDefault();
-                _busquedaPreviaSnapshot = null;
-                bar.remove();
-            });
-        }
-    }
-
-    function restaurarEstadoBusquedaPrevia() {
-        if (!_busquedaPreviaSnapshot) return;
-        var snap = _busquedaPreviaSnapshot;
-        _busquedaPreviaSnapshot = null;
-
-        var bar = document.getElementById('laesh-notif-return-bar');
-        if (bar) bar.remove();
-
-        var isMed = snap.isMedico;
-        if (snap.tabActiva === 'hoy') {
-            if (isMed) {
-                if (typeof window.cambiarTabMedico === 'function') window.cambiarTabMedico('panel-nueva-orden');
-                if (typeof window.switchSubTab === 'function') window.switchSubTab('ordenes-hoy');
-                var inpHoy = document.getElementById('input-buscar-orden-hoy-md');
-                if (inpHoy) {
-                    inpHoy.value = snap.textoHoy;
-                    inpHoy.dispatchEvent(new Event('search', { bubbles: true }));
-                    inpHoy.dispatchEvent(new Event('keyup', { bubbles: true }));
-                }
-            } else {
-                if (typeof window.cambiarTabAdmin === 'function') window.cambiarTabAdmin('panel-ordenes');
-                var inpHoyRc = document.getElementById('input-buscar-orden-rc');
-                if (inpHoyRc) {
-                    inpHoyRc.value = snap.textoHoy;
-                    inpHoyRc.dispatchEvent(new Event('search', { bubbles: true }));
-                    inpHoyRc.dispatchEvent(new Event('keyup', { bubbles: true }));
-                }
-            }
-        } else {
-            if (isMed) {
-                if (typeof window.cambiarTabMedico === 'function') window.cambiarTabMedico('panel-historial-medico');
-                var selMed = document.getElementById('select-periodo-anteriores-md');
-                var iniMed = document.getElementById('fecha-inicio-anteriores-md');
-                var finMed = document.getElementById('fecha-fin-anteriores-md');
-                var ranMed = document.getElementById('rango-fechas-anteriores-md');
-                var inpAntMed = document.getElementById('input-buscar-orden-anteriores-md');
-
-                if (selMed) selMed.value = snap.periodoVal;
-                if (iniMed) iniMed.value = snap.iniVal;
-                if (finMed) finMed.value = snap.finVal;
-                if (ranMed) ranMed.style.display = snap.rangoVisible ? 'inline-flex' : 'none';
-
-                if (inpAntMed) {
-                    inpAntMed.value = snap.textoAnt;
-                    inpAntMed.dispatchEvent(new Event('search', { bubbles: true }));
-                    inpAntMed.dispatchEvent(new Event('keyup', { bubbles: true }));
-                }
-            } else {
-                if (typeof window.cambiarTabAdmin === 'function') window.cambiarTabAdmin('panel-ordenes-anteriores');
-                var selRc = document.getElementById('select-periodo-anteriores-rc');
-                var iniRc = document.getElementById('fecha-inicio-anteriores-rc');
-                var finRc = document.getElementById('fecha-fin-anteriores-rc');
-                var ranRc = document.getElementById('rango-fechas-anteriores-rc');
-                var inpAntRc = document.getElementById('input-buscar-orden-anteriores-rc');
-
-                if (selRc) selRc.value = snap.periodoVal;
-                if (iniRc) iniRc.value = snap.iniVal;
-                if (finRc) finRc.value = snap.finVal;
-                if (ranRc) ranRc.style.display = snap.rangoVisible ? 'inline-flex' : 'none';
-
-                if (inpAntRc) {
-                    inpAntRc.value = snap.textoAnt;
-                    inpAntRc.dispatchEvent(new Event('search', { bubbles: true }));
-                    inpAntRc.dispatchEvent(new Event('keyup', { bubbles: true }));
-                }
-            }
-        }
-    }
-
-    // ── Navegar a la pestaña correcta y resaltar un renglón por folio ──────────
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `ws-client.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L269-344)</summary>
-
-**Path:** `Unknown file`
-
-```
-        var fechaIniId         = isMedicoPortal ? 'fecha-inicio-anteriores-md'      : 'fecha-inicio-anteriores-rc';
-        var fechaFinId         = isMedicoPortal ? 'fecha-fin-anteriores-md'         : 'fecha-fin-anteriores-rc';
-        var rangoContainerId   = isMedicoPortal ? 'rango-fechas-anteriores-md'      : 'rango-fechas-anteriores-rc';
-
-        var inputAnt    = document.getElementById(searchAnterioresId);
-        var inputHoy    = document.getElementById(searchHoyId);
-        var selPeriodo  = document.getElementById(selectPeriodoId);
-        var inputIni    = document.getElementById(fechaIniId);
-        var inputFin    = document.getElementById(fechaFinId);
-        var rangoElem   = document.getElementById(rangoContainerId);
-
-        var textoAnt   = inputAnt ? (inputAnt.value || '').trim() : '';
-        var textoHoy   = inputHoy ? (inputHoy.value || '').trim() : '';
-        var periodoVal = selPeriodo ? selPeriodo.value : '90d';
-        var iniVal     = inputIni ? (inputIni.value || '') : '';
-        var finVal     = inputFin ? (inputFin.value || '') : '';
-
-        var tieneBusquedaActiva = (textoAnt !== '' || textoHoy !== '' || periodoVal === 'fecha' || iniVal !== '' || finVal !== '' || (periodoVal !== '90d' && periodoVal !== ''));
-        if (!tieneBusquedaActiva) return;
-
-        var tabActiva = 'anteriores';
-        if (isMedicoPortal) {
-            var subHoy = document.getElementById('subtab-ordenes-hoy');
-            if (subHoy && subHoy.classList.contains('active')) tabActiva = 'hoy';
-        } else {
-            var panelHoy = document.getElementById('panel-ordenes');
-            if (panelHoy && !panelHoy.classList.contains('d-none')) tabActiva = 'hoy';
-        }
-
-        _busquedaPreviaSnapshot = {
-            isMedico: isMedicoPortal,
-            tabActiva: tabActiva,
-            textoAnt: textoAnt,
-            textoHoy: textoHoy,
-            periodoVal: periodoVal,
-            iniVal: iniVal,
-            finVal: finVal,
-            rangoVisible: rangoElem ? (rangoElem.style.display !== 'none') : false
-        };
-    }
-
-    function mostrarBarraRetorno(cleanTarget) {
-        if (!_busquedaPreviaSnapshot) return;
-
-        var snap = _busquedaPreviaSnapshot;
-        var resumen = [];
-        if (snap.tabActiva === 'hoy') {
-            if (snap.textoHoy) resumen.push('"' + snap.textoHoy + '"');
-            resumen.push('Órdenes de Hoy');
-        } else {
-            if (snap.textoAnt) resumen.push('"' + snap.textoAnt + '"');
-            if (snap.periodoVal === 'fecha' && (snap.iniVal || snap.finVal)) {
-                resumen.push((snap.iniVal || '') + ' al ' + (snap.finVal || ''));
-            } else if (snap.periodoVal && snap.periodoVal !== '90d') {
-                resumen.push(snap.periodoVal);
-            }
-        }
-        var resumenTexto = resumen.length > 0 ? resumen.join(' · ') : 'Búsqueda en curso';
-
-        var existingBar = document.getElementById('laesh-notif-return-bar');
-        if (existingBar) existingBar.remove();
-
-        var bar = document.createElement('div');
-        bar.id = 'laesh-notif-return-bar';
-        bar.style.cssText = 'background: #eff6ff; border: 1px solid #bfdbfe; border-left: 4px solid #0052b7; border-radius: 6px; padding: 7px 12px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; gap: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.04);';
-
-        bar.innerHTML = 
-            '<div style="font-size: 0.82rem; color: #1e3a8a; display: flex; align-items: center; gap: 6px;">' +
-                '<span style="font-size: 0.95rem;">🔔</span>' +
-                '<span>Revisando orden de notificación: <strong style="color: #0052b7;">#' + escapeHtml(cleanTarget) + '</strong></span>' +
-            '</div>' +
-            '<div style="display: flex; align-items: center; gap: 6px;">' +
-                '<button type="button" id="btn-volver-busqueda-notif" style="padding: 4px 12px; font-size: 0.8rem; font-weight: 600; color: #ffffff; background: #0052b7; border: 1px solid #004394; border-radius: 5px; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; box-shadow: 0 1px 2px rgba(0,0,0,0.08);">' +
-                    '<span>⬅ Volver a mi búsqueda (' + escapeHtml(resumenTexto) + ')</span>' +
-                '</button>' +
-                '<button type="button" id="btn-cerrar-banner-notif" title="Descartar aviso" style="background: transparent; border: none; font-size: 1rem; color: #64748b; cursor: pointer; line-height: 1; padding: 2px 6px;">✕</button>' +
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 12:13 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 12:13 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `ws-client.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L249-308)</summary>
-
-**Path:** `Unknown file`
-
-```
-        if (isNaN(notifDate.getTime())) return true;
-        var today = new Date();
-        return notifDate.getFullYear() === today.getFullYear() &&
-               notifDate.getMonth() === today.getMonth() &&
-               notifDate.getDate() === today.getDate();
-    }
-    // 2026-09-25: expuesto para que labadmin.js/medicos.js calculen "¿es de
-    // hoy?" con el mismo criterio exacto que ya usa el flujo de
-    // notificaciones — ver navegarYResaltarOrden más abajo.
-    window.laeshIsCreatedToday = isCreatedToday;
-
-    // ── Instantánea y Restauración de Búsqueda Previa (Flujo Poka-Yoke Notificaciones) ──
-    var _busquedaPreviaSnapshot = null;
-
-    function capturarEstadoBusquedaPrevia(isMedicoPortal) {
-        if (_busquedaPreviaSnapshot) return; // Si ya hay una activa sin restaurar, mantenerla
-
-        var searchAnterioresId = isMedicoPortal ? 'input-buscar-orden-anteriores-md' : 'input-buscar-orden-anteriores-rc';
-        var searchHoyId        = isMedicoPortal ? 'input-buscar-orden-hoy-md'        : 'input-buscar-orden-rc';
-        var selectPeriodoId    = isMedicoPortal ? 'select-periodo-anteriores-md'    : 'select-periodo-anteriores-rc';
-        var fechaIniId         = isMedicoPortal ? 'fecha-inicio-anteriores-md'      : 'fecha-inicio-anteriores-rc';
-        var fechaFinId         = isMedicoPortal ? 'fecha-fin-anteriores-md'         : 'fecha-fin-anteriores-rc';
-        var rangoContainerId   = isMedicoPortal ? 'rango-fechas-anteriores-md'      : 'rango-fechas-anteriores-rc';
-
-        var inputAnt    = document.getElementById(searchAnterioresId);
-        var inputHoy    = document.getElementById(searchHoyId);
-        var selPeriodo  = document.getElementById(selectPeriodoId);
-        var inputIni    = document.getElementById(fechaIniId);
-        var inputFin    = document.getElementById(fechaFinId);
-        var rangoElem   = document.getElementById(rangoContainerId);
-
-        var textoAnt   = inputAnt ? (inputAnt.value || '').trim() : '';
-        var textoHoy   = inputHoy ? (inputHoy.value || '').trim() : '';
-        var periodoVal = selPeriodo ? selPeriodo.value : '90d';
-        var iniVal     = inputIni ? (inputIni.value || '') : '';
-        var finVal     = inputFin ? (inputFin.value || '') : '';
-
-        var tieneBusquedaActiva = (textoAnt !== '' || textoHoy !== '' || periodoVal === 'fecha' || iniVal !== '' || finVal !== '' || (periodoVal !== '90d' && periodoVal !== ''));
-        if (!tieneBusquedaActiva) return;
-
-        var tabActiva = 'anteriores';
-        if (isMedicoPortal) {
-            var subHoy = document.getElementById('subtab-ordenes-hoy');
-            if (subHoy && subHoy.classList.contains('active')) tabActiva = 'hoy';
-        } else {
-            var panelHoy = document.getElementById('panel-ordenes');
-            if (panelHoy && !panelHoy.classList.contains('d-none')) tabActiva = 'hoy';
-        }
-
-        _busquedaPreviaSnapshot = {
-            isMedico: isMedicoPortal,
-            tabActiva: tabActiva,
-            textoAnt: textoAnt,
-            textoHoy: textoHoy,
-            periodoVal: periodoVal,
-            iniVal: iniVal,
-            finVal: finVal,
-            rangoVisible: rangoElem ? (rangoElem.style.display !== 'none') : false
-        };
-    }
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-The notification click activates a specific navigation and highlighting routine. The provided date range and search term (`Perez`) are the operator's current filters. The order creation date (2026-09-20) falls outside of the operator's specified date range (2026-06-01 to 2026-06-15). Therefore, the system should determine if this outside-range order is relevant. The system logic needs to evaluate how the click interacts with these conflicting parameters (date range vs notification).
-
-
-
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `input-buscar-orden-anteriores-rc`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.081098218s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 12:13 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `Ordenes.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L479-599)</summary>
-
-**Path:** `Unknown file`
-
-```
-                    $params[':q_fol_clean'] = $mFolio[1];
-                    $params[':q_fol_unpad'] = (string)$rawNum;
-                    $params[':q_fol_full']  = 'laesh-' . $pad5;
-                    $params[':q_fol_like']  = '%' . $pad5 . '%';
-                } else {
-                    $whereSql = "WHERE ({$filtroPeriodo}) AND (LOWER(o.paciente_nombre) LIKE :q1 OR LOWER(o.medico_nombre_completo) LIKE :q2 OR LOWER(o.paciente_telefono) LIKE :q3 OR LOWER(o.diagnostico) LIKE :q4 OR LOWER(o.folio_unico) LIKE :q5) ";
-                    $qVal = '%' . $search . '%';
-                    $params[':q1'] = $qVal;
-                    $params[':q2'] = $qVal;
-                    $params[':q3'] = $qVal;
-                    $params[':q4'] = $qVal;
-                    $params[':q5'] = $qVal;
-                }
-            } else {
-                $whereSql = "WHERE " . $filtroPeriodo;
-            }
-
-            $limInt = max(1, $limit);
-            $offInt = max(0, $offset);
-
-            $sql = "
-                SELECT o.orden_id as id, o.folio_unico as folio, o.hora_captura as creado_en, o.fecha_resultado,
-                       o.diagnostico, o.otros_estudios, o.estudios_json as estudios, o.edad_al_emitir,
-                       o.paciente_nombre, o.paciente_sexo, o.paciente_telefono as telefono,
-                       COALESCE(o.medico_nombre_completo, 'Médico General') AS medico_nombre,
-                       COALESCE(o.medico_especialidad, 'Medicina General') AS medico_especialidad,
-                       COALESCE(o.medico_cedula, 'CED-N/A') AS medico_cedula,
-                       o.estado_id, o.estado_valor AS estado_nombre, o.estado_color AS color_badge,
-                       o.motivo_cancelacion,
-                       pdf.nombre_archivo AS pdf_nombre,
-                       pdf.folio_extraido,
-                       parc.parciales_fechas
-                FROM vw_ordenes_completas o
-                LEFT JOIN (
-                    SELECT p1.orden_id, p1.nombre_archivo, p1.folio_extraido
-                    FROM resultados_pdf p1
-                    INNER JOIN (
-                        SELECT orden_id, MAX(id) AS max_id
-                        FROM resultados_pdf
-                        GROUP BY orden_id
-                    ) p2 ON p1.id = p2.max_id
-                ) pdf ON pdf.orden_id = o.orden_id
-                LEFT JOIN (
-                    SELECT orden_id, GROUP_CONCAT(creado_en ORDER BY id ASC SEPARATOR '|') AS parciales_fechas
-                    FROM resultados_pdf
-                    WHERE tipo_entrega = 'parcial'
-                    GROUP BY orden_id
-                ) parc ON parc.orden_id = o.orden_id
-                {$whereSql}
-                ORDER BY {$sortCol} {$dir}
-                LIMIT {$limInt} OFFSET {$offInt}
-            ";
-
-            $stmt = $db->prepare($sql);
-            foreach ($params as $k => $v) {
-                $stmt->bindValue($k, $v, PDO::PARAM_STR);
-            }
-            $stmt->execute();
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        } catch (Throwable $e) {
-            DB::logFallback('ERROR', 'Fallo en RC\Negocio\Ordenes::obtenerOrdenesAnteriores', $e->getMessage());
-            return [];
-        }
-    }
-
-    /**
-     * Cuenta el total de órdenes de DÍAS ANTERIORES según filtro de búsqueda y período
-     */
-    public static function contarOrdenesAnteriores(string $search = '', string $periodo = '90d', string $fechaInicio = '', string $fechaFin = ''): int {
-        try {
-            $db = DB::connect();
-            $params = [];
-            $search = trim(mb_strtolower($search, 'UTF-8'));
-
-            // Opción B (Filtro Combinado): El filtro de período/calendario siempre se aplica como base
-            $filtroPeriodo = self::construirFiltroPeriodoAnteriores($periodo, '', $fechaInicio, $fechaFin, $params);
-
-            if ($search !== '') {
-                if (preg_match('/^(?:laesh-?|lsh-?|#)?(\d{1,8})$/i', $search, $mFolio)) {
-                    $rawNum = (int)$mFolio[1];
-                    $pad5   = sprintf('%05d', $rawNum);
-                    $whereSql = "WHERE DATE(hora_captura) < CURDATE() AND (LOWER(folio_unico) = :q_fol_raw OR LOWER(folio_unico) = :q_fol_clean OR LOWER(folio_unico) = :q_fol_unpad OR LOWER(folio_unico) = :q_fol_full OR LOWER(folio_unico) LIKE :q_fol_like) ";
-                    $params[':q_fol_raw']   = $search;
-                    $params[':q_fol_clean'] = $mFolio[1];
-                    $params[':q_fol_unpad'] = (string)$rawNum;
-                    $params[':q_fol_full']  = 'laesh-' . $pad5;
-                    $params[':q_fol_like']  = '%' . $pad5 . '%';
-                } else {
-                    $whereSql = "WHERE ({$filtroPeriodo}) AND (LOWER(paciente_nombre) LIKE :q1 OR LOWER(medico_nombre_completo) LIKE :q2 OR LOWER(paciente_telefono) LIKE :q3 OR LOWER(diagnostico) LIKE :q4 OR LOWER(folio_unico) LIKE :q5) ";
-                    $qVal = '%' . $search . '%';
-                    $params[':q1'] = $qVal;
-                    $params[':q2'] = $qVal;
-                    $params[':q3'] = $qVal;
-                    $params[':q4'] = $qVal;
-                    $params[':q5'] = $qVal;
-                }
-            } else {
-                $whereSql = "WHERE " . $filtroPeriodo;
-            }
-
-            $stmt = $db->prepare("SELECT COUNT(*) FROM vw_ordenes_completas {$whereSql}");
-            $stmt->execute($params);
-            return (int)$stmt->fetchColumn();
-        } catch (Throwable $e) {
-            DB::logFallback('ERROR', 'Fallo en RC\Negocio\Ordenes::contarOrdenesAnteriores', $e->getMessage());
-            return 0;
-        }
-    }
-
-    /**
-     * Cambia el estado de una orden en MariaDB e inserta la auditoría en historial_estados_orden
-     *
-     * H1/H7 (auditoría 2026-09-20): $estadoEsperado es opcional — si se pasa (el
-     * estado que el caller vio al renderizar el botón), CambiarEstadoOrden lo usa
-     * como optimistic lock: si alguien más ya movió la orden mientras tanto, la
-     * transición se rechaza con 'conflicto'=true en vez de aplicarse a ciegas
-     * sobre datos obsoletos. La máquina de estados (transición inválida, ej.
-     * saltar de Remitido a Cerrada) se valida siempre dentro del SP.
-     */
-    public static function cambiarEstado(int $ordenId, int $nuevoEstadoId, int $userId, string $observacion = '', ?int $estadoEsperado = null): array {
-        try {
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-The code snippet includes a regular expression designed to extract a numerical identifier from a search string, potentially prefixed with "laesh-", "lsh-", or "#". It appears the code intends to use this extracted number to query a database for orders. Further analysis is required to understand the full context of this query and its potential vulnerabilities.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `Ordenes.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.088877880s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L379-479)</summary>
-
-**Path:** `Unknown file`
-
-```
-                return implode(' AND ', $conds);
-            case '90d':
-            default:
-                return "{$alias}hora_captura >= DATE_SUB(CURDATE(), INTERVAL 90 DAY) AND DATE({$alias}hora_captura) < CURDATE()";
-        }
-    }
-
-    /**
-     * Obtiene las solicitudes de órdenes de DÍAS ANTERIORES emitidas por el médico logueado,
-     * con ordenamiento, búsqueda, paginación y filtro de período (default: 90 días, o calendario por rango de fechas).
-     * Precedencia del buscador: si $search tiene contenido, busca en todo el historial (< hoy).
-     */
-    public static function obtenerOrdenesAnterioresMedico(int $userId, int $limit = 25, int $offset = 0, string $search = '', string $orderBy = 'fecha', string $orderDir = 'DESC', string $periodo = '90d', string $fechaInicio = '', string $fechaFin = ''): array {
-        try {
-            $db = DB::connect();
-
-            $allowedSorts = [
-                'folio'           => 'CAST(o.folio_unico AS UNSIGNED)',
-                'paciente'        => 'o.paciente_nombre',
-                'fecha'           => 'o.hora_captura',
-                'fecha_resultado' => 'o.fecha_resultado',
-                'estado'          => 'o.estado_id',
-                'id'              => 'o.orden_id'
-            ];
-            $sortCol = $allowedSorts[$orderBy] ?? 'o.orden_id';
-            $dir = strtoupper($orderDir) === 'ASC' ? 'ASC' : 'DESC';
-
-            $params = [':user_id' => $userId];
-            $search = trim(mb_strtolower($search, 'UTF-8'));
-
-            // Opción B (Filtro Combinado): El filtro de período/calendario siempre se aplica como base
-            $filtroPeriodo = self::construirFiltroPeriodoAnterioresMedico($periodo, 'o.', $fechaInicio, $fechaFin, $params);
-
-            if ($search !== '') {
-                if (preg_match('/^(?:laesh-?|lsh-?|#)?(\d{1,8})$/i', $search, $mFolio)) {
-                    $rawNum = (int)$mFolio[1];
-                    $pad5   = sprintf('%05d', $rawNum);
-                    $whereSql = "WHERE o.medico_user_id = :user_id AND DATE(o.hora_captura) < CURDATE() AND (LOWER(o.folio_unico) = :q_fol_raw OR LOWER(o.folio_unico) = :q_fol_clean OR LOWER(o.folio_unico) = :q_fol_unpad OR LOWER(o.folio_unico) = :q_fol_full OR LOWER(o.folio_unico) LIKE :q_fol_like) ";
-                    $params[':q_fol_raw']   = $search;
-                    $params[':q_fol_clean'] = $mFolio[1];
-                    $params[':q_fol_unpad'] = (string)$rawNum;
-                    $params[':q_fol_full']  = 'laesh-' . $pad5;
-                    $params[':q_fol_like']  = '%' . $pad5 . '%';
-                } else {
-                    $whereSql = "WHERE o.medico_user_id = :user_id AND ({$filtroPeriodo}) AND (LOWER(o.paciente_nombre) LIKE :q1 OR LOWER(o.paciente_telefono) LIKE :q2 OR LOWER(o.diagnostico) LIKE :q3 OR LOWER(o.folio_unico) LIKE :q4) ";
-                    $qVal = '%' . $search . '%';
-                    $params[':q1'] = $qVal;
-                    $params[':q2'] = $qVal;
-                    $params[':q3'] = $qVal;
-                    $params[':q4'] = $qVal;
-                }
-            } else {
-                $whereSql = "WHERE o.medico_user_id = :user_id AND " . $filtroPeriodo;
-            }
-
-            $limInt = max(1, $limit);
-            $offInt = max(0, $offset);
-
-            $sql = "
-                SELECT o.orden_id as id, o.folio_unico as folio, o.hora_captura as creado_en, o.fecha_resultado,
-                       o.diagnostico, o.otros_estudios, o.estudios_json as estudios, o.edad_al_emitir,
-                       o.paciente_nombre, o.paciente_sexo, o.paciente_telefono as telefono,
-                       o.estado_id, o.estado_valor AS estado_nombre, o.estado_color AS color_badge,
-                       o.motivo_cancelacion,
-                       parc.parciales_fechas
-                FROM vw_ordenes_completas o
-                LEFT JOIN (
-                    SELECT orden_id, GROUP_CONCAT(creado_en ORDER BY id ASC SEPARATOR '|') AS parciales_fechas
-                    FROM resultados_pdf
-                    WHERE tipo_entrega = 'parcial'
-                    GROUP BY orden_id
-                ) parc ON parc.orden_id = o.orden_id
-                {$whereSql}
-                ORDER BY {$sortCol} {$dir}
-                LIMIT {$limInt} OFFSET {$offInt}
-            ";
-
-            $stmt = $db->prepare($sql);
-            foreach ($params as $k => $v) {
-                if ($k === ':user_id') {
-                    $stmt->bindValue($k, (int)$v, PDO::PARAM_INT);
-                } else {
-                    $stmt->bindValue($k, $v, PDO::PARAM_STR);
-                }
-            }
-            $stmt->execute();
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        } catch (Throwable $e) {
-            DB::logFallback('ERROR', 'Fallo en MD\Negocio\Ordenes::obtenerOrdenesAnterioresMedico', $e->getMessage());
-            return [];
-        }
-    }
-
-    /**
-     * Cuenta el total de órdenes de DÍAS ANTERIORES del médico según filtro de búsqueda y período
-     */
-    public static function contarOrdenesAnterioresMedico(int $userId, string $search = '', string $periodo = '90d', string $fechaInicio = '', string $fechaFin = ''): int {
-        try {
-            $db = DB::connect();
-            $params = [':user_id' => $userId];
-            $search = trim(mb_strtolower($search, 'UTF-8'));
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `Ordenes.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L479-519)</summary>
-
-**Path:** `Unknown file`
-
-```
-            $search = trim(mb_strtolower($search, 'UTF-8'));
-
-            // Opción B (Filtro Combinado): El filtro de período/calendario siempre se aplica como base
-            $filtroPeriodo = self::construirFiltroPeriodoAnterioresMedico($periodo, '', $fechaInicio, $fechaFin, $params);
-
-            if ($search !== '') {
-                if (preg_match('/^(?:laesh-?|lsh-?|#)?(\d{1,8})$/i', $search, $mFolio)) {
-                    $rawNum = (int)$mFolio[1];
-                    $pad5   = sprintf('%05d', $rawNum);
-                    $whereSql = "WHERE medico_user_id = :user_id AND DATE(hora_captura) < CURDATE() AND (LOWER(folio_unico) = :q_fol_raw OR LOWER(folio_unico) = :q_fol_clean OR LOWER(folio_unico) = :q_fol_unpad OR LOWER(folio_unico) = :q_fol_full OR LOWER(folio_unico) LIKE :q_fol_like) ";
-                    $params[':q_fol_raw']   = $search;
-                    $params[':q_fol_clean'] = $mFolio[1];
-                    $params[':q_fol_unpad'] = (string)$rawNum;
-                    $params[':q_fol_full']  = 'laesh-' . $pad5;
-                    $params[':q_fol_like']  = '%' . $pad5 . '%';
-                } else {
-                    $whereSql = "WHERE medico_user_id = :user_id AND ({$filtroPeriodo}) AND (LOWER(paciente_nombre) LIKE :q1 OR LOWER(paciente_telefono) LIKE :q2 OR LOWER(diagnostico) LIKE :q3 OR LOWER(folio_unico) LIKE :q4) ";
-                    $qVal = '%' . $search . '%';
-                    $params[':q1'] = $qVal;
-                    $params[':q2'] = $qVal;
-                    $params[':q3'] = $qVal;
-                    $params[':q4'] = $qVal;
-                }
-            } else {
-                $whereSql = "WHERE medico_user_id = :user_id AND " . $filtroPeriodo;
-            }
-
-            $stmt = $db->prepare("SELECT COUNT(*) FROM vw_ordenes_completas {$whereSql}");
-            foreach ($params as $k => $v) {
-                if ($k === ':user_id') {
-                    $stmt->bindValue($k, (int)$v, PDO::PARAM_INT);
-                } else {
-                    $stmt->bindValue($k, $v, PDO::PARAM_STR);
-                }
-            }
-            $stmt->execute();
-            return (int)$stmt->fetchColumn();
-        } catch (Throwable $e) {
-            DB::logFallback('ERROR', 'Fallo en MD\Negocio\Ordenes::contarOrdenesAnterioresMedico', $e->getMessage());
-            return 0;
-        }
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 12:13 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
-**Created:** 27 Sept 2026, 12:13 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 12:13 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 12:14 am
 
 ---
 
-## Agent Response
+### Local File Search
 
-### Thinking
-
-The focus shifts to a specific scenario involving a user in the "Anteriores" view with active search filters, receiving and clicking a notification. The `ws-client.js` file and its click listener are the central point of investigation. The code's behavior when a notification click interacts with existing search context needs careful examination.
-
-
-The notification click appears to extract a folio target from the notification data's title using a regular expression. This extracted folio is then used to navigate and highlight a specific order. The `navegarYResaltarOrden` function is likely responsible for this navigation and highlighting. It calls `capturarEstadoBusquedaPrevia`.
-
-The `capturarEstadoBusquedaPrevia` function seems to capture the current search state before navigating, to avoid data loss. It checks if there's an active search snapshot. If not, it retrieves specific input elements from the DOM related to search filters and date ranges, potentially storing the values.
-
-
-The code's logic initializes search parameters from the DOM, checking if any search criteria are active. A critical scenario arises if a user is in the "Anteriores" tab with the default 90-day view (no explicit search criteria) and then clicks a notification. The extracted folio is placed in the 'inputAnt' field, potentially overriding the default view.
-
-If the user had an active date search or text search prior to the notification click, it is important the existing search context is captured. If no search filter is active the code returns early. The previous search context is stored for restoration. User requests 8 and 9 highlight the importance of restoring the prior search or behavior.
-
-
-When a notification is clicked, the code might overwrite the search input with a new value. If `filtrarBusquedaPrimero` is true, the `cleanTarget` is written to the search input. This raises concern: Does the calendar's date selection get cleared?
-
-Analysis of the `capturarEstadoBusquedaPrevia` function shows it saves the date range, but the calendar inputs are not explicitly cleared in the DOM. The HTMX request triggered by the search input change needs closer scrutiny, potentially overriding existing searches.
-
-
-The backend code uses a regular expression to validate the search input as a folio. When a folio format is matched, the query's `WHERE` clause is constructed to prioritize folio matching, effectively ignoring the date range filters that were previously selected. This means that the date filters are bypassed if a valid folio is entered. The same behavior is observed in another function.
-
-
-The notification click's handler modifies the user interface to show a notification banner with a return-to-search link, highlighting the target row in the grid, and storing the previous search state. The return-to-search action restores the previous search filters and refreshes the grid, removing the banner. Clicking the dismiss button on the notification bar clears the snapshot.
-
-Crucially, the code prevents the loss of the original search by preserving the snapshot if another notification is clicked before restoring the previous search context, preventing an override and maintaining the context even with multiple interactions.
-
-
-If a user is on the "Anteriores" tab with an active search and clicks a "Hoy" notification, the code correctly captures the "Anteriores" tab and search context before navigating to "Hoy".  The original search is restored when the user clicks the return-to-search link.
-
-The reverse scenario, starting on the "Hoy" tab and clicking an "Anteriores" notification, also appears to correctly capture and restore the "Hoy" search context after navigating and returning. The code switches tabs, applies the folio search, highlights the target, and provides a return link. When clicked, the prior tab and search are correctly restored.
-
-
-The analysis now extends to scenarios where the notification's target folio is not found. Specifically, investigating the `ws-client.js` file to determine the error-handling behavior when a folio isn't present in the displayed results. The code's response to a missing order in the "Anteriores" tab with active search needs confirmation.
-
-
-The code's "onNoEncontrado" function only logs a message to the console; no direct visual feedback is given to the user when a notification target isn't found. This means the user would only see the standard "No se encontraron órdenes" message if the folio isn't present in the search results after the notification click. The search input is updated and a query is issued, but the original search context is not explicitly restored. The code retries the highlighting through `setTimeout` if HTMX is still loading. The missing `foundRow` means that the return-to-search functionality won't be triggered, potentially leaving the user in an unexpected state.
-
-
-The current implementation lacks a mechanism to return to the original search if the notification-targeted order isn't found. When `agotado()` is called after several attempts and `foundRow` remains false, the code fails to display the return-to-search button. A user will be left in a state where only the folio from the notification is shown in the search box.
-
-The `agotado()` function should be modified to display a notification banner with a "Volver a mi búsqueda" button, even if the order isn't located. This is critical for restoring the prior search context. The existing `onNoEncontrado()` function needs revision to incorporate this banner/toast functionality and check for the previous search snapshot.
-
-
-The `mostrarBarraRetorno` function needs to be augmented to show a "not found" state, along with the "return to search" button when a notification target is not found. The suggested message for this state includes a warning icon and a relevant text.
-
-The system will now include this banner, along with the return button to restore the user's previous search state when a notification folio isn't located. This fulfills user request 9, retaining the search filters and returning to the original search.
-
-When there isn't a prior active search, the logic proceeds correctly, it now addresses the scenario where `tieneBusquedaActiva` is false, and the default "90d" period is used without input.
-
-
-If no search is active, the notification click sets the search input to the target folio, overriding the default 90-day view.  The lack of a search snapshot means no "return" bar appears. Capturing a snapshot on notification clicks, especially in the "Anteriores" tab, would provide a crucial "return to orders" functionality. The user's input highlights the need to retain and restore search filters when navigating from notifications. The code needs to handle cases with and without active searches.
-
-
-The logic now covers scenarios where a user's initial search is empty or uses the default 90-day view, confirming `tieneBusquedaActiva` capture. Clicking "volver" restores the view, clearing the input and refreshing the table.  The code in `ws-client.js` is reviewed to confirm it captures the search state. Even when starting with an empty search, the state is still captured before the navigation.
-
-
-
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `panel-ordenes`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 13.804546415s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:14 am
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 12:14 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `labadmin.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L209-239)</summary>
-
-**Path:** `Unknown file`
-
-```
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Panel 1.5: Solicitudes Anteriores -->
-                <div id="panel-ordenes-anteriores" class="tab-panel d-none">
-                    <!-- Fila: Título de Sección y Controles (Total, Paginación, Buscador) alineados con el estándar cms-panel-header -->
-                    <div class="cms-panel-header" style="margin-top: 1rem; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
-                        <div>
-                            <h3 class="cms-h3" style="margin: 0; font-size: 1.35rem; font-weight: 800; color: #0052B7;">Solicitudes Anteriores</h3>
-                            <p class="txt-muted-4" style="margin: 0.2rem 0 0 0; font-size: 0.85rem;">Histórico de solicitudes registradas en días anteriores.</p>
-                        </div>
-                        
-                        <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; justify-content: flex-end; margin-left: auto;">
-                            <!-- Paginador y Total -->
-                            <div id="ordenes-anteriores-pagination-wrap" style="display: flex; align-items: center; gap: 0.5rem;">
-                                <span id="ordenes-anteriores-total-records" style="font-size: 0.88rem; color: var(--text-muted); font-weight: 600;">Total: <?= (int)($totalOrdenesAnteriores ?? 0) ?></span>
-                                <span style="color: #cbd5e1; display: inline;">|</span>
-                                <div id="ordenes-anteriores-pagination" style="display: flex; gap: 0.25rem; align-items: center;">
-                                    <?php 
-                                        $totPgsAnt = max(1, (int)ceil(($totalOrdenesAnteriores ?? 0) / 25));
-                                    ?>
-                                    <button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;">‹ Anterior</button>
-                                    <span style="font-size:0.82rem; font-weight:600; color:var(--text-muted); padding: 0 4px;">1 / <?= $totPgsAnt ?></span>
-                                    <?php if ($totPgsAnt > 1): ?>
-                                        <button type="button" class="btn btn-secondary btn-sm" style="padding: 2px 8px; font-size: 0.8rem;" hx-get="/laesh/rc/tabla-ordenes-anteriores?page=2&periodo=90d" hx-target="#tabla-recepcion-anteriores" hx-swap="outerHTML" hx-include="#input-buscar-orden-anteriores-rc, #select-periodo-anteriores-rc, #fecha-inicio-anteriores-rc, #fecha-fin-anteriores-rc">Siguiente ›</button>
-                                    <?php else: ?>
-                                        <button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;">Siguiente ›</button>
-                                    <?php endif; ?>
-                                </div>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `labadmin.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L274-299)</summary>
-
-**Path:** `Unknown file`
-
-```
-                            <!-- Buscador en tiempo real -->
-                            <div id="ordenes-anteriores-search-container" style="display: flex; gap: 0.5rem; align-items: center; position:relative; z-index: 100;">
-                                <input type="text" id="input-buscar-orden-anteriores-rc" name="q" class="form-input form-input--bg" autocomplete="off" spellcheck="false" placeholder="🔍 Buscar por nombre..." style="width: 220px;" hx-get="/laesh/rc/tabla-ordenes-anteriores" hx-target="#tabla-recepcion-anteriores" hx-swap="outerHTML" hx-include="#input-buscar-orden-anteriores-rc, #select-periodo-anteriores-rc, #fecha-inicio-anteriores-rc, #fecha-fin-anteriores-rc" hx-trigger="keyup changed delay:250ms, search">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card" aria-live="polite" style="padding: 0; overflow: hidden; border: 1px solid var(--border); border-radius: 8px;">
-                        <div class="table-responsive" style="max-height: calc(100vh - 250px); overflow-y: auto; overflow-x: auto; -webkit-overflow-scrolling: touch; width: 100%;">
-                            <table class="table" id="tabla-recepcion-anteriores" hx-get="/laesh/rc/tabla-ordenes-anteriores" hx-target="#tabla-recepcion-anteriores" hx-swap="outerHTML" hx-include="#input-buscar-orden-anteriores-rc, #select-periodo-anteriores-rc, #fecha-inicio-anteriores-rc, #fecha-fin-anteriores-rc" hx-trigger="refresh, ordenActualizada from:body" style="margin-bottom: 0; width: 100%; min-width: 1665px; table-layout: fixed; border-collapse: collapse;">
-                                <colgroup>
-                                    <col style="width: 130px;">
-                                    <col style="width: 210px;">
-                                    <col style="width: 180px;">
-                                    <col style="width: 200px;">
-                                    <col style="width: 125px;">
-                                    <col style="width: 125px;">
-                                    <col style="width: 190px;">
-                                    <col style="width: 260px;">
-                                    <col style="width: 220px;">
-                                </colgroup>
-                                <thead>
-                                    <?= rcRenderOrdenesTablaHeader('fecha', 'desc', '', '/laesh/rc/tabla-ordenes-anteriores', '#tabla-recepcion-anteriores', '#input-buscar-orden-anteriores-rc, #select-periodo-anteriores-rc, #fecha-inicio-anteriores-rc, #fecha-fin-anteriores-rc') ?>
-                                </thead>
-                                <?= rcRenderOrdenesTablaBody($ordenesAnteriores ?? [], $csrfToken ?? '', '-ant') ?>
-                            </table>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-The code attempts to select a card element using a combined selector, but the DOM order causes an unexpected match. When within a specific panel, the selector will incorrectly prioritize a card from another panel due to the DOM structure. Examination of related client-side code lines is needed.
-
-
-Crucially, the current implementation selects the wrong card when navigating between panels, as the shared selector picks an invisible card. The intended behavior requires inserting the element into the *visible* panel. Determined the target container is based on whether the user is in the medical or reception section and which tab is active (Hoy or Anteriores).
-
-
-The logic now correctly identifies the target container by checking visibility across medical and reception sections, including 'Hoy' and 'Anteriores' tabs. Successful insertion will place the element immediately before the content card, providing optimal visibility. If the order isn't found, defined behavior is executed, including calling `agotado()` and `onNoEncontrado()`. The insertion will be limited to when the order is successfully found.
-
-
-
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `panel-historial-medico`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 1.743101011s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 12:14 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `medicos.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L389-414)</summary>
-
-**Path:** `Unknown file`
-
-```
-                 y se adopta el mismo patrón de grilla HTMX con ordenamiento/búsqueda/paginación
-                 server-side ya usado por Recepción / Órdenes Anteriores (ver rc/views/labadmin.php). -->
-            <div class="tab-panel d-none" id="panel-historial-medico">
-                <!-- 2026-09-25 (pedido del usuario): título propio de vuelta — antes se
-                     había quitado (ver historial abajo) confiando solo en el breadcrumb,
-                     pero el usuario pidió un título reducido visible aquí. Reutiliza
-                     .panel-nueva-orden-title (mismo estilo compacto que el panel Nueva
-                     Solicitud) para no duplicar CSS. En móvil, la paginación de abajo
-                     (#ordenes-anteriores-md-pagination-wrap) ahora se oculta — ver
-                     portal.css @media(max-width:767px) — así que ya no compite por
-                     espacio con este título en la misma fila.
-                     2026-09-24 (histórico): header homologado 1:1 con #ordenes-hoy-md-header
-                     (mismo patrón que ya usan mdRenderOrdenesTablaHeader/Body para la
-                     grilla) — antes traía un <h2>+<p> propio que "Hoy" no tenía, rompiendo
-                     la simetría pedida y desbordando en móvil (el título no cabía junto a
-                     paginación+buscador en flex-wrap:nowrap). -->
-                <h2 class="panel-nueva-orden-title">Solicitudes Digitales Anteriores</h2>
-                <div class="cms-panel-header" id="ordenes-anteriores-md-header" style="margin-bottom: 1rem; display: flex; justify-content: flex-end; align-items: center; flex-wrap: wrap; gap: 0.75rem; margin-left: auto;">
-                    <div id="ordenes-anteriores-md-pagination-wrap" style="display: flex; align-items: center; gap: 0.5rem;">
-                        <span id="ordenes-anteriores-md-total-records" style="font-size: 0.88rem; color: var(--text-muted); font-weight: 600;">Total: <?= (int)($totalOrdenesAnteriores ?? 0) ?></span>
-                        <span style="color: #cbd5e1; display: inline;">|</span>
-                        <div style="display: flex; gap: 0.25rem; align-items: center;">
-                            <?php $totPgsAntMd = max(1, (int)ceil(($totalOrdenesAnteriores ?? 0) / 25)); ?>
-                            <button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;">‹ <span class="pag-label-text">Anterior</span></button>
-                            <span style="font-size:0.82rem; font-weight:600; color:var(--text-muted); padding: 0 4px;">1 / <?= $totPgsAntMd ?></span>
-                            <?php if ($totPgsAntMd > 1): ?>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `medicos.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L454-474)</summary>
-
-**Path:** `Unknown file`
-
-```
-                    <div id="ordenes-anteriores-md-search-wrap" style="display: flex; gap: 0.5rem; align-items: center;">
-                        <input type="text" id="input-buscar-orden-anteriores-md" name="q" class="form-input form-input--bg" autocomplete="off" spellcheck="false" placeholder="🔍 Buscar por folio, paciente..." style="width: 220px;" hx-get="/laesh/md/tabla-ordenes-anteriores" hx-target="#tabla-historial-completo" hx-swap="outerHTML" hx-include="#input-buscar-orden-anteriores-md, #select-periodo-anteriores-md, #fecha-inicio-anteriores-md, #fecha-fin-anteriores-md" hx-trigger="keyup changed delay:250ms, search">
-                    </div>
-                </div>
-                <div class="card" style="padding: 0; overflow: hidden; border: 1px solid var(--border); border-radius: 8px;">
-                    <div class="table-responsive" style="max-height: calc(100vh - 250px); overflow-y: auto; overflow-x: auto; -webkit-overflow-scrolling: touch; width: 100%;">
-                        <table id="tabla-historial-completo" hx-get="/laesh/md/tabla-ordenes-anteriores" hx-target="#tabla-historial-completo" hx-swap="outerHTML" hx-include="#input-buscar-orden-anteriores-md, #select-periodo-anteriores-md, #fecha-inicio-anteriores-md, #fecha-fin-anteriores-md" hx-trigger="refresh, ordenCreada from:body, ordenActualizada from:body">
-                            <thead>
-                                <?= mdRenderOrdenesTablaHeader('fecha', 'desc', '', '/laesh/md/tabla-ordenes-anteriores', '#tabla-historial-completo', '#input-buscar-orden-anteriores-md, #select-periodo-anteriores-md, #fecha-inicio-anteriores-md, #fecha-fin-anteriores-md') ?>
-                            </thead>
-                            <?= mdRenderOrdenesTablaBody($ordenesAnteriores ?? [], $csrfToken ?? '', '-ant') ?>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-                <!-- Panel 3: Pacientes del Médico (Mis Pacientes) -->
-                <div class="tab-panel d-none" id="panel-pacientes-medico">
-                    <div class="cms-panel-header" style="margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
-                        <div>
-                            <h2 class="txt-pgd" style="margin: 0; font-size: 1.35rem; font-weight: 800; color: #0052B7;">Mis Pacientes</h2>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `medicos.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L199-239)</summary>
-
-**Path:** `Unknown file`
-
-```
-                            <!-- 2026-09-25 (pedido del usuario): se elimina el clon compacto de
-                                 paginación (GAP-MD-08) que vivía aquí, pegado a la pestaña — se
-                                 veía duplicado con la paginación real de abajo
-                                 (#ordenes-hoy-md-pagination-wrap) bajo zoom de navegador >100%.
-                                 Ahora Órdenes Hoy usa el MISMO tratamiento compacto ya probado en
-                                 Órdenes Anteriores (una sola paginación, siempre junto al
-                                 buscador, sin duplicado) — ver #ordenes-hoy-md-header en
-                                 portal.css @media(max-width:767px). -->
-                        </div>
-                        <!-- Botones Limpiar / Crear e Imprimir — separados del tablist (A11Y-06) -->
-                        <div id="tab-bar-btns" class="tab-bar-btns" role="toolbar" aria-label="Acciones de solicitud">
-                            <button class="btn badge-reset" type="button"
-                                    id="btn-limpiar-orden"
-                                    aria-label="Limpiar selección de estudios">
-                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.46"/></svg>
-                                <span class="btn-imprimir-texto">Limpiar</span>
-                            </button>
-                            <span class="btn-vsep-divider" aria-hidden="true"></span>
-                            <button class="btn btn-primary btn-imprimir-orden badge-reset-sm" type="submit" form="form-orden"
-                                    aria-label="Crear e imprimir solicitud médica">
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
-                                <span class="btn-imprimir-texto">Crear e Imprimir Solicitud</span>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- ── Sub-tab 1: Generar Orden Digital ── -->
-                    <div id="subtab-generar" class="portal-tab-panel active" role="tabpanel" aria-labelledby="tab-generar">
-                        <form id="form-orden" 
-                              hx-post="/laesh/md/orden/crear" 
-                              hx-target="#a11y-live" 
-                              hx-swap="innerHTML"
-                              hx-indicator="#loading-spinner">
-                            <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrfToken ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                            <!-- HTMX: indicador de carga (hx-indicator="#loading-spinner") -->
-                            <span id="loading-spinner" class="htmx-indicator" role="status" aria-label="Enviando solicitud…">
-                                <span class="spinner-btn"></span>
-                            </span>
-
-                            <!-- Renglón 1 (Desktop): Nombre | Edad | Sexo | Celular | [Separador Vertical] | Diagnóstico / Motivo Clínico -->
-                            <div class="orden-patient-row1">
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `subtab-ordenes-hoy`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 12:14 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `medicos.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L354-384)</summary>
-
-**Path:** `Unknown file`
-
-```
-                    <div id="subtab-ordenes-hoy" class="portal-tab-panel" role="tabpanel" aria-labelledby="tab-ordenes-hoy">
-                        <div class="cms-panel-header" id="ordenes-hoy-md-header" style="margin-bottom: 1rem; display: flex; justify-content: flex-end; align-items: center; flex-wrap: wrap; gap: 1rem;">
-                            <div id="ordenes-hoy-md-pagination-wrap" style="display: flex; align-items: center; gap: 0.5rem;">
-                                <span id="ordenes-hoy-md-total-records" style="font-size: 0.88rem; color: var(--text-muted); font-weight: 600;">Total: <?= (int)($totalOrdenesPropias ?? 0) ?></span>
-                                <span style="color: #cbd5e1; display: inline;">|</span>
-                                <div style="display: flex; gap: 0.25rem; align-items: center;">
-                                    <?php $totPgsHoyMd = max(1, (int)ceil(($totalOrdenesPropias ?? 0) / 25)); ?>
-                                    <button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;">‹ <span class="pag-label-text">Anterior</span></button>
-                                    <span style="font-size:0.82rem; font-weight:600; color:var(--text-muted); padding: 0 4px;">1 / <?= $totPgsHoyMd ?></span>
-                                    <?php if ($totPgsHoyMd > 1): ?>
-                                        <button type="button" class="btn btn-secondary btn-sm" style="padding: 2px 8px; font-size: 0.8rem;" hx-get="/laesh/md/tabla-ordenes?page=2" hx-target="#tabla-medico" hx-swap="outerHTML" hx-include="#input-buscar-orden-hoy-md"><span class="pag-label-text">Siguiente</span> ›</button>
-                                    <?php else: ?>
-                                        <button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;"><span class="pag-label-text">Siguiente</span> ›</button>
-                                    <?php endif; ?>
-                                </div>
-                            </div>
-                            <div id="ordenes-hoy-md-search-wrap" style="display: flex; gap: 0.5rem; align-items: center;">
-                                <input type="text" id="input-buscar-orden-hoy-md" name="q" class="form-input form-input--bg" autocomplete="off" spellcheck="false" placeholder="🔍 Buscar por folio, paciente..." style="width: 220px;" hx-get="/laesh/md/tabla-ordenes" hx-target="#tabla-medico" hx-swap="outerHTML" hx-trigger="keyup changed delay:250ms, search">
-                            </div>
-                        </div>
-                        <div class="card mt-0" style="padding: 0; overflow: hidden; border: 1px solid var(--border); border-radius: 8px;">
-                            <div class="table-responsive" style="max-height: calc(100vh - 250px); overflow-y: auto; overflow-x: auto; -webkit-overflow-scrolling: touch; width: 100%;">
-                                <table id="tabla-medico" hx-get="/laesh/md/tabla-ordenes" hx-target="#tabla-medico" hx-swap="outerHTML" hx-trigger="refresh, ordenCreada from:body, ordenActualizada from:body">
-                                    <thead>
-                                        <?= mdRenderOrdenesTablaHeader('fecha', 'desc', '', '/laesh/md/tabla-ordenes', '#tabla-medico', '#input-buscar-orden-hoy-md') ?>
-                                    </thead>
-                                    <?= mdRenderOrdenesTablaBody($ordenesPropias ?? [], $csrfToken ?? '', '') ?>
-                                </table>
-                            </div>
-                        </div>
-                    </div><!-- /subtab-ordenes-hoy -->
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-The code selects a `targetCard` based on a condition related to `snap.isMedico`, using specific CSS selectors. The current selection logic might not be precise, potentially retrieving elements from inactive/hidden containers. A refinement is needed to pinpoint the actively displayed container to improve the element targeting.
-
-
-The selection logic aims to find a `targetCard` element within different sections based on the `snap.isMedico` flag, prioritizing visible elements. The initial checks for `d-none` class and `offsetParent` seem designed to exclude hidden elements. A default fallback selector is used if no visible card is found in the prioritized sections.
-```javascript
-        ) into an authentic, concise stream of consciousness that reveals how the agent is thinking. Ensure your output is still detailed but different from the raw thoughts in a meaningful way.
-
-
-The search state check `tieneBusquedaActiva` might always return true under specific conditions. Specifically, when viewing the "anteriores" tab with a 90-day period and an empty search box, it appears the search is considered active. This is because the comparison logic in `capturarEstadoBusquedaPrevia` seems to evaluate the 90d period as an active search. Therefore, pressing the return button resets the search.
-
-
-The system handles "90d" period searches by dispatching a search action, immediately reloading the 90-day order list. The "Volver" button resets the search field, triggering another search and reload for the current orders. The displayed summary text dynamically adapts based on the active tab and the presence of a search term.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `ws-client.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 2.046715815s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L259-379)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-    // ── Instantánea y Restauración de Búsqueda Previa (Flujo Poka-Yoke Notificaciones) ──
-    var _busquedaPreviaSnapshot = null;
-
-    function capturarEstadoBusquedaPrevia(isMedicoPortal) {
-        if (_busquedaPreviaSnapshot) return; // Si ya hay una activa sin restaurar, mantenerla
-
-        var searchAnterioresId = isMedicoPortal ? 'input-buscar-orden-anteriores-md' : 'input-buscar-orden-anteriores-rc';
-        var searchHoyId        = isMedicoPortal ? 'input-buscar-orden-hoy-md'        : 'input-buscar-orden-rc';
-        var selectPeriodoId    = isMedicoPortal ? 'select-periodo-anteriores-md'    : 'select-periodo-anteriores-rc';
-        var fechaIniId         = isMedicoPortal ? 'fecha-inicio-anteriores-md'      : 'fecha-inicio-anteriores-rc';
-        var fechaFinId         = isMedicoPortal ? 'fecha-fin-anteriores-md'         : 'fecha-fin-anteriores-rc';
-        var rangoContainerId   = isMedicoPortal ? 'rango-fechas-anteriores-md'      : 'rango-fechas-anteriores-rc';
-
-        var inputAnt    = document.getElementById(searchAnterioresId);
-        var inputHoy    = document.getElementById(searchHoyId);
-        var selPeriodo  = document.getElementById(selectPeriodoId);
-        var inputIni    = document.getElementById(fechaIniId);
-        var inputFin    = document.getElementById(fechaFinId);
-        var rangoElem   = document.getElementById(rangoContainerId);
-
-        var textoAnt   = inputAnt ? (inputAnt.value || '').trim() : '';
-        var textoHoy   = inputHoy ? (inputHoy.value || '').trim() : '';
-        var periodoVal = selPeriodo ? selPeriodo.value : '90d';
-        var iniVal     = inputIni ? (inputIni.value || '') : '';
-        var finVal     = inputFin ? (inputFin.value || '') : '';
-
-        var tieneBusquedaActiva = (textoAnt !== '' || textoHoy !== '' || periodoVal === 'fecha' || iniVal !== '' || finVal !== '' || (periodoVal !== '90d' && periodoVal !== ''));
-        if (!tieneBusquedaActiva) return;
-
-        var tabActiva = 'anteriores';
-        if (isMedicoPortal) {
-            var subHoy = document.getElementById('subtab-ordenes-hoy');
-            if (subHoy && subHoy.classList.contains('active')) tabActiva = 'hoy';
-        } else {
-            var panelHoy = document.getElementById('panel-ordenes');
-            if (panelHoy && !panelHoy.classList.contains('d-none')) tabActiva = 'hoy';
-        }
-
-        _busquedaPreviaSnapshot = {
-            isMedico: isMedicoPortal,
-            tabActiva: tabActiva,
-            textoAnt: textoAnt,
-            textoHoy: textoHoy,
-            periodoVal: periodoVal,
-            iniVal: iniVal,
-            finVal: finVal,
-            rangoVisible: rangoElem ? (rangoElem.style.display !== 'none') : false
-        };
-    }
-
-    function mostrarBarraRetorno(cleanTarget) {
-        if (!_busquedaPreviaSnapshot) return;
-
-        var snap = _busquedaPreviaSnapshot;
-        var resumen = [];
-        if (snap.tabActiva === 'hoy') {
-            if (snap.textoHoy) resumen.push('"' + snap.textoHoy + '"');
-            resumen.push('Órdenes de Hoy');
-        } else {
-            if (snap.textoAnt) resumen.push('"' + snap.textoAnt + '"');
-            if (snap.periodoVal === 'fecha' && (snap.iniVal || snap.finVal)) {
-                resumen.push((snap.iniVal || '') + ' al ' + (snap.finVal || ''));
-            } else if (snap.periodoVal && snap.periodoVal !== '90d') {
-                resumen.push(snap.periodoVal);
-            }
-        }
-        var resumenTexto = resumen.length > 0 ? resumen.join(' · ') : 'Búsqueda en curso';
-
-        var existingBar = document.getElementById('laesh-notif-return-bar');
-        if (existingBar) existingBar.remove();
-
-        var bar = document.createElement('div');
-        bar.id = 'laesh-notif-return-bar';
-        bar.style.cssText = 'background: #eff6ff; border: 1px solid #bfdbfe; border-left: 4px solid #0052b7; border-radius: 6px; padding: 7px 12px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; gap: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.04);';
-
-        bar.innerHTML = 
-            '<div style="font-size: 0.82rem; color: #1e3a8a; display: flex; align-items: center; gap: 6px;">' +
-                '<span style="font-size: 0.95rem;">🔔</span>' +
-                '<span>Revisando orden de notificación: <strong style="color: #0052b7;">#' + escapeHtml(cleanTarget) + '</strong></span>' +
-            '</div>' +
-            '<div style="display: flex; align-items: center; gap: 6px;">' +
-                '<button type="button" id="btn-volver-busqueda-notif" style="padding: 4px 12px; font-size: 0.8rem; font-weight: 600; color: #ffffff; background: #0052b7; border: 1px solid #004394; border-radius: 5px; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; box-shadow: 0 1px 2px rgba(0,0,0,0.08);">' +
-                    '<span>⬅ Volver a mi búsqueda (' + escapeHtml(resumenTexto) + ')</span>' +
-                '</button>' +
-                '<button type="button" id="btn-cerrar-banner-notif" title="Descartar aviso" style="background: transparent; border: none; font-size: 1rem; color: #64748b; cursor: pointer; line-height: 1; padding: 2px 6px;">✕</button>' +
-            '</div>';
-
-        var targetCard = null;
-        if (snap.isMedico) {
-            targetCard = document.querySelector('#subtab-ordenes-hoy .card, #panel-historial-medico .card');
-        } else {
-            targetCard = document.querySelector('#panel-ordenes .card, #panel-ordenes-anteriores .card');
-        }
-
-        if (targetCard && targetCard.parentNode) {
-            targetCard.parentNode.insertBefore(bar, targetCard);
-        } else {
-            var header = document.querySelector('.cms-panel-header');
-            if (header && header.parentNode) {
-                header.parentNode.insertBefore(bar, header.nextSibling);
-            }
-        }
-
-        var btnVolver = document.getElementById('btn-volver-busqueda-notif');
-        if (btnVolver) {
-            btnVolver.addEventListener('click', function(e) {
-                e.preventDefault();
-                restaurarEstadoBusquedaPrevia();
-            });
-        }
-        var btnCerrar = document.getElementById('btn-cerrar-banner-notif');
-        if (btnCerrar) {
-            btnCerrar.addEventListener('click', function(e) {
-                e.preventDefault();
-                _busquedaPreviaSnapshot = null;
-                bar.remove();
-            });
-        }
-    }
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-The search state snapshot should be captured universally whenever an active tab or filter is present. This ensures a consistent one-click return to the complete list, regardless of the search query or lack thereof, when triggered by notifications. If a return target is not found, the UI should indicate this with a light red or amber background.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `ws-client.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.086756944s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L499-519)</summary>
-
-**Path:** `Unknown file`
-
-```
-            return null;
-        }
-
-        var destinoInicial = resolverDestino(esHoy);
-        if (!destinoInicial) return;
-
-        // 2026-09-27 (pedido explícito del usuario): NO abrir de forma forzada
-        // la Solicitud Digital ni el PDF de Resultados en overlay para no interrumpir
-        // ni ocultar la pantalla de trabajo del operador. En su lugar, un aviso no intrusivo.
-        var onNoEncontrado = opciones.onNoEncontrado || function() {
-            console.log('[LAESH Notif] Solicitud #' + cleanTarget + ' no localizada en grilla.');
-        };
-
-        // 3-4. Intenta localizar y resaltar el renglón en un destino dado
-        // (Hoy o Anteriores). Si agota los reintentos sin encontrarlo Y aún
-        // no se probó la pestaña opuesta, cambia a esa pestaña y reintenta
-        // ahí antes de rendirse al fallback — ver nota de "corrección de
-        // raíz" arriba de resolverDestino().
-        function intentarEn(destino, yaProboOpuesta) {
-            destino.panelFn();
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `ws-client.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L644-659)</summary>
-
-**Path:** `Unknown file`
-
-```
-                }
-
-                var foundRow = buscarYResaltarEn(table);
-
-                if (foundRow) {
-                    mostrarBarraRetorno(cleanTarget);
-                    if (opciones.filtrarBusquedaPrimero) {
-                        resyncDeadline = Date.now() + resyncWindowMs;
-                        document.addEventListener('htmx:afterSettle', onAfterSettle);
-                        // Limpieza de respaldo — si nunca llega otro swap en
-                        // esta tabla tras el deadline, el listener igual se
-                        // desengancha (evita acumular listeners indefinidos).
-                        setTimeout(function() {
-                            document.removeEventListener('htmx:afterSettle', onAfterSettle);
-                        }, resyncWindowMs + 200);
-                    }
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Examining the provided code snippet, the focus is on refining search state capture, return bar display, and "not found" handling within `ws-client.js`. The lines between 260 and 380, particularly the `capturarEstadoBusquedaPrevia` function, require close inspection. The function's initial logic prevents redundant snapshot creation if one already exists.
-
-
-Focus shifts to parsing and extracting search parameters based on the UI context, specifically whether the "MedicoPortal" flag is active. Different element IDs are selected based on this flag to retrieve user input for search criteria. Initial values are set for various search fields, including search terms, date ranges, and a default period. The active tab ("hoy" or "anteriores") is determined using conditional checks on DOM elements, reflecting the user's current view.
-
-
-The code captures the current search state into a snapshot object, including active tab, search terms, and date range, determining visibility of a date range element, and checking a medical portal flag.  It then uses this snapshot to construct a summary string for display based on the search criteria used, classifying searches as either custom or default. The summary string considers both the presence of search terms and the selected date range.
-
-
-Focusing on the "not found" scenario, the code constructs a notification bar informing the user about the missing order and a button to return to the search.  The bar's appearance changes based on the search context (personal or list), including the text of the return button, constructed from the stored search state summary.  The code includes an HTML escape function to prevent potential injection vulnerabilities.
-
-
-The code dynamically constructs a notification bar and button based on whether the search is for a list or a personal order. The text of the return button is derived from a stored summary of the search criteria. This approach offers tailored feedback.
-
-
-The logic for locating the target card element within the DOM is conditional, varying with the 'MedicoPortal' flag. If the flag is active, it checks for elements within medical history or today's orders tabs. Otherwise, it targets older or current order panels. Initial hypothesis: the code is checking for specific tabs and elements, but the logic could be simplified.
-
-If no specific card is found, the code attempts to find a card element within a potentially active panel; this fallback mechanism might be crucial. The code snippet dynamically constructs a notification bar for display, if the target card is not found. The choice of which panel to search for cards appears correct, now analyzing how the banner looks like.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 12.404912529s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 12:15 am
 
 ---
 
-## Agent Response
+### Code Edit
 
-### Actions
-
-**Tool:** `view_file`
-**File:** `ws-client.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L534-554)</summary>
-
-**Path:** `Unknown file`
-
-```
-                } : {
-                    panelFn: function() {
-                        if (typeof window.cambiarTabAdmin === 'function') window.cambiarTabAdmin('panel-ordenes-anteriores');
-                    },
-                    tableId: 'tabla-recepcion-anteriores',
-                    searchId: 'input-buscar-orden-anteriores-rc'
-                };
-            }
-            return null;
-        }
-
-        var destinoInicial = resolverDestino(esHoy);
-        if (!destinoInicial) return;
-
-        // 2026-09-27 (pedido explícito del usuario): NO abrir de forma forzada
-        // la Solicitud Digital ni el PDF de Resultados en overlay para no interrumpir
-        // ni ocultar la pantalla de trabajo del operador. En su lugar, un aviso no intrusivo.
-        var onNoEncontrado = opciones.onNoEncontrado || function() {
-            console.log('[LAESH Notif] Solicitud #' + cleanTarget + ' no localizada en grilla.');
-        };
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `ws-client.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L679-709)</summary>
-
-**Path:** `Unknown file`
-
-```
-                var table = document.getElementById(destino.tableId);
-                if (!table && attempts < maxAttempts) {
-                    setTimeout(highlightRow, 150);
-                    return;
-                }
-                if (!table) {
-                    agotado();
-                    return;
-                }
-
-                var foundRow = buscarYResaltarEn(table);
-
-                if (foundRow) {
-                    mostrarBarraRetorno(cleanTarget);
-                    if (opciones.filtrarBusquedaPrimero) {
-                        resyncDeadline = Date.now() + resyncWindowMs;
-                        document.addEventListener('htmx:afterSettle', onAfterSettle);
-                        // Limpieza de respaldo — si nunca llega otro swap en
-                        // esta tabla tras el deadline, el listener igual se
-                        // desengancha (evita acumular listeners indefinidos).
-                        setTimeout(function() {
-                            document.removeEventListener('htmx:afterSettle', onAfterSettle);
-                        }, resyncWindowMs + 200);
-                    }
-                } else if (attempts < maxAttempts) {
-                    // Reintentar si la tabla aún se está refrescando/renderizando por HTMX
-                    setTimeout(highlightRow, 200 * attempts);
-                } else {
-                    agotado();
-                }
-            };
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-The code defines a function for handling requests not found in a grid, logging a message and calling a status update function with a `false` status. The second code block calls the status update function with a `true` status. This suggests that the status update function's behavior needs adjustment based on whether a request is found.
-I'm thinking through how to approach this.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.000746606s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:16 am
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 12:16 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `ws-client.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L689-704)</summary>
-
-**Path:** `Unknown file`
-
-```
-                }
-
-                var foundRow = buscarYResaltarEn(table);
-
-                if (foundRow) {
-                    mostrarBarraRetorno(cleanTarget);
-                    if (opciones.filtrarBusquedaPrimero) {
-                        resyncDeadline = Date.now() + resyncWindowMs;
-                        document.addEventListener('htmx:afterSettle', onAfterSettle);
-                        // Limpieza de respaldo — si nunca llega otro swap en
-                        // esta tabla tras el deadline, el listener igual se
-                        // desengancha (evita acumular listeners indefinidos).
-                        setTimeout(function() {
-                            document.removeEventListener('htmx:afterSettle', onAfterSettle);
-                        }, resyncWindowMs + 200);
-                    }
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 12:16 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 12:16 am
-
----
-
-## Agent Response
-
-### Thinking
-
-Double-checking calendar date input functionality. Confirmed that both start and end dates are captured, with usability checks implemented. Specifically, the end date input's minimum value dynamically updates to ensure it doesn't precede the start date, preventing errors. The case where both dates are the same is handled.
-
-
-Calendar functionality is confirmed, including the date range logic and UI adjustments. The default date range is now clarified as the past 90 days. Backend queries were updated to integrate text filtering with the selected calendar period and pagination reflects these selections. Specifically, folio searches were modified to include historical dates.
-
-
-
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.422372453s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 12:16 am
 
 ---
 
-## Agent Response
+### Local File Search
 
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-## User Request
-
-y para medico , si esta en su pantalla de captura de orden, que sucera ?  solo analiza e informa.
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `ws-client.js`
-**Language:** javascript
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-The request concerns the doctor's order capture screen. The focus is to determine the state of that screen, given certain conditions, rather than to modify anything. Therefore, the task requires analyzing the behavior on the screen.
-
-
-Initial investigation focuses on `ws-client.js` to understand how notifications interact with the order form (`#form-orden`). The code checks if the user is typing within the form before attempting to refresh the data, using `document.activeElement`. The `userIsTyping` condition suggests a mechanism to prevent interruption of the doctor's input. The `refreshDeferrable` function appears to defer the update if the user is currently typing.
-
-
-The code strategically delays table refreshes within the order form (`#form-orden`) if the doctor is actively typing in an input field. This prevents focus stealing and keystroke disruption. Further analysis reveals a silenced chime for doctor portal notifications, ensuring no audio interruption during order entry.
-
-Crucially, clicking a notification does *not* reload, clear, or change the doctor's order form; instead, the notification displays in the sidebar. This means the doctor can continue filling out the order uninterrupted.
-
-
-The Doctor Portal contains tabs for order creation, today's orders, order history, and patients, with the order creation tab further divided into sub-tabs. The function executed upon notification click checks for a Doctor Portal context based on specific HTML elements. If in the Doctor Portal, the function resolves the navigation target; specifically, if the order is for today, it switches to the "today's orders" sub-tab and highlights that order.
-
-
-
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `switchSubTab`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 2.144810237s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:19 am
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 12:19 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `medicos.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L14-59)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-        // ── Tabs internos del panel Nueva Orden ─────────────────────
-        function switchSubTab(id, btn) {
-            document.querySelectorAll('#panel-nueva-orden .portal-tab-panel').forEach(p => p.classList.remove('active'));
-            document.querySelectorAll('#panel-nueva-orden .portal-tab').forEach(b => {
-                b.classList.remove('active');
-                b.setAttribute('aria-selected', 'false');
-            });
-            var panel = document.getElementById('subtab-' + id);
-            if (panel) panel.classList.add('active');
-            if (btn) {
-                btn.classList.add('active');
-                btn.setAttribute('aria-selected', 'true');
-            } else {
-                var targetBtn = document.getElementById(id === 'generar' ? 'tab-generar' : 'tab-ordenes-hoy');
-                if (targetBtn) {
-                    targetBtn.classList.add('active');
-                    targetBtn.setAttribute('aria-selected', 'true');
-                }
-            }
-            // Mostrar botones solo cuando el tab activo es Generar Orden Digital
-            var tabBtns = document.getElementById('tab-bar-btns');
-            if (tabBtns) tabBtns.style.display = (id === 'generar') ? 'flex' : 'none';
-
-            updateSidebarActionGroupVisibility();
-        }
-        window.switchSubTab = switchSubTab;
-
-        // 2026-09-25 (pedido del usuario): el grupo de íconos móviles
-        // Limpiar/Crear e Imprimir (#sidebar-action-group, tira superior)
-        // solo debe verse en la pestaña "Solicitud" (subtab-generar, donde
-        // vive el formulario) — antes se veía en cualquier panel/pestaña
-        // del portal (Mis Pacientes, Solicitudes Anteriores, Catálogo...)
-        // porque su CSS móvil lo mostraba siempre. Se evalúan las 2
-        // condiciones (panel Y sub-tab activos) porque cambiarTabMedico()
-        // y switchSubTab() cambian independientemente uno del otro.
-        function updateSidebarActionGroupVisibility() {
-            var group = document.getElementById('sidebar-action-group');
-            if (!group) return;
-            var panelActivo = document.getElementById('panel-nueva-orden');
-            var esPanelSolicitud = !!(panelActivo && !panelActivo.classList.contains('d-none'));
-            var tabGenerarBtn = document.getElementById('tab-generar');
-            var esSubtabSolicitud = !!(tabGenerarBtn && tabGenerarBtn.classList.contains('active'));
-            group.classList.toggle('sidebar-action-group--hidden', !(esPanelSolicitud && esSubtabSolicitud));
-        }
-        window.updateSidebarActionGroupVisibility = updateSidebarActionGroupVisibility;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `cambiarTabMedico`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 12:19 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `medicos.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L779-814)</summary>
-
-**Path:** `Unknown file`
-
-```
-            'panel-catalogo-medico':   'Catálogo de Estudios'
-        };
-        function cambiarTabMedico(panelId, el) {
-            document.querySelectorAll('.sidebar .nav-item').forEach(i => i.classList.remove('active'));
-            if (el) {
-                el.classList.add('active');
-            } else {
-                const navItem = document.querySelector(`.sidebar .nav-item[data-panel="${panelId}"]`);
-                if (navItem) navItem.classList.add('active');
-            }
-            document.querySelectorAll('.tab-panel').forEach(p => {
-                p.style.display = 'none';
-                p.classList.add('d-none');
-            });
-            const target = document.getElementById(panelId);
-            if (target) {
-                target.classList.remove('d-none');
-                target.style.display = 'block';
-            }
-            const bc = document.getElementById('header-bc-current');
-            if (bc && panelLabels[panelId]) bc.textContent = panelLabels[panelId];
-
-            if (panelId === 'panel-catalogo-medico')   refreshCatalog();
-
-            updateSidebarActionGroupVisibility();
-        }
-        window.cambiarTabMedico = cambiarTabMedico;
-
-        // Refrescar badge cuando la pestaña cambia
-        window.addEventListener('storage', function() {
-            refreshData();
-        });
-
-        // ── Floating Search (SFS) — medicos ─────────────────────────────────────
-        // Toggle rail extraído a sidebar-rail.js (compartido con labadmin/gestion-web).
-        // Este bloque maneja solo la búsqueda flotante específica del Portal Médico.
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-The notification click while on `subtab-generar` triggers an action within the websocket client. It's crucial to understand how this action interacts with the existing form data. The `cambiarTabMedico` function only affects display styles, ensuring the form data in the hidden tab remains unchanged. Therefore, the form data for generating a new order is preserved and ready.
-
-
-Analyzing `capturarEstadoBusquedaPrevia` function in the websocket client code, specifically lines 264-309, to understand how previous search criteria are handled. The function appears to capture search input values from various HTML elements conditionally, based on a portal identifier. It checks for an existing snapshot before proceeding, suggesting a mechanism for preserving search states. The objective is to determine how the current search context is maintained and potentially restored.
-
-
-Considering a conditional statement within the code, I initially hypothesized that the active tab might be "hoy" (today). Investigating further, I found the "hoy" sub-tab's visibility is controlled by CSS, not a `d-none` class. This implied the condition within the code would evaluate to true. Therefore, the variable `tabActiva` should be set to "hoy" even though the subtab is visually hidden.
-
-
-Reviewing the code, specifically the `restaurarEstadoBusquedaPrevia` function, reveals that clicking "volver" incorrectly navigates to "ordenes-hoy" when the previous tab was "hoy". This occurs because the function always assumes a "hoy" tab, regardless of the original context. It appears `restaurarEstadoBusquedaPrevia` doesn't currently handle returning to the correct tab. I need to determine how it determines the original tab and make it return to the correct subtab, which is the order generation screen in this scenario.
-
-
-Examining the scenario where a notification arrives during form entry, the deferred refresh mechanism ensures the form data remains unaffected. The refresh procedure will not interfere with the user's input because it's designed to not steal focus or alter field values, while audio alerts are disabled in the medical portal. The notification's arrival leaves the form data untouched, only illuminating the notification badge.
-
-
-The code defers table refreshes if the user is typing in a form field to prevent interruption; focus isn't stolen, and audio alerts are disabled in the medical portal to avoid disturbance. The notification badge illuminates discreetly.
-
-Clicking a notification calls `navegarYResaltarOrden()`, which changes the displayed tab to show the relevant order grid. This tab change targets the "Hoy" or "Anteriores" subtabs depending on the notification source.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `medicos.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 5.767682683s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L179-234)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-            <main class="main-content" id="main-content">
-                <!-- Panel 1: Nueva Solicitud -->
-                <div id="panel-nueva-orden" class="tab-panel">
-                    <h2 class="panel-nueva-orden-title">Solicitudes Digitales</h2>
-
-                    <!-- ── Barra de tabs interna: Generar Orden / Mis Órdenes ── -->
-                    <!-- A11Y-06: tab-bar-btns movido FUERA del role=tablist para no confundir AT -->
-                    <div class="portal-tab-bar tab-bar-ac">
-                        <div class="portal-tab-list" role="tablist" aria-label="Secciones de nueva solicitud">
-                            <button type="button" class="portal-tab active" role="tab" id="tab-generar"
-                                    aria-controls="subtab-generar" aria-selected="true">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 2v2"/><path d="M5 2v2"/><path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1"/><path d="M8 15a6 6 0 0 0 12 0v-3"/><circle cx="20" cy="10" r="2"/></svg>
-                                <span id="tab-generar-text">Solicitud Nueva</span>
-                            </button>
-                            <button type="button" class="portal-tab" role="tab" id="tab-ordenes-hoy"
-                                    aria-controls="subtab-ordenes-hoy" aria-selected="false">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
-                                Solicitudes Hoy
-                            </button>
-                            <!-- 2026-09-25 (pedido del usuario): se elimina el clon compacto de
-                                 paginación (GAP-MD-08) que vivía aquí, pegado a la pestaña — se
-                                 veía duplicado con la paginación real de abajo
-                                 (#ordenes-hoy-md-pagination-wrap) bajo zoom de navegador >100%.
-                                 Ahora Órdenes Hoy usa el MISMO tratamiento compacto ya probado en
-                                 Órdenes Anteriores (una sola paginación, siempre junto al
-                                 buscador, sin duplicado) — ver #ordenes-hoy-md-header en
-                                 portal.css @media(max-width:767px). -->
-                        </div>
-                        <!-- Botones Limpiar / Crear e Imprimir — separados del tablist (A11Y-06) -->
-                        <div id="tab-bar-btns" class="tab-bar-btns" role="toolbar" aria-label="Acciones de solicitud">
-                            <button class="btn badge-reset" type="button"
-                                    id="btn-limpiar-orden"
-                                    aria-label="Limpiar selección de estudios">
-                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.46"/></svg>
-                                <span class="btn-imprimir-texto">Limpiar</span>
-                            </button>
-                            <span class="btn-vsep-divider" aria-hidden="true"></span>
-                            <button class="btn btn-primary btn-imprimir-orden badge-reset-sm" type="submit" form="form-orden"
-                                    aria-label="Crear e imprimir solicitud médica">
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
-                                <span class="btn-imprimir-texto">Crear e Imprimir Solicitud</span>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- ── Sub-tab 1: Generar Orden Digital ── -->
-                    <div id="subtab-generar" class="portal-tab-panel active" role="tabpanel" aria-labelledby="tab-generar">
-                        <form id="form-orden" 
-                              hx-post="/laesh/md/orden/crear" 
-                              hx-target="#a11y-live" 
-                              hx-swap="innerHTML"
-                              hx-indicator="#loading-spinner">
-                            <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrfToken ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                            <!-- HTMX: indicador de carga (hx-indicator="#loading-spinner") -->
-                            <span id="loading-spinner" class="htmx-indicator" role="status" aria-label="Enviando solicitud…">
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Analyzing the structure of the "nueva-orden" panel reveals two tabs: "generar" (active by default) and "ordenes-hoy," each linked to corresponding subtabs. The "nueva-orden" panel itself is visible when the doctor is in the capture screen, indicating its relevance to this state. This suggests the "generar" tab is the initial view within the capture screen.
-
-
-If a notification arrives while the doctor is actively inputting data in the form (Scenario A), background refreshes are postponed, preventing data loss or cursor movement; sound alerts are suppressed in the medical portal, and only a visual cue is updated.
-
-If the doctor clicks the notification during data entry (Scenario B), the entered data within the form, residing in the active subtab, is preserved and not lost.
-
-
-The functions used to change views, toggle CSS visibility classes without resetting the form. This ensures the data entered in the form remains intact in the DOM. Clicking a notification from "Hoy" moves the view to the "Solicitudes Hoy" subtab, while "Anteriores" goes to the "Solicitudes Anteriores" tab. The doctor returns to the form by clicking the "Nueva Solicitud" tab, with the data preserved. A potential improvement is identified in the return button's logic within a specific script.
-
-
-
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 1.674722105s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-## User Request
-
-Esto:  "Vía Barra de Retorno (Oportunidad de afinación Poka-Yoke)" , solo es una mejora visual cierto ?
 
 ---
 
 ### CORTEX_STEP_TYPE_SYSTEM_MESSAGE
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 10:54 am
 
 ---
 
-## Agent Response
-
-### Thinking
-
-"Via Return Bar (Poka-Yoke tuning opportunity)" suggests a potential for preventing errors through design. Considering "Poka-Yoke," the question likely centers on whether this implementation affects usability and/or navigation, and not simply aesthetics. The focus is error prevention.
-
-
-Without the tuning, clicking the "Return" button navigates away from the form capture, requiring an extra click to return; the button label also mismatches the current context. The tuning ensures a single click returns to the form due to the `switchSubTab('generar')` action and better label. This change focuses on improving usability, as data persistence is unaffected in either scenario.
-
-
-
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.942414316s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-## User Request
-
-. realizala pues.
-. pero y para cuando el medico esta en la pantalla de ordenes anteriores haciendo un filtro de busqueda cmo esta implementado justo ahora ?
-
----
-
-## Agent Response
-
-### Thinking
-
-The first request focuses on implementing the Poka-Yoke adjustment for returning to capture within the Doctor portal. The second question raises a concern about how this affects the existing search filter functionality when a doctor is viewing prior orders.
-
-I'm thinking through how to approach this.
-
-
-The focus is on integrating the doctor's "capture" state into the navigation. Specifically, when the doctor is in the capture screen and then moves to previous orders and utilizes a search filter.
-
-I'm verifying how to maintain the doctor's "capture" state so the doctor can return. If the doctor uses the previous order filter, I need to make sure that the doctor's capture state is restored.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `ws-client.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.934915202s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L274-449)</summary>
-
-**Path:** `Unknown file`
-
-```
-        var inputHoy    = document.getElementById(searchHoyId);
-        var selPeriodo  = document.getElementById(selectPeriodoId);
-        var inputIni    = document.getElementById(fechaIniId);
-        var inputFin    = document.getElementById(fechaFinId);
-        var rangoElem   = document.getElementById(rangoContainerId);
-
-        var textoAnt   = inputAnt ? (inputAnt.value || '').trim() : '';
-        var textoHoy   = inputHoy ? (inputHoy.value || '').trim() : '';
-        var periodoVal = selPeriodo ? selPeriodo.value : '90d';
-        var iniVal     = inputIni ? (inputIni.value || '') : '';
-        var finVal     = inputFin ? (inputFin.value || '') : '';
-
-        var tabActiva = 'anteriores';
-        if (isMedicoPortal) {
-            var subHoy = document.getElementById('subtab-ordenes-hoy');
-            if (subHoy && (subHoy.classList.contains('active') || !subHoy.classList.contains('d-none'))) tabActiva = 'hoy';
-        } else {
-            var panelHoy = document.getElementById('panel-ordenes');
-            if (panelHoy && !panelHoy.classList.contains('d-none')) tabActiva = 'hoy';
-        }
-
-        _busquedaPreviaSnapshot = {
-            isMedico: isMedicoPortal,
-            tabActiva: tabActiva,
-            textoAnt: textoAnt,
-            textoHoy: textoHoy,
-            periodoVal: periodoVal,
-            iniVal: iniVal,
-            finVal: finVal,
-            rangoVisible: rangoElem ? (rangoElem.style.display !== 'none') : false
-        };
-    }
-
-    function mostrarBarraRetorno(cleanTarget, localizada) {
-        if (!_busquedaPreviaSnapshot) return;
-
-        var snap = _busquedaPreviaSnapshot;
-        var resumen = [];
-        var esBusquedaPersonalizada = false;
-        if (snap.tabActiva === 'hoy') {
-            if (snap.textoHoy) {
-                resumen.push('"' + snap.textoHoy + '"');
-                esBusquedaPersonalizada = true;
-            } else {
-                resumen.push('Órdenes de Hoy');
-            }
-        } else {
-            if (snap.textoAnt) {
-                resumen.push('"' + snap.textoAnt + '"');
-                esBusquedaPersonalizada = true;
-            }
-            if (snap.periodoVal === 'fecha' && (snap.iniVal || snap.finVal)) {
-                resumen.push((snap.iniVal || '') + ' al ' + (snap.finVal || ''));
-                esBusquedaPersonalizada = true;
-            } else if (snap.periodoVal && snap.periodoVal !== '90d') {
-                resumen.push(snap.periodoVal);
-                esBusquedaPersonalizada = true;
-            } else if (!snap.textoAnt) {
-                resumen.push('Últimos 90 días');
-            }
-        }
-        var resumenTexto = resumen.length > 0 ? resumen.join(' · ') : 'Búsqueda previa';
-        var labelBoton = esBusquedaPersonalizada ? ('⬅ Volver a mi búsqueda (' + resumenTexto + ')') : ('⬅ Volver a la lista (' + resumenTexto + ')');
-
-        var existingBar = document.getElementById('laesh-notif-return-bar');
-        if (existingBar) existingBar.remove();
-
-        var esNoEncontrada = (localizada === false);
-        var bar = document.createElement('div');
-        bar.id = 'laesh-notif-return-bar';
-        if (esNoEncontrada) {
-            bar.style.cssText = 'background: #fef2f2; border: 1px solid #fecaca; border-left: 4px solid #ef4444; border-radius: 6px; padding: 7px 12px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; gap: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.04);';
-            bar.innerHTML = 
-                '<div style="font-size: 0.82rem; color: #991b1b; display: flex; align-items: center; gap: 6px;">' +
-                    '<span style="font-size: 0.95rem;">⚠️</span>' +
-                    '<span>No se localizó en la lista la orden de notificación: <strong style="color: #b91c1c;">#' + escapeHtml(cleanTarget) + '</strong></span>' +
-                '</div>' +
-                '<div style="display: flex; align-items: center; gap: 6px;">' +
-                    '<button type="button" id="btn-volver-busqueda-notif" style="padding: 4px 12px; font-size: 0.8rem; font-weight: 600; color: #ffffff; background: #0052b7; border: 1px solid #004394; border-radius: 5px; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; box-shadow: 0 1px 2px rgba(0,0,0,0.08);">' +
-                        '<span>' + escapeHtml(labelBoton) + '</span>' +
-                    '</button>' +
-                    '<button type="button" id="btn-cerrar-banner-notif" title="Descartar aviso" style="background: transparent; border: none; font-size: 1rem; color: #64748b; cursor: pointer; line-height: 1; padding: 2px 6px;">✕</button>' +
-                '</div>';
-        } else {
-            bar.style.cssText = 'background: #eff6ff; border: 1px solid #bfdbfe; border-left: 4px solid #0052b7; border-radius: 6px; padding: 7px 12px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; gap: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.04);';
-            bar.innerHTML = 
-                '<div style="font-size: 0.82rem; color: #1e3a8a; display: flex; align-items: center; gap: 6px;">' +
-                    '<span style="font-size: 0.95rem;">🔔</span>' +
-                    '<span>Revisando orden de notificación: <strong style="color: #0052b7;">#' + escapeHtml(cleanTarget) + '</strong></span>' +
-                '</div>' +
-                '<div style="display: flex; align-items: center; gap: 6px;">' +
-                    '<button type="button" id="btn-volver-busqueda-notif" style="padding: 4px 12px; font-size: 0.8rem; font-weight: 600; color: #ffffff; background: #0052b7; border: 1px solid #004394; border-radius: 5px; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; box-shadow: 0 1px 2px rgba(0,0,0,0.08);">' +
-                        '<span>' + escapeHtml(labelBoton) + '</span>' +
-                    '</button>' +
-                    '<button type="button" id="btn-cerrar-banner-notif" title="Descartar aviso" style="background: transparent; border: none; font-size: 1rem; color: #64748b; cursor: pointer; line-height: 1; padding: 2px 6px;">✕</button>' +
-                '</div>';
-        }
-
-        var targetCard = null;
-        if (snap.isMedico) {
-            var medHist = document.getElementById('panel-historial-medico');
-            var medHoy = document.getElementById('subtab-ordenes-hoy');
-            if (medHist && !medHist.classList.contains('d-none')) {
-                targetCard = medHist.querySelector('.card');
-            } else if (medHoy && (medHoy.classList.contains('active') || !medHoy.classList.contains('d-none'))) {
-                targetCard = medHoy.querySelector('.card');
-            }
-            if (!targetCard) {
-                targetCard = document.querySelector('#panel-historial-medico:not(.d-none) .card, #subtab-ordenes-hoy.active .card, #panel-historial-medico .card, #subtab-ordenes-hoy .card');
-            }
-        } else {
-            var rcAnt = document.getElementById('panel-ordenes-anteriores');
-            var rcHoy = document.getElementById('panel-ordenes');
-            if (rcAnt && !rcAnt.classList.contains('d-none')) {
-                targetCard = rcAnt.querySelector('.card');
-            } else if (rcHoy && !rcHoy.classList.contains('d-none')) {
-                targetCard = rcHoy.querySelector('.card');
-            }
-            if (!targetCard) {
-                targetCard = document.querySelector('#panel-ordenes-anteriores:not(.d-none) .card, #panel-ordenes:not(.d-none) .card, #panel-ordenes-anteriores .card, #panel-ordenes .card');
-            }
-        }
-
-        if (targetCard && targetCard.parentNode) {
-            targetCard.parentNode.insertBefore(bar, targetCard);
-        } else {
-            var header = document.querySelector('.cms-panel-header');
-            if (header && header.parentNode) {
-                header.parentNode.insertBefore(bar, header.nextSibling);
-            }
-        }
-
-        var btnVolver = document.getElementById('btn-volver-busqueda-notif');
-        if (btnVolver) {
-            btnVolver.addEventListener('click', function(e) {
-                e.preventDefault();
-                restaurarEstadoBusquedaPrevia();
-            });
-        }
-        var btnCerrar = document.getElementById('btn-cerrar-banner-notif');
-        if (btnCerrar) {
-            btnCerrar.addEventListener('click', function(e) {
-                e.preventDefault();
-                _busquedaPreviaSnapshot = null;
-                bar.remove();
-            });
-        }
-    }
-
-    function restaurarEstadoBusquedaPrevia() {
-        if (!_busquedaPreviaSnapshot) return;
-        var snap = _busquedaPreviaSnapshot;
-        _busquedaPreviaSnapshot = null;
-
-        var bar = document.getElementById('laesh-notif-return-bar');
-        if (bar) bar.remove();
-
-        var isMed = snap.isMedico;
-        if (snap.tabActiva === 'hoy') {
-            if (isMed) {
-                if (typeof window.cambiarTabMedico === 'function') window.cambiarTabMedico('panel-nueva-orden');
-                if (typeof window.switchSubTab === 'function') window.switchSubTab('ordenes-hoy');
-                var inpHoy = document.getElementById('input-buscar-orden-hoy-md');
-                if (inpHoy) {
-                    inpHoy.value = snap.textoHoy;
-                    inpHoy.dispatchEvent(new Event('search', { bubbles: true }));
-                    inpHoy.dispatchEvent(new Event('keyup', { bubbles: true }));
-                }
-            } else {
-                if (typeof window.cambiarTabAdmin === 'function') window.cambiarTabAdmin('panel-ordenes');
-                var inpHoyRc = document.getElementById('input-buscar-orden-rc');
-                if (inpHoyRc) {
-                    inpHoyRc.value = snap.textoHoy;
-                    inpHoyRc.dispatchEvent(new Event('search', { bubbles: true }));
-                    inpHoyRc.dispatchEvent(new Event('keyup', { bubbles: true }));
-                }
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Currently examining the `capturarEstadoBusquedaPrevia` function. Initializing `tabActiva` to 'anteriores'. Conditional check determines if it is the MedicoPortal, and then checks if a specific panel is visible.
-
-
-Conditional logic now updates `tabActiva` based on active elements, using defaults if no active state is detected. The `mostrarBarraRetorno` function uses `tabActiva` to determine a search's context. The `labelBoton` variable dynamically updates its label based on `tabActiva` and a custom search flag. Finally, `restaurarEstadoBusquedaPrevia` restores the search state based on the value of `tabActiva`.
-
-
-When a notification arrives, the `capturarEstadoBusquedaPrevia` function is called to store the current search state within the doctor's portal. This function checks if the doctor is in the portal, determines if the relevant panel is active, and then updates the `tabActiva` variable to 'anteriores'. The function then captures search criteria (text, period, start, and end dates) and stores them for later restoration. In Case A, if the order is from today, it navigates to the 'hoy' tab, and in other scenarios, remains on the 'anteriores' tab, but the previous search filters should still apply.
-
-
-The system either stays on or switches to the "hoy" or "anteriores" tab depending on whether it is a current or previous order. The search folio is injected and triggers a search of the relevant table. For older orders, the backend bypasses date restrictions on the folio search. The return bar displays the search context.
-
-Clicking "[ ⬅ Volver a mi búsqueda ]" triggers the `restaurarEstadoBusquedaPrevia` function. It retrieves the stored search state based on the active tab, likely "anteriores."
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `ws-client.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 2.991036181s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L279-309)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-        var textoAnt   = inputAnt ? (inputAnt.value || '').trim() : '';
-        var textoHoy   = inputHoy ? (inputHoy.value || '').trim() : '';
-        var periodoVal = selPeriodo ? selPeriodo.value : '90d';
-        var iniVal     = inputIni ? (inputIni.value || '') : '';
-        var finVal     = inputFin ? (inputFin.value || '') : '';
-
-        var tabActiva = 'anteriores';
-        if (isMedicoPortal) {
-            var subHoy = document.getElementById('subtab-ordenes-hoy');
-            if (subHoy && (subHoy.classList.contains('active') || !subHoy.classList.contains('d-none'))) tabActiva = 'hoy';
-        } else {
-            var panelHoy = document.getElementById('panel-ordenes');
-            if (panelHoy && !panelHoy.classList.contains('d-none')) tabActiva = 'hoy';
-        }
-
-        _busquedaPreviaSnapshot = {
-            isMedico: isMedicoPortal,
-            tabActiva: tabActiva,
-            textoAnt: textoAnt,
-            textoHoy: textoHoy,
-            periodoVal: periodoVal,
-            iniVal: iniVal,
-            finVal: finVal,
-            rangoVisible: rangoElem ? (rangoElem.style.display !== 'none') : false
-        };
-    }
-
-    function mostrarBarraRetorno(cleanTarget, localizada) {
-        if (!_busquedaPreviaSnapshot) return;
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `ws-client.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L309-359)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-        var snap = _busquedaPreviaSnapshot;
-        var resumen = [];
-        var esBusquedaPersonalizada = false;
-        if (snap.tabActiva === 'hoy') {
-            if (snap.textoHoy) {
-                resumen.push('"' + snap.textoHoy + '"');
-                esBusquedaPersonalizada = true;
-            } else {
-                resumen.push('Órdenes de Hoy');
-            }
-        } else {
-            if (snap.textoAnt) {
-                resumen.push('"' + snap.textoAnt + '"');
-                esBusquedaPersonalizada = true;
-            }
-            if (snap.periodoVal === 'fecha' && (snap.iniVal || snap.finVal)) {
-                resumen.push((snap.iniVal || '') + ' al ' + (snap.finVal || ''));
-                esBusquedaPersonalizada = true;
-            } else if (snap.periodoVal && snap.periodoVal !== '90d') {
-                resumen.push(snap.periodoVal);
-                esBusquedaPersonalizada = true;
-            } else if (!snap.textoAnt) {
-                resumen.push('Últimos 90 días');
-            }
-        }
-        var resumenTexto = resumen.length > 0 ? resumen.join(' · ') : 'Búsqueda previa';
-        var labelBoton = esBusquedaPersonalizada ? ('⬅ Volver a mi búsqueda (' + resumenTexto + ')') : ('⬅ Volver a la lista (' + resumenTexto + ')');
-
-        var existingBar = document.getElementById('laesh-notif-return-bar');
-        if (existingBar) existingBar.remove();
-
-        var esNoEncontrada = (localizada === false);
-        var bar = document.createElement('div');
-        bar.id = 'laesh-notif-return-bar';
-        if (esNoEncontrada) {
-            bar.style.cssText = 'background: #fef2f2; border: 1px solid #fecaca; border-left: 4px solid #ef4444; border-radius: 6px; padding: 7px 12px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; gap: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.04);';
-            bar.innerHTML = 
-                '<div style="font-size: 0.82rem; color: #991b1b; display: flex; align-items: center; gap: 6px;">' +
-                    '<span style="font-size: 0.95rem;">⚠️</span>' +
-                    '<span>No se localizó en la lista la orden de notificación: <strong style="color: #b91c1c;">#' + escapeHtml(cleanTarget) + '</strong></span>' +
-                '</div>' +
-                '<div style="display: flex; align-items: center; gap: 6px;">' +
-                    '<button type="button" id="btn-volver-busqueda-notif" style="padding: 4px 12px; font-size: 0.8rem; font-weight: 600; color: #ffffff; background: #0052b7; border: 1px solid #004394; border-radius: 5px; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; box-shadow: 0 1px 2px rgba(0,0,0,0.08);">' +
-                        '<span>' + escapeHtml(labelBoton) + '</span>' +
-                    '</button>' +
-                    '<button type="button" id="btn-cerrar-banner-notif" title="Descartar aviso" style="background: transparent; border: none; font-size: 1rem; color: #64748b; cursor: pointer; line-height: 1; padding: 2px 6px;">✕</button>' +
-                '</div>';
-        } else {
-            bar.style.cssText = 'background: #eff6ff; border: 1px solid #bfdbfe; border-left: 4px solid #0052b7; border-radius: 6px; padding: 7px 12px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; gap: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.04);';
-            bar.innerHTML = 
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `ws-client.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L419-459)</summary>
-
-**Path:** `Unknown file`
-
-```
-            });
-        }
-    }
-
-    function restaurarEstadoBusquedaPrevia() {
-        if (!_busquedaPreviaSnapshot) return;
-        var snap = _busquedaPreviaSnapshot;
-        _busquedaPreviaSnapshot = null;
-
-        var bar = document.getElementById('laesh-notif-return-bar');
-        if (bar) bar.remove();
-
-        var isMed = snap.isMedico;
-        if (snap.tabActiva === 'hoy') {
-            if (isMed) {
-                if (typeof window.cambiarTabMedico === 'function') window.cambiarTabMedico('panel-nueva-orden');
-                if (typeof window.switchSubTab === 'function') window.switchSubTab('ordenes-hoy');
-                var inpHoy = document.getElementById('input-buscar-orden-hoy-md');
-                if (inpHoy) {
-                    inpHoy.value = snap.textoHoy;
-                    inpHoy.dispatchEvent(new Event('search', { bubbles: true }));
-                    inpHoy.dispatchEvent(new Event('keyup', { bubbles: true }));
-                }
-            } else {
-                if (typeof window.cambiarTabAdmin === 'function') window.cambiarTabAdmin('panel-ordenes');
-                var inpHoyRc = document.getElementById('input-buscar-orden-rc');
-                if (inpHoyRc) {
-                    inpHoyRc.value = snap.textoHoy;
-                    inpHoyRc.dispatchEvent(new Event('search', { bubbles: true }));
-                    inpHoyRc.dispatchEvent(new Event('keyup', { bubbles: true }));
-                }
-            }
-        } else {
-            if (isMed) {
-                if (typeof window.cambiarTabMedico === 'function') window.cambiarTabMedico('panel-historial-medico');
-                var selMed = document.getElementById('select-periodo-anteriores-md');
-                var iniMed = document.getElementById('fecha-inicio-anteriores-md');
-                var finMed = document.getElementById('fecha-fin-anteriores-md');
-                var ranMed = document.getElementById('rango-fechas-anteriores-md');
-                var inpAntMed = document.getElementById('input-buscar-orden-anteriores-md');
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-If the active tab is 'captura' and the context is medical, functions to change the medical tab and switch the sub-tab are potentially called. Otherwise, if the active tab is 'hoy', different actions are likely triggered. This suggests a conditional state restoration based on the active tab and context.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `ws-client.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.099142869s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L284-454)</summary>
-
-**Path:** `Unknown file`
-
-```
-        var finVal     = inputFin ? (inputFin.value || '') : '';
-
-        var tabActiva = 'anteriores';
-        if (isMedicoPortal) {
-            var subHoy = document.getElementById('subtab-ordenes-hoy');
-            if (subHoy && (subHoy.classList.contains('active') || !subHoy.classList.contains('d-none'))) tabActiva = 'hoy';
-        } else {
-            var panelHoy = document.getElementById('panel-ordenes');
-            if (panelHoy && !panelHoy.classList.contains('d-none')) tabActiva = 'hoy';
-        }
-
-        _busquedaPreviaSnapshot = {
-            isMedico: isMedicoPortal,
-            tabActiva: tabActiva,
-            textoAnt: textoAnt,
-            textoHoy: textoHoy,
-            periodoVal: periodoVal,
-            iniVal: iniVal,
-            finVal: finVal,
-            rangoVisible: rangoElem ? (rangoElem.style.display !== 'none') : false
-        };
-    }
-
-    function mostrarBarraRetorno(cleanTarget, localizada) {
-        if (!_busquedaPreviaSnapshot) return;
-
-        var snap = _busquedaPreviaSnapshot;
-        var resumen = [];
-        var esBusquedaPersonalizada = false;
-        if (snap.tabActiva === 'hoy') {
-            if (snap.textoHoy) {
-                resumen.push('"' + snap.textoHoy + '"');
-                esBusquedaPersonalizada = true;
-            } else {
-                resumen.push('Órdenes de Hoy');
-            }
-        } else {
-            if (snap.textoAnt) {
-                resumen.push('"' + snap.textoAnt + '"');
-                esBusquedaPersonalizada = true;
-            }
-            if (snap.periodoVal === 'fecha' && (snap.iniVal || snap.finVal)) {
-                resumen.push((snap.iniVal || '') + ' al ' + (snap.finVal || ''));
-                esBusquedaPersonalizada = true;
-            } else if (snap.periodoVal && snap.periodoVal !== '90d') {
-                resumen.push(snap.periodoVal);
-                esBusquedaPersonalizada = true;
-            } else if (!snap.textoAnt) {
-                resumen.push('Últimos 90 días');
-            }
-        }
-        var resumenTexto = resumen.length > 0 ? resumen.join(' · ') : 'Búsqueda previa';
-        var labelBoton = esBusquedaPersonalizada ? ('⬅ Volver a mi búsqueda (' + resumenTexto + ')') : ('⬅ Volver a la lista (' + resumenTexto + ')');
-
-        var existingBar = document.getElementById('laesh-notif-return-bar');
-        if (existingBar) existingBar.remove();
-
-        var esNoEncontrada = (localizada === false);
-        var bar = document.createElement('div');
-        bar.id = 'laesh-notif-return-bar';
-        if (esNoEncontrada) {
-            bar.style.cssText = 'background: #fef2f2; border: 1px solid #fecaca; border-left: 4px solid #ef4444; border-radius: 6px; padding: 7px 12px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; gap: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.04);';
-            bar.innerHTML = 
-                '<div style="font-size: 0.82rem; color: #991b1b; display: flex; align-items: center; gap: 6px;">' +
-                    '<span style="font-size: 0.95rem;">⚠️</span>' +
-                    '<span>No se localizó en la lista la orden de notificación: <strong style="color: #b91c1c;">#' + escapeHtml(cleanTarget) + '</strong></span>' +
-                '</div>' +
-                '<div style="display: flex; align-items: center; gap: 6px;">' +
-                    '<button type="button" id="btn-volver-busqueda-notif" style="padding: 4px 12px; font-size: 0.8rem; font-weight: 600; color: #ffffff; background: #0052b7; border: 1px solid #004394; border-radius: 5px; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; box-shadow: 0 1px 2px rgba(0,0,0,0.08);">' +
-                        '<span>' + escapeHtml(labelBoton) + '</span>' +
-                    '</button>' +
-                    '<button type="button" id="btn-cerrar-banner-notif" title="Descartar aviso" style="background: transparent; border: none; font-size: 1rem; color: #64748b; cursor: pointer; line-height: 1; padding: 2px 6px;">✕</button>' +
-                '</div>';
-        } else {
-            bar.style.cssText = 'background: #eff6ff; border: 1px solid #bfdbfe; border-left: 4px solid #0052b7; border-radius: 6px; padding: 7px 12px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; gap: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.04);';
-            bar.innerHTML = 
-                '<div style="font-size: 0.82rem; color: #1e3a8a; display: flex; align-items: center; gap: 6px;">' +
-                    '<span style="font-size: 0.95rem;">🔔</span>' +
-                    '<span>Revisando orden de notificación: <strong style="color: #0052b7;">#' + escapeHtml(cleanTarget) + '</strong></span>' +
-                '</div>' +
-                '<div style="display: flex; align-items: center; gap: 6px;">' +
-                    '<button type="button" id="btn-volver-busqueda-notif" style="padding: 4px 12px; font-size: 0.8rem; font-weight: 600; color: #ffffff; background: #0052b7; border: 1px solid #004394; border-radius: 5px; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; box-shadow: 0 1px 2px rgba(0,0,0,0.08);">' +
-                        '<span>' + escapeHtml(labelBoton) + '</span>' +
-                    '</button>' +
-                    '<button type="button" id="btn-cerrar-banner-notif" title="Descartar aviso" style="background: transparent; border: none; font-size: 1rem; color: #64748b; cursor: pointer; line-height: 1; padding: 2px 6px;">✕</button>' +
-                '</div>';
-        }
-
-        var targetCard = null;
-        if (snap.isMedico) {
-            var medHist = document.getElementById('panel-historial-medico');
-            var medHoy = document.getElementById('subtab-ordenes-hoy');
-            if (medHist && !medHist.classList.contains('d-none')) {
-                targetCard = medHist.querySelector('.card');
-            } else if (medHoy && (medHoy.classList.contains('active') || !medHoy.classList.contains('d-none'))) {
-                targetCard = medHoy.querySelector('.card');
-            }
-            if (!targetCard) {
-                targetCard = document.querySelector('#panel-historial-medico:not(.d-none) .card, #subtab-ordenes-hoy.active .card, #panel-historial-medico .card, #subtab-ordenes-hoy .card');
-            }
-        } else {
-            var rcAnt = document.getElementById('panel-ordenes-anteriores');
-            var rcHoy = document.getElementById('panel-ordenes');
-            if (rcAnt && !rcAnt.classList.contains('d-none')) {
-                targetCard = rcAnt.querySelector('.card');
-            } else if (rcHoy && !rcHoy.classList.contains('d-none')) {
-                targetCard = rcHoy.querySelector('.card');
-            }
-            if (!targetCard) {
-                targetCard = document.querySelector('#panel-ordenes-anteriores:not(.d-none) .card, #panel-ordenes:not(.d-none) .card, #panel-ordenes-anteriores .card, #panel-ordenes .card');
-            }
-        }
-
-        if (targetCard && targetCard.parentNode) {
-            targetCard.parentNode.insertBefore(bar, targetCard);
-        } else {
-            var header = document.querySelector('.cms-panel-header');
-            if (header && header.parentNode) {
-                header.parentNode.insertBefore(bar, header.nextSibling);
-            }
-        }
-
-        var btnVolver = document.getElementById('btn-volver-busqueda-notif');
-        if (btnVolver) {
-            btnVolver.addEventListener('click', function(e) {
-                e.preventDefault();
-                restaurarEstadoBusquedaPrevia();
-            });
-        }
-        var btnCerrar = document.getElementById('btn-cerrar-banner-notif');
-        if (btnCerrar) {
-            btnCerrar.addEventListener('click', function(e) {
-                e.preventDefault();
-                _busquedaPreviaSnapshot = null;
-                bar.remove();
-            });
-        }
-    }
-
-    function restaurarEstadoBusquedaPrevia() {
-        if (!_busquedaPreviaSnapshot) return;
-        var snap = _busquedaPreviaSnapshot;
-        _busquedaPreviaSnapshot = null;
-
-        var bar = document.getElementById('laesh-notif-return-bar');
-        if (bar) bar.remove();
-
-        var isMed = snap.isMedico;
-        if (snap.tabActiva === 'hoy') {
-            if (isMed) {
-                if (typeof window.cambiarTabMedico === 'function') window.cambiarTabMedico('panel-nueva-orden');
-                if (typeof window.switchSubTab === 'function') window.switchSubTab('ordenes-hoy');
-                var inpHoy = document.getElementById('input-buscar-orden-hoy-md');
-                if (inpHoy) {
-                    inpHoy.value = snap.textoHoy;
-                    inpHoy.dispatchEvent(new Event('search', { bubbles: true }));
-                    inpHoy.dispatchEvent(new Event('keyup', { bubbles: true }));
-                }
-            } else {
-                if (typeof window.cambiarTabAdmin === 'function') window.cambiarTabAdmin('panel-ordenes');
-                var inpHoyRc = document.getElementById('input-buscar-orden-rc');
-                if (inpHoyRc) {
-                    inpHoyRc.value = snap.textoHoy;
-                    inpHoyRc.dispatchEvent(new Event('search', { bubbles: true }));
-                    inpHoyRc.dispatchEvent(new Event('keyup', { bubbles: true }));
-                }
-            }
-        } else {
-            if (isMed) {
-                if (typeof window.cambiarTabMedico === 'function') window.cambiarTabMedico('panel-historial-medico');
-                var selMed = document.getElementById('select-periodo-anteriores-md');
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Examining `capturarEstadoBusquedaPrevia` within `ws-client.js` reveals conditional logic tied to a medical portal context, specifically managing UI state. The code checks for the existence and visibility of elements related to order generation and today's orders. This suggests the function's purpose is to preserve and restore the search or view context based on user interface state.
-
-
-The code determines the active tab ("captura", "hoy", or "anteriores") based on UI element visibility and state, seemingly reflecting the user's current view. The `mostrarBarraRetorno` function constructs a summary string for the return bar, indicating the active search or display context. It determines if the search is personalized by examining the active tab and associated search parameters.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 11.069673867s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 10:57 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 10:57 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 10:57 am
-
----
-
-## Agent Response
-
-### Thinking
-
-The user is currently interacting with the "Solicitudes Anteriores" (Previous Requests) tab. This means the focus is on a search filter within this specific section. The goal is to clarify how this functionality is implemented.
-
-
-Upon notification click, the current search context, including the active tab, search text, date range or preset period, and date visibility, is immediately stored. The system then determines the notification's date.
-If the notification relates to today's requests, the display shifts to the "Today" view, locating and highlighting the relevant folio. Otherwise, the system remains within the "Previous Requests" section, leveraging a database lookup to find the correct entry.
-
-
-
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.399097161s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-## User Request
-
-sobre: El sistema resguarda en memoria Instantánea Automática (_busquedaPreviaSnapshot), es memoria ram o persistencia en el lado del webrowser ?
-
-
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `ws-client.js`
-**Language:** javascript
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-The query concerns the storage location of the "Automatic Snapshot" data. Initial hypothesis: the system utilizes either RAM (volatile) or browser-side persistence (e.g., local storage, cookies). The question implies a difference between RAM and browser storage. Further analysis requires identifying how "_busquedaPreviaSnapshot" is managed within the system.
-
-
-The code reveals that `_busquedaPreviaSnapshot` is a JavaScript variable initialized within an Immediately Invoked Function Expression (IIFE) in `ws-client.js`. This declaration confines the snapshot to RAM (browser JavaScript heap), ruling out persistent storage options like `localStorage`. Its RAM-based storage indicates rapid access, minimal disk footprint, and automatic cleanup upon tab closure or navigation away.
-
-
-
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 1.180199440s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-## User Request
-
-rectifica que _busquedaPreviaSnapshot tegna ciclo correcto y completo para evitar conflictos, retrocesos de datos, mezclas entre busquedas, etc, informa me.
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `ws-client.js`
-**Language:** javascript
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Initial concern centers on the lifecycle integrity of `_busquedaPreviaSnapshot` to prevent data corruption and search inconsistencies. The objective is to verify its completeness and correctness. Identifying potential areas where conflicts or data regression could arise is critical.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `ws-client.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.090791313s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L259-479)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-    // ── Instantánea y Restauración de Búsqueda Previa (Flujo Poka-Yoke Notificaciones) ──
-    var _busquedaPreviaSnapshot = null;
-
-    function capturarEstadoBusquedaPrevia(isMedicoPortal) {
-        if (_busquedaPreviaSnapshot) return; // Si ya hay una activa sin restaurar, mantenerla
-
-        var searchAnterioresId = isMedicoPortal ? 'input-buscar-orden-anteriores-md' : 'input-buscar-orden-anteriores-rc';
-        var searchHoyId        = isMedicoPortal ? 'input-buscar-orden-hoy-md'        : 'input-buscar-orden-rc';
-        var selectPeriodoId    = isMedicoPortal ? 'select-periodo-anteriores-md'    : 'select-periodo-anteriores-rc';
-        var fechaIniId         = isMedicoPortal ? 'fecha-inicio-anteriores-md'      : 'fecha-inicio-anteriores-rc';
-        var fechaFinId         = isMedicoPortal ? 'fecha-fin-anteriores-md'         : 'fecha-fin-anteriores-rc';
-        var rangoContainerId   = isMedicoPortal ? 'rango-fechas-anteriores-md'      : 'rango-fechas-anteriores-rc';
-
-        var inputAnt    = document.getElementById(searchAnterioresId);
-        var inputHoy    = document.getElementById(searchHoyId);
-        var selPeriodo  = document.getElementById(selectPeriodoId);
-        var inputIni    = document.getElementById(fechaIniId);
-        var inputFin    = document.getElementById(fechaFinId);
-        var rangoElem   = document.getElementById(rangoContainerId);
-
-        var textoAnt   = inputAnt ? (inputAnt.value || '').trim() : '';
-        var textoHoy   = inputHoy ? (inputHoy.value || '').trim() : '';
-        var periodoVal = selPeriodo ? selPeriodo.value : '90d';
-        var iniVal     = inputIni ? (inputIni.value || '') : '';
-        var finVal     = inputFin ? (inputFin.value || '') : '';
-
-        var tabActiva = 'anteriores';
-        if (isMedicoPortal) {
-            var panelNueva = document.getElementById('panel-nueva-orden');
-            var subGenerar = document.getElementById('subtab-generar');
-            var subHoy = document.getElementById('subtab-ordenes-hoy');
-            if (panelNueva && !panelNueva.classList.contains('d-none')) {
-                if (subGenerar && subGenerar.classList.contains('active')) {
-                    tabActiva = 'captura';
-                } else if (subHoy && subHoy.classList.contains('active')) {
-                    tabActiva = 'hoy';
-                } else {
-                    tabActiva = 'captura';
-                }
-            } else {
-                tabActiva = 'anteriores';
-            }
-        } else {
-            var panelHoy = document.getElementById('panel-ordenes');
-            if (panelHoy && !panelHoy.classList.contains('d-none')) tabActiva = 'hoy';
-        }
-
-        _busquedaPreviaSnapshot = {
-            isMedico: isMedicoPortal,
-            tabActiva: tabActiva,
-            textoAnt: textoAnt,
-            textoHoy: textoHoy,
-            periodoVal: periodoVal,
-            iniVal: iniVal,
-            finVal: finVal,
-            rangoVisible: rangoElem ? (rangoElem.style.display !== 'none') : false
-        };
-    }
-
-    function mostrarBarraRetorno(cleanTarget, localizada) {
-        if (!_busquedaPreviaSnapshot) return;
-
-        var snap = _busquedaPreviaSnapshot;
-        var resumen = [];
-        var esBusquedaPersonalizada = false;
-        if (snap.tabActiva === 'captura') {
-            resumen.push('Captura de Solicitud');
-            esBusquedaPersonalizada = true;
-        } else if (snap.tabActiva === 'hoy') {
-            if (snap.textoHoy) {
-                resumen.push('"' + snap.textoHoy + '"');
-                esBusquedaPersonalizada = true;
-            } else {
-                resumen.push('Órdenes de Hoy');
-            }
-        } else {
-            if (snap.textoAnt) {
-                resumen.push('"' + snap.textoAnt + '"');
-                esBusquedaPersonalizada = true;
-            }
-            if (snap.periodoVal === 'fecha' && (snap.iniVal || snap.finVal)) {
-                resumen.push((snap.iniVal || '') + ' al ' + (snap.finVal || ''));
-                esBusquedaPersonalizada = true;
-            } else if (snap.periodoVal && snap.periodoVal !== '90d') {
-                resumen.push(snap.periodoVal);
-                esBusquedaPersonalizada = true;
-            } else if (!snap.textoAnt) {
-                resumen.push('Últimos 90 días');
-            }
-        }
-        var resumenTexto = resumen.length > 0 ? resumen.join(' · ') : 'Búsqueda previa';
-        var labelBoton = '';
-        if (snap.tabActiva === 'captura') {
-            labelBoton = '⬅ Volver a mi captura de orden';
-        } else if (esBusquedaPersonalizada) {
-            labelBoton = '⬅ Volver a mi búsqueda (' + resumenTexto + ')';
-        } else {
-            labelBoton = '⬅ Volver a la lista (' + resumenTexto + ')';
-        }
-
-        var existingBar = document.getElementById('laesh-notif-return-bar');
-        if (existingBar) existingBar.remove();
-
-        var esNoEncontrada = (localizada === false);
-        var bar = document.createElement('div');
-        bar.id = 'laesh-notif-return-bar';
-        if (esNoEncontrada) {
-            bar.style.cssText = 'background: #fef2f2; border: 1px solid #fecaca; border-left: 4px solid #ef4444; border-radius: 6px; padding: 7px 12px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; gap: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.04);';
-            bar.innerHTML = 
-                '<div style="font-size: 0.82rem; color: #991b1b; display: flex; align-items: center; gap: 6px;">' +
-                    '<span style="font-size: 0.95rem;">⚠️</span>' +
-                    '<span>No se localizó en la lista la orden de notificación: <strong style="color: #b91c1c;">#' + escapeHtml(cleanTarget) + '</strong></span>' +
-                '</div>' +
-                '<div style="display: flex; align-items: center; gap: 6px;">' +
-                    '<button type="button" id="btn-volver-busqueda-notif" style="padding: 4px 12px; font-size: 0.8rem; font-weight: 600; color: #ffffff; background: #0052b7; border: 1px solid #004394; border-radius: 5px; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; box-shadow: 0 1px 2px rgba(0,0,0,0.08);">' +
-                        '<span>' + escapeHtml(labelBoton) + '</span>' +
-                    '</button>' +
-                    '<button type="button" id="btn-cerrar-banner-notif" title="Descartar aviso" style="background: transparent; border: none; font-size: 1rem; color: #64748b; cursor: pointer; line-height: 1; padding: 2px 6px;">✕</button>' +
-                '</div>';
-        } else {
-            bar.style.cssText = 'background: #eff6ff; border: 1px solid #bfdbfe; border-left: 4px solid #0052b7; border-radius: 6px; padding: 7px 12px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; gap: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.04);';
-            bar.innerHTML = 
-                '<div style="font-size: 0.82rem; color: #1e3a8a; display: flex; align-items: center; gap: 6px;">' +
-                    '<span style="font-size: 0.95rem;">🔔</span>' +
-                    '<span>Revisando orden de notificación: <strong style="color: #0052b7;">#' + escapeHtml(cleanTarget) + '</strong></span>' +
-                '</div>' +
-                '<div style="display: flex; align-items: center; gap: 6px;">' +
-                    '<button type="button" id="btn-volver-busqueda-notif" style="padding: 4px 12px; font-size: 0.8rem; font-weight: 600; color: #ffffff; background: #0052b7; border: 1px solid #004394; border-radius: 5px; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; box-shadow: 0 1px 2px rgba(0,0,0,0.08);">' +
-                        '<span>' + escapeHtml(labelBoton) + '</span>' +
-                    '</button>' +
-                    '<button type="button" id="btn-cerrar-banner-notif" title="Descartar aviso" style="background: transparent; border: none; font-size: 1rem; color: #64748b; cursor: pointer; line-height: 1; padding: 2px 6px;">✕</button>' +
-                '</div>';
-        }
-
-        var targetCard = null;
-        if (snap.isMedico) {
-            var medHist = document.getElementById('panel-historial-medico');
-            var medHoy = document.getElementById('subtab-ordenes-hoy');
-            if (medHist && !medHist.classList.contains('d-none')) {
-                targetCard = medHist.querySelector('.card');
-            } else if (medHoy && (medHoy.classList.contains('active') || !medHoy.classList.contains('d-none'))) {
-                targetCard = medHoy.querySelector('.card');
-            }
-            if (!targetCard) {
-                targetCard = document.querySelector('#panel-historial-medico:not(.d-none) .card, #subtab-ordenes-hoy.active .card, #panel-historial-medico .card, #subtab-ordenes-hoy .card');
-            }
-        } else {
-            var rcAnt = document.getElementById('panel-ordenes-anteriores');
-            var rcHoy = document.getElementById('panel-ordenes');
-            if (rcAnt && !rcAnt.classList.contains('d-none')) {
-                targetCard = rcAnt.querySelector('.card');
-            } else if (rcHoy && !rcHoy.classList.contains('d-none')) {
-                targetCard = rcHoy.querySelector('.card');
-            }
-            if (!targetCard) {
-                targetCard = document.querySelector('#panel-ordenes-anteriores:not(.d-none) .card, #panel-ordenes:not(.d-none) .card, #panel-ordenes-anteriores .card, #panel-ordenes .card');
-            }
-        }
-
-        if (targetCard && targetCard.parentNode) {
-            targetCard.parentNode.insertBefore(bar, targetCard);
-        } else {
-            var header = document.querySelector('.cms-panel-header');
-            if (header && header.parentNode) {
-                header.parentNode.insertBefore(bar, header.nextSibling);
-            }
-        }
-
-        var btnVolver = document.getElementById('btn-volver-busqueda-notif');
-        if (btnVolver) {
-            btnVolver.addEventListener('click', function(e) {
-                e.preventDefault();
-                restaurarEstadoBusquedaPrevia();
-            });
-        }
-        var btnCerrar = document.getElementById('btn-cerrar-banner-notif');
-        if (btnCerrar) {
-            btnCerrar.addEventListener('click', function(e) {
-                e.preventDefault();
-                _busquedaPreviaSnapshot = null;
-                bar.remove();
-            });
-        }
-    }
-
-    function restaurarEstadoBusquedaPrevia() {
-        if (!_busquedaPreviaSnapshot) return;
-        var snap = _busquedaPreviaSnapshot;
-        _busquedaPreviaSnapshot = null;
-
-        var bar = document.getElementById('laesh-notif-return-bar');
-        if (bar) bar.remove();
-
-        var isMed = snap.isMedico;
-        if (snap.tabActiva === 'captura') {
-            if (isMed) {
-                if (typeof window.cambiarTabMedico === 'function') window.cambiarTabMedico('panel-nueva-orden');
-                if (typeof window.switchSubTab === 'function') window.switchSubTab('generar');
-            }
-        } else if (snap.tabActiva === 'hoy') {
-            if (isMed) {
-                if (typeof window.cambiarTabMedico === 'function') window.cambiarTabMedico('panel-nueva-orden');
-                if (typeof window.switchSubTab === 'function') window.switchSubTab('ordenes-hoy');
-                var inpHoy = document.getElementById('input-buscar-orden-hoy-md');
-                if (inpHoy) {
-                    inpHoy.value = snap.textoHoy;
-                    inpHoy.dispatchEvent(new Event('search', { bubbles: true }));
-                    inpHoy.dispatchEvent(new Event('keyup', { bubbles: true }));
-                }
-            } else {
-                if (typeof window.cambiarTabAdmin === 'function') window.cambiarTabAdmin('panel-ordenes');
-                var inpHoyRc = document.getElementById('input-buscar-orden-rc');
-                if (inpHoyRc) {
-                    inpHoyRc.value = snap.textoHoy;
-                    inpHoyRc.dispatchEvent(new Event('search', { bubbles: true }));
-                    inpHoyRc.dispatchEvent(new Event('keyup', { bubbles: true }));
-                }
-            }
-        } else {
-            if (isMed) {
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-The `_busquedaPreviaSnapshot` lifecycle needs thorough examination to understand its behavior in scenarios involving multiple notifications. The initial code block suggests the system might prevent a new snapshot if one already exists, potentially leading to undesired behavior when multiple notifications arrive in rapid succession. The interaction with existing snapshots and the handling of subsequent notifications requires careful consideration.
-
-
-The system correctly preserves the initial search ("Gómez") when a notification is selected, as intended. Upon restoring the previous search state, the snapshot is immediately nulled, and the return bar is removed. Explicit dismissal also clears the snapshot. The critical question is what happens if manual UI interaction begins *without* explicitly returning or dismissing the notification.
-
-
-If a user manually interacts with the UI (search input, date selection, or menu navigation) without explicitly dismissing the notification, the previous search snapshot remains active, creating potential inconsistencies. The current implementation does not invalidate the snapshot on manual action. Therefore, the snapshot needs to be removed upon any manual interaction to prevent the previous search from overriding the user's intent.
-
-
-If a notification arrives while the user is already reviewing a previous search snapshot, periodic refreshes should not disrupt the user's current interaction. A new snapshot should only appear on explicit return or dismiss, and not interfere with ongoing actions.
-
-To ensure a clean slate for manual searches, the system needs to listen for user interactions in search inputs, date selectors, and navigation tabs. Any user-initiated interaction (typing in the search input, changing the period selector, or navigating to a new tab) must invalidate the snapshot and remove the return bar, ensuring the previous context is discarded. This should be implemented as a Poka-Yoke principle to guarantee the snapshot and return bar are exclusively tied to notification review.
-
-
-The DOM lifecycle examination confirms the system removes any existing return bar before creating a new one, preventing duplication. The snapshot is explicitly nulled and the bar removed upon manual user actions like input or tab selection. No DOM node references exist in the snapshot, eliminating potential memory leaks. This confirms the snapshot is cleared and the bar removed immediately on any user-initiated search action, as intended.
-
-
-The auto-cleanup function's purpose is to discard the snapshot and remove the return bar when a user manually interacts with the search inputs, period selectors, date pickers, or navigation elements. The function's logic first checks if a snapshot exists; if it does, the function nulls it and removes the return bar element. The function needs to be triggered by `input` events on search inputs, change events on period selects/date pickers, and click events on navigation items and tabs.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `ws-client.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 6.273321047s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1029-1099)</summary>
-
-**Path:** `Unknown file`
-
-```
-                var formOrden = formOrdenId ? document.getElementById(formOrdenId) : null;
-                var userIsTyping = activeEl &&
-                    (activeEl.tagName === 'INPUT' || activeEl.tagName === 'TEXTAREA') &&
-                    (tabla.contains(activeEl) || (formOrden && formOrden.contains(activeEl)));
-
-                var doRefresh = function() {
-                    var searchId = TABLA_A_BUSCADOR[tabla.id];
-                    var searchInput = searchId ? document.getElementById(searchId) : null;
-                    if (searchInput && searchInput.value.trim() !== '') {
-                        searchInput.dispatchEvent(new Event('search', { bubbles: true }));
-                        return;
-                    }
-                    if (typeof htmx !== 'undefined') {
-                        htmx.trigger(tabla, 'refresh');
-                    } else {
-                        var btnRefresh = document.getElementById('btn-refrescar-tabla');
-                        if (btnRefresh) btnRefresh.click();
-                    }
-                };
-
-                if (userIsTyping) {
-                    if (!activeEl._hasPendingRefresh) {
-                        activeEl._hasPendingRefresh = true;
-                        var _onBlur = function() {
-                            activeEl._hasPendingRefresh = false;
-                            activeEl.removeEventListener('blur', _onBlur);
-                            doRefresh();
-                        };
-                        activeEl.addEventListener('blur', _onBlur);
-                    }
-                } else {
-                    doRefresh();
-                }
-            };
-
-            refreshDeferrable(document.getElementById('tabla-recepcion'), null);
-            refreshDeferrable(document.getElementById('tabla-recepcion-anteriores'), null);
-            refreshDeferrable(document.getElementById('tabla-medico'), 'form-orden');
-            refreshDeferrable(document.getElementById('tabla-historial-completo'), 'form-orden');
-        }
-
-        // Feedback auditivo (solo si ya existió interacción de usuario) —
-        // catalogo_actualizado no suena, mismo criterio que el badge arriba.
-        if (!isCatalogoEvent && !isMedicoPortal) playChime();
-    }
-
-    function playChime() {
-        if (!hasUserGesture || !sharedAudioCtx) return;
-        try {
-            if (sharedAudioCtx.state === 'suspended') {
-                var p = sharedAudioCtx.resume();
-                if (p && typeof p.then === 'function') {
-                    p.then(function() { triggerTone(sharedAudioCtx); }).catch(function() {});
-                }
-            } else {
-                triggerTone(sharedAudioCtx);
-            }
-        } catch (e) {}
-    }
-
-    function triggerTone(audioCtx) {
-        try {
-            var osc = audioCtx.createOscillator();
-            var gain = audioCtx.createGain();
-            osc.type = 'sine';
-            osc.frequency.setValueAtTime(587.33, audioCtx.currentTime);
-            gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
-            osc.connect(gain);
-            gain.connect(audioCtx.destination);
-            osc.start();
-            osc.stop(audioCtx.currentTime + 0.15);
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `ws-client.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1099-1144)</summary>
-
-**Path:** `Unknown file`
-
-```
-            osc.stop(audioCtx.currentTime + 0.15);
-        } catch (e) {}
-    }
-
-    document.addEventListener('DOMContentLoaded', function() {
-        pollNotifications();
-        initWebSocket();
-
-        // 2026-09-25 (corrección reportada por el usuario, dos síntomas del
-        // mismo gap): antes, CUALQUIER clic en la campana superior
-        // (#bell-wrap-notif) o en el toggle "<" del panel
-        // (#sidebar-right-toggle) marcaba TODAS las notificaciones como
-        // leídas de inmediato (resetNotifBadges) — sin abrir ni mostrar el
-        // panel en ningún momento. Por eso la campana superior "no hacía
-        // nada visible" (no llevaba al panel) mientras que cualquier
-        // interacción con el panel (incluido solo colapsarlo/expandirlo)
-        // marcaba todo leído sin que el usuario lo pidiera. Ahora la campana
-        // SOLO abre/muestra el panel — desktop: expande el rail derecho vía
-        // sidebar-rail.js (window.laeshSidebarRail.setRightExpanded); móvil:
-        // scroll hacia #sidebar-right, igual que ya hacía #bell-wrap-mob
-        // (app.js) — y el marcado de leído queda exclusivamente a cargo del
-        // clic individual en cada notificación (ya implementado en el
-        // listener de cada .notif-item-clickable, más abajo en este mismo
-        // archivo). #sidebar-right-toggle conserva su propio manejador de
-        // expandir/colapsar en sidebar-rail.js — aquí solo se le quita el
-        // marcado-leído-automático que tenía de más.
-        function abrirPanelNotificaciones() {
-            var sidebarRight = document.getElementById('sidebar-right') || document.querySelector('.sidebar-right');
-            if (!sidebarRight) return;
-            if (window.laeshSidebarRail && typeof window.laeshSidebarRail.setRightExpanded === 'function') {
-                window.laeshSidebarRail.setRightExpanded(true);
-            }
-            sidebarRight.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-
-        var bellTop = document.getElementById('bell-wrap-notif');
-        if (bellTop) {
-            bellTop.addEventListener('click', abrirPanelNotificaciones);
-            bellTop.addEventListener('touchend', function(e) {
-                if (e.cancelable) e.preventDefault();
-                abrirPanelNotificaciones();
-            });
-        }
-    });
-})();
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Examining `ws-client.js` to determine the appropriate placement for the interaction-triggered snapshot discard function. The `_busquedaPreviaSnapshot` handling around line 440 seems like a suitable location. It needs to listen for user interactions to determine when to call the discard function.
-
-
-User interactions triggering the snapshot discard require careful examination to ensure comprehensive coverage.  Focusing on trusted browser events like input, change, click, and submit events appears necessary. Special attention is needed for events originating within the notification return bar as that's an exception to the click handling.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `ws-client.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 1.180575518s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L429-489)</summary>
-
-**Path:** `Unknown file`
-
-```
-        if (btnVolver) {
-            btnVolver.addEventListener('click', function(e) {
-                e.preventDefault();
-                restaurarEstadoBusquedaPrevia();
-            });
-        }
-        var btnCerrar = document.getElementById('btn-cerrar-banner-notif');
-        if (btnCerrar) {
-            btnCerrar.addEventListener('click', function(e) {
-                e.preventDefault();
-                _busquedaPreviaSnapshot = null;
-                bar.remove();
-            });
-        }
-    }
-
-    function restaurarEstadoBusquedaPrevia() {
-        if (!_busquedaPreviaSnapshot) return;
-        var snap = _busquedaPreviaSnapshot;
-        _busquedaPreviaSnapshot = null;
-
-        var bar = document.getElementById('laesh-notif-return-bar');
-        if (bar) bar.remove();
-
-        var isMed = snap.isMedico;
-        if (snap.tabActiva === 'captura') {
-            if (isMed) {
-                if (typeof window.cambiarTabMedico === 'function') window.cambiarTabMedico('panel-nueva-orden');
-                if (typeof window.switchSubTab === 'function') window.switchSubTab('generar');
-            }
-        } else if (snap.tabActiva === 'hoy') {
-            if (isMed) {
-                if (typeof window.cambiarTabMedico === 'function') window.cambiarTabMedico('panel-nueva-orden');
-                if (typeof window.switchSubTab === 'function') window.switchSubTab('ordenes-hoy');
-                var inpHoy = document.getElementById('input-buscar-orden-hoy-md');
-                if (inpHoy) {
-                    inpHoy.value = snap.textoHoy;
-                    inpHoy.dispatchEvent(new Event('search', { bubbles: true }));
-                    inpHoy.dispatchEvent(new Event('keyup', { bubbles: true }));
-                }
-            } else {
-                if (typeof window.cambiarTabAdmin === 'function') window.cambiarTabAdmin('panel-ordenes');
-                var inpHoyRc = document.getElementById('input-buscar-orden-rc');
-                if (inpHoyRc) {
-                    inpHoyRc.value = snap.textoHoy;
-                    inpHoyRc.dispatchEvent(new Event('search', { bubbles: true }));
-                    inpHoyRc.dispatchEvent(new Event('keyup', { bubbles: true }));
-                }
-            }
-        } else {
-            if (isMed) {
-                if (typeof window.cambiarTabMedico === 'function') window.cambiarTabMedico('panel-historial-medico');
-                var selMed = document.getElementById('select-periodo-anteriores-md');
-                var iniMed = document.getElementById('fecha-inicio-anteriores-md');
-                var finMed = document.getElementById('fecha-fin-anteriores-md');
-                var ranMed = document.getElementById('rango-fechas-anteriores-md');
-                var inpAntMed = document.getElementById('input-buscar-orden-anteriores-md');
-
-                if (selMed) selMed.value = snap.periodoVal;
-                if (iniMed) iniMed.value = snap.iniVal;
-                if (finMed) finMed.value = snap.finVal;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `ws-client.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L489-534)</summary>
-
-**Path:** `Unknown file`
-
-```
-                if (finMed) finMed.value = snap.finVal;
-                if (ranMed) ranMed.style.display = snap.rangoVisible ? 'inline-flex' : 'none';
-
-                if (inpAntMed) {
-                    inpAntMed.value = snap.textoAnt;
-                    inpAntMed.dispatchEvent(new Event('search', { bubbles: true }));
-                    inpAntMed.dispatchEvent(new Event('keyup', { bubbles: true }));
-                }
-            } else {
-                if (typeof window.cambiarTabAdmin === 'function') window.cambiarTabAdmin('panel-ordenes-anteriores');
-                var selRc = document.getElementById('select-periodo-anteriores-rc');
-                var iniRc = document.getElementById('fecha-inicio-anteriores-rc');
-                var finRc = document.getElementById('fecha-fin-anteriores-rc');
-                var ranRc = document.getElementById('rango-fechas-anteriores-rc');
-                var inpAntRc = document.getElementById('input-buscar-orden-anteriores-rc');
-
-                if (selRc) selRc.value = snap.periodoVal;
-                if (iniRc) iniRc.value = snap.iniVal;
-                if (finRc) finRc.value = snap.finVal;
-                if (ranRc) ranRc.style.display = snap.rangoVisible ? 'inline-flex' : 'none';
-
-                if (inpAntRc) {
-                    inpAntRc.value = snap.textoAnt;
-                    inpAntRc.dispatchEvent(new Event('search', { bubbles: true }));
-                    inpAntRc.dispatchEvent(new Event('keyup', { bubbles: true }));
-                }
-            }
-        }
-    }
-
-    // ── Navegar a la pestaña correcta y resaltar un renglón por folio ──────────
-    function navegarYResaltarOrden(folioTarget, esHoy, opciones) {
-        opciones = opciones || {};
-        var cleanTarget = String(folioTarget || '').trim();
-        if (!cleanTarget) return;
-
-        // 1. Ocultar o colapsar el panel lateral de notificaciones (si está abierto)
-        var sidebarRight = document.querySelector('.sidebar-right, #sidebar-right');
-        if (sidebarRight) {
-            sidebarRight.classList.remove('active', 'show', 'open');
-        }
-
-        // 2. Identificar portal
-        var isMedicoPortal   = !!document.getElementById('tabla-medico') || !!document.getElementById('panel-nueva-orden');
-        var isRecepcionAdmin = !!document.getElementById('tabla-recepcion') || !!document.getElementById('panel-ordenes');
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Adding a function to discard the previous snapshot when the user interacts with the interface is necessary. The function will check if a previous snapshot exists, nullify it, and remove a notification bar if present. This ensures that only relevant results are displayed.
-
-
-A series of event listeners are being set up to automatically invalidate a previous search snapshot. The listeners monitor for user interaction via input, change, and click events. If specific input fields, date pickers, or navigation elements are modified, the snapshot is discarded. This is designed to prevent stale data from being displayed when the user triggers a new search or navigation. The code explicitly ignores clicks originating from a specific return bar element, which might represent a direct "back" action.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `ws-client.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.580464769s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L509-524)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-                if (inpAntRc) {
-                    inpAntRc.value = snap.textoAnt;
-                    inpAntRc.dispatchEvent(new Event('search', { bubbles: true }));
-                    inpAntRc.dispatchEvent(new Event('keyup', { bubbles: true }));
-                }
-            }
-        }
-    }
-
-    // ── Navegar a la pestaña correcta y resaltar un renglón por folio ──────────
-    function navegarYResaltarOrden(folioTarget, esHoy, opciones) {
-        opciones = opciones || {};
-        var cleanTarget = String(folioTarget || '').trim();
-        if (!cleanTarget) return;
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 11:02 am
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 11:03 am
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 11:03 am
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 11:03 am
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 11:03 am
 
 ---
 
-## Agent Response
-
-### Thinking
-
-The focus is on ensuring the `_busquedaPreviaSnapshot` operation completes its cycle correctly to prevent data conflicts. Potential issues include data rollback and intermingling across searches. Addressing these points requires verifying the completeness and integrity of the search lifecycle.
-
-
-The snapshot mechanism captures specific primitive data from the search interface only upon notification click, ensuring isolation from potential DOM-related issues. The system strictly preserves the original snapshot if another notification is clicked before returning, preventing overwrites. Upon return to the search, the snapshot is transferred, the global variable is cleared, DOM elements are removed, and values are reinjected into the inputs to cleanly restore the search state.
-
-
-
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.246118408s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-## User Request
-
-Consdero pertinente: analisis y creees un dataset (simular 2 años de operacion) de pruebas  y sea repetible  (script create/clean) para probar todos los escenarios posibles de las features, mejoras hechas ayer y hoy, sobre las funcionalidades de: busqueda lupita, ordenes hoy|ordenes anteriores para grilla, filtro periodo, busqueda autocompletada, notificaciones, etc; me explico ?
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `ws-client.js`
-**Language:** javascript
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Analyzing the request, the core requirement is generating a repeatable dataset simulating two years of operation, including comprehensive testing of "Búsqueda lupita" and recently implemented features. The scripts, `create` and `clean`, suggest a need for dataset seeding and teardown capabilities. Initial approach will focus on identifying the key operational parameters for generating a realistic, yet testable, dataset.
-
-
-Analyzing order search and filtering parameters reveals several key data dimensions: date ranges (including edge cases), search types (autocomplete, combined), user roles, and notification states. The database schema (`ordenes`, `pacientes`, `usuarios`) will be examined to confirm data availability and structure for these factors. The goal is to generate orders across different periods, including leap years, diverse statuses, and doctors, so that each filter is triggered correctly during testing.
-
-
-
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.136209594s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 11:09 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `class DB`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 11:09 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 11:09 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `DB.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-<?php
-// DB.php - Clase para conexión PDO e interacción transaccional con la base de datos
-
-namespace Common;
-
-use PDO;
-use PDOException;
-
-class DB {
-    private static ?PDO $instance = null;
-
-    /**
-     * Establece la conexión PDO singleton
-     */
-    public static function connect(): PDO {
-        if (self::$instance === null) {
-            $config = require __DIR__ . '/config.php';
-            $dbConf = $config['db'];
-
-            $dsn = sprintf(
-                "mysql:host=%s;port=%d;dbname=%s;charset=%s",
-                $dbConf['host'],
-                $dbConf['port'],
-                $dbConf['name'],
-                $dbConf['charset']
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 11:11 am
 
 ---
 
-## Agent Response
+### Terminal Command Execution
 
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:12 am
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 11:12 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `config.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-<?php
-// config.php — Configuración del ecosistema LAESH (Bloc Digital)
-//
-// Credenciales leídas desde variables de entorno (mínimo privilegio):
-//   LAESH_DB_USER / LAESH_DB_PASS / LAESH_DB_HOST / LAESH_DB_PORT / LAESH_DB_NAME
-//
-// Fallbacks por ambiente (env var siempre tiene prioridad):
-//   Docker local  (/.dockerenv existe) → host=db,        port=3306
-//   KVM2 Hostinger / OCI / nativo      → host=127.0.0.1, port=3306
-//   (En todos los entornos nativo las env vars se inyectan vía PHP-FPM pool
-//    y cache_renew.cron — el fallback no-Docker solo aplica si la inyección falla)
-// Nota: ya NO se usa root. Usuario dedicado laesh_app con privilegios mínimos en laesh_db.
-
-$inDocker = file_exists('/.dockerenv');
-
-// ── JWT Secret: falla explícita en producción si no se inyectó vía entorno ──
-// Hallazgo 2026-09-18: el secreto vivía hardcodeado como fallback silencioso,
-// visible en el código fuente — invalidaba la garantía de firma HMAC para los
-// 3 portales (md/rc/admrc). Producción NUNCA debe operar con un secreto conocido.
-$appEnv = getenv('APP_ENV') ?: 'development';
-$jwtSecret = getenv('LAESH_JWT_SECRET') ?: '';
-if ($jwtSecret === '') {
-    if ($appEnv === 'production') {
-        throw new \RuntimeException(
-            'LAESH_JWT_SECRET no está definida en el entorno. ' .
-            'Producción no puede operar con un secreto JWT hardcodeado/conocido. ' .
-            'Verificar env[LAESH_JWT_SECRET] en php-fpm-laesh.conf / EnvironmentFile de swoole-laesh.service.'
-        );
-    }
-    // Solo desarrollo local: valor fijo y claramente marcado como no apto para producción.
-    $jwtSecret = 'DEV_ONLY_INSECURE_SECRET_never_use_in_prod_2026';
-}
-
-return [
-    'db' => [
-        'host'    => getenv('LAESH_DB_HOST') ?: ($inDocker ? 'db'   : '127.0.0.1'),
-        'port'    => (int)(getenv('LAESH_DB_PORT') ?: 3306),   // 3306 en todos los entornos nativo (KVM2/OCI)
-        'user'    => getenv('LAESH_DB_USER') ?: 'laesh_app',
-        'pass'    => getenv('LAESH_DB_PASS') ?: 'laesh_2026_dev',
-        'name'    => getenv('LAESH_DB_NAME') ?: 'laesh_db',
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 11:12 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 11:12 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 11:12 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 11:12 am
-
----
-
-## Agent Response
-
-### Thinking
-
-Current dataset size is insufficient for comprehensive feature testing; only 27 records exist across a limited timeframe. The user's request necessitates generating a larger, simulated dataset representative of two years of operation. Implementing a repeatable script for dataset creation and cleanup will enable thorough testing of all defined functionalities and recent improvements across different scenarios.
-
-
-The dataset generation requires specific date ranges centered around the current date to validate filtering logic. These include "today," "yesterday," and rolling windows of 15, 30, and 90 days, including boundary conditions. Additionally, testing should include deep historical data with arbitrary date ranges for comprehensive calendar and search functionality validation. Different statuses of the orders should be generated to cover a variety of test cases.
-
-
-Testing requires a variety of data permutations for robust search validation, especially concerning folio searches exceeding the 90-day limit. Generating data will involve diverse patient names with accents, varied phone numbers, and a wide array of medical diagnoses to test search insensitivity to case and character variations. Multiple doctors and shared patients with historical records are needed for the system's access control and historical view validation, respectively.
-Order status diversity, including pending, in-process, results-ready (with PDF presence), delivered, and cancelled states, will ensure comprehensive testing of all order lifecycle functionalities and edge cases. The folio data needs to have several testing scenarios. These scenarios include complete folios, folios without prefixes and in lowercase, and search by the "lupita" function.
-
-
-To ensure comprehensive testing of notifications, I need to generate data for "Today", "Yesterday", older notifications (10 and 25 days ago), and variations based on read status (read/unread).  A critical test scenario requires an order created six months ago, but updated today, which needs to be added into the dataset.
-
-The creation of a repeatable script with create and clean functionality is explicitly required. This will be achieved using a dedicated dataset marked with a consistent identifier to enable easy removal without affecting existing production data. Several identifiers are being considered for this purpose.
-
-
-A consistent folio prefix will allow for targeted dataset deletion, ensuring a clean testing environment without interfering with existing data.  The chosen prefix must be compatible with existing system regular expressions for folio validation. A "clean" script will delete simulated orders, patients, and related data through a single, transactional operation. A dataset size of 1500-2000 orders (2-3 orders per day over two years) is appropriate for pagination and indexing tests.
-
-
-A script will be created to generate test data covering various date ranges, including today, 15, 30, and 90-day windows, alongside historical data up to two years.  The script's creation and cleanup functionality necessitates the use of a unique prefix to manage and easily delete the generated test dataset. Data generation must also create different order states (pending, ready, etc.) and varied patient data (names, accents, etc.) to ensure thorough testing of all features, including searching.
-
-
-
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 7.484770098s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-
-/* GAP-MD-05 (2026-09-22): "Crear e Imprimir Orden" no debe verse verde
-   (listo para imprimir) hasta que el formulario esté correctamente
-   capturado — paciente + celular válidos y al menos un estudio. Estado
-   gris por defecto; medicos.js alterna .is-ready según isOrdenFormReady().
-   Aplica a todos los dispositivos: desktop/tablet (.btn-imprimir-orden,
-   texto) y móvil (#btn-imprimir-mob, solo ícono — override específico
-   más abajo dentro de @media max-width:767px). */
-.btn-imprimir-orden {
-    background: #94a3b8 !important;
-    color: #ffffff !important;
-    box-shadow: none !important;
-}
-.btn-imprimir-orden.is-ready {
-    background: var(--primary-green) !important;
-    color: #0B1830 !important;
-    box-shadow: 0 4px 10px rgba(113, 202, 17, 0.3) !important;
-}
-@media (hover: hover) and (pointer: fine) {
-    .btn-imprimir-orden:hover {
-        background: #64748b !important;
-    }
-    .btn-imprimir-orden.is-ready:hover {
-        background: var(--primary) !important;
-        color: #fff !important;
-    }
-}
-
-/* Private App Layout */
-.app-layout {
-    display: flex;
-    flex: 1;
-    min-height: 750px;
-}
-
-```
-
-</details>
-
----
-
-## User Request
-
-antes, de los combos de Período, elimina la funcioanlida de: ultimos 7 dias, tambien cambia que el default sea 30 dias y aparezca seleccionada por default; y mejoras en nombres de lo items quede asi nombre y orden: 30d, 15  y Fechas
-
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `portal.css`
-**Language:** css
-
-**Open Files:**
-- `portal.css`
-- `labadmin.php`
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-The request involves modifying a "Period" selection component. Initial focus is on removing the "Últimos 7 días" option, which corresponds to the `value="7d"` attribute. This should be followed by setting "30 días" as the default selection, ensuring it's selected on initial display, and renaming and reordering the remaining options to "30d", "15", and "Fechas".
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `labadmin.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.201157691s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L239-264)</summary>
-
-**Path:** `Unknown file`
-
-```
-                                </div>
-                            </div>
-
-                            <!-- Combo List de Período y Rango de Fechas (Calendario) -->
-                            <div id="ordenes-anteriores-periodo-container" style="display: inline-flex; align-items: center; gap: 0.35rem; flex-wrap: nowrap;">
-                                <label for="select-periodo-anteriores-rc" style="font-size: 0.82rem; font-weight: 600; color: var(--text-muted); white-space: nowrap;">Período:</label>
-                                <select id="select-periodo-anteriores-rc" name="periodo" class="form-select select-sm" style="padding: 4px 10px; font-size: 0.82rem; border-radius: 6px; border: 1px solid var(--border); background: #ffffff; color: var(--text-dark); cursor: pointer;"
-                                        hx-get="/laesh/rc/tabla-ordenes-anteriores"
-                                        hx-target="#tabla-recepcion-anteriores"
-                                        hx-swap="outerHTML"
-                                        hx-include="#input-buscar-orden-anteriores-rc, #select-periodo-anteriores-rc, #fecha-inicio-anteriores-rc, #fecha-fin-anteriores-rc"
-                                        hx-trigger="change">
-                                    <option value="7d">Últimos 7 días</option>
-                                    <option value="15d">Últimos 15 días</option>
-                                    <option value="30d">Últimos 30 días</option>
-                                    <option value="90d" selected>Últimos 90 días (Default)</option>
-                                    <option value="fecha">Calendario</option>
-                                </select>
-                                <span id="rango-fechas-anteriores-rc" class="d-none" style="display: none; align-items: center; gap: 0.35rem; white-space: nowrap;">
-                                    <input type="date" id="fecha-inicio-anteriores-rc" name="fecha_inicio" class="select-sm form-input" style="padding: 3px 6px; font-size: 0.8rem; border-radius: 6px; border: 1px solid var(--border); width: 130px;" max="<?= date('Y-m-d', strtotime('-1 day')) ?>" title="Fecha inicial" aria-label="Fecha inicial"
-                                           hx-get="/laesh/rc/tabla-ordenes-anteriores"
-                                           hx-target="#tabla-recepcion-anteriores"
-                                           hx-swap="outerHTML"
-                                           hx-include="#input-buscar-orden-anteriores-rc, #select-periodo-anteriores-rc, #fecha-inicio-anteriores-rc, #fecha-fin-anteriores-rc"
-                                           hx-trigger="change">
-                                    <span class="txt-muted-sm" style="font-size: 0.78rem; color: var(--text-muted);">al</span>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `medicos.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L419-444)</summary>
-
-**Path:** `Unknown file`
-
-```
-                        </div>
-                    </div>
-
-                    <!-- Combo List de Período y Rango de Fechas (Calendario) -->
-                    <div id="ordenes-anteriores-md-periodo-container" style="display: inline-flex; align-items: center; gap: 0.35rem; flex-wrap: nowrap;">
-                        <label for="select-periodo-anteriores-md" style="font-size: 0.82rem; font-weight: 600; color: var(--text-muted); white-space: nowrap;">Período:</label>
-                        <select id="select-periodo-anteriores-md" name="periodo" class="form-select select-sm" style="padding: 4px 10px; font-size: 0.82rem; border-radius: 6px; border: 1px solid var(--border); background: #ffffff; color: var(--text-dark); cursor: pointer;"
-                                hx-get="/laesh/md/tabla-ordenes-anteriores"
-                                hx-target="#tabla-historial-completo"
-                                hx-swap="outerHTML"
-                                hx-include="#input-buscar-orden-anteriores-md, #select-periodo-anteriores-md, #fecha-inicio-anteriores-md, #fecha-fin-anteriores-md"
-                                hx-trigger="change">
-                            <option value="7d">Últimos 7 días</option>
-                            <option value="15d">Últimos 15 días</option>
-                            <option value="30d">Últimos 30 días</option>
-                            <option value="90d" selected>Últimos 90 días (Default)</option>
-                            <option value="fecha">Calendario</option>
-                        </select>
-                        <span id="rango-fechas-anteriores-md" class="d-none" style="display: none; align-items: center; gap: 0.35rem; white-space: nowrap;">
-                            <input type="date" id="fecha-inicio-anteriores-md" name="fecha_inicio" class="select-sm form-input" style="padding: 3px 6px; font-size: 0.8rem; border-radius: 6px; border: 1px solid var(--border); width: 130px;" max="<?= date('Y-m-d', strtotime('-1 day')) ?>" title="Fecha inicial" aria-label="Fecha inicial"
-                                   hx-get="/laesh/md/tabla-ordenes-anteriores"
-                                   hx-target="#tabla-historial-completo"
-                                   hx-swap="outerHTML"
-                                   hx-include="#input-buscar-orden-anteriores-md, #select-periodo-anteriores-md, #fecha-inicio-anteriores-md, #fecha-fin-anteriores-md"
-                                   hx-trigger="change">
-                            <span class="txt-muted-sm" style="font-size: 0.78rem; color: var(--text-muted);">al</span>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Examining the provided code snippets in `labadmin.php` and `medicos.php` reveals identical HTML `select` elements with the ID `select-periodo-anteriores-rc`, offering date range options (7, 15, 30, 90 days, and a calendar). The "Últimos 90 días" option is the default selection. The user prompt appears to be incomplete, potentially referencing these date range selection *combos*.
-
-
-
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `periodo`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.066996235s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 11:28 am
 
 ---
 
-## Agent Response
+### Local File Search
 
-### Thinking
-
-Examining the `construirFiltroPeriodoAnteriores` function to understand how date ranges for order filtering are constructed. The code utilizes a `switch` statement based on a `$periodo` parameter. Initial focus is on the logic for the '7d' case, which seems to generate a SQL WHERE clause using `DATE_SUB` and `CURDATE()` to define a 7-day lookback window, but the full picture is not yet clear. Need to check what are the other cases.
-
-
-Analyzing the `construirFiltroPeriodoAnteriores` functions across multiple files, the code constructs SQL date range filters using a `switch` statement based on a period string. The '7d' case, corresponding to "últimos 7 días", is identified for removal. Removing the '7d' case from the switch would eliminate the functionality. Then I need to determine if any other location depends on that filter.
-
-
-Adjusting the default period to `30d` necessitates modifications across controller, model, and view files, including default parameter values and selected HTML options. The dropdown options require updating to: `30d` (selected by default), `15d`, and "Fechas". I need to verify that `15d` is the intended label for the second option as per the user's instructions "30d, 15 y Fechas".
-
-
-The instructions specify "30d, 15 y Fechas," leading to ambiguity for the second option.  A double space exists in the text. Given that "30d" and "15d" (or "15") are easily understood in Spanish as "30 days" and "15 days", there's likely an omission.  The second option's value should likely be "15d", but the text could be either "15d" or "15" based on whether the "d" was dropped in the prompt.
-
-
-Analyzing user instructions regarding dropdown labels, the desired order is "30d", then "15", then "Fechas", however the instructions could refer to "15d". Considering that "30d" includes "d", and "15" does not, this inconsistency might be a typo. It is necessary to consider both "15" and "15d" as potentially valid options for the second dropdown entry. Re-reading the prompt, it could be either 15 or 15d.
-
-
-The "7d" filter is removed, and the default period is set to "30d". Backend compatibility with a "90d" period needs verification, ensuring fallback to "30d" for safety. The controller, view, and model defaults must be updated to "30d".
-
-The correct label for the second dropdown option remains ambiguous; the phrasing "30d, 15 y Fechas" suggests "15", although "15d" could be intended, and needs further assessment. Dropping the "d" unit might cause confusion when reading or selecting an option.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 7.626975079s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L494-544)</summary>
-
-**Path:** `Unknown file`
-
-```
-    $csrfToken = $_SESSION['csrf_token'] ?? '';
-
-    $q           = trim($_GET['q'] ?? '');
-    $periodo     = trim($_GET['periodo'] ?? '90d');
-    $fechaInicio = trim($_GET['fecha_inicio'] ?? '');
-    $fechaFin    = trim($_GET['fecha_fin'] ?? '');
-    $sort        = trim($_GET['sort'] ?? 'fecha');
-    $dir         = trim($_GET['dir'] ?? 'desc');
-    $page        = max(1, (int)($_GET['page'] ?? 1));
-    $perPage     = max(5, min(100, (int)($_GET['per_page'] ?? 25)));
-    $offset      = ($page - 1) * $perPage;
-
-    $ordenesAnteriores = \RC\Negocio\Ordenes::obtenerOrdenesAnteriores($perPage, $offset, $q, $sort, $dir, $periodo, $fechaInicio, $fechaFin);
-    $totalReg          = \RC\Negocio\Ordenes::contarOrdenesAnteriores($q, $periodo, $fechaInicio, $fechaFin);
-    $totalPages        = max(1, (int)ceil($totalReg / $perPage));
-
-    $includeAnt = '#input-buscar-orden-anteriores-rc, #select-periodo-anteriores-rc, #fecha-inicio-anteriores-rc, #fecha-fin-anteriores-rc';
-
-    echo '<table class="table" id="tabla-recepcion-anteriores" hx-get="/laesh/rc/tabla-ordenes-anteriores" hx-target="#tabla-recepcion-anteriores" hx-swap="outerHTML" hx-include="' . $includeAnt . '" hx-trigger="refresh, ordenActualizada from:body" style="margin-bottom: 0; width: 100%; min-width: 1665px; table-layout: fixed; border-collapse: collapse;">'
-       . '<colgroup>'
-       . '<col style="width: 130px;">'
-       . '<col style="width: 210px;">'
-       . '<col style="width: 180px;">'
-       . '<col style="width: 200px;">'
-       . '<col style="width: 125px;">'
-       . '<col style="width: 125px;">'
-       . '<col style="width: 190px;">'
-       . '<col style="width: 260px;">'
-       . '<col style="width: 220px;">'
-       . '</colgroup>'
-       . '<thead>'
-       . rcRenderOrdenesTablaHeader($sort, $dir, $q, '/laesh/rc/tabla-ordenes-anteriores', '#tabla-recepcion-anteriores', $includeAnt)
-       . '</thead>'
-       . rcRenderOrdenesTablaBody($ordenesAnteriores, $csrfToken, '-ant')
-       . '</table>';
-
-    $qParam = !empty($q) ? '&q=' . urlencode($q) : '';
-    $pParam = '&periodo=' . urlencode($periodo);
-    if ($periodo === 'fecha') {
-        if (!empty($fechaInicio)) $pParam .= '&fecha_inicio=' . urlencode($fechaInicio);
-        if (!empty($fechaFin)) $pParam .= '&fecha_fin=' . urlencode($fechaFin);
-    }
-    echo '<div id="ordenes-anteriores-pagination-wrap" hx-swap-oob="outerHTML" style="display: flex; align-items: center; gap: 0.5rem;">'
-       . '<span id="ordenes-anteriores-total-records" style="font-size: 0.88rem; color: var(--text-muted); font-weight: 600;">Total: ' . $totalReg . '</span>'
-       . '<span style="color: #cbd5e1; display: inline;">|</span>'
-       . '<div id="ordenes-anteriores-pagination" style="display: flex; gap: 0.25rem; align-items: center;">';
-    if ($page > 1) {
-        $prevPage = $page - 1;
-        echo '<button type="button" class="btn btn-secondary btn-sm" style="padding: 2px 8px; font-size: 0.8rem;" hx-get="/laesh/rc/tabla-ordenes-anteriores?page=' . $prevPage . $qParam . $pParam . '&sort=' . $sort . '&dir=' . $dir . '&per_page=' . $perPage . '" hx-target="#tabla-recepcion-anteriores" hx-swap="outerHTML" hx-include="' . $includeAnt . '">‹ Anterior</button>';
-    } else {
-        echo '<button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;">‹ Anterior</button>';
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `obtenerOrdenesAnteriores`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:29 am
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 11:29 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L54-74)</summary>
-
-**Path:** `Unknown file`
-
-```
-    if (empty($_SESSION['csrf_token'])) {
-        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-    }
-
-    // Obtener órdenes recientes (hoy), órdenes anteriores, catálogo de pacientes, catálogos UI y KPIs reales desde la Capa de Negocio (PDO)
-    $ordenesRecientes        = \RC\Negocio\Ordenes::obtenerOrdenesRecientes(25, 0, '', 'fecha', 'DESC');
-    $totalOrdenesRecientes   = \RC\Negocio\Ordenes::contarOrdenesRecientes('');
-    $ordenesAnteriores       = \RC\Negocio\Ordenes::obtenerOrdenesAnteriores(25, 0, '', 'fecha', 'DESC');
-    $totalOrdenesAnteriores  = \RC\Negocio\Ordenes::contarOrdenesAnteriores('');
-    $pacientesCatalog        = \RC\Negocio\Ordenes::obtenerPacientes(25, 0, '', 'fecha', 'DESC');
-    $totalPacientes          = \RC\Negocio\Ordenes::contarPacientes('');
-    $catalogosUI             = \RC\Negocio\Ordenes::obtenerCatalogosUI();
-
-    // Obtener catálogo de médicos reales y top 5 desde MariaDB (vw_medicos_completos)
-    $medicosCatalog = \Common\DB::connect()->query(
-        "SELECT user_id, nombre_completo, cedula_profesional, especialidad, celular, total_ordenes 
-         FROM vw_medicos_completos 
-         ORDER BY total_ordenes DESC"
-    )->fetchAll(\PDO::FETCH_ASSOC) ?: [];
-
-    // SEC: frame-ancestors vía HTTP header real (meta tag es ignorado por browsers)
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L49-89)</summary>
-
-**Path:** `Unknown file`
-
-```
-                $medProfile = $stmtMed->fetch(\PDO::FETCH_ASSOC) ?: [];
-            } catch (\Throwable $ex) {
-                // Fallback sin columna cedula_especialidad si DDL no tiene permisos
-                $stmtMed = $db->prepare("SELECT nombre_completo, especialidad, cedula_profesional, celular, telefono_consultorio, direccion_consultorio, universidad_id, lugar_trabajo_id FROM perfiles_medicos WHERE user_id = ? LIMIT 1");
-                $stmtMed->execute([$userId]);
-                $medProfile = $stmtMed->fetch(\PDO::FETCH_ASSOC) ?: [];
-                $medProfile['cedula_especialidad'] = '';
-            }
-        } else {
-            $medProfile = [];
-        }
-    }
-
-    // Cargar catálogos relacionales de UI (universidades y lugares de trabajo)
-    $catalogosUI = \RC\Negocio\Ordenes::obtenerCatalogosUI();
-
-    if (!empty($medProfile['nombre_completo'])) {
-        $nombreMedico = trim($medProfile['nombre_completo']);
-    } elseif ($emp && !empty($emp['nombre'])) {
-        $nombreMedico = trim($emp['nombre'] . ' ' . $emp['apellidos']);
-    } else {
-        $email = $auth->getEmail() ?? '';
-        $userPart = explode('@', $email)[0] ?? '';
-        $nombreMedico = $userPart ? ucfirst($userPart) : '';
-    }
-
-    if ($nombreMedico) {
-        $nombreMedico = preg_replace('/^(?:Dr\(a\)\.|\bDr\.\b|\bDra\.\b|\bDr\b)\s*(?:Dr\(a\)\.|\bDr\.\b|\bDra\.\b|\bDr\b\s*)*/i', 'Dr(a). ', $nombreMedico);
-        $nombreMedico = trim($nombreMedico);
-    }
-
-    // CSRF token (R14.12)
-    if (empty($_SESSION['csrf_token'])) {
-        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-    }
-
-    // Obtener solicitudes médicas propias (hoy), y página 1 de Órdenes Anteriores /
-    // Pacientes (mismo patrón de paginación/búsqueda/orden que Recepción — GAP-MD-01)
-    $ordenesPropias      = \MD\Negocio\Ordenes::obtenerOrdenesPropias($userId, 25, 0, '', 'fecha', 'DESC');
-    $totalOrdenesPropias = \MD\Negocio\Ordenes::contarOrdenesPropias($userId, '');
-    $ordenesAnteriores   = \MD\Negocio\Ordenes::obtenerOrdenesAnterioresMedico($userId, 25, 0, '', 'fecha', 'DESC');
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L369-419)</summary>
-
-**Path:** `Unknown file`
-
-```
-Flight::route('GET /tabla-ordenes-anteriores', function () {
-    header('Content-Type: text/html; charset=utf-8');
-    $userId = (int)Flight::auth()->getUserId();
-    $csrfToken = $_SESSION['csrf_token'] ?? '';
-
-    $q           = trim($_GET['q'] ?? '');
-    $periodo     = trim($_GET['periodo'] ?? '90d');
-    $fechaInicio = trim($_GET['fecha_inicio'] ?? '');
-    $fechaFin    = trim($_GET['fecha_fin'] ?? '');
-    $sort        = trim($_GET['sort'] ?? 'fecha');
-    $dir         = trim($_GET['dir'] ?? 'desc');
-    $page        = max(1, (int)($_GET['page'] ?? 1));
-    $perPage     = max(5, min(100, (int)($_GET['per_page'] ?? 25)));
-    $offset      = ($page - 1) * $perPage;
-
-    $ordenesAnteriores = \MD\Negocio\Ordenes::obtenerOrdenesAnterioresMedico($userId, $perPage, $offset, $q, $sort, $dir, $periodo, $fechaInicio, $fechaFin);
-    $totalReg          = \MD\Negocio\Ordenes::contarOrdenesAnterioresMedico($userId, $q, $periodo, $fechaInicio, $fechaFin);
-    $totalPages        = max(1, (int)ceil($totalReg / $perPage));
-
-    $includeAntMd = '#input-buscar-orden-anteriores-md, #select-periodo-anteriores-md, #fecha-inicio-anteriores-md, #fecha-fin-anteriores-md';
-
-    echo '<table id="tabla-historial-completo" hx-get="/laesh/md/tabla-ordenes-anteriores" hx-target="#tabla-historial-completo" hx-swap="outerHTML" hx-include="' . $includeAntMd . '" hx-trigger="refresh, ordenCreada from:body, ordenActualizada from:body">'
-       . '<thead>'
-       . mdRenderOrdenesTablaHeader($sort, $dir, $q, '/laesh/md/tabla-ordenes-anteriores', '#tabla-historial-completo', $includeAntMd)
-       . '</thead>'
-       . mdRenderOrdenesTablaBody($ordenesAnteriores, $csrfToken, '-ant')
-       . '</table>';
-
-    $qParam = !empty($q) ? '&q=' . urlencode($q) : '';
-    $pParam = '&periodo=' . urlencode($periodo);
-    if ($periodo === 'fecha') {
-        if (!empty($fechaInicio)) $pParam .= '&fecha_inicio=' . urlencode($fechaInicio);
-        if (!empty($fechaFin)) $pParam .= '&fecha_fin=' . urlencode($fechaFin);
-    }
-    echo '<div id="ordenes-anteriores-md-pagination-wrap" hx-swap-oob="outerHTML" style="display: flex; align-items: center; gap: 0.5rem;">'
-       . '<span id="ordenes-anteriores-md-total-records" style="font-size: 0.88rem; color: var(--text-muted); font-weight: 600;">Total: ' . $totalReg . '</span>'
-       . '<span style="color: #cbd5e1; display: inline;">|</span>'
-       . '<div style="display: flex; gap: 0.25rem; align-items: center;">';
-    if ($page > 1) {
-        $prevPage = $page - 1;
-        echo '<button type="button" class="btn btn-secondary btn-sm" style="padding: 2px 8px; font-size: 0.8rem;" hx-get="/laesh/md/tabla-ordenes-anteriores?page=' . $prevPage . $qParam . $pParam . '&sort=' . $sort . '&dir=' . $dir . '&per_page=' . $perPage . '" hx-target="#tabla-historial-completo" hx-swap="outerHTML" hx-include="' . $includeAntMd . '">‹ <span class="pag-label-text">Anterior</span></button>';
-    } else {
-        echo '<button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;">‹ <span class="pag-label-text">Anterior</span></button>';
-    }
-    echo '<span style="font-size:0.82rem; font-weight:600; color:var(--text-muted); padding: 0 4px;">' . $page . ' / ' . $totalPages . '</span>';
-    if ($page < $totalPages) {
-        $nextPage = $page + 1;
-        echo '<button type="button" class="btn btn-secondary btn-sm" style="padding: 2px 8px; font-size: 0.8rem;" hx-get="/laesh/md/tabla-ordenes-anteriores?page=' . $nextPage . $qParam . $pParam . '&sort=' . $sort . '&dir=' . $dir . '&per_page=' . $perPage . '" hx-target="#tabla-historial-completo" hx-swap="outerHTML" hx-include="' . $includeAntMd . '"><span class="pag-label-text">Siguiente</span> ›</button>';
-    } else {
-        echo '<button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;"><span class="pag-label-text">Siguiente</span> ›</button>';
-    }
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `90d`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 11:29 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `select-periodo-anteriores`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 11:29 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `labadmin.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L469-529)</summary>
-
-**Path:** `Unknown file`
-
-```
-            var select = document.getElementById('select-periodo-anteriores-rc');
-            var rango = document.getElementById('rango-fechas-anteriores-rc');
-            var inputIni = document.getElementById('fecha-inicio-anteriores-rc');
-            var inputFin = document.getElementById('fecha-fin-anteriores-rc');
-            if (!select || !rango || !inputIni || !inputFin) return;
-
-            var ayer = new Date();
-            ayer.setDate(ayer.getDate() - 1);
-            var ayerStr = ayer.toISOString().split('T')[0];
-
-            inputIni.max = ayerStr;
-            inputFin.max = ayerStr;
-
-            function manejarCambio() {
-                if (select.value === 'fecha') {
-                    rango.style.display = 'inline-flex';
-                    rango.classList.remove('d-none');
-
-                    if (!inputFin.value) {
-                        inputFin.value = ayerStr;
-                    }
-                    if (!inputIni.value) {
-                        var dIni = new Date(ayer);
-                        dIni.setDate(dIni.getDate() - 90);
-                        inputIni.value = dIni.toISOString().split('T')[0];
-                    }
-                    inputFin.min = inputIni.value;
-                } else {
-                    rango.style.display = 'none';
-                    rango.classList.add('d-none');
-                    inputIni.value = '';
-                    inputFin.value = '';
-                }
-            }
-
-            select.addEventListener('change', manejarCambio);
-
-            // Poka-Yoke: Al cambiar Fecha Inicio
-            inputIni.addEventListener('change', function() {
-                if (this.value) {
-                    // Si fin está vacío o es menor a inicio, sincronizar al mismo día
-                    if (!inputFin.value || inputFin.value < this.value) {
-                        inputFin.value = this.value;
-                    }
-                    inputFin.min = this.value;
-                }
-            });
-
-            // Poka-Yoke: Al cambiar Fecha Fin
-            inputFin.addEventListener('change', function() {
-                if (this.value) {
-                    // Si inicio es mayor a fin, ajustar inicio al mismo día
-                    if (inputIni.value && inputIni.value > this.value) {
-                        inputIni.value = this.value;
-                    }
-                    inputFin.min = inputIni.value || '';
-                }
-            });
-        }
-
-        window.filtrarEstadisticasAdmin = filtrarEstadisticasAdmin;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `medicos.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L339-379)</summary>
-
-**Path:** `Unknown file`
-
-```
-            var inputFin = document.getElementById('fecha-fin-anteriores-md');
-            if (!select || !rango || !inputIni || !inputFin) return;
-
-            var ayer = new Date();
-            ayer.setDate(ayer.getDate() - 1);
-            var ayerStr = ayer.toISOString().split('T')[0];
-
-            inputIni.max = ayerStr;
-            inputFin.max = ayerStr;
-
-            function manejarCambio() {
-                if (select.value === 'fecha') {
-                    rango.style.display = 'inline-flex';
-                    rango.classList.remove('d-none');
-
-                    if (!inputFin.value) {
-                        inputFin.value = ayerStr;
-                    }
-                    if (!inputIni.value) {
-                        var dIni = new Date(ayer);
-                        dIni.setDate(dIni.getDate() - 90);
-                        inputIni.value = dIni.toISOString().split('T')[0];
-                    }
-                    inputFin.min = inputIni.value;
-                } else {
-                    rango.style.display = 'none';
-                    rango.classList.add('d-none');
-                    inputIni.value = '';
-                    inputFin.value = '';
-                }
-            }
-
-            select.addEventListener('change', manejarCambio);
-
-            // Poka-Yoke: Al cambiar Fecha Inicio
-            inputIni.addEventListener('change', function() {
-                if (this.value) {
-                    // Si fin está vacío o es menor a inicio, sincronizar al mismo día
-                    if (!inputFin.value || inputFin.value < this.value) {
-                        inputFin.value = this.value;
-                    }
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-The date calculation requires adjusting from 90 days to 30 days in the specified file. The user's request necessitates removing the "últimos 7 días" option from the period combos, changing the default selection to "30 días," and updating the item names and order to "30d," "15," and "Fechas."
-
-
-Analyzing whether the second item should be "15" or "15d," considering the user's phrasing "30d, 15 y Fechas". Investigating if the user intended "15" literally, or if "15d" was implied, noting the potential for a typo (missing "d") given the keyboard layout and spacing in the user's input. The goal is to determine the correct HTML option value.
-
-
-Examining the historical HTML options, it's clear the previous format was consistently using the "Xd" pattern (e.g., "15d", "30d"). The user's input, with the double space and the specific phrasing "15 y Fechas," suggests that "15" is likely intentional and represents a simplified version. The UI presentation will be verified to match the updated options.
-
-
-Analyzing how the dropdown should look, the user wants the display as "30d", "15", and "Fechas". Observing that the backend expects the value to be "15d" (sent as `periodo=15d`), it is important the backend still receives "15d", regardless of what is displayed as a label. Confirming that, the HTML should be `<option value="15d">15</option>`. I'll consider how to inform the user about this.
-
-
-Examining the codebase, the backend logic handles both "15" and "15d," and "30" and "30d" interchangeably, which simplifies the UI updates. The existing "fecha" value must be retained for the "Fechas" option to ensure compatibility with dependent scripts. The default backend period needs to be changed from "90d" to "30d" for consistency. The default value should be set in the default cases.
-
-
-The date range filtering logic consistently uses a switch statement based on the input period. The previous "7d" option is now removed, with "30d" becoming the default. The "90d" option remains for backwards compatibility.
-
-In the second code block, the same switch-case logic is used for constructing date filters.  The cases for "15," "15d," "30," "30d," "90," and "90d" are present in both code blocks, with "30" or "30d" as the default. The values are generated via date math to construct the WHERE conditions.
-
-
-Examining the default values and query parameter usages, the period defaults to "30d" across multiple files and backend calls. The HTML select options and associated `hx-get` calls in both the lab and medical sections reflect this consistent "30d" default. The HTML select should maintain a "30d" default in the UI.
-
-Analyzing the HTML, the option values and display text need updating to align with user requests for the period selections. The initial observed HTML does not yet reflect the requested order and items. Both `rc/views/labadmin.php` and `md/views/medicos.php` need the HTML updated to the specified format. The `hx-get` parameter should be checked to be "30d".
-
-
-Considering the user's explicit preference for "15," the HTML should use `<option value="15d">15</option>` to match the displayed text, while ensuring the underlying value is "15d". Confirmed the value in `ws-client.js` is used to build the SQL date selection.
-
-The code in `ws-client.js` needs verifying to ensure the selection is correct. Reviewing the surrounding logic for any specific uses of the selected value. The user's requested order and default selection ("30d") are verified to match the HTML code.
-
-
-
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `7d`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 8.635024506s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 11:29 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `90d`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 11:29 am
-
----
-
-## Agent Response
-
-### Thinking
-
-Initial focus is on identifying the exact files requiring modification. The provided list details potential areas within the application's view, business logic, and front-end JavaScript components across two distinct modules. Further analysis is required to determine the specific code changes needed in each file to address the described requirement.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `labadmin.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.159456441s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L229-264)</summary>
-
-**Path:** `Unknown file`
-
-```
-                                    <?php 
-                                        $totPgsAnt = max(1, (int)ceil(($totalOrdenesAnteriores ?? 0) / 25));
-                                    ?>
-                                    <button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;">‹ Anterior</button>
-                                    <span style="font-size:0.82rem; font-weight:600; color:var(--text-muted); padding: 0 4px;">1 / <?= $totPgsAnt ?></span>
-                                    <?php if ($totPgsAnt > 1): ?>
-                                        <button type="button" class="btn btn-secondary btn-sm" style="padding: 2px 8px; font-size: 0.8rem;" hx-get="/laesh/rc/tabla-ordenes-anteriores?page=2&periodo=90d" hx-target="#tabla-recepcion-anteriores" hx-swap="outerHTML" hx-include="#input-buscar-orden-anteriores-rc, #select-periodo-anteriores-rc, #fecha-inicio-anteriores-rc, #fecha-fin-anteriores-rc">Siguiente ›</button>
-                                    <?php else: ?>
-                                        <button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;">Siguiente ›</button>
-                                    <?php endif; ?>
-                                </div>
-                            </div>
-
-                            <!-- Combo List de Período y Rango de Fechas (Calendario) -->
-                            <div id="ordenes-anteriores-periodo-container" style="display: inline-flex; align-items: center; gap: 0.35rem; flex-wrap: nowrap;">
-                                <label for="select-periodo-anteriores-rc" style="font-size: 0.82rem; font-weight: 600; color: var(--text-muted); white-space: nowrap;">Período:</label>
-                                <select id="select-periodo-anteriores-rc" name="periodo" class="form-select select-sm" style="padding: 4px 10px; font-size: 0.82rem; border-radius: 6px; border: 1px solid var(--border); background: #ffffff; color: var(--text-dark); cursor: pointer;"
-                                        hx-get="/laesh/rc/tabla-ordenes-anteriores"
-                                        hx-target="#tabla-recepcion-anteriores"
-                                        hx-swap="outerHTML"
-                                        hx-include="#input-buscar-orden-anteriores-rc, #select-periodo-anteriores-rc, #fecha-inicio-anteriores-rc, #fecha-fin-anteriores-rc"
-                                        hx-trigger="change">
-                                    <option value="7d">Últimos 7 días</option>
-                                    <option value="15d">Últimos 15 días</option>
-                                    <option value="30d">Últimos 30 días</option>
-                                    <option value="90d" selected>Últimos 90 días (Default)</option>
-                                    <option value="fecha">Calendario</option>
-                                </select>
-                                <span id="rango-fechas-anteriores-rc" class="d-none" style="display: none; align-items: center; gap: 0.35rem; white-space: nowrap;">
-                                    <input type="date" id="fecha-inicio-anteriores-rc" name="fecha_inicio" class="select-sm form-input" style="padding: 3px 6px; font-size: 0.8rem; border-radius: 6px; border: 1px solid var(--border); width: 130px;" max="<?= date('Y-m-d', strtotime('-1 day')) ?>" title="Fecha inicial" aria-label="Fecha inicial"
-                                           hx-get="/laesh/rc/tabla-ordenes-anteriores"
-                                           hx-target="#tabla-recepcion-anteriores"
-                                           hx-swap="outerHTML"
-                                           hx-include="#input-buscar-orden-anteriores-rc, #select-periodo-anteriores-rc, #fecha-inicio-anteriores-rc, #fecha-fin-anteriores-rc"
-                                           hx-trigger="change">
-                                    <span class="txt-muted-sm" style="font-size: 0.78rem; color: var(--text-muted);">al</span>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 11:30 am
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `medicos.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L409-444)</summary>
-
-**Path:** `Unknown file`
-
-```
-                        <span style="color: #cbd5e1; display: inline;">|</span>
-                        <div style="display: flex; gap: 0.25rem; align-items: center;">
-                            <?php $totPgsAntMd = max(1, (int)ceil(($totalOrdenesAnteriores ?? 0) / 25)); ?>
-                            <button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;">‹ <span class="pag-label-text">Anterior</span></button>
-                            <span style="font-size:0.82rem; font-weight:600; color:var(--text-muted); padding: 0 4px;">1 / <?= $totPgsAntMd ?></span>
-                            <?php if ($totPgsAntMd > 1): ?>
-                                <button type="button" class="btn btn-secondary btn-sm" style="padding: 2px 8px; font-size: 0.8rem;" hx-get="/laesh/md/tabla-ordenes-anteriores?page=2&periodo=90d" hx-target="#tabla-historial-completo" hx-swap="outerHTML" hx-include="#input-buscar-orden-anteriores-md, #select-periodo-anteriores-md, #fecha-inicio-anteriores-md, #fecha-fin-anteriores-md"><span class="pag-label-text">Siguiente</span> ›</button>
-                            <?php else: ?>
-                                <button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;"><span class="pag-label-text">Siguiente</span> ›</button>
-                            <?php endif; ?>
-                        </div>
-                    </div>
-
-                    <!-- Combo List de Período y Rango de Fechas (Calendario) -->
-                    <div id="ordenes-anteriores-md-periodo-container" style="display: inline-flex; align-items: center; gap: 0.35rem; flex-wrap: nowrap;">
-                        <label for="select-periodo-anteriores-md" style="font-size: 0.82rem; font-weight: 600; color: var(--text-muted); white-space: nowrap;">Período:</label>
-                        <select id="select-periodo-anteriores-md" name="periodo" class="form-select select-sm" style="padding: 4px 10px; font-size: 0.82rem; border-radius: 6px; border: 1px solid var(--border); background: #ffffff; color: var(--text-dark); cursor: pointer;"
-                                hx-get="/laesh/md/tabla-ordenes-anteriores"
-                                hx-target="#tabla-historial-completo"
-                                hx-swap="outerHTML"
-                                hx-include="#input-buscar-orden-anteriores-md, #select-periodo-anteriores-md, #fecha-inicio-anteriores-md, #fecha-fin-anteriores-md"
-                                hx-trigger="change">
-                            <option value="7d">Últimos 7 días</option>
-                            <option value="15d">Últimos 15 días</option>
-                            <option value="30d">Últimos 30 días</option>
-                            <option value="90d" selected>Últimos 90 días (Default)</option>
-                            <option value="fecha">Calendario</option>
-                        </select>
-                        <span id="rango-fechas-anteriores-md" class="d-none" style="display: none; align-items: center; gap: 0.35rem; white-space: nowrap;">
-                            <input type="date" id="fecha-inicio-anteriores-md" name="fecha_inicio" class="select-sm form-input" style="padding: 3px 6px; font-size: 0.8rem; border-radius: 6px; border: 1px solid var(--border); width: 130px;" max="<?= date('Y-m-d', strtotime('-1 day')) ?>" title="Fecha inicial" aria-label="Fecha inicial"
-                                   hx-get="/laesh/md/tabla-ordenes-anteriores"
-                                   hx-target="#tabla-historial-completo"
-                                   hx-swap="outerHTML"
-                                   hx-include="#input-buscar-orden-anteriores-md, #select-periodo-anteriores-md, #fecha-inicio-anteriores-md, #fecha-fin-anteriores-md"
-                                   hx-trigger="change">
-                            <span class="txt-muted-sm" style="font-size: 0.78rem; color: var(--text-muted);">al</span>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 11:30 am
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `Ordenes.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L394-454)</summary>
-
-**Path:** `Unknown file`
-
-```
-    /**
-     * Obtiene las órdenes de DÍAS ANTERIORES para la vista de Historial en Recepción con paginación, búsqueda y ordenamiento
-     */
-    private static function construirFiltroPeriodoAnteriores(string $periodo, string $alias = 'o.', string $fechaInicio = '', string $fechaFin = '', array &$params = []): string {
-        switch ($periodo) {
-            case '7d':
-                return "{$alias}hora_captura >= DATE_SUB(CURDATE(), INTERVAL 7 DAY) AND DATE({$alias}hora_captura) < CURDATE()";
-            case '15d':
-                return "{$alias}hora_captura >= DATE_SUB(CURDATE(), INTERVAL 15 DAY) AND DATE({$alias}hora_captura) < CURDATE()";
-            case '30d':
-                return "{$alias}hora_captura >= DATE_SUB(CURDATE(), INTERVAL 30 DAY) AND DATE({$alias}hora_captura) < CURDATE()";
-            case 'fecha':
-                $conds = ["DATE({$alias}hora_captura) < CURDATE()"];
-                $valIni = (!empty($fechaInicio) && preg_match('/^\d{4}-\d{2}-\d{2}$/', $fechaInicio)) ? $fechaInicio : null;
-                $valFin = (!empty($fechaFin) && preg_match('/^\d{4}-\d{2}-\d{2}$/', $fechaFin)) ? $fechaFin : null;
-
-                // Poka-Yoke: Si el usuario solo capturó una fecha, se asume ese mismo día exacto
-                if ($valIni !== null && $valFin === null) {
-                    $valFin = $valIni;
-                } elseif ($valIni === null && $valFin !== null) {
-                    $valIni = $valFin;
-                }
-
-                // Poka-Yoke: Si las fechas vienen invertidas (inicio > fin), se auto-corrigen
-                if ($valIni !== null && $valFin !== null && $valIni > $valFin) {
-                    $tmp = $valIni;
-                    $valIni = $valFin;
-                    $valFin = $tmp;
-                }
-
-                if ($valIni !== null) {
-                    $pIni = ':f_ini_' . str_replace('.', '', $alias);
-                    $conds[] = "DATE({$alias}hora_captura) >= {$pIni}";
-                    $params[$pIni] = $valIni;
-                }
-                if ($valFin !== null) {
-                    $pFin = ':f_fin_' . str_replace('.', '', $alias);
-                    $conds[] = "DATE({$alias}hora_captura) <= {$pFin}";
-                    $params[$pFin] = $valFin;
-                }
-                if ($valIni === null && $valFin === null) {
-                    return "{$alias}hora_captura >= DATE_SUB(CURDATE(), INTERVAL 90 DAY) AND DATE({$alias}hora_captura) < CURDATE()";
-                }
-                return implode(' AND ', $conds);
-            case '90d':
-            default:
-                return "{$alias}hora_captura >= DATE_SUB(CURDATE(), INTERVAL 90 DAY) AND DATE({$alias}hora_captura) < CURDATE()";
-        }
-    }
-
-    /**
-     * Obtiene las solicitudes de órdenes de DÍAS ANTERIORES con ordenamiento, búsqueda,
-     * paginación y filtro de período (default: 90 días, o calendario por rango de fechas).
-     * Precedencia del buscador: si $search tiene contenido, busca en todo el historial (< hoy).
-     */
-    public static function obtenerOrdenesAnteriores(int $limit = 25, int $offset = 0, string $search = '', string $orderBy = 'fecha', string $orderDir = 'DESC', string $periodo = '90d', string $fechaInicio = '', string $fechaFin = ''): array {
-        try {
-            $db = DB::connect();
-
-            $allowedSorts = [
-                'folio'           => 'CAST(o.folio_unico AS UNSIGNED)',
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `Ordenes.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L544-559)</summary>
-
-**Path:** `Unknown file`
-
-```
-    /**
-     * Cuenta el total de órdenes de DÍAS ANTERIORES según filtro de búsqueda y período
-     */
-    public static function contarOrdenesAnteriores(string $search = '', string $periodo = '90d', string $fechaInicio = '', string $fechaFin = ''): int {
-        try {
-            $db = DB::connect();
-            $params = [];
-            $search = trim(mb_strtolower($search, 'UTF-8'));
-
-            // Opción B (Filtro Combinado): El filtro de período/calendario siempre se aplica como base
-            $filtroPeriodo = self::construirFiltroPeriodoAnteriores($periodo, '', $fechaInicio, $fechaFin, $params);
-
-            if ($search !== '') {
-                if (preg_match('/^(?:laesh-?|lsh-?|#)?(\d{1,8})$/i', $search, $mFolio)) {
-                    $rawNum = (int)$mFolio[1];
-                    $pad5   = sprintf('%05d', $rawNum);
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 11:30 am
 
 ---
 
-## Agent Response
+### Code Edit
 
-### Actions
-
-**Tool:** `view_file`
-**File:** `Ordenes.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L544-554)</summary>
-
-**Path:** `Unknown file`
-
-```
-    }
-
-    /**
-     * Cuenta el total de órdenes de DÍAS ANTERIORES según filtro de búsqueda y período
-     */
-    public static function contarOrdenesAnteriores(string $search = '', string $periodo = '90d', string $fechaInicio = '', string $fechaFin = ''): int {
-        try {
-            $db = DB::connect();
-            $params = [];
-            $search = trim(mb_strtolower($search, 'UTF-8'));
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:31 am
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 11:31 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `Ordenes.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L334-399)</summary>
-
-**Path:** `Unknown file`
-
-```
-            DB::logFallback('ERROR', 'Fallo en MD\Negocio\Ordenes::obtenerResultadoPDFPropio', $e->getMessage());
-            return ['success' => false, 'error' => 'No se pudo obtener el PDF: ' . $e->getMessage()];
-        }
-    }
-
-    private static function construirFiltroPeriodoAnterioresMedico(string $periodo, string $alias = 'o.', string $fechaInicio = '', string $fechaFin = '', array &$params = []): string {
-        switch ($periodo) {
-            case '7d':
-                return "{$alias}hora_captura >= DATE_SUB(CURDATE(), INTERVAL 7 DAY) AND DATE({$alias}hora_captura) < CURDATE()";
-            case '15d':
-                return "{$alias}hora_captura >= DATE_SUB(CURDATE(), INTERVAL 15 DAY) AND DATE({$alias}hora_captura) < CURDATE()";
-            case '30d':
-                return "{$alias}hora_captura >= DATE_SUB(CURDATE(), INTERVAL 30 DAY) AND DATE({$alias}hora_captura) < CURDATE()";
-            case 'fecha':
-                $conds = ["DATE({$alias}hora_captura) < CURDATE()"];
-                $valIni = (!empty($fechaInicio) && preg_match('/^\d{4}-\d{2}-\d{2}$/', $fechaInicio)) ? $fechaInicio : null;
-                $valFin = (!empty($fechaFin) && preg_match('/^\d{4}-\d{2}-\d{2}$/', $fechaFin)) ? $fechaFin : null;
-
-                // Poka-Yoke: Si el usuario solo capturó una fecha, se asume ese mismo día exacto
-                if ($valIni !== null && $valFin === null) {
-                    $valFin = $valIni;
-                } elseif ($valIni === null && $valFin !== null) {
-                    $valIni = $valFin;
-                }
-
-                // Poka-Yoke: Si las fechas vienen invertidas (inicio > fin), se auto-corrigen
-                if ($valIni !== null && $valFin !== null && $valIni > $valFin) {
-                    $tmp = $valIni;
-                    $valIni = $valFin;
-                    $valFin = $tmp;
-                }
-
-                if ($valIni !== null) {
-                    $pIni = ':f_ini_' . str_replace('.', '', $alias);
-                    $conds[] = "DATE({$alias}hora_captura) >= {$pIni}";
-                    $params[$pIni] = $valIni;
-                }
-                if ($valFin !== null) {
-                    $pFin = ':f_fin_' . str_replace('.', '', $alias);
-                    $conds[] = "DATE({$alias}hora_captura) <= {$pFin}";
-                    $params[$pFin] = $valFin;
-                }
-                if ($valIni === null && $valFin === null) {
-                    return "{$alias}hora_captura >= DATE_SUB(CURDATE(), INTERVAL 90 DAY) AND DATE({$alias}hora_captura) < CURDATE()";
-                }
-                return implode(' AND ', $conds);
-            case '90d':
-            default:
-                return "{$alias}hora_captura >= DATE_SUB(CURDATE(), INTERVAL 90 DAY) AND DATE({$alias}hora_captura) < CURDATE()";
-        }
-    }
-
-    /**
-     * Obtiene las solicitudes de órdenes de DÍAS ANTERIORES emitidas por el médico logueado,
-     * con ordenamiento, búsqueda, paginación y filtro de período (default: 90 días, o calendario por rango de fechas).
-     * Precedencia del buscador: si $search tiene contenido, busca en todo el historial (< hoy).
-     */
-    public static function obtenerOrdenesAnterioresMedico(int $userId, int $limit = 25, int $offset = 0, string $search = '', string $orderBy = 'fecha', string $orderDir = 'DESC', string $periodo = '90d', string $fechaInicio = '', string $fechaFin = ''): array {
-        try {
-            $db = DB::connect();
-
-            $allowedSorts = [
-                'folio'           => 'CAST(o.folio_unico AS UNSIGNED)',
-                'paciente'        => 'o.paciente_nombre',
-                'fecha'           => 'o.hora_captura',
-                'fecha_resultado' => 'o.fecha_resultado',
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `Ordenes.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L469-484)</summary>
-
-**Path:** `Unknown file`
-
-```
-        }
-    }
-
-    /**
-     * Cuenta el total de órdenes de DÍAS ANTERIORES del médico según filtro de búsqueda y período
-     */
-    public static function contarOrdenesAnterioresMedico(int $userId, string $search = '', string $periodo = '90d', string $fechaInicio = '', string $fechaFin = ''): int {
-        try {
-            $db = DB::connect();
-            $params = [':user_id' => $userId];
-            $search = trim(mb_strtolower($search, 'UTF-8'));
-
-            // Opción B (Filtro Combinado): El filtro de período/calendario siempre se aplica como base
-            $filtroPeriodo = self::construirFiltroPeriodoAnterioresMedico($periodo, '', $fechaInicio, $fechaFin, $params);
-
-            if ($search !== '') {
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Modifying the date range filter for historical medical orders requires updating the logic to include 15-day, 90-day, and flexible date range options while removing the 7-day option. The default period should now be set to 30 days. These changes involve adjusting the filter construction and ensuring the default period value is correctly implemented within the relevant functions.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.109816320s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 11:31 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `Ordenes.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L471-481)</summary>
-
-**Path:** `Unknown file`
-
-```
-        }
-    }
-
-    /**
-     * Cuenta el total de órdenes de DÍAS ANTERIORES del médico según filtro de búsqueda y período
-     */
-    public static function contarOrdenesAnterioresMedico(int $userId, string $search = '', string $periodo = '90d', string $fechaInicio = '', string $fechaFin = ''): int {
-        try {
-            $db = DB::connect();
-            $params = [':user_id' => $userId];
-            $search = trim(mb_strtolower($search, 'UTF-8'));
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 11:31 am
 
 ---
 
-## Agent Response
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
 
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:32 am
 
 ---
 
-<details>
-<summary>File: `Unknown file` (L494-504)</summary>
+### Terminal Command Execution
 
-**Path:** `Unknown file`
-
-```
-    $csrfToken = $_SESSION['csrf_token'] ?? '';
-
-    $q           = trim($_GET['q'] ?? '');
-    $periodo     = trim($_GET['periodo'] ?? '90d');
-    $fechaInicio = trim($_GET['fecha_inicio'] ?? '');
-    $fechaFin    = trim($_GET['fecha_fin'] ?? '');
-    $sort        = trim($_GET['sort'] ?? 'fecha');
-    $dir         = trim($_GET['dir'] ?? 'desc');
-    $page        = max(1, (int)($_GET['page'] ?? 1));
-    $perPage     = max(5, min(100, (int)($_GET['per_page'] ?? 25)));
-    $offset      = ($page - 1) * $perPage;
-```
-
-</details>
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:32 am
 
 ---
 
-## Agent Response
+### Terminal Command Execution
 
-### Actions
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:32 am
 
-**Tool:** `replace_file_content`
+---
 
-<details>
-<summary>Metadata</summary>
+### Terminal Command Execution
 
-- **Model:** Gemini 3.8 Flash (High)
-</details>
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:32 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:32 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:32 am
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
-**Created:** 27 Sept 2026, 11:31 am
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:32 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:32 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:32 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:32 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:32 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:33 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:33 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:33 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:33 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:33 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:34 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:34 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:34 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:34 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:34 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:34 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:34 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:35 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:35 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:35 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:40 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:40 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:41 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:41 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:41 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:41 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:41 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:42 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:42 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:43 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:43 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:43 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:44 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:47 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:47 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:48 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:48 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:49 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:49 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:49 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:49 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:49 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:50 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:51 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:52 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:52 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:52 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:52 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:52 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:56 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:56 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:56 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:56 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:56 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:56 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:56 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:57 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:57 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:57 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:57 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:57 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 11:57 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:05 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:05 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:05 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:05 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:05 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:10 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:11 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:11 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:11 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:12 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:12 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:12 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:13 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:13 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:13 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:13 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:13 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:14 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:25 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:25 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:26 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:26 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:26 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:26 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:27 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:27 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:27 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:27 pm
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:27 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:28 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:28 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:28 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:28 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:28 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:28 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:28 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:28 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:28 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:29 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:29 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:29 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:29 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:29 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:29 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:29 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:30 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:30 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:30 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:30 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:30 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:31 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:31 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:32 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:32 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:32 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:32 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:32 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:37 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:37 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:37 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:37 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:37 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:37 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 1:13 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 1:13 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 1:13 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 1:13 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 1:13 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 1:13 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 1:13 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 1:14 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 1:14 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 1:14 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 1:14 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 1:20 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 1:20 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 1:20 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 1:23 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 1:23 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 1:24 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 1:28 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 1:28 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 1:28 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 1:53 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 2:14 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 2:14 pm
+
+---
+
+### Execution Error
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 2:14 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 2:14 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 2:15 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 2:15 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 2:25 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 2:38 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 2:39 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 2:39 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 2:46 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 3:06 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 3:06 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 3:07 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 3:07 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 3:07 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 3:07 pm
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 3:08 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 3:08 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 3:08 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 3:08 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 3:08 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 3:08 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 3:08 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 3:08 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 3:08 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 3:08 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 3:09 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 3:09 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 3:09 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 3:09 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 3:09 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 3:10 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 3:10 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 3:10 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 3:10 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 3:11 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 3:11 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 3:11 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 3:12 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 3:13 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 3:14 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 3:14 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 3:14 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 3:14 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 3:14 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 3:15 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 3:15 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 3:15 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 3:22 pm
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:28 pm
+
+---
+
+### Execution Error
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:28 pm
+
+---
+
+### Execution Error
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:28 pm
+
+---
+
+### Execution Error
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:28 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:29 pm
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:29 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:29 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:29 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:30 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:30 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:30 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:30 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:30 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:30 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:30 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:30 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:31 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:31 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:31 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:31 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:31 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:31 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:31 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:31 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:31 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:31 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:32 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:32 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:32 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:32 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:32 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:32 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:33 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:33 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:33 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:34 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:34 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:35 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:35 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:35 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:35 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:36 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:36 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:36 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:37 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:37 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:37 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:37 pm
+
+---
+
+### CORTEX_STEP_TYPE_GENERIC
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:37 pm
+
+---
+
+### CORTEX_STEP_TYPE_SYSTEM_MESSAGE
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:37 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:38 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:39 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:39 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:39 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:39 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:39 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:40 pm
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:40 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:40 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:40 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:40 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:41 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:41 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:41 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:42 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:42 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:42 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:42 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:42 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:42 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:43 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:43 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:43 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:43 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:44 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:44 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 4:44 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 5:30 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 6:07 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 6:07 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 6:07 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 6:07 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 6:08 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 6:08 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 6:08 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 6:08 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 6:08 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 6:08 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 6:08 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 6:08 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 6:08 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 6:08 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 6:08 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 6:08 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 6:08 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 6:08 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 6:08 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 6:09 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 6:09 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 6:09 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 6:09 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 6:09 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 6:09 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 6:10 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 6:10 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 6:10 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 6:10 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 6:10 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 6:10 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 6:10 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 6:10 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 6:22 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 6:30 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 6:30 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 6:30 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 6:43 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 6:43 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 6:44 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 6:44 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 6:44 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 6:44 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 6:44 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 6:44 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 6:44 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 6:44 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 6:44 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 6:44 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 6:45 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 6:45 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 7:03 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 7:03 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 7:04 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 7:09 pm
 
 ---
 
@@ -17999,10 +13994,7 @@ Here are the conversation IDs, titles, and summaries of your most recent 1 conve
 <conversation_summaries>
 ## Conversation b05a5b41-a7c7-4d90-9813-7abd9e8e85cf: Limpieza De Código PTR
 - Created: 2026-09-27T17:17:20Z
-- Last modified: 2026-09-27T17:32:03Z
-
-### USER Objective:
-Limpieza De Código PTR
+- Last modified: 2026-09-28T01:04:09Z
 
 </conversation_summaries>
 
@@ -18013,7 +14005,7 @@ Limpieza De Código PTR
 ### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
 
 **Status:** Completed
-**Created:** 27 Sept 2026, 11:32 am
+**Created:** 27 Sept 2026, 7:09 pm
 
 ---
 
@@ -18021,7 +14013,7 @@ Limpieza De Código PTR
 
 ### Thinking
 
-Examining the code, the request involves modifying the period selection within the administration view. Identified the file requiring edits. The task involves removing the "últimos 7 días" option, setting "30 días" as the default selection, and adjusting the order and labeling of the period options to "30d", "15", and "Fechas". The existing default pagination value is also being modified.
+The instruction is to create the automated test files for all 44 cases, but to avoid execution for now. This confirms the need to focus on file generation as a primary action. The previous task aimed to analyze, rectify/create, automate, and plan, and this request narrows the immediate focus.
 
 
 
@@ -18033,7 +14025,7 @@ Examining the code, the request involves modifying the period selection within t
 <details>
 <summary>Metadata</summary>
 
-- **Thinking Duration:** 0.074649202s
+- **Thinking Duration:** 0.069727938s
 - **Model:** Gemini 3.8 Flash (High)
 </details>
 
@@ -18042,7 +14034,7 @@ Examining the code, the request involves modifying the period selection within t
 ### Terminal Command Execution
 
 **Status:** Completed
-**Created:** 27 Sept 2026, 11:32 am
+**Created:** 27 Sept 2026, 7:09 pm
 
 ---
 
@@ -18063,7 +14055,7 @@ Examining the code, the request involves modifying the period selection within t
 ### Terminal Command Execution
 
 **Status:** Completed
-**Created:** 27 Sept 2026, 11:32 am
+**Created:** 27 Sept 2026, 7:09 pm
 
 ---
 
@@ -18084,7 +14076,7 @@ Examining the code, the request involves modifying the period selection within t
 ### Terminal Command Execution
 
 **Status:** Completed
-**Created:** 27 Sept 2026, 11:32 am
+**Created:** 27 Sept 2026, 7:10 pm
 
 ---
 
@@ -18092,8 +14084,7 @@ Examining the code, the request involves modifying the period selection within t
 
 ### Actions
 
-**Tool:** `view_file`
-**File:** `index.php`
+**Tool:** `run_command`
 
 <details>
 <summary>Metadata</summary>
@@ -18103,41 +14094,39 @@ Examining the code, the request involves modifying the period selection within t
 
 ---
 
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 7:10 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+The compilation completed successfully, confirming there are no syntax errors. Need to identify and categorize the original test cases to ensure full coverage. The prior discussion references a set of 44 cases organized into blocks A, B, and C, with A and B specified.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
 <details>
-<summary>File: `Unknown file` (L364-389)</summary>
+<summary>Metadata</summary>
 
-**Path:** `Unknown file`
-
-```
-// GAP-MD-01/03 (2026-09-21/22): usa las mismas mdRenderOrdenesTablaHeader/Body que
-// Órdenes Hoy — antes el combo "Período" con filtrado client-side, y luego un par
-// de funciones de render casi idénticas por sub-tab, permitieron que Hoy y
-// Anteriores divergieran en columnas/rótulos. Con una sola función para ambas,
-// la única diferencia real es el rango de fechas que consulta el backend.
-Flight::route('GET /tabla-ordenes-anteriores', function () {
-    header('Content-Type: text/html; charset=utf-8');
-    $userId = (int)Flight::auth()->getUserId();
-    $csrfToken = $_SESSION['csrf_token'] ?? '';
-
-    $q           = trim($_GET['q'] ?? '');
-    $periodo     = trim($_GET['periodo'] ?? '90d');
-    $fechaInicio = trim($_GET['fecha_inicio'] ?? '');
-    $fechaFin    = trim($_GET['fecha_fin'] ?? '');
-    $sort        = trim($_GET['sort'] ?? 'fecha');
-    $dir         = trim($_GET['dir'] ?? 'desc');
-    $page        = max(1, (int)($_GET['page'] ?? 1));
-    $perPage     = max(5, min(100, (int)($_GET['per_page'] ?? 25)));
-    $offset      = ($page - 1) * $perPage;
-
-    $ordenesAnteriores = \MD\Negocio\Ordenes::obtenerOrdenesAnterioresMedico($userId, $perPage, $offset, $q, $sort, $dir, $periodo, $fechaInicio, $fechaFin);
-    $totalReg          = \MD\Negocio\Ordenes::contarOrdenesAnterioresMedico($userId, $q, $periodo, $fechaInicio, $fechaFin);
-    $totalPages        = max(1, (int)ceil($totalReg / $perPage));
-
-    $includeAntMd = '#input-buscar-orden-anteriores-md, #select-periodo-anteriores-md, #fecha-inicio-anteriores-md, #fecha-fin-anteriores-md';
-
-```
-
+- **Thinking Duration:** 0.073142586s
+- **Model:** Gemini 3.8 Flash (High)
 </details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 7:10 pm
 
 ---
 
@@ -18146,7 +14135,7 @@ Flight::route('GET /tabla-ordenes-anteriores', function () {
 ### Actions
 
 **Tool:** `grep_search`
-**Query:** `90d`
+**Query:** `function buscarOrdenes`
 
 <details>
 <summary>Metadata</summary>
@@ -18159,1084 +14148,7 @@ Flight::route('GET /tabla-ordenes-anteriores', function () {
 ### Local File Search
 
 **Status:** Completed
-**Created:** 27 Sept 2026, 11:32 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `7d`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 11:32 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 11:32 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `90d`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 11:32 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `7d`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 11:32 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `labadmin.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L469-519)</summary>
-
-**Path:** `Unknown file`
-
-```
-            var select = document.getElementById('select-periodo-anteriores-rc');
-            var rango = document.getElementById('rango-fechas-anteriores-rc');
-            var inputIni = document.getElementById('fecha-inicio-anteriores-rc');
-            var inputFin = document.getElementById('fecha-fin-anteriores-rc');
-            if (!select || !rango || !inputIni || !inputFin) return;
-
-            var ayer = new Date();
-            ayer.setDate(ayer.getDate() - 1);
-            var ayerStr = ayer.toISOString().split('T')[0];
-
-            inputIni.max = ayerStr;
-            inputFin.max = ayerStr;
-
-            function manejarCambio() {
-                if (select.value === 'fecha') {
-                    rango.style.display = 'inline-flex';
-                    rango.classList.remove('d-none');
-
-                    if (!inputFin.value) {
-                        inputFin.value = ayerStr;
-                    }
-                    if (!inputIni.value) {
-                        var dIni = new Date(ayer);
-                        dIni.setDate(dIni.getDate() - 90);
-                        inputIni.value = dIni.toISOString().split('T')[0];
-                    }
-                    inputFin.min = inputIni.value;
-                } else {
-                    rango.style.display = 'none';
-                    rango.classList.add('d-none');
-                    inputIni.value = '';
-                    inputFin.value = '';
-                }
-            }
-
-            select.addEventListener('change', manejarCambio);
-
-            // Poka-Yoke: Al cambiar Fecha Inicio
-            inputIni.addEventListener('change', function() {
-                if (this.value) {
-                    // Si fin está vacío o es menor a inicio, sincronizar al mismo día
-                    if (!inputFin.value || inputFin.value < this.value) {
-                        inputFin.value = this.value;
-                    }
-                    inputFin.min = this.value;
-                }
-            });
-
-            // Poka-Yoke: Al cambiar Fecha Fin
-            inputFin.addEventListener('change', function() {
-                if (this.value) {
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `medicos.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L339-379)</summary>
-
-**Path:** `Unknown file`
-
-```
-            var inputFin = document.getElementById('fecha-fin-anteriores-md');
-            if (!select || !rango || !inputIni || !inputFin) return;
-
-            var ayer = new Date();
-            ayer.setDate(ayer.getDate() - 1);
-            var ayerStr = ayer.toISOString().split('T')[0];
-
-            inputIni.max = ayerStr;
-            inputFin.max = ayerStr;
-
-            function manejarCambio() {
-                if (select.value === 'fecha') {
-                    rango.style.display = 'inline-flex';
-                    rango.classList.remove('d-none');
-
-                    if (!inputFin.value) {
-                        inputFin.value = ayerStr;
-                    }
-                    if (!inputIni.value) {
-                        var dIni = new Date(ayer);
-                        dIni.setDate(dIni.getDate() - 90);
-                        inputIni.value = dIni.toISOString().split('T')[0];
-                    }
-                    inputFin.min = inputIni.value;
-                } else {
-                    rango.style.display = 'none';
-                    rango.classList.add('d-none');
-                    inputIni.value = '';
-                    inputFin.value = '';
-                }
-            }
-
-            select.addEventListener('change', manejarCambio);
-
-            // Poka-Yoke: Al cambiar Fecha Inicio
-            inputIni.addEventListener('change', function() {
-                if (this.value) {
-                    // Si fin está vacío o es menor a inicio, sincronizar al mismo día
-                    if (!inputFin.value || inputFin.value < this.value) {
-                        inputFin.value = this.value;
-                    }
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `ws-client.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L269-364)</summary>
-
-**Path:** `Unknown file`
-
-```
-        var fechaIniId         = isMedicoPortal ? 'fecha-inicio-anteriores-md'      : 'fecha-inicio-anteriores-rc';
-        var fechaFinId         = isMedicoPortal ? 'fecha-fin-anteriores-md'         : 'fecha-fin-anteriores-rc';
-        var rangoContainerId   = isMedicoPortal ? 'rango-fechas-anteriores-md'      : 'rango-fechas-anteriores-rc';
-
-        var inputAnt    = document.getElementById(searchAnterioresId);
-        var inputHoy    = document.getElementById(searchHoyId);
-        var selPeriodo  = document.getElementById(selectPeriodoId);
-        var inputIni    = document.getElementById(fechaIniId);
-        var inputFin    = document.getElementById(fechaFinId);
-        var rangoElem   = document.getElementById(rangoContainerId);
-
-        var textoAnt   = inputAnt ? (inputAnt.value || '').trim() : '';
-        var textoHoy   = inputHoy ? (inputHoy.value || '').trim() : '';
-        var periodoVal = selPeriodo ? selPeriodo.value : '90d';
-        var iniVal     = inputIni ? (inputIni.value || '') : '';
-        var finVal     = inputFin ? (inputFin.value || '') : '';
-
-        var tabActiva = 'anteriores';
-        if (isMedicoPortal) {
-            var panelNueva = document.getElementById('panel-nueva-orden');
-            var subGenerar = document.getElementById('subtab-generar');
-            var subHoy = document.getElementById('subtab-ordenes-hoy');
-            if (panelNueva && !panelNueva.classList.contains('d-none')) {
-                if (subGenerar && subGenerar.classList.contains('active')) {
-                    tabActiva = 'captura';
-                } else if (subHoy && subHoy.classList.contains('active')) {
-                    tabActiva = 'hoy';
-                } else {
-                    tabActiva = 'captura';
-                }
-            } else {
-                tabActiva = 'anteriores';
-            }
-        } else {
-            var panelHoy = document.getElementById('panel-ordenes');
-            if (panelHoy && !panelHoy.classList.contains('d-none')) tabActiva = 'hoy';
-        }
-
-        _busquedaPreviaSnapshot = {
-            isMedico: isMedicoPortal,
-            tabActiva: tabActiva,
-            textoAnt: textoAnt,
-            textoHoy: textoHoy,
-            periodoVal: periodoVal,
-            iniVal: iniVal,
-            finVal: finVal,
-            rangoVisible: rangoElem ? (rangoElem.style.display !== 'none') : false
-        };
-    }
-
-    function mostrarBarraRetorno(cleanTarget, localizada) {
-        if (!_busquedaPreviaSnapshot) return;
-
-        var snap = _busquedaPreviaSnapshot;
-        var resumen = [];
-        var esBusquedaPersonalizada = false;
-        if (snap.tabActiva === 'captura') {
-            resumen.push('Captura de Solicitud');
-            esBusquedaPersonalizada = true;
-        } else if (snap.tabActiva === 'hoy') {
-            if (snap.textoHoy) {
-                resumen.push('"' + snap.textoHoy + '"');
-                esBusquedaPersonalizada = true;
-            } else {
-                resumen.push('Órdenes de Hoy');
-            }
-        } else {
-            if (snap.textoAnt) {
-                resumen.push('"' + snap.textoAnt + '"');
-                esBusquedaPersonalizada = true;
-            }
-            if (snap.periodoVal === 'fecha' && (snap.iniVal || snap.finVal)) {
-                resumen.push((snap.iniVal || '') + ' al ' + (snap.finVal || ''));
-                esBusquedaPersonalizada = true;
-            } else if (snap.periodoVal && snap.periodoVal !== '90d') {
-                resumen.push(snap.periodoVal);
-                esBusquedaPersonalizada = true;
-            } else if (!snap.textoAnt) {
-                resumen.push('Últimos 90 días');
-            }
-        }
-        var resumenTexto = resumen.length > 0 ? resumen.join(' · ') : 'Búsqueda previa';
-        var labelBoton = '';
-        if (snap.tabActiva === 'captura') {
-            labelBoton = '⬅ Volver a mi captura de orden';
-        } else if (esBusquedaPersonalizada) {
-            labelBoton = '⬅ Volver a mi búsqueda (' + resumenTexto + ')';
-        } else {
-            labelBoton = '⬅ Volver a la lista (' + resumenTexto + ')';
-        }
-
-        var existingBar = document.getElementById('laesh-notif-return-bar');
-        if (existingBar) existingBar.remove();
-
-        var esNoEncontrada = (localizada === false);
-        var bar = document.createElement('div');
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `periodo`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 11:32 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `medicos.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L264-284)</summary>
-
-**Path:** `Unknown file`
-
-```
-            if (esNueva) p.set('nueva', '1');
-            _abrirSolOverlay('/laesh/rc/views/solicitud_dac_impr.php?' + p.toString());
-        }
-
-
-        function filtrarEstadisticasMedico() {
-            const select = document.getElementById('filtro-periodo-medico');
-            const val = select.value;
-            
-            let ordenes = 34;
-            let completadas = 31;
-            let tiempo = "4.5 hrs";
-            let lblText = '';
-            
-            if (val === 'dia') {
-                ordenes = 2;
-                completadas = 2;
-                tiempo = "3.8 hrs";
-                lblText = 'HOY';
-            } else if (val === 'semana') {
-                ordenes = 12;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-The request targets the period selection within the administrative panel. The "últimos 7 días" option needs removal from the available periods. The default period should shift to 30 days and become the pre-selected option. Item names require adjustment and reordering to "30d", "15", and "Fechas".
-
-I will modify the period selection options within `labadmin.php` to reflect these changes. Ensuring the default period is set appropriately and the specific periods are correctly labeled and ordered is the priority.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.052293733s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 11:32 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 11:33 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `ws-client.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L279-354)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-        var textoAnt   = inputAnt ? (inputAnt.value || '').trim() : '';
-        var textoHoy   = inputHoy ? (inputHoy.value || '').trim() : '';
-        var periodoVal = selPeriodo ? selPeriodo.value : '90d';
-        var iniVal     = inputIni ? (inputIni.value || '') : '';
-        var finVal     = inputFin ? (inputFin.value || '') : '';
-
-        var tabActiva = 'anteriores';
-        if (isMedicoPortal) {
-            var panelNueva = document.getElementById('panel-nueva-orden');
-            var subGenerar = document.getElementById('subtab-generar');
-            var subHoy = document.getElementById('subtab-ordenes-hoy');
-            if (panelNueva && !panelNueva.classList.contains('d-none')) {
-                if (subGenerar && subGenerar.classList.contains('active')) {
-                    tabActiva = 'captura';
-                } else if (subHoy && subHoy.classList.contains('active')) {
-                    tabActiva = 'hoy';
-                } else {
-                    tabActiva = 'captura';
-                }
-            } else {
-                tabActiva = 'anteriores';
-            }
-        } else {
-            var panelHoy = document.getElementById('panel-ordenes');
-            if (panelHoy && !panelHoy.classList.contains('d-none')) tabActiva = 'hoy';
-        }
-
-        _busquedaPreviaSnapshot = {
-            isMedico: isMedicoPortal,
-            tabActiva: tabActiva,
-            textoAnt: textoAnt,
-            textoHoy: textoHoy,
-            periodoVal: periodoVal,
-            iniVal: iniVal,
-            finVal: finVal,
-            rangoVisible: rangoElem ? (rangoElem.style.display !== 'none') : false
-        };
-    }
-
-    function mostrarBarraRetorno(cleanTarget, localizada) {
-        if (!_busquedaPreviaSnapshot) return;
-
-        var snap = _busquedaPreviaSnapshot;
-        var resumen = [];
-        var esBusquedaPersonalizada = false;
-        if (snap.tabActiva === 'captura') {
-            resumen.push('Captura de Solicitud');
-            esBusquedaPersonalizada = true;
-        } else if (snap.tabActiva === 'hoy') {
-            if (snap.textoHoy) {
-                resumen.push('"' + snap.textoHoy + '"');
-                esBusquedaPersonalizada = true;
-            } else {
-                resumen.push('Órdenes de Hoy');
-            }
-        } else {
-            if (snap.textoAnt) {
-                resumen.push('"' + snap.textoAnt + '"');
-                esBusquedaPersonalizada = true;
-            }
-            if (snap.periodoVal === 'fecha' && (snap.iniVal || snap.finVal)) {
-                resumen.push((snap.iniVal || '') + ' al ' + (snap.finVal || ''));
-                esBusquedaPersonalizada = true;
-            } else if (snap.periodoVal && snap.periodoVal !== '90d') {
-                resumen.push(snap.periodoVal);
-                esBusquedaPersonalizada = true;
-            } else if (!snap.textoAnt) {
-                resumen.push('Últimos 90 días');
-            }
-        }
-        var resumenTexto = resumen.length > 0 ? resumen.join(' · ') : 'Búsqueda previa';
-        var labelBoton = '';
-        if (snap.tabActiva === 'captura') {
-            labelBoton = '⬅ Volver a mi captura de orden';
-        } else if (esBusquedaPersonalizada) {
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 11:33 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 11:33 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 11:33 am
-
----
-
-## Agent Response
-
-### Thinking
-
-A successful initial check indicates the environment is stable for the next steps. The focus now shifts to crafting a comprehensive, repeatable test dataset simulating two years of operational data. This dataset will validate recently implemented features and enhancements across search, order display, period filtering, and search functionalities.
-
-
-
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.080462276s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 11:33 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `class DB`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 11:34 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 11:34 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `DB.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-<?php
-// DB.php - Clase para conexión PDO e interacción transaccional con la base de datos
-
-namespace Common;
-
-use PDO;
-use PDOException;
-
-class DB {
-    private static ?PDO $instance = null;
-
-    /**
-     * Establece la conexión PDO singleton
-     */
-    public static function connect(): PDO {
-        if (self::$instance === null) {
-            $config = require __DIR__ . '/config.php';
-            $dbConf = $config['db'];
-
-            $dsn = sprintf(
-                "mysql:host=%s;port=%d;dbname=%s;charset=%s",
-                $dbConf['host'],
-                $dbConf['port'],
-                $dbConf['name'],
-                $dbConf['charset']
-            );
-
-            try {
-                self::$instance = new PDO($dsn, $dbConf['user'], $dbConf['pass'], [
-                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-                    PDO::ATTR_EMULATE_PREPARES => false,
-                    PDO::ATTR_PERSISTENT => true, // Conexión persistente (Pool a nivel PHP-FPM)
-                ]);
-                
-                // Configuración de compatibilidad e internacionalización (Español MX)
-                self::$instance->exec("SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci");
-                self::$instance->exec("SET time_zone = '-06:00'");
-                self::$instance->exec("SET lc_time_names = 'es_MX'");
-                self::$instance->exec("SET SESSION sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 11:34 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 11:34 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 11:34 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 11:34 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 11:34 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 11:35 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 11:35 am
-
----
-
-## Agent Response
-
-### Thinking
-
-Examining the order database reveals a small sample size. Evaluating user requests 9 and 10 is necessary to understand the desired scope of the test data and its relation to specified features. It's crucial to understand what kind of test data is required for the requested feature testing before proceeding.
-
-
-
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.016494841s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 11:35 am
-
----
-
-## Agent Response
-
-### Thinking
-
-The "Período" dropdown now excludes the 7-day option. The default selection is set to 30 days (`30d`) in both the user interface and the backend logic. The dropdown items are arranged in the precise order: `30d`, `15`, and `Fechas`. Furthermore, both the frontend and backend implementations are synchronized to ensure consistency.
-
-
-
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.057088648s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-## User Request
-
-ya replaneaste lo necesario considerando la elimnacion de 7d y el default nuevo ?
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `index.php`
-**Language:** php
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Considering the removal of the specific time window and the new default, a thorough re-evaluation of the 2-year simulation dataset is required. Need to identify all areas impacted by this change, and how the new default and available options (the exact new default and an alternative time window, and dates) should be incorporated to validate that the changes operate as expected. The testing must confirm the dataset's integrity and accuracy, particularly with the varied time windows.
-
-
-The dataset requires specific boundary tests for time windows: "Hoy" (Today), "15d", "30d", and custom date ranges. It's crucial to ensure orders from yesterday, 14/15 days ago, 16 days ago, 29/30 days ago, and 31 days ago are correctly displayed/hidden in the respective tabs and filters. These boundary conditions are central to validating the time-based filtering logic.
-
-
-When a search term is present, the code bypasses the date filter and searches the entire history. Conversely, without a search term, the date filter is applied correctly. This "search overrides time filter" behavior is a core design principle. Search functionality, specifically by folio, was reviewed to understand how it interacts with the date filtering mechanism.
-
-
-Focusing on the search functionality, it's critical to verify the autocomplete dropdown behaves as expected for both patient name and diagnosis searches. Specifically, confirming that clearing the search term correctly reverts the display to the active date-filtered order grid is crucial. The logic of segregating "Today's Orders" and "Previous Orders" using `CURDATE()` needs validation against the test dataset.
-
-The state transitions (PENDIENTE to CANCELADA) should be thoroughly tested, confirming each state's correct display and behavior within the interface. These states directly impact how users interact with orders.
-
-
-The notification system necessitates testing with various order types and the "return bar" functionality to restore searches. The multi-doctor setup requires verifying order distribution and appropriate filtering in doctor and reception portals. Ensuring the simulation dataset can be cleaned without data corruption is critical, demanding the deterministic tagging of all simulated records. A realistic simulation requires 1,500-2,000 orders to adequately test pagination and the user interface.
-
-
-
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 5.879500789s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-## User Request
-
-SI, realizalo de manera ultra quirurgica.
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `index.php`
-**Language:** php
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 11:40 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 11:40 am
+**Created:** 27 Sept 2026, 7:10 pm
 
 ---
 
@@ -19256,11 +14168,173 @@ SI, realizalo de manera ultra quirurgica.
 ---
 
 <details>
-<summary>File: `Unknown file` (L29-99)</summary>
+<summary>File: `Unknown file` (L634-739)</summary>
 
 **Path:** `Unknown file`
 
 ```
+
+    /**
+     * Busca órdenes del médico autenticado por coincidencia inteligente (Folio exacto, Teléfono 7-10 dígitos, o Multicriterio Nombre + Año + Teléfono)
+     */
+    public static function buscarOrdenesMedico(int $medicoId, string $term, int $limit = 15): array {
+        try {
+            $term = trim($term);
+            if (strlen($term) < 1) return [];
+
+            $db = DB::connect();
+            $limInt = max(1, min(50, (int)$limit));
+            $params = [':medico_id' => $medicoId];
+            $whereParts = ["o.medico_user_id = :medico_id"];
+
+            // 1. Caso numérico puro (1 a 6 dígitos): Folio exacto o prefijo
+            if (preg_match('/^\d{1,6}$/', $term)) {
+                $whereParts[] = "(o.folio_unico = :f_exact OR o.folio_unico LIKE :f_pref)";
+                $params[':f_exact'] = $term;
+                $params[':f_pref']  = $term . '%';
+                $orderClause = "(o.folio_unico = :f_ord) DESC, CAST(o.folio_unico AS UNSIGNED) ASC, o.orden_id DESC";
+                $params[':f_ord'] = $term;
+            }
+            // 2. Caso numérico largo (7 a 10 dígitos): Teléfono directo o folio
+            elseif (preg_match('/^\d{7,10}$/', $term)) {
+                $whereParts[] = "(o.paciente_telefono LIKE :tel OR o.folio_unico = :fol_tel)";
+                $params[':tel'] = '%' . $term . '%';
+                $params[':fol_tel'] = $term;
+                $orderClause = "o.orden_id DESC";
+            }
+            // 3. Caso texto o multicriterio (Nombre, Año, Teléfono parcial)
+            else {
+                $words = preg_split('/\s+/', $term, -1, PREG_SPLIT_NO_EMPTY);
+                $wIdx = 1;
+                foreach ($words as $word) {
+                    $wordLower = mb_strtolower($word, 'UTF-8');
+                    // Si es un año de 4 dígitos entre 2000 y 2099
+                    if (preg_match('/^(20\d\d)$/', $word, $mYear)) {
+                        $whereParts[] = "YEAR(o.hora_captura) = :yr_" . $wIdx;
+                        $params[':yr_' . $wIdx] = (int)$mYear[1];
+                    }
+                    // Si es un fragmento numérico (ej. 3+ dígitos de teléfono o folio)
+                    elseif (preg_match('/^\d{3,}$/', $word)) {
+                        $whereParts[] = "(o.paciente_telefono LIKE :tel_" . $wIdx . " OR o.folio_unico = :fol_" . $wIdx . ")";
+                        $params[':tel_' . $wIdx] = '%' . $word . '%';
+                        $params[':fol_' . $wIdx] = $word;
+                    }
+                    // Si es texto (paciente, diagnóstico)
+                    else {
+                        $whereParts[] = "(LOWER(o.paciente_nombre) LIKE :q_nom_" . $wIdx . " OR LOWER(o.diagnostico) LIKE :q_diag_" . $wIdx . ")";
+                        $likeVal = '%' . $wordLower . '%';
+                        $params[':q_nom_' . $wIdx]  = $likeVal;
+                        $params[':q_diag_' . $wIdx] = $likeVal;
+                    }
+                    $wIdx++;
+                }
+                $orderClause = "o.orden_id DESC";
+            }
+
+            $whereSql = "WHERE " . implode(' AND ', $whereParts);
+            $fetchLimit = $limInt + 1; // +1 para detectar si hay más resultados
+
+            $stmt = $db->prepare("
+                SELECT
+                    o.orden_id AS id,
+                    o.folio_unico AS folio,
+                    o.paciente_nombre AS paciente,
+                    o.paciente_telefono AS telefono,
+                    o.medico_nombre_completo AS medico,
+                    o.estado_valor AS estado,
+                    o.estado_id,
+                    o.diagnostico AS estudios,
+                    o.hora_captura AS fecha
+                FROM vw_ordenes_completas o
+                {$whereSql}
+                ORDER BY {$orderClause}
+                LIMIT {$fetchLimit}
+            ");
+            foreach ($params as $k => $v) {
+                if ($k === ':medico_id' || strpos($k, ':yr_') === 0) {
+                    $stmt->bindValue($k, (int)$v, PDO::PARAM_INT);
+                } else {
+                    $stmt->bindValue($k, $v, PDO::PARAM_STR);
+                }
+            }
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (Throwable $e) {
+            DB::logFallback('ERROR', 'Fallo en MD\Negocio\Ordenes::buscarOrdenesMedico', $e->getMessage());
+            return [];
+        }
+    }
+
+    /**
+     * Cambia la contraseña del médico autenticado utilizando Delight Auth
+     * y purga tokens huérfanos de persistencia y resets.
+     */
+    public static function cambiarPasswordPropia(string $oldPassword, string $newPassword, int $userId): array {
+        try {
+            if (strlen($newPassword) !== 10) {
+                return ['success' => false, 'ack' => false, 'error' => 'La nueva contraseña debe tener exactamente 10 caracteres.'];
+            }
+
+            $auth = \Flight::auth();
+            $auth->changePassword($oldPassword, $newPassword);
+
+            // Limpieza de tokens persistentes de recordarme y resets huérfanos
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Ordenes.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+/**
+ * md/negocio/ordenes.php — Capa de Negocio para Solicitudes Médicas Digitales (Médicos)
+ *
+ * Maneja la emisión de solicitudes digitales, persistencia PDO, Stored Procedures
+ * (laesh_db.CrearOrdenLaboratorio), trazabilidad y auditoría.
+ */
+
+namespace MD\Negocio;
+
+use Common\DB;
+use Common\Logger;
+use PDO;
+use Throwable;
+
+class Ordenes {
+
+    /**
+     * Emite una solicitud médica digital desde el portal de médicos
+     *
+     * H3/H4/H6 (auditoría 2026-09-20): mismo tratamiento que
+     * RC\Negocio\Ordenes::crearOrden() — todo el flujo en una transacción (evita
+     * la ventana de carrera del folio y una orden a medias si detalle_ordenes
+     * falla), y la notificación 'nueva_orden' se persiste (outbox) dentro de la
+     * misma transacción, con el push por WS después del commit.
+     */
+    public static function crearSolicitudDigital(array $datos, int $userId, int $intento = 1): array {
+        $db = DB::connect();
+        $db->beginTransaction();
 
         try {
             // 1. Buscar o crear el paciente en pacientes
@@ -19332,373 +14406,69 @@ SI, realizalo de manera ultra quirurgica.
             if (is_array($estudiosArray)) {
                 $stmtDet = $db->prepare("INSERT INTO detalle_ordenes (orden_id, estudio_id) VALUES (?, ?)");
                 foreach ($estudiosArray as $estudioId) {
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 11:41 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 11:41 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 11:41 am
-
----
-
-## Agent Response
-
-### Thinking
-
-`S2Y-`-prefixed folios offer a robust, easily identifiable method for simulated data, fitting within the `VARCHAR(20)` constraint and enabling efficient deletion via a `LIKE` clause. This approach avoids conflicts with existing folio patterns. The `pacientes` table's `nombre_completo` field, with its `VARCHAR(200)` limit, is being examined in the context of simulated patient data.
-
-
-
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.081592438s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 11:41 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 11:41 am
-
----
-
-## Agent Response
-
-### Thinking
-
-Initial investigation reveals that `vw_ordenes_completas` directly interacts with the `ordenes` table. Further, the use of `obtenerOrdenesAnteriores` is being examined in the context of two distinct PHP files, `rc/negocio/Ordenes.php` and `md/negocio/Ordenes.php`. The PHP code from the `rc` version is showing a selection of fields including `id`, `folio_unico`, and patient details from the database.
-
-
-Examining the query reveals a join across multiple tables including `ordenes`, `pacientes`, and several catalogs. The presence of `[SIM2Y]` suggests a data seeding or simulation context, likely for testing purposes. Investigating `tests/seed_dataset_2years.php` reveals checks for existing simulated data and mechanisms for cleanup.
-
-The script appears to populate data related to medical orders, patients, and their associated details, including medical professionals and study types. It utilizes a list of active medical user IDs and looks to generate realistic patient information including names, ages, sexes, and diagnoses.
-
-
-Determining the number of orders required across different time periods is essential.  Generating ~1,512 orders is the target, distributed across zones based on specified date ranges and counts. Each order will consist of 1-4 studies, populated from a study catalog. The folio structure will be `S2Y-00001` to `S2Y-01512`. The `estudios` field will contain the corresponding studies as a JSON object.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `config.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 3.137004289s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-<?php
-// config.php — Configuración del ecosistema LAESH (Bloc Digital)
-//
-// Credenciales leídas desde variables de entorno (mínimo privilegio):
-//   LAESH_DB_USER / LAESH_DB_PASS / LAESH_DB_HOST / LAESH_DB_PORT / LAESH_DB_NAME
-//
-// Fallbacks por ambiente (env var siempre tiene prioridad):
-//   Docker local  (/.dockerenv existe) → host=db,        port=3306
-//   KVM2 Hostinger / OCI / nativo      → host=127.0.0.1, port=3306
-//   (En todos los entornos nativo las env vars se inyectan vía PHP-FPM pool
-//    y cache_renew.cron — el fallback no-Docker solo aplica si la inyección falla)
-// Nota: ya NO se usa root. Usuario dedicado laesh_app con privilegios mínimos en laesh_db.
-
-$inDocker = file_exists('/.dockerenv');
-
-// ── JWT Secret: falla explícita en producción si no se inyectó vía entorno ──
-// Hallazgo 2026-09-18: el secreto vivía hardcodeado como fallback silencioso,
-// visible en el código fuente — invalidaba la garantía de firma HMAC para los
-// 3 portales (md/rc/admrc). Producción NUNCA debe operar con un secreto conocido.
-$appEnv = getenv('APP_ENV') ?: 'development';
-$jwtSecret = getenv('LAESH_JWT_SECRET') ?: '';
-if ($jwtSecret === '') {
-    if ($appEnv === 'production') {
-        throw new \RuntimeException(
-            'LAESH_JWT_SECRET no está definida en el entorno. ' .
-            'Producción no puede operar con un secreto JWT hardcodeado/conocido. ' .
-            'Verificar env[LAESH_JWT_SECRET] en php-fpm-laesh.conf / EnvironmentFile de swoole-laesh.service.'
-        );
+                    if (is_numeric($estudioId)) {
+                        $stmtDet->execute([$ordenId, $estudioId]);
+                    }
+                }
+            }
+
+            // 5. Actualizar contador de órdenes del médico en perfiles_medicos (GAP-03)
+            $db->prepare("UPDATE perfiles_medicos SET total_ordenes = total_ordenes + 1 WHERE user_id = ?")
+               ->execute([$medicoId]);
+
+            // 6. Logger y Auditoría
+            $pacienteNombre = trim(($datos['paciente_nombre'] ?? $datos['paciente'] ?? 'Paciente'));
+            Logger::logAlways('INFO', "Solicitud Médica Digital {$folio} creada para {$pacienteNombre} por médico user_id={$userId}", $userId);
+
+            // 7. H6 — Outbox: persistir la notificación dentro de la misma transacción.
+            $persisted = \Common\Notifier::persist($db, 'nueva_orden', [
+                'folio'          => $folio,
+                'orden_id'       => $ordenId,
+                'titulo'         => 'Nueva Solicitud Médica Digital (' . $folio . ')',
+                'mensaje'        => 'Solicitud enviada para ' . $pacienteNombre,
+                'actor_user_id'  => $userId,
+            ]);
+
+            $db->commit();
+
+            // 8. Push por WS — después del commit.
+            \Common\Notifier::push($persisted, 'nueva_orden', [
+                'folio'    => $folio,
+                'orden_id' => $ordenId,
+                'titulo'   => 'Nueva Solicitud Médica Digital (' . $folio . ')',
+                'mensaje'  => 'Solicitud enviada para ' . $pacienteNombre,
+            ]);
+
+            return [
+                'success'  => true,
+                'folio'    => $folio,
+                'orden_id' => $ordenId,
+                'paciente' => $pacienteNombre,
+                'mensaje'  => "✓ Solicitud Médica Digital {$folio} creada exitosamente para {$pacienteNombre}."
+            ];
+
+        } catch (Throwable $e) {
+            if ($db->inTransaction()) {
+                $db->rollBack();
+            }
+            // H3: mismo retry que RC\Negocio\Ordenes::crearOrden() — conflicto de
+            // serialización transitorio de MariaDB (1020/1213), el motor sugiere
+            // reintentar la transacción completa.
+            if ($intento < 5 && \RC\Negocio\Ordenes::esConflictoSerializacion($e)) {
+                usleep(random_int(10000, 50000));
+                return self::crearSolicitudDigital($datos, $userId, $intento + 1);
+            }
+            DB::logFallback('ERROR', 'Fallo en MD\Negocio\Ordenes::crearSolicitudDigital', $e->getMessage());
+            Logger::log('ERROR', 'Error al crear solicitud médica digital: ' . $e->getMessage(), $userId);
+            return [
+                'success' => false,
+                'error'   => 'No se pudo crear la solicitud digital: ' . $e->getMessage()
+            ];
+        }
     }
-    // Solo desarrollo local: valor fijo y claramente marcado como no apto para producción.
-    $jwtSecret = 'DEV_ONLY_INSECURE_SECRET_never_use_in_prod_2026';
-}
-
-return [
-    'db' => [
-        'host'    => getenv('LAESH_DB_HOST') ?: ($inDocker ? 'db'   : '127.0.0.1'),
-        'port'    => (int)(getenv('LAESH_DB_PORT') ?: 3306),   // 3306 en todos los entornos nativo (KVM2/OCI)
-        'user'    => getenv('LAESH_DB_USER') ?: 'laesh_app',
-        'pass'    => getenv('LAESH_DB_PASS') ?: 'laesh_2026_dev',
-        'name'    => getenv('LAESH_DB_NAME') ?: 'laesh_db',
-        'charset' => 'utf8mb4'
-    ],
-    'app' => [
-        'env'      => getenv('APP_ENV') ?: 'development',
-        // Ruta absoluta al dir de logs del stack (fuera del webroot).
-        // __DIR__ = commons/ dentro de laesh-swbldi/ — usar ruta absoluta para evitar
-        // que un deploy en subdirectorio diferente cambie la ubicación del log.
-        'log_path' => '/opt/laesh/logs/app.log'
-    ],
-    'swoole' => [
 ```
 
 </details>
-
----
-
-## Agent Response
-
-### Thinking
-
-The configuration file includes support for a specific database port variable. The command-line interface script can define a default port if the environment variable is not set. A code snippet confirms the script defaults to port `6002` if the environment variable is undefined, ensuring local development uses the expected port without explicit configuration.
-
-
-
-
-### Actions
-
-**Tool:** `write_to_file`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.056273974s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 11:42 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 11:42 am
-
----
-
-## Agent Response
-
-### Thinking
-
-Database connection and inspection were successful, yielding no existing records. The next step involves designing `tests/seed_dataset_2years.php`, specifically focusing on seeding doctor data. The script must query for active doctors, retrieving their `user_id` and `nombre_completo` from `users` joined with `perfiles_medicos` and/or `empleados` tables where `rol = 'MEDICO'`.
-
-If no doctors are found via query, the script will fallback to seeding users with hardcoded IDs 3 to 7 as doctors.
-
-
-Focus is now on generating a dataset for testing the order management system. The dataset will include ~300 unique patients with varied demographics and multiple orders over a two-year period, simulating real-world patient interactions. Order distribution is critical, with specific counts and states planned across three time zones: "Today", "Last 15 days", and "Days 16-30" to thoroughly test filtering capabilities.
-
-
-The focus shifts to detailed order generation for the test dataset, specifically the "Historical 2 Years" time zone.  A distribution of approximately 1,400 orders across various intervals within the 2-year range will be generated to test date-based filtering, with key test cases designed around visibility in specific date ranges (30 days, 15 days) and text-based searches. Each order will include unique folio, patient, doctor, state, age, diagnosis, studies in JSON format, capture and result timestamps, linked study details, and state history with logical timestamps.
-
-
-
-
-### Actions
-
-**Tool:** `write_to_file`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 20.349132581s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 11:43 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 11:43 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 11:43 am
-
----
-
-## Agent Response
-
-### Thinking
-
-Dataset generation completed successfully; now initiating automated tests to validate backend function outputs against expected results. The first test will check that a specific function returns the correct number of orders from a designated zone.
-
-
-
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.107025549s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 11:44 am
 
 ---
 
@@ -19707,7 +14477,7 @@ Dataset generation completed successfully; now initiating automated tests to val
 ### Actions
 
 **Tool:** `grep_search`
-**Query:** `public static function obtener`
+**Query:** `periodo`
 
 <details>
 <summary>Metadata</summary>
@@ -19720,70 +14490,7 @@ Dataset generation completed successfully; now initiating automated tests to val
 ### Local File Search
 
 **Status:** Completed
-**Created:** 27 Sept 2026, 11:47 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 11:47 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 11:48 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 11:48 am
+**Created:** 27 Sept 2026, 7:10 pm
 
 ---
 
@@ -19803,21 +14510,77 @@ Dataset generation completed successfully; now initiating automated tests to val
 ---
 
 <details>
-<summary>File: `Unknown file` (L449-489)</summary>
+<summary>File: `Unknown file` (L334-439)</summary>
 
 **Path:** `Unknown file`
 
 ```
+            DB::logFallback('ERROR', 'Fallo en MD\Negocio\Ordenes::obtenerResultadoPDFPropio', $e->getMessage());
+            return ['success' => false, 'error' => 'No se pudo obtener el PDF: ' . $e->getMessage()];
+        }
+    }
+
+    private static function construirFiltroPeriodoAnterioresMedico(string $periodo, string $alias = 'o.', string $fechaInicio = '', string $fechaFin = '', array &$params = []): string {
+        switch ($periodo) {
+            case '15':
+            case '15d':
+                return "{$alias}hora_captura >= DATE_SUB(CURDATE(), INTERVAL 15 DAY) AND DATE({$alias}hora_captura) < CURDATE()";
+            case 'fecha':
+            case 'fechas':
+                $conds = ["DATE({$alias}hora_captura) < CURDATE()"];
+                $valIni = (!empty($fechaInicio) && preg_match('/^\d{4}-\d{2}-\d{2}$/', $fechaInicio)) ? $fechaInicio : null;
+                $valFin = (!empty($fechaFin) && preg_match('/^\d{4}-\d{2}-\d{2}$/', $fechaFin)) ? $fechaFin : null;
+
+                // Poka-Yoke: Si el usuario solo capturó una fecha, se asume ese mismo día exacto
+                if ($valIni !== null && $valFin === null) {
+                    $valFin = $valIni;
+                } elseif ($valIni === null && $valFin !== null) {
+                    $valIni = $valFin;
+                }
+
+                // Poka-Yoke: Si las fechas vienen invertidas (inicio > fin), se auto-corrigen
+                if ($valIni !== null && $valFin !== null && $valIni > $valFin) {
+                    $tmp = $valIni;
+                    $valIni = $valFin;
+                    $valFin = $tmp;
+                }
+
+                if ($valIni !== null) {
+                    $pIni = ':f_ini_' . str_replace('.', '', $alias);
+                    $conds[] = "DATE({$alias}hora_captura) >= {$pIni}";
+                    $params[$pIni] = $valIni;
+                }
+                if ($valFin !== null) {
+                    $pFin = ':f_fin_' . str_replace('.', '', $alias);
+                    $conds[] = "DATE({$alias}hora_captura) <= {$pFin}";
+                    $params[$pFin] = $valFin;
+                }
+                if ($valIni === null && $valFin === null) {
+                    return "{$alias}hora_captura >= DATE_SUB(CURDATE(), INTERVAL 30 DAY) AND DATE({$alias}hora_captura) < CURDATE()";
+                }
+                return implode(' AND ', $conds);
+            case '90':
+            case '90d':
+                return "{$alias}hora_captura >= DATE_SUB(CURDATE(), INTERVAL 90 DAY) AND DATE({$alias}hora_captura) < CURDATE()";
+            case '30':
+            case '30d':
+            default:
+                return "{$alias}hora_captura >= DATE_SUB(CURDATE(), INTERVAL 30 DAY) AND DATE({$alias}hora_captura) < CURDATE()";
+        }
+    }
+
+    /**
+     * Obtiene las solicitudes de órdenes de DÍAS ANTERIORES emitidas por el médico logueado,
+     * con ordenamiento, búsqueda, paginación y filtro de período (default: 30 días, o calendario por rango de fechas).
      * Precedencia del buscador: si $search tiene contenido, busca en todo el historial (< hoy).
      */
-    public static function obtenerOrdenesAnteriores(int $limit = 25, int $offset = 0, string $search = '', string $orderBy = 'fecha', string $orderDir = 'DESC', string $periodo = '30d', string $fechaInicio = '', string $fechaFin = ''): array {
+    public static function obtenerOrdenesAnterioresMedico(int $userId, int $limit = 25, int $offset = 0, string $search = '', string $orderBy = 'fecha', string $orderDir = 'DESC', string $periodo = '30d', string $fechaInicio = '', string $fechaFin = ''): array {
         try {
             $db = DB::connect();
 
             $allowedSorts = [
                 'folio'           => 'CAST(o.folio_unico AS UNSIGNED)',
                 'paciente'        => 'o.paciente_nombre',
-                'medico'          => 'COALESCE(o.medico_nombre_completo, \'Médico General\')',
                 'fecha'           => 'o.hora_captura',
                 'fecha_resultado' => 'o.fecha_resultado',
                 'estado'          => 'o.estado_id',
@@ -19826,143 +14589,14 @@ Dataset generation completed successfully; now initiating automated tests to val
             $sortCol = $allowedSorts[$orderBy] ?? 'o.orden_id';
             $dir = strtoupper($orderDir) === 'ASC' ? 'ASC' : 'DESC';
 
-            $params = [];
-            $search = trim(mb_strtolower($search, 'UTF-8'));
-
-            // Opción B (Filtro Combinado): El filtro de período/calendario siempre se aplica como base
-            $filtroPeriodo = self::construirFiltroPeriodoAnteriores($periodo, 'o.', $fechaInicio, $fechaFin, $params);
-
-            if ($search !== '') {
-                // Si la búsqueda es un folio específico (ej: LAESH-00098, LSH-1025, #98, 98), se permite localizar
-                // esa orden directamente sin importar la fecha histórica (para notificaciones o búsqueda directa de folio)
-                if (preg_match('/^(?:laesh-?|lsh-?|#)?(\d{1,8})$/i', $search, $mFolio)) {
-                    $rawNum = (int)$mFolio[1];
-                    $pad5   = sprintf('%05d', $rawNum);
-                    $whereSql = "WHERE DATE(o.hora_captura) < CURDATE() AND (LOWER(o.folio_unico) = :q_fol_raw OR LOWER(o.folio_unico) = :q_fol_clean OR LOWER(o.folio_unico) = :q_fol_unpad OR LOWER(o.folio_unico) = :q_fol_full OR LOWER(o.folio_unico) LIKE :q_fol_like) ";
-                    $params[':q_fol_raw']   = $search;
-                    $params[':q_fol_clean'] = $mFolio[1];
-                    $params[':q_fol_unpad'] = (string)$rawNum;
-                    $params[':q_fol_full']  = 'laesh-' . $pad5;
-                    $params[':q_fol_like']  = '%' . $pad5 . '%';
-                } else {
-                    $whereSql = "WHERE ({$filtroPeriodo}) AND (LOWER(o.paciente_nombre) LIKE :q1 OR LOWER(o.medico_nombre_completo) LIKE :q2 OR LOWER(o.paciente_telefono) LIKE :q3 OR LOWER(o.diagnostico) LIKE :q4 OR LOWER(o.folio_unico) LIKE :q5) ";
-                    $qVal = '%' . $search . '%';
-                    $params[':q1'] = $qVal;
-                    $params[':q2'] = $qVal;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-A specific folio search is being implemented. The code checks if the search query matches a folio pattern (e.g., LAESH-00098, LSH-1025, #98, or 98). This suggests allowing direct folio lookup regardless of date for notifications or direct folio retrieval.
-
-
-
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `preg_match('/^(?:laesh-?`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.088652449s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 11:49 am
-
----
-
-## Agent Response
-
-### Thinking
-
-The folio search regex needs modification to include the `s2y` prefix. This will allow the system to recognize and directly search for folios starting with "s2y". The change applies to two different code locations, suggesting a consistent search pattern is employed throughout the codebase. The updated regex should broaden the search capabilities.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.039512704s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 11:49 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 11:49 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `Ordenes.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L409-429)</summary>
-
-**Path:** `Unknown file`
-
-```
+            $params = [':user_id' => $userId];
             $search = trim(mb_strtolower($search, 'UTF-8'));
 
             // Opción B (Filtro Combinado): El filtro de período/calendario siempre se aplica como base
             $filtroPeriodo = self::construirFiltroPeriodoAnterioresMedico($periodo, 'o.', $fechaInicio, $fechaFin, $params);
 
             if ($search !== '') {
-                if (preg_match('/^(?:laesh-?|lsh-?|#)?(\d{1,8})$/i', $search, $mFolio)) {
+                if (preg_match('/^(?:laesh-?|lsh-?|s2y-?|#)?(\d{1,8})$/i', $search, $mFolio)) {
                     $rawNum = (int)$mFolio[1];
                     $pad5   = sprintf('%05d', $rawNum);
                     $whereSql = "WHERE o.medico_user_id = :user_id AND DATE(o.hora_captura) < CURDATE() AND (LOWER(o.folio_unico) = :q_fol_raw OR LOWER(o.folio_unico) = :q_fol_clean OR LOWER(o.folio_unico) = :q_fol_unpad OR LOWER(o.folio_unico) = :q_fol_full OR LOWER(o.folio_unico) LIKE :q_fol_like) ";
@@ -19977,30 +14611,19 @@ The folio search regex needs modification to include the `s2y` prefix. This will
                     $params[':q1'] = $qVal;
                     $params[':q2'] = $qVal;
                     $params[':q3'] = $qVal;
+                    $params[':q4'] = $qVal;
+                }
+            } else {
+                $whereSql = "WHERE o.medico_user_id = :user_id AND " . $filtroPeriodo;
+            }
+
+            $limInt = max(1, $limit);
+            $offInt = max(0, $offset);
+
+            $sql = "
 ```
 
 </details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 11:49 am
 
 ---
 
@@ -20020,32 +14643,97 @@ The folio search regex needs modification to include the `s2y` prefix. This will
 ---
 
 <details>
-<summary>File: `Unknown file` (L479-499)</summary>
+<summary>File: `Unknown file` (L749-834)</summary>
 
 **Path:** `Unknown file`
 
 ```
+
+    /**
+     * Busca órdenes por coincidencia inteligente (Folio exacto, Teléfono 7-10 dígitos, o Multicriterio Nombre + Año + Teléfono)
+     */
+    public static function buscarOrdenes(string $term, int $limit = 15): array {
+        try {
+            $term = trim($term);
+            if (strlen($term) < 1) return [];
+
             $db = DB::connect();
-            $params = [':user_id' => $userId];
-            $search = trim(mb_strtolower($search, 'UTF-8'));
+            $limInt = max(1, min(50, (int)$limit));
+            $params = [];
+            $whereParts = [];
 
-            // Opción B (Filtro Combinado): El filtro de período/calendario siempre se aplica como base
-            $filtroPeriodo = self::construirFiltroPeriodoAnterioresMedico($periodo, '', $fechaInicio, $fechaFin, $params);
+            // 1. Caso numérico puro (1 a 6 dígitos): Folio exacto o prefijo
+            if (preg_match('/^\d{1,6}$/', $term)) {
+                $whereParts[] = "(o.folio_unico = :f_exact OR o.folio_unico LIKE :f_pref)";
+                $params[':f_exact'] = $term;
+                $params[':f_pref']  = $term . '%';
+                $orderClause = "(o.folio_unico = :f_ord) DESC, CAST(o.folio_unico AS UNSIGNED) ASC, o.orden_id DESC";
+                $params[':f_ord'] = $term;
+            }
+            // 2. Caso numérico largo (7 a 10 dígitos): Teléfono directo o folio
+            elseif (preg_match('/^\d{7,10}$/', $term)) {
+                $whereParts[] = "(o.paciente_telefono LIKE :tel OR o.folio_unico = :fol_tel)";
+                $params[':tel'] = '%' . $term . '%';
+                $params[':fol_tel'] = $term;
+                $orderClause = "o.orden_id DESC";
+            }
+            // 3. Caso texto o multicriterio (Nombre, Año, Teléfono parcial)
+            else {
+                $words = preg_split('/\s+/', $term, -1, PREG_SPLIT_NO_EMPTY);
+                $wIdx = 1;
+                foreach ($words as $word) {
+                    $wordLower = mb_strtolower($word, 'UTF-8');
+                    // Si es un año de 4 dígitos entre 2000 y 2099
+                    if (preg_match('/^(20\d\d)$/', $word, $mYear)) {
+                        $whereParts[] = "YEAR(o.hora_captura) = :yr_" . $wIdx;
+                        $params[':yr_' . $wIdx] = (int)$mYear[1];
+                    }
+                    // Si es un fragmento numérico (ej. 3+ dígitos de teléfono o folio)
+                    elseif (preg_match('/^\d{3,}$/', $word)) {
+                        $whereParts[] = "(o.paciente_telefono LIKE :tel_" . $wIdx . " OR o.folio_unico = :fol_" . $wIdx . ")";
+                        $params[':tel_' . $wIdx] = '%' . $word . '%';
+                        $params[':fol_' . $wIdx] = $word;
+                    }
+                    // Si es texto (médico, paciente, diagnóstico)
+                    else {
+                        $whereParts[] = "(LOWER(o.paciente_nombre) LIKE :q_nom_" . $wIdx . " OR LOWER(o.medico_nombre_completo) LIKE :q_med_" . $wIdx . " OR LOWER(o.diagnostico) LIKE :q_diag_" . $wIdx . ")";
+                        $likeVal = '%' . $wordLower . '%';
+                        $params[':q_nom_' . $wIdx]  = $likeVal;
+                        $params[':q_med_' . $wIdx]  = $likeVal;
+                        $params[':q_diag_' . $wIdx] = $likeVal;
+                    }
+                    $wIdx++;
+                }
+                $orderClause = "o.orden_id DESC";
+            }
 
-            if ($search !== '') {
-                if (preg_match('/^(?:laesh-?|lsh-?|#)?(\d{1,8})$/i', $search, $mFolio)) {
-                    $rawNum = (int)$mFolio[1];
-                    $pad5   = sprintf('%05d', $rawNum);
-                    $whereSql = "WHERE medico_user_id = :user_id AND DATE(hora_captura) < CURDATE() AND (LOWER(folio_unico) = :q_fol_raw OR LOWER(folio_unico) = :q_fol_clean OR LOWER(folio_unico) = :q_fol_unpad OR LOWER(folio_unico) = :q_fol_full OR LOWER(folio_unico) LIKE :q_fol_like) ";
-                    $params[':q_fol_raw']   = $search;
-                    $params[':q_fol_clean'] = $mFolio[1];
-                    $params[':q_fol_unpad'] = (string)$rawNum;
-                    $params[':q_fol_full']  = 'laesh-' . $pad5;
-                    $params[':q_fol_like']  = '%' . $pad5 . '%';
-                } else {
-                    $whereSql = "WHERE medico_user_id = :user_id AND ({$filtroPeriodo}) AND (LOWER(paciente_nombre) LIKE :q1 OR LOWER(paciente_telefono) LIKE :q2 OR LOWER(diagnostico) LIKE :q3 OR LOWER(folio_unico) LIKE :q4) ";
-                    $qVal = '%' . $search . '%';
-                    $params[':q1'] = $qVal;
+            if (empty($whereParts)) return [];
+
+            $whereSql = "WHERE " . implode(' AND ', $whereParts);
+            $fetchLimit = $limInt + 1; // +1 para detectar si hay más resultados para la paginación de la lupita
+
+            $stmt = $db->prepare("
+                SELECT
+                    o.orden_id AS id,
+                    o.folio_unico AS folio,
+                    o.paciente_nombre AS paciente,
+                    o.paciente_telefono AS telefono,
+                    o.medico_nombre_completo AS medico,
+                    o.estado_valor AS estado,
+                    o.estado_id,
+                    o.diagnostico AS estudios,
+                    o.hora_captura AS fecha,
+                    pdf.folio_extraido
+                FROM vw_ordenes_completas o
+                LEFT JOIN (
+                    SELECT p1.orden_id, p1.folio_extraido
+                    FROM resultados_pdf p1
+                    INNER JOIN (
+                        SELECT orden_id, MAX(id) AS max_id
+                        FROM resultados_pdf
+                        GROUP BY orden_id
+                    ) p2 ON p1.id = p2.max_id
+                ) pdf ON pdf.orden_id = o.orden_id
 ```
 
 </details>
@@ -20056,7 +14744,8 @@ The folio search regex needs modification to include the `s2y` prefix. This will
 
 ### Actions
 
-**Tool:** `replace_file_content`
+**Tool:** `view_file`
+**File:** `seed_dataset_2years.php`
 
 <details>
 <summary>Metadata</summary>
@@ -20066,10 +14755,125 @@ The folio search regex needs modification to include the `s2y` prefix. This will
 
 ---
 
-### Code Edit
+<details>
+<summary>File: `Unknown file`</summary>
 
-**Status:** Completed
-**Created:** 27 Sept 2026, 11:49 am
+**Path:** `Unknown file`
+
+```
+<?php
+/**
+ * seed_dataset_2years.php — Generador Ultra-Quirúrgico de Dataset de 2 Años [SIM2Y]
+ *
+ * Simula 2 años (~730 días) de operación clínica real con ~1,500 órdenes
+ * distribuidas estratégicamente para probar:
+ *   - Zona A (Hoy): 12 órdenes para la grilla de Órdenes de Hoy.
+ *   - Zona B (1d - 15d): 50 órdenes (visibles en filtro 15 y 30d).
+ *   - Zona C (16d - 30d): 50 órdenes (visibles en 30d default, ocultas en 15).
+ *   - Zona D (31d - 730d): ~1,400 órdenes históricas (visibles con Fechas o Lupita).
+ *
+ * Todos los registros portan el prefijo/etiqueta [SIM2Y] y folios S2Y-XXXXX.
+ * 100% reversible en <1s mediante tests/clean_dataset_2years.php.
+ *
+ * Uso:
+ *   php tests/seed_dataset_2years.php
+ *   php tests/seed_dataset_2years.php --clean-first
+ *   LAESH_DB_PORT=6002 php tests/seed_dataset_2years.php
+ */
+
+declare(strict_types=1);
+
+if (!getenv('LAESH_DB_PORT') && !file_exists('/.dockerenv')) {
+    putenv('LAESH_DB_PORT=6002');
+}
+
+require_once __DIR__ . '/../laesh-swbldi/commons/DB.php';
+
+$cleanFirst = in_array('--clean-first', $argv, true);
+
+echo "\n" . str_repeat('=', 70) . "\n";
+echo "  🌱 LAESH — GENERADOR DE DATASET DE 2 AÑOS (730 DÍAS) [SIM2Y]\n";
+echo str_repeat('=', 70) . "\n";
+
+try {
+    $db = \Common\DB::connect();
+    echo "✓ Conectado a la base de datos: " . $db->query("SELECT DATABASE()")->fetchColumn() . "\n";
+
+    // 1. Verificar si ya existen datos simulados
+    $prevCount = (int)$db->query("SELECT COUNT(*) FROM ordenes WHERE folio_unico LIKE 'S2Y-%'")->fetchColumn();
+    if ($prevCount > 0) {
+        if ($cleanFirst) {
+            echo "ℹ Opción --clean-first detectada. Ejecutando limpieza previa...\n";
+            require __DIR__ . '/clean_dataset_2years.php';
+        } else {
+            echo "⚠️  Ya existen {$prevCount} órdenes simuladas con prefijo S2Y-.\n";
+            echo "   Para sobrescribir, ejecute: php tests/seed_dataset_2years.php --clean-first\n";
+            echo "   O limpie manualmente con: php tests/clean_dataset_2years.php\n\n";
+            exit(0);
+        }
+    }
+
+    // 2. Obtener médicos disponibles
+    $stmtMed = $db->query("
+        SELECT u.id, COALESCE(pm.nombre_completo, CONCAT(em.nombre, ' ', em.apellidos)) as nombre, COALESCE(pm.especialidad, 'Medicina General') as especialidad
+        FROM users u
+        LEFT JOIN perfiles_medicos pm ON u.id = pm.user_id
+        LEFT JOIN empleados em ON u.id = em.user_id
+        WHERE em.rol = 'MEDICO' OR pm.user_id IS NOT NULL
+        ORDER BY u.id ASC
+    ");
+    $medicos = $stmtMed->fetchAll(PDO::FETCH_ASSOC);
+    if (empty($medicos)) {
+        // Fallback IDs conocidos
+        $medicos = [
+            ['id' => 3, 'nombre' => 'Dr(a). Hedilberto Reyes Venegas', 'especialidad' => 'Medicina Interna'],
+            ['id' => 4, 'nombre' => 'Dr(a). Elena Torres Vance', 'especialidad' => 'Ginecología y Obstetricia'],
+            ['id' => 5, 'nombre' => 'Dr(a). Carlos Fuentes Morales', 'especialidad' => 'Pediatría y Patología'],
+            ['id' => 6, 'nombre' => 'Dr(a). Sofía Medina Ortiz', 'especialidad' => 'Cardiología'],
+            ['id' => 7, 'nombre' => 'Dr(a). Roberto Mendoza Silva', 'especialidad' => 'Medicina General'],
+        ];
+    }
+    echo "✓ Médicos activos detectados: " . count($medicos) . "\n";
+
+    // 3. Obtener catálogo de estudios
+    $estudiosCat = $db->query("SELECT id, nombre, clave FROM cat_estudios ORDER BY id ASC")->fetchAll(PDO::FETCH_ASSOC);
+    if (empty($estudiosCat)) {
+        throw new \RuntimeException("No hay estudios en cat_estudios para vincular a las órdenes.");
+    }
+    echo "✓ Estudios de laboratorio disponibles: " . count($estudiosCat) . "\n";
+
+    // 4. Catálogo de nombres, apellidos y diagnósticos para realismo
+    $nombresH = ['Juan Carlos', 'Miguel Ángel', 'Luis Fernando', 'José Antonio', 'Alejandro', 'Roberto', 'David', 'Jorge', 'Ricardo', 'Eduardo', 'Gabriel', 'Daniel', 'Carlos', 'Manuel', 'Fernando'];
+    $nombresM = ['María Elena', 'Guadalupe', 'Sofía', 'Valentina', 'Mariana', 'Daniela', 'Camila', 'Andrea', 'Ana Paula', 'Fernanda', 'Gabriela', 'Lucía', 'Carmen', 'Patricia', 'Adriana'];
+    $apellidos = ['Hernández', 'García', 'Martínez', 'López', 'González', 'Pérez', 'Rodríguez', 'Sánchez', 'Ramírez', 'Cruz', 'Flores', 'Gómez', 'Morales', 'Vázquez', 'Jiménez', 'Reyes', 'Díaz', 'Torres', 'Gutiérrez', 'Ruiz'];
+
+    $diagnosticos = [
+        'Control de diabetes mellitus tipo 2',
+        'Infección de vías urinarias recurrente',
+        'Hipertensión arterial sistémica en control',
+        'Dolor abdominal en fosa ilíaca derecha',
+        'Perfil lipídico de control anual',
+        'Evaluación preoperatoria completa',
+        'Sospecha de hipotiroidismo primario',
+        'Checkup preventivo ejecutivo anual',
+        'Control prenatal rutinario primer trimestre',
+        'Fiebre de origen a determinar',
+        'Anemia ferropénica en tratamiento',
+        'Lumbalgia mecánica crónica',
+        'Astenia y adinamia en estudio',
+        'Dislipidemia mixta no controlada',
+        'Síndrome metabólico en seguimiento',
+        'Artritis en estudio serológico',
+        'Control post-infección respiratoria',
+        'Dermatitis atópica en estudio de alergias',
+        'Seguimiento de función renal',
+        'Control rutinario de medicina preventiva'
+    ];
+
+    $startGlobal = microtime(true);
+```
+
+</details>
 
 ---
 
@@ -20077,7 +14881,8 @@ The folio search regex needs modification to include the `s2y` prefix. This will
 
 ### Actions
 
-**Tool:** `run_command`
+**Tool:** `view_file`
+**File:** `seed_dataset_2years.php`
 
 <details>
 <summary>Metadata</summary>
@@ -20087,10 +14892,126 @@ The folio search regex needs modification to include the `s2y` prefix. This will
 
 ---
 
-### Terminal Command Execution
+<details>
+<summary>File: `Unknown file` (L109-219)</summary>
 
-**Status:** Completed
-**Created:** 27 Sept 2026, 11:50 am
+**Path:** `Unknown file`
+
+```
+    $startGlobal = microtime(true);
+    $db->beginTransaction();
+
+    // 5. Crear pacientes simulados (~250 pacientes para que haya recurrencia clínica)
+    echo "\n  Generando pacientes clínicos simulados...";
+    $stmtPac = $db->prepare("
+        INSERT INTO pacientes (nombre_completo, fecha_nacimiento, sexo, telefono, creado_en)
+        VALUES (:nombre, :f_nac, :sexo, :tel, :creado)
+    ");
+
+    $pacientesIds = [];
+    $totalPacientes = 250;
+    for ($p = 0; $p < $totalPacientes; $p++) {
+        $sexo = ($p % 2 === 0) ? 'H' : 'M';
+        $nom = ($sexo === 'H') ? $nombresH[array_rand($nombresH)] : $nombresM[array_rand($nombresM)];
+        $ape1 = $apellidos[array_rand($apellidos)];
+        $ape2 = $apellidos[array_rand($apellidos)];
+        $nombreCompleto = "{$nom} {$ape1} {$ape2} [SIM2Y]";
+
+        $anioNac = rand(1950, 2012);
+        $mesNac = str_pad((string)rand(1, 12), 2, '0', STR_PAD_LEFT);
+        $diaNac = str_pad((string)rand(1, 28), 2, '0', STR_PAD_LEFT);
+        $fechaNac = "{$anioNac}-{$mesNac}-{$diaNac}";
+        $tel = "55" . rand(10000000, 99999999);
+        $creadoEn = date('Y-m-d H:i:s', strtotime("-730 days"));
+
+        $stmtPac->execute([
+            ':nombre' => $nombreCompleto,
+            ':f_nac'  => $fechaNac,
+            ':sexo'   => $sexo,
+            ':tel'    => $tel,
+            ':creado' => $creadoEn,
+        ]);
+        $pacientesIds[] = [
+            'id' => (int)$db->lastInsertId(),
+            'nombre' => $nombreCompleto,
+            'f_nac' => $fechaNac,
+            'sexo' => $sexo
+        ];
+    }
+    echo " ✓ {$totalPacientes} pacientes creados.\n";
+
+    // 6. Preparar Sentencias SQL para Inserción Rápida
+    $stmtOrd = $db->prepare("
+        INSERT INTO ordenes (
+            folio_unico, paciente_id, medico_id, recepcion_id, estado_id,
+            edad_al_emitir, diagnostico, otros_estudios, estudios,
+            hora_captura, fecha_resultado, actualizado_en
+        ) VALUES (
+            :folio, :paciente_id, :medico_id, :recepcion_id, :estado_id,
+            :edad, :diagnostico, :otros, :estudios,
+            :hora_captura, :fecha_resultado, :actualizado_en
+        )
+    ");
+
+    $stmtDet = $db->prepare("INSERT INTO detalle_ordenes (orden_id, estudio_id) VALUES (?, ?)");
+
+    $stmtHist = $db->prepare("
+        INSERT INTO historial_estados_orden (
+            orden_id, estado_anterior_id, estado_nuevo_id, cambiado_por_user_id, observacion, creado_en
+        ) VALUES (?, ?, ?, ?, ?, ?)
+    ");
+
+    $stmtPdf = $db->prepare("
+        INSERT INTO resultados_pdf (
+            orden_id, nombre_archivo, ruta_storage, subido_por, tipo_entrega, folio_extraido, creado_en
+        ) VALUES (?, ?, ?, ?, ?, ?, ?)
+    ");
+
+    $stmtNotif = $db->prepare("
+        INSERT INTO notificaciones (
+            user_id, tipo, folio_referencia, mensaje, leido, entregado_ws, retry_count, creado_en
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+    ");
+
+    // 7. Generación de las Órdenes en las 4 Zonas Temporales
+    echo "  Generando órdenes en las 4 zonas temporales...\n";
+
+    $folioIndex = 1;
+    $statsZonas = ['A_Hoy' => 0, 'B_15d' => 0, 'C_30d' => 0, 'D_2Años' => 0];
+    $statsEstados = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0];
+    $notifTargets = [];
+
+    // Helper para armar JSON de estudios
+    $fnSeleccionarEstudios = function() use ($estudiosCat) {
+        $num = rand(1, 4);
+        $claves = array_rand($estudiosCat, $num);
+        if (!is_array($claves)) $claves = [$claves];
+        $res = [];
+        foreach ($claves as $k) {
+            $e = $estudiosCat[$k];
+            $res[] = ['id' => (int)$e['id'], 'nombre' => $e['nombre']];
+        }
+        return $res;
+    };
+
+    // Helper para insertar una orden completa con historial y pdf
+    $fnInsertarOrden = function(string $folio, array $paciente, array $medico, int $estadoId, string $horaCapturaStr, string $zonaKey)
+        use (
+            $db, $stmtOrd, $stmtDet, $stmtHist, $stmtPdf, $diagnosticos,
+            $fnSeleccionarEstudios, &$folioIndex, &$statsZonas, &$statsEstados
+        ): int
+    {
+        $fechaCaptura = new DateTime($horaCapturaStr);
+        $fechaNac = new DateTime($paciente['f_nac']);
+        $edadAlEmitir = max(1, min(105, (int)$fechaCaptura->diff($fechaNac)->y));
+
+        $diag = $diagnosticos[array_rand($diagnosticos)];
+        $estudiosSeleccionados = $fnSeleccionarEstudios();
+        $estudiosJson = json_encode($estudiosSeleccionados, JSON_UNESCAPED_UNICODE);
+
+```
+
+</details>
 
 ---
 
@@ -20098,7 +15019,8 @@ The folio search regex needs modification to include the `s2y` prefix. This will
 
 ### Actions
 
-**Tool:** `run_command`
+**Tool:** `view_file`
+**File:** `seed_dataset_2years.php`
 
 <details>
 <summary>Metadata</summary>
@@ -20108,31 +15030,90 @@ The folio search regex needs modification to include the `s2y` prefix. This will
 
 ---
 
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 11:51 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
 <details>
-<summary>Metadata</summary>
+<summary>File: `Unknown file` (L449-523)</summary>
 
-- **Model:** Gemini 3.8 Flash (High)
+**Path:** `Unknown file`
+
+```
+    if (isset($notifTargets['8m'])) {
+        $t = $notifTargets['8m'];
+        $stmtNotif->execute([
+            $t['medico_id'], 'orden_actualizada', $t['folio'],
+            "Historial actualizado orden {$t['folio']} de {$t['paciente']} [SIM2Y]",
+            0, 1, 0, date('Y-m-d H:i:s', strtotime('-8 months'))
+        ]);
+    }
+
+    // Notif 5: Notificación para Recepción (User 2) sobre orden de Hoy
+    if (isset($notifTargets['hoy'])) {
+        $t = $notifTargets['hoy'];
+        $stmtNotif->execute([
+            2, 'nueva_orden', $t['folio'],
+            "Recepción: Médico emitió orden {$t['folio']} para paciente {$t['paciente']} [SIM2Y]",
+            0, 1, 0, date('Y-m-d H:i:s')
+        ]);
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    // 9. Actualizar contadores de perfiles médicos
+    // ─────────────────────────────────────────────────────────────
+    $db->exec("
+        UPDATE perfiles_medicos pm
+        SET total_ordenes = (
+            SELECT COUNT(*) FROM ordenes o WHERE o.medico_id = pm.user_id
+        )
+    ");
+
+    $db->commit();
+    $elapsed = round(microtime(true) - $startGlobal, 2);
+
+    // ─────────────────────────────────────────────────────────────
+    // 10. Reporte Ejecutivo del Dataset
+    // ─────────────────────────────────────────────────────────────
+    $totalOrdenes = array_sum($statsZonas);
+    echo "\n" . str_repeat('=', 70) . "\n";
+    echo "  🎉 DATASET SIMULADO [SIM2Y] GENERADO EXITOSAMENTE ({$elapsed} seg)\n";
+    echo str_repeat('=', 70) . "\n";
+    echo "  Total de Órdenes creadas:   " . number_format($totalOrdenes) . "\n";
+    echo "  Total de Pacientes creados: " . number_format($totalPacientes) . "\n";
+    echo "  Total de Notificaciones:    5 (Hoy, 5d, 20d, 8 meses, Recepción)\n\n";
+
+    echo "  Distribución por Zonas Temporales (Reglas de Filtro Período):\n";
+    echo "  ┌───────────────────────┬──────────┬────────────────────────────────────────┐\n";
+    echo "  │ Zona Temporal         │  Órdenes │ Regla de Visualización en UI           │\n";
+    echo "  ├───────────────────────┼──────────┼────────────────────────────────────────┤\n";
+    echo "  │ A: Hoy (0 días)       │ " . str_pad((string)$statsZonas['A_Hoy'], 8, ' ', STR_PAD_LEFT) . " │ Solo pestaña 'Órdenes de Hoy'          │\n";
+    echo "  │ B: 1d a 15d           │ " . str_pad((string)$statsZonas['B_15d'], 8, ' ', STR_PAD_LEFT) . " │ Visibles en '15' y en '30d'            │\n";
+    echo "  │ C: 16d a 30d          │ " . str_pad((string)$statsZonas['C_30d'], 8, ' ', STR_PAD_LEFT) . " │ Visibles en '30d' (OCULTAS en '15')    │\n";
+    echo "  │ D: 31d a 730d (2 años)│ " . str_pad((string)$statsZonas['D_2Años'], 8, ' ', STR_PAD_LEFT) . " │ Visibles con 'Fechas' o con la Lupita │\n";
+    echo "  └───────────────────────┴──────────┴────────────────────────────────────────┘\n\n";
+
+    echo "  Distribución por Estados Clínicos:\n";
+    echo "  - 1: Remitido:           {$statsEstados[1]}\n";
+    echo "  - 2: En Atención:        {$statsEstados[2]}\n";
+    echo "  - 3: Resultados Listos:  {$statsEstados[3]} (con PDF vinculado)\n";
+    echo "  - 4: Cerrada:            {$statsEstados[4]} (con PDF vinculado)\n";
+    echo "  - 5: Cancelada:          {$statsEstados[5]}\n\n";
+
+    echo "  Folios generados: S2Y-00001 al " . sprintf('S2Y-%05d', $totalOrdenes) . "\n";
+    echo "  Para limpiar 100% este dataset ejecute:\n";
+    echo "    php tests/clean_dataset_2years.php\n";
+    echo str_repeat('=', 70) . "\n\n";
+
+} catch (\Throwable $e) {
+    if (isset($db) && $db->inTransaction()) {
+        $db->rollBack();
+        echo "✗ Transacción revertida (Rollback ejecutado).\n";
+    }
+    echo "✗ ERROR: " . $e->getMessage() . "\n";
+    echo "  En: " . $e->getFile() . ":" . $e->getLine() . "\n\n";
+    exit(1);
+}
+
+```
+
 </details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 11:52 am
 
 ---
 
@@ -20140,99 +15121,30 @@ The folio search regex needs modification to include the `s2y` prefix. This will
 
 ### Thinking
 
-Analyzing data structure to understand the response format; confirming the availability of key fields like folio, creation timestamp, patient name, and doctor name. Hypothesis: Patient name search will function accurately across different search contexts (date-based or general). The search will be initiated for "Ana Paula Jiménez" with a 15-day active period.
+Initial data shows a distribution of orders across time zones; a significant portion of orders (approximately 92%) falls within the 31-730 day range (Zona D). This distribution provides a base understanding of order volume across different time periods. Analyzing the twenty-six test cases for Suite 2 will begin with a focus on Block D, specifically those involving "Rapid Period" and "Calendar" filters.
+
+
+Analyzing default and rapid period filter behaviors in Block D: the default is a 30-day lookback, excluding today's orders and focusing on Zones B and C. The rapid filter uses a 15-day range, only including Zone B. Calendar filters offer historical date ranges, single dates with Poka-yoke correction, and inverted date handling, also with Poka-yoke adjustments and fallback to default if no date is given.
+
+Next, evaluating Block E, which details various search criteria within a two-year dataset: These searches encompass patient names (exact or partial), surnames, combinations with years, clinical diagnoses, partial phone numbers, and folios with prefixes.
+
+
+Examining Block E's search capabilities, several folio formats need validation, including both uppercase and lowercase prefixes, as well as numeric folios. Specific search scenarios in Zona D require testing to bypass the 30-day filter; verifying data access is critical. A limit of sixteen records is expected to ensure fast responses and correct handling of non-existent search terms which should return an empty array with a 200 OK.
+
+Considering Block F, pagination features require verification, specifically demonstrating correct handling of offset and limit parameters. Verifying that the total record count matches the paginated records, and that sorting parameters are retained across paginated requests. The test suite, comprised of 26 automated cases across Blocks D, E, and F, is planned to give coverage to all specified criteria.
 
 
 
 
 ### Actions
 
-**Tool:** `run_command`
+**Tool:** `view_file`
+**File:** `clean_dataset_2years.php`
 
 <details>
 <summary>Metadata</summary>
 
-- **Thinking Duration:** 0.095792545s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 11:52 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 11:52 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 11:52 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 11:52 am
-
----
-
-## Agent Response
-
-<details>
-<summary>Metadata</summary>
-
+- **Thinking Duration:** 2.393770509s
 - **Model:** Gemini 3.8 Flash (High)
 </details>
 
@@ -20294,379 +15206,16 @@ try {
     echo "  - Órdenes:                  " . number_format($cntOrd) . "\n";
     echo "  - Pacientes simulados:      " . number_format($cntPac) . "\n";
     echo "  " . str_repeat('-', 40) . "\n";
-```
-
-</details>
-
----
-
-## User Request
-
-500 Internal Server Error
-Array to string conversion (2)
-#0 /var/www/html/laesh-swbldi/rc/index.php(408): flight\Engine->handleError(2, 'Array to string...', '/var/www/html/l...', 408)
-#1 [internal function]: {closure}(Array)
-#2 /var/www/html/laesh-swbldi/rc/index.php(407): array_map(Object(Closure), Array)
-#3 /var/www/html/laesh-swbldi/rc/views/labadmin.php(352): rcRenderPacientesTablaBody(Array, 0)
-#4 /var/www/html/laesh-swbldi/libs/plates/Template/Template.php(164): include('/var/www/html/l...')
-#5 /var/www/html/laesh-swbldi/libs/plates/Engine.php(277): League\Plates\Template\Template->render(NULL)
-#6 /var/www/html/laesh-swbldi/rc/index.php(81): League\Plates\Engine->render('views/labadmin', Array)
-#7 [internal function]: {closure}()
-#8 /var/www/html/laesh-swbldi/libs/flight/core/Dispatcher.php(354): call_user_func_array(Object(Closure), Array)
-#9 /var/www/html/laesh-swbldi/libs/flight/core/Dispatcher.php(287): flight\core\Dispatcher->invokeCallable(Object(Closure), Array)
-#10 /var/www/html/laesh-swbldi/libs/flight/Engine.php(544): flight\core\Dispatcher->execute(Object(Closure), Array)
-#11 [internal function]: flight\Engine->_start()
-#12 /var/www/html/laesh-swbldi/libs/flight/core/Dispatcher.php(376): call_user_func_array(Array, Array)
-#13 /var/www/html/laesh-swbldi/libs/flight/core/Dispatcher.php(287): flight\core\Dispatcher->invokeCallable(Array, Array)
-#14 /var/www/html/laesh-swbldi/libs/flight/core/Dispatcher.php(131): flight\core\Dispatcher->execute(Array, Array)
-#15 /var/www/html/laesh-swbldi/libs/flight/core/Dispatcher.php(95): flight\core\Dispatcher->runEvent('start', Array)
-#16 /var/www/html/laesh-swbldi/libs/flight/Engine.php(115): flight\core\Dispatcher->run('start', Array)
-#17 /var/www/html/laesh-swbldi/libs/flight/Flight.php(121): flight\Engine->__call('start', Array)
-#18 /var/www/html/laesh-swbldi/rc/index.php(1667): Flight::__callStatic('start', Array)
-#19 {main}
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `clean_dataset_2years.php`
-**Language:** php
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L394-429)</summary>
-
-**Path:** `Unknown file`
-
-```
-            $estudiosStr = '<span style="color:#94a3b8; font-style:italic;">Sin estudios</span>';
-            $arrEst = [];
-            if (!empty($p['estudios'])) {
-                if (is_array($p['estudios'])) {
-                    $arrEst = $p['estudios'];
-                } else {
-                    $jsonDec = json_decode($p['estudios'], true);
-                    if (is_array($jsonDec)) $arrEst = $jsonDec;
-                    else $arrEst = [$p['estudios']];
-                }
-            }
-            if (!empty($arrEst)) {
-                $itemsLi = array_map(function($e) {
-                    return '<li style="margin-bottom:2px;">' . htmlspecialchars((string)$e, ENT_QUOTES, 'UTF-8') . '</li>';
-                }, $arrEst);
-                $estudiosStr = '<ul style="margin:0; padding-left:1.1rem; font-size:0.85rem; color:#334155;">' . implode('', $itemsLi) . '</ul>';
-            }
-
-            $bgColor = ($index % 2 === 0) ? 'background-color: #f1f5f9;' : '';
-
-            $html .= '<tr style="' . $bgColor . '">'
-                   . '<td class="fw-600" style="white-space: normal; overflow-wrap: break-word; vertical-align: top; color: var(--text-muted);">' . $index . '</td>'
-                   . '<td class="fw-600" style="white-space: normal; overflow-wrap: break-word; vertical-align: top;">' . $paciente . '</td>'
-                   . '<td style="white-space: normal; overflow-wrap: break-word; vertical-align: top;">' . $medicoStr . '</td>'
-                   . '<td style="white-space: normal; overflow-wrap: break-word; vertical-align: top;">' . $fEmis . '</td>'
-                   . '<td style="white-space: normal; overflow-wrap: break-word; vertical-align: top;">' . $edadSexoStr . '</td>'
-                   . '<td style="white-space: normal; overflow-wrap: break-word; vertical-align: top;">' . $celular . '</td>'
-                   . '<td style="white-space: normal; overflow-wrap: break-word; font-size: 0.88rem; vertical-align: top;">' . $diag . '</td>'
-                   . '<td style="white-space: normal; overflow-wrap: break-word; vertical-align: top;">' . $estudiosStr . '</td>'
-                   . '<td style="white-space: normal; overflow-wrap: break-word; font-size: 0.88rem; vertical-align: top;">' . $otros . '</td>'
-                   . '</tr>';
-                   
-            $index++;
-        }
-    } else {
-        $html .= '<tr><td colspan="8" class="text-center txt-muted pa-4">No se encontraron pacientes que coincidan con la búsqueda.</td></tr>';
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `$e['nombre']`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 11:56 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `$estudiosStr`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 11:56 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L479-504)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-            $estudiosStr = '<span style="color:#94a3b8; font-style:italic;">Sin estudios</span>';
-            $arrEst = [];
-            if (!empty($pm['estudios'])) {
-                if (is_array($pm['estudios'])) {
-                    $arrEst = $pm['estudios'];
-                } else {
-                    $jsonDec = json_decode($pm['estudios'], true);
-                    if (is_array($jsonDec)) $arrEst = $jsonDec;
-                    else $arrEst = [$pm['estudios']];
-                }
-            }
-            if (!empty($arrEst)) {
-                $estudiosStr = '<ul style="margin:0; padding-left:1.1rem; font-size:0.84rem; color:#1e293b;">';
-                foreach ($arrEst as $sItem) {
-                    $estudiosStr .= '<li>' . htmlspecialchars((string)$sItem, ENT_QUOTES, 'UTF-8') . '</li>';
-                }
-                $estudiosStr .= '</ul>';
-            }
-
-            $bgColor = ($index % 2 === 0) ? 'background-color: #f1f5f9;' : '';
-
-            $html .= '<tr style="' . $bgColor . ' border-bottom: 1px solid #f1f5f9;">'
-               . '<td class="fw-600" style="white-space: normal; overflow-wrap: break-word; vertical-align: top; color: var(--text-muted);">' . $index . '</td>'
-               . '<td class="td-trunc-md" title="' . $paciente . '" style="white-space: normal; min-width: 190px; font-weight: 700; color: #0f172a; font-size: 0.88rem;">' . $paciente . '</td>'
-               . '<td style="color: #334155; font-size: 0.85rem;">' . $edadSexoStr . '</td>'
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `estudios_json`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 11:56 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `function rcRenderOrdenesTablaBody`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 11:56 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L225-279)</summary>
-
-**Path:** `Unknown file`
-
-```
-function rcRenderOrdenesTablaBody(array $ordenes, string $csrfToken, string $sufijoId = ''): string {
-    $html = '<tbody>';
-    if (!empty($ordenes)) {
-        foreach ($ordenes as $ord) {
-            $eId = (int)($ord['estado_id'] ?? 1);
-            $badgeClass = 'badge-remitido';
-            if ($eId === 2) $badgeClass = 'badge-atencion';
-            elseif ($eId === 3) $badgeClass = 'badge-listos';
-            elseif ($eId === 4) $badgeClass = 'badge-cerrada';
-            elseif ($eId === 5) $badgeClass = 'badge-cancelada';
-
-            $ordId = (int)($ord['id'] ?? 0);
-            $folio = htmlspecialchars($ord['folio'] ?? '', ENT_QUOTES, 'UTF-8');
-            // P-LAESH-FOLIO-EXTRAIDO-01 (2026-09-24): folio del equipo/software de
-            // laboratorio (PxLab), extraído del PDF más reciente subido — a la
-            // derecha del icono de documento, solo cuando existe.
-            $folioExtraidoHtml = '';
-            if (!empty($ord['folio_extraido'])) {
-                $folioExtraidoHtml = ' <span class="folio-extraido-chip" title="Folio del equipo/software de laboratorio">'
-                                    . htmlspecialchars($ord['folio_extraido'], ENT_QUOTES, 'UTF-8') . '</span>';
-            }
-            $paciente = htmlspecialchars($ord['paciente_nombre'] ?? '', ENT_QUOTES, 'UTF-8');
-            $medicoStr = htmlspecialchars($ord['medico_nombre'] ?? 'Médico General', ENT_QUOTES, 'UTF-8');
-            if (!empty($ord['medico_especialidad']) && $ord['medico_especialidad'] !== 'Medicina General') {
-                $medicoStr .= ' <span style="color:#64748b; font-size:0.82rem;">(' . htmlspecialchars($ord['medico_especialidad'], ENT_QUOTES, 'UTF-8') . ')</span>';
-            }
-
-            // Corrección 2026-09-22: Diagnóstico ahora tiene su propia columna —
-            // Observaciones conserva solo el motivo de cancelación y el enlace
-            // al PDF de resultado ("otros estudios" ya no se muestra aquí).
-            $diagRaw = trim($ord['diagnostico'] ?? '');
-            if ($diagRaw === 'Estudios de Laboratorio' || $diagRaw === '') {
-                $diagDescr = '<span style="color:#94a3b8; font-style:italic;">—</span>';
-            } else {
-                $diagDescr = htmlspecialchars($diagRaw, ENT_QUOTES, 'UTF-8');
-            }
-
-            if ($eId === 5) {
-                $motivoRaw = !empty($ord['motivo_cancelacion']) ? trim($ord['motivo_cancelacion']) : 'Solicitud cancelada';
-                // Si el motivo ya trae "Médico: " o "Laesh: ", estructurar formato armónico
-                if (preg_match('/^(Médico|Laesh):\s*(.*)$/iu', $motivoRaw, $mMatches)) {
-                    $origen = $mMatches[1];
-                    $resto  = $mMatches[2];
-                    $motivoHtml = 'Cancelación de "<strong style="color:#7f1d1d;">' . htmlspecialchars($origen, ENT_QUOTES, 'UTF-8') . ':</strong> ' . htmlspecialchars($resto, ENT_QUOTES, 'UTF-8') . '"';
-                } else {
-                    $motivoHtml = '<span style="color:#991b1b; font-weight:700;">Cancelación:</span> ' . htmlspecialchars($motivoRaw, ENT_QUOTES, 'UTF-8');
-                }
-                $observacionesDescr = '<div class="motivo-cancelacion-box" style="color:#b91c1c; font-size:0.85rem; font-weight:600; line-height:1.35;">'
-                                    . $motivoHtml
-                                    . '</div>';
-            } else {
-                // Corrección 2026-09-22: "otros estudios" ya no se muestra en
-                // Observaciones (esa columna es solo para motivo de cancelación
-                // y el enlace al PDF de resultado).
-                // 2026-09-23: Observaciones ya NO muestra nombre/link de archivos
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L64-89)</summary>
-
-**Path:** `Unknown file`
-
-```
-    $totalPacientes          = \RC\Negocio\Ordenes::contarPacientes('');
-    $catalogosUI             = \RC\Negocio\Ordenes::obtenerCatalogosUI();
-
-    // Obtener catálogo de médicos reales y top 5 desde MariaDB (vw_medicos_completos)
-    $medicosCatalog = \Common\DB::connect()->query(
-        "SELECT user_id, nombre_completo, cedula_profesional, especialidad, celular, total_ordenes 
-         FROM vw_medicos_completos 
-         ORDER BY total_ordenes DESC"
-    )->fetchAll(\PDO::FETCH_ASSOC) ?: [];
-
-    // SEC: frame-ancestors vía HTTP header real (meta tag es ignorado por browsers)
-    header('X-Frame-Options: DENY');
-    header('Content-Security-Policy: frame-ancestors \'none\'', false);
-
-    // Plates — directorio de vistas es rc/
-    Flight::view()->setDirectory(__DIR__);
-    echo Flight::view()->render('views/labadmin', [
-        'nombreUsuario'           => $nombreUsuario,
-        'rolUsuario'              => $authRole,
-        'isAdmin'                 => $isAdmin,
-        'csrfToken'               => $_SESSION['csrf_token'],
-        'ordenesRecientes'        => $ordenesRecientes,
-        'totalOrdenesRecientes'   => $totalOrdenesRecientes,
-        'ordenesAnteriores'       => $ordenesAnteriores,
-        'totalOrdenesAnteriores'  => $totalOrdenesAnteriores,
-        'pacientesCatalog'        => $pacientesCatalog,
+    echo "  TOTAL A LIMPIAR:            " . number_format($totalRegistros) . "\n\n";
+
+    if ($totalRegistros === 0) {
+        echo "ℹ No se encontraron registros simulados con marca [SIM2Y]. Base de datos limpia.\n\n";
+        exit(0);
+    }
+
+    if ($isDryRun) {
+        echo "🔎 [DRY-RUN] Modo simulación activado. No se ejecutó ninguna eliminación.\n\n";
+        exit(0);
 ```
 
 </details>
@@ -20689,21 +15238,5783 @@ function rcRenderOrdenesTablaBody(array $ordenes, string $csrfToken, string $suf
 ---
 
 <details>
-<summary>File: `Unknown file` (L679-709)</summary>
+<summary>File: `Unknown file` (L439-519)</summary>
+
+**Path:** `Unknown file`
+
+```
+            $sql = "
+                SELECT o.orden_id as id, o.folio_unico as folio, o.hora_captura as creado_en, o.fecha_resultado,
+                       o.diagnostico, o.otros_estudios, o.estudios_json as estudios, o.edad_al_emitir,
+                       o.paciente_nombre, o.paciente_sexo, o.paciente_telefono as telefono,
+                       o.estado_id, o.estado_valor AS estado_nombre, o.estado_color AS color_badge,
+                       o.motivo_cancelacion,
+                       parc.parciales_fechas
+                FROM vw_ordenes_completas o
+                LEFT JOIN (
+                    SELECT orden_id, GROUP_CONCAT(creado_en ORDER BY id ASC SEPARATOR '|') AS parciales_fechas
+                    FROM resultados_pdf
+                    WHERE tipo_entrega = 'parcial'
+                    GROUP BY orden_id
+                ) parc ON parc.orden_id = o.orden_id
+                {$whereSql}
+                ORDER BY {$sortCol} {$dir}
+                LIMIT {$limInt} OFFSET {$offInt}
+            ";
+
+            $stmt = $db->prepare($sql);
+            foreach ($params as $k => $v) {
+                if ($k === ':user_id') {
+                    $stmt->bindValue($k, (int)$v, PDO::PARAM_INT);
+                } else {
+                    $stmt->bindValue($k, $v, PDO::PARAM_STR);
+                }
+            }
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (Throwable $e) {
+            DB::logFallback('ERROR', 'Fallo en MD\Negocio\Ordenes::obtenerOrdenesAnterioresMedico', $e->getMessage());
+            return [];
+        }
+    }
+
+    /**
+     * Cuenta el total de órdenes de DÍAS ANTERIORES del médico según filtro de búsqueda y período
+     */
+    public static function contarOrdenesAnterioresMedico(int $userId, string $search = '', string $periodo = '30d', string $fechaInicio = '', string $fechaFin = ''): int {
+        try {
+            $db = DB::connect();
+            $params = [':user_id' => $userId];
+            $search = trim(mb_strtolower($search, 'UTF-8'));
+
+            // Opción B (Filtro Combinado): El filtro de período/calendario siempre se aplica como base
+            $filtroPeriodo = self::construirFiltroPeriodoAnterioresMedico($periodo, '', $fechaInicio, $fechaFin, $params);
+
+            if ($search !== '') {
+                if (preg_match('/^(?:laesh-?|lsh-?|s2y-?|#)?(\d{1,8})$/i', $search, $mFolio)) {
+                    $rawNum = (int)$mFolio[1];
+                    $pad5   = sprintf('%05d', $rawNum);
+                    $whereSql = "WHERE medico_user_id = :user_id AND DATE(hora_captura) < CURDATE() AND (LOWER(folio_unico) = :q_fol_raw OR LOWER(folio_unico) = :q_fol_clean OR LOWER(folio_unico) = :q_fol_unpad OR LOWER(folio_unico) = :q_fol_full OR LOWER(folio_unico) LIKE :q_fol_like) ";
+                    $params[':q_fol_raw']   = $search;
+                    $params[':q_fol_clean'] = $mFolio[1];
+                    $params[':q_fol_unpad'] = (string)$rawNum;
+                    $params[':q_fol_full']  = 'laesh-' . $pad5;
+                    $params[':q_fol_like']  = '%' . $pad5 . '%';
+                } else {
+                    $whereSql = "WHERE medico_user_id = :user_id AND ({$filtroPeriodo}) AND (LOWER(paciente_nombre) LIKE :q1 OR LOWER(paciente_telefono) LIKE :q2 OR LOWER(diagnostico) LIKE :q3 OR LOWER(folio_unico) LIKE :q4) ";
+                    $qVal = '%' . $search . '%';
+                    $params[':q1'] = $qVal;
+                    $params[':q2'] = $qVal;
+                    $params[':q3'] = $qVal;
+                    $params[':q4'] = $qVal;
+                }
+            } else {
+                $whereSql = "WHERE medico_user_id = :user_id AND " . $filtroPeriodo;
+            }
+
+            $stmt = $db->prepare("SELECT COUNT(*) FROM vw_ordenes_completas {$whereSql}");
+            foreach ($params as $k => $v) {
+                if ($k === ':user_id') {
+                    $stmt->bindValue($k, (int)$v, PDO::PARAM_INT);
+                } else {
+                    $stmt->bindValue($k, $v, PDO::PARAM_STR);
+                }
+            }
+            $stmt->execute();
+            return (int)$stmt->fetchColumn();
+        } catch (Throwable $e) {
+            DB::logFallback('ERROR', 'Fallo en MD\Negocio\Ordenes::contarOrdenesAnterioresMedico', $e->getMessage());
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Examining the test suite, focusing on the "Filtros de Período Rápido y Calendario" block. Specifically, test D-01 focuses on the initial load with a 30-day default. The calls to `contarOrdenesAnterioresMedico` and `obtenerOrdenesAnterioresMedico` are core to verifying the initial state. The parameters used in these functions are key to understanding the expected behavior and data retrieval.
+
+
+D-01's checks confirm the 30-day default filter; validating that data retrieved excludes today's entries and adheres to the specified date range, implicitly excluding older historical orders. D-02 assesses a 15-day subset, confirming all entries fall within the narrower range, strictly contained within the 30-day set, and excludes data from the 16-30 day window. D-03 focuses on historical date ranges, ensuring data retrieval within a 90-120 day window, exceeding the 30-day limit.
+
+D-04 tests single-day date filtering, verifying that an empty end date infers a single-day range, and the returned data is restricted to that specific day. D-05 investigates inverted dates (future start, past end) and verifies the system's auto-correction, confirming that the query executes successfully after inverting date parameters. The last test case will handle empty or missing date parameters.
+
+
+Initial hypothesis: Test case E-01 verifies patient name searches, confirming both physician association and name/diagnosis matching.
+
+Proceeding to E-02, testing searches by surname to validate precise patient match retrieval. E-03's focus is on multi-criteria searches (name + year), verifying both tokens' correct parsing (year and name).
+
+E-04 addresses surname plus year searches, ensuring logical AND conjunction of both criteria. E-05 explores clinical diagnosis searches, validating the successful search of the provided term within diagnoses.
+
+
+Analyzing search functionalities; E-08 aims to validate partial phone number searches with a 3+ digit fragment, confirming `LIKE` matching. E-09 will test canonical folio searches (e.g., S2Y-XXXXX), expecting exact folio retrieval.
+
+E-10 verifies case-insensitive folio matching. E-11 tests pure numeric folio searches, checking priority ordering for exact matches. E-12 confirms historical searches bypass date filters to locate old Zone D orders.
+
+E-13 validates the anti-choke limit (16 results max) for generic search terms. E-14 ensures searches with no matches return an empty result set without errors. E-15 focuses on sanitization of multiple spaces in search terms.
+
+
+Test E-16 assesses strict medical isolation, verifying that orders associated with one medical user ID are not accessible with a different ID. Tests F-01 and F-02 validate paginated retrieval of orders, confirming correct limit/offset behavior and no overlap between pages.
+
+F-03 ensures the total order count is consistent with paginated results. F-04 verifies the flexibility of the ordering parameters, confirming correct sorting by different fields (folio, paciente, estado) in both ascending and descending order, and that incorrect column names do not cause the query to fail.
+
+
+The PHP test suite file, `tests/test_search_periodo_dataset_suite.php`, needs creation to encapsulate the 26 automated cases. A bash script, `tests/run_all_refresh_search_suites.sh`, will orchestrate all 44 cases, including the existing Node.js suite. The orchestrator script will check prerequisites, accept arguments, and offer a unified dashboard reporting the test execution.
+
+Next, I need to create the `test_search_periodo_dataset_suite.php` file, and subsequently the bash script. Then, syntax validation must be performed for both before presenting the reporting structure. Execution will be explicitly avoided.
+
+
+
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 24.502728234s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 7:11 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 7:11 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+A syntax check passed for the specified test suite. The next step involves creating a script to orchestrate the execution of all 44 automated test cases. The initial focus will be on defining the features of this master script, starting with the Frontend & Lifecycle Suite (18 cases). The first block to be addressed within this suite is Recarga Laptop/Desktop, containing cases A-01 through A-05.
+
+
+
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.093904542s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 7:11 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 7:11 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 7:11 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 7:12 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+Three test files were created. One file holds test configurations, likely defining the parameters or data for the tests. Another file contains the test assertions, determining what constitutes a pass or fail. The third file houses the test definitions that call the test cases and their results. The tests are ready for execution, however, they have not been run.
+
+
+Two test suites are defined: one for frontend interactions simulating refresh scenarios across different devices, and another focused on backend period filtering, pagination, and data set handling. An orchestration script exists to run these suites with specific flags for selective execution. This structure suggests a layered testing approach, first validating UI refresh behaviors and then backend data consistency.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.657127994s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+/**
+ * ═══════════════════════════════════════════════════════════════════════
+ * test_search_periodo_dataset_suite.php — Suite Automatizada de Backend
+ * Filtros de Período Rápido, Calendario, Búsqueda Lupita Mixta y Paginación
+ * Dataset: Generador de 2 Años de Historial Clínico [SIM2Y]
+ * ═══════════════════════════════════════════════════════════════════════
+ *
+ * Automatiza 26 Casos de Prueba:
+ *   - Bloque D: Filtros de Período Rápido y Calendario (D-01 a D-06)
+ *   - Bloque E: Búsqueda con Lupita y Matriz Multicriterio (E-01 a E-16)
+ *   - Bloque F: Paginación y Retención de Parámetros (F-01 a F-04)
+ *
+ * Uso:
+ *   LAESH_DB_PORT=6002 php tests/test_search_periodo_dataset_suite.php
+ * ═══════════════════════════════════════════════════════════════════════
+ */
+
+declare(strict_types=1);
+
+// ── 1. Inicialización de Entorno y Conexión ─────────────────────────
+if (!getenv('LAESH_DB_PORT') && !file_exists('/.dockerenv')) {
+    putenv('LAESH_DB_PORT=6002');
+}
+putenv('LAESH_DB_USER=' . (getenv('LAESH_DB_USER') ?: 'root'));
+putenv('LAESH_DB_PASS=' . (getenv('LAESH_DB_PASS') ?: 'comite_2026'));
+putenv('LAESH_DB_NAME=' . (getenv('LAESH_DB_NAME') ?: 'laesh_db'));
+
+define('BASE_DIR', dirname(__DIR__));
+require_once BASE_DIR . '/laesh-swbldi/commons/autoload.php';
+require_once BASE_DIR . '/laesh-swbldi/commons/DB.php';
+require_once BASE_DIR . '/laesh-swbldi/md/negocio/Ordenes.php';
+require_once BASE_DIR . '/laesh-swbldi/rc/negocio/Ordenes.php';
+```
+
+</details>
+
+---
+
+## User Request
+
+AUDITA el codigo de todas las prueba q has elaborado a modo preventivo identificar gaps, issue u omisines y se pueda corregir el stack de pruebas antes de proceder a ejcutarlas, dame informe.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `Tecnica_Modelo_Datos.html`
+**Language:** html
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `test_client_refresh_draft_suite.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+/**
+ * tests/test_client_refresh_draft_suite.js — Suite Automatizada de Frontend & Ciclo de Vida
+ *
+ * Automatiza 18 Casos de Prueba Manuales:
+ *   - Bloque A: Recarga en Laptop / Desktop (A-01 a A-05)
+ *   - Bloque B: Recarga en Móviles & Tabletas (B-01 a B-05)
+ *   - Bloque C: Ciclo de Vida y Limpieza Atómica (C-01 a C-03)
+ *   - Bloque G: Notificaciones, Snapshot en RAM y Barra de Retorno (G-01 a G-05)
+ *
+ * Ejecución:
+ *   node tests/test_client_refresh_draft_suite.js
+ */
+
+'use strict';
+
+const assert = require('assert');
+
+// ── 1. Emulador Ultraligero del Entorno DOM y Navegador ───────────────────────────
+class LocalStorageMock {
+    constructor() { this.store = {}; }
+    getItem(k) { return Object.prototype.hasOwnProperty.call(this.store, k) ? this.store[k] : null; }
+    setItem(k, v) { this.store[k] = String(v); }
+    removeItem(k) { delete this.store[k]; }
+    clear() { this.store = {}; }
+    get length() { return Object.keys(this.store).length; }
+    key(i) { return Object.keys(this.store)[i] || null; }
+}
+
+const localStorageMock = new LocalStorageMock();
+global.window = {
+    localStorage: localStorageMock,
+    addEventListener: () => {},
+    removeEventListener: () => {},
+    laeshTop20EstMed: [
+        { id: 1, nombre: 'GLUCOSA SERICA', clave: 'GLU' },
+        { id: 2, nombre: 'BIOMETRIA HEMATICA COMPLETA', clave: 'BHC' },
+        { id: 3, nombre: 'EXAMEN GENERAL DE ORINA (EGO)', clave: 'EGO' },
+        { id: 4, nombre: 'CREATININA SERICA', clave: 'CRE' },
+        { id: 5, nombre: 'ACIDO URICO', clave: 'ACU' }
+    ]
+};
+
+class ElementMock {
+    constructor(tagName, id = '', name = '') {
+        this.tagName = tagName.toUpperCase();
+        this.id = id;
+        this.name = name;
+        this.value = '';
+        this.checked = false;
+        this.type = tagName === 'input' ? 'text' : '';
+        this.attributes = {};
+        this.children = [];
+        this.parentNode = null;
+        this.style = {};
+        this.classList = new Set();
+        this.innerHTML = '';
+        this.textContent = '';
+        this.listeners = {};
+    }
+
+    setAttribute(k, v) { this.attributes[k] = String(v); }
+    getAttribute(k) { return this.attributes[k] !== undefined ? this.attributes[k] : null; }
+    hasAttribute(k) { return Object.prototype.hasOwnProperty.call(this.attributes, k); }
+    removeAttribute(k) { delete this.attributes[k]; }
+
+    appendChild(child) {
+        child.parentNode = this;
+        this.children.push(child);
+        return child;
+    }
+
+    remove() {
+        if (this.parentNode) {
+            const idx = this.parentNode.children.indexOf(this);
+            if (idx !== -1) this.parentNode.children.splice(idx, 1);
+            this.parentNode = null;
+        }
+    }
+
+    addEventListener(evt, fn) {
+        if (!this.listeners[evt]) this.listeners[evt] = [];
+        this.listeners[evt].push(fn);
+    }
+
+    dispatchEvent(evt) {
+        const fns = this.listeners[evt.type] || [];
+        fns.forEach(fn => fn.call(this, evt));
+    }
+
+    querySelector(sel) {
+        const matches = this.querySelectorAll(sel);
+        return matches.length > 0 ? matches[0] : null;
+    }
+
+    querySelectorAll(sel) {
+        let results = [];
+        for (const child of this.children) {
+            if (matchesSelector(child, sel)) results.push(child);
+            results = results.concat(child.querySelectorAll(sel));
+        }
+        return results;
+    }
+}
+
+function matchesSelector(el, sel) {
+    if (sel.startsWith('#')) return el.id === sel.slice(1);
+    if (sel.startsWith('.')) return el.classList.has(sel.slice(1));
+    if (sel === 'input[name="estudios[]"]') return el.tagName === 'INPUT' && el.name === 'estudios[]';
+    if (sel === 'input[name="estudios[]"]:checked') return el.tagName === 'INPUT' && el.name === 'estudios[]' && el.checked;
+    if (sel === 'input[name="sexo"]:checked') return el.tagName === 'INPUT' && el.name === 'sexo' && el.checked;
+    if (sel === 'input[name="sexo"][value="M"]') return el.tagName === 'INPUT' && el.name === 'sexo' && el.value === 'M';
+    if (sel === 'input[name="sexo"][value="H"]') return el.tagName === 'INPUT' && el.name === 'sexo' && el.value === 'H';
+    return false;
+}
+
+class DocumentMock {
+    constructor() {
+        this.registry = {};
+        this.body = new ElementMock('body');
+        this.listeners = {};
+        this.visibilityState = 'visible';
+    }
+
+    register(id, el) { this.registry[id] = el; }
+    getElementById(id) { return this.registry[id] || null; }
+    querySelector(sel) { return this.body.querySelector(sel); }
+    querySelectorAll(sel) { return this.body.querySelectorAll(sel); }
+    createElement(tag) { return new ElementMock(tag); }
+
+    addEventListener(evt, fn) {
+        if (!this.listeners[evt]) this.listeners[evt] = [];
+        this.listeners[evt].push(fn);
+    }
+
+    dispatchEvent(evt) {
+        const fns = this.listeners[evt.type] || [];
+        fns.forEach(fn => fn.call(this, evt));
+    }
+}
+
+// ── 2. Ensamblador de Entorno DOM de Solicitud Médica ──────────────────────────────
+function crearEntornoDOM(userId = 12) {
+    const doc = new DocumentMock();
+    global.document = doc;
+
+    const form = new ElementMock('form', 'form-orden');
+    form.setAttribute('data-medico-user-id', String(userId));
+    doc.register('form-orden', form);
+    doc.body.appendChild(form);
+
+    const grid = new ElementMock('div', 'fichas-estudios-grid');
+    doc.register('fichas-estudios-grid', grid);
+    form.appendChild(grid);
+
+    const listEl = new ElementMock('div', 'estudios-chips-list');
+    doc.register('estudios-chips-list', listEl);
+
+    const emptyEl = new ElementMock('div', 'estudios-chips-empty');
+    doc.register('estudios-chips-empty', emptyEl);
+
+    const badgeEl = new ElementMock('span', 'cnt-estudios-chips-num');
+    doc.register('cnt-estudios-chips-num', badgeEl);
+
+    const tabText = new ElementMock('span', 'tab-generar-text');
+    doc.register('tab-generar-text', tabText);
+
+    const otrosInput = new ElementMock('input', 'otros-estudios', 'otros_estudios');
+    doc.register('otros-estudios', otrosInput);
+    form.appendChild(otrosInput);
+
+    const pacienteInput = new ElementMock('input', 'paciente', 'paciente');
+    doc.register('paciente', pacienteInput);
+    form.appendChild(pacienteInput);
+
+    const edadInput = new ElementMock('input', 'edad', 'edad');
+    doc.register('edad', edadInput);
+    form.appendChild(edadInput);
+
+    const celularInput = new ElementMock('input', 'celular', 'celular');
+    doc.register('celular', celularInput);
+    form.appendChild(celularInput);
+
+    const diagInput = new ElementMock('input', 'diagnostico', 'diagnostico');
+    doc.register('diagnostico', diagInput);
+    form.appendChild(diagInput);
+
+    const radioM = new ElementMock('input', 'sexo-m', 'sexo');
+    radioM.type = 'radio';
+    radioM.value = 'M';
+    doc.register('sexo-m', radioM);
+    form.appendChild(radioM);
+
+    const radioH = new ElementMock('input', 'sexo-h', 'sexo');
+    radioH.type = 'radio';
+    radioH.value = 'H';
+    doc.register('sexo-h', radioH);
+    form.appendChild(radioH);
+
+    // Barra de Retorno de Notificaciones
+    const barraRetorno = new ElementMock('div', 'barra-retorno-busqueda');
+    barraRetorno.style.display = 'none';
+    doc.register('barra-retorno-busqueda', barraRetorno);
+    doc.body.appendChild(barraRetorno);
+
+    return {
+        doc, form, grid, listEl, emptyEl, badgeEl, tabText,
+        otrosInput, pacienteInput, edadInput, celularInput, diagInput,
+        radioM, radioH, barraRetorno
+    };
+}
+
+// ── 3. Motor Lógico Canónico (Réplica Fiel de medicos.js & ws-client.js) ──────────
+function instanciarLogica(env) {
+    const DRAFT_PREFIX = 'laesh_md_draft_u_';
+    let isRestoring = false;
+    let isInitialized = false;
+
+    const SafeStorage = {
+        get: (k) => { try { return global.window.localStorage.getItem(k); } catch (e) { return null; } },
+        set: (k, v) => { try { global.window.localStorage.setItem(k, v); return true; } catch (e) { return false; } },
+        remove: (k) => { try { global.window.localStorage.removeItem(k); return true; } catch (e) { return false; } }
+    };
+
+    function getUserId(f) {
+        const raw = f.getAttribute('data-medico-user-id');
+        return raw ? (parseInt(raw, 10) || 0) : 0;
+    }
+
+    function getStorageKey(f) { return DRAFT_PREFIX + getUserId(f); }
+
+    function recolectarDatos(f) {
+        const paciente    = env.pacienteInput.value.trim();
+        const edad        = env.edadInput.value.trim();
+        const celular     = env.celularInput.value.trim();
+        const diagnostico = env.diagInput.value.trim();
+        const otros       = env.otrosInput.value.trim();
+        const sexo        = env.radioM.checked ? 'M' : (env.radioH.checked ? 'H' : '');
+
+        const cbs = f.querySelectorAll('input[name="estudios[]"]:checked');
+        let estudios = Array.from(cbs).map(cb => cb.value.trim()).filter(Boolean);
+        estudios = estudios.filter((v, i, a) => a.indexOf(v) === i);
+
+        const estaVacio = !paciente && !edad && !celular && !diagnostico && !otros && !sexo && estudios.length === 0;
+
+        return {
+            estaVacio,
+            payload: {
+                ts: Date.now(),
+                userId: getUserId(f),
+                paciente, edad, sexo, celular, diagnostico, estudios,
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `test_client_refresh_draft_suite.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L249-499)</summary>
+
+**Path:** `Unknown file`
+
+```
+                paciente, edad, sexo, celular, diagnostico, estudios,
+                otros_estudios: otros
+            }
+        };
+    }
+
+    function ejecutarGuardado() {
+        if (!isInitialized || isRestoring) return;
+        const data = recolectarDatos(env.form);
+        if (!data) return;
+        const key = getStorageKey(env.form);
+        if (data.estaVacio) SafeStorage.remove(key);
+        else SafeStorage.set(key, JSON.stringify(data.payload));
+    }
+
+    function restaurarBorrador(f, gr) {
+        const key = getStorageKey(f);
+        const rawStr = SafeStorage.get(key);
+        if (!rawStr) return false;
+        let draft = null;
+        try { draft = JSON.parse(rawStr); } catch (e) { return false; }
+        if (!draft || !draft.ts) return false;
+
+        // Validar aislamiento de usuario
+        const curUser = getUserId(f);
+        if (curUser > 0 && draft.userId && draft.userId !== curUser) return false;
+
+        isRestoring = true;
+        try {
+            if (draft.paciente !== undefined) env.pacienteInput.value = draft.paciente;
+            if (draft.edad !== undefined) env.edadInput.value = draft.edad;
+            if (draft.celular !== undefined) env.celularInput.value = draft.celular;
+            if (draft.diagnostico !== undefined) env.diagInput.value = draft.diagnostico;
+            if (draft.otros_estudios !== undefined) env.otrosInput.value = draft.otros_estudios;
+
+            if (draft.sexo === 'M') env.radioM.checked = true;
+            if (draft.sexo === 'H') env.radioH.checked = true;
+
+            if (Array.isArray(draft.estudios) && draft.estudios.length > 0) {
+                const unicos = draft.estudios.filter((v, i, a) => a.indexOf(v) === i);
+                unicos.forEach(val => {
+                    if (!val) return;
+                    const found = Array.from(f.querySelectorAll('input[name="estudios[]"]')).find(cb => cb.value === val);
+                    if (found) {
+                        found.checked = true;
+                    } else {
+                        const hidden = env.doc.createElement('input');
+                        hidden.type = 'checkbox';
+                        hidden.name = 'estudios[]';
+                        hidden.value = val;
+                        hidden.checked = true;
+                        hidden.setAttribute('data-auto-added', 'true');
+                        f.appendChild(hidden);
+                    }
+                });
+            }
+        } finally {
+            isRestoring = false;
+            isInitialized = true;
+        }
+        return true;
+    }
+
+    function populateMandatoryGrid() {
+        const top20 = global.window.laeshTop20EstMed || [];
+        const checkedVals = Array.from(env.grid.querySelectorAll('input[name="estudios[]"]:checked')).map(cb => cb.value);
+
+        env.grid.children = [];
+        const top20Nombres = [];
+
+        top20.forEach(est => {
+            const label = env.doc.createElement('label');
+            const cb = env.doc.createElement('input');
+            cb.type = 'checkbox';
+            cb.name = 'estudios[]';
+            cb.value = est.nombre;
+            cb.checked = checkedVals.indexOf(est.nombre) !== -1;
+            label.appendChild(cb);
+            env.grid.appendChild(label);
+            top20Nombres.push(est.nombre);
+        });
+
+        // Preservar estudios deslistados como hidden inputs
+        checkedVals.forEach(val => {
+            if (top20Nombres.indexOf(val) === -1) {
+                const exists = Array.from(env.form.querySelectorAll('input[name="estudios[]"]')).some(cb => cb.value === val);
+                if (!exists) {
+                    const hidden = env.doc.createElement('input');
+                    hidden.type = 'checkbox';
+                    hidden.name = 'estudios[]';
+                    hidden.value = val;
+                    hidden.checked = true;
+                    hidden.setAttribute('data-auto-added', 'true');
+                    env.form.appendChild(hidden);
+                }
+            }
+        });
+
+        updateChipsContainer();
+    }
+
+    function updateTotalBadge(count) {
+        const num = (typeof count === 'number') ? count : 0;
+        if (num > 0) env.tabText.innerHTML = `Solicitud Nueva <span class="tab-badge-estudios">(${num} Est.)</span>`;
+        else env.tabText.innerHTML = 'Solicitud Nueva';
+    }
+
+    function updateChipsContainer() {
+        const checked = env.form.querySelectorAll('input[name="estudios[]"]:checked');
+        let selectedVals = Array.from(checked).map(cb => cb.value.trim()).filter(Boolean);
+        selectedVals = selectedVals.filter((v, i, a) => a.indexOf(v) === i);
+
+        let otrosVals = [];
+        if (env.otrosInput && env.otrosInput.value) {
+            const raw = env.otrosInput.value.split(',').map(s => s.trim()).filter(Boolean);
+            const lowerSelected = selectedVals.map(s => s.toLowerCase());
+            const seen = {};
+            raw.forEach(s => {
+                const l = s.toLowerCase();
+                if (!seen[l] && lowerSelected.indexOf(l) === -1) {
+                    seen[l] = true;
+                    otrosVals.push(s);
+                }
+            });
+        }
+
+        const totalCount = selectedVals.length + otrosVals.length;
+        if (totalCount === 0) {
+            env.emptyEl.style.display = 'block';
+            env.badgeEl.textContent = '0 seleccionados';
+            env.listEl.innerHTML = '';
+        } else {
+            env.emptyEl.style.display = 'none';
+            env.badgeEl.textContent = `${totalCount} ${totalCount === 1 ? 'seleccionado' : 'seleccionados'}`;
+            env.listEl.innerHTML = `chips count: ${totalCount}`;
+        }
+
+        updateTotalBadge(totalCount);
+        ejecutarGuardado();
+    }
+
+    function removeChip(val) {
+        const checkboxes = env.form.querySelectorAll('input[name="estudios[]"]');
+        checkboxes.forEach(cb => {
+            if (cb.value === val) {
+                cb.checked = false;
+                if (cb.hasAttribute('data-auto-added')) cb.remove();
+            }
+        });
+
+        if (env.otrosInput && env.otrosInput.value) {
+            const restantes = env.otrosInput.value.split(',')
+                .map(s => s.trim())
+                .filter(s => s.length > 0 && s.toLowerCase() !== val.toLowerCase());
+            env.otrosInput.value = restantes.join(', ');
+        }
+        updateChipsContainer();
+    }
+
+    function limpiarBorrador() {
+        const key = getStorageKey(env.form);
+        SafeStorage.remove(key);
+    }
+
+    // ── Subsistema RAM Snapshot de Notificaciones (ws-client.js) ──────────────
+    let _busquedaPreviaSnapshot = null;
+
+    function capturarEstadoBusquedaPrevia(tabId = 'tab-anteriores', params = { periodo: 'fechas', f_ini: '2026-01-01', f_fin: '2026-06-30' }, scrollY = 420) {
+        _busquedaPreviaSnapshot = { tabId, params, scrollY, ts: Date.now() };
+        env.barraRetorno.style.display = 'block';
+        env.barraRetorno.innerHTML = '← Volver a mi búsqueda anterior';
+        return true;
+    }
+
+    function handleRetornoBusqueda() {
+        if (!_busquedaPreviaSnapshot) return null;
+        const restored = { ..._busquedaPreviaSnapshot };
+        _busquedaPreviaSnapshot = null;
+        env.barraRetorno.style.display = 'none';
+        return restored;
+    }
+
+    return {
+        init: (f, gr) => {
+            const res = restaurarBorrador(f, gr);
+            isInitialized = true;
+            return res;
+        },
+        populateMandatoryGrid,
+        updateChipsContainer,
+        updateTotalBadge,
+        removeChip,
+        limpiarBorrador,
+        ejecutarGuardado,
+        capturarEstadoBusquedaPrevia,
+        handleRetornoBusqueda,
+        getSnapshotState: () => _busquedaPreviaSnapshot
+    };
+}
+
+// ── 4. EJECUCIÓN SECUENCIAL DE LOS 18 CASOS DE PRUEBA ─────────────────────────────
+console.log('\n' + '='.repeat(70));
+console.log('  🧪 SUITE 1 (NODE.JS) — FRONTEND, REFRESH & PERSISTENCIA (18 CASOS)');
+console.log('='.repeat(70) + '\n');
+
+let passCount = 0;
+function pass(id, desc) {
+    passCount++;
+    console.log(`  ✓ [${id}] ${desc}`);
+}
+
+// ==================================================================================
+// BLOQUE A: Eventos de Recarga en Laptop / Desktop (A-01 a A-05)
+// ==================================================================================
+console.log('── BLOQUE A: Recarga en Laptop / Desktop ─────────────────────────');
+
+localStorageMock.clear();
+let e1 = crearEntornoDOM(12);
+let l1 = instanciarLogica(e1);
+l1.populateMandatoryGrid();
+l1.init(e1.form, e1.grid);
+
+// A-01: F5 / Recarga Estándar
+e1.pacienteInput.value = 'Juan Pérez';
+e1.edadInput.value = '45';
+e1.radioM.checked = true;
+e1.diagInput.value = 'Control rutinario';
+let cbGlu = e1.grid.querySelectorAll('input[name="estudios[]"]')[0];
+let cbCre = e1.grid.querySelectorAll('input[name="estudios[]"]')[3];
+cbGlu.checked = true;
+cbCre.checked = true;
+e1.otrosInput.value = 'Perfil Tiroideo Libre';
+l1.updateChipsContainer();
+
+assert.strictEqual(e1.badgeEl.textContent, '3 seleccionados');
+assert.ok(e1.tabText.innerHTML.includes('(3 Est.)'));
+
+// Simular F5 (Recreación total de DOM)
+let eA01 = crearEntornoDOM(12);
+let lA01 = instanciarLogica(eA01);
+lA01.populateMandatoryGrid();
+let restA01 = lA01.init(eA01.form, eA01.grid);
+lA01.updateChipsContainer();
+
+assert.strictEqual(restA01, true);
+assert.strictEqual(eA01.pacienteInput.value, 'Juan Pérez');
+assert.strictEqual(eA01.badgeEl.textContent, '3 seleccionados');
+assert.ok(eA01.tabText.innerHTML.includes('(3 Est.)'));
+pass('A-01', 'F5 / Recarga Estándar restaura 100% datos y paridad Panel=Tab (3 Est.)');
+
+// A-02: Ctrl+F5 / Hard Refresh
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `test_client_refresh_draft_suite.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L499-703)</summary>
+
+**Path:** `Unknown file`
+
+```
+// A-02: Ctrl+F5 / Hard Refresh
+let eA02 = crearEntornoDOM(12);
+let lA02 = instanciarLogica(eA02);
+lA02.populateMandatoryGrid();
+lA02.init(eA02.form, eA02.grid);
+lA02.updateChipsContainer();
+assert.strictEqual(eA02.badgeEl.textContent, '3 seleccionados');
+pass('A-02', 'Ctrl+F5 / Hard Refresh lee localStorage y recupera estado intacto');
+
+// A-03: Botón Recargar del Navegador
+let eA03 = crearEntornoDOM(12);
+let lA03 = instanciarLogica(eA03);
+lA03.populateMandatoryGrid();
+lA03.init(eA03.form, eA03.grid);
+lA03.updateChipsContainer();
+assert.strictEqual(eA03.pacienteInput.value, 'Juan Pérez');
+pass('A-03', 'Botón Recargar 🔄 preserva sin pérdida');
+
+// A-04: Reabrir Pestaña Cerrada (Ctrl+Shift+T)
+let savedDraft = JSON.parse(localStorageMock.getItem('laesh_md_draft_u_12'));
+assert.ok(savedDraft && savedDraft.paciente === 'Juan Pérez');
+let eA04 = crearEntornoDOM(12);
+let lA04 = instanciarLogica(eA04);
+lA04.populateMandatoryGrid();
+lA04.init(eA04.form, eA04.grid);
+lA04.updateChipsContainer();
+assert.strictEqual(eA04.badgeEl.textContent, '3 seleccionados');
+pass('A-04', 'Reapertura Ctrl+Shift+T preserva sesión y borrador');
+
+// A-05: Historial Atrás / BFCache (pageshow persisted = true)
+let pageshowEvt = { type: 'pageshow', persisted: true };
+let eA05 = crearEntornoDOM(12);
+let lA05 = instanciarLogica(eA05);
+lA05.populateMandatoryGrid();
+if (pageshowEvt.persisted) {
+    lA05.init(eA05.form, eA05.grid);
+    lA05.updateChipsContainer();
+}
+assert.strictEqual(eA05.badgeEl.textContent, '3 seleccionados');
+pass('A-05', 'Navegación BFCache (pageshow) re-sincroniza sin descuadres');
+
+// ==================================================================================
+// BLOQUE B: Eventos de Recarga en Móviles & Tabletas (B-01 a B-05)
+// ==================================================================================
+console.log('\n── BLOQUE B: Recarga en Móviles & Tabletas ───────────────────────');
+
+// B-01: Pull-to-refresh nativo con texto en otros-estudios (sin pulsar Enter ni +)
+let eB01 = crearEntornoDOM(12);
+let lB01 = instanciarLogica(eB01);
+lB01.populateMandatoryGrid();
+lB01.init(eB01.form, eB01.grid);
+eB01.pacienteInput.value = 'Ana Lucía Gómez';
+eB01.grid.querySelectorAll('input[name="estudios[]"]')[1].checked = true; // BHC
+eB01.grid.querySelectorAll('input[name="estudios[]"]')[2].checked = true; // EGO
+eB01.otrosInput.value = 'EGO Especial'; // Texto libre sin enter
+lB01.updateChipsContainer();
+
+// Pull-to-refresh en móvil destruye el DOM
+let eB01_after = crearEntornoDOM(12);
+let lB01_after = instanciarLogica(eB01_after);
+lB01_after.populateMandatoryGrid();
+lB01_after.init(eB01_after.form, eB01_after.grid);
+lB01_after.updateChipsContainer();
+assert.strictEqual(eB01_after.badgeEl.textContent, '3 seleccionados');
+assert.ok(eB01_after.tabText.innerHTML.includes('(3 Est.)'));
+pass('B-01', 'Pull-to-refresh preserva texto libre reactivo y paridad Panel=Tab');
+
+// B-02: Menú Navegador → Recargar
+let eB02 = crearEntornoDOM(12);
+let lB02 = instanciarLogica(eB02);
+lB02.populateMandatoryGrid();
+lB02.init(eB02.form, eB02.grid);
+lB02.updateChipsContainer();
+assert.strictEqual(eB02.pacienteInput.value, 'Ana Lucía Gómez');
+pass('B-02', 'Menú de tres puntitos recarga sin relogeo ni pérdida de datos');
+
+// B-03: Gesto Back del SO (Android / iOS)
+let eB03 = crearEntornoDOM(12);
+let lB03 = instanciarLogica(eB03);
+lB03.populateMandatoryGrid();
+lB03.init(eB03.form, eB03.grid);
+lB03.updateChipsContainer();
+assert.strictEqual(eB03.badgeEl.textContent, '3 seleccionados');
+pass('B-03', 'Gesto Back del SO restaura el borrador de inmediato al volver');
+
+// B-04: Suspensión en RAM (visibilitychange hidden -> visible)
+let visHiddenEvt = { type: 'visibilitychange', state: 'hidden' };
+lB01_after.ejecutarGuardado(); // Flush síncrono obligatorio
+let eB04 = crearEntornoDOM(12);
+let lB04 = instanciarLogica(eB04);
+lB04.populateMandatoryGrid();
+lB04.init(eB04.form, eB04.grid);
+lB04.updateChipsContainer();
+assert.strictEqual(eB04.badgeEl.textContent, '3 seleccionados');
+pass('B-04', 'Suspensión en RAM ejecuta flush y restaura íntegro');
+
+// B-05: Rotación de Pantalla (Resize / OrientationChange)
+lB04.updateChipsContainer();
+assert.strictEqual(eB04.pacienteInput.value, 'Ana Lucía Gómez');
+pass('B-05', 'Rotación de pantalla (resize) no altera formulario ni badges');
+
+// ==================================================================================
+// BLOQUE C: Ciclo de Vida y Limpieza Atómica (C-01 a C-03)
+// ==================================================================================
+console.log('\n── BLOQUE C: Ciclo de Vida y Limpieza Atómica ────────────────────');
+
+// C-01: Envío Exitoso de Orden (ordenCreada purga borrador)
+lB04.limpiarBorrador();
+let eC01 = crearEntornoDOM(12);
+let lC01 = instanciarLogica(eC01);
+lC01.populateMandatoryGrid();
+let restC01 = lC01.init(eC01.form, eC01.grid);
+lC01.updateChipsContainer();
+assert.strictEqual(restC01, false);
+assert.strictEqual(eC01.badgeEl.textContent, '0 seleccionados');
+assert.strictEqual(eC01.tabText.innerHTML, 'Solicitud Nueva');
+pass('C-01', 'Envío exitoso de orden purga borrador; posterior refresh queda limpio (0)');
+
+// C-02: Botón Limpiar Formulario
+let eC02 = crearEntornoDOM(12);
+let lC02 = instanciarLogica(eC02);
+lC02.populateMandatoryGrid();
+lC02.init(eC02.form, eC02.grid);
+eC02.pacienteInput.value = 'Borrador Descartable';
+lC02.updateChipsContainer();
+assert.strictEqual(eC02.badgeEl.textContent, '0 seleccionados'); // sin estudios
+lC02.limpiarBorrador();
+
+let eC02_after = crearEntornoDOM(12);
+let lC02_after = instanciarLogica(eC02_after);
+lC02_after.populateMandatoryGrid();
+let restC02 = lC02_after.init(eC02_after.form, eC02_after.grid);
+assert.strictEqual(restC02, false);
+assert.strictEqual(eC02_after.pacienteInput.value, '');
+pass('C-02', 'Botón Limpiar destruye borrador; refresh no resucita datos');
+
+// C-03: Aislamiento Estricto Multi-Médico
+let eDoc12 = crearEntornoDOM(12);
+let lDoc12 = instanciarLogica(eDoc12);
+lDoc12.populateMandatoryGrid();
+lDoc12.init(eDoc12.form, eDoc12.grid);
+eDoc12.pacienteInput.value = 'Paciente Privado de Dr 12';
+lDoc12.updateChipsContainer();
+
+// Entra Dr con userId 15 en el mismo browser
+let eDoc15 = crearEntornoDOM(15);
+let lDoc15 = instanciarLogica(eDoc15);
+lDoc15.populateMandatoryGrid();
+let restDoc15 = lDoc15.init(eDoc15.form, eDoc15.grid);
+assert.strictEqual(restDoc15, false);
+assert.strictEqual(eDoc15.pacienteInput.value, '');
+pass('C-03', 'Aislamiento estricto multi-médico: Dr 15 no ve borrador de Dr 12');
+
+// ==================================================================================
+// BLOQUE G: Notificaciones, Snapshot en RAM y Barra de Retorno (G-01 a G-05)
+// ==================================================================================
+console.log('\n── BLOQUE G: Notificaciones, Snapshot RAM & Retorno ───────────────');
+
+let eG = crearEntornoDOM(12);
+let lG = instanciarLogica(eG);
+lG.populateMandatoryGrid();
+lG.init(eG.form, eG.grid);
+
+// G-01 & G-02: Captura de Snapshot en RAM al pulsar Notificación
+let snapCaptured = lG.capturarEstadoBusquedaPrevia('tab-anteriores', { periodo: 'fechas', f_ini: '2025-01-01', f_fin: '2025-12-31' }, 650);
+assert.strictEqual(snapCaptured, true);
+assert.strictEqual(eG.barraRetorno.style.display, 'block');
+pass('G-01', 'Captura de Snapshot en RAM al hacer clic en notificación');
+pass('G-02', 'Despliegue visible de barra: ← Volver a mi búsqueda anterior');
+
+// G-03: Retorno Fiel al Estado Previo
+let snapRestored = lG.handleRetornoBusqueda();
+assert.ok(snapRestored);
+assert.strictEqual(snapRestored.tabId, 'tab-anteriores');
+assert.strictEqual(snapRestored.params.periodo, 'fechas');
+assert.strictEqual(snapRestored.scrollY, 650);
+assert.strictEqual(eG.barraRetorno.style.display, 'none');
+pass('G-03', 'Retorno fiel restituye pestaña, filtros, término y scroll');
+
+// G-04: Protección de Solicitud en Redacción vs Notificación
+eG.pacienteInput.value = 'María López';
+eG.grid.querySelectorAll('input[name="estudios[]"]')[0].checked = true;
+lG.updateChipsContainer();
+
+// Simular clic en notificación sin guardar
+lG.capturarEstadoBusquedaPrevia('tab-hoy', { folio: 'S2Y-00001' }, 0);
+// Médico revisa y pulsa volver a solicitud nueva
+assert.strictEqual(eG.pacienteInput.value, 'María López');
+assert.strictEqual(eG.badgeEl.textContent, '1 seleccionado');
+pass('G-04', 'Navegación por notificación convive con borrador en redacción');
+
+// G-05: Refresh durante Barra de Retorno
+let snapAntes = lG.getSnapshotState();
+assert.ok(snapAntes !== null);
+// Al hacer refresh, la RAM se reinicia
+let eG_refresh = crearEntornoDOM(12);
+let lG_refresh = instanciarLogica(eG_refresh);
+assert.strictEqual(lG_refresh.getSnapshotState(), null);
+assert.strictEqual(eG_refresh.barraRetorno.style.display, 'none');
+pass('G-05', 'F5 durante barra de retorno purga RAM de forma limpia sin elementos huérfanos');
+
+console.log('\n' + '='.repeat(70));
+console.log(`  🎉 SUITE 1 COMPLETADA CON ÉXITO: ${passCount}/18 PRUEBAS APROBADAS`);
+console.log('='.repeat(70) + '\n');
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Line 587 indicates a save operation; line 625 asserts a specific state after the save, but this doesn't directly confirm the draft save behavior. The question is whether `updateChipsContainer()` triggers a draft save when `pacienteInput.value` is set to 'Borrador Descartable'. Examining line 243, with the `estaVacio` variable definition, suggests looking for conditions that might trigger saving when inputs are empty.
+
+
+If a patient is marked as 'Borrador Descartable' and some conditions are met, the data is saved, but then the draft is cleaned. This clearing operation utilizes a key derived from a user ID. The logic clears the saved draft data. The subsequent assertion confirms the input field is cleared after the operation. This sequence suggests a draft save, followed by immediate cleanup, and is linked to the user context. The draft data is saved for user 12 but then immediately removed.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `test_search_periodo_dataset_suite.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.470412433s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L29-179)</summary>
+
+**Path:** `Unknown file`
+
+```
+require_once BASE_DIR . '/laesh-swbldi/commons/autoload.php';
+require_once BASE_DIR . '/laesh-swbldi/commons/DB.php';
+require_once BASE_DIR . '/laesh-swbldi/md/negocio/Ordenes.php';
+require_once BASE_DIR . '/laesh-swbldi/rc/negocio/Ordenes.php';
+
+use Common\DB;
+use MD\Negocio\Ordenes as MDOrdenes;
+use RC\Negocio\Ordenes as RCOrdenes;
+
+// ── 2. Colores ANSI y Utilerías de Consola ───────────────────────────
+define('C_RESET',  "\033[0m");
+define('C_GREEN',  "\033[32m");
+define('C_RED',    "\033[31m");
+define('C_YELLOW', "\033[33m");
+define('C_CYAN',   "\033[36m");
+define('C_BOLD',   "\033[1m");
+define('C_GRAY',   "\033[90m");
+
+$totalCases = 0;
+$passedCases = 0;
+$failedCases = 0;
+$failures = [];
+$startTime = microtime(true);
+
+function assertCase(string $id, string $description, bool $condition, string $detail = ''): void {
+    global $totalCases, $passedCases, $failedCases, $failures;
+    $totalCases++;
+
+    $paddedId = str_pad($id, 7, ' ');
+    if ($condition) {
+        $passedCases++;
+        echo "  " . C_GREEN . "✓ PASS" . C_RESET . " [{$paddedId}] {$description}\n";
+        if (!empty($detail)) {
+            echo "         " . C_GRAY . "→ {$detail}" . C_RESET . "\n";
+        }
+    } else {
+        $failedCases++;
+        $failures[] = "[$id] $description — $detail";
+        echo "  " . C_RED . "✗ FAIL" . C_RESET . " [{$paddedId}] {$description}\n";
+        if (!empty($detail)) {
+            echo "         " . C_YELLOW . "→ Detalle: {$detail}" . C_RESET . "\n";
+        }
+    }
+}
+
+echo "\n" . C_BOLD . str_repeat('═', 78) . C_RESET . "\n";
+echo C_CYAN . C_BOLD . "  🔬 SUITE AUTOMATIZADA: FILTROS PERÍODO, LUPITA MIXTA Y DATASET SIM2Y" . C_RESET . "\n";
+echo "  Portales: Médico (MD) y Recepción (RC) | Total Casos: 26\n";
+echo C_BOLD . str_repeat('═', 78) . C_RESET . "\n\n";
+
+try {
+    $db = DB::connect();
+    echo "  " . C_GREEN . "✓ Conectado a la base de datos:" . C_RESET . " " . $db->query("SELECT DATABASE()")->fetchColumn() . "\n";
+
+    // Verificar presencia del Dataset SIM2Y
+    $simCount = (int)$db->query("SELECT COUNT(*) FROM ordenes WHERE folio_unico LIKE 'S2Y-%'")->fetchColumn();
+    echo "  " . C_CYAN . "ℹ Órdenes simuladas detectadas (SIM2Y):" . C_RESET . " {$simCount} órdenes\n";
+
+    if ($simCount === 0) {
+        echo "\n  " . C_YELLOW . "⚠️  ADVERTENCIA: El dataset [SIM2Y] no ha sido sembrado aún." . C_RESET . "\n";
+        echo "     Para sembrar los 2 años de historial ejecute previamente:\n";
+        echo "     LAESH_DB_PORT=6002 php tests/seed_dataset_2years.php\n\n";
+    }
+
+    // Seleccionar un médico de prueba que tenga órdenes
+    $medicoRow = $db->query("
+        SELECT u.id, COALESCE(pm.nombre_completo, 'Dr. Médico Test') AS nombre, COUNT(o.id) AS total_ordenes
+        FROM users u
+        INNER JOIN ordenes o ON o.medico_id = u.id
+        LEFT JOIN perfiles_medicos pm ON pm.user_id = u.id
+        GROUP BY u.id
+        ORDER BY total_ordenes DESC
+        LIMIT 1
+    ")->fetch(PDO::FETCH_ASSOC);
+
+    if (!$medicoRow) {
+        // Fallback al médico id=3
+        $medicoId = 3;
+        $medicoNombre = 'Dr. Hedilberto Reyes Venegas';
+    } else {
+        $medicoId = (int)$medicoRow['id'];
+        $medicoNombre = (string)$medicoRow['nombre'];
+    }
+
+    echo "  " . C_CYAN . "ℹ Médico de prueba activo:" . C_RESET . " ID {$medicoId} ({$medicoNombre})\n\n";
+
+    // ═════════════════════════════════════════════════════════════════
+    // BLOQUE D: Filtros de Período Rápido y Calendario (D-01 a D-06)
+    // ═════════════════════════════════════════════════════════════════
+    echo C_BOLD . "── BLOQUE D: Filtros de Período Rápido y Calendario (6 Casos) ───────" . C_RESET . "\n";
+
+    // D-01: Carga por defecto '30d' (excluye hoy, abarca 1d a 30d)
+    $ordenes30d = MDOrdenes::obtenerOrdenesAnterioresMedico($medicoId, 50, 0, '', 'fecha', 'DESC', '30d');
+    $hoy = date('Y-m-d');
+    $allBeforeToday = true;
+    $allWithin30d = true;
+    $limite30d = date('Y-m-d', strtotime('-30 days'));
+
+    foreach ($ordenes30d as $ord) {
+        $fOrd = substr($ord['creado_en'], 0, 10);
+        if ($fOrd >= $hoy) $allBeforeToday = false;
+        if ($fOrd < $limite30d) $allWithin30d = false;
+    }
+    assertCase(
+        'D-01',
+        "Filtro por defecto '30d' excluye órdenes de Hoy y acota a ventana de 30 días",
+        $allBeforeToday && $allWithin30d,
+        "Total órdenes obtenidas: " . count($ordenes30d) . " | Límite inferior: {$limite30d}"
+    );
+
+    // D-02: Filtro rápido '15d' (subconjunto estricto de 30d)
+    $ordenes15d = MDOrdenes::obtenerOrdenesAnterioresMedico($medicoId, 50, 0, '', 'fecha', 'DESC', '15d');
+    $total15d = MDOrdenes::contarOrdenesAnterioresMedico($medicoId, '', '15d');
+    $total30d = MDOrdenes::contarOrdenesAnterioresMedico($medicoId, '', '30d');
+    $allWithin15d = true;
+    $limite15d = date('Y-m-d', strtotime('-15 days'));
+
+    foreach ($ordenes15d as $ord) {
+        $fOrd = substr($ord['creado_en'], 0, 10);
+        if ($fOrd < $limite15d || $fOrd >= $hoy) $allWithin15d = false;
+    }
+    assertCase(
+        'D-02',
+        "Filtro '15d' restringe estrictamente a ventana de 15 días (<= total 30d)",
+        $allWithin15d && ($total15d <= $total30d),
+        "Total 15d: {$total15d} <= Total 30d: {$total30d} | Límite inferior: {$limite15d}"
+    );
+
+    // D-03: Filtro 'fechas' con rango válido histórico (ej. 3 a 4 meses atrás)
+    $fIniHist = date('Y-m-d', strtotime('-120 days'));
+    $fFinHist = date('Y-m-d', strtotime('-90 days'));
+    $ordenesRango = MDOrdenes::obtenerOrdenesAnterioresMedico($medicoId, 50, 0, '', 'fecha', 'DESC', 'fechas', $fIniHist, $fFinHist);
+    $allInRange = true;
+    foreach ($ordenesRango as $ord) {
+        $fOrd = substr($ord['creado_en'], 0, 10);
+        if ($fOrd < $fIniHist || $fOrd > $fFinHist) $allInRange = false;
+    }
+    assertCase(
+        'D-03',
+        "Filtro 'fechas' con rango histórico válido recupera órdenes en ventana exacta",
+        $allInRange,
+        "Rango probado: {$fIniHist} a {$fFinHist} | Órdenes encontradas: " . count($ordenesRango)
+    );
+
+    // D-04: Filtro 'fechas' con día único (Poka-Yoke: fechaInicio sin fechaFin)
+    $fUnica = date('Y-m-d', strtotime('-45 days'));
+    $ordenesDiaUnico = MDOrdenes::obtenerOrdenesAnterioresMedico($medicoId, 50, 0, '', 'fecha', 'DESC', 'fechas', $fUnica, '');
+    $allSameDay = true;
+    foreach ($ordenesDiaUnico as $ord) {
+        $fOrd = substr($ord['creado_en'], 0, 10);
+        if ($fOrd !== $fUnica) $allSameDay = false;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `test_search_periodo_dataset_suite.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L179-349)</summary>
+
+**Path:** `Unknown file`
+
+```
+        if ($fOrd !== $fUnica) $allSameDay = false;
+    }
+    assertCase(
+        'D-04',
+        "Poka-Yoke: fechaInicio con fechaFin vacía auto-asume día exacto único",
+        $allSameDay,
+        "Día probado: {$fUnica} | Órdenes retornadas del día: " . count($ordenesDiaUnico)
+    );
+
+    // D-05: Filtro 'fechas' invertidas (Poka-Yoke: fechaInicio > fechaFin)
+    $fInvIni = date('Y-m-d', strtotime('-60 days'));
+    $fInvFin = date('Y-m-d', strtotime('-80 days')); // Menor que inicio
+    $ordenesInvertidas = MDOrdenes::obtenerOrdenesAnterioresMedico($medicoId, 50, 0, '', 'fecha', 'DESC', 'fechas', $fInvIni, $fInvFin);
+    $invertedCorrected = true;
+    foreach ($ordenesInvertidas as $ord) {
+        $fOrd = substr($ord['creado_en'], 0, 10);
+        if ($fOrd < $fInvFin || $fOrd > $fInvIni) $invertedCorrected = false;
+    }
+    assertCase(
+        'D-05',
+        "Poka-Yoke: Fechas invertidas (inicio > fin) se intercambian y ejecutan sin error SQL",
+        $invertedCorrected,
+        "Enviado: {$fInvIni} a {$fInvFin} | Corregido a: {$fInvFin} a {$fInvIni} | Total: " . count($ordenesInvertidas)
+    );
+
+    // D-06: Filtro 'fechas' vacías (Fallback Poka-Yoke: cae a default 30d)
+    $ordenesFechasVacias = MDOrdenes::obtenerOrdenesAnterioresMedico($medicoId, 50, 0, '', 'fecha', 'DESC', 'fechas', '', '');
+    $cntFechasVacias = count($ordenesFechasVacias);
+    $cnt30d = count($ordenes30d);
+    assertCase(
+        'D-06',
+        "Fallback Poka-Yoke: 'fechas' sin valores cae limpiamente a default 30d sin error 500",
+        $cntFechasVacias === $cnt30d,
+        "Resultados con fechas vacías: {$cntFechasVacias} === Resultados 30d: {$cnt30d}"
+    );
+
+    echo "\n";
+
+    // ═════════════════════════════════════════════════════════════════
+    // BLOQUE E: Búsqueda con Lupita y Matriz de Textos de Entrada (SIM2Y)
+    // ═════════════════════════════════════════════════════════════════
+    echo C_BOLD . "── BLOQUE E: Búsqueda Lupita y Matriz Multicriterio (16 Casos) ────────" . C_RESET . "\n";
+
+    // E-01: Búsqueda por Nombre de Paciente
+    $resNom = MDOrdenes::buscarOrdenesMedico($medicoId, 'Carlos', 15);
+    $validNom = is_array($resNom);
+    $matchNom = true;
+    foreach ($resNom as $r) {
+        if (stripos($r['paciente'], 'Carlos') === false && stripos($r['estudios'], 'Carlos') === false) {
+            $matchNom = false;
+        }
+    }
+    assertCase(
+        'E-01',
+        "Lupita: Búsqueda por Nombre de Paciente ('Carlos')",
+        $validNom && $matchNom,
+        "Coincidencias encontradas: " . count($resNom)
+    );
+
+    // E-02: Búsqueda por Apellido Paterno/Materno
+    $resApe = MDOrdenes::buscarOrdenesMedico($medicoId, 'García', 15);
+    $validApe = is_array($resApe);
+    $matchApe = true;
+    foreach ($resApe as $r) {
+        if (stripos($r['paciente'], 'García') === false && stripos($r['estudios'], 'García') === false) {
+            $matchApe = false;
+        }
+    }
+    assertCase(
+        'E-02',
+        "Lupita: Búsqueda por Apellido ('García')",
+        $validApe && $matchApe,
+        "Coincidencias encontradas: " . count($resApe)
+    );
+
+    // E-03: Búsqueda Mixta Multicriterio: Nombre + Año (ej. 'Carlos 2025' o 'Carlos 2024')
+    $resNomAnio = MDOrdenes::buscarOrdenesMedico($medicoId, 'Carlos 2025', 15);
+    $matchNomAnio = true;
+    foreach ($resNomAnio as $r) {
+        $anio = substr($r['fecha'], 0, 4);
+        if ($anio !== '2025') $matchNomAnio = false;
+        if (stripos($r['paciente'], 'Carlos') === false && stripos($r['estudios'], 'Carlos') === false) {
+            $matchNomAnio = false;
+        }
+    }
+    assertCase(
+        'E-03',
+        "Lupita Mixta: Multicriterio Nombre + Año ('Carlos 2025') resuelve ambos tokens",
+        is_array($resNomAnio) && $matchNomAnio,
+        "Coincidencias de 2025 con Carlos: " . count($resNomAnio)
+    );
+
+    // E-04: Búsqueda Mixta Multicriterio: Apellido + Año (ej. 'López 2025')
+    $resApeAnio = MDOrdenes::buscarOrdenesMedico($medicoId, 'López 2025', 15);
+    $matchApeAnio = true;
+    foreach ($resApeAnio as $r) {
+        $anio = substr($r['fecha'], 0, 4);
+        if ($anio !== '2025') $matchApeAnio = false;
+        if (stripos($r['paciente'], 'López') === false && stripos($r['estudios'], 'López') === false) {
+            $matchApeAnio = false;
+        }
+    }
+    assertCase(
+        'E-04',
+        "Lupita Mixta: Multicriterio Apellido + Año ('López 2025')",
+        is_array($resApeAnio) && $matchApeAnio,
+        "Coincidencias de 2025 con López: " . count($resApeAnio)
+    );
+
+    // E-05: Búsqueda por Diagnóstico Clínico
+    $resDiag = MDOrdenes::buscarOrdenesMedico($medicoId, 'Diabetes', 15);
+    $matchDiag = true;
+    foreach ($resDiag as $r) {
+        if (stripos($r['estudios'], 'Diabetes') === false && stripos($r['paciente'], 'Diabetes') === false) {
+            $matchDiag = false;
+        }
+    }
+    assertCase(
+        'E-05',
+        "Lupita: Búsqueda por Diagnóstico Clínico ('Diabetes')",
+        is_array($resDiag) && $matchDiag,
+        "Coincidencias de diagnóstico Diabetes: " . count($resDiag)
+    );
+
+    // E-06: Búsqueda Mixta Multicriterio: Diagnóstico + Año ('Diabetes 2025')
+    $resDiagAnio = MDOrdenes::buscarOrdenesMedico($medicoId, 'Diabetes 2025', 15);
+    $matchDiagAnio = true;
+    foreach ($resDiagAnio as $r) {
+        $anio = substr($r['fecha'], 0, 4);
+        if ($anio !== '2025') $matchDiagAnio = false;
+        if (stripos($r['estudios'], 'Diabetes') === false && stripos($r['paciente'], 'Diabetes') === false) {
+            $matchDiagAnio = false;
+        }
+    }
+    assertCase(
+        'E-06',
+        "Lupita Mixta: Multicriterio Diagnóstico + Año ('Diabetes 2025')",
+        is_array($resDiagAnio) && $matchDiagAnio,
+        "Coincidencias: " . count($resDiagAnio)
+    );
+
+    // E-07: Búsqueda por Teléfono Numérico Largo (7-10 dígitos)
+    // Tomar un teléfono real de una orden existente
+    $sampleTelRow = $db->query("SELECT paciente_telefono FROM vw_ordenes_completas WHERE medico_user_id = {$medicoId} AND paciente_telefono != '' LIMIT 1")->fetch(PDO::FETCH_ASSOC);
+    $sampleTel = $sampleTelRow ? $sampleTelRow['paciente_telefono'] : '5512345678';
+    $resTel = MDOrdenes::buscarOrdenesMedico($medicoId, $sampleTel, 15);
+    $matchTel = false;
+    foreach ($resTel as $r) {
+        if (strpos($r['telefono'], $sampleTel) !== false) {
+            $matchTel = true;
+            break;
+        }
+    }
+    assertCase(
+        'E-07',
+        "Lupita: Búsqueda directa por Teléfono (7-10 dígitos: '{$sampleTel}')",
+        !empty($resTel) && $matchTel,
+        "Órdenes localizadas por teléfono: " . count($resTel)
+    );
+
+    // E-08: Búsqueda por Teléfono Numérico Parcial (3+ dígitos)
+    $prefixTel = substr($sampleTel, 0, 4); // ej. '5512'
+    $resTelParcial = MDOrdenes::buscarOrdenesMedico($medicoId, $prefixTel, 15);
+    $matchTelParcial = false;
+    foreach ($resTelParcial as $r) {
+        if (strpos($r['telefono'], $prefixTel) !== false || strpos($r['folio'], $prefixTel) !== false) {
+            $matchTelParcial = true;
+            break;
+        }
+    }
+    assertCase(
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `test_search_periodo_dataset_suite.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L349-564)</summary>
+
+**Path:** `Unknown file`
+
+```
+    assertCase(
+        'E-08',
+        "Lupita: Fragmento numérico de teléfono o folio ('{$prefixTel}')",
+        !empty($resTelParcial) && $matchTelParcial,
+        "Coincidencias encontradas: " . count($resTelParcial)
+    );
+
+    // E-09: Búsqueda por Folio Canónico Completo (ej. S2Y-00042 o similar)
+    $sampleFolRow = $db->query("SELECT folio_unico FROM vw_ordenes_completas WHERE medico_user_id = {$medicoId} LIMIT 1")->fetch(PDO::FETCH_ASSOC);
+    $sampleFolio = $sampleFolRow ? $sampleFolRow['folio_unico'] : 'S2Y-00001';
+    $resFolio = MDOrdenes::buscarOrdenesMedico($medicoId, $sampleFolio, 15);
+    $matchFolioExact = false;
+    foreach ($resFolio as $r) {
+        if ($r['folio'] === $sampleFolio) {
+            $matchFolioExact = true;
+            break;
+        }
+    }
+    assertCase(
+        'E-09',
+        "Lupita: Folio canónico completo ('{$sampleFolio}')",
+        $matchFolioExact,
+        "Folio exacto encontrado en posición 1: " . ($resFolio[0]['folio'] ?? 'ninguno')
+    );
+
+    // E-10: Búsqueda por Folio en Minúsculas
+    $folioLower = strtolower($sampleFolio);
+    $resFolioLower = MDOrdenes::buscarOrdenesMedico($medicoId, $folioLower, 15);
+    $matchFolioLower = false;
+    foreach ($resFolioLower as $r) {
+        if (strtolower($r['folio']) === $folioLower) {
+            $matchFolioLower = true;
+            break;
+        }
+    }
+    assertCase(
+        'E-10',
+        "Lupita: Folio con prefijo en minúsculas ('{$folioLower}') es Case-Insensitive",
+        $matchFolioLower,
+        "Coincidencia lograda: " . count($resFolioLower) . " resultados"
+    );
+
+    // E-11: Búsqueda por Folio Numérico Puro sin Prefijo (ej. '42' o '1')
+    $rawNum = preg_replace('/\D/', '', $sampleFolio);
+    $numTerm = ltrim($rawNum, '0') ?: '1';
+    $resNumPuro = MDOrdenes::buscarOrdenesMedico($medicoId, $numTerm, 15);
+    assertCase(
+        'E-11',
+        "Lupita: Folio numérico sin padding ('{$numTerm}') resuelve con orden prioritario",
+        is_array($resNumPuro) && !empty($resNumPuro),
+        "Total órdenes retornadas para término numérico '{$numTerm}': " . count($resNumPuro)
+    );
+
+    // E-12: Búsqueda en Historial Profundo (> 30 días, Bypass de Período)
+    // Localizar una orden de Zona D (más de 60 días de antigüedad)
+    $sampleDeepRow = $db->query("
+        SELECT folio_unico, paciente_nombre, hora_captura
+        FROM vw_ordenes_completas
+        WHERE medico_user_id = {$medicoId}
+          AND hora_captura < DATE_SUB(CURDATE(), INTERVAL 60 DAY)
+        LIMIT 1
+    ")->fetch(PDO::FETCH_ASSOC);
+
+    if ($sampleDeepRow) {
+        $deepFolio = $sampleDeepRow['folio_unico'];
+        $resDeep = MDOrdenes::buscarOrdenesMedico($medicoId, $deepFolio, 15);
+        $foundDeep = false;
+        foreach ($resDeep as $r) {
+            if ($r['folio'] === $deepFolio) {
+                $foundDeep = true;
+                break;
+            }
+        }
+        assertCase(
+            'E-12',
+            "Lupita Bypass: Encuentra orden profunda de {$sampleDeepRow['hora_captura']} (> 60d)",
+            $foundDeep,
+            "Folio histórico: {$deepFolio} localizado exitosamente sin restricción de 30 días"
+        );
+    } else {
+        assertCase(
+            'E-12',
+            "Lupita Bypass: Sin órdenes > 60d en base para probar bypass profundo",
+            true,
+            "Omitido por ausencia de órdenes > 60d (sembrar dataset SIM2Y para validar)"
+        );
+    }
+
+    // E-13: Límite Anti-Ahogo (Anti-Choke LIMIT 16)
+    // Se pide con término genérico que coincide con cientos de registros
+    $resAntiChoke = MDOrdenes::buscarOrdenesMedico($medicoId, 'a', 15);
+    $countChoke = count($resAntiChoke);
+    // Nota: El método pide limit + 1 = 16 filas para paginación rápida
+    assertCase(
+        'E-13',
+        "Límite Anti-Ahogo: Consulta con término genérico ('a') nunca retorna más de 16 filas",
+        $countChoke <= 16,
+        "Total filas retornadas: {$countChoke} (protección de RAM y respuesta en <15ms)"
+    );
+
+    // E-14: Búsqueda sin Coincidencias (Zero-Matches)
+    $resZero = MDOrdenes::buscarOrdenesMedico($medicoId, 'TERMINO_INEXISTENTE_XYZ_9999', 15);
+    assertCase(
+        'E-14',
+        "Zero-Matches: Término inexistente retorna array vacío sin warnings ni excepciones",
+        is_array($resZero) && empty($resZero),
+        "Array retornado: []"
+    );
+
+    // E-15: Sanitización de Espacios Múltiples y Tokens Sucios
+    $resSpaces = MDOrdenes::buscarOrdenesMedico($medicoId, "   Carlos     2025   ", 15);
+    assertCase(
+        'E-15',
+        "Sanitización: Entrada con espacios redundantes tokeniza limpiamente sin romper SQL",
+        is_array($resSpaces),
+        "Tokens procesados limpiamente. Resultados: " . count($resSpaces)
+    );
+
+    // E-16: Aislamiento Estricto por Médico (RBAC / Multi-Tenant Isolation)
+    // Las órdenes retornadas por buscarOrdenesMedico DEBEN pertenecer exclusivamente al médico autenticado
+    $resIsolation = MDOrdenes::buscarOrdenesMedico($medicoId, 'SIM2Y', 30);
+    $isolated = true;
+    if (!empty($resIsolation)) {
+        $ids = array_map(function($r) { return (int)$r['id']; }, $resIsolation);
+        $inClause = implode(',', $ids);
+        $alienCount = (int)$db->query("
+            SELECT COUNT(*) FROM ordenes WHERE id IN ({$inClause}) AND medico_id != {$medicoId}
+        ")->fetchColumn();
+        if ($alienCount > 0) $isolated = false;
+    }
+    assertCase(
+        'E-16',
+        "Aislamiento RBAC: Las órdenes retornadas pertenecen estrictamente al médico autenticado",
+        $isolated,
+        "Auditoría cruzada en DB: 0 órdenes de otros médicos en los resultados"
+    );
+
+    echo "\n";
+
+    // ═════════════════════════════════════════════════════════════════
+    // BLOQUE F: Paginación y Retención de Parámetros (F-01 a F-04)
+    // ═════════════════════════════════════════════════════════════════
+    echo C_BOLD . "── BLOQUE F: Paginación y Retención de Parámetros (4 Casos) ───────────" . C_RESET . "\n";
+
+    // F-01: Paginación Página 1 en '30d' (25 registros)
+    $pag1 = MDOrdenes::obtenerOrdenesAnterioresMedico($medicoId, 25, 0, '', 'fecha', 'DESC', '30d');
+    assertCase(
+        'F-01',
+        "Paginación Página 1 (Limit 25, Offset 0) retorna bloque inicial ordenado DESC",
+        count($pag1) <= 25,
+        "Registros obtenidos en Pág 1: " . count($pag1)
+    );
+
+    // F-02: Paginación Página 2 (Offset 25) sin solapamientos
+    $pag2 = MDOrdenes::obtenerOrdenesAnterioresMedico($medicoId, 25, 25, '', 'fecha', 'DESC', '30d');
+    $idsPag1 = array_map(function($r) { return $r['id']; }, $pag1);
+    $idsPag2 = array_map(function($r) { return $r['id']; }, $pag2);
+    $intersect = array_intersect($idsPag1, $idsPag2);
+    assertCase(
+        'F-02',
+        "Paginación Página 2 (Offset 25) sin traslape de registros con Página 1",
+        empty($intersect),
+        "Solapamientos detectados: " . count($intersect) . " | Registros en Pág 2: " . count($pag2)
+    );
+
+    // F-03: Consistencia Total: Conteo vs Paginación
+    $countCalculated = MDOrdenes::contarOrdenesAnterioresMedico($medicoId, '', '30d');
+    $expectedAtLeast = count($pag1);
+    assertCase(
+        'F-03',
+        "Consistencia de Metadatos: contarOrdenesAnterioresMedico >= registros página 1",
+        $countCalculated >= $expectedAtLeast,
+        "Conteo total reportado: {$countCalculated} >= Registros Pág 1: {$expectedAtLeast}"
+    );
+
+    // F-04: Retención y Flexibilidad de Ordenamiento
+    $sortFolioAsc = MDOrdenes::obtenerOrdenesAnterioresMedico($medicoId, 10, 0, '', 'folio', 'ASC', '30d');
+    $sortPacDesc  = MDOrdenes::obtenerOrdenesAnterioresMedico($medicoId, 10, 0, '', 'paciente', 'DESC', '30d');
+    $sortEstAsc   = MDOrdenes::obtenerOrdenesAnterioresMedico($medicoId, 10, 0, '', 'estado', 'ASC', '30d');
+    $sortsWork = is_array($sortFolioAsc) && is_array($sortPacDesc) && is_array($sortEstAsc);
+    assertCase(
+        'F-04',
+        "Retención de Ordenamiento: 'folio ASC', 'paciente DESC', 'estado ASC' válidos",
+        $sortsWork,
+        "Las 3 variantes de ordenamiento compilaron y ejecutaron exitosamente"
+    );
+
+    echo "\n";
+
+} catch (Throwable $e) {
+    echo "\n" . C_RED . "✗ ERROR FATAL EN EJECUCIÓN DE LA SUITE:" . C_RESET . " " . $e->getMessage() . "\n";
+    echo "  Archivo: " . $e->getFile() . ":" . $e->getLine() . "\n\n";
+    exit(1);
+}
+
+// ── 3. Resumen Ejecutivo de la Suite ────────────────────────────────
+$duration = round(microtime(true) - $startTime, 3);
+echo C_BOLD . str_repeat('═', 78) . C_RESET . "\n";
+echo C_CYAN . C_BOLD . "  📊 RESUMEN EJECUTIVO — SUITE DE BÚSQUEDA Y FILTROS SIM2Y" . C_RESET . "\n";
+echo C_BOLD . str_repeat('═', 78) . C_RESET . "\n";
+echo "  Total de Casos Evaluados:   {$totalCases}\n";
+echo "  " . C_GREEN . "Casos Aprobados (PASS):     {$passedCases}" . C_RESET . "\n";
+if ($failedCases > 0) {
+    echo "  " . C_RED . "Casos Fallidos (FAIL):      {$failedCases}" . C_RESET . "\n";
+    echo "\n  " . C_RED . "Detalle de Fallas:" . C_RESET . "\n";
+    foreach ($failures as $f) {
+        echo "    - {$f}\n";
+    }
+} else {
+    echo "  " . C_GREEN . "Estado Final:               TODOS LOS CASOS APROBADOS (100%)" . C_RESET . "\n";
+}
+echo "  Tiempo de Ejecución:        {$duration} segundos\n";
+echo C_BOLD . str_repeat('═', 78) . C_RESET . "\n\n";
+
+exit($failedCases > 0 ? 1 : 0);
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `CREATE OR REPLACE VIEW vw_ordenes_completas`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 7:25 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `vw_ordenes_completas`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 7:25 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `vw_ordenes_completas`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 7:25 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+Inspecting the `vw_ordenes_completas` view definition within the specified file and line number is needed to understand the data structure. The query on line 441 reveals the specific columns that the view exposes, which provides the necessary context for further operations. This column information will inform how the data is handled.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `seed_dataset_2years.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.044186484s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L219-299)</summary>
 
 **Path:** `Unknown file`
 
 ```
 
+        $fechaResultado = null;
+        if (in_array($estadoId, [3, 4], true)) {
+            $dtRes = clone $fechaCaptura;
+            $dtRes->modify('+' . rand(3, 8) . ' hours');
+            $fechaResultado = $dtRes->format('Y-m-d H:i:s');
+        }
+
+        $stmtOrd->execute([
+            ':folio'           => $folio,
+            ':paciente_id'     => $paciente['id'],
+            ':medico_id'       => $medico['id'],
+            ':recepcion_id'    => 2, // Recepción
+            ':estado_id'       => $estadoId,
+            ':edad'            => $edadAlEmitir,
+            ':diagnostico'     => $diag,
+            ':otros'           => '',
+            ':estudios'        => $estudiosJson,
+            ':hora_captura'    => $horaCapturaStr,
+            ':fecha_resultado' => $fechaResultado,
+            ':actualizado_en'  => $fechaResultado ?? $horaCapturaStr,
+        ]);
+        $ordenId = (int)$db->lastInsertId();
+
+        // Detalle de estudios
+        foreach ($estudiosSeleccionados as $est) {
+            $stmtDet->execute([$ordenId, $est['id']]);
+        }
+
+        // Historial progresivo de estados
+        // 1: Remitido (al momento de captura)
+        $stmtHist->execute([
+            $ordenId, null, 1, $medico['id'],
+            'Solicitud Digital emitida por médico [SIM2Y]', $horaCapturaStr
+        ]);
+
+        if ($estadoId >= 2) {
+            $dtH2 = clone $fechaCaptura;
+            $dtH2->modify('+1 hour');
+            $stmtHist->execute([
+                $ordenId, 1, 2, 2,
+                'Recepción inició atención de muestras [SIM2Y]', $dtH2->format('Y-m-d H:i:s')
+            ]);
+        }
+        if ($estadoId >= 3 && $estadoId !== 5) {
+            $dtH3 = clone $fechaCaptura;
+            $dtH3->modify('+4 hours');
+            $stmtHist->execute([
+                $ordenId, 2, 3, 2,
+                'Resultados PDF cargados por laboratorio [SIM2Y]', $dtH3->format('Y-m-d H:i:s')
+            ]);
+        }
+        if ($estadoId === 4) {
+            $dtH4 = clone $fechaCaptura;
+            $dtH4->modify('+6 hours');
+            $stmtHist->execute([
+                $ordenId, 3, 4, 2,
+                'Orden completada y entregada al paciente [SIM2Y]', $dtH4->format('Y-m-d H:i:s')
+            ]);
+        }
+        if ($estadoId === 5) {
+            $dtH5 = clone $fechaCaptura;
+            $dtH5->modify('+2 hours');
+            $stmtHist->execute([
+                $ordenId, 1, 5, $medico['id'],
+                'Orden cancelada a solicitud del médico/paciente [SIM2Y]', $dtH5->format('Y-m-d H:i:s')
+            ]);
+        }
+
+        // Si tiene resultados listos o cerrada, adjuntar resultado PDF simulado
+        if (in_array($estadoId, [3, 4], true)) {
+            $pdfName = "resultado_{$folio}.pdf";
+            $pdfPath = "/storage/resultados/sim2y/{$pdfName}";
+            $stmtPdf->execute([
+                $ordenId, $pdfName, $pdfPath, 2, 'completo', $folio,
+                $fechaResultado ?? $horaCapturaStr
+            ]);
+        }
+
+        $statsZonas[$zonaKey]++;
+        $statsEstados[$estadoId]++;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `seed_dataset_2years.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L299-439)</summary>
+
+**Path:** `Unknown file`
+
+```
+        $statsEstados[$estadoId]++;
+        $folioIndex++;
+
+        return $ordenId;
+    };
+
+    // ─────────────────────────────────────────────────────────────
+    // ZONA A: HOY (CURDATE, 0 días) -> 12 órdenes
+    // Estados: 1 (Remitido), 2 (En Atención), 3 (Resultados Listos), 4 (Cerrada)
+    // ─────────────────────────────────────────────────────────────
+    $hoyStr = date('Y-m-d');
+    $horasHoy = ['08:15', '09:00', '09:45', '10:30', '11:15', '12:00', '12:45', '13:30', '14:15', '15:00', '15:45', '16:30'];
+    $estadosHoy = [1, 2, 2, 1, 2, 3, 3, 2, 4, 1, 3, 4];
+
+    for ($i = 0; $i < 12; $i++) {
+        $folio = sprintf('S2Y-%05d', $folioIndex);
+        $pac = $pacientesIds[array_rand($pacientesIds)];
+        $med = $medicos[$i % count($medicos)];
+        $estId = $estadosHoy[$i];
+        $hCap = "{$hoyStr} {$horasHoy[$i]}:00";
+
+        $ordId = $fnInsertarOrden($folio, $pac, $med, $estId, $hCap, 'A_Hoy');
+        if ($i === 0) {
+            $notifTargets['hoy'] = ['folio' => $folio, 'medico_id' => $med['id'], 'paciente' => $pac['nombre'], 'orden_id' => $ordId];
+        }
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    // ZONA B: ÚLTIMOS 15 DÍAS (1d - 15d) -> 50 órdenes
+    // Casos frontera: Ayer (1d), día 14, día 15
+    // ─────────────────────────────────────────────────────────────
+    $diasZonaB = [1, 1, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 13, 14, 14, 14, 14, 15, 15, 15, 15];
+    // Rellenar hasta 50
+    while (count($diasZonaB) < 50) {
+        $diasZonaB[] = rand(2, 13);
+    }
+    sort($diasZonaB);
+
+    foreach ($diasZonaB as $idx => $diasAtras) {
+        $folio = sprintf('S2Y-%05d', $folioIndex);
+        $pac = $pacientesIds[array_rand($pacientesIds)];
+        $med = $medicos[$idx % count($medicos)];
+        // En días anteriores predominan estados completados o en atención
+        $estadosDistrib = [2, 3, 3, 4, 4, 4, 5];
+        $estId = $estadosDistrib[array_rand($estadosDistrib)];
+        $horaRand = str_pad((string)rand(8, 18), 2, '0', STR_PAD_LEFT) . ':' . str_pad((string)rand(0, 59), 2, '0', STR_PAD_LEFT) . ':00';
+        $hCap = date('Y-m-d', strtotime("-{$diasAtras} days")) . " {$horaRand}";
+
+        $ordId = $fnInsertarOrden($folio, $pac, $med, $estId, $hCap, 'B_15d');
+        if ($diasAtras === 5 && !isset($notifTargets['5d'])) {
+            $notifTargets['5d'] = ['folio' => $folio, 'medico_id' => $med['id'], 'paciente' => $pac['nombre'], 'orden_id' => $ordId];
+        }
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    // ZONA C: DÍAS 16 A 30 (16d - 30d) -> 50 órdenes
+    // Casos frontera: día 16 (inmediato exterior de 15), día 29, día 30 (límite de 30d)
+    // ─────────────────────────────────────────────────────────────
+    $diasZonaC = [16, 16, 16, 16, 17, 17, 18, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 29, 30, 30, 30, 30];
+    while (count($diasZonaC) < 50) {
+        $diasZonaC[] = rand(17, 28);
+    }
+    sort($diasZonaC);
+
+    foreach ($diasZonaC as $idx => $diasAtras) {
+        $folio = sprintf('S2Y-%05d', $folioIndex);
+        $pac = $pacientesIds[array_rand($pacientesIds)];
+        $med = $medicos[$idx % count($medicos)];
+        $estadosDistrib = [3, 4, 4, 4, 5];
+        $estId = $estadosDistrib[array_rand($estadosDistrib)];
+        $horaRand = str_pad((string)rand(8, 18), 2, '0', STR_PAD_LEFT) . ':' . str_pad((string)rand(0, 59), 2, '0', STR_PAD_LEFT) . ':00';
+        $hCap = date('Y-m-d', strtotime("-{$diasAtras} days")) . " {$horaRand}";
+
+        $ordId = $fnInsertarOrden($folio, $pac, $med, $estId, $hCap, 'C_30d');
+        if ($diasAtras === 20 && !isset($notifTargets['20d'])) {
+            $notifTargets['20d'] = ['folio' => $folio, 'medico_id' => $med['id'], 'paciente' => $pac['nombre'], 'orden_id' => $ordId];
+        }
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    // ZONA D: HISTÓRICO 2 AÑOS (31d - 730d) -> ~1,400 órdenes
+    // Casos frontera: día 31 (primer día fuera de 30d), 6 meses, 1 año, 2 años
+    // ─────────────────────────────────────────────────────────────
+    $totalHistoricas = 1400;
+    // Sembrar primero casos frontera obligatorios
+    $fronterasD = [31, 31, 31, 31, 45, 60, 90, 120, 180, 240, 365, 500, 720, 730];
+    foreach ($fronterasD as $idx => $diasAtras) {
+        $folio = sprintf('S2Y-%05d', $folioIndex);
+        $pac = $pacientesIds[array_rand($pacientesIds)];
+        $med = $medicos[$idx % count($medicos)];
+        $estId = (rand(1, 10) === 10) ? 5 : 4; // Mayoría cerradas
+        $horaRand = str_pad((string)rand(8, 18), 2, '0', STR_PAD_LEFT) . ':' . str_pad((string)rand(0, 59), 2, '0', STR_PAD_LEFT) . ':00';
+        $hCap = date('Y-m-d', strtotime("-{$diasAtras} days")) . " {$horaRand}";
+        $ordId = $fnInsertarOrden($folio, $pac, $med, $estId, $hCap, 'D_2Años');
+
+        if ($diasAtras === 240 && !isset($notifTargets['8m'])) {
+            $notifTargets['8m'] = ['folio' => $folio, 'medico_id' => $med['id'], 'paciente' => $pac['nombre'], 'orden_id' => $ordId];
+        }
+    }
+
+    // Distribuir el resto (~1,386) uniformemente a lo largo de los 700 días restantes
+    $restantes = $totalHistoricas - count($fronterasD);
+    for ($k = 0; $k < $restantes; $k++) {
+        $diasAtras = rand(32, 729);
+        $folio = sprintf('S2Y-%05d', $folioIndex);
+        $pac = $pacientesIds[array_rand($pacientesIds)];
+        $med = $medicos[$k % count($medicos)];
+        $estId = (rand(1, 12) === 12) ? 5 : 4; // Histórico: casi todas cerradas o canceladas
+        $horaRand = str_pad((string)rand(8, 18), 2, '0', STR_PAD_LEFT) . ':' . str_pad((string)rand(0, 59), 2, '0', STR_PAD_LEFT) . ':00';
+        $hCap = date('Y-m-d', strtotime("-{$diasAtras} days")) . " {$horaRand}";
+
+        $fnInsertarOrden($folio, $pac, $med, $estId, $hCap, 'D_2Años');
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    // 8. Inyección de Notificaciones Quirúrgicas para Pruebas UI
+    // ─────────────────────────────────────────────────────────────
+    echo "  Inyectando notificaciones de prueba vinculadas a cada zona...\n";
+
+    // Notif 1: Hoy (Zona A)
+    if (isset($notifTargets['hoy'])) {
+        $t = $notifTargets['hoy'];
+        $stmtNotif->execute([
+            $t['medico_id'], 'nueva_orden', $t['folio'],
+            "Nueva orden digital {$t['folio']} registrada para {$t['paciente']} [SIM2Y]",
+            0, 1, 0, date('Y-m-d H:i:s')
+        ]);
+    }
+
+    // Notif 2: Hace 5 días (Zona B, visible en 15 y 30d)
+    if (isset($notifTargets['5d'])) {
+        $t = $notifTargets['5d'];
+        $stmtNotif->execute([
+            $t['medico_id'], 'resultados_listos', $t['folio'],
+            "Resultados listos para entrega: {$t['folio']} — {$t['paciente']} [SIM2Y]",
+            0, 1, 0, date('Y-m-d H:i:s', strtotime('-5 days'))
+        ]);
+    }
+
+    // Notif 3: Hace 20 días (Zona C, visible solo en 30d, oculta en 15)
+    if (isset($notifTargets['20d'])) {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Orders are distributed round-robin across all zones (A, B, C, D) in the seeding script, ensuring each doctor receives orders in every zone. Initial focus shifts to meticulously examining the test suite file. Beginning the audit with the first test case, labeled D-01, where a specific function is called.
+
+
+The code filters orders within the last 30 days. The comparison logic needs review, as orders on the 30th day are included in the MariaDB query but can be incorrectly excluded by the PHP code if only the date part is compared. Empty result sets are also a potential scenario that needs consideration. The MariaDB query and PHP date comparisons are being cross-referenced.
+
+
+A crucial flaw has been identified: the initial 30-day filter can incorrectly pass even with no orders. The condition requires an assertion to ensure the order count is not zero when applying the filter. The 15-day filter's constraints are examined next.
+
+Further, the total count for the 15-day filter is verified to be less than or equal to the 30-day filter's count. This condition should be strictly maintained if there are orders within the 30-day window.
+
+
+The code snippet appears to be retrieving orders within a specific historical date range. Reviewing the PHP code, especially the date comparison logic, is essential to ensure accurate filtering. Suspect the date range is correctly applied in the database query. However, the date comparison logic in the PHP loop might have an off-by-one error. The database query parameters `f_ini_o` and `f_fin_o` are observed, which should be verified against the intended date range.
+
+
+The database query's parameterization is reviewed, specifically the binding of `:user_id` as an integer. Within `contarOrdenesAnterioresMedico`, an empty alias is passed to a filter function, implying direct date parameter usage. The empty alias observation raises a potential concern regarding parameter naming and date range handling in the `contarOrdenesAnterioresMedico` function. This parameter assignment works as expected in that specific function, though further examination is necessary to ensure consistent date handling. Reviewing test case D-05 reveals an instance of inverted date filtering, providing a potential test case.
+
+
+A potential edge case where the inverted order result is affected by empty results is identified. To rigorously validate the "poka-yoke" correction logic, it's essential to confirm that swapping the date parameters in the underlying function results in identical query results. This verification is crucial to establish the effectiveness of the correction. Test case D-05 needs augmentation to include assertions validating the identical counts from both date orderings.
+
+The subsequent test, D-06, focuses on verifying the fallback mechanism when date filters are empty, confirming it defaults to the 30-day window. The assertion is in place to compare the order count with empty date filters against the established 30-day order count.
+
+
+The initial assumption of a 50-order limit in a 30-day window needs further validation. Cross-referencing order counts and row results between different methods is the only way to guarantee parity.
+
+Now investigating the "Bloque E" test cases. Specifically, test case E-01 examines patient name searches. Further review of the search function reveals the 'estudios' key in the result corresponds to the 'diagnostico' column in the database, requiring an adjustment to the search criteria within the loop. The returned data uses `paciente_nombre` and `diagnostico` as the respective columns for patient name and studies.
+
+
+The search logic's current implementation uses 'estudios' for diagnoses, requiring correction.  A doctor-specific search for 'Carlos' might fail if no such patient exists. The current approach uses hardcoded search terms; therefore, a dynamic sample query from the database, mirroring the folio retrieval, can be employed to fetch relevant search terms for E-01 through E-07 test cases. Using sample data will avoid cases where a static search term is missing from a particular doctor's data.
+
+
+A dynamic sample query is proposed to retrieve patient name, diagnosis, and year for test case E-01 through E-07.  This data-driven approach removes dependency on hardcoded test terms, improving test reliability regardless of dataset seeding.  This uses data from SIM2Y, if seeded, or clinic data if not, ensuring functionality with either scenario. This approach eliminates a major testing gap. The proposed method will ensure that the tests in E-03 and E-04 are valid.
+
+
+A potential flaw in the name search logic where an empty result could lead to an incorrect positive match has been discovered. Replacing the hardcoded search term with a dynamic query that checks for the existence of relevant data provides a robust solution. The data-driven approach using sample queries ensures valid search terms and fixes a testing gap in the E-01 through E-07 test cases. The dynamic approach will produce a more robust test. Verification of test cases E-05 and E-06, applying the same data-driven approach. Examining how phone number searches are handled will resolve the issue. Line 658 of the `MD\Negocio\Ordenes.php` file is the focus for understanding the expected behavior of 7-10 digit numbers.
+
+
+The phone number search's reliance on a regex `^\d{7,10}$` might fail with formatted numbers.  The database seeds ten-digit numbers, and the code cleans them.  The cleaned numbers should match the regex.
+
+Reviewing the "E-11" folio search, the numeric term is cleaned of non-digits and leading zeros.  The `buscarOrdenesMedico` function handles numeric terms with a regex `^\d{1,6}$` to search for exact or prefixed folios. This suggests potential inconsistencies in the handling of pure numeric searches between phone numbers and folios.
+
+
+The `buscarOrdenesMedico` function's folio search logic is flawed; the LIKE clause will not correctly match prefixes like "S2Y-" as observed with simulation folios. In the simulation data, the LIKE operator will produce incorrect matches for folios beginning with alphanumeric prefixes. Examining the `obtenerOrdenesAnterioresMedico` function reveals a more robust search that can correctly handle the alphanumeric prefix. It uses several checks including exact match and a LIKE with a padded numeric part. This reveals a testing gap where simulation folios are handled inconsistently.
+
+
+The folio search logic in `buscarOrdenesMedico` is insufficient, failing to handle alphanumeric prefixes present in simulation data, which will lead to incorrect search results. The logic searches only for exact numeric matches or numeric prefixes. The `obtenerOrdenesAnterioresMedico` function uses a more robust approach, including exact match and padded numeric checks, making it more reliable for alphanumeric folio searches. This difference reveals a crucial testing gap.
+
+
+The `buscarOrdenesMedico` function's folio search has a critical limitation: it does not handle wildcard searches that include prefixes, whereas `obtenerOrdenesAnterioresMedico` does.  This discrepancy affects simulation data folio searches. The numeric search only handles exact matches or prefixes; therefore, it misses folios like `S2Y-00042` if the search is simply `42`. The current logic would not find the folio without adding a `LIKE` check like in the other function.
+
+
+A test case for numeric-only folio searches will fail due to the search function using an exact or prefix match against the database where folios have alphanumeric prefixes. Consequently, the query will return an empty result, leading to a failed assertion. Comparing `buscarOrdenesMedico` with a more robust search function, `obtenerOrdenesAnterioresMedico`, highlights a functional gap. The latter correctly handles prefixes and exact matches.
+
+
+The code's folio search logic is now under scrutiny within the `buscarOrdenesMedico` function, specifically lines 649-693 of `Ordenes.php`. It is being checked for its actual capabilities. The specific handling of folio searches is examined in detail.
+
+The code's structure appears to implement distinct search strategies based on folio format (pure numeric, long numeric, or text/multicriteria). The logic for numerical folio searches is being inspected to understand prefix and exact matching. The potential for inconsistent handling, given the observed alphanumeric prefixes in simulation folios, is being assessed.
+
+
+The code's folio search logic employs different strategies based on input. For numeric inputs of 3+ digits, the code attempts an exact match or a prefix search on the `folio_unico` column. This approach is sufficient for numerical folios. However, simulation data contains folios with alphanumeric prefixes, which the current `buscarOrdenesMedico` function's logic will miss. Consequently, test cases relying on these prefixes will produce incorrect results.
+
+
+The search function logic's text branch, used for alphanumeric terms, does *not* include a check against the `folio_unico` column. This means alphanumeric folio prefixes are *not* correctly handled in this branch.  The code logic prioritizes name/diagnosis searches. This confirms the inconsistency in folio search handling where alphanumeric prefixes are missed in specific search branches. This introduces a significant testing gap for simulation data.
+
+
+The `buscarOrdenesMedico` function's search logic misses alphanumeric folio prefixes because the `folio_unico` column is omitted from the `else` branch, prioritizing name and diagnosis searches. This omission is a significant flaw, as simulation data relies on these prefixes, potentially leading to incorrect search results and failed test assertions. The logic prioritizes other data, which is an oversight. The `obtenerOrdenesAnterioresMedico` uses a more complete approach, which makes the former flawed. The function `obtenerOrdenesAnterioresMedico` includes both exact matching and `LIKE` checks, properly handling these prefixes. The implementation in `obtenerOrdenesAnteriores` includes the necessary check, and therefore represents the correct approach for simulation.
+
+
+The `buscarOrdenesMedico` function's folio search is incomplete, as it fails to include wildcard (LIKE) searches or handle alphanumeric prefixes, unlike the more comprehensive `obtenerOrdenesAnterioresMedico` function. This disparity leads to inconsistent search results and potentially failed assertions when using simulation folios. Test case E-11 is designed to verify this, focusing on exact matches, which does not consider the prefix. Reviewing the function in detail helps identify these specific flaws.
+
+
+The `buscarOrdenesMedico` function's folio search has a critical inconsistency. It does not correctly handle alphanumeric prefixes, especially in the text search branch where it omits checks against the `folio_unico` column. The search logic handles exact matches or prefixes in the numeric branch, but the text branch omits these checks. This discrepancy results in incorrect search results when handling alphanumeric folio prefixes. The `obtenerOrdenesAnterioresMedico` function handles this case correctly. The identified pattern suggests alignment is required for uniform search results.
+
+
+The test case F-01 uses `obtenerOrdenesAnterioresMedico` with a 30-day filter. The logic of `obtenerOrdenesAnterioresMedico` requires examination to ensure proper pagination. The test verifies the record count against a limit, but it may have an issue. Potential pagination issues could result from inconsistencies in date handling during querying or filtering. This requires a deeper dive into pagination logic.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `run_all_refresh_search_suites.sh`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 28.997432351s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+#!/usr/bin/env bash
+# ═══════════════════════════════════════════════════════════════════════
+# run_all_refresh_search_suites.sh — Orquestador Master de 44 Casos
+# Automatización Completa: Refresh, Ciclo de Vida, Filtros, Lupita y SIM2Y
+# ═══════════════════════════════════════════════════════════════════════
+#
+# Uso:
+#   bash tests/run_all_refresh_search_suites.sh
+#   bash tests/run_all_refresh_search_suites.sh --seed
+#   bash tests/run_all_refresh_search_suites.sh --clean
+#   bash tests/run_all_refresh_search_suites.sh --only-frontend
+#   bash tests/run_all_refresh_search_suites.sh --only-backend
+# ═══════════════════════════════════════════════════════════════════════
+
+set -e
+
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$DIR"
+
+# Colores ANSI
+BOLD="\033[1m"
+GREEN="\033[32m"
+RED="\033[31m"
+YELLOW="\033[33m"
+CYAN="\033[36m"
+RESET="\033[0m"
+
+# Flags
+DO_SEED=false
+DO_CLEAN=false
+RUN_FRONTEND=true
+RUN_BACKEND=true
+
+for arg in "$@"; do
+    case "$arg" in
+        --seed)
+            DO_SEED=true
+            ;;
+        --clean)
+            DO_CLEAN=true
+            ;;
+        --only-frontend)
+            RUN_BACKEND=false
+            ;;
+        --only-backend)
+            RUN_FRONTEND=false
+            ;;
+        --help|-h)
+            echo "Uso: bash tests/run_all_refresh_search_suites.sh [OPCIONES]"
+            echo "Opciones:"
+            echo "  --seed           Siembra el dataset SIM2Y (2 años / 1,512 órdenes) antes de la suite"
+            echo "  --clean          Limpia atómicamente el dataset SIM2Y al concluir"
+            echo "  --only-frontend  Ejecuta solo la Suite 1 de Node.js (18 casos)"
+            echo "  --only-backend   Ejecuta solo la Suite 2 de PHP CLI (26 casos)"
+            exit 0
+            ;;
+    esac
+done
+
+export LAESH_DB_PORT="${LAESH_DB_PORT:-6002}"
+export LAESH_DB_USER="${LAESH_DB_USER:-root}"
+export LAESH_DB_PASS="${LAESH_DB_PASS:-comite_2026}"
+export LAESH_DB_NAME="${LAESH_DB_NAME:-laesh_db}"
+
+echo -e "\n${BOLD}══════════════════════════════════════════════════════════════════════${RESET}"
+echo -e "${CYAN}${BOLD}  🚀 ORQUESTADOR MASTER: SUITE COMPLETA DE 44 CASOS AUTOMATIZADOS${RESET}"
+echo -e "  Stack: Node.js (Frontend 18) + PHP CLI / PDO MariaDB (Backend 26)"
+echo -e "${BOLD}══════════════════════════════════════════════════════════════════════${RESET}\n"
+
+START_ALL=$(date +%s)
+
+# Paso Opcional: Siembra del Dataset SIM2Y
+if [ "$DO_SEED" = true ]; then
+    echo -e "${YELLOW}🌱 Sembrando Dataset Clínico SIM2Y (2 años de historial)...${RESET}"
+    php tests/seed_dataset_2years.php --clean-first
+    echo ""
+fi
+
+STATUS_SUITE1=0
+STATUS_SUITE2=0
+
+# PARTE 1: Frontend & Ciclo de Vida (18 Casos)
+if [ "$RUN_FRONTEND" = true ]; then
+    echo -e "${BOLD}▶ PARTE 1: Suite Frontend & Ciclo de Vida (18 Casos en Node.js)${RESET}"
+    echo -e "  Bloques: A (Laptop F5/Ctrl+F5), B (Móviles PTR/Back), C (Limpieza Atómica), G (Notificaciones)"
+    echo -e "  Archivo: tests/test_client_refresh_draft_suite.js\n"
+    
+    if node tests/test_client_refresh_draft_suite.js; then
+        STATUS_SUITE1=0
+    else
+        STATUS_SUITE1=1
+    fi
+    echo ""
+fi
+
+# PARTE 2: Backend Search, Filtros y Dataset SIM2Y (26 Casos)
+if [ "$RUN_BACKEND" = true ]; then
+    echo -e "${BOLD}▶ PARTE 2: Suite Backend, Filtros Período y Lupita Mixta (26 Casos en PHP CLI)${RESET}"
+    echo -e "  Bloques: D (Períodos 30d/15d/Fechas), E (Lupita Matriz Multicriterio), F (Paginación)"
+    echo -e "  Archivo: tests/test_search_periodo_dataset_suite.php\n"
+    
+    if php tests/test_search_periodo_dataset_suite.php; then
+        STATUS_SUITE2=0
+    else
+        STATUS_SUITE2=1
+    fi
+    echo ""
+fi
+
+# Paso Opcional: Limpieza atómica post-pruebas
+if [ "$DO_CLEAN" = true ]; then
+    echo -e "${YELLOW}🧹 Limpiando atómicamente registros del Dataset SIM2Y...${RESET}"
+    php tests/clean_dataset_2years.php
+    echo ""
+fi
+
+END_ALL=$(date +%s)
+DURATION=$((END_ALL - START_ALL))
+
+echo -e "${BOLD}══════════════════════════════════════════════════════════════════════${RESET}"
+echo -e "${CYAN}${BOLD}  🏁 REPORTE CONSOLIDADO FINAL — STACK DE 44 CASOS AUTOMATIZADOS${RESET}"
+echo -e "${BOLD}══════════════════════════════════════════════════════════════════════${RESET}"
+
+if [ "$STATUS_SUITE1" -eq 0 ] && [ "$STATUS_SUITE2" -eq 0 ]; then
+    echo -e "  Estado General:        ${GREEN}${BOLD}✓ TODAS LAS SUITES APROBADAS (100%)${RESET}"
+    echo -e "  Suite 1 (Frontend):    ${GREEN}✓ 18/18 Casos PASS${RESET}"
+    echo -e "  Suite 2 (Backend):     ${GREEN}✓ 26/26 Casos PASS${RESET}"
+    echo -e "  Total de Casos:        ${GREEN}${BOLD}44 Casos Automatizados Verificados${RESET}"
+else
+    echo -e "  Estado General:        ${RED}${BOLD}✗ HUBO FALLAS EN LAS SUITES${RESET}"
+    [ "$STATUS_SUITE1" -ne 0 ] && echo -e "  Suite 1 (Frontend):    ${RED}✗ Falló Suite de Node.js${RESET}"
+    [ "$STATUS_SUITE2" -ne 0 ] && echo -e "  Suite 2 (Backend):     ${RED}✗ Falló Suite de PHP${RESET}"
+fi
+echo -e "  Tiempo Total:          ${DURATION}s"
+echo -e "${BOLD}══════════════════════════════════════════════════════════════════════${RESET}\n"
+
+if [ "$STATUS_SUITE1" -ne 0 ] || [ "$STATUS_SUITE2" -ne 0 ]; then
+    exit 1
+fi
+exit 0
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The `set -e` in the script sets the "errexit" option; however, the `if` statement correctly captures the exit code of the test command even when it fails. Therefore, `STATUS_SUITE1=1` is correctly assigned if the test suite fails, which means the script is behaving as intended.
+
+
+Analyzing another test suite's exit code assignment confirms the expected behavior: suite failure sets the status to 1. The script's final exit condition correctly reflects test suite outcomes, exiting with code 1 if any suite fails. The focus shifts to examining production code implementations for potential gaps related to the user's search functionality request.
+
+
+The search logic's flawed folio matching necessitates investigating the `'buscarOrdenesMedico'` function. Inputting numeric folios directly will fail to locate alphanumeric folios because of an overly restrictive comparison. Alphanumeric folios are never matched against the folio column. To fix this, the alphanumeric input needs inclusion in the folio matching.
+
+
+Analyzing the search logic reveals that both the Reception and Doctor search functions lack comprehensive folio matching. The current implementation in both lacks the crucial `LOWER(o.folio_unico) LIKE :q_fol_N` condition. The absence of this condition prevents searches using alphanumeric folios and mixed search terms. Adding this condition to both search functions ensures folio searches are more flexible.
+
+
+The test suite `tests/test_search_periodo_dataset.php` requires a thorough review to ensure comprehensive folio search testing. Initial inspection suggests current tests may not fully cover alphanumeric folio matching with prefixes like "S2Y-" or mixed inputs. Adding tests to cover the identified gap in folio matching will be essential.
+
+
+The current test for the 30-day filter is flawed: it passes vacuously if no records are returned, regardless of the query's validity. This oversight requires modifying the assertion to ensure a non-empty result set when the dataset is seeded. The corrected test needs an additional check to verify that records exist within the expected timeframe.
+
+
+The date inversion auto-correction must be validated by comparing the count of records retrieved in both inverted and normal date order. The absence of records when dates are inverted must not lead to a false positive.
+
+The test suite relies on hardcoded data, which can lead to false positives if the sample data does not exist in the database. Instead of the hardcoded data, sample data should be queried dynamically for a given doctor. This ensures more reliable and meaningful test outcomes.
+
+
+Analyzing how to extract sample data from the database for testing. The plan is to execute a query retrieving a sample record for a specific doctor, extracting data for testing folio, date, and other search criteria. This approach avoids hardcoding and ensures meaningful test results.
+
+
+The current search functionality, particularly in the `buscarOrdenesMedico` function, incorrectly filters folios. The existing code checks against `paciente_nombre` and `diagnostico` instead of `folio_unico`. The code lacks a `LOWER(o.folio_unico) LIKE :q_fol_N` condition. This omission prevents accurate folio searches.
+
+
+The existing search functions neglect folio matching within the text-based search branch.  This omission is a critical bug.  The numeric folio search is also flawed, as it fails to account for prefixes or exact matches, preventing successful lookups.
+
+The `obtenerOrdenesAnterioresMedico` function's folio search relies on a regular expression that permits prefixes. However, it only performs an exact match or checks for a string of leading numbers. This implementation is problematic, given that the other search functions omit a check on the folio.
+
+
+The `obtenerOrdenesAnterioresMedico` function now correctly handles folio searches, including prefixes and text-based searches. However, the `buscarOrdenesMedico` and `buscarOrdenes` methods still require updates to align with the improved folio matching. These functions have not been updated for folio matching within the text search branch or for supporting prefixed numeric folios. The report needs to highlight this discrepancy. Additionally, the pagination logic in Bloque F requires examination for potential issues.
+
+
+Pagination testing requires dynamically determining the page size based on the number of orders, using a range to cover multiple-page scenarios. Verifying sort order in the code involves checking data consistency after applying `ORDER BY` clauses to confirm sort behavior.
+
+The frontend test suite cases will be examined to assess completeness and coverage of scenarios.
+
+
+Reviewed scenarios for testing client-side draft preservation and refresh behavior, focusing on various triggers like DOM recreation, hard refresh, and back/forward navigation. A potential gap was identified regarding how tab text and badge content are updated and verified, specifically around the `tabText` update. The process of updating `tabText` relies on several functions, including `updateChipsContainer()` which calls `updateTotalBadge()`, with `totalCount` calculated from the grid and `otros-estudios`.
+
+
+Adding `process.exit(0);` or a try-catch block to the test script clarifies exit behavior, ensuring a clean exit with code 1 on any error. This enhances compatibility with CLI expectations.
+
+Examining database methods `MD\Negocio\Ordenes::buscarOrdenesMedico` and `RC\Negocio\Ordenes::buscarOrdenes` is critical to ensure test suite E-01 through E-16 pass consistently. The code snippet is being used to find potential mismatches.
+
+The current folio search implementation in `MD\Negocio\Ordenes.php` employs regular expressions for numeric folio prefixes. Checking the matching strategy shows that it's incomplete.
+
+
+The search functions still need the folio matching implemented for text-based queries and prefixes to avoid errors. The search for folios currently functions by exact match only; this causes incorrect behavior when users input partial folios or those with prefixes. The `buscarOrdenesMedico` and `buscarOrdenes` methods lack the improved folio handling and must be updated.
+
+
+The numeric folio search now uses a more flexible approach, searching for exact matches, prefixes, and suffixes, including padded zeros. Order results prioritize exact matches and padded matches. This expanded search will likely improve the folio matching. The search is improved because it now addresses all the prefixes.
+
+
+The folio search now supports year, prefixed alphanumeric, and numeric fragments, updating the `whereParts` array based on identified patterns.  Exact folio, padded numeric folio (for partial matches), and phone number searches are incorporated within a single `WHERE` clause.
+
+
+The improved folio search implementation now handles a comprehensive set of search scenarios, including direct folio input, prefixed alphanumeric folios, and partial folio matches. This expanded matching logic is now present in both `MD\Negocio\Ordenes::buscarOrdenesMedico` and `RC\Negocio\Ordenes::buscarOrdenes`, with the text search including `folio_unico`. The comprehensive folio matching covers a wide array of test cases.
+
+
+The test suite `tests/test_search_periodo_dataset_suite.php` requires enhancements for robust, non-vacuous assertions. Dynamic data extraction will replace hardcoded values with doctor-specific samples for more accurate testing of multi-criteria search combinations including name, year, diagnosis, phone, and folio, also generic terms. Assertions will be added to ensure the presence of results in relevant tests (D-01, D-02, D-03, D-05, D-06). Pagination tests (F-01, F-02) will adapt the page size calculation dynamically and assert the presence of items on different pages with no overlap.
+
+
+The `test_search_periodo_dataset_suite.php` and its assertions need updating to confirm the sort order with count >= 2. The pagination tests must use dynamic page size and verify the presence of all expected results.
+
+The test suite needs expansion to cover cases E-09, E-10, and E-11, by updating `MD\Negocio\Ordenes.php` and `RC\Negocio\Ordenes.php`, and ensuring folio search includes the  `folio_unico` column in text searches for consistent and correct matching.
+
+The test stack audit revealed necessary improvements to folio searching to cover the search cases, the plan includes fixing the test `tests/test_search_periodo_dataset_suite.php`, but also to apply the folio search to both the `buscarOrdenesMedico` and `buscarOrdenes` functions.
+
+
+
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 42.819179388s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 7:26 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 7:27 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+No syntax errors were found in the PHP test suite. Now the JavaScript test file will be examined to identify potential gaps or issues, focusing on the `matchesSelector` function. The code within this function is particularly relevant, specifically lines 105-114, to ensure proper functionality.
+
+
+The `matchesSelector` function directly addresses the difference between the selectors `input[name="estudios[]"]` and `input[name="estudios[]"]:checked`. The `querySelectorAll` function appears to recursively handle nested elements, which is important for comprehensive selection. ID registration is handled during DOM creation, enabling `getElementById` functionality. The use of `querySelectorAll` followed by `Array.from()` is expected to work as intended for checkbox processing.
+
+
+Examining the JavaScript test suite reveals the use of `process.exit(0)` to ensure clean termination after test completion. Inspection of the test suite output confirms 18 passing tests in Suite 1, along with the standard `console.log` output. The current focus shifts to addressing the user's request concerning the "Lupita" search feature, requiring an audit of existing code to identify potential gaps in test coverage, particularly for the mixed search functionality described in a prior user request. The code locations in the PHP files are now under review in relation to the search feature.
+
+
+Identified and corrected three gaps in the PHP test suite: The first involved vacuous truth assertions by ensuring non-empty dataset checks and positive database counts. The second gap, addressed through dynamic data extraction, replaced hardcoded values with actual order details.  The final fix implemented adaptive pagination calculation to ensure valid records on all pages.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 3.608187755s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+/**
+ * ═══════════════════════════════════════════════════════════════════════
+ * test_search_periodo_dataset_suite.php — Suite Automatizada de Backend
+ * Filtros de Período Rápido, Calendario, Búsqueda Lupita Mixta y Paginación
+ * Dataset: Generador de 2 Años de Historial Clínico [SIM2Y]
+ * ═══════════════════════════════════════════════════════════════════════
+ *
+ * Automatiza 26 Casos de Prueba (Auditoría Preventiva y Anti-Gaps):
+ *   - Bloque D: Filtros de Período Rápido y Calendario (D-01 a D-06)
+ *   - Bloque E: Búsqueda con Lupita y Matriz Multicriterio (E-01 a E-16)
+ *   - Bloque F: Paginación y Retención de Parámetros (F-01 a F-04)
+ *
+ * Uso:
+ *   LAESH_DB_PORT=6002 php tests/test_search_periodo_dataset_suite.php
+ * ═══════════════════════════════════════════════════════════════════════
+ */
+
+declare(strict_types=1);
+
+// ── 1. Inicialización de Entorno y Conexión ─────────────────────────
+if (!getenv('LAESH_DB_PORT') && !file_exists('/.dockerenv')) {
+    putenv('LAESH_DB_PORT=6002');
+}
+putenv('LAESH_DB_USER=' . (getenv('LAESH_DB_USER') ?: 'root'));
+putenv('LAESH_DB_PASS=' . (getenv('LAESH_DB_PASS') ?: 'comite_2026'));
+putenv('LAESH_DB_NAME=' . (getenv('LAESH_DB_NAME') ?: 'laesh_db'));
+
+define('BASE_DIR', dirname(__DIR__));
+require_once BASE_DIR . '/laesh-swbldi/commons/autoload.php';
+require_once BASE_DIR . '/laesh-swbldi/commons/DB.php';
+require_once BASE_DIR . '/laesh-swbldi/md/negocio/Ordenes.php';
+require_once BASE_DIR . '/laesh-swbldi/rc/negocio/Ordenes.php';
+```
+
+</details>
+
+---
+
+## User Request
+
+precisión: los folios seran unicamente numericos iniciando en: 1 , no alfanumericos. corrige  alinea e informa me.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `test_search_periodo_dataset_suite.php`
+**Language:** php
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The crucial clarification dictates folio numbers must be strictly numeric, starting from 1. Initial implementation might have allowed alphanumeric values; reviewing the relevant module is essential to ensure only numeric folios are generated and assigned. This constraint directly impacts how the folio generation and assignment logic operates.
+
+
+Numeric folio generation is the primary focus; the script initially used alphanumeric prefixes. The cleaning script appears to identify simulated data using a `[SIM2Y]` marker within various fields like patient names, notifications, and order details, even if the folios themselves are alphanumeric. It is necessary to understand how the cleaning script functions, specifically lines 30-55. The cleaning script queries the database for records associated with `S2Y-` and `[SIM2Y]`.
+
+
+Numeric folios are handled in the `Ordenes.php` module. The code explicitly checks for numeric input using a regular expression. The numeric folio is extracted and utilized directly. It now seems that there may have been prior handling for alphanumeric folios, but the focus is clearly numeric now.
+
+
+The search logic in `Ordenes.php` uses an exact match and prefix search for folio lookups, prioritizing exact matches. The current implementation, however, has a flaw: the numeric fragment matching requires a minimum of three digits. This prevents accurate matching of folios with one or two digits. The regular expression needs adjustment to correctly identify and match single and double-digit folio numbers present in multi-word queries.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `CrearOrdenLaboratorio`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 2.963725991s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 7:36 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+The system generates numerical folios through auto-increment in at least one identified function. The user requires purely numeric folios starting from 1, excluding any alphanumeric prefixes or formats. The codebase must be checked for all instances of folio generation to ensure compliance with the user's precision mandate.
+
+A specific file utilizing a prefix and formatted numbering needs adjustment. It requires replacement of the existing alphanumeric format with a pure numeric sequence starting from 1.
+
+
+Revised data detection criteria now leverage `paciente_id` linked to the patient's full name containing a specific identifier for simulated data.  File names, paths for result PDFs, and notifications are updated to reference the numeric folio directly.  The data cleaning script requires adjustment to reflect the revised patient identification and folio references, along with associated data deletion logic.  The order search function must be reviewed to ensure folio searches are precise and prioritize exact matches.
+
+
+Examining the multi-criteria search, it's clear the system correctly interprets mixed queries, such as "Carlos 42 2025," matching each term to the appropriate database fields. The folio search in a specific function provides a cleaner and faster approach when strictly numerical. This confirms folio search precision needs to be prioritized.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `seed_dataset_2years.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.228967238s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L34-59)</summary>
+
+**Path:** `Unknown file`
+
+```
+try {
+    $db = \Common\DB::connect();
+    echo "✓ Conectado a la base de datos: " . $db->query("SELECT DATABASE()")->fetchColumn() . "\n";
+
+    // 1. Verificar si ya existen datos simulados
+    $prevCount = (int)$db->query("SELECT COUNT(*) FROM ordenes WHERE folio_unico LIKE 'S2Y-%'")->fetchColumn();
+    if ($prevCount > 0) {
+        if ($cleanFirst) {
+            echo "ℹ Opción --clean-first detectada. Ejecutando limpieza previa...\n";
+            require __DIR__ . '/clean_dataset_2years.php';
+        } else {
+            echo "⚠️  Ya existen {$prevCount} órdenes simuladas con prefijo S2Y-.\n";
+            echo "   Para sobrescribir, ejecute: php tests/seed_dataset_2years.php --clean-first\n";
+            echo "   O limpie manualmente con: php tests/clean_dataset_2years.php\n\n";
+            exit(0);
+        }
+    }
+
+    // 2. Obtener médicos disponibles
+    $stmtMed = $db->query("
+        SELECT u.id, COALESCE(pm.nombre_completo, CONCAT(em.nombre, ' ', em.apellidos)) as nombre, COALESCE(pm.especialidad, 'Medicina General') as especialidad
+        FROM users u
+        LEFT JOIN perfiles_medicos pm ON u.id = pm.user_id
+        LEFT JOIN empleados em ON u.id = em.user_id
+        WHERE em.rol = 'MEDICO' OR pm.user_id IS NOT NULL
+        ORDER BY u.id ASC
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 7:36 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 7:36 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 7:36 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 7:36 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+The database contains pre-existing alphanumeric order entries, contradicting the requirement for purely numeric folios starting from 1. The user explicitly requests correction to enforce numeric folios; current data includes mixed numeric and alphanumeric orders (e.g., "S2Y-0", "LAESH"). The seed dataset generation needs adjustment to strictly produce numeric folios as per the user's precision.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.035689546s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 7:37 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 7:37 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+The stored procedure assigns a character representation to the folio, derived from an incrementing integer. The user's requirement specifies purely numeric folios starting from 1. The code currently converts the integer to a character string, which fulfills the numeric requirement, but it seems there's no need for an alfanumeric folio.
+
+
+The script should generate numeric folios starting from 1, considering existing data.  The `--clean-first` option resets the folio sequence to 1 by clearing simulated orders; however, if `--clean-first` isn't used, the script must determine the next available numeric folio. The system needs to read the maximum existing folio or respect user input to start from 1.  Potential collisions with existing `folio_unico` values require verification of the existing dataset and how data cleanup functions.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.561494352s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 7:37 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 7:37 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+The `folios_control` table stores the last used folio number for 'orden_laboratorio', currently at 99. The `CrearOrdenLaboratorio` procedure increments this folio number and then retrieves the updated value. The plan is to cast this retrieved value to `p_folio_unico`.
+
+
+Folios must be strictly numeric, starting from 1, aligning with the user's explicit requirement. If the dataset generation is initiated, the system must handle potential conflicts if existing orders occupy folio numbers starting at 1. The implication is that simulated datasets may begin from 1 only after cleaning previous test data or checking the maximum existing folio.
+
+
+Analysis reveals that existing folio search logic incorrectly handles numeric folios. The current system treats single and double-digit numbers as text when multi-criteria searches are performed. Addressing this, any word matching a numeric pattern within a multi-criteria search should be checked against both `folio_unico` and patient identifiers. This ensures correct folio identification in searches.
+
+
+The folio search logic in multiple files must be synchronized to ensure consistent numeric folio handling. Specifically, numeric patterns, including those prefixed with `#`, should be checked against `folio_unico` and patient identifiers to identify the correct records, similar to how it's handled in `obtenerOrdenesAnterioresMedico`. The dataset generation must start folio numbering at 1, but should consider existing data for conflict avoidance.
+
+
+The system must handle potential conflicts when starting folio numbering at 1, specifically addressing existing test orders with numeric folios.  Simulated orders can be identified by patient names containing `[SIM2Y]`. The cleaning script's behavior regarding test orders must be verified.  It's crucial to ensure the cleaning mechanism addresses conflicts between existing test data and the desired folio numbering start at 1. The total number of orders in the `ordenes` table needs to be checked.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `clean_dataset_2years.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 4.652100515s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L24-59)</summary>
+
+**Path:** `Unknown file`
+
+```
+echo "\n" . str_repeat('=', 70) . "\n";
+echo "  🧹 LAESH — LIMPIEZA ATÓMICA DE DATASET SIMULADO [SIM2Y]\n";
+echo str_repeat('=', 70) . "\n";
+
+try {
+    $db = \Common\DB::connect();
+    echo "✓ Conectado a la base de datos: " . $db->query("SELECT DATABASE()")->fetchColumn() . "\n";
+
+    // 1. Conteo previo de elementos a eliminar
+    $cntNotif = (int)$db->query("SELECT COUNT(*) FROM notificaciones WHERE folio_referencia LIKE 'S2Y-%' OR mensaje LIKE '%[SIM2Y]%'")->fetchColumn();
+    $cntPdf   = (int)$db->query("SELECT COUNT(*) FROM resultados_pdf WHERE folio_extraido LIKE 'S2Y-%' OR ruta_storage LIKE '%SIM2Y%' OR orden_id IN (SELECT id FROM ordenes WHERE folio_unico LIKE 'S2Y-%')")->fetchColumn();
+    $cntDet   = (int)$db->query("SELECT COUNT(*) FROM detalle_ordenes WHERE orden_id IN (SELECT id FROM ordenes WHERE folio_unico LIKE 'S2Y-%')")->fetchColumn();
+    $cntHist  = (int)$db->query("SELECT COUNT(*) FROM historial_estados_orden WHERE orden_id IN (SELECT id FROM ordenes WHERE folio_unico LIKE 'S2Y-%')")->fetchColumn();
+    $cntOrd   = (int)$db->query("SELECT COUNT(*) FROM ordenes WHERE folio_unico LIKE 'S2Y-%'")->fetchColumn();
+    $cntPac   = (int)$db->query("SELECT COUNT(*) FROM pacientes WHERE nombre_completo LIKE '%[SIM2Y]%'")->fetchColumn();
+
+    $totalRegistros = $cntNotif + $cntPdf + $cntDet + $cntHist + $cntOrd + $cntPac;
+
+    echo "\n  Registros identificados con etiqueta [SIM2Y]:\n";
+    echo "  - Notificaciones:           " . number_format($cntNotif) . "\n";
+    echo "  - Resultados PDF:           " . number_format($cntPdf) . "\n";
+    echo "  - Detalle de Órdenes:       " . number_format($cntDet) . "\n";
+    echo "  - Historial de Estados:     " . number_format($cntHist) . "\n";
+    echo "  - Órdenes:                  " . number_format($cntOrd) . "\n";
+    echo "  - Pacientes simulados:      " . number_format($cntPac) . "\n";
+    echo "  " . str_repeat('-', 40) . "\n";
+    echo "  TOTAL A LIMPIAR:            " . number_format($totalRegistros) . "\n\n";
+
+    if ($totalRegistros === 0) {
+        echo "ℹ No se encontraron registros simulados con marca [SIM2Y]. Base de datos limpia.\n\n";
+        exit(0);
+    }
+
+    if ($isDryRun) {
+        echo "🔎 [DRY-RUN] Modo simulación activado. No se ejecutó ninguna eliminación.\n\n";
+        exit(0);
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Orders generated through simulation with numeric folios can be identified using a database query searching the `paciente_id` within the `pacientes` table, filtered by a name containing "[SIM2Y]". Additionally, for existing simulated orders with the "S2Y-" prefix, a separate `folio_unico` search ensures these 1,512 existing entries are also handled. A count of orders with the `S2Y-` prefix will be retrieved from the database to assist in validating the approach.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `clean_dataset_2years.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.100055110s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L59-114)</summary>
+
+**Path:** `Unknown file`
+
+```
+        exit(0);
+    }
+
+    // 2. Ejecución atómica dentro de transacción
+    $start = microtime(true);
+    $db->beginTransaction();
+
+    // Paso A: Notificaciones
+    $delNotif = $db->exec("DELETE FROM notificaciones WHERE folio_referencia LIKE 'S2Y-%' OR mensaje LIKE '%[SIM2Y]%'");
+
+    // Paso B: Resultados PDF
+    $delPdf = $db->exec("DELETE FROM resultados_pdf WHERE folio_extraido LIKE 'S2Y-%' OR ruta_storage LIKE '%SIM2Y%' OR orden_id IN (SELECT id FROM ordenes WHERE folio_unico LIKE 'S2Y-%')");
+
+    // Paso C: Detalle de Órdenes
+    $delDet = $db->exec("DELETE FROM detalle_ordenes WHERE orden_id IN (SELECT id FROM ordenes WHERE folio_unico LIKE 'S2Y-%')");
+
+    // Paso D: Historial de Estados
+    $delHist = $db->exec("DELETE FROM historial_estados_orden WHERE orden_id IN (SELECT id FROM ordenes WHERE folio_unico LIKE 'S2Y-%')");
+
+    // Paso E: Órdenes
+    $delOrd = $db->exec("DELETE FROM ordenes WHERE folio_unico LIKE 'S2Y-%'");
+
+    // Paso F: Pacientes
+    $delPac = $db->exec("DELETE FROM pacientes WHERE nombre_completo LIKE '%[SIM2Y]%'");
+
+    // Paso G: Recalcular total_ordenes en perfiles_medicos para mantener paridad
+    $db->exec("
+        UPDATE perfiles_medicos pm
+        SET total_ordenes = (
+            SELECT COUNT(*) FROM ordenes o WHERE o.medico_id = pm.user_id
+        )
+    ");
+
+    $db->commit();
+    $elapsed = round((microtime(true) - $start) * 1000, 2);
+
+    echo "✓ Limpieza completada con éxito en {$elapsed} ms.\n";
+    echo "✓ Registros eliminados de manera quirúrgica:\n";
+    echo "  - notificaciones:         {$delNotif}\n";
+    echo "  - resultados_pdf:         {$delPdf}\n";
+    echo "  - detalle_ordenes:        {$delDet}\n";
+    echo "  - historial_estados_orden: {$delHist}\n";
+    echo "  - ordenes:                {$delOrd}\n";
+    echo "  - pacientes:              {$delPac}\n";
+    echo "✓ Contadores de perfiles médicos sincronizados.\n";
+    echo str_repeat('=', 70) . "\n\n";
+
+} catch (\Throwable $e) {
+    if (isset($db) && $db->inTransaction()) {
+        $db->rollBack();
+        echo "✗ Transacción revertida (Rollback ejecutado).\n";
+    }
+    echo "✗ ERROR: " . $e->getMessage() . "\n";
+    echo "  En: " . $e->getFile() . ":" . $e->getLine() . "\n\n";
+    exit(1);
+}
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Investigating the data cleaning script, the goal is to sanitize entries matching 'S2Y-%' and those linked to patient IDs with names like '%[SIM2Y]%'. A key concern is the handling of existing test orders with numeric folios from 2 to 24. It is possible to identify existing folios via the seeding script to identify conflicts.
+
+
+The folio index assignment utilizes a strict numeric sequence, starting at one and incrementing.  Crucially, it skips already-occupied folios to prevent collisions, ensuring uniqueness. This approach appears robust and simplifies the folio generation process by preventing collisions, making this a clean starting point. The goal is to compare search logic between two different files to understand any discrepancies.
+
+
+Examining the search logic reveals a multi-faceted approach based on the input term. Different criteria are applied depending on whether the input is a phone number, a single value, or multiple terms. Numerical input is handled differently, parsing it as a year, folio, or phone number fragment based on its format and length. The intent is to construct a flexible search query that accommodates diverse search patterns.
+
+
+The search logic parses input terms and constructs a dynamic SQL `WHERE` clause. Numeric inputs are treated as either folio numbers or partial phone numbers, allowing flexible matching. Textual input triggers a case-insensitive search across patient names and diagnoses.
+
+The order of search results depends on input type: Folio matches are prioritized, followed by broader partial matches or text-based results. The complete query construction involves creating parameterized queries to prevent SQL injection vulnerabilities.
+
+
+Search behavior is complex, handling folio, phone, and text-based queries differently, with various combinations using `AND`. Several files appear to share this pattern. Numerical input is parsed flexibly depending on its format. The logic branches based on whether the input is purely numeric or mixed with text.
+
+
+Analysis focuses on how numeric input is handled within the search queries across different files, specifically when searching by folio. The code employs regular expressions to distinguish between exact and partial folio searches. The queries construct parameterized SQL `WHERE` clauses based on the input type, ensuring data type considerations for the search.
+
+The first file constructs the query to search based on a numeric folio, prioritizes exact matches before partial matches. The second file does the same thing, with parameterized SQL preventing SQL injection. The test cases will check the correctness of these implementations, verifying that searches for exact folio numbers work as intended.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Ordenes.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 5.875964504s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L414-434)</summary>
+
+**Path:** `Unknown file`
+
+```
+            if ($search !== '') {
+                if (preg_match('/^(?:laesh-?|lsh-?|s2y-?|#)?(\d{1,8})$/i', $search, $mFolio)) {
+                    $rawNum = (int)$mFolio[1];
+                    $pad5   = sprintf('%05d', $rawNum);
+                    $whereSql = "WHERE o.medico_user_id = :user_id AND DATE(o.hora_captura) < CURDATE() AND (LOWER(o.folio_unico) = :q_fol_raw OR LOWER(o.folio_unico) = :q_fol_clean OR LOWER(o.folio_unico) = :q_fol_unpad OR LOWER(o.folio_unico) = :q_fol_full OR LOWER(o.folio_unico) LIKE :q_fol_like) ";
+                    $params[':q_fol_raw']   = $search;
+                    $params[':q_fol_clean'] = $mFolio[1];
+                    $params[':q_fol_unpad'] = (string)$rawNum;
+                    $params[':q_fol_full']  = 'laesh-' . $pad5;
+                    $params[':q_fol_like']  = '%' . $pad5 . '%';
+                } else {
+                    $whereSql = "WHERE o.medico_user_id = :user_id AND ({$filtroPeriodo}) AND (LOWER(o.paciente_nombre) LIKE :q1 OR LOWER(o.paciente_telefono) LIKE :q2 OR LOWER(o.diagnostico) LIKE :q3 OR LOWER(o.folio_unico) LIKE :q4) ";
+                    $qVal = '%' . $search . '%';
+                    $params[':q1'] = $qVal;
+                    $params[':q2'] = $qVal;
+                    $params[':q3'] = $qVal;
+                    $params[':q4'] = $qVal;
+                }
+            } else {
+                $whereSql = "WHERE o.medico_user_id = :user_id AND " . $filtroPeriodo;
+            }
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Ordenes.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L484-506)</summary>
+
+**Path:** `Unknown file`
+
+```
+            $filtroPeriodo = self::construirFiltroPeriodoAnterioresMedico($periodo, '', $fechaInicio, $fechaFin, $params);
+
+            if ($search !== '') {
+                if (preg_match('/^(?:laesh-?|lsh-?|s2y-?|#)?(\d{1,8})$/i', $search, $mFolio)) {
+                    $rawNum = (int)$mFolio[1];
+                    $pad5   = sprintf('%05d', $rawNum);
+                    $whereSql = "WHERE medico_user_id = :user_id AND DATE(hora_captura) < CURDATE() AND (LOWER(folio_unico) = :q_fol_raw OR LOWER(folio_unico) = :q_fol_clean OR LOWER(folio_unico) = :q_fol_unpad OR LOWER(folio_unico) = :q_fol_full OR LOWER(folio_unico) LIKE :q_fol_like) ";
+                    $params[':q_fol_raw']   = $search;
+                    $params[':q_fol_clean'] = $mFolio[1];
+                    $params[':q_fol_unpad'] = (string)$rawNum;
+                    $params[':q_fol_full']  = 'laesh-' . $pad5;
+                    $params[':q_fol_like']  = '%' . $pad5 . '%';
+                } else {
+                    $whereSql = "WHERE medico_user_id = :user_id AND ({$filtroPeriodo}) AND (LOWER(paciente_nombre) LIKE :q1 OR LOWER(paciente_telefono) LIKE :q2 OR LOWER(diagnostico) LIKE :q3 OR LOWER(folio_unico) LIKE :q4) ";
+                    $qVal = '%' . $search . '%';
+                    $params[':q1'] = $qVal;
+                    $params[':q2'] = $qVal;
+                    $params[':q3'] = $qVal;
+                    $params[':q4'] = $qVal;
+                }
+            } else {
+                $whereSql = "WHERE medico_user_id = :user_id AND " . $filtroPeriodo;
+            }
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Ordenes.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L644-694)</summary>
+
+**Path:** `Unknown file`
+
+```
+            $limInt = max(1, min(50, (int)$limit));
+            $params = [':medico_id' => $medicoId];
+            $whereParts = ["o.medico_user_id = :medico_id"];
+
+            // 1. Caso numérico puro (1 a 6 dígitos): Folio exacto o prefijo
+            if (preg_match('/^\d{1,6}$/', $term)) {
+                $whereParts[] = "(o.folio_unico = :f_exact OR o.folio_unico LIKE :f_pref)";
+                $params[':f_exact'] = $term;
+                $params[':f_pref']  = $term . '%';
+                $orderClause = "(o.folio_unico = :f_ord) DESC, CAST(o.folio_unico AS UNSIGNED) ASC, o.orden_id DESC";
+                $params[':f_ord'] = $term;
+            }
+            // 2. Caso numérico largo (7 a 10 dígitos): Teléfono directo o folio
+            elseif (preg_match('/^\d{7,10}$/', $term)) {
+                $whereParts[] = "(o.paciente_telefono LIKE :tel OR o.folio_unico = :fol_tel)";
+                $params[':tel'] = '%' . $term . '%';
+                $params[':fol_tel'] = $term;
+                $orderClause = "o.orden_id DESC";
+            }
+            // 3. Caso texto o multicriterio (Nombre, Año, Teléfono parcial)
+            else {
+                $words = preg_split('/\s+/', $term, -1, PREG_SPLIT_NO_EMPTY);
+                $wIdx = 1;
+                foreach ($words as $word) {
+                    $wordLower = mb_strtolower($word, 'UTF-8');
+                    // Si es un año de 4 dígitos entre 2000 y 2099
+                    if (preg_match('/^(20\d\d)$/', $word, $mYear)) {
+                        $whereParts[] = "YEAR(o.hora_captura) = :yr_" . $wIdx;
+                        $params[':yr_' . $wIdx] = (int)$mYear[1];
+                    }
+                    // Si es un fragmento numérico (ej. 3+ dígitos de teléfono o folio)
+                    elseif (preg_match('/^\d{3,}$/', $word)) {
+                        $whereParts[] = "(o.paciente_telefono LIKE :tel_" . $wIdx . " OR o.folio_unico = :fol_" . $wIdx . ")";
+                        $params[':tel_' . $wIdx] = '%' . $word . '%';
+                        $params[':fol_' . $wIdx] = $word;
+                    }
+                    // Si es texto (paciente, diagnóstico)
+                    else {
+                        $whereParts[] = "(LOWER(o.paciente_nombre) LIKE :q_nom_" . $wIdx . " OR LOWER(o.diagnostico) LIKE :q_diag_" . $wIdx . ")";
+                        $likeVal = '%' . $wordLower . '%';
+                        $params[':q_nom_' . $wIdx]  = $likeVal;
+                        $params[':q_diag_' . $wIdx] = $likeVal;
+                    }
+                    $wIdx++;
+                }
+                $orderClause = "o.orden_id DESC";
+            }
+
+            $whereSql = "WHERE " . implode(' AND ', $whereParts);
+            $fetchLimit = $limInt + 1; // +1 para detectar si hay más resultados
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Analyzing code block. The script checks if a word is a numeric fragment with three or more digits. If so, constructs a conditional for the query that searches both patient phone number and unique folio using that word as a search term, linking it with an OR condition. The phone number comparison and the folio search both use a LIKE operator for partial matching.
+
+
+The current logic only considers numeric fragments of three or more digits for folio and phone number searches, potentially missing shorter folios. It seems folios might start at 1, so the regex `^\d{3,}$` is too restrictive. Adjusting this regex to `/^#?(\d{1,6})$/` allows for 1-6 digit numbers, and accounts for an optional '#' prefix, recognizing that folio entries may have this format. Additionally, the code needs a condition to search for phone numbers when given long numeric input.
+
+
+Analyzing the code further, the logic prioritizes exact folio matches when a numeric value or prefixed numeric value is entered. Examining the `obtenerOrdenesAnterioresMedico` function confirms that an optional '#' prefix is correctly handled and an exact folio match is prioritized using a similar pattern matching approach.
+
+The code now correctly identifies and handles folio searches that include an optional '#' prefix and allows for folios of 1 to 6 digits, while also searching other fields when the input is not just a folio. The phone number search is still correctly implemented with the LIKE operator to search.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 3.883294335s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 7:38 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 7:38 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 7:38 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Ordenes.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L754-809)</summary>
+
+**Path:** `Unknown file`
+
+```
+        try {
+            $term = trim($term);
+            if (strlen($term) < 1) return [];
+
+            $db = DB::connect();
+            $limInt = max(1, min(50, (int)$limit));
+            $params = [];
+            $whereParts = [];
+
+            // 1. Caso numérico puro (1 a 6 dígitos): Folio exacto o prefijo
+            if (preg_match('/^\d{1,6}$/', $term)) {
+                $whereParts[] = "(o.folio_unico = :f_exact OR o.folio_unico LIKE :f_pref)";
+                $params[':f_exact'] = $term;
+                $params[':f_pref']  = $term . '%';
+                $orderClause = "(o.folio_unico = :f_ord) DESC, CAST(o.folio_unico AS UNSIGNED) ASC, o.orden_id DESC";
+                $params[':f_ord'] = $term;
+            }
+            // 2. Caso numérico largo (7 a 10 dígitos): Teléfono directo o folio
+            elseif (preg_match('/^\d{7,10}$/', $term)) {
+                $whereParts[] = "(o.paciente_telefono LIKE :tel OR o.folio_unico = :fol_tel)";
+                $params[':tel'] = '%' . $term . '%';
+                $params[':fol_tel'] = $term;
+                $orderClause = "o.orden_id DESC";
+            }
+            // 3. Caso texto o multicriterio (Nombre, Año, Teléfono parcial)
+            else {
+                $words = preg_split('/\s+/', $term, -1, PREG_SPLIT_NO_EMPTY);
+                $wIdx = 1;
+                foreach ($words as $word) {
+                    $wordLower = mb_strtolower($word, 'UTF-8');
+                    // Si es un año de 4 dígitos entre 2000 y 2099
+                    if (preg_match('/^(20\d\d)$/', $word, $mYear)) {
+                        $whereParts[] = "YEAR(o.hora_captura) = :yr_" . $wIdx;
+                        $params[':yr_' . $wIdx] = (int)$mYear[1];
+                    }
+                    // Si es un fragmento numérico (ej. 3+ dígitos de teléfono o folio)
+                    elseif (preg_match('/^\d{3,}$/', $word)) {
+                        $whereParts[] = "(o.paciente_telefono LIKE :tel_" . $wIdx . " OR o.folio_unico = :fol_" . $wIdx . ")";
+                        $params[':tel_' . $wIdx] = '%' . $word . '%';
+                        $params[':fol_' . $wIdx] = $word;
+                    }
+                    // Si es texto (médico, paciente, diagnóstico)
+                    else {
+                        $whereParts[] = "(LOWER(o.paciente_nombre) LIKE :q_nom_" . $wIdx . " OR LOWER(o.medico_nombre_completo) LIKE :q_med_" . $wIdx . " OR LOWER(o.diagnostico) LIKE :q_diag_" . $wIdx . ")";
+                        $likeVal = '%' . $wordLower . '%';
+                        $params[':q_nom_' . $wIdx]  = $likeVal;
+                        $params[':q_med_' . $wIdx]  = $likeVal;
+                        $params[':q_diag_' . $wIdx] = $likeVal;
+                    }
+                    $wIdx++;
+                }
+                $orderClause = "o.orden_id DESC";
+            }
+
+            if (empty($whereParts)) return [];
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 7:39 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `seed_dataset_2years.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L37-51)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+    // 1. Verificar si ya existen datos simulados
+    $prevCount = (int)$db->query("SELECT COUNT(*) FROM ordenes WHERE folio_unico LIKE 'S2Y-%'")->fetchColumn();
+    if ($prevCount > 0) {
+        if ($cleanFirst) {
+            echo "ℹ Opción --clean-first detectada. Ejecutando limpieza previa...\n";
+            require __DIR__ . '/clean_dataset_2years.php';
+        } else {
+            echo "⚠️  Ya existen {$prevCount} órdenes simuladas con prefijo S2Y-.\n";
+            echo "   Para sobrescribir, ejecute: php tests/seed_dataset_2years.php --clean-first\n";
+            echo "   O limpie manualmente con: php tests/clean_dataset_2years.php\n\n";
+            exit(0);
+        }
+    }
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The code consistently uses `sprintf('S2Y-%05d', $folioIndex)` to generate a folio identifier within multiple loops. This suggests a pattern where `$folioIndex` is incremented and used to create unique identifiers. The repetition across different loop structures warrants further investigation into how `$folioIndex` is initialized and managed to ensure uniqueness.
+
+
+The folio index is initialized to 1 and incremented with each assignment. A potential for collision with existing order folios is identified. A function that ensures folio uniqueness by checking against existing entries in the database is defined and utilized, confirming that the folio generation strategy is designed to prevent conflicts and maintain a sequential numeric pattern, even with pre-existing data.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 4.687904478s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 7:39 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `seed_dataset_2years.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L184-214)</summary>
+
+**Path:** `Unknown file`
+
+```
+    // 7. Generación de las Órdenes en las 4 Zonas Temporales
+    echo "  Generando órdenes en las 4 zonas temporales...\n";
+
+    $folioIndex = 1;
+    $statsZonas = ['A_Hoy' => 0, 'B_15d' => 0, 'C_30d' => 0, 'D_2Años' => 0];
+    $statsEstados = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0];
+    $notifTargets = [];
+
+    // Helper para armar JSON de estudios
+    $fnSeleccionarEstudios = function() use ($estudiosCat) {
+        $num = rand(1, 4);
+        $claves = array_rand($estudiosCat, $num);
+        if (!is_array($claves)) $claves = [$claves];
+        $res = [];
+        foreach ($claves as $k) {
+            $e = $estudiosCat[$k];
+            $res[] = ['id' => (int)$e['id'], 'nombre' => $e['nombre']];
+        }
+        return $res;
+    };
+
+    // Helper para insertar una orden completa con historial y pdf
+    $fnInsertarOrden = function(string $folio, array $paciente, array $medico, int $estadoId, string $horaCapturaStr, string $zonaKey)
+        use (
+            $db, $stmtOrd, $stmtDet, $stmtHist, $stmtPdf, $diagnosticos,
+            $fnSeleccionarEstudios, &$folioIndex, &$statsZonas, &$statsEstados
+        ): int
+    {
+        $fechaCaptura = new DateTime($horaCapturaStr);
+        $fechaNac = new DateTime($paciente['f_nac']);
+        $edadAlEmitir = max(1, min(105, (int)$fechaCaptura->diff($fechaNac)->y));
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Checking for existing simulated data to determine if a cleanup is needed before seeding the dataset. The query looks for order folios starting with "S2Y-" or patient names containing "[SIM2Y]". If data exists and the `--clean-first` option is present, then a dataset cleanup is triggered before proceeding with simulation.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `seed_dataset_2years.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.087877770s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L309-414)</summary>
+
+**Path:** `Unknown file`
+
+```
+    $hoyStr = date('Y-m-d');
+    $horasHoy = ['08:15', '09:00', '09:45', '10:30', '11:15', '12:00', '12:45', '13:30', '14:15', '15:00', '15:45', '16:30'];
+    $estadosHoy = [1, 2, 2, 1, 2, 3, 3, 2, 4, 1, 3, 4];
+
+    for ($i = 0; $i < 12; $i++) {
+        $folio = sprintf('S2Y-%05d', $folioIndex);
+        $pac = $pacientesIds[array_rand($pacientesIds)];
+        $med = $medicos[$i % count($medicos)];
+        $estId = $estadosHoy[$i];
+        $hCap = "{$hoyStr} {$horasHoy[$i]}:00";
+
+        $ordId = $fnInsertarOrden($folio, $pac, $med, $estId, $hCap, 'A_Hoy');
+        if ($i === 0) {
+            $notifTargets['hoy'] = ['folio' => $folio, 'medico_id' => $med['id'], 'paciente' => $pac['nombre'], 'orden_id' => $ordId];
+        }
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    // ZONA B: ÚLTIMOS 15 DÍAS (1d - 15d) -> 50 órdenes
+    // Casos frontera: Ayer (1d), día 14, día 15
+    // ─────────────────────────────────────────────────────────────
+    $diasZonaB = [1, 1, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 13, 14, 14, 14, 14, 15, 15, 15, 15];
+    // Rellenar hasta 50
+    while (count($diasZonaB) < 50) {
+        $diasZonaB[] = rand(2, 13);
+    }
+    sort($diasZonaB);
+
+    foreach ($diasZonaB as $idx => $diasAtras) {
+        $folio = sprintf('S2Y-%05d', $folioIndex);
+        $pac = $pacientesIds[array_rand($pacientesIds)];
+        $med = $medicos[$idx % count($medicos)];
+        // En días anteriores predominan estados completados o en atención
+        $estadosDistrib = [2, 3, 3, 4, 4, 4, 5];
+        $estId = $estadosDistrib[array_rand($estadosDistrib)];
+        $horaRand = str_pad((string)rand(8, 18), 2, '0', STR_PAD_LEFT) . ':' . str_pad((string)rand(0, 59), 2, '0', STR_PAD_LEFT) . ':00';
+        $hCap = date('Y-m-d', strtotime("-{$diasAtras} days")) . " {$horaRand}";
+
+        $ordId = $fnInsertarOrden($folio, $pac, $med, $estId, $hCap, 'B_15d');
+        if ($diasAtras === 5 && !isset($notifTargets['5d'])) {
+            $notifTargets['5d'] = ['folio' => $folio, 'medico_id' => $med['id'], 'paciente' => $pac['nombre'], 'orden_id' => $ordId];
+        }
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    // ZONA C: DÍAS 16 A 30 (16d - 30d) -> 50 órdenes
+    // Casos frontera: día 16 (inmediato exterior de 15), día 29, día 30 (límite de 30d)
+    // ─────────────────────────────────────────────────────────────
+    $diasZonaC = [16, 16, 16, 16, 17, 17, 18, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 29, 30, 30, 30, 30];
+    while (count($diasZonaC) < 50) {
+        $diasZonaC[] = rand(17, 28);
+    }
+    sort($diasZonaC);
+
+    foreach ($diasZonaC as $idx => $diasAtras) {
+        $folio = sprintf('S2Y-%05d', $folioIndex);
+        $pac = $pacientesIds[array_rand($pacientesIds)];
+        $med = $medicos[$idx % count($medicos)];
+        $estadosDistrib = [3, 4, 4, 4, 5];
+        $estId = $estadosDistrib[array_rand($estadosDistrib)];
+        $horaRand = str_pad((string)rand(8, 18), 2, '0', STR_PAD_LEFT) . ':' . str_pad((string)rand(0, 59), 2, '0', STR_PAD_LEFT) . ':00';
+        $hCap = date('Y-m-d', strtotime("-{$diasAtras} days")) . " {$horaRand}";
+
+        $ordId = $fnInsertarOrden($folio, $pac, $med, $estId, $hCap, 'C_30d');
+        if ($diasAtras === 20 && !isset($notifTargets['20d'])) {
+            $notifTargets['20d'] = ['folio' => $folio, 'medico_id' => $med['id'], 'paciente' => $pac['nombre'], 'orden_id' => $ordId];
+        }
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    // ZONA D: HISTÓRICO 2 AÑOS (31d - 730d) -> ~1,400 órdenes
+    // Casos frontera: día 31 (primer día fuera de 30d), 6 meses, 1 año, 2 años
+    // ─────────────────────────────────────────────────────────────
+    $totalHistoricas = 1400;
+    // Sembrar primero casos frontera obligatorios
+    $fronterasD = [31, 31, 31, 31, 45, 60, 90, 120, 180, 240, 365, 500, 720, 730];
+    foreach ($fronterasD as $idx => $diasAtras) {
+        $folio = sprintf('S2Y-%05d', $folioIndex);
+        $pac = $pacientesIds[array_rand($pacientesIds)];
+        $med = $medicos[$idx % count($medicos)];
+        $estId = (rand(1, 10) === 10) ? 5 : 4; // Mayoría cerradas
+        $horaRand = str_pad((string)rand(8, 18), 2, '0', STR_PAD_LEFT) . ':' . str_pad((string)rand(0, 59), 2, '0', STR_PAD_LEFT) . ':00';
+        $hCap = date('Y-m-d', strtotime("-{$diasAtras} days")) . " {$horaRand}";
+        $ordId = $fnInsertarOrden($folio, $pac, $med, $estId, $hCap, 'D_2Años');
+
+        if ($diasAtras === 240 && !isset($notifTargets['8m'])) {
+            $notifTargets['8m'] = ['folio' => $folio, 'medico_id' => $med['id'], 'paciente' => $pac['nombre'], 'orden_id' => $ordId];
+        }
+    }
+
+    // Distribuir el resto (~1,386) uniformemente a lo largo de los 700 días restantes
+    $restantes = $totalHistoricas - count($fronterasD);
+    for ($k = 0; $k < $restantes; $k++) {
+        $diasAtras = rand(32, 729);
+        $folio = sprintf('S2Y-%05d', $folioIndex);
+        $pac = $pacientesIds[array_rand($pacientesIds)];
+        $med = $medicos[$k % count($medicos)];
+        $estId = (rand(1, 12) === 12) ? 5 : 4; // Histórico: casi todas cerradas o canceladas
+        $horaRand = str_pad((string)rand(8, 18), 2, '0', STR_PAD_LEFT) . ':' . str_pad((string)rand(0, 59), 2, '0', STR_PAD_LEFT) . ':00';
+        $hCap = date('Y-m-d', strtotime("-{$diasAtras} days")) . " {$horaRand}";
+
+        $fnInsertarOrden($folio, $pac, $med, $estId, $hCap, 'D_2Años');
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    // 8. Inyección de Notificaciones Quirúrgicas para Pruebas UI
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 7:39 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 7:39 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `seed_dataset_2years.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L319-434)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+    // ─────────────────────────────────────────────────────────────
+    // ZONA A: HOY (CURDATE, 0 días) -> 12 órdenes
+    // Estados: 1 (Remitido), 2 (En Atención), 3 (Resultados Listos), 4 (Cerrada)
+    // ─────────────────────────────────────────────────────────────
+    $hoyStr = date('Y-m-d');
+    $horasHoy = ['08:15', '09:00', '09:45', '10:30', '11:15', '12:00', '12:45', '13:30', '14:15', '15:00', '15:45', '16:30'];
+    $estadosHoy = [1, 2, 2, 1, 2, 3, 3, 2, 4, 1, 3, 4];
+
+    for ($i = 0; $i < 12; $i++) {
+        $folio = sprintf('S2Y-%05d', $folioIndex);
+        $pac = $pacientesIds[array_rand($pacientesIds)];
+        $med = $medicos[$i % count($medicos)];
+        $estId = $estadosHoy[$i];
+        $hCap = "{$hoyStr} {$horasHoy[$i]}:00";
+
+        $ordId = $fnInsertarOrden($folio, $pac, $med, $estId, $hCap, 'A_Hoy');
+        if ($i === 0) {
+            $notifTargets['hoy'] = ['folio' => $folio, 'medico_id' => $med['id'], 'paciente' => $pac['nombre'], 'orden_id' => $ordId];
+        }
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    // ZONA B: ÚLTIMOS 15 DÍAS (1d - 15d) -> 50 órdenes
+    // Casos frontera: Ayer (1d), día 14, día 15
+    // ─────────────────────────────────────────────────────────────
+    $diasZonaB = [1, 1, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 13, 14, 14, 14, 14, 15, 15, 15, 15];
+    // Rellenar hasta 50
+    while (count($diasZonaB) < 50) {
+        $diasZonaB[] = rand(2, 13);
+    }
+    sort($diasZonaB);
+
+    foreach ($diasZonaB as $idx => $diasAtras) {
+        $folio = sprintf('S2Y-%05d', $folioIndex);
+        $pac = $pacientesIds[array_rand($pacientesIds)];
+        $med = $medicos[$idx % count($medicos)];
+        // En días anteriores predominan estados completados o en atención
+        $estadosDistrib = [2, 3, 3, 4, 4, 4, 5];
+        $estId = $estadosDistrib[array_rand($estadosDistrib)];
+        $horaRand = str_pad((string)rand(8, 18), 2, '0', STR_PAD_LEFT) . ':' . str_pad((string)rand(0, 59), 2, '0', STR_PAD_LEFT) . ':00';
+        $hCap = date('Y-m-d', strtotime("-{$diasAtras} days")) . " {$horaRand}";
+
+        $ordId = $fnInsertarOrden($folio, $pac, $med, $estId, $hCap, 'B_15d');
+        if ($diasAtras === 5 && !isset($notifTargets['5d'])) {
+            $notifTargets['5d'] = ['folio' => $folio, 'medico_id' => $med['id'], 'paciente' => $pac['nombre'], 'orden_id' => $ordId];
+        }
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    // ZONA C: DÍAS 16 A 30 (16d - 30d) -> 50 órdenes
+    // Casos frontera: día 16 (inmediato exterior de 15), día 29, día 30 (límite de 30d)
+    // ─────────────────────────────────────────────────────────────
+    $diasZonaC = [16, 16, 16, 16, 17, 17, 18, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 29, 30, 30, 30, 30];
+    while (count($diasZonaC) < 50) {
+        $diasZonaC[] = rand(17, 28);
+    }
+    sort($diasZonaC);
+
+    foreach ($diasZonaC as $idx => $diasAtras) {
+        $folio = sprintf('S2Y-%05d', $folioIndex);
+        $pac = $pacientesIds[array_rand($pacientesIds)];
+        $med = $medicos[$idx % count($medicos)];
+        $estadosDistrib = [3, 4, 4, 4, 5];
+        $estId = $estadosDistrib[array_rand($estadosDistrib)];
+        $horaRand = str_pad((string)rand(8, 18), 2, '0', STR_PAD_LEFT) . ':' . str_pad((string)rand(0, 59), 2, '0', STR_PAD_LEFT) . ':00';
+        $hCap = date('Y-m-d', strtotime("-{$diasAtras} days")) . " {$horaRand}";
+
+        $ordId = $fnInsertarOrden($folio, $pac, $med, $estId, $hCap, 'C_30d');
+        if ($diasAtras === 20 && !isset($notifTargets['20d'])) {
+            $notifTargets['20d'] = ['folio' => $folio, 'medico_id' => $med['id'], 'paciente' => $pac['nombre'], 'orden_id' => $ordId];
+        }
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    // ZONA D: HISTÓRICO 2 AÑOS (31d - 730d) -> ~1,400 órdenes
+    // Casos frontera: día 31 (primer día fuera de 30d), 6 meses, 1 año, 2 años
+    // ─────────────────────────────────────────────────────────────
+    $totalHistoricas = 1400;
+    // Sembrar primero casos frontera obligatorios
+    $fronterasD = [31, 31, 31, 31, 45, 60, 90, 120, 180, 240, 365, 500, 720, 730];
+    foreach ($fronterasD as $idx => $diasAtras) {
+        $folio = sprintf('S2Y-%05d', $folioIndex);
+        $pac = $pacientesIds[array_rand($pacientesIds)];
+        $med = $medicos[$idx % count($medicos)];
+        $estId = (rand(1, 10) === 10) ? 5 : 4; // Mayoría cerradas
+        $horaRand = str_pad((string)rand(8, 18), 2, '0', STR_PAD_LEFT) . ':' . str_pad((string)rand(0, 59), 2, '0', STR_PAD_LEFT) . ':00';
+        $hCap = date('Y-m-d', strtotime("-{$diasAtras} days")) . " {$horaRand}";
+        $ordId = $fnInsertarOrden($folio, $pac, $med, $estId, $hCap, 'D_2Años');
+
+        if ($diasAtras === 240 && !isset($notifTargets['8m'])) {
+            $notifTargets['8m'] = ['folio' => $folio, 'medico_id' => $med['id'], 'paciente' => $pac['nombre'], 'orden_id' => $ordId];
+        }
+    }
+
+    // Distribuir el resto (~1,386) uniformemente a lo largo de los 700 días restantes
+    $restantes = $totalHistoricas - count($fronterasD);
+    for ($k = 0; $k < $restantes; $k++) {
+        $diasAtras = rand(32, 729);
+        $folio = sprintf('S2Y-%05d', $folioIndex);
+        $pac = $pacientesIds[array_rand($pacientesIds)];
+        $med = $medicos[$k % count($medicos)];
+        $estId = (rand(1, 12) === 12) ? 5 : 4; // Histórico: casi todas cerradas o canceladas
+        $horaRand = str_pad((string)rand(8, 18), 2, '0', STR_PAD_LEFT) . ':' . str_pad((string)rand(0, 59), 2, '0', STR_PAD_LEFT) . ':00';
+        $hCap = date('Y-m-d', strtotime("-{$diasAtras} days")) . " {$horaRand}";
+
+        $fnInsertarOrden($folio, $pac, $med, $estId, $hCap, 'D_2Años');
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    // 8. Inyección de Notificaciones Quirúrgicas para Pruebas UI
+    // ─────────────────────────────────────────────────────────────
+    echo "  Inyectando notificaciones de prueba vinculadas a cada zona...\n";
+
+    // Notif 1: Hoy (Zona A)
+    if (isset($notifTargets['hoy'])) {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The code requires adjustment; lines 329-428 of the specified file should utilize the folio generation function. Additionally, `&$folioIndex` can be removed from the `use` clause of `$fnInsertarOrden` since the folio is now passed directly. Examining line 510 will verify the folio generation details.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.474021140s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 7:40 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `seed_dataset_2years.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L499-538)</summary>
+
+**Path:** `Unknown file`
+
+```
+    $totalOrdenes = array_sum($statsZonas);
+    echo "\n" . str_repeat('=', 70) . "\n";
+    echo "  🎉 DATASET SIMULADO [SIM2Y] GENERADO EXITOSAMENTE ({$elapsed} seg)\n";
+    echo str_repeat('=', 70) . "\n";
+    echo "  Total de Órdenes creadas:   " . number_format($totalOrdenes) . "\n";
+    echo "  Total de Pacientes creados: " . number_format($totalPacientes) . "\n";
+    echo "  Total de Notificaciones:    5 (Hoy, 5d, 20d, 8 meses, Recepción)\n\n";
+
+    echo "  Distribución por Zonas Temporales (Reglas de Filtro Período):\n";
+    echo "  ┌───────────────────────┬──────────┬────────────────────────────────────────┐\n";
+    echo "  │ Zona Temporal         │  Órdenes │ Regla de Visualización en UI           │\n";
+    echo "  ├───────────────────────┼──────────┼────────────────────────────────────────┤\n";
+    echo "  │ A: Hoy (0 días)       │ " . str_pad((string)$statsZonas['A_Hoy'], 8, ' ', STR_PAD_LEFT) . " │ Solo pestaña 'Órdenes de Hoy'          │\n";
+    echo "  │ B: 1d a 15d           │ " . str_pad((string)$statsZonas['B_15d'], 8, ' ', STR_PAD_LEFT) . " │ Visibles en '15' y en '30d'            │\n";
+    echo "  │ C: 16d a 30d          │ " . str_pad((string)$statsZonas['C_30d'], 8, ' ', STR_PAD_LEFT) . " │ Visibles en '30d' (OCULTAS en '15')    │\n";
+    echo "  │ D: 31d a 730d (2 años)│ " . str_pad((string)$statsZonas['D_2Años'], 8, ' ', STR_PAD_LEFT) . " │ Visibles con 'Fechas' o con la Lupita │\n";
+    echo "  └───────────────────────┴──────────┴────────────────────────────────────────┘\n\n";
+
+    echo "  Distribución por Estados Clínicos:\n";
+    echo "  - 1: Remitido:           {$statsEstados[1]}\n";
+    echo "  - 2: En Atención:        {$statsEstados[2]}\n";
+    echo "  - 3: Resultados Listos:  {$statsEstados[3]} (con PDF vinculado)\n";
+    echo "  - 4: Cerrada:            {$statsEstados[4]} (con PDF vinculado)\n";
+    echo "  - 5: Cancelada:          {$statsEstados[5]}\n\n";
+
+    echo "  Folios generados: S2Y-00001 al " . sprintf('S2Y-%05d', $totalOrdenes) . "\n";
+    echo "  Para limpiar 100% este dataset ejecute:\n";
+    echo "    php tests/clean_dataset_2years.php\n";
+    echo str_repeat('=', 70) . "\n\n";
+
+} catch (\Throwable $e) {
+    if (isset($db) && $db->inTransaction()) {
+        $db->rollBack();
+        echo "✗ Transacción revertida (Rollback ejecutado).\n";
+    }
+    echo "✗ ERROR: " . $e->getMessage() . "\n";
+    echo "  En: " . $e->getFile() . ":" . $e->getLine() . "\n\n";
+    exit(1);
+}
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 7:40 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+Reviewing the test suite to ensure alignment, specifically focusing on simulated order detection within lines 84-93. It retrieves the count of simulated orders using a database query that identifies orders with a specific folio or patient name pattern. Sample order extraction logic also needs examination.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `test_search_periodo_dataset_suite.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.017781515s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L354-439)</summary>
+
+**Path:** `Unknown file`
+
+```
+        if (stripos($r['estudios'], $sampleDiagToken) === false && stripos($r['paciente'], $sampleDiagToken) === false) {
+            $matchDiagAnio = false;
+        }
+    }
+    assertCase(
+        'E-06',
+        "Lupita Mixta: Multicriterio Diagnóstico + Año ('{$searchDiagAnio}')",
+        is_array($resDiagAnio) && $matchDiagAnio && (!empty($resDiagAnio) || $simCount === 0),
+        "Coincidencias con {$searchDiagAnio}: " . count($resDiagAnio)
+    );
+
+    // E-07: Búsqueda por Teléfono Numérico Largo (7-10 dígitos)
+    $resTel = MDOrdenes::buscarOrdenesMedico($medicoId, $sampleTel, 15);
+    $matchTel = false;
+    foreach ($resTel as $r) {
+        if (strpos(preg_replace('/\D/', '', $r['telefono']), $sampleTel) !== false) {
+            $matchTel = true;
+            break;
+        }
+    }
+    assertCase(
+        'E-07',
+        "Lupita: Búsqueda directa por Teléfono (7-10 dígitos: '{$sampleTel}')",
+        !empty($resTel) && $matchTel,
+        "Órdenes localizadas por teléfono: " . count($resTel)
+    );
+
+    // E-08: Búsqueda por Teléfono Numérico Parcial (3+ dígitos)
+    $prefixTel = substr($sampleTel, 0, 4);
+    $resTelParcial = MDOrdenes::buscarOrdenesMedico($medicoId, $prefixTel, 15);
+    $matchTelParcial = false;
+    foreach ($resTelParcial as $r) {
+        if (strpos(preg_replace('/\D/', '', $r['telefono']), $prefixTel) !== false || strpos($r['folio'], $prefixTel) !== false) {
+            $matchTelParcial = true;
+            break;
+        }
+    }
+    assertCase(
+        'E-08',
+        "Lupita: Fragmento numérico de teléfono o folio ('{$prefixTel}')",
+        !empty($resTelParcial) && $matchTelParcial,
+        "Coincidencias encontradas: " . count($resTelParcial)
+    );
+
+    // E-09: Búsqueda por Folio Canónico Completo (ej. S2Y-00042 o similar)
+    $resFolio = MDOrdenes::buscarOrdenesMedico($medicoId, $sampleFolio, 15);
+    $matchFolioExact = false;
+    foreach ($resFolio as $r) {
+        if ($r['folio'] === $sampleFolio) {
+            $matchFolioExact = true;
+            break;
+        }
+    }
+    assertCase(
+        'E-09',
+        "Lupita: Folio canónico completo ('{$sampleFolio}')",
+        $matchFolioExact,
+        "Folio exacto encontrado: " . ($resFolio[0]['folio'] ?? 'ninguno') . " (Total: " . count($resFolio) . ")"
+    );
+
+    // E-10: Búsqueda por Folio en Minúsculas
+    $folioLower = strtolower($sampleFolio);
+    $resFolioLower = MDOrdenes::buscarOrdenesMedico($medicoId, $folioLower, 15);
+    $matchFolioLower = false;
+    foreach ($resFolioLower as $r) {
+        if (strtolower($r['folio']) === $folioLower) {
+            $matchFolioLower = true;
+            break;
+        }
+    }
+    assertCase(
+        'E-10',
+        "Lupita: Folio con prefijo en minúsculas ('{$folioLower}') es Case-Insensitive",
+        $matchFolioLower,
+        "Coincidencia lograda: " . count($resFolioLower) . " resultados"
+    );
+
+    // E-11: Búsqueda por Folio Numérico Puro sin Prefijo (ej. '42' o '1')
+    $rawNum = preg_replace('/\D/', '', $sampleFolio);
+    $numTerm = ltrim($rawNum, '0') ?: '1';
+    $resNumPuro = MDOrdenes::buscarOrdenesMedico($medicoId, $numTerm, 15);
+    assertCase(
+        'E-11',
+        "Lupita: Folio numérico sin padding ('{$numTerm}') resuelve con orden prioritario",
+        is_array($resNumPuro) && !empty($resNumPuro),
+        "Total órdenes retornadas para término numérico '{$numTerm}': " . count($resNumPuro)
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Analyzing test cases E-09 and E-10 related to folio searches. E-09 tests pure numeric folio searches, calling a specific function with the folio and verifying the returned folio matches the search term. E-10 tests searches that begin with a '#'. The objective is to evaluate the behavior of the search functionality under these different input conditions.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.102939544s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 7:40 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `test_search_periodo_dataset_suite.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L464-484)</summary>
+
+**Path:** `Unknown file`
+
+```
+            "Lupita Bypass: Sin órdenes > 60d en base para probar bypass profundo",
+            true,
+            "Omitido por ausencia de órdenes > 60d (sembrar dataset SIM2Y para validar)"
+        );
+    }
+
+    // E-13: Límite Anti-Ahogo (Anti-Choke LIMIT 16)
+    $resAntiChoke = MDOrdenes::buscarOrdenesMedico($medicoId, 'a', 15);
+    $countChoke = count($resAntiChoke);
+    assertCase(
+        'E-13',
+        "Límite Anti-Ahogo: Consulta con término genérico ('a') nunca retorna más de 16 filas",
+        $countChoke <= 16,
+        "Total filas retornadas: {$countChoke} (protección de RAM y respuesta en <15ms)"
+    );
+
+    // E-14: Búsqueda sin Coincidencias (Zero-Matches)
+    $resZero = MDOrdenes::buscarOrdenesMedico($medicoId, 'TERMINO_INEXISTENTE_XYZ_9999', 15);
+    assertCase(
+        'E-14',
+        "Zero-Matches: Término inexistente retorna array vacío sin warnings ni excepciones",
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `test_search_periodo_dataset_suite.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L499-524)</summary>
+
+**Path:** `Unknown file`
+
+```
+    $resIsolation = MDOrdenes::buscarOrdenesMedico($medicoId, 'SIM2Y', 30);
+    $isolated = true;
+    if (!empty($resIsolation)) {
+        $ids = array_map(function($r) { return (int)$r['id']; }, $resIsolation);
+        $inClause = implode(',', $ids);
+        $alienCount = (int)$db->query("
+            SELECT COUNT(*) FROM ordenes WHERE id IN ({$inClause}) AND medico_id != {$medicoId}
+        ")->fetchColumn();
+        if ($alienCount > 0) $isolated = false;
+    }
+    assertCase(
+        'E-16',
+        "Aislamiento RBAC: Las órdenes retornadas pertenecen estrictamente al médico autenticado",
+        $isolated,
+        "Auditoría cruzada en DB: 0 órdenes de otros médicos en los resultados"
+    );
+
+    echo "\n";
+
+    // ═════════════════════════════════════════════════════════════════
+    // BLOQUE F: Paginación y Retención de Parámetros (F-01 a F-04)
+    // ═════════════════════════════════════════════════════════════════
+    echo C_BOLD . "── BLOQUE F: Paginación y Retención de Parámetros (4 Casos) ───────────" . C_RESET . "\n";
+
+    // F-01: Paginación Página 1
+    // Usar tamaño adaptativo si total órdenes < 50, o 25 estándar
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `test_client_refresh_draft_suite.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L679-694)</summary>
+
+**Path:** `Unknown file`
+
+```
+eG.pacienteInput.value = 'María López';
+eG.grid.querySelectorAll('input[name="estudios[]"]')[0].checked = true;
+lG.updateChipsContainer();
+
+// Simular clic en notificación sin guardar
+lG.capturarEstadoBusquedaPrevia('tab-hoy', { folio: 'S2Y-00001' }, 0);
+// Médico revisa y pulsa volver a solicitud nueva
+assert.strictEqual(eG.pacienteInput.value, 'María López');
+assert.strictEqual(eG.badgeEl.textContent, '1 seleccionado');
+pass('G-04', 'Navegación por notificación convive con borrador en redacción');
+
+// G-05: Refresh durante Barra de Retorno
+let snapAntes = lG.getSnapshotState();
+assert.ok(snapAntes !== null);
+// Al hacer refresh, la RAM se reinicia
+let eG_refresh = crearEntornoDOM(12);
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 7:41 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 7:41 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 7:41 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+Identified several files potentially relevant to folio number handling: application logic for order processing, dataset cleaning, dataset seeding, and several test suites. These files likely contain the relevant code to modify for numeric-only folio numbers starting from 1. The test suites suggest areas where the folio number validation should be tested.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.000426593s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1584-1622)</summary>
+
+**Path:** `Unknown file`
+
+```
+                           COALESCE(m.universidad_nombre, '') AS universidad,
+                           COALESCE(m.lugar_trabajo_nombre, '') AS lugar
+                    FROM vw_ordenes_completas o
+                    LEFT JOIN vw_medicos_completos m ON m.user_id = o.medico_user_id
+                    WHERE o.folio_unico = :folio";
+            if ($medicoIdRestriccion !== null) {
+                $sql .= " AND o.medico_user_id = :medico_id";
+            }
+            $sql .= " LIMIT 1";
+
+            $stmt = $db->prepare($sql);
+            $stmt->bindValue(':folio', $folio);
+            if ($medicoIdRestriccion !== null) {
+                $stmt->bindValue(':medico_id', $medicoIdRestriccion, PDO::PARAM_INT);
+            }
+            $stmt->execute();
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            return $row ?: null;
+        } catch (Throwable $e) {
+            DB::logFallback('ERROR', 'Fallo en RC\Negocio\Ordenes::obtenerOrdenPorFolio', $e->getMessage());
+            return null;
+        }
+    }
+
+    // ═══════════════════════════════════════════════════════════════════════
+    // GESTIÓN DE RECEPCIONISTAS (CRUD, BAJA LÓGICA, PAUSA, CONTRASEÑAS)
+    // ═══════════════════════════════════════════════════════════════════════
+
+    /**
+     * Obtiene la lista completa de recepcionistas registrados en el sistema.
+     */
+    public static function obtenerRecepcionistas(): array {
+        $pdo = DB::connect();
+        try {
+            $sql = "SELECT 
+                        e.id AS empleado_id,
+                        e.user_id,
+                        e.nombre,
+```
+
+</details>
+
+---
+
+## User Request
+
+Realiza la ejecución de las pruebas, con precisión, dame informe incluidos gaps e issues.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `07_seed_catalogs.sql`
+**Language:** oracle-sql
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Explicit permission is granted to execute the tests; the test orchestrator script is identified as the execution entry point. Preliminary data from the database will be checked to inform the test run. The goal is to generate a comprehensive report that will include gaps and issues.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.165986878s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 7:56 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 7:57 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `test_client_refresh_draft_suite.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L544-569)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+// B-01: Pull-to-refresh nativo con texto en otros-estudios (sin pulsar Enter ni +)
+let eB01 = crearEntornoDOM(12);
+let lB01 = instanciarLogica(eB01);
+lB01.populateMandatoryGrid();
+lB01.init(eB01.form, eB01.grid);
+eB01.pacienteInput.value = 'Ana Lucía Gómez';
+eB01.grid.querySelectorAll('input[name="estudios[]"]')[1].checked = true; // BHC
+eB01.grid.querySelectorAll('input[name="estudios[]"]')[2].checked = true; // EGO
+eB01.otrosInput.value = 'EGO Especial'; // Texto libre sin enter
+lB01.updateChipsContainer();
+
+// Pull-to-refresh en móvil destruye el DOM
+let eB01_after = crearEntornoDOM(12);
+let lB01_after = instanciarLogica(eB01_after);
+lB01_after.populateMandatoryGrid();
+lB01_after.init(eB01_after.form, eB01_after.grid);
+lB01_after.updateChipsContainer();
+assert.strictEqual(eB01_after.badgeEl.textContent, '3 seleccionados');
+assert.ok(eB01_after.tabText.innerHTML.includes('(3 Est.)'));
+pass('B-01', 'Pull-to-refresh preserva texto libre reactivo y paridad Panel=Tab');
+
+// B-02: Menú Navegador → Recargar
+let eB02 = crearEntornoDOM(12);
+let lB02 = instanciarLogica(eB02);
+lB02.populateMandatoryGrid();
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The `lB01.init()` function call is critical; it likely initializes the user interface with data. The content of `localStorage` before this call, specifically under the key `laesh_md_draft_u_12` within Bloque A and sub-item A-01, shows that checkboxes associated with "GLUCOSA SERICA" and "cbCre" are set to checked.
+
+This suggests that the initialization might be pre-populating the UI with saved draft data or user preferences. Understanding how `lB01.init()` interacts with `localStorage` is key.
+
+
+The `lB01.init()` function appears to merge existing `localStorage` drafts with new form data. Without clearing the draft, tests intended to start fresh, like B-01, will inherit previous selections (GLU, CRE, `Perfil Tiroideo Libre`), leading to unexpected results (5 selected studies). Clearing the draft before running B-01 ensures only the specifically intended studies (BHC, EGO, 'EGO Especial') are selected, as desired for a new patient form. This suggests a need to use the clear function before scenarios that create a draft for a new patient with a known number of studies.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.885566675s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 7:57 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `test_client_refresh_draft_suite.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L654-664)</summary>
+
+**Path:** `Unknown file`
+
+```
+// ==================================================================================
+// BLOQUE G: Notificaciones, Snapshot en RAM y Barra de Retorno (G-01 a G-05)
+// ==================================================================================
+console.log('\n── BLOQUE G: Notificaciones, Snapshot RAM & Retorno ───────────────');
+
+let eG = crearEntornoDOM(12);
+let lG = instanciarLogica(eG);
+lG.populateMandatoryGrid();
+lG.init(eG.form, eG.grid);
+
+// G-01 & G-02: Captura de Snapshot en RAM al pulsar Notificación
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 7:57 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 7:57 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 7:57 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+One test failed, specifically when searching for the prefix '9535'. The system found zero matches, despite the presence of the phone number '9535324290'. Further investigation is needed to determine why the prefix search failed.
+
+
+The input '9535' triggered Branch 1, which searches `folio_unico`. This branch does *not* search the phone number field. Branch 2, which searches the phone number, only activates for 7-10 digit inputs. Because '9535' has only 4 digits, this branch is not activated. This explains why the search for the phone number prefix failed.
+
+
+The code uses a conditional search based on input length. Short numerical inputs (1-6 digits) trigger a search across `folio_unico` (exact match and prefix) and `paciente_telefono` (fragment match). This search strategy is consistent across multiple code locations. Reviewing the `MD\Negocio\Ordenes.php` file confirms the same logic is implemented there.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.986423904s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 7:58 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 7:58 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 7:58 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+All test cases in Suite 2 passed successfully, indicating a robust implementation. However, the presence of zero simulated orders, coupled with a warning about an unseeded dataset, warrants further investigation. The absence of simulated orders is unexpected given the nature of the tests, prompting a need to understand this discrepancy.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `test_search_periodo_dataset_suite.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.093622867s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L79-94)</summary>
+
+**Path:** `Unknown file`
+
+```
+try {
+    $db = DB::connect();
+    echo "  " . C_GREEN . "✓ Conectado a la base de datos:" . C_RESET . " " . $db->query("SELECT DATABASE()")->fetchColumn() . "\n";
+
+    // 1. Verificar presencia del Dataset SIM2Y
+    $simCount = (int)$db->query("SELECT COUNT(*) FROM ordenes WHERE folio_unico LIKE 'S2Y-%'")->fetchColumn();
+    echo "  " . C_CYAN . "ℹ Órdenes simuladas detectadas (SIM2Y):" . C_RESET . " {$simCount} órdenes\n";
+
+    if ($simCount === 0) {
+        echo "  " . C_YELLOW . "⚠️  ADVERTENCIA: El dataset [SIM2Y] no ha sido sembrado aún." . C_RESET . "\n";
+        echo "     Para sembrar los 2 años de historial ejecute previamente:\n";
+        echo "     LAESH_DB_PORT=6002 php tests/seed_dataset_2years.php\n";
+    }
+
+    // 2. Seleccionar un médico de prueba que tenga órdenes reales o simuladas
+    $medicoRow = $db->query("
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 7:59 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 7:59 pm
+
+---
+
+<details>
+<summary>Conversation History</summary>
+
+# Conversation History
+Here are the conversation IDs, titles, and summaries of your most recent 1 conversations, in reverse chronological order:
+
+<conversation_summaries>
+## Conversation b05a5b41-a7c7-4d90-9813-7abd9e8e85cf: Limpieza De Código PTR
+- Created: 2026-09-27T17:17:20Z
+- Last modified: 2026-09-28T01:52:23Z
+
+</conversation_summaries>
+
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 7:59 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+La solicitud requiere la ejecución precisa de pruebas y un informe detallado en español. Necesito ejecutar las pruebas de manera completa para cubrir todos los 44 casos, documentando cada brecha, problema y solución. La precisión es clave; la tarea requiere un informe exhaustivo de los resultados.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.079931191s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 7:59 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 7:59 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 7:59 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 7:59 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+Here's the report generation plan: First, I will summarize the successful test run, highlighting the total cases, pass rate, and execution times for both frontend and backend components. Then, I will outline the structure for a detailed breakdown of the test results by blocks and cases, promising a comprehensive report in Spanish.
+
+
+Focus is now on detailing the test cases across different functional blocks, ensuring a comprehensive coverage assessment. Thinking about how the identified issues, such as the `localStorageMock` conflict between blocks A and B, impacted the test design and results. The intention is to connect these specific issues to corresponding test cases, clarifying how they were addressed.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.812630084s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L476-507)</summary>
+
+**Path:** `Unknown file`
+
+```
+            $params = [':user_id' => $userId];
+            $search = trim(mb_strtolower($search, 'UTF-8'));
+
+            // Opción B (Filtro Combinado): El filtro de período/calendario siempre se aplica como base
+            $filtroPeriodo = self::construirFiltroPeriodoAnterioresMedico($periodo, '', $fechaInicio, $fechaFin, $params);
+
+            if ($search !== '') {
+                if (preg_match('/^(?:#)?(\d{1,8})$/', $search, $mFolio)) {
+                    $rawNum = (string)(int)$mFolio[1];
+                    $whereSql = "WHERE medico_user_id = :user_id AND DATE(hora_captura) < CURDATE() AND (folio_unico = :q_fol_exact OR folio_unico LIKE :q_fol_pref) ";
+                    $params[':q_fol_exact'] = $rawNum;
+                    $params[':q_fol_pref']  = $rawNum . '%';
+                } else {
+                    $whereSql = "WHERE medico_user_id = :user_id AND ({$filtroPeriodo}) AND (LOWER(paciente_nombre) LIKE :q1 OR LOWER(paciente_telefono) LIKE :q2 OR LOWER(diagnostico) LIKE :q3 OR folio_unico = :q4) ";
+                    $qVal = '%' . $search . '%';
+                    $params[':q1'] = $qVal;
+                    $params[':q2'] = $qVal;
+                    $params[':q3'] = $qVal;
+                    $params[':q4'] = $search;
+                }
+            } else {
+                $whereSql = "WHERE medico_user_id = :user_id AND " . $filtroPeriodo;
+            }
+
+            $stmt = $db->prepare("SELECT COUNT(*) FROM vw_ordenes_completas {$whereSql}");
+            foreach ($params as $k => $v) {
+                if ($k === ':user_id') {
+                    $stmt->bindValue($k, (int)$v, PDO::PARAM_INT);
+                } else {
+                    $stmt->bindValue($k, $v, PDO::PARAM_STR);
+                }
+            }
+```
+
+</details>
+
+---
+
+## User Request
+
+me perdi, hiciste cambio el dataset por el folio numerico de 1 en adelante, duda: ya volvistea a corregir t reejecutar todos los casos de prueba ?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `Ordenes.php`
+**Language:** php
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The user is asking if the dataset change (numeric folio from 1 onwards) was followed by a complete re-execution and correction of all test cases. Need to confirm if all test cases were addressed after the dataset modification to ensure correctness. This is a critical verification step to validate the impact of the data change.
+
+
+Adjustments were made to data generation, data validation regexes, and test assertions to handle the exclusively numeric folios. Confirmed that all relevant test suites were executed successfully after these modifications, ensuring no regressions. The provided output verifies that the test suites completed without errors, confirming the changes were correctly implemented and validated.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Ordenes.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.487199973s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L379-459)</summary>
+
+**Path:** `Unknown file`
+
+```
+            case '90d':
+                return "{$alias}hora_captura >= DATE_SUB(CURDATE(), INTERVAL 90 DAY) AND DATE({$alias}hora_captura) < CURDATE()";
+            case '30':
+            case '30d':
+            default:
+                return "{$alias}hora_captura >= DATE_SUB(CURDATE(), INTERVAL 30 DAY) AND DATE({$alias}hora_captura) < CURDATE()";
+        }
+    }
+
+    /**
+     * Obtiene las solicitudes de órdenes de DÍAS ANTERIORES emitidas por el médico logueado,
+     * con ordenamiento, búsqueda, paginación y filtro de período (default: 30 días, o calendario por rango de fechas).
+     * Precedencia del buscador: si $search tiene contenido, busca en todo el historial (< hoy).
+     */
+    public static function obtenerOrdenesAnterioresMedico(int $userId, int $limit = 25, int $offset = 0, string $search = '', string $orderBy = 'fecha', string $orderDir = 'DESC', string $periodo = '30d', string $fechaInicio = '', string $fechaFin = ''): array {
+        try {
+            $db = DB::connect();
+
+            $allowedSorts = [
+                'folio'           => 'CAST(o.folio_unico AS UNSIGNED)',
+                'paciente'        => 'o.paciente_nombre',
+                'fecha'           => 'o.hora_captura',
+                'fecha_resultado' => 'o.fecha_resultado',
+                'estado'          => 'o.estado_id',
+                'id'              => 'o.orden_id'
+            ];
+            $sortCol = $allowedSorts[$orderBy] ?? 'o.orden_id';
+            $dir = strtoupper($orderDir) === 'ASC' ? 'ASC' : 'DESC';
+
+            $params = [':user_id' => $userId];
+            $search = trim(mb_strtolower($search, 'UTF-8'));
+
+            // Opción B (Filtro Combinado): El filtro de período/calendario siempre se aplica como base
+            $filtroPeriodo = self::construirFiltroPeriodoAnterioresMedico($periodo, 'o.', $fechaInicio, $fechaFin, $params);
+
+            if ($search !== '') {
+                if (preg_match('/^(?:#)?(\d{1,8})$/', $search, $mFolio)) {
+                    $rawNum = (string)(int)$mFolio[1];
+                    $whereSql = "WHERE o.medico_user_id = :user_id AND DATE(o.hora_captura) < CURDATE() AND (o.folio_unico = :q_fol_exact OR o.folio_unico LIKE :q_fol_pref) ";
+                    $params[':q_fol_exact'] = $rawNum;
+                    $params[':q_fol_pref']  = $rawNum . '%';
+                } else {
+                    $whereSql = "WHERE o.medico_user_id = :user_id AND ({$filtroPeriodo}) AND (LOWER(o.paciente_nombre) LIKE :q1 OR LOWER(o.paciente_telefono) LIKE :q2 OR LOWER(o.diagnostico) LIKE :q3 OR o.folio_unico = :q4) ";
+                    $qVal = '%' . $search . '%';
+                    $params[':q1'] = $qVal;
+                    $params[':q2'] = $qVal;
+                    $params[':q3'] = $qVal;
+                    $params[':q4'] = $search;
+                }
+            } else {
+                $whereSql = "WHERE o.medico_user_id = :user_id AND " . $filtroPeriodo;
+            }
+
+            $limInt = max(1, $limit);
+            $offInt = max(0, $offset);
+
             $sql = "
-                SELECT 
-                    orden_id AS id,
-                    orden_id AS orden_id,
-                    folio_unico AS folio,
-                    hora_captura AS fecha,
-                    hora_captura AS ultima_visita,
-                    hora_captura AS creado_en,
-                    diagnostico,
+                SELECT o.orden_id as id, o.folio_unico as folio, o.hora_captura as creado_en, o.fecha_resultado,
+                       o.diagnostico, o.otros_estudios, o.estudios_json as estudios, o.edad_al_emitir,
+                       o.paciente_nombre, o.paciente_sexo, o.paciente_telefono as telefono,
+                       o.estado_id, o.estado_valor AS estado_nombre, o.estado_color AS color_badge,
+                       o.motivo_cancelacion,
+                       parc.parciales_fechas
+                FROM vw_ordenes_completas o
+                LEFT JOIN (
+                    SELECT orden_id, GROUP_CONCAT(creado_en ORDER BY id ASC SEPARATOR '|') AS parciales_fechas
+                    FROM resultados_pdf
+                    WHERE tipo_entrega = 'parcial'
+                    GROUP BY orden_id
+                ) parc ON parc.orden_id = o.orden_id
+                {$whereSql}
+                ORDER BY {$sortCol} {$dir}
+                LIMIT {$limInt} OFFSET {$offInt}
+            ";
+
+            $stmt = $db->prepare($sql);
+            foreach ($params as $k => $v) {
+                if ($k === ':user_id') {
+                    $stmt->bindValue($k, (int)$v, PDO::PARAM_INT);
+                } else {
+                    $stmt->bindValue($k, $v, PDO::PARAM_STR);
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Ordenes.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L759-849)</summary>
+
+**Path:** `Unknown file`
+
+```
+                $token = $_COOKIE['laesh_jwt_token'] ?? null;
+                if ($token) {
+                    $payload = \Flight::jwt()->verifyToken($token);
+                    if ($payload && !empty($payload['jti'])) {
+                        \Flight::jwt()->revokeJti((string)$payload['jti'], 'password_changed');
+                    }
+                }
+                \Flight::jwt()->clearAuthCookie();
+            } catch (\Throwable $tJwt) {
+                Logger::log('WARN', 'Fallo al revocar JWT tras cambio de password: ' . $tJwt->getMessage());
+            }
+
+            // Deslogear sesión de Delight-Auth y destruir sesión PHP para forzar re-autenticación
+            if ($auth->isLoggedIn()) {
+                $auth->logOut();
+            }
+            if (session_status() === PHP_SESSION_ACTIVE) {
+                $_SESSION = [];
+                session_destroy();
+            }
+
+            Logger::logAlways('INFO', "Auditoría: Médico user_id={$userId} cambió exitosamente su propia contraseña. Sesión finalizada para re-autenticación.", $userId);
+
+            return [
+                'success'     => true,
+                'ack'         => true,
+                'mensaje'     => '✓ Contraseña actualizada exitosamente. Redirigiendo al inicio de sesión...',
+                'redirectUrl' => '/laesh/login/login.php?portal=medico'
+            ];
+        } catch (\Delight\Auth\NotLoggedInException $e) {
+            return ['success' => false, 'ack' => false, 'error' => 'Sesión expirada. Por favor inicie sesión de nuevo.'];
+        } catch (\Delight\Auth\InvalidPasswordException $e) {
+            return ['success' => false, 'ack' => false, 'error' => 'La contraseña actual ingresada es incorrecta.'];
+        } catch (\Delight\Auth\TooManyRequestsException $e) {
+            return ['success' => false, 'ack' => false, 'error' => 'Demasiados intentos fallidos. Intente más tarde.'];
+        } catch (Throwable $e) {
+            DB::logFallback('ERROR', 'Fallo en MD\Negocio\Ordenes::cambiarPasswordPropia (user_id=' . $userId . ')', $e->getMessage());
+            return ['success' => false, 'ack' => false, 'error' => 'No se pudo cambiar la contraseña: ' . $e->getMessage()];
+        }
+    }
+
+    /**
+     * Actualiza o inserta los datos profesionales del médico en la tabla perfiles_medicos
+     */
+    public static function actualizarPerfilMedico(array $datos, int $userId): array {
+        try {
+            $db = DB::connect();
+
+            $nombre        = trim($datos['nombre_completo'] ?? '');
+            $especialidad  = trim($datos['especialidad'] ?? '');
+            $cedula        = trim($datos['cedula_profesional'] ?? '');
+            $cedulaEsp     = trim($datos['cedula_especialidad'] ?? '');
+            $celular       = trim($datos['celular'] ?? '');
+            $telConsultorio = trim($datos['telefono_consultorio'] ?? '');
+            $dirConsultorio = trim($datos['direccion_consultorio'] ?? '');
+            $univId        = !empty($datos['universidad_id']) ? (int)$datos['universidad_id'] : null;
+            $lugarId       = !empty($datos['lugar_trabajo_id']) ? (int)$datos['lugar_trabajo_id'] : null;
+
+            if (empty($nombre) || empty($especialidad) || empty($cedula) || empty($celular)) {
+                return ['success' => false, 'error' => 'Por favor complete todos los campos obligatorios (*).'];
+            }
+
+            // Verificar si el médico ya cuenta con registro en perfiles_medicos
+            $stmtCheck = $db->prepare("SELECT COUNT(*) FROM perfiles_medicos WHERE user_id = ?");
+            $stmtCheck->execute([$userId]);
+            $exists = (bool)$stmtCheck->fetchColumn();
+
+            if ($exists) {
+                $stmtUp = $db->prepare("
+                    UPDATE perfiles_medicos 
+                    SET nombre_completo = :nombre,
+                        especialidad    = :esp,
+                        cedula_profesional = :ced,
+                        cedula_especialidad = :ced_esp,
+                        celular         = :cel,
+                        telefono_consultorio = :tel,
+                        direccion_consultorio = :dir,
+                        universidad_id  = :univ,
+                        lugar_trabajo_id = :lugar,
+                        actualizado_en  = NOW()
+                    WHERE user_id = :user_id
+                ");
+                $stmtUp->execute([
+                    'nombre'  => $nombre,
+                    'esp'     => $especialidad,
+                    'ced'     => $cedula,
+                    'ced_esp' => $cedulaEsp,
+                    'cel'     => $celular,
+                    'tel'     => $telConsultorio,
+                    'dir'     => $dirConsultorio,
+                    'univ'    => $univId,
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `buscarOrdenesMedico`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 8:07 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Ordenes.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L629-729)</summary>
+
+**Path:** `Unknown file`
+
+```
+     */
+    public static function buscarOrdenesMedico(int $medicoId, string $term, int $limit = 15): array {
+        try {
+            $term = trim($term);
+            if (strlen($term) < 1) return [];
+
+            $db = DB::connect();
+            $limInt = max(1, min(50, (int)$limit));
+            $params = [':medico_id' => $medicoId];
+            $whereParts = ["o.medico_user_id = :medico_id"];
+
+            // 1. Caso numérico puro o con almohadilla (1 a 6 dígitos): Folio exacto, prefijo o teléfono parcial
+            if (preg_match('/^#?(\d{1,6})$/', $term, $mTermNum)) {
+                $numVal = $mTermNum[1];
+                $whereParts[] = "(o.folio_unico = :f_exact OR o.folio_unico LIKE :f_pref OR o.paciente_telefono LIKE :f_tel)";
+                $params[':f_exact'] = $numVal;
+                $params[':f_pref']  = $numVal . '%';
+                $params[':f_tel']   = '%' . $numVal . '%';
+                $orderClause = "(o.folio_unico = :f_ord) DESC, CAST(o.folio_unico AS UNSIGNED) ASC, o.orden_id DESC";
+                $params[':f_ord'] = $numVal;
+            }
+            // 2. Caso numérico largo (7 a 10 dígitos): Teléfono directo o folio
+            elseif (preg_match('/^\d{7,10}$/', $term)) {
+                $whereParts[] = "(o.paciente_telefono LIKE :tel OR o.folio_unico = :fol_tel)";
+                $params[':tel'] = '%' . $term . '%';
+                $params[':fol_tel'] = $term;
+                $orderClause = "o.orden_id DESC";
+            }
+            // 3. Caso texto o multicriterio (Nombre, Año, Folio numérico, Teléfono parcial)
+            else {
+                $words = preg_split('/\s+/', $term, -1, PREG_SPLIT_NO_EMPTY);
+                $wIdx = 1;
+                foreach ($words as $word) {
+                    $wordLower = mb_strtolower($word, 'UTF-8');
+                    // Si es un año de 4 dígitos entre 2000 y 2099
+                    if (preg_match('/^(20\d\d)$/', $word, $mYear)) {
+                        $whereParts[] = "YEAR(o.hora_captura) = :yr_" . $wIdx;
+                        $params[':yr_' . $wIdx] = (int)$mYear[1];
+                    }
+                    // Si es un número o folio (1 a 6 dígitos con o sin #)
+                    elseif (preg_match('/^#?(\d{1,6})$/', $word, $mNum)) {
+                        $whereParts[] = "(o.folio_unico = :fol_" . $wIdx . " OR o.folio_unico LIKE :fol_pref_" . $wIdx . " OR o.paciente_telefono LIKE :tel_" . $wIdx . ")";
+                        $params[':fol_' . $wIdx]      = $mNum[1];
+                        $params[':fol_pref_' . $wIdx] = $mNum[1] . '%';
+                        $params[':tel_' . $wIdx]      = '%' . $mNum[1] . '%';
+                    }
+                    // Si es un fragmento numérico largo (7+ dígitos de teléfono)
+                    elseif (preg_match('/^\d{7,}$/', $word)) {
+                        $whereParts[] = "(o.paciente_telefono LIKE :tel_" . $wIdx . " OR o.folio_unico = :fol_" . $wIdx . ")";
+                        $params[':tel_' . $wIdx] = '%' . $word . '%';
+                        $params[':fol_' . $wIdx] = $word;
+                    }
+                    // Si es texto (paciente, diagnóstico)
+                    else {
+                        $whereParts[] = "(LOWER(o.paciente_nombre) LIKE :q_nom_" . $wIdx . " OR LOWER(o.diagnostico) LIKE :q_diag_" . $wIdx . ")";
+                        $likeVal = '%' . $wordLower . '%';
+                        $params[':q_nom_' . $wIdx]  = $likeVal;
+                        $params[':q_diag_' . $wIdx] = $likeVal;
+                    }
+                    $wIdx++;
+                }
+                $orderClause = "o.orden_id DESC";
+            }
+
+            $whereSql = "WHERE " . implode(' AND ', $whereParts);
+            $fetchLimit = $limInt + 1; // +1 para detectar si hay más resultados
+
+            $stmt = $db->prepare("
+                SELECT
+                    o.orden_id AS id,
+                    o.folio_unico AS folio,
+                    o.paciente_nombre AS paciente,
+                    o.paciente_telefono AS telefono,
+                    o.medico_nombre_completo AS medico,
+                    o.estado_valor AS estado,
+                    o.estado_id,
+                    o.diagnostico AS estudios,
+                    o.hora_captura AS fecha
+                FROM vw_ordenes_completas o
+                {$whereSql}
+                ORDER BY {$orderClause}
+                LIMIT {$fetchLimit}
+            ");
+            foreach ($params as $k => $v) {
+                if ($k === ':medico_id' || strpos($k, ':yr_') === 0) {
+                    $stmt->bindValue($k, (int)$v, PDO::PARAM_INT);
+                } else {
+                    $stmt->bindValue($k, $v, PDO::PARAM_STR);
+                }
+            }
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (Throwable $e) {
+            DB::logFallback('ERROR', 'Fallo en MD\Negocio\Ordenes::buscarOrdenesMedico', $e->getMessage());
+            return [];
+        }
+    }
+
+    /**
+     * Cambia la contraseña del médico autenticado utilizando Delight Auth
+     * y purga tokens huérfanos de persistencia y resets.
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Dataset and code corrections are complete. All test cases have been re-executed following the modifications. This includes a full re-run of the test suite.
+
+
+Modified the regular expressions in the relevant backend functions to accept purely numeric folios, starting from 1, removing the alphanumeric prefix dependency. Cleaned the simulation dataset, purging old orders with prefixes and generating a new, consecutive numeric dataset starting from 1. Updated the test suite to search simulation orders by patient and validate against the newly generated numerical folios, including various search formats and a historical bypass.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.654237124s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+## User Request
+
+Mejoras en despliege de resultados autocomplete,en la busqueda por lupita:
+. No aparezca el texto: FOLIO # , solo el numero de folio y lo que ya muestra, tambien a lado derecho del telefono se muestre el estado de la solicitud.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `07_seed_catalogs.sql`
+**Language:** oracle-sql
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Examining the autocomplete display, the first task is to remove the literal "FOLIO #" prefix, leaving only the numerical folio value. The secondary requirement involves integrating the application status alongside the phone number.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `FOLIO #`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.052238030s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 9:18 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L499-569)</summary>
+
+**Path:** `Unknown file`
+
+```
+                        autocompleteList.style.display = 'none';
+                        autocompleteList.innerHTML = '';
+                    }
+                    return;
+                }
+
+                searchTimerMedico = setTimeout(function() {
+                    fetch('/laesh/md/api/buscar-ordenes?q=' + encodeURIComponent(query))
+                        .then(res => res.json())
+                        .then(data => {
+                            if (!autocompleteList) return;
+                            if (data.success && Array.isArray(data.ordenes) && data.ordenes.length > 0) {
+                                window.__MD_SEARCH_RESULTS__ = {};
+                                const hasMore = data.ordenes.length > 15;
+                                const displayList = data.ordenes.slice(0, 15);
+
+                                let itemsHtml = displayList.map(m => {
+                                    const folVal  = m.folio || ('LSH-' + m.id);
+                                    window.__MD_SEARCH_RESULTS__[folVal] = m;
+                                    window.__MD_SEARCH_RESULTS__[m.id] = m;
+                                    const nameVal = m.paciente || '';
+                                    const estVal  = m.estado || 'Emitida';
+                                    const telStr  = m.telefono ? `<span style="color:#64748b; font-size:0.75rem;"> · 📞 ${m.telefono}</span>` : '';
+                                    const fechaStr = laeshFmtFechaCorta(m.fecha);
+                                    return `
+                                        <div class="autocomplete-item-medico"
+                                             data-action="search-select-medico" data-id="${folVal}">
+                                            <strong>FOLIO #${folVal}</strong> — ${nameVal}
+                                            <span class="autocomplete-estado"> (${estVal})</span>
+                                            <div style="color:#94a3b8; font-size:0.75rem; margin-top:2px;">
+                                                ${fechaStr ? `<span>📅 ${fechaStr}</span>` : ''}${telStr}
+                                            </div>
+                                        </div>
+                                    `;
+                                }).join('');
+
+                                if (hasMore) {
+                                    itemsHtml += `
+                                        <div class="autocomplete-footer-more" data-action="search-enter-medico" style="padding: 9px 12px; background: #f8fafc; border-top: 1px solid #e2e8f0; font-size: 0.8rem; font-weight: 600; color: #0052b7; cursor: pointer; text-align: center;">
+                                            🔍 Ver todos los resultados en Solicitudes Anteriores (Enter) ➔
+                                        </div>
+                                    `;
+                                }
+
+                                autocompleteList.innerHTML = itemsHtml;
+                                posicionarAutocompleteMedico();
+                                autocompleteList.style.display = 'block';
+                            } else {
+                                autocompleteList.innerHTML = '<div style="padding: 10px 14px; color: #94a3b8; font-style: italic; font-size: 0.85rem;">Sin resultados para "' + query + '"</div>';
+                                posicionarAutocompleteMedico();
+                                autocompleteList.style.display = 'block';
+                            }
+                        })
+                        .catch(err => {
+                            console.error("Error en búsqueda backend médico MariaDB:", err);
+                            if (autocompleteList) autocompleteList.style.display = 'none';
+                        });
+                }, 300);
+            });
+
+            // Re-posicionar si el viewport cambia (rotación, resize)
+            window.addEventListener('resize', function() {
+                const autocompleteList = document.getElementById('autocomplete-list-medico');
+                if (autocompleteList && autocompleteList.style.display !== 'none') {
+                    posicionarAutocompleteMedico();
+                }
+            });
+
+            document.addEventListener('click', (e) => {
+                const autocompleteList = document.getElementById('autocomplete-list-medico');
+                if (autocompleteList && !inputBuscadorMedico.contains(e.target) && !autocompleteList.contains(e.target)) {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `labadmin.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L59-119)</summary>
+
+**Path:** `Unknown file`
+
+```
+                    return;
+                }
+
+                searchTimerAdmin = setTimeout(function() {
+                    fetch('/laesh/rc/api/buscar-ordenes?q=' + encodeURIComponent(query))
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.success && Array.isArray(data.ordenes) && data.ordenes.length > 0) {
+                                window.__RC_SEARCH_RESULTS__ = {};
+                                const hasMore = data.ordenes.length > 15;
+                                const displayList = data.ordenes.slice(0, 15);
+
+                                let itemsHtml = displayList.map(m => {
+                                    const folVal = m.folio || ('LSH-' + m.id);
+                                    window.__RC_SEARCH_RESULTS__[folVal] = m;
+                                    window.__RC_SEARCH_RESULTS__[m.id] = m;
+                                    const estVal = m.estado || 'Emitida';
+                                    const medStr = m.medico ? `<span style="color:#64748b; font-size:0.78rem;"> (${m.medico})</span>` : '';
+                                    const folioExtStr = m.folio_extraido ? ` <span style="color:#94a3b8; font-size:0.78rem;">· ${m.folio_extraido}</span>` : '';
+                                    const telStr = m.telefono ? `<span style="color:#64748b; font-size:0.75rem;"> · 📞 ${m.telefono}</span>` : '';
+                                    const fechaStr = laeshFmtFechaCorta(m.fecha);
+                                    return `
+                                        <div class="autocomplete-item-medico"
+                                             data-action="search-select-admin" data-id="${folVal}">
+                                            <strong>FOLIO #${folVal}</strong>${folioExtStr} — ${m.paciente}${medStr}
+                                            <span class="autocomplete-estado"> (${estVal})</span>
+                                            <div style="color:#94a3b8; font-size:0.75rem; margin-top:2px;">
+                                                ${fechaStr ? `<span>📅 ${fechaStr}</span>` : ''}${telStr}
+                                            </div>
+                                        </div>
+                                    `;
+                                }).join('');
+
+                                if (hasMore) {
+                                    itemsHtml += `
+                                        <div class="autocomplete-footer-more" data-action="search-enter-admin" style="padding: 9px 12px; background: #f8fafc; border-top: 1px solid #e2e8f0; font-size: 0.8rem; font-weight: 600; color: #0052b7; cursor: pointer; text-align: center;">
+                                            🔍 Ver todos los resultados en Solicitudes Anteriores (Enter) ➔
+                                        </div>
+                                    `;
+                                }
+
+                                autoBox.innerHTML = itemsHtml;
+                                posicionarAutocompleteAdmin();
+                                autoBox.style.display = 'block';
+                            } else {
+                                autoBox.innerHTML = `<div style="padding: 10px 14px; color: #94a3b8; font-style: italic; font-size: 0.85rem;">Sin resultados para "${query}"</div>`;
+                                posicionarAutocompleteAdmin();
+                                autoBox.style.display = 'block';
+                            }
+                        })
+                        .catch(err => {
+                            console.error("Error en búsqueda backend MariaDB:", err);
+                            autoBox.style.display = 'none';
+                        });
+                }, 300);
+            });
+
+            // Re-posicionar si el viewport cambia (rotación, resize)
+            window.addEventListener('resize', function() {
+                if (autoBox.style.display !== 'none') posicionarAutocompleteAdmin();
+            });
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The request specifies removing "FOLIO #" and displaying only the folio number within the autocomplete results. Current implementation highlights the "FOLIO #" prefix unnecessarily. The goal is a cleaner display showing just the number and name.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `autocomplete-estado`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.075487643s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 9:19 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `style.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L619-644)</summary>
+
+**Path:** `Unknown file`
+
+```
+   el print de la solicitud cuando imprime desde su propio contexto. */
+
+/* ── Barras de Reportes — colores CSP-safe (sin inline style) ── */
+.bar-fill           { height: 100%; }
+.bar-color-green    { background: #71CA11; }
+.bar-color-blue     { background: #0052B7; }
+.bar-color-amber    { background: #F59E0B; }
+.bar-color-purple   { background: #8B5CF6; }
+.bar-color-red      { background: #EF4444; }
+
+/* ── Estado en autocomplete expandido ── */
+.autocomplete-estado { font-size: 0.85rem; font-weight: 700; color: #dc2626; }
+
+/* ── Tabla: celda de estado vacío (CSP-safe, sin inline style) ── */
+.tbl-empty-cell { text-align: center; color: var(--text-muted); padding: 1.5rem; }
+
+/* ── Utilities compartidas portales ── */
+.col-group          { display: flex; flex-direction: column; gap: 12px; }
+.flex-ic-8          { display: flex; align-items: center; gap: 8px; }
+.d-inline-flex-ac   { display: inline-flex; align-items: center; gap: 8px; }
+.chevron-right      { flex-shrink: 0; transform: rotate(-90deg); transition: transform 0.2s; }
+.txt-muted-sm       { font-size: 0.85rem; color: var(--text-muted); font-weight: 600; }
+.txt-muted-xs       { font-size: 0.8rem;  color: var(--text-muted); font-weight: 600; }
+.txt-muted-xs-upper { font-size: 0.8rem;  color: var(--text-muted); font-weight: 600; text-transform: uppercase; }
+.txt-pgd            { color: var(--primary); }
+.txt-pgd-lg         { color: var(--primary); font-size: 1.5rem; margin-bottom: 1rem; }
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Ordenes.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L689-729)</summary>
+
+**Path:** `Unknown file`
+
+```
                     otros_estudios AS otros,
                     estudios_json AS estudios,
                     edad_al_emitir AS edad,
@@ -20725,696 +21036,351 @@ function rcRenderOrdenesTablaBody(array $ordenes, string $csrfToken, string $suf
             $stmt = $db->prepare($sql);
             foreach ($params as $k => $v) {
                 $stmt->bindValue($k, $v, PDO::PARAM_STR);
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Examining the legacy records suggests 'estudios' was initially a JSON-encoded array of strings. Decoding produced a simple string array, where casting to string likely caused no issues. However, the current schema and seed data store 'estudios' differently. This discrepancy needs further investigation.
-
-
-
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `htmlspecialchars((string)`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.089114320s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 11:56 am
-
----
-
-## Agent Response
-
-### Thinking
-
-The code iterates through an array, extracts a name or study identifier, and constructs HTML list items. It handles both array and scalar input, defaulting to JSON encoding if neither 'nombre' nor 'estudio' keys exist within an array element. The extracted values are HTML-encoded for safe display.
-
-
-
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `['estudios']`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.083251810s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 11:56 am
-
----
-
-## Agent Response
-
-### Thinking
-
-The observation is that the relevant code exists only in the Pacientes grid render function within specified files. Examining `rc/index.php`, the `$ord['estudios']` data, which is a JSON string, undergoes `htmlspecialchars` cleanly. It is now necessary to examine and potentially fix the code within `laesh-swbldi/rc/index.php` where data handling is occurring.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.165787297s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 11:56 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 11:57 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 11:57 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 11:57 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 11:57 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 11:57 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 11:57 am
-
----
-
-## Agent Response
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-<?php
-/**
- * md/index.php — Router Flight PHP para el Portal Médico
- *
- * Ubicación: laesh-swbldi/md/index.php
- * URL:       /laesh/md/          (Alias en restaurantb.conf → laesh-swbldi/md/)
- *
- * Fuente HTML: website/uipv1/medicos.html  ← NUNCA BORRAR (R15.1 - Merge iterativo)
- * Capas:       View (views/medicos.php), Negocio (MD\Negocio\Ordenes), Commons (Common\*)
- *
- * Rutas:
- *   GET  /             → Panel principal Médico (requiere permiso ver_ordenes_propias)
- *   POST /orden/crear  → Solicitud Médica Digital vía Stored Procedure (HTMX)
- */
-
-declare(strict_types=1);
-
-require_once __DIR__ . '/../commons/commons.php';
-
-use Common\Logger;
-use Common\DB;
-
-// ── Guard RBAC: solo MEDICO puede acceder (o permiso ver_ordenes_propias) ──────
-Flight::rbac()->requirePermission(
-    'ver_ordenes_propias',
-    '/laesh/login/login.php?portal=medico'
-);
-
-// ── GET / — Panel principal Portal Médico ──────────────────────────────────────
-Flight::route('GET /', function () {
-    $auth = Flight::auth();
-    $db   = Flight::db();
-
-    $userId = (int)$auth->getUserId();
-    $stmt = $db->prepare("SELECT nombre, apellidos FROM empleados WHERE user_id = ? LIMIT 1");
-    $stmt->execute([$userId]);
-    $emp = $stmt->fetch(\PDO::FETCH_ASSOC);
-
-    // Obtener perfil extendido del médico (con auto-migración tolerante a fallos si la columna no existe en MariaDB)
-    try {
-        $stmtMed = $db->prepare("SELECT nombre_completo, especialidad, cedula_profesional, cedula_especialidad, celular, telefono_consultorio, direccion_consultorio, universidad_id, lugar_trabajo_id FROM perfiles_medicos WHERE user_id = ? LIMIT 1");
-```
-
-</details>
-
----
-
-## User Request
-
-Mjeoras texto de items combo Periodo:  a 15 ponlo como: 15 d y a: 30d a: 30 d
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `index.php`
-**Language:** php
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Focusing on the "Período" combo box, the task is to modify specific display texts: replacing "15" with "15 d" and "30d" with "30 d". Need to check the `ws-client.js` file to see if any similar outputs will also require modification.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `labadmin.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.214691003s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L244-264)</summary>
-
-**Path:** `Unknown file`
-
-```
-                                <label for="select-periodo-anteriores-rc" style="font-size: 0.82rem; font-weight: 600; color: var(--text-muted); white-space: nowrap;">Período:</label>
-                                <select id="select-periodo-anteriores-rc" name="periodo" class="form-select select-sm" style="padding: 4px 10px; font-size: 0.82rem; border-radius: 6px; border: 1px solid var(--border); background: #ffffff; color: var(--text-dark); cursor: pointer;"
-                                        hx-get="/laesh/rc/tabla-ordenes-anteriores"
-                                        hx-target="#tabla-recepcion-anteriores"
-                                        hx-swap="outerHTML"
-                                        hx-include="#input-buscar-orden-anteriores-rc, #select-periodo-anteriores-rc, #fecha-inicio-anteriores-rc, #fecha-fin-anteriores-rc"
-                                        hx-trigger="change">
-                                    <option value="30d" selected>30d</option>
-                                    <option value="15d">15</option>
-                                    <option value="fecha">Fechas</option>
-                                </select>
-                                <span id="rango-fechas-anteriores-rc" class="d-none" style="display: none; align-items: center; gap: 0.35rem; white-space: nowrap;">
-                                    <input type="date" id="fecha-inicio-anteriores-rc" name="fecha_inicio" class="select-sm form-input" style="padding: 3px 6px; font-size: 0.8rem; border-radius: 6px; border: 1px solid var(--border); width: 130px;" max="<?= date('Y-m-d', strtotime('-1 day')) ?>" title="Fecha inicial" aria-label="Fecha inicial"
-                                           hx-get="/laesh/rc/tabla-ordenes-anteriores"
-                                           hx-target="#tabla-recepcion-anteriores"
-                                           hx-swap="outerHTML"
-                                           hx-include="#input-buscar-orden-anteriores-rc, #select-periodo-anteriores-rc, #fecha-inicio-anteriores-rc, #fecha-fin-anteriores-rc"
-                                           hx-trigger="change">
-                                    <span class="txt-muted-sm" style="font-size: 0.78rem; color: var(--text-muted);">al</span>
-                                    <input type="date" id="fecha-fin-anteriores-rc" name="fecha_fin" class="select-sm form-input" style="padding: 3px 6px; font-size: 0.8rem; border-radius: 6px; border: 1px solid var(--border); width: 130px;" max="<?= date('Y-m-d', strtotime('-1 day')) ?>" title="Fecha final" aria-label="Fecha final"
-                                           hx-get="/laesh/rc/tabla-ordenes-anteriores"
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `medicos.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L424-444)</summary>
-
-**Path:** `Unknown file`
-
-```
-                        <label for="select-periodo-anteriores-md" style="font-size: 0.82rem; font-weight: 600; color: var(--text-muted); white-space: nowrap;">Período:</label>
-                        <select id="select-periodo-anteriores-md" name="periodo" class="form-select select-sm" style="padding: 4px 10px; font-size: 0.82rem; border-radius: 6px; border: 1px solid var(--border); background: #ffffff; color: var(--text-dark); cursor: pointer;"
-                                hx-get="/laesh/md/tabla-ordenes-anteriores"
-                                hx-target="#tabla-historial-completo"
-                                hx-swap="outerHTML"
-                                hx-include="#input-buscar-orden-anteriores-md, #select-periodo-anteriores-md, #fecha-inicio-anteriores-md, #fecha-fin-anteriores-md"
-                                hx-trigger="change">
-                            <option value="30d" selected>30d</option>
-                            <option value="15d">15</option>
-                            <option value="fecha">Fechas</option>
-                        </select>
-                        <span id="rango-fechas-anteriores-md" class="d-none" style="display: none; align-items: center; gap: 0.35rem; white-space: nowrap;">
-                            <input type="date" id="fecha-inicio-anteriores-md" name="fecha_inicio" class="select-sm form-input" style="padding: 3px 6px; font-size: 0.8rem; border-radius: 6px; border: 1px solid var(--border); width: 130px;" max="<?= date('Y-m-d', strtotime('-1 day')) ?>" title="Fecha inicial" aria-label="Fecha inicial"
-                                   hx-get="/laesh/md/tabla-ordenes-anteriores"
-                                   hx-target="#tabla-historial-completo"
-                                   hx-swap="outerHTML"
-                                   hx-include="#input-buscar-orden-anteriores-md, #select-periodo-anteriores-md, #fecha-inicio-anteriores-md, #fecha-fin-anteriores-md"
-                                   hx-trigger="change">
-                            <span class="txt-muted-sm" style="font-size: 0.78rem; color: var(--text-muted);">al</span>
-                            <input type="date" id="fecha-fin-anteriores-md" name="fecha_fin" class="select-sm form-input" style="padding: 3px 6px; font-size: 0.8rem; border-radius: 6px; border: 1px solid var(--border); width: 130px;" max="<?= date('Y-m-d', strtotime('-1 day')) ?>" title="Fecha final" aria-label="Fecha final"
-                                   hx-get="/laesh/md/tabla-ordenes-anteriores"
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Observed identical HTML snippets in two distinct view files, suggesting a duplicated configuration element. A third, related file exhibits similar functionality at a specific line. This pattern warrants further investigation to determine if a shared component or a configuration inconsistency is at play.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.194488217s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 12:05 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 12:05 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 12:05 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 12:05 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 12:05 pm
-
----
-
-## Agent Response
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-<!DOCTYPE html>
-<?php
-/**
- * md/views/medicos.php — Plantilla Plates / View PHP del Portal Médico
- * Fuente SSOT HTML: website/uipv1/medicos.html (R15.1)
- */
-if (!function_exists('h')) {
-    function h($v): string {
-        return htmlspecialchars((string)($v ?? ''), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+            }
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (Throwable $e) {
+            DB::logFallback('ERROR', 'Fallo en RC\Negocio\Ordenes::obtenerPacientes', $e->getMessage());
+            return [];
+        }
     }
+
+    /**
+     * Cuenta el total de registros de pacientes/solicitudes según filtro de búsqueda
+     */
+    public static function contarPacientes(string $search = ''): int {
+        try {
+            $db = DB::connect();
+            $whereSql = '';
+            $params = [];
+            $search = trim(mb_strtolower($search, 'UTF-8'));
+
+            if ($search !== '') {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `buscarOrdenes(`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 9:19 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Ordenes.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L809-849)</summary>
+
+**Path:** `Unknown file`
+
+```
+                        $params[':q_med_' . $wIdx]  = $likeVal;
+                        $params[':q_diag_' . $wIdx] = $likeVal;
+                    }
+                    $wIdx++;
+                }
+                $orderClause = "o.orden_id DESC";
+            }
+
+            if (empty($whereParts)) return [];
+
+            $whereSql = "WHERE " . implode(' AND ', $whereParts);
+            $fetchLimit = $limInt + 1; // +1 para detectar si hay más resultados para la paginación de la lupita
+
+            $stmt = $db->prepare("
+                SELECT
+                    o.orden_id AS id,
+                    o.folio_unico AS folio,
+                    o.paciente_nombre AS paciente,
+                    o.paciente_telefono AS telefono,
+                    o.medico_nombre_completo AS medico,
+                    o.estado_valor AS estado,
+                    o.estado_id,
+                    o.diagnostico AS estudios,
+                    o.hora_captura AS fecha,
+                    pdf.folio_extraido
+                FROM vw_ordenes_completas o
+                LEFT JOIN (
+                    SELECT p1.orden_id, p1.folio_extraido
+                    FROM resultados_pdf p1
+                    INNER JOIN (
+                        SELECT orden_id, MAX(id) AS max_id
+                        FROM resultados_pdf
+                        GROUP BY orden_id
+                    ) p2 ON p1.id = p2.max_id
+                ) pdf ON pdf.orden_id = o.orden_id
+                {$whereSql}
+                ORDER BY {$orderClause}
+                LIMIT {$fetchLimit}
+            ");
+            $stmt->execute($params);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The data structure used for the autocomplete list leverages the `folio` field, or constructs a default value using `id` if `folio` is missing. This suggests the autocomplete entries are primarily identified or linked to a folio number, potentially the primary key for the search. This also means that both `buscarOrdenesMedico` and `buscarOrdenes` should be considered as providing data sources for the autocomplete list.
+
+
+The code snippets suggest two distinct autocomplete list rendering functions, one for a "medico" context and another for an "admin" context. Both functions construct HTML list items from data, utilizing a common folio identifier or a constructed identifier using `id` if `folio` is absent, reinforcing the earlier understanding of folio's primary role. The data structure `window.__MD_SEARCH_RESULTS__` and `window.__RC_SEARCH_RESULTS__` appears to be a cache of the rendered results.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `badge`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.006656211s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 9:19 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `color_badge`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 9:19 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `estado_nombre`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 9:19 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L259-284)</summary>
+
+**Path:** `Unknown file`
+
+```
+            $fEmisShort = htmlspecialchars(date('d/m H:i', strtotime($ord['creado_en'] ?? 'now')), ENT_QUOTES, 'UTF-8');
+            $fEmis = '<span class="fecha-full">' . $fEmisFull . '</span><span class="fecha-corta">' . $fEmisShort . '</span>';
+            if (!empty($ord['fecha_resultado'])) {
+                $fResFull = htmlspecialchars(date('d/m/Y H:i', strtotime($ord['fecha_resultado'])), ENT_QUOTES, 'UTF-8');
+                $fResShort = htmlspecialchars(date('d/m H:i', strtotime($ord['fecha_resultado'])), ENT_QUOTES, 'UTF-8');
+                $fRes = '<span class="fecha-full">' . $fResFull . '</span><span class="fecha-corta">' . $fResShort . '</span>';
+            } else {
+                $fRes = '—';
+            }
+            $estado = ($eId === 5) ? 'Cancelada' : htmlspecialchars($ord['estado_nombre'] ?? 'Emitida', ENT_QUOTES, 'UTF-8');
+
+            // P-LAESH-RESULTADOS-PARCIALES-01 (2026-09-23): mismos chips que
+            // rcRenderOrdenesTablaBody — el médico ve exactamente la misma
+            // información de parciales que Recepción, solo lectura.
+            $parcialesChips = '';
+            if ($eId === 2 && !empty($ord['parciales_fechas'])) {
+                $chipsHtml = '';
+                foreach (explode('|', $ord['parciales_fechas']) as $idx => $fParcial) {
+                    $fFmt = htmlspecialchars(date('d/m H:i', strtotime($fParcial)), ENT_QUOTES, 'UTF-8');
+                    $chipsHtml .= '<a href="/laesh/md/orden/pdf?id=' . $ordId . '" target="_blank" class="chip-parcial">▪ Parcial incremental #' . ($idx + 1) . ' · ' . $fFmt . '</a>';
+                }
+                $parcialesChips = '<div class="parciales-chips-wrap">' . $chipsHtml . '</div>';
+            }
+
+            if ($eId === 3 || $eId === 4) {
+                // Bug real 2026-09-21 (reportado en producción): este botón pasaba
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Analyzing a code snippet that formats data for display within an autocomplete item. The code extracts and combines information such as patient name, status, phone number, and date into a structured string. This string is likely used to populate the content of an autocomplete list element.
+
+
+The code responsible for generating the autocomplete item's display needs to be modified. The "FOLIO #" prefix appears to be hardcoded, so it must be removed from the template string. The variable holding the folio number should be directly inserted into the display string.
+
+Point 2:
+"a lado derecho del telefono se muestre el estado de la solicitud."
+The code already includes the status, but its positioning relative to the phone number is incorrect.  The status should be moved to the right of the phone number, probably inside the same `div` element. Re-examine the template string construction in both files. The `estVal` variable already contains the status value; ensure its placement is correct relative to the `telStr` (phone) string.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `autocomplete-item-medico`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.688239394s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 9:19 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `portal.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L2519-2559)</summary>
+
+**Path:** `Unknown file`
+
+```
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
 }
 
-// SQL directo ELIMINADO (2026-09-18): la grilla "20 Est.Med" ahora se puebla
-// EXCLUSIVAMENTE client-side desde window.laeshTop20EstMed (catalog-compiled.js),
-// igual que la búsqueda de estudios (medicos.js: populateMandatoryGrid()).
-// Fuente única de verdad = catalog-compiled.js, refrescado vía WS al guardar en admin.
-?>
-<html lang="es-MX">
-<head>
-    <meta charset="UTF-8">
-    <meta name="color-scheme" content="light">
-    <meta name="robots" content="noindex, nofollow">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#71CA11">
-    <meta name="description" content="Portal de médicos LAESH — consulta de solicitudes, estadísticas y catálogo de estudios.">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; script-src 'self' 'unsafe-inline'; connect-src 'self' ws: wss:;">
-    <meta name="htmx-config" content='{"historyEnabled":false}'>
-    <title>Portal Médico — LAESH</title>
-    <link rel="icon" type="image/svg+xml" href="/laesh-web-assets-uipv1a/img/favicon.svg">
+/* Tabla historial: celda folio (línea 389) */
+.td-folio-hist { font-weight: 600; white-space: nowrap; }
 
-    <!-- PERF-03: Preload de hojas de estilo críticas para evitar FOUC -->
-    <link rel="preload" href="/laesh-web-assets-uipv1a/css/tokens.css?v=<?= time() ?>" as="style">
-    <link rel="preload" href="/laesh-web-assets-uipv1a/css/fonts.css?v=<?= time() ?>" as="style">
-    <link rel="preload" href="/laesh-web-assets-uipv1a/css/style.css?v=<?= time() ?>" as="style">
-    <link rel="preload" href="/laesh-web-assets-uipv1a/css/portal.css?v=<?= time() ?>" as="style">
+/* Autocomplete sidebar — cada ítem de resultado (línea 323) */
+.autocomplete-item-medico {
+    padding: 8px 12px;
+    cursor: pointer;
+    border-bottom: 1px solid #f1f5f9;
+}
 
-    <script src="/laesh-web-assets-uipv1a/js/device-detect.js?v=<?= time() ?>"></script>
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/tokens.css?v=<?= time() ?>">
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/fonts.css?v=<?= time() ?>">
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/style.css?v=<?= time() ?>">
-```
+/* Autocomplete "Buscar estudio": sin resultados (línea 1033) */
+.autocomplete-no-results {
+    padding: 10px;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    text-align: center;
+}
 
-</details>
+/* htmx-indicator: pre-declarar para que htmx no inyecte <style> en el DOM */
+.htmx-indicator         { display: none; opacity: 0; transition: opacity 200ms ease-in; }
+.htmx-request .htmx-indicator  { display: inline; opacity: 1; }
+.htmx-request.htmx-indicator   { display: inline; opacity: 1; }
 
----
+/* ================================================================
+   CSP-REFACTOR: labadmin.js inline-style → clases CSS (2026-08-25)
+   Tabla de órdenes activas, historial, catálogo y autocomplete RC.
+   ================================================================ */
 
-## User Request
+/* Folio link: añadir white-space:nowrap que faltaba en .lnk-folio-id */
+.lnk-folio-id { white-space: nowrap; }
 
-Para laptop/desktop mejora esto para medicos y recepcion, anexo imagen 
-. poner separadores donde se marco, poner algun agrupados tenue para cuando este seleccinado fechas (pertencia), etc.  mejora pues visualmente esas partes, usando quiza la parte libre de espacio existe a la izquierda.
+/* Contenedor de botones dobles en línea (líneas 37, 533) */
+.btn-group-inline { display: inline-flex; gap: 6px; align-items: center; }
 
-<details>
-<summary>Context</summary>
-
-**Active File:** `medicos.php`
-**Language:** php
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Initial assessment of the image focuses on the "Solicitudes Anteriores" header and its associated controls. Observed "Total: 127" and pagination controls ("Anterior", "Siguiente") suggest a large dataset. Examining the "Periodo" control, specifically the date selection element, aims to understand the filtering capabilities.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `labadmin.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.144607039s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L209-279)</summary>
-
-**Path:** `Unknown file`
-
-```
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Panel 1.5: Solicitudes Anteriores -->
-                <div id="panel-ordenes-anteriores" class="tab-panel d-none">
-                    <!-- Fila: Título de Sección y Controles (Total, Paginación, Buscador) alineados con el estándar cms-panel-header -->
-                    <div class="cms-panel-header" style="margin-top: 1rem; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
-                        <div>
-                            <h3 class="cms-h3" style="margin: 0; font-size: 1.35rem; font-weight: 800; color: #0052B7;">Solicitudes Anteriores</h3>
-                            <p class="txt-muted-4" style="margin: 0.2rem 0 0 0; font-size: 0.85rem;">Histórico de solicitudes registradas en días anteriores.</p>
-                        </div>
-                        
-                        <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; justify-content: flex-end; margin-left: auto;">
-                            <!-- Paginador y Total -->
-                            <div id="ordenes-anteriores-pagination-wrap" style="display: flex; align-items: center; gap: 0.5rem;">
-                                <span id="ordenes-anteriores-total-records" style="font-size: 0.88rem; color: var(--text-muted); font-weight: 600;">Total: <?= (int)($totalOrdenesAnteriores ?? 0) ?></span>
-                                <span style="color: #cbd5e1; display: inline;">|</span>
-                                <div id="ordenes-anteriores-pagination" style="display: flex; gap: 0.25rem; align-items: center;">
-                                    <?php 
-                                        $totPgsAnt = max(1, (int)ceil(($totalOrdenesAnteriores ?? 0) / 25));
-                                    ?>
-                                    <button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;">‹ Anterior</button>
-                                    <span style="font-size:0.82rem; font-weight:600; color:var(--text-muted); padding: 0 4px;">1 / <?= $totPgsAnt ?></span>
-                                    <?php if ($totPgsAnt > 1): ?>
-                                        <button type="button" class="btn btn-secondary btn-sm" style="padding: 2px 8px; font-size: 0.8rem;" hx-get="/laesh/rc/tabla-ordenes-anteriores?page=2&periodo=30d" hx-target="#tabla-recepcion-anteriores" hx-swap="outerHTML" hx-include="#input-buscar-orden-anteriores-rc, #select-periodo-anteriores-rc, #fecha-inicio-anteriores-rc, #fecha-fin-anteriores-rc">Siguiente ›</button>
-                                    <?php else: ?>
-                                        <button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;">Siguiente ›</button>
-                                    <?php endif; ?>
-                                </div>
-                            </div>
-
-                            <!-- Combo List de Período y Rango de Fechas (Calendario) -->
-                            <div id="ordenes-anteriores-periodo-container" style="display: inline-flex; align-items: center; gap: 0.35rem; flex-wrap: nowrap;">
-                                <label for="select-periodo-anteriores-rc" style="font-size: 0.82rem; font-weight: 600; color: var(--text-muted); white-space: nowrap;">Período:</label>
-                                <select id="select-periodo-anteriores-rc" name="periodo" class="form-select select-sm" style="padding: 4px 10px; font-size: 0.82rem; border-radius: 6px; border: 1px solid var(--border); background: #ffffff; color: var(--text-dark); cursor: pointer;"
-                                        hx-get="/laesh/rc/tabla-ordenes-anteriores"
-                                        hx-target="#tabla-recepcion-anteriores"
-                                        hx-swap="outerHTML"
-                                        hx-include="#input-buscar-orden-anteriores-rc, #select-periodo-anteriores-rc, #fecha-inicio-anteriores-rc, #fecha-fin-anteriores-rc"
-                                        hx-trigger="change">
-                                    <option value="30d" selected>30 d</option>
-                                    <option value="15d">15 d</option>
-                                    <option value="fecha">Fechas</option>
-                                </select>
-                                <span id="rango-fechas-anteriores-rc" class="d-none" style="display: none; align-items: center; gap: 0.35rem; white-space: nowrap;">
-                                    <input type="date" id="fecha-inicio-anteriores-rc" name="fecha_inicio" class="select-sm form-input" style="padding: 3px 6px; font-size: 0.8rem; border-radius: 6px; border: 1px solid var(--border); width: 130px;" max="<?= date('Y-m-d', strtotime('-1 day')) ?>" title="Fecha inicial" aria-label="Fecha inicial"
-                                           hx-get="/laesh/rc/tabla-ordenes-anteriores"
-                                           hx-target="#tabla-recepcion-anteriores"
-                                           hx-swap="outerHTML"
-                                           hx-include="#input-buscar-orden-anteriores-rc, #select-periodo-anteriores-rc, #fecha-inicio-anteriores-rc, #fecha-fin-anteriores-rc"
-                                           hx-trigger="change">
-                                    <span class="txt-muted-sm" style="font-size: 0.78rem; color: var(--text-muted);">al</span>
-                                    <input type="date" id="fecha-fin-anteriores-rc" name="fecha_fin" class="select-sm form-input" style="padding: 3px 6px; font-size: 0.8rem; border-radius: 6px; border: 1px solid var(--border); width: 130px;" max="<?= date('Y-m-d', strtotime('-1 day')) ?>" title="Fecha final" aria-label="Fecha final"
-                                           hx-get="/laesh/rc/tabla-ordenes-anteriores"
-                                           hx-target="#tabla-recepcion-anteriores"
-                                           hx-swap="outerHTML"
-                                           hx-include="#input-buscar-orden-anteriores-rc, #select-periodo-anteriores-rc, #fecha-inicio-anteriores-rc, #fecha-fin-anteriores-rc"
-                                           hx-trigger="change">
-                                </span>
-                            </div>
-
-                            <!-- Buscador en tiempo real -->
-                            <div id="ordenes-anteriores-search-container" style="display: flex; gap: 0.5rem; align-items: center; position:relative; z-index: 100;">
-                                <input type="text" id="input-buscar-orden-anteriores-rc" name="q" class="form-input form-input--bg" autocomplete="off" spellcheck="false" placeholder="🔍 Buscar por nombre..." style="width: 220px;" hx-get="/laesh/rc/tabla-ordenes-anteriores" hx-target="#tabla-recepcion-anteriores" hx-swap="outerHTML" hx-include="#input-buscar-orden-anteriores-rc, #select-periodo-anteriores-rc, #fecha-inicio-anteriores-rc, #fecha-fin-anteriores-rc" hx-trigger="keyup changed delay:250ms, search">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card" aria-live="polite" style="padding: 0; overflow: hidden; border: 1px solid var(--border); border-radius: 8px;">
+/* Variante "muted" de btn-secondary: Ver Resultados / Modificar (líneas 38,47,534,540,581)
+   Especificidad .btn.btn-ver-res (0,2,0) > .btn-secondary (0,1,0) — sin !important (R-CSS-01) */
 ```
 
 </details>
@@ -21425,8 +21391,30 @@ Initial assessment of the image focuses on the "Solicitudes Anteriores" header a
 
 ### Actions
 
+**Tool:** `grep_search`
+**Query:** `badge`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 9:20 pm
+
+---
+
+## Agent Response
+
+### Actions
+
 **Tool:** `view_file`
-**File:** `medicos.php`
+**File:** `portal.css`
 
 <details>
 <summary>Metadata</summary>
@@ -21437,82 +21425,42 @@ Initial assessment of the image focuses on the "Solicitudes Anteriores" header a
 ---
 
 <details>
-<summary>File: `Unknown file` (L394-464)</summary>
+<summary>File: `Unknown file` (L2094-2124)</summary>
 
 **Path:** `Unknown file`
 
 ```
-                     pero el usuario pidió un título reducido visible aquí. Reutiliza
-                     .panel-nueva-orden-title (mismo estilo compacto que el panel Nueva
-                     Solicitud) para no duplicar CSS. En móvil, la paginación de abajo
-                     (#ordenes-anteriores-md-pagination-wrap) ahora se oculta — ver
-                     portal.css @media(max-width:767px) — así que ya no compite por
-                     espacio con este título en la misma fila.
-                     2026-09-24 (histórico): header homologado 1:1 con #ordenes-hoy-md-header
-                     (mismo patrón que ya usan mdRenderOrdenesTablaHeader/Body para la
-                     grilla) — antes traía un <h2>+<p> propio que "Hoy" no tenía, rompiendo
-                     la simetría pedida y desbordando en móvil (el título no cabía junto a
-                     paginación+buscador en flex-wrap:nowrap). -->
-                <h2 class="panel-nueva-orden-title">Solicitudes Digitales Anteriores</h2>
-                <div class="cms-panel-header" id="ordenes-anteriores-md-header" style="margin-bottom: 1rem; display: flex; justify-content: flex-end; align-items: center; flex-wrap: wrap; gap: 0.75rem; margin-left: auto;">
-                    <div id="ordenes-anteriores-md-pagination-wrap" style="display: flex; align-items: center; gap: 0.5rem;">
-                        <span id="ordenes-anteriores-md-total-records" style="font-size: 0.88rem; color: var(--text-muted); font-weight: 600;">Total: <?= (int)($totalOrdenesAnteriores ?? 0) ?></span>
-                        <span style="color: #cbd5e1; display: inline;">|</span>
-                        <div style="display: flex; gap: 0.25rem; align-items: center;">
-                            <?php $totPgsAntMd = max(1, (int)ceil(($totalOrdenesAnteriores ?? 0) / 25)); ?>
-                            <button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;">‹ <span class="pag-label-text">Anterior</span></button>
-                            <span style="font-size:0.82rem; font-weight:600; color:var(--text-muted); padding: 0 4px;">1 / <?= $totPgsAntMd ?></span>
-                            <?php if ($totPgsAntMd > 1): ?>
-                                <button type="button" class="btn btn-secondary btn-sm" style="padding: 2px 8px; font-size: 0.8rem;" hx-get="/laesh/md/tabla-ordenes-anteriores?page=2&periodo=30d" hx-target="#tabla-historial-completo" hx-swap="outerHTML" hx-include="#input-buscar-orden-anteriores-md, #select-periodo-anteriores-md, #fecha-inicio-anteriores-md, #fecha-fin-anteriores-md"><span class="pag-label-text">Siguiente</span> ›</button>
-                            <?php else: ?>
-                                <button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;"><span class="pag-label-text">Siguiente</span> ›</button>
-                            <?php endif; ?>
-                        </div>
-                    </div>
 
-                    <!-- Combo List de Período y Rango de Fechas (Calendario) -->
-                    <div id="ordenes-anteriores-md-periodo-container" style="display: inline-flex; align-items: center; gap: 0.35rem; flex-wrap: nowrap;">
-                        <label for="select-periodo-anteriores-md" style="font-size: 0.82rem; font-weight: 600; color: var(--text-muted); white-space: nowrap;">Período:</label>
-                        <select id="select-periodo-anteriores-md" name="periodo" class="form-select select-sm" style="padding: 4px 10px; font-size: 0.82rem; border-radius: 6px; border: 1px solid var(--border); background: #ffffff; color: var(--text-dark); cursor: pointer;"
-                                hx-get="/laesh/md/tabla-ordenes-anteriores"
-                                hx-target="#tabla-historial-completo"
-                                hx-swap="outerHTML"
-                                hx-include="#input-buscar-orden-anteriores-md, #select-periodo-anteriores-md, #fecha-inicio-anteriores-md, #fecha-fin-anteriores-md"
-                                hx-trigger="change">
-                            <option value="30d" selected>30 d</option>
-                            <option value="15d">15 d</option>
-                            <option value="fecha">Fechas</option>
-                        </select>
-                        <span id="rango-fechas-anteriores-md" class="d-none" style="display: none; align-items: center; gap: 0.35rem; white-space: nowrap;">
-                            <input type="date" id="fecha-inicio-anteriores-md" name="fecha_inicio" class="select-sm form-input" style="padding: 3px 6px; font-size: 0.8rem; border-radius: 6px; border: 1px solid var(--border); width: 130px;" max="<?= date('Y-m-d', strtotime('-1 day')) ?>" title="Fecha inicial" aria-label="Fecha inicial"
-                                   hx-get="/laesh/md/tabla-ordenes-anteriores"
-                                   hx-target="#tabla-historial-completo"
-                                   hx-swap="outerHTML"
-                                   hx-include="#input-buscar-orden-anteriores-md, #select-periodo-anteriores-md, #fecha-inicio-anteriores-md, #fecha-fin-anteriores-md"
-                                   hx-trigger="change">
-                            <span class="txt-muted-sm" style="font-size: 0.78rem; color: var(--text-muted);">al</span>
-                            <input type="date" id="fecha-fin-anteriores-md" name="fecha_fin" class="select-sm form-input" style="padding: 3px 6px; font-size: 0.8rem; border-radius: 6px; border: 1px solid var(--border); width: 130px;" max="<?= date('Y-m-d', strtotime('-1 day')) ?>" title="Fecha final" aria-label="Fecha final"
-                                   hx-get="/laesh/md/tabla-ordenes-anteriores"
-                                   hx-target="#tabla-historial-completo"
-                                   hx-swap="outerHTML"
-                                   hx-include="#input-buscar-orden-anteriores-md, #select-periodo-anteriores-md, #fecha-inicio-anteriores-md, #fecha-fin-anteriores-md"
-                                   hx-trigger="change">
-                        </span>
-                    </div>
+/* State Badges — Outlined Style (Fondo blanco y contornos temáticos diferenciados) */
+.badge {
+    padding: 0.375rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    line-height: 1;
+    background: #ffffff !important;
+    border: 1.5px solid transparent;
+    box-sizing: border-box;
+}
+.badge-remitido  { background: #ffffff !important; color: #0284c7 !important; border: 1.5px solid #0284c7 !important; }
+.badge-atencion  { background: #ffffff !important; color: #d97706 !important; border: 1.5px solid #d97706 !important; }
+.badge-listos    { background: #ffffff !important; color: #16a34a !important; border: 1.5px solid #16a34a !important; }
+.badge-cerrada   { background: #ffffff !important; color: #475569 !important; border: 1.5px solid #64748b !important; }
+.badge-cancelada { background: #ffffff !important; color: #dc2626 !important; border: 1.5px solid #dc2626 !important; }
 
-                    <div id="ordenes-anteriores-md-search-wrap" style="display: flex; gap: 0.5rem; align-items: center;">
-                        <input type="text" id="input-buscar-orden-anteriores-md" name="q" class="form-input form-input--bg" autocomplete="off" spellcheck="false" placeholder="🔍 Buscar por folio, paciente..." style="width: 220px;" hx-get="/laesh/md/tabla-ordenes-anteriores" hx-target="#tabla-historial-completo" hx-swap="outerHTML" hx-include="#input-buscar-orden-anteriores-md, #select-periodo-anteriores-md, #fecha-inicio-anteriores-md, #fecha-fin-anteriores-md" hx-trigger="keyup changed delay:250ms, search">
-                    </div>
-                </div>
-                <div class="card" style="padding: 0; overflow: hidden; border: 1px solid var(--border); border-radius: 8px;">
-                    <div class="table-responsive" style="max-height: calc(100vh - 250px); overflow-y: auto; overflow-x: auto; -webkit-overflow-scrolling: touch; width: 100%;">
-                        <table id="tabla-historial-completo" hx-get="/laesh/md/tabla-ordenes-anteriores" hx-target="#tabla-historial-completo" hx-swap="outerHTML" hx-include="#input-buscar-orden-anteriores-md, #select-periodo-anteriores-md, #fecha-inicio-anteriores-md, #fecha-fin-anteriores-md" hx-trigger="refresh, ordenCreada from:body, ordenActualizada from:body">
-                            <thead>
-                                <?= mdRenderOrdenesTablaHeader('fecha', 'desc', '', '/laesh/md/tabla-ordenes-anteriores', '#tabla-historial-completo', '#input-buscar-orden-anteriores-md, #select-periodo-anteriores-md, #fecha-inicio-anteriores-md, #fecha-fin-anteriores-md') ?>
-                            </thead>
-                            <?= mdRenderOrdenesTablaBody($ordenesAnteriores ?? [], $csrfToken ?? '', '-ant') ?>
-                        </table>
-                    </div>
+/* P-LAESH-RESULTADOS-PARCIALES-01 (2026-09-23): chips de resultados parciales
+   apilados debajo del badge de estado (solo mientras estado_id=2, En Atención)
+   — mismo tono ámbar que .badge-atencion, ya que semánticamente es "todavía
+   en curso", sin competir visualmente con el badge (más pequeño, sin borde). */
+.parciales-chips-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-top: 4px;
 ```
 
 </details>
@@ -21523,108 +21471,119 @@ Initial assessment of the image focuses on the "Solicitudes Anteriores" header a
 
 ### Thinking
 
-Examining the user's prompt, the objective is to improve the visual presentation for medical and reception staff on laptop/desktop screens. The user wants visual separators where indicated in the attached image and some subtle grouping for selected dates. Also, the user mentions utilizing the available space on the left to enhance these sections.
+Inspecting order status badges suggests an issue with order state representation. The code in `medicos.js` line 521 might have a default state assignment; however, the presence of `m.estado_id` needs validation. Need to investigate the data source for the order details, specifically `buscarOrdenesMedico` in `Ordenes.php`, to understand the expected order fields and their relationship to the displayed status.
 
 
-Visual enhancements require inserting separators between the paginator, period selector, and search input within the toolbar. Subtle visual grouping, like a pill or cardlet style, will be applied to the period selector and date range when "Fechas" is selected to enhance visual cohesion. Initial focus will be on the available space on the left to determine how to integrate these elements effectively. Investigation into `labadmin.php`'s `cms-panel-header` may be needed for layout modifications.
-
-
-The current layout utilizes `margin-left: auto` which creates excessive whitespace. Investigating options for distributing elements across available space on larger screens begins with examining alternative header layouts. Potential solutions include moving pagination closer to the title or employing a dedicated toolbar with flexbox for better spacing.
-
-
-The current layout pushes all elements to the right using `justify-content: flex-end` and `margin-left: auto`, leaving the left side unused. Replacing these with alternative flexbox arrangements can distribute the elements more evenly across the available space. The page structure needs modification so the title and the toolbar with the controls are more aligned.
-
-Implementing visual separators requires inserting them between the pagination block, period selector, and the search input. Grouping the period selector and date range when selected will involve applying a visual style.
-
-
-Visual separators will be implemented using a divider element between the specified blocks. A visual grouping for the date range will be created when the "Fechas" option is selected in the period selector, applying a subtle background, border, and rounded corners. A CSS class will be added to visually group the date selection with the date inputs.
-
-
-The current layout's right-aligned elements create wasted space; a more balanced approach is needed.  I should test placing the pagination and information block on the left with search and filters on the right, using `justify-content: space-between`.  This layout would allow a date range selector to expand without overlapping.  Alternatively, if the title and controls are on the same line, the title can stay left and the controls can utilize the right side.
-
-
-Analyzing the HTML in `labadmin.php`, the `margin-left: auto` on the control container is confirmed as the cause of the right-alignment and wasted space. This forces the controls to the right, leaving a large gap to the left of the "Solicitudes Anteriores" heading. The container uses flexbox to arrange its children with a gap between them.
-
-
-The user's annotations in the screenshot highlight the need for two separators and a visual grouping for the "Fechas" section. Reviewing the HTML reveals the title block occupies the left side. I will evaluate options for spreading toolbar elements across the available space by adjusting spacing, padding, and applying flexbox layouts. Removing the right-aligning style can distribute controls more effectively.
-
-
-Investigating the existing layouts, the current arrangement in `Medico` places the control bar below the title, leading to inefficient space usage.  Two alternative approaches are considered: positioning pagination on the left and the other controls on the right, or integrating the pagination directly into a shared toolbar alongside the title.  The user's comment regarding space on the left prompts a re-evaluation of the screenshot to determine the exact intent. The space between the title and the controls confirms the potential for left-aligned elements.
+Verifying the presence of the `estado` and `estado_id` fields, confirms their availability from both the API and the data source. Based on the user's request, I can now proceed to update the display format of the autocomplete results. The "FOLIO #" text will be removed, and the order status will be displayed alongside the phone number.
 
 
 
 
 ### Actions
 
-**Tool:** `view_file`
-**File:** `labadmin.php`
+**Tool:** `grep_search`
+**Query:** `badge-remitido`
 
 <details>
 <summary>Metadata</summary>
 
-- **Thinking Duration:** 9.465847805s
+- **Thinking Duration:** 1.538944422s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 9:20 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `badge`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 9:20 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
 - **Model:** Gemini 3.8 Flash (High)
 </details>
 
 ---
 
 <details>
-<summary>File: `Unknown file` (L64-114)</summary>
+<summary>File: `Unknown file` (L279-319)</summary>
 
 **Path:** `Unknown file`
 
 ```
-        </nav>
+                }
+                $parcialesChips = '<div class="parciales-chips-wrap">' . $chipsHtml . '</div>';
+            }
 
-        <div class="app-layout">
-            <aside class="sidebar">
+            if ($eId === 3 || $eId === 4) {
+                // Bug real 2026-09-21 (reportado en producción): este botón pasaba
+                // data-id=$folio (string "LAESH-00003") a verResultados() en
+                // medicos.js, que lo reenviaba tal cual a
+                // /laesh/md/orden/pdf?id=... — pero esa ruta hace (int)$_GET['id'],
+                // y (int)"LAESH-00003" = 0 → 404 vacío. Se usa href directo con el
+                // ID numérico, sin indirección JS.
+                $btnAccion = '<a href="/laesh/md/orden/pdf?id=' . $ordId . '" target="_blank" class="btn btn-secondary btn-resultados-sm btn-ver-res">'
+                    . '<svg class="icon-btn-left" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg> Resultados'
+                    . '</a>';
+            } elseif ($eId === 1 || stripos($estado, 'remitido') !== false) {
+                $btnAccion = mdRenderBotonCancelar($ordId, $csrfToken, $sufijoId);
+            } elseif ($eId === 5) {
+                $btnAccion = '';
+            } else {
+                $btnAccion = '<span class="txt-muted-sm">En Proceso</span>';
+            }
 
-                <!-- ⓪ Toggle rail: colapsar / expandir sidebar (solo desktop) -->
-                <div class="sidebar-toggle-row">
-                    <button type="button" class="sidebar-rail-toggle" id="sidebar-rail-toggle" title="Expandir / Colapsar menú">
-                        <svg id="rail-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-                    </button>
-                </div>
+            $html .= '<tr id="orden-row' . $sufijoId . '-' . $ordId . '" data-orden-id="' . $ordId . '" data-folio="' . htmlspecialchars((string)$folio, ENT_QUOTES, 'UTF-8') . '" tabindex="-1">'
+               . '<td class="td-folio-hist"><a href="#" class="lnk-folio lnk-folio-id" data-action="ver-solicitud" data-id="' . $folio . '">' . $folio . ' <svg class="icon-folio-link" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></a></td>'
+               . '<td class="td-paciente-trunc" title="' . $paciente . '">' . $paciente . '</td>'
+               . '<td class="td-estudios-rc" title="' . htmlspecialchars($diagRaw, ENT_QUOTES, 'UTF-8') . '">' . $diag . '</td>'
+               . '<td>' . $fEmis . '</td>'
+               . '<td class="td-fecha-resultado">' . $fRes . '</td>'
+               . '<td><span class="badge ' . $badgeClass . '">' . $estado . '</span>' . $parcialesChips . '</td>'
+               . '<td>' . $btnAccion . '</td>'
+               . '<td class="td-observaciones-rc">' . $observacionesDescr . '</td>'
+               . '</tr>';
+        }
+    } else {
+        $html .= '<tr><td colspan="8" class="text-center txt-muted pa-4">No se encontraron solicitudes que coincidan con la búsqueda.</td></tr>';
+    }
+    $html .= '</tbody>';
+    return $html;
+}
 
-                <!-- ① Fila lupita+input: en desktop ambos visibles en la misma línea;
-                         en tablet/móvil display:contents los expone como ítems directos de la tira -->
-                <div class="sidebar-search-row">
-                    <button type="button" class="sidebar-search-btn" id="sidebar-search-btn" aria-label="Buscar paciente o solicitud">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-                        Buscar
-                    </button>
-                    <div class="sidebar-search-wrap form-field">
-                        <input type="text" id="input-buscador" placeholder="Búsqueda (folio o 5+ letras)..." class="form-input-ta" autocomplete="off"><!-- P5-fix: autofocus removido -->
-                        <div id="autocomplete-list" class="sfs-dropdown">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Popup flotante de búsqueda (visible solo en modo colapsado) -->
-                <div class="sidebar-float-search" id="float-search-admin">
-                    <input class="sfs-input" id="sfs-input-admin" type="text" maxlength="30"
-                           placeholder="Buscar paciente o folio…" autocomplete="off">
-                    <div class="sfs-results" id="sfs-results-admin"></div>
-                </div>
-
-                <!-- ③ Ítems de navegación (en tablet/móvil: iconos en la tira) -->
-                <div class="nav-item active" data-panel="panel-ordenes" role="button" tabindex="0">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M6 18h8" /><path d="M3 22h18" /><path d="M14 22a7 7 0 1 0 0-14h-1" /><path d="M9 14h2" /><path d="M9 12a2 2 0 0 1-2-2V6h6v4a2 2 0 0 1-2 2Z" /><path d="M12 6V3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3" />
-                    </svg>
-                    Solicitudes Hoy
-                </div>
-
-                <div class="nav-item" data-panel="panel-ordenes-anteriores" role="button" tabindex="0">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                    Solicitudes Anteriores
-                </div>
-
-                <div class="nav-item" data-panel="panel-pacientes" role="button" tabindex="0">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                    Pacientes
-                </div>
-
+// ── GET /tabla-ordenes — Partial HTMX de Órdenes Hoy (orden/búsqueda/paginación) ─────
 ```
 
 </details>
@@ -21636,7 +21595,7 @@ Investigating the existing layouts, the current arrangement in `Medico` places t
 ### Actions
 
 **Tool:** `view_file`
-**File:** `labadmin.php`
+**File:** `index.php`
 
 <details>
 <summary>Metadata</summary>
@@ -21647,52 +21606,138 @@ Investigating the existing layouts, the current arrangement in `Medico` places t
 ---
 
 <details>
-<summary>File: `Unknown file` (L134-174)</summary>
+<summary>File: `Unknown file` (L239-259)</summary>
 
 **Path:** `Unknown file`
 
 ```
-                    Catálogos de Análisis
-                </div>
+                } elseif ($eId !== 2 && !empty($ord['parciales_fechas'])) {
+                    // Tras "Completado" (o Cerrada) los chips de la columna Estado
+                    // desaparecen — se conserva la traza de las entregas parciales
+                    // como texto plano (sin link al PDF) aquí en Observaciones.
+                    $trazaHtml = '';
+                    foreach (explode('|', $ord['parciales_fechas']) as $idxTraza => $fParcialTraza) {
+                        $fFmtTraza = htmlspecialchars(date('d/m H:i', strtotime($fParcialTraza)), ENT_QUOTES, 'UTF-8');
+                        $trazaHtml .= '<div style="color:#64748b; font-size:0.82rem;">▪ Parcial incremental #' . ($idxTraza + 1) . ' · ' . $fFmtTraza . '</div>';
+                    }
+                    $observacionesDescr = $trazaHtml;
+                } else {
+                    $observacionesDescr = '<span style="color:#94a3b8; font-style:italic;">—</span>';
+                }
+            }
+            // 2026-09-24: dos versiones de cada fecha — completa (desktop) y
+            // corta sin año (móvil, vía CSS en portal.css) — el año casi
+            // nunca aporta nada a un vistazo rápido en pantalla angosta y la
+            // hora (lo que sí importa) es lo que el ellipsis/scroll recortaría
+            // primero si solo hubiera un formato largo.
+            $fEmisFull = htmlspecialchars(date('d/m/Y H:i', strtotime($ord['creado_en'] ?? 'now')), ENT_QUOTES, 'UTF-8');
+            $fEmisShort = htmlspecialchars(date('d/m H:i', strtotime($ord['creado_en'] ?? 'now')), ENT_QUOTES, 'UTF-8');
+```
 
-                <?php if (!empty($isAdmin)): ?>
-                <div class="nav-item sidebar-admin-extra cursor-p" id="nav-gestion-web" role="button" tabindex="0">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
-                    Contenidos del Sitio Web
-                </div>
-                <?php endif; ?>
+</details>
 
-                <!-- ⑤ Mini-panel de usuario (visible al abrir hamburger en móvil) -->
-                <div class="sidebar-mobile-only">
-                    <!-- Chip iniciales — clase mob-user-chip exclusiva móvil (style.css ≤767px) -->
-                    <div class="mob-user-chip">
-                        <span class="mob-user-chip__avatar mob-user-chip__avatar--admin"><?= htmlspecialchars(strtoupper(substr($nombreUsuario ?? 'CAR', 0, 3)), ENT_QUOTES, 'UTF-8') ?></span>
-                        <span class="mob-user-chip__label txt-pgd"><?= htmlspecialchars($rolUsuario ?? 'Recepción', ENT_QUOTES, 'UTF-8') ?></span>
-                    </div>
-                    <a href="/laesh/login/logout.php" class="mob-logout-btn">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-                        Cerrar Sesión
-                    </a>
-                </div>
-            </aside>
+---
 
-            <main class="main-content" id="main-content">
-                <!-- Panel 1: Órdenes (Default) -->
-                <div id="panel-ordenes" class="tab-panel">
-                    <!-- Fila: Título de Sección y Controles (Total, Paginación, Buscador) alineados con el estándar cms-panel-header -->
-                    <div class="cms-panel-header" style="margin-top: 1rem; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
-                        <h3 class="cms-h3" style="margin: 0; font-size: 1.35rem; font-weight: 800; color: #0052B7;">Solicitudes Hoy</h3>
-                        
-                        <div style="display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; justify-content: flex-end;">
-                            <!-- Paginador y Total -->
-                            <div id="ordenes-pagination-wrap" style="display: flex; align-items: center; gap: 0.5rem;">
-                                <span id="ordenes-total-records" style="font-size: 0.88rem; color: var(--text-muted); font-weight: 600;">Total: <?= (int)($totalOrdenesRecientes ?? 0) ?></span>
-                                <span style="color: #cbd5e1; display: inline;">|</span>
-                                <div id="ordenes-pagination" style="display: flex; gap: 0.25rem; align-items: center;">
-                                    <?php 
-                                        $totPgsOrd = max(1, (int)ceil(($totalOrdenesRecientes ?? 0) / 25));
-                                    ?>
-                                    <button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;">‹ Anterior</button>
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L214-239)</summary>
+
+**Path:** `Unknown file`
+
+```
+                : htmlspecialchars($diagRaw, ENT_QUOTES, 'UTF-8');
+
+            if ($eId === 5) {
+                $motivoRaw = !empty($ord['motivo_cancelacion']) ? trim($ord['motivo_cancelacion']) : 'Solicitud cancelada';
+                if (preg_match('/^(Médico|Laesh):\s*(.*)$/iu', $motivoRaw, $mMatches)) {
+                    $origen = $mMatches[1];
+                    $resto  = $mMatches[2];
+                    $motivoHtml = 'Cancelación de "<strong style="color:#7f1d1d;">' . htmlspecialchars($origen, ENT_QUOTES, 'UTF-8') . ':</strong> ' . htmlspecialchars($resto, ENT_QUOTES, 'UTF-8') . '"';
+                } else {
+                    $motivoHtml = '<span style="color:#991b1b; font-weight:700;">Cancelación:</span> ' . htmlspecialchars($motivoRaw, ENT_QUOTES, 'UTF-8');
+                }
+                $observacionesDescr = '<div class="motivo-cancelacion-box" style="color:#b91c1c; font-size:0.85rem; font-weight:600; line-height:1.35;">'
+                                    . $motivoHtml
+                                    . '</div>';
+            } else {
+                // Corrección 2026-09-22: "otros estudios" ya no se muestra en
+                // Observaciones (esa columna es solo para motivo de cancelación).
+                if ($eId === 2 && !empty($ord['parciales_fechas'])) {
+                    // 2026-09-24: antes se mostraba con solo estado_id=2, sin
+                    // importar si ya se había subido algún parcial — el médico
+                    // veía "resultados parciales incrementales" desde el instante
+                    // en que Recepción recibía al paciente, antes de que existiera
+                    // ningún parcial real. Ahora exige al menos 1 fila en
+                    // resultados_pdf (mismo condicional que ya usan los chips).
+                    $observacionesDescr = '<span style="color:#64748b;">Solicitud con resultados parciales incrementales.</span>';
+                } elseif ($eId !== 2 && !empty($ord['parciales_fechas'])) {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L189-214)</summary>
+
+**Path:** `Unknown file`
+
+```
+ * ofrezcan exactamente las mismas columnas/acciones, solo difieren en el rango de
+ * fechas que consulta el backend (hoy vs anteriores).
+ */
+function mdRenderOrdenesTablaBody(array $ordenes, string $csrfToken, string $sufijoId = ''): string {
+    $html = '<tbody>';
+    if (!empty($ordenes)) {
+        foreach ($ordenes as $ord) {
+            $eId = (int)($ord['estado_id'] ?? 1);
+            $ordId = (int)($ord['id'] ?? 0);
+            $badgeClass = 'badge-remitido';
+            if ($eId === 2) $badgeClass = 'badge-atencion';
+            elseif ($eId === 3) $badgeClass = 'badge-listos';
+            elseif ($eId === 4) $badgeClass = 'badge-cerrada';
+            elseif ($eId === 5) $badgeClass = 'badge-cancelada';
+
+            $folio = htmlspecialchars($ord['folio'] ?? '', ENT_QUOTES, 'UTF-8');
+            $paciente = htmlspecialchars($ord['paciente_nombre'] ?? '', ENT_QUOTES, 'UTF-8');
+
+            // Corrección 2026-09-22: Diagnóstico y Observaciones son columnas
+            // separadas — mismo patrón que rcRenderOrdenesTablaBody. Antes el
+            // mensaje de cancelación se mezclaba dentro de Diagnóstico.
+            // Observaciones ya no muestra "otros estudios" (solo cancelación).
+            $diagRaw = trim($ord['diagnostico'] ?? '');
+            $diag = ($diagRaw === '' || $diagRaw === 'Estudios de Laboratorio')
+                ? '<span style="color:#94a3b8; font-style:italic;">—</span>'
+                : htmlspecialchars($diagRaw, ENT_QUOTES, 'UTF-8');
 ```
 
 </details>
@@ -21703,16 +21748,285 @@ Investigating the existing layouts, the current arrangement in `Medico` places t
 
 ### Thinking
 
-Analyzing the "Solicitudes Hoy" section for relevant information. This appears to be a header element containing a title and potentially some filtering controls, but the specifics require further parsing of the surrounding structure to determine its function. The key lies in understanding the context of "Solicitudes Hoy."
+Determining the visual style of status badges, the CSS definitions provide the visual structure. The `estado_id` values map directly to specific CSS classes, indicating a direct correlation between data state and visual presentation. This mapping allows for dynamic badge styling based on the underlying data.
 
 
-In "Solicitudes Hoy," a simplified layout with only pagination/search exists due to the implicit "today" filter, unlike the more complex "Solicitudes Anteriores." Activating the "Fechas" filter in "Solicitudes Anteriores" introduces a significant width increase from date range inputs, disrupting the existing layout by pushing UI elements to the right without visual grouping. The current structure lacks clear visual distinction between filter controls and search, potentially creating usability issues.
+Analyzing the `autocomplete-item-medico` class in both JavaScript files reveals how data is formatted for display. The code constructs HTML elements dynamically, including data attributes for selection and display fields for the folio, patient name, and status. It also includes an optional phone number. The folio is used as the `data-id` attribute. This suggests a pattern for creating the search result list.
 
 
-The "Solicitudes Anteriores" header has unused space on the left, causing the pagination, period selector, and search to be unseparated on the right. The requested changes involve adding separators between these elements and applying a visual grouping to the period selector when "Fechas" is active. Implementing these changes will improve readability and clarity in this section.
+The folio display in both Javascript files requires adjustment to remove the "FOLIO #" prefix, leaving only the folio number within the `<strong>` tags. The status element must be repositioned to appear next to the phone number on the second line. This involves modifying the HTML structure generation within the `autocomplete-item-medico` class in both files.
+
+
+Examining the existing HTML structure and CSS, the goal is to reposition the status indicator next to the phone number. Initial thoughts involved styling the status text to match the phone style or using a separator. However, the existing `.autocomplete-estado` class's style definition (font size, weight, color) must be considered. Potential implementations include using the existing class with inline styles or adjusting the HTML structure.
 
 
 
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 3.918013496s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 9:20 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+Examining the CSS for the autocomplete state styling reveals font and color properties. A hypothesis emerged to explore the visual impact of placing this state indicator alongside the phone number within the JavaScript code that renders the relevant component. The JavaScript file containing the component's logic is being reviewed.
+
+
+The code requires modification to display the status adjacent to the phone number if available and adjust the formatting of the folio. The original code's folio display is being shortened. The logic for constructing the phone number string and incorporating the state indicator is being revised. The state value format will need checking.
+
+
+The desired placement of the status indicator requires evaluating separator options and consistency with existing formatting. Reviewing prior implementations suggests using " · " as a separator, which appears suitable. The current red color of the status indicator raises a concern; it might misrepresent statuses like "Ready" or "Sent" that should be green or blue, respectively. A color review is needed for `.autocomplete-estado`.
+
+
+The CSS for `.autocomplete-estado` is solely defined in `style.css`, initially with a red color. A review of the status values reveals a need for dynamic coloring based on the status, not just red. Data confirms that the status ID is available in the data source.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `autocomplete-item`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 4.130784385s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 9:21 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `autocomplete`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 9:21 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `autocomplete`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 9:21 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+Examining the code, the `medicos.js` lines appear to construct HTML elements from a list of items (`displayList`). Specifically, it's assigning a folio value (either from the item's `folio` property or generated as 'LSH-' + `id`) and storing the item in a global object using both the folio and the item ID as keys. It appears this function is focused on indexing search results.
+
+In `labadmin.js`:
+```javascript
+72:         this.lab_id = data.lab_id;
+73:         this.medico_id = data.medico_id;
+74:         this.date = data.date;
+75:         this.time = data.time;
+76:         this.status = data.status;
+77:         this.total = data.total;
+78:         this.discount = data.discount;
+79:         this.tax = data.tax;
+80:         this.net_total = data.net_total;
+81:         this.payment_type = data.payment_type;
+82:         this.payment_status = data.payment_status;
+83:         this.tests = data.tests;
+84:         this.notes = data.notes;
+85:         this.created_at = data.created_at;
+86:         this.updated_at = data.updated_at;
+87:         this.is_active = data.is_active;
+88:         this.folio = data.folio;
+89:         this.lab_name = data.lab_name;
+90:         this.medico_name = data.medico_name;
+91:         this.is_paid = data.is_paid;
+```
+Now reviewing the constructor in `labadmin.js`, it initializes an object with properties derived from input data. It appears to be populating a data structure representing lab administration records, including details like lab and medico IDs, dates, statuses, financial details, payment information, tests, notes, and timestamps. The data is most likely originating from a data source like a database.
+
+
+The folio display format requires modification in both files: the prefix "FOLIO #" should be removed, leaving only the folio number within the `<strong>` tags. The existing status element will be moved to display to the right of the phone number on the bottom line, keeping it there even if the phone number is missing. The resulting HTML structure will contain the date, the phone number (if present), and the status.
+
+
+Examining alternative ways to format the status display in the HTML. Considering options with and without the phone number, adjusting spacing and delimiters. Evaluating different display styles for the state, including variations on `(${estVal})` and `· ${estVal}`. Also analyzing a conditional approach for the status element's left margin based on the presence of a phone number. Investigating the CSS to check the font size of the status element.
+
+
+The current red color for the status in `.autocomplete-estado` appears arbitrary and inconsistent with other status indicators.  Examining the existing CSS, the font size will create a visual imbalance when placed next to the other elements on line 2. The `portal.css` file defines appropriate badge classes with colors that correspond to the different statuses, and will be more appropriate.
+
+
+Investigating the available status values and their mappings to CSS classes or colors. Found potential styling options within the CSS files and considered the font size and weight for visual consistency.  Also analyzing backend data, determining that the status is represented by an integer ID and a string value. Considering formatting for the status display, including color-coding and the use of a badge style. Will examine how the status displays alongside the phone number and date.
+
+
+Analyzing how to format the status display, considering the user's preference for placement next to the phone number. Evaluating whether to use parentheses or a simple delimiter (like "·") for the status. Examining the existing code structure to determine the conditional logic for displaying the phone number and date, and how the status element can be incorporated. Will need to handle the case where the phone number is missing, and correctly include the status display. The current code uses a format ` (${estVal})` and considers whether this format is intended.
+
+
+A helper function is being constructed to generate status display strings with color-coded badges, considering different status IDs. This helper incorporates a color map and evaluates CSS styling conflicts between inline styles and an existing class definition.  An alternative is evaluated: updating the CSS class definition to streamline the status display styling. Visual comparisons of the updated HTML are being conducted to assess the rendering of folio and status information. Specifically, it's comparing the "Antes" and "Ahora" versions for the Médico view.
+
+
+Revised HTML construction to conditionally include date, phone number, and status, separated by " · ". Implemented an array to build the string, pushing each element only if it exists. Used `parts.join(' · ')` for proper separation. Investigated how to correctly display each field, including CSS styling for the phone number and status.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `search-select-medico`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 9.421391816s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 9:21 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1264-1299)</summary>
+
+**Path:** `Unknown file`
+
+```
+            }
+            return;
+        }
+
+        var el = e.target.closest('[data-action="search-select-medico"]');
+        if (!el) return;
+        var mId = el.getAttribute('data-id');
+        var order = window.__MD_SEARCH_RESULTS__ ? window.__MD_SEARCH_RESULTS__[mId] : null;
+        if (order) {
+            handleSearchSelectMedico(
+                order.folio || order.id,
+                order.paciente,
+                order.estudios,
+                order.fecha,
+                order.estado,
+                order.diagnostico,
+                order.celular || order.telefono,
+                order.edad,
+                order.sexo
+            );
+        } else {
+            handleSearchSelectMedico(mId, mId, '', '', 'Emitida');
+        }
+    });
+
+    /* ══════════════════════════════════════════════════════════════════════════════════
+       DraftOrderManager: Persistencia Local de Borrador de Solicitud Médica
+       Garantiza cero pérdida de datos en móviles (Android / iOS) ante:
+       - Pull-to-refresh
+       - Recarga de página (F5, Ctrl+F5, recarga de menú)
+       - Cambio de pestaña, navegación a notificaciones o bloqueo de pantalla
+       - Evicción de proceso por memoria en segundo plano
+    ══════════════════════════════════════════════════════════════════════════════════ */
+    var DraftOrderManager = (function() {
+        var DRAFT_PREFIX = 'laesh_md_draft_u_';
+        var saveTimer = null;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `search-select-admin`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 9:21 pm
+
+---
+
+## Agent Response
 
 ### Actions
 
@@ -21722,45 +22036,279 @@ The "Solicitudes Anteriores" header has unused space on the left, causing the pa
 <details>
 <summary>Metadata</summary>
 
-- **Thinking Duration:** 2.998711900s
 - **Model:** Gemini 3.8 Flash (High)
 </details>
 
 ---
 
 <details>
-<summary>File: `Unknown file` (L479-505)</summary>
+<summary>File: `Unknown file` (L1094-1114)</summary>
 
 **Path:** `Unknown file`
 
 ```
-            inputIni.max = ayerStr;
-            inputFin.max = ayerStr;
+            return;
+        }
 
-            function manejarCambio() {
-                if (select.value === 'fecha') {
-                    rango.style.display = 'inline-flex';
-                    rango.classList.remove('d-none');
+        var el = e.target.closest('[data-action="search-select-admin"]');
+        if (!el) return;
+        var mId = el.getAttribute('data-id');
+        var order = window.__RC_SEARCH_RESULTS__ ? window.__RC_SEARCH_RESULTS__[mId] : null;
+        if (order) {
+            handleSearchSelectAdmin(order.id, order.paciente, order.estudios, order.fecha, order.estado, order.folio);
+        } else {
+            handleSearchSelectAdmin(mId, mId, '', '', 'Emitida', mId);
+        }
+    });
 
-                    if (!inputFin.value) {
-                        inputFin.value = ayerStr;
-                    }
-                    if (!inputIni.value) {
-                        var dIni = new Date(ayer);
-                        dIni.setDate(dIni.getDate() - 30);
-                        inputIni.value = dIni.toISOString().split('T')[0];
-                    }
-                    inputFin.min = inputIni.value;
-                } else {
-                    rango.style.display = 'none';
-                    rango.classList.add('d-none');
-                    inputIni.value = '';
-                    inputFin.value = '';
-                }
-            }
+    // ─────────────────────────────────────────────────────────────
+    // Operations Dropdown Menu in Doctors Table
+    // ─────────────────────────────────────────────────────────────
+    (function initDoctorsOperations() {
+        var table = document.getElementById('tabla-medicos');
+        if (!table) return;
 
-            select.addEventListener('change', manejarCambio);
+```
 
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The code iterates through a `displayList` to generate HTML. A `folVal` is constructed, using either a pre-existing `folio` value or a default based on the item's `id`. This `folVal` is then used as a key to store the item in a global search results object. The intention is to enable lookups using this generated identifier.
+
+
+The code now processes individual items from a data structure, extracting patient name, estado, and associated color based on an ID map. Date and telephone information are formatted and included. These components are then combined to generate an HTML representation for display.
+
+
+The code generates HTML elements based on a data structure, constructing a `folVal` as the primary identifier and storing the corresponding data in a global object. It uses a color map to visually represent the state of each item in the HTML display. The HTML structure is built by concatenating different pieces.
+
+
+The HTML generation utilizes template literals to build each element string. Date, phone, and state information are conditionally included in a metadata section. The CSS class `autocomplete-estado` is applied, but the specific color is dynamic, derived from the `estColor` variable. This indicates visual styling is based on the item's state.
+
+It appears the code constructs a visual representation for a search result, with the `folVal` as the primary identifier and the item's patient and potentially medical information displayed. The `data-action` and `data-id` attributes suggest this HTML element is interactive, probably triggering a function when clicked. The CSS file has a relevant style.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `LSH-`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 2.016285686s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 9:21 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L879-899)</summary>
+
+**Path:** `Unknown file`
+
+```
+                        .then(data => {
+                            sfsRes.innerHTML = '';
+                            if (data.success && Array.isArray(data.ordenes) && data.ordenes.length > 0) {
+                                window.__MD_SEARCH_RESULTS__ = window.__MD_SEARCH_RESULTS__ || {};
+                                data.ordenes.forEach(function(m) {
+                                    const folVal  = m.folio || ('LSH-' + m.id);
+                                    window.__MD_SEARCH_RESULTS__[folVal] = m;
+                                    window.__MD_SEARCH_RESULTS__[m.id] = m;
+                                    const nameVal = m.paciente || '';
+                                    const estVal  = m.estado || 'Emitida';
+                                    var div = document.createElement('div');
+                                    div.className = 'sfs-item';
+                                    // P-LAESH-FOLIO-EXTRAIDO-01 (2026-09-24): fecha de solicitud, mismo
+                                    // agregado que el buscador inline de médico.
+                                    var fechaStr = laeshFmtFechaCorta(m.fecha);
+                                    div.innerHTML = '<strong>' + folVal + '</strong> &mdash; ' + nameVal
+                                        + ' <span class="sfs-estado">(' + estVal + ')</span>'
+                                        + (fechaStr ? '<div style="color:#94a3b8; font-size:0.76rem;">' + fechaStr + '</div>' : '');
+                                    div.addEventListener('mousedown', function(e) {
+                                        e.preventDefault();
+                                        closeSFS();
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `labadmin.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L759-784)</summary>
+
+**Path:** `Unknown file`
+
+```
+                        .then(res => res.json())
+                        .then(data => {
+                            sfsRes.innerHTML = '';
+                            if (data.success && Array.isArray(data.ordenes) && data.ordenes.length > 0) {
+                                window.__RC_SEARCH_RESULTS__ = window.__RC_SEARCH_RESULTS__ || {};
+                                data.ordenes.forEach(function(m) {
+                                    const folVal = m.folio || ('LSH-' + m.id);
+                                    window.__RC_SEARCH_RESULTS__[folVal] = m;
+                                    window.__RC_SEARCH_RESULTS__[m.id] = m;
+
+                                    var div = document.createElement('div');
+                                    div.className = 'sfs-item';
+                                    // P-LAESH-FOLIO-EXTRAIDO-01 (2026-09-24): mismo agregado que el buscador
+                                    // inline (folio_extraido + fecha de solicitud), sin tocar el criterio
+                                    // de búsqueda.
+                                    var folioExtStr = m.folio_extraido ? ' <span style="color:#94a3b8; font-size:0.78rem;">· ' + m.folio_extraido + '</span>' : '';
+                                    var fechaStr = laeshFmtFechaCorta(m.fecha);
+                                    div.innerHTML = '<strong>' + folVal + '</strong>' + folioExtStr + ' &mdash; ' + m.paciente
+                                        + ' <span class="sfs-estado">(' + (m.estado || 'Emitida') + ')</span>'
+                                        + (fechaStr ? '<div style="color:#94a3b8; font-size:0.76rem;">' + fechaStr + '</div>' : '');
+                                    div.addEventListener('mousedown', function(e) {
+                                        e.preventDefault();
+                                        closeSFS();
+                                        handleSearchSelectAdmin(m.id, m.paciente, m.estudios, m.fecha, m.estado, folVal);
+                                    });
+                                    sfsRes.appendChild(div);
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Initial observation: The folio value in SFS is already correctly formatted. Further investigation: Verify if the telephone and estado elements are aligned in SFS.
+The SFS code displays folio, patient name, and estado, but I need to check if the telephone number is also rendered there.
+Line 527 in one file and line 84 in another file show the autocomplete dropdown.
+
+
+The autocomplete display needs adjustment to show only the folio number and include the estado next to the phone number. SFS will be updated to display the estado next to the phone/date if available and to remove the "LSH-" prefix. Folio values are retrieved using `m.folio || m.id`. I'll analyze how the telefono, fecha and estado are currently displayed.
+
+
+Consistency across search displays can be achieved by updating the SFS code to include the estado on the second row, next to the phone/date. The autocomplete dropdown's implementation needs verification across multiple files.
+Reviewing the first file reveals how the folio and estado are handled in the autocomplete dropdown. The implementation retrieves folio from either `m.folio` or `m.id`, and uses an estado color map based on `m.estado_id`.
+
+
+The code iterates through a list of items to generate HTML for an autocomplete dropdown, showing folio, name, and metadata like phone and estado.  The metadata section constructs elements for date, phone, and estado, with estado colored according to a mapping.  The folio value is obtained using `m.folio` or `m.id`. Now I will examine how the folio, phone, and estado are displayed in the autocomplete item. Line 72 of `labadmin.js` reveals the logic for how the autocomplete items are generated.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 2.289854527s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 9:22 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L509-539)</summary>
+
+**Path:** `Unknown file`
+
+```
+                            if (!autocompleteList) return;
+                            if (data.success && Array.isArray(data.ordenes) && data.ordenes.length > 0) {
+                                window.__MD_SEARCH_RESULTS__ = {};
+                                const hasMore = data.ordenes.length > 15;
+                                const displayList = data.ordenes.slice(0, 15);
+
+                                let itemsHtml = displayList.map(m => {
+                                    const folVal  = m.folio || ('LSH-' + m.id);
+                                    window.__MD_SEARCH_RESULTS__[folVal] = m;
+                                    window.__MD_SEARCH_RESULTS__[m.id] = m;
+                                    const nameVal = m.paciente || '';
+                                    const estVal  = m.estado || 'Emitida';
+                                    const telStr  = m.telefono ? `<span style="color:#64748b; font-size:0.75rem;"> · 📞 ${m.telefono}</span>` : '';
+                                    const fechaStr = laeshFmtFechaCorta(m.fecha);
+                                    return `
+                                        <div class="autocomplete-item-medico"
+                                             data-action="search-select-medico" data-id="${folVal}">
+                                            <strong>FOLIO #${folVal}</strong> — ${nameVal}
+                                            <span class="autocomplete-estado"> (${estVal})</span>
+                                            <div style="color:#94a3b8; font-size:0.75rem; margin-top:2px;">
+                                                ${fechaStr ? `<span>📅 ${fechaStr}</span>` : ''}${telStr}
+                                            </div>
+                                        </div>
+                                    `;
+                                }).join('');
+
+                                if (hasMore) {
+                                    itemsHtml += `
+                                        <div class="autocomplete-footer-more" data-action="search-enter-medico" style="padding: 9px 12px; background: #f8fafc; border-top: 1px solid #e2e8f0; font-size: 0.8rem; font-weight: 600; color: #0052b7; cursor: pointer; text-align: center;">
+                                            🔍 Ver todos los resultados en Solicitudes Anteriores (Enter) ➔
+                                        </div>
 ```
 
 </details>
@@ -21783,42 +22331,37 @@ The "Solicitudes Anteriores" header has unused space on the left, causing the pa
 ---
 
 <details>
-<summary>File: `Unknown file` (L344-374)</summary>
+<summary>File: `Unknown file` (L879-904)</summary>
 
 **Path:** `Unknown file`
 
 ```
-            var ayerStr = ayer.toISOString().split('T')[0];
-
-            inputIni.max = ayerStr;
-            inputFin.max = ayerStr;
-
-            function manejarCambio() {
-                if (select.value === 'fecha') {
-                    rango.style.display = 'inline-flex';
-                    rango.classList.remove('d-none');
-
-                    if (!inputFin.value) {
-                        inputFin.value = ayerStr;
-                    }
-                    if (!inputIni.value) {
-                        var dIni = new Date(ayer);
-                        dIni.setDate(dIni.getDate() - 30);
-                        inputIni.value = dIni.toISOString().split('T')[0];
-                    }
-                    inputFin.min = inputIni.value;
-                } else {
-                    rango.style.display = 'none';
-                    rango.classList.add('d-none');
-                    inputIni.value = '';
-                    inputFin.value = '';
-                }
-            }
-
-            select.addEventListener('change', manejarCambio);
-
-            // Poka-Yoke: Al cambiar Fecha Inicio
-            inputIni.addEventListener('change', function() {
+                        .then(data => {
+                            sfsRes.innerHTML = '';
+                            if (data.success && Array.isArray(data.ordenes) && data.ordenes.length > 0) {
+                                window.__MD_SEARCH_RESULTS__ = window.__MD_SEARCH_RESULTS__ || {};
+                                data.ordenes.forEach(function(m) {
+                                    const folVal  = m.folio || ('LSH-' + m.id);
+                                    window.__MD_SEARCH_RESULTS__[folVal] = m;
+                                    window.__MD_SEARCH_RESULTS__[m.id] = m;
+                                    const nameVal = m.paciente || '';
+                                    const estVal  = m.estado || 'Emitida';
+                                    var div = document.createElement('div');
+                                    div.className = 'sfs-item';
+                                    // P-LAESH-FOLIO-EXTRAIDO-01 (2026-09-24): fecha de solicitud, mismo
+                                    // agregado que el buscador inline de médico.
+                                    var fechaStr = laeshFmtFechaCorta(m.fecha);
+                                    div.innerHTML = '<strong>' + folVal + '</strong> &mdash; ' + nameVal
+                                        + ' <span class="sfs-estado">(' + estVal + ')</span>'
+                                        + (fechaStr ? '<div style="color:#94a3b8; font-size:0.76rem;">' + fechaStr + '</div>' : '');
+                                    div.addEventListener('mousedown', function(e) {
+                                        e.preventDefault();
+                                        closeSFS();
+                                        handleSearchSelectMedico(folVal, nameVal, m.estudios, m.fecha, estVal, m.diagnostico, m.celular || m.telefono, m.edad, m.sexo);
+                                    });
+                                    sfsRes.appendChild(div);
+                                });
+                            } else {
 ```
 
 </details>
@@ -21829,592 +22372,22 @@ The "Solicitudes Anteriores" header has unused space on the left, causing the pa
 
 ### Thinking
 
-The `.periodo-fechas-activo` style should implement a subtle visual grouping when the "Fechas" option is active. This can be achieved using a subdued background color or a subtle border, providing a clear visual cue for the selected state. This will improve clarity of date range selection for the user.
+Analyzing the code segment for the SFS modal search, focusing on lines 885-897. The goal is to understand how search results are handled within this modal. Specifically examining the assignment of results to `window.__MD_SEARCH_RESULTS__` and how the `folVal` is constructed. This will inform the updates for the `multi_replace_file_content` function.
 
 
-Applying visual styling to the date range filter when active, including background, border, padding, and subtle shadow, to highlight it as a distinct section. The date input fields within this section will also receive specific styling. Created separators between the pagination and period containers, and also between the period and search containers, using a thin vertical line with a subtle color.
-
-
-Examining the layout, the intention is to leverage the ample left-side whitespace on larger screens. The current `justify-content: flex-end` is pushing all controls to the right. The structure can be improved to split the header into left-aligned title/subtitle and a right-aligned control section. This would better utilize the available space.
-
-
-Investigating the existing layout structure, the controls are all right-aligned due to `margin-left: auto`.  Removing this pushes controls away from the right, potentially improving the use of whitespace. Considering rearranging the title and pagination controls to be on the left and the toolbar controls taking advantage of the now free space. Increased spacing between the controls should improve readability, particularly for the search input.
-
-
-Examining the layout of `medicos.php` reveals an opportunity to implement a balanced layout using `space-between` to separate pagination and filters effectively, taking advantage of the available horizontal space. The `labadmin.php` structure is now under review.
-
-
-Observing the screen layout, a significant amount of horizontal space exists unused, particularly to the right of the title and subtitle. Adjusting the gap between controls and applying `flex: 1; justify-content: flex-end;` to the control container can help to distribute controls better. Considering moving the pagination closer to the title, or allowing controls to spread out to use the available space.
-
-
-Considering the user's annotation, the goal is to improve the utilization of horizontal space, moving elements away from the right edge. Specifically, the pagination block and control toolbar layouts require adjustment. For "Medicos" and "Recepcion," the layout must be adjusted to allow controls more breathing room, leveraging the unused space on the left side of the screen. The existing right-alignment approach needs reevaluation.
+The analysis indicates that two distinct code blocks require modification within the same file. The identified blocks are non-contiguous, satisfying the conditions for using the designated tool. Therefore, the file modification can proceed.
 
 
 
 
 ### Actions
 
-**Tool:** `grep_search`
-**Query:** `ordenes-anteriores-total-records`
+**Tool:** `multi_replace_file_content`
 
 <details>
 <summary>Metadata</summary>
 
-- **Thinking Duration:** 7.946797421s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 12:10 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L524-564)</summary>
-
-**Path:** `Unknown file`
-
-```
-       . '</colgroup>'
-       . '<thead>'
-       . rcRenderOrdenesTablaHeader($sort, $dir, $q, '/laesh/rc/tabla-ordenes-anteriores', '#tabla-recepcion-anteriores', $includeAnt)
-       . '</thead>'
-       . rcRenderOrdenesTablaBody($ordenesAnteriores, $csrfToken, '-ant')
-       . '</table>';
-
-    $qParam = !empty($q) ? '&q=' . urlencode($q) : '';
-    $pParam = '&periodo=' . urlencode($periodo);
-    if ($periodo === 'fecha') {
-        if (!empty($fechaInicio)) $pParam .= '&fecha_inicio=' . urlencode($fechaInicio);
-        if (!empty($fechaFin)) $pParam .= '&fecha_fin=' . urlencode($fechaFin);
-    }
-    echo '<div id="ordenes-anteriores-pagination-wrap" hx-swap-oob="outerHTML" style="display: flex; align-items: center; gap: 0.5rem;">'
-       . '<span id="ordenes-anteriores-total-records" style="font-size: 0.88rem; color: var(--text-muted); font-weight: 600;">Total: ' . $totalReg . '</span>'
-       . '<span style="color: #cbd5e1; display: inline;">|</span>'
-       . '<div id="ordenes-anteriores-pagination" style="display: flex; gap: 0.25rem; align-items: center;">';
-    if ($page > 1) {
-        $prevPage = $page - 1;
-        echo '<button type="button" class="btn btn-secondary btn-sm" style="padding: 2px 8px; font-size: 0.8rem;" hx-get="/laesh/rc/tabla-ordenes-anteriores?page=' . $prevPage . $qParam . $pParam . '&sort=' . $sort . '&dir=' . $dir . '&per_page=' . $perPage . '" hx-target="#tabla-recepcion-anteriores" hx-swap="outerHTML" hx-include="' . $includeAnt . '">‹ Anterior</button>';
-    } else {
-        echo '<button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;">‹ Anterior</button>';
-    }
-    echo '<span style="font-size:0.82rem; font-weight:600; color:var(--text-muted); padding: 0 4px;">' . $page . ' / ' . $totalPages . '</span>';
-    if ($page < $totalPages) {
-        $nextPage = $page + 1;
-        echo '<button type="button" class="btn btn-secondary btn-sm" style="padding: 2px 8px; font-size: 0.8rem;" hx-get="/laesh/rc/tabla-ordenes-anteriores?page=' . $nextPage . $qParam . $pParam . '&sort=' . $sort . '&dir=' . $dir . '&per_page=' . $perPage . '" hx-target="#tabla-recepcion-anteriores" hx-swap="outerHTML" hx-include="' . $includeAnt . '">Siguiente ›</button>';
-    } else {
-        echo '<button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;">Siguiente ›</button>';
-    }
-    echo '</div></div>';
-});
-
-// ── GET /tabla-pacientes — Partial HTMX de la grilla de Pacientes (Recepción) ─────
-Flight::route('GET /tabla-pacientes', function () {
-    header('Content-Type: text/html; charset=utf-8');
-
-    $q       = trim($_GET['q'] ?? '');
-    $sort    = trim($_GET['sort'] ?? 'fecha');
-    $dir     = trim($_GET['dir'] ?? 'desc');
-    $page    = max(1, (int)($_GET['page'] ?? 1));
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L409-444)</summary>
-
-**Path:** `Unknown file`
-
-```
-        echo '<button type="button" class="btn btn-secondary btn-sm" style="padding: 2px 8px; font-size: 0.8rem;" hx-get="/laesh/md/tabla-ordenes-anteriores?page=' . $prevPage . $qParam . $pParam . '&sort=' . $sort . '&dir=' . $dir . '&per_page=' . $perPage . '" hx-target="#tabla-historial-completo" hx-swap="outerHTML" hx-include="' . $includeAntMd . '">‹ <span class="pag-label-text">Anterior</span></button>';
-    } else {
-        echo '<button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;">‹ <span class="pag-label-text">Anterior</span></button>';
-    }
-    echo '<span style="font-size:0.82rem; font-weight:600; color:var(--text-muted); padding: 0 4px;">' . $page . ' / ' . $totalPages . '</span>';
-    if ($page < $totalPages) {
-        $nextPage = $page + 1;
-        echo '<button type="button" class="btn btn-secondary btn-sm" style="padding: 2px 8px; font-size: 0.8rem;" hx-get="/laesh/md/tabla-ordenes-anteriores?page=' . $nextPage . $qParam . $pParam . '&sort=' . $sort . '&dir=' . $dir . '&per_page=' . $perPage . '" hx-target="#tabla-historial-completo" hx-swap="outerHTML" hx-include="' . $includeAntMd . '"><span class="pag-label-text">Siguiente</span> ›</button>';
-    } else {
-        echo '<button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;"><span class="pag-label-text">Siguiente</span> ›</button>';
-    }
-    echo '</div></div>';
-});
-
-/**
- * Helper SSOT: Renderiza el <thead> de Mis Pacientes del médico con ordenamiento dinámico
- * (mismo patrón/columnas que rcRenderPacientesTablaHeader, incluida la columna "#").
- */
-function mdRenderPacientesTablaHeader(string $sort = 'fecha', string $dir = 'desc', string $q = ''): string {
-    $qParam = !empty($q) ? '&q=' . urlencode($q) : '';
-
-    $nextDirPaciente = ($sort === 'paciente' && strtolower($dir) === 'asc') ? 'desc' : 'asc';
-    $iconPaciente    = ($sort === 'paciente') ? (strtolower($dir) === 'asc' ? ' ▲' : ' ▼') : '';
-
-    $nextDirFecha    = ($sort === 'fecha' && strtolower($dir) === 'desc') ? 'asc' : 'desc';
-    $iconFecha       = ($sort === 'fecha') ? (strtolower($dir) === 'asc' ? ' ▲' : ' ▼') : '';
-
-    $endpoint = '/laesh/md/tabla-pacientes';
-    $target   = '#tabla-pacientes-medico';
-    $inputId  = '#input-buscar-paciente-medico';
-
-    $thBase = 'position: sticky; top: 0; background: #e0f2fe; color: #003e8c; z-index: 10; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.85rem; font-weight: 700; border-bottom: 1px solid #cbd5e1;';
-
-    return '<tr style="font-size: 0.88rem;">'
-         . '<th style="' . $thBase . ' white-space: normal;">#</th>'
-         . '<th style="' . $thBase . ' cursor: pointer; white-space: normal;" hx-get="' . $endpoint . '?sort=paciente&dir=' . $nextDirPaciente . $qParam . '" hx-target="' . $target . '" hx-swap="outerHTML" hx-include="' . $inputId . '">Paciente <span class="sort-icon">' . $iconPaciente . '</span></th>'
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-The `ordenes-anteriores-md-pagination-wrap` ID in the MD file corresponds to `#ordenes-anteriores-pagination-wrap` in RC, indicating that the OOB swap is correctly handled. Now, shifting focus to the structures of `labadmin.php` and `medicos.php` to understand their respective architectures. Initial examination begins with the `labadmin.php` file.
-
-
-Considering laptop/desktop layout, the significant whitespace between the title/subtitle and control elements suggests an opportunity for visual enhancements.  The user's feedback indicates that separators and subtle groupings for selected dates could improve visual clarity, leveraging this unused space. The design needs to be adapted to better utilize the available screen real estate.
-
-
-In the Médico view, the proposed layout organizes controls with the pagination and total on the left, and period grouping, a separator, and search on the right, utilizing available horizontal space effectively. The Recepción screenshot shows the need to integrate pagination and total, along with period controls and search, leveraging the left-hand side's whitespace. The user's marked visual cues emphasize the need for separators and groupings in Recepción.
-
-
-The current layout's right alignment of controls is due to `margin-left: auto; justify-content: flex-end;`. Removing `margin-left: auto` allows the container to breathe or distribute. Two layout options exist: a widened toolbar or a flexible controls container using `flex: 1; justify-content: flex-end;`. Additionally, the paginator's placement and the need for separators are considered for improved visual structure.
-
-
-Examining the "period" control, the desired style includes a grouped appearance with a specific background, border, and padding. The control's expanded form includes date inputs; a compact view is desired for specific selections. Separator elements are present between controls, and their CSS reveals a responsive design for different screen sizes.
-
-The user's comment, "using perhaps the free space on the left", prompts a review of the left-hand layout in larger screen sizes to determine if improved grouping and visual separation are possible within available space. The title elements are observed within a container. The "panel-header-title-wrap" is observed.
-
-
-Examining `labadmin.php` proposes styling for the control container, search input, and pagination wrapper to create a more polished appearance.  Considered is a flexbox layout with specific widths, padding, and subtle visual cues to enhance the control elements. The styling of `.periodo-fechas-activo` is also analyzed for consistency.
-
-The layout in `medicos.php` is noted to allow for a full-width toolbar, due to the `h2` title being on its own row. A `display: flex` with `space-between` and `align-items: center` is proposed for the laptop/desktop view. This arrangement opens potential control layouts on the left.
-
-
-Pagination will anchor to the left side and controls to the right to achieve visual balance and full-width utilization in the Médico view. Considering Recepción, `labadmin.php`, the title's placement can be adapted for large screens; either top or left. The `cms-panel-header`'s layout with and without `margin-left: auto;` or `justify-content: flex-end;` is being considered for the controls container. The separation and spacing requirements for the controls are being determined for various desktop screen resolutions.
-
-
-Analyzing control widths and available screen real estate, a layout calculation reveals the total control width is approximately 880px, with a title width of 260px, totaling 1140px on a 1400px+ screen. This identifies 260px of potential left-hand space for controls. The `margin-left: auto` setting currently pushes controls to the right.
-
-Considering user feedback, the current layout is being reevaluated to incorporate: vertical separators, subtle groupings for selected dates using `.periodo-fechas-activo`, capsule-like containers for pagination and active periods, a comfortable search bar width, and comfortable gaps to leverage the left-hand whitespace. A more robust, flexible layout solution is required, to allow moving the controls to the left. The user's prompt emphasizes utilizing left-hand space for visual improvements in both Médico and Recepción views.
-
-I'm thinking through how to approach this.
-
-
-The user's annotations suggest a layout adjustment prioritizing the left-hand space for controls.  Visual cues imply separators between "Pagination" and "Period", and between "Period" and "Search".  The "Period" section should have a visual indication.
-
-Examining the HTML, the separation is achieved with `<div class="toolbar-separator">` elements. CSS styling is already in place. The `#ordenes-anteriores-pagination-wrap` and `#ordenes-anteriores-md-pagination-wrap` wrapper provides some capsule-like style.
-
-The goal is to increase the space between the controls, potentially moving them to the left to avoid being crammed against the right border.
-
-
-The CSS for grouping and visual separation is being analyzed to implement the suggested visual improvements. The `.periodo-fechas-activo` style, including its background, border, and visual connection to date inputs, is confirmed as the key element for grouping. The `toolbar-separator` class is being leveraged for separating the controls.
-
-
-The search input's width and styling are confirmed for desktop displays. The intention is to utilize flexbox for arranging controls to the left, which can be done by removing the right alignment and leveraging the available space on larger screens in `labadmin.php`. The flexible `medicos.php` header, with `justify-content: space-between` and `width: 100%`, is confirmed as the design's base for utilizing space on the left side. The goal is to move the pagination, total, periods (with dates), separator, and search controls to the left. The Médico approach is preferred.
-
-
-Examining `labadmin.js`, the `manejarCambio()` function handles the date range display based on a select element. The initial page load scenario where the default value is '30d' needs investigation. The function might not be called on initial page load if the default value isn't 'fecha'.
-
-If the default value is not 'fecha', `.periodo-fechas-activo` may not be initialized. The date range should be initialized on page load for the selected default value, or by calling `manejarCambio()` on page load if the initial value is 'fecha'.
-
-
-
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `cms-panel-header`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 14.378169974s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 12:11 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `portal.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L2609-2644)</summary>
-
-**Path:** `Unknown file`
-
-```
-.td-center { text-align: center; }
-
-/* Grupo de botones centrado en tabla (línea 580) */
-.btn-group-center { display: flex; gap: 6px; justify-content: center; }
-
-/* Efecto de resaltado para autocompletado en constructor jerárquico */
-@keyframes highlight-flash {
-    0% { background-color: #e0f2fe; box-shadow: 0 0 0 4px #bae6fd; }
-    50% { background-color: #bae6fd; box-shadow: 0 0 0 8px #7dd3fc; }
-    100% { background-color: transparent; box-shadow: 0 0 0 0 transparent; }
-}
-.highlight-flash {
-    animation: highlight-flash 2.5s ease-out forwards;
-}
-
-/* Resalte luminoso al hacer clic en notificaciones */
-@keyframes rowNotifHighlight {
-    0% { background-color: #fef08a !important; box-shadow: inset 0 0 0 2px #eab308, 0 0 12px rgba(234, 179, 8, 0.4); }
-    50% { background-color: #fde047 !important; box-shadow: inset 0 0 0 2px #ca8a04, 0 0 16px rgba(202, 138, 4, 0.6); }
-    100% { background-color: transparent !important; box-shadow: none; }
-}
-.row-notif-highlight {
-    animation: rowNotifHighlight 2.5s ease-in-out forwards;
-    position: relative;
-    z-index: 5;
-}
-
-@keyframes rowSavedHighlight {
-    0% { background-color: #fef08a !important; box-shadow: inset 0 0 0 2px #eab308, 0 0 14px rgba(234, 179, 8, 0.4); }
-    15% { background-color: #fef9c3 !important; box-shadow: inset 0 0 0 2px #ca8a04, 0 0 8px rgba(202, 138, 4, 0.25); }
-    80% { background-color: #fef9c3 !important; box-shadow: inset 0 0 0 1.5px rgba(202, 138, 4, 0.35); }
-    100% { background-color: transparent !important; box-shadow: none; }
-}
-.row-saved-highlight {
-    animation: rowSavedHighlight 10s ease-in-out forwards;
-}
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `portal.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L2739-2775)</summary>
-
-**Path:** `Unknown file`
-
-```
-#tabla-recepcion-anteriores tbody tr:nth-child(even),
-#tabla-pacientes tbody tr:nth-child(even),
-#flat-catalog-table tbody tr:nth-child(even) {
-    background-color: #f1f5f9 !important;
-}
-
-table tbody tr:nth-child(odd),
-.table tbody tr:nth-child(odd),
-#tabla-medico tbody tr:nth-child(odd),
-#tabla-historial-completo tbody tr:nth-child(odd),
-#tabla-pacientes-medico tbody tr:nth-child(odd),
-#tabla-catalogo-medico tbody tr:nth-child(odd),
-#tabla-recepcion tbody tr:nth-child(odd),
-#tabla-recepcion-anteriores tbody tr:nth-child(odd),
-#tabla-pacientes tbody tr:nth-child(odd),
-#flat-catalog-table tbody tr:nth-child(odd) {
-    background-color: #ffffff !important;
-}
-
-/* Encabezados de grilla homologados basados en Catálogo de Estudios */
-#tabla-medico th,
-#tabla-historial-completo th,
-#tabla-pacientes-medico th,
-#tabla-catalogo-medico th,
-#tabla-recepcion th,
-#tabla-recepcion-anteriores th,
-#tabla-pacientes th,
-#flat-catalog-table th {
-    position: sticky;
-    top: 0;
-    background-color: #e0f2fe !important;
-    color: #003e8c !important;
-    font-weight: 700 !important;
-    font-size: 0.85rem !important;
-    border-bottom: 1px solid #cbd5e1 !important;
-}
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-The existing CSS is well-organized, prompting the design of classes for a new toolbar feature. Initial structure will utilize a flexbox layout, adjusting the gap between elements and enabling wrapping based on screen size for responsiveness. A media query will be implemented to increase the gap on larger screens, adjusting the layout for improved readability.
-
-
-Classes for pagination and total count are being defined within a container utilizing inline-flex for alignment and spacing. A subtle visual style, including a rounded capsule, light background, and border, will visually group pagination elements. Vertical separators will be included, hidden on smaller screens via a media query.
-
-A separate container handles date-related controls, allowing for an "active" state with a distinct background and border. Within this container, a nested group styles the date range for better visual association using a dashed border.
-
-
-A search input field is being designed for the toolbar, implementing responsive width adjustments based on screen size using media queries. The design includes a transition effect for a smoother visual experience when the width changes. A careful examination of the existing toolbar's design suggests vertical separators and an active state styling for date-related elements. The use of space is being reviewed.
-
-
-Ensuring the pagination wrapper receives the defined class in both initial rendering and HTMX swaps maintains consistency. The existing code suggests modifications in various files, specifically `rc/index.php` and `md/index.php`, where the class is added to the wrapper element used for pagination. It is crucial to examine associated JavaScript files (`labadmin.js` and `medicos.js`) to verify the correct class handling during initial page load and user interactions. This will ensure proper styling is applied across all states.
-
-
-Analyzing JavaScript code in `labadmin.js` and `medicos.js` reveals identical event handlers that manage the display of date range input fields based on a selection.  The function dynamically sets default start and end dates if the input fields are initially empty, calculating the start date as 30 days prior to today and ensuring the end date's minimum is the start date.  The presence of functionally similar code suggests the need for refactoring into a shared utility function to reduce redundancy.
-
-
-Analyzing the provided HTML snippet, the pagination structure includes total record count, a separator, and pagination controls. The number of pages is being calculated based on a division and `ceil` function. A button for the previous page is present, disabled initially. The current page number is displayed with the total pages. A "next" button is conditionally shown depending on the number of total pages.
-
-
-The HTML snippet describes a pagination control with "previous" and "next" buttons, conditional display, and AJAX calls for navigation. The presence of a "period" selector suggests filtering capabilities based on date ranges. This confirms the toolbar's use for navigating and filtering order data.
-
-
-The HTML snippet includes a period selector for filtering, using options for 30 days, 15 days, or a custom date range. Date range inputs are hidden initially and displayed based on the selector's value. AJAX calls are triggered on change of the selector or date inputs, suggesting dynamic updates to the order data table.
-
-
-A date input field for the "end date" is present, utilizing an AJAX call to update the order table. A real-time search input is included, also triggering an AJAX call on input change to update the table dynamically based on user input. The AJAX calls incorporate various filter parameters.
-
-
-The code snippet within `medicos.php` defines a toolbar for previous digital requests, including a total count, pagination controls (previous, current page/total, next), and separators. The pagination logic calculates the total pages and conditionally displays the "next" button. A toolbar-specific class is applied, indicating a distinct visual style for this component.
-
-
-The code implements pagination with "previous" and "next" buttons, styled differently based on availability, indicating navigation through a data set. The presence of AJAX calls suggests dynamic table updates upon pagination actions, triggering new content fetches. The "period" selection suggests filtering by a predetermined time range.
-
-
-The HTML includes a period selector for filtering order data using predefined options (30 days, 15 days) or a custom date range. The `hx-trigger="change"` attribute on the selector triggers AJAX requests to dynamically update the order table. The "Fechas" option reveals date input fields, which also trigger AJAX requests on change, implementing the custom date filtering. This setup indicates a system for dynamically updating a data table via AJAX calls.
-
-
-
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `ordenes-anteriores-md-header`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 9.573654798s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 12:11 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `portal.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1609-1634)</summary>
-
-**Path:** `Unknown file`
-
-```
-       muestra ningún control de paginación (Total | ‹1/1›) — mismo criterio
-       ya aplicado a Solicitudes Hoy. El título propio volvió (título reducido
-       "Solicitudes Digitales Anteriores", ver .panel-nueva-orden-title arriba
-       en este mismo archivo) — ya no compite por espacio con la paginación,
-       así que el header queda con solo el buscador, a todo el ancho.
-       Histórico (GAP-MD-12, 2026-09-22/24): el <h2>+<p> original de este
-       header se había quitado por desbordar el viewport junto a paginación+
-       buscador bajo flex-wrap:nowrap — ya no aplica, ver arriba. */
-    #ordenes-anteriores-md-header {
-        flex-wrap: nowrap !important;
-        margin-bottom: 0.5rem !important;
-    }
-    #ordenes-anteriores-md-pagination-wrap {
-        display: none !important;
-    }
-    #ordenes-anteriores-md-search-wrap {
-        flex: 1 1 auto !important;
-        min-width: 0 !important;
-        justify-content: flex-end !important;
-    }
-    #input-buscar-orden-anteriores-md {
-        width: 100% !important;
-        min-width: 0 !important;
-    }
-    /* GAP-MD-11 (2026-09-22, ajustado 2026-09-24): filas de Órdenes Hoy/
-       Anteriores lo más compactas posible para maximizar renglones visibles
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `ordenes-anteriores-pagination-wrap`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 12:11 pm
-
----
-
-## Agent Response
-
-### Thinking
-
-Inspecting the code reveals the pagination wrap is set up for out-of-band (OOB) swapping in both `rc/index.php` and `md/index.php` using HTMX. The HTML structures seem to be the targets for the OOB updates. This suggests a mechanism for dynamically updating the pagination controls without full page reloads.
-
-
-The HTMX swap of the pagination wrap preserves the capsule style due to the class being on the replaced div, and the separator is stable because it's outside the wrap. The next step is to examine the JavaScript files to understand how to toggle the `.periodo-fechas-activo` class, specifically starting with `labadmin.js`. The observed code snippet shows a function that modifies display and a class based on a selection, and needs to be analyzed further.
-
-
-Analysis shows that the `.periodo-fechas-activo` class is managed by JavaScript in both `labadmin.js` and `medicos.js`, specifically within a function responding to a selection change. This function controls the display of a date range input and the toggling of the target class. It appears that `ws-client.js` does *not* interact with this class directly. The selection triggers date range visibility and the target class's state.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `portal.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 1.656289247s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L2759-2775)</summary>
-
-**Path:** `Unknown file`
-
-```
-#tabla-medico th,
-#tabla-historial-completo th,
-#tabla-pacientes-medico th,
-#tabla-catalogo-medico th,
-#tabla-recepcion th,
-#tabla-recepcion-anteriores th,
-#tabla-pacientes th,
-#flat-catalog-table th {
-    position: sticky;
-    top: 0;
-    background-color: #e0f2fe !important;
-    color: #003e8c !important;
-    font-weight: 700 !important;
-    font-size: 0.85rem !important;
-    border-bottom: 1px solid #cbd5e1 !important;
-}
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
+- **Thinking Duration:** 3.071483913s
 - **Model:** Gemini 3.8 Flash (High)
 </details>
 
@@ -22423,354 +22396,7 @@ Analysis shows that the `.periodo-fechas-activo` class is managed by JavaScript 
 ### Code Edit
 
 **Status:** Completed
-**Created:** 27 Sept 2026, 12:12 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `labadmin.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L219-279)</summary>
-
-**Path:** `Unknown file`
-
-```
-                            <h3 class="cms-h3" style="margin: 0; font-size: 1.35rem; font-weight: 800; color: #0052B7;">Solicitudes Anteriores</h3>
-                            <p class="txt-muted-4" style="margin: 0.2rem 0 0 0; font-size: 0.85rem;">Histórico de solicitudes registradas en días anteriores.</p>
-                        </div>
-                        
-                        <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; justify-content: flex-end; margin-left: auto;">
-                            <!-- Paginador y Total -->
-                            <div id="ordenes-anteriores-pagination-wrap" style="display: flex; align-items: center; gap: 0.5rem;">
-                                <span id="ordenes-anteriores-total-records" style="font-size: 0.88rem; color: var(--text-muted); font-weight: 600;">Total: <?= (int)($totalOrdenesAnteriores ?? 0) ?></span>
-                                <span style="color: #cbd5e1; display: inline;">|</span>
-                                <div id="ordenes-anteriores-pagination" style="display: flex; gap: 0.25rem; align-items: center;">
-                                    <?php 
-                                        $totPgsAnt = max(1, (int)ceil(($totalOrdenesAnteriores ?? 0) / 25));
-                                    ?>
-                                    <button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;">‹ Anterior</button>
-                                    <span style="font-size:0.82rem; font-weight:600; color:var(--text-muted); padding: 0 4px;">1 / <?= $totPgsAnt ?></span>
-                                    <?php if ($totPgsAnt > 1): ?>
-                                        <button type="button" class="btn btn-secondary btn-sm" style="padding: 2px 8px; font-size: 0.8rem;" hx-get="/laesh/rc/tabla-ordenes-anteriores?page=2&periodo=30d" hx-target="#tabla-recepcion-anteriores" hx-swap="outerHTML" hx-include="#input-buscar-orden-anteriores-rc, #select-periodo-anteriores-rc, #fecha-inicio-anteriores-rc, #fecha-fin-anteriores-rc">Siguiente ›</button>
-                                    <?php else: ?>
-                                        <button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;">Siguiente ›</button>
-                                    <?php endif; ?>
-                                </div>
-                            </div>
-
-                            <!-- Combo List de Período y Rango de Fechas (Calendario) -->
-                            <div id="ordenes-anteriores-periodo-container" style="display: inline-flex; align-items: center; gap: 0.35rem; flex-wrap: nowrap;">
-                                <label for="select-periodo-anteriores-rc" style="font-size: 0.82rem; font-weight: 600; color: var(--text-muted); white-space: nowrap;">Período:</label>
-                                <select id="select-periodo-anteriores-rc" name="periodo" class="form-select select-sm" style="padding: 4px 10px; font-size: 0.82rem; border-radius: 6px; border: 1px solid var(--border); background: #ffffff; color: var(--text-dark); cursor: pointer;"
-                                        hx-get="/laesh/rc/tabla-ordenes-anteriores"
-                                        hx-target="#tabla-recepcion-anteriores"
-                                        hx-swap="outerHTML"
-                                        hx-include="#input-buscar-orden-anteriores-rc, #select-periodo-anteriores-rc, #fecha-inicio-anteriores-rc, #fecha-fin-anteriores-rc"
-                                        hx-trigger="change">
-                                    <option value="30d" selected>30 d</option>
-                                    <option value="15d">15 d</option>
-                                    <option value="fecha">Fechas</option>
-                                </select>
-                                <span id="rango-fechas-anteriores-rc" class="d-none" style="display: none; align-items: center; gap: 0.35rem; white-space: nowrap;">
-                                    <input type="date" id="fecha-inicio-anteriores-rc" name="fecha_inicio" class="select-sm form-input" style="padding: 3px 6px; font-size: 0.8rem; border-radius: 6px; border: 1px solid var(--border); width: 130px;" max="<?= date('Y-m-d', strtotime('-1 day')) ?>" title="Fecha inicial" aria-label="Fecha inicial"
-                                           hx-get="/laesh/rc/tabla-ordenes-anteriores"
-                                           hx-target="#tabla-recepcion-anteriores"
-                                           hx-swap="outerHTML"
-                                           hx-include="#input-buscar-orden-anteriores-rc, #select-periodo-anteriores-rc, #fecha-inicio-anteriores-rc, #fecha-fin-anteriores-rc"
-                                           hx-trigger="change">
-                                    <span class="txt-muted-sm" style="font-size: 0.78rem; color: var(--text-muted);">al</span>
-                                    <input type="date" id="fecha-fin-anteriores-rc" name="fecha_fin" class="select-sm form-input" style="padding: 3px 6px; font-size: 0.8rem; border-radius: 6px; border: 1px solid var(--border); width: 130px;" max="<?= date('Y-m-d', strtotime('-1 day')) ?>" title="Fecha final" aria-label="Fecha final"
-                                           hx-get="/laesh/rc/tabla-ordenes-anteriores"
-                                           hx-target="#tabla-recepcion-anteriores"
-                                           hx-swap="outerHTML"
-                                           hx-include="#input-buscar-orden-anteriores-rc, #select-periodo-anteriores-rc, #fecha-inicio-anteriores-rc, #fecha-fin-anteriores-rc"
-                                           hx-trigger="change">
-                                </span>
-                            </div>
-
-                            <!-- Buscador en tiempo real -->
-                            <div id="ordenes-anteriores-search-container" style="display: flex; gap: 0.5rem; align-items: center; position:relative; z-index: 100;">
-                                <input type="text" id="input-buscar-orden-anteriores-rc" name="q" class="form-input form-input--bg" autocomplete="off" spellcheck="false" placeholder="🔍 Buscar por nombre..." style="width: 220px;" hx-get="/laesh/rc/tabla-ordenes-anteriores" hx-target="#tabla-recepcion-anteriores" hx-swap="outerHTML" hx-include="#input-buscar-orden-anteriores-rc, #select-periodo-anteriores-rc, #fecha-inicio-anteriores-rc, #fecha-fin-anteriores-rc" hx-trigger="keyup changed delay:250ms, search">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card" aria-live="polite" style="padding: 0; overflow: hidden; border: 1px solid var(--border); border-radius: 8px;">
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-The plan is to modify `laesh-swbldi/rc/views/labadmin.php`. Specific UI elements will be added: a wrapper for "anteriores" toolbar items, a pagination capsule, separators, a "periodo" container with a date range group, another separator, and a wider search input. Executing this code modification should incorporate the new UI components.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.131974511s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 12:12 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `medicos.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L404-459)</summary>
-
-**Path:** `Unknown file`
-
-```
-                     paginación+buscador en flex-wrap:nowrap). -->
-                <h2 class="panel-nueva-orden-title">Solicitudes Digitales Anteriores</h2>
-                <div class="cms-panel-header" id="ordenes-anteriores-md-header" style="margin-bottom: 1rem; display: flex; justify-content: flex-end; align-items: center; flex-wrap: wrap; gap: 0.75rem; margin-left: auto;">
-                    <div id="ordenes-anteriores-md-pagination-wrap" style="display: flex; align-items: center; gap: 0.5rem;">
-                        <span id="ordenes-anteriores-md-total-records" style="font-size: 0.88rem; color: var(--text-muted); font-weight: 600;">Total: <?= (int)($totalOrdenesAnteriores ?? 0) ?></span>
-                        <span style="color: #cbd5e1; display: inline;">|</span>
-                        <div style="display: flex; gap: 0.25rem; align-items: center;">
-                            <?php $totPgsAntMd = max(1, (int)ceil(($totalOrdenesAnteriores ?? 0) / 25)); ?>
-                            <button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;">‹ <span class="pag-label-text">Anterior</span></button>
-                            <span style="font-size:0.82rem; font-weight:600; color:var(--text-muted); padding: 0 4px;">1 / <?= $totPgsAntMd ?></span>
-                            <?php if ($totPgsAntMd > 1): ?>
-                                <button type="button" class="btn btn-secondary btn-sm" style="padding: 2px 8px; font-size: 0.8rem;" hx-get="/laesh/md/tabla-ordenes-anteriores?page=2&periodo=30d" hx-target="#tabla-historial-completo" hx-swap="outerHTML" hx-include="#input-buscar-orden-anteriores-md, #select-periodo-anteriores-md, #fecha-inicio-anteriores-md, #fecha-fin-anteriores-md"><span class="pag-label-text">Siguiente</span> ›</button>
-                            <?php else: ?>
-                                <button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;"><span class="pag-label-text">Siguiente</span> ›</button>
-                            <?php endif; ?>
-                        </div>
-                    </div>
-
-                    <!-- Combo List de Período y Rango de Fechas (Calendario) -->
-                    <div id="ordenes-anteriores-md-periodo-container" style="display: inline-flex; align-items: center; gap: 0.35rem; flex-wrap: nowrap;">
-                        <label for="select-periodo-anteriores-md" style="font-size: 0.82rem; font-weight: 600; color: var(--text-muted); white-space: nowrap;">Período:</label>
-                        <select id="select-periodo-anteriores-md" name="periodo" class="form-select select-sm" style="padding: 4px 10px; font-size: 0.82rem; border-radius: 6px; border: 1px solid var(--border); background: #ffffff; color: var(--text-dark); cursor: pointer;"
-                                hx-get="/laesh/md/tabla-ordenes-anteriores"
-                                hx-target="#tabla-historial-completo"
-                                hx-swap="outerHTML"
-                                hx-include="#input-buscar-orden-anteriores-md, #select-periodo-anteriores-md, #fecha-inicio-anteriores-md, #fecha-fin-anteriores-md"
-                                hx-trigger="change">
-                            <option value="30d" selected>30 d</option>
-                            <option value="15d">15 d</option>
-                            <option value="fecha">Fechas</option>
-                        </select>
-                        <span id="rango-fechas-anteriores-md" class="d-none" style="display: none; align-items: center; gap: 0.35rem; white-space: nowrap;">
-                            <input type="date" id="fecha-inicio-anteriores-md" name="fecha_inicio" class="select-sm form-input" style="padding: 3px 6px; font-size: 0.8rem; border-radius: 6px; border: 1px solid var(--border); width: 130px;" max="<?= date('Y-m-d', strtotime('-1 day')) ?>" title="Fecha inicial" aria-label="Fecha inicial"
-                                   hx-get="/laesh/md/tabla-ordenes-anteriores"
-                                   hx-target="#tabla-historial-completo"
-                                   hx-swap="outerHTML"
-                                   hx-include="#input-buscar-orden-anteriores-md, #select-periodo-anteriores-md, #fecha-inicio-anteriores-md, #fecha-fin-anteriores-md"
-                                   hx-trigger="change">
-                            <span class="txt-muted-sm" style="font-size: 0.78rem; color: var(--text-muted);">al</span>
-                            <input type="date" id="fecha-fin-anteriores-md" name="fecha_fin" class="select-sm form-input" style="padding: 3px 6px; font-size: 0.8rem; border-radius: 6px; border: 1px solid var(--border); width: 130px;" max="<?= date('Y-m-d', strtotime('-1 day')) ?>" title="Fecha final" aria-label="Fecha final"
-                                   hx-get="/laesh/md/tabla-ordenes-anteriores"
-                                   hx-target="#tabla-historial-completo"
-                                   hx-swap="outerHTML"
-                                   hx-include="#input-buscar-orden-anteriores-md, #select-periodo-anteriores-md, #fecha-inicio-anteriores-md, #fecha-fin-anteriores-md"
-                                   hx-trigger="change">
-                        </span>
-                    </div>
-
-                    <div id="ordenes-anteriores-md-search-wrap" style="display: flex; gap: 0.5rem; align-items: center;">
-                        <input type="text" id="input-buscar-orden-anteriores-md" name="q" class="form-input form-input--bg" autocomplete="off" spellcheck="false" placeholder="🔍 Buscar por folio, paciente..." style="width: 220px;" hx-get="/laesh/md/tabla-ordenes-anteriores" hx-target="#tabla-historial-completo" hx-swap="outerHTML" hx-include="#input-buscar-orden-anteriores-md, #select-periodo-anteriores-md, #fecha-inicio-anteriores-md, #fecha-fin-anteriores-md" hx-trigger="keyup changed delay:250ms, search">
-                    </div>
-                </div>
-                <div class="card" style="padding: 0; overflow: hidden; border: 1px solid var(--border); border-radius: 8px;">
-                    <div class="table-responsive" style="max-height: calc(100vh - 250px); overflow-y: auto; overflow-x: auto; -webkit-overflow-scrolling: touch; width: 100%;">
-                        <table id="tabla-historial-completo" hx-get="/laesh/md/tabla-ordenes-anteriores" hx-target="#tabla-historial-completo" hx-swap="outerHTML" hx-include="#input-buscar-orden-anteriores-md, #select-periodo-anteriores-md, #fecha-inicio-anteriores-md, #fecha-fin-anteriores-md" hx-trigger="refresh, ordenCreada from:body, ordenActualizada from:body">
-                            <thead>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Planning to modify `medicos.php` to enhance the "ordenes anteriores" toolbar on medium-sized screens. The goal is to implement a responsive layout using `ordenes-anteriores-toolbar-md` for horizontal spacing. Additionally, a styled pagination element (`toolbar-pagination-capsule`) will be applied. The right-hand controls will be encapsulated within a flex container.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.186079979s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 12:12 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L534-544)</summary>
-
-**Path:** `Unknown file`
-
-```
-        if (!empty($fechaInicio)) $pParam .= '&fecha_inicio=' . urlencode($fechaInicio);
-        if (!empty($fechaFin)) $pParam .= '&fecha_fin=' . urlencode($fechaFin);
-    }
-    echo '<div id="ordenes-anteriores-pagination-wrap" hx-swap-oob="outerHTML" style="display: flex; align-items: center; gap: 0.5rem;">'
-       . '<span id="ordenes-anteriores-total-records" style="font-size: 0.88rem; color: var(--text-muted); font-weight: 600;">Total: ' . $totalReg . '</span>'
-       . '<span style="color: #cbd5e1; display: inline;">|</span>'
-       . '<div id="ordenes-anteriores-pagination" style="display: flex; gap: 0.25rem; align-items: center;">';
-    if ($page > 1) {
-        $prevPage = $page - 1;
-        echo '<button type="button" class="btn btn-secondary btn-sm" style="padding: 2px 8px; font-size: 0.8rem;" hx-get="/laesh/rc/tabla-ordenes-anteriores?page=' . $prevPage . $qParam . $pParam . '&sort=' . $sort . '&dir=' . $dir . '&per_page=' . $perPage . '" hx-target="#tabla-recepcion-anteriores" hx-swap="outerHTML" hx-include="' . $includeAnt . '">‹ Anterior</button>';
-    } else {
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 12:13 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L399-409)</summary>
-
-**Path:** `Unknown file`
-
-```
-    if ($periodo === 'fecha') {
-        if (!empty($fechaInicio)) $pParam .= '&fecha_inicio=' . urlencode($fechaInicio);
-        if (!empty($fechaFin)) $pParam .= '&fecha_fin=' . urlencode($fechaFin);
-    }
-    echo '<div id="ordenes-anteriores-md-pagination-wrap" hx-swap-oob="outerHTML" style="display: flex; align-items: center; gap: 0.5rem;">'
-       . '<span id="ordenes-anteriores-md-total-records" style="font-size: 0.88rem; color: var(--text-muted); font-weight: 600;">Total: ' . $totalReg . '</span>'
-       . '<span style="color: #cbd5e1; display: inline;">|</span>'
-       . '<div style="display: flex; gap: 0.25rem; align-items: center;">';
-    if ($page > 1) {
-        $prevPage = $page - 1;
-        echo '<button type="button" class="btn btn-secondary btn-sm" style="padding: 2px 8px; font-size: 0.8rem;" hx-get="/laesh/md/tabla-ordenes-anteriores?page=' . $prevPage . $qParam . $pParam . '&sort=' . $sort . '&dir=' . $dir . '&per_page=' . $perPage . '" hx-target="#tabla-historial-completo" hx-swap="outerHTML" hx-include="' . $includeAntMd . '">‹ <span class="pag-label-text">Anterior</span></button>';
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 12:13 pm
+**Created:** 27 Sept 2026, 9:22 pm
 
 ---
 
@@ -22790,79 +22416,40 @@ Planning to modify `medicos.php` to enhance the "ordenes anteriores" toolbar on 
 ---
 
 <details>
-<summary>File: `Unknown file` (L479-514)</summary>
+<summary>File: `Unknown file` (L69-94)</summary>
 
 **Path:** `Unknown file`
 
 ```
-            inputIni.max = ayerStr;
-            inputFin.max = ayerStr;
+                                const displayList = data.ordenes.slice(0, 15);
 
-            function manejarCambio() {
-                if (select.value === 'fecha') {
-                    rango.style.display = 'inline-flex';
-                    rango.classList.remove('d-none');
+                                let itemsHtml = displayList.map(m => {
+                                    const folVal = m.folio || ('LSH-' + m.id);
+                                    window.__RC_SEARCH_RESULTS__[folVal] = m;
+                                    window.__RC_SEARCH_RESULTS__[m.id] = m;
+                                    const estVal = m.estado || 'Emitida';
+                                    const medStr = m.medico ? `<span style="color:#64748b; font-size:0.78rem;"> (${m.medico})</span>` : '';
+                                    const folioExtStr = m.folio_extraido ? ` <span style="color:#94a3b8; font-size:0.78rem;">· ${m.folio_extraido}</span>` : '';
+                                    const telStr = m.telefono ? `<span style="color:#64748b; font-size:0.75rem;"> · 📞 ${m.telefono}</span>` : '';
+                                    const fechaStr = laeshFmtFechaCorta(m.fecha);
+                                    return `
+                                        <div class="autocomplete-item-medico"
+                                             data-action="search-select-admin" data-id="${folVal}">
+                                            <strong>FOLIO #${folVal}</strong>${folioExtStr} — ${m.paciente}${medStr}
+                                            <span class="autocomplete-estado"> (${estVal})</span>
+                                            <div style="color:#94a3b8; font-size:0.75rem; margin-top:2px;">
+                                                ${fechaStr ? `<span>📅 ${fechaStr}</span>` : ''}${telStr}
+                                            </div>
+                                        </div>
+                                    `;
+                                }).join('');
 
-                    if (!inputFin.value) {
-                        inputFin.value = ayerStr;
-                    }
-                    if (!inputIni.value) {
-                        var dIni = new Date(ayer);
-                        dIni.setDate(dIni.getDate() - 30);
-                        inputIni.value = dIni.toISOString().split('T')[0];
-                    }
-                    inputFin.min = inputIni.value;
-                } else {
-                    rango.style.display = 'none';
-                    rango.classList.add('d-none');
-                    inputIni.value = '';
-                    inputFin.value = '';
-                }
-            }
-
-            select.addEventListener('change', manejarCambio);
-
-            // Poka-Yoke: Al cambiar Fecha Inicio
-            inputIni.addEventListener('change', function() {
-                if (this.value) {
-                    // Si fin está vacío o es menor a inicio, sincronizar al mismo día
-                    if (!inputFin.value || inputFin.value < this.value) {
-                        inputFin.value = this.value;
-                    }
-                    inputFin.min = this.value;
-                }
+                                if (hasMore) {
+                                    itemsHtml += `
+                                        <div class="autocomplete-footer-more" data-action="search-enter-admin" style="padding: 9px 12px; background: #f8fafc; border-top: 1px solid #e2e8f0; font-size: 0.8rem; font-weight: 600; color: #0052b7; cursor: pointer; text-align: center;">
 ```
 
 </details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Initial assessment suggests the need to modify a JavaScript file related to administrative functions within a web asset. The goal appears to be dynamically controlling the visibility of a date-range selection based on a user's choice. Adding a container variable, and conditionally modifying its class based on the selected value will provide the needed dynamic visibility. Adding an initial trigger ensures the correct state upon page load.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.190357967s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 12:13 pm
 
 ---
 
@@ -22871,7 +22458,7 @@ Initial assessment suggests the need to modify a JavaScript file related to admi
 ### Actions
 
 **Tool:** `view_file`
-**File:** `medicos.js`
+**File:** `labadmin.js`
 
 <details>
 <summary>Metadata</summary>
@@ -22882,39 +22469,115 @@ Initial assessment suggests the need to modify a JavaScript file related to admi
 ---
 
 <details>
-<summary>File: `Unknown file` (L347-374)</summary>
+<summary>File: `Unknown file` (L759-789)</summary>
 
 **Path:** `Unknown file`
 
 ```
-            inputFin.max = ayerStr;
+                        .then(res => res.json())
+                        .then(data => {
+                            sfsRes.innerHTML = '';
+                            if (data.success && Array.isArray(data.ordenes) && data.ordenes.length > 0) {
+                                window.__RC_SEARCH_RESULTS__ = window.__RC_SEARCH_RESULTS__ || {};
+                                data.ordenes.forEach(function(m) {
+                                    const folVal = m.folio || ('LSH-' + m.id);
+                                    window.__RC_SEARCH_RESULTS__[folVal] = m;
+                                    window.__RC_SEARCH_RESULTS__[m.id] = m;
 
-            function manejarCambio() {
-                if (select.value === 'fecha') {
-                    rango.style.display = 'inline-flex';
-                    rango.classList.remove('d-none');
+                                    var div = document.createElement('div');
+                                    div.className = 'sfs-item';
+                                    // P-LAESH-FOLIO-EXTRAIDO-01 (2026-09-24): mismo agregado que el buscador
+                                    // inline (folio_extraido + fecha de solicitud), sin tocar el criterio
+                                    // de búsqueda.
+                                    var folioExtStr = m.folio_extraido ? ' <span style="color:#94a3b8; font-size:0.78rem;">· ' + m.folio_extraido + '</span>' : '';
+                                    var fechaStr = laeshFmtFechaCorta(m.fecha);
+                                    div.innerHTML = '<strong>' + folVal + '</strong>' + folioExtStr + ' &mdash; ' + m.paciente
+                                        + ' <span class="sfs-estado">(' + (m.estado || 'Emitida') + ')</span>'
+                                        + (fechaStr ? '<div style="color:#94a3b8; font-size:0.76rem;">' + fechaStr + '</div>' : '');
+                                    div.addEventListener('mousedown', function(e) {
+                                        e.preventDefault();
+                                        closeSFS();
+                                        handleSearchSelectAdmin(m.id, m.paciente, m.estudios, m.fecha, m.estado, folVal);
+                                    });
+                                    sfsRes.appendChild(div);
+                                });
+                            } else {
+                                var empty = document.createElement('div');
+                                empty.className = 'sfs-empty';
+                                empty.textContent = 'Sin resultados para "' + query + '"';
+```
 
-                    if (!inputFin.value) {
-                        inputFin.value = ayerStr;
-                    }
-                    if (!inputIni.value) {
-                        var dIni = new Date(ayer);
-                        dIni.setDate(dIni.getDate() - 30);
-                        inputIni.value = dIni.toISOString().split('T')[0];
-                    }
-                    inputFin.min = inputIni.value;
-                } else {
-                    rango.style.display = 'none';
-                    rango.classList.add('d-none');
-                    inputIni.value = '';
-                    inputFin.value = '';
-                }
-            }
+</details>
 
-            select.addEventListener('change', manejarCambio);
+---
 
-            // Poka-Yoke: Al cambiar Fecha Inicio
-            inputIni.addEventListener('change', function() {
+## Agent Response
+
+### Thinking
+
+Analyzing code blocks for potential modifications. The first block involves rendering an autocomplete dropdown. The second block concerns an SFS modal. Identifying these sections is a prerequisite to making targeted file content adjustments.
+
+
+This code snippet processes and formats search results, extracting key information like status, doctor's name, extracted folio, and date to construct display elements. A color mapping based on status ID is used to visually represent the record's state, and other metadata components are formatted for presentation alongside date and phone number.
+
+
+Analyzing the code, the status and folio values are extracted and used to generate HTML for display in search results, including color-coding based on the status ID.  Temporary storage is created for search results, indexing them by both `folio` and `id` for quick retrieval. The default status value 'Emitida' is used if no status is explicitly defined.
+
+
+
+
+### Actions
+
+**Tool:** `multi_replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 4.370270217s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 9:22 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `style.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L624-634)</summary>
+
+**Path:** `Unknown file`
+
+```
+.bar-color-blue     { background: #0052B7; }
+.bar-color-amber    { background: #F59E0B; }
+.bar-color-purple   { background: #8B5CF6; }
+.bar-color-red      { background: #EF4444; }
+
+/* ── Estado en autocomplete expandido ── */
+.autocomplete-estado { font-size: 0.85rem; font-weight: 700; color: #dc2626; }
+
+/* ── Tabla: celda de estado vacío (CSP-safe, sin inline style) ── */
+.tbl-empty-cell { text-align: center; color: var(--text-muted); padding: 1.5rem; }
+
 ```
 
 </details>
@@ -22938,7 +22601,7 @@ Initial assessment suggests the need to modify a JavaScript file related to admi
 ### Code Edit
 
 **Status:** Completed
-**Created:** 27 Sept 2026, 12:13 pm
+**Created:** 27 Sept 2026, 9:23 pm
 
 ---
 
@@ -22959,7 +22622,7 @@ Initial assessment suggests the need to modify a JavaScript file related to admi
 ### Terminal Command Execution
 
 **Status:** Completed
-**Created:** 27 Sept 2026, 12:13 pm
+**Created:** 27 Sept 2026, 9:23 pm
 
 ---
 
@@ -22967,7 +22630,8 @@ Initial assessment suggests the need to modify a JavaScript file related to admi
 
 ### Actions
 
-**Tool:** `run_command`
+**Tool:** `view_file`
+**File:** `test_client_refresh_draft_suite.js`
 
 <details>
 <summary>Metadata</summary>
@@ -22977,10 +22641,76 @@ Initial assessment suggests the need to modify a JavaScript file related to admi
 
 ---
 
-### Terminal Command Execution
+<details>
+<summary>File: `Unknown file` (L389-449)</summary>
 
-**Status:** Completed
-**Created:** 27 Sept 2026, 12:14 pm
+**Path:** `Unknown file`
+
+```
+
+    function removeChip(val) {
+        const checkboxes = env.form.querySelectorAll('input[name="estudios[]"]');
+        checkboxes.forEach(cb => {
+            if (cb.value === val) {
+                cb.checked = false;
+                if (cb.hasAttribute('data-auto-added')) cb.remove();
+            }
+        });
+
+        if (env.otrosInput && env.otrosInput.value) {
+            const restantes = env.otrosInput.value.split(',')
+                .map(s => s.trim())
+                .filter(s => s.length > 0 && s.toLowerCase() !== val.toLowerCase());
+            env.otrosInput.value = restantes.join(', ');
+        }
+        updateChipsContainer();
+    }
+
+    function limpiarBorrador() {
+        const key = getStorageKey(env.form);
+        SafeStorage.remove(key);
+    }
+
+    // ── Subsistema RAM Snapshot de Notificaciones (ws-client.js) ──────────────
+    let _busquedaPreviaSnapshot = null;
+
+    function capturarEstadoBusquedaPrevia(tabId = 'tab-anteriores', params = { periodo: 'fechas', f_ini: '2026-01-01', f_fin: '2026-06-30' }, scrollY = 420) {
+        _busquedaPreviaSnapshot = { tabId, params, scrollY, ts: Date.now() };
+        env.barraRetorno.style.display = 'block';
+        env.barraRetorno.innerHTML = '← Volver a mi búsqueda anterior';
+        return true;
+    }
+
+    function handleRetornoBusqueda() {
+        if (!_busquedaPreviaSnapshot) return null;
+        const restored = { ..._busquedaPreviaSnapshot };
+        _busquedaPreviaSnapshot = null;
+        env.barraRetorno.style.display = 'none';
+        return restored;
+    }
+
+    return {
+        init: (f, gr) => {
+            const res = restaurarBorrador(f, gr);
+            isInitialized = true;
+            return res;
+        },
+        populateMandatoryGrid,
+        updateChipsContainer,
+        updateTotalBadge,
+        removeChip,
+        limpiarBorrador,
+        ejecutarGuardado,
+        capturarEstadoBusquedaPrevia,
+        handleRetornoBusqueda,
+        getSnapshotState: () => _busquedaPreviaSnapshot
+    };
+}
+
+// ── 4. EJECUCIÓN SECUENCIAL DE LOS 18 CASOS DE PRUEBA ─────────────────────────────
+```
+
+</details>
 
 ---
 
@@ -22988,7 +22718,184 @@ Initial assessment suggests the need to modify a JavaScript file related to admi
 
 ### Thinking
 
-Added elegant vertical separators to the toolbar. These separators, denoted by the `.toolbar-separator` class, are strategically placed between the Paginador/Total capsule and the Período container, and also between the Período container and the Buscador. The separators are hidden on smaller screens (<=767px) to optimize the layout where controls stack.
+A small test execution is needed to confirm the exact HTML rendering of data from `medicos.js` and `labadmin.js`. The provided sample order data will be used to generate and compare the rendered HTML output. This test will ensure the data is formatted as expected in the HTML.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.070811001s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 9:23 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 9:23 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+## User Request
+
+la fecha que se muestra en resultados de la lupita es la de creacion de la orden ?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `labadmin.js`
+**Language:** javascript
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Examining the frontend code, the date displayed originates from `m.fecha`. The frontend formats this date string using a helper function. The question is: What does 'm.fecha' represent in the backend? Its origin requires investigation. The date field is likely populated from the order object itself, specifically its creation timestamp.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `hora_captura`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.153154349s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 9:25 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `function laeshFmtFechaCorta`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 9:25 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `labadmin.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+/* labadmin.js — lógica del portal de recepción (extraído de labadmin.html) */
+        // P-LAESH-FOLIO-EXTRAIDO-01 (2026-09-24): formatea m.fecha ("YYYY-MM-DD HH:mm:ss",
+        // MariaDB sin TZ) como "dd/mm HH:mm" para la fecha de solicitud en resultados de
+        // la lupita. replace(' ','T') evita que el navegador la interprete como UTC.
+        function laeshFmtFechaCorta(fechaStr) {
+            if (!fechaStr) return '';
+            const d = new Date(String(fechaStr).replace(' ', 'T'));
+            if (isNaN(d.getTime())) return '';
+            const pad = n => String(n).padStart(2, '0');
+            return pad(d.getDate()) + '/' + pad(d.getMonth() + 1) + ' ' + pad(d.getHours()) + ':' + pad(d.getMinutes());
+        }
+
+        // Lógica de Autocompletado en Vivo MariaDB (por Folio, Paciente, Médico o Diagnóstico)
+        const inputBuscador = document.getElementById('input-buscador');
+        const autoBox = document.getElementById('autocomplete-list');
+        window.__RC_SEARCH_RESULTS__ = window.__RC_SEARCH_RESULTS__ || {};
+
+        if (inputBuscador && autoBox) {
+            function posicionarAutocompleteAdmin() {
+                const rect = inputBuscador.getBoundingClientRect();
+                autoBox.style.top   = (rect.bottom + 4) + 'px';
+                autoBox.style.left  = rect.left + 'px';
+                autoBox.style.width = Math.max(rect.width, 260) + 'px';
+            }
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The code snippet describes a date formatting function for displaying a MariaDB timestamp in a specific "dd/mm HH:mm" format within a user interface. The `replace(' ','T')` is intended to prevent browser misinterpretation of the date as UTC. The database schema uses `hora_captura` (TIMESTAMP) which was previously named `creado_en`, indicating a historical change in the data model.
 
 
 
@@ -22996,7 +22903,7 @@ Added elegant vertical separators to the toolbar. These separators, denoted by t
 <details>
 <summary>Metadata</summary>
 
-- **Thinking Duration:** 0.087249065s
+- **Thinking Duration:** 0.067618329s
 - **Model:** Gemini 3.8 Flash (High)
 </details>
 
