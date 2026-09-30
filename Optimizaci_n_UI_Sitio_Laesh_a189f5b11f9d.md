@@ -7,9 +7,9 @@
 | **Trajectory ID** | `6e357b7e-c91b-4705-961b-75dfa5c7e94c` |
 | **Cascade ID** | `707376e8-5501-46d1-bf86-a189f5b11f9d` |
 | **Type** | Agent Conversation |
-| **Total Steps** | 11055 |
+| **Total Steps** | 11306 |
 | **Started** | 21 Sept 2026, 3:55 pm |
-| **Completed** | 27 Sept 2026, 9:25 pm |
+| **Completed** | 30 Sept 2026, 4:38 pm |
 
 ---
 
@@ -13985,6096 +13985,366 @@
 
 ---
 
-<details>
-<summary>Conversation History</summary>
-
-# Conversation History
-Here are the conversation IDs, titles, and summaries of your most recent 1 conversations, in reverse chronological order:
-
-<conversation_summaries>
-## Conversation b05a5b41-a7c7-4d90-9813-7abd9e8e85cf: Limpieza De Código PTR
-- Created: 2026-09-27T17:17:20Z
-- Last modified: 2026-09-28T01:04:09Z
-
-</conversation_summaries>
-
-</details>
-
----
-
 ### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 7:09 pm
 
 ---
 
-## Agent Response
-
-### Thinking
-
-The instruction is to create the automated test files for all 44 cases, but to avoid execution for now. This confirms the need to focus on file generation as a primary action. The previous task aimed to analyze, rectify/create, automate, and plan, and this request narrows the immediate focus.
-
-
-
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.069727938s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 7:09 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 7:09 pm
 
 ---
 
-## Agent Response
+### Terminal Command Execution
 
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
+**Status:** Reset
+**Created:** 27 Sept 2026, 7:10 pm
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 7:10 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 7:10 pm
-
----
-
-## Agent Response
-
-### Thinking
-
-The compilation completed successfully, confirming there are no syntax errors. Need to identify and categorize the original test cases to ensure full coverage. The prior discussion references a set of 44 cases organized into blocks A, B, and C, with A and B specified.
-
-
-
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.073142586s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 7:10 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `function buscarOrdenes`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 7:10 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `Ordenes.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L634-739)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-    /**
-     * Busca órdenes del médico autenticado por coincidencia inteligente (Folio exacto, Teléfono 7-10 dígitos, o Multicriterio Nombre + Año + Teléfono)
-     */
-    public static function buscarOrdenesMedico(int $medicoId, string $term, int $limit = 15): array {
-        try {
-            $term = trim($term);
-            if (strlen($term) < 1) return [];
-
-            $db = DB::connect();
-            $limInt = max(1, min(50, (int)$limit));
-            $params = [':medico_id' => $medicoId];
-            $whereParts = ["o.medico_user_id = :medico_id"];
-
-            // 1. Caso numérico puro (1 a 6 dígitos): Folio exacto o prefijo
-            if (preg_match('/^\d{1,6}$/', $term)) {
-                $whereParts[] = "(o.folio_unico = :f_exact OR o.folio_unico LIKE :f_pref)";
-                $params[':f_exact'] = $term;
-                $params[':f_pref']  = $term . '%';
-                $orderClause = "(o.folio_unico = :f_ord) DESC, CAST(o.folio_unico AS UNSIGNED) ASC, o.orden_id DESC";
-                $params[':f_ord'] = $term;
-            }
-            // 2. Caso numérico largo (7 a 10 dígitos): Teléfono directo o folio
-            elseif (preg_match('/^\d{7,10}$/', $term)) {
-                $whereParts[] = "(o.paciente_telefono LIKE :tel OR o.folio_unico = :fol_tel)";
-                $params[':tel'] = '%' . $term . '%';
-                $params[':fol_tel'] = $term;
-                $orderClause = "o.orden_id DESC";
-            }
-            // 3. Caso texto o multicriterio (Nombre, Año, Teléfono parcial)
-            else {
-                $words = preg_split('/\s+/', $term, -1, PREG_SPLIT_NO_EMPTY);
-                $wIdx = 1;
-                foreach ($words as $word) {
-                    $wordLower = mb_strtolower($word, 'UTF-8');
-                    // Si es un año de 4 dígitos entre 2000 y 2099
-                    if (preg_match('/^(20\d\d)$/', $word, $mYear)) {
-                        $whereParts[] = "YEAR(o.hora_captura) = :yr_" . $wIdx;
-                        $params[':yr_' . $wIdx] = (int)$mYear[1];
-                    }
-                    // Si es un fragmento numérico (ej. 3+ dígitos de teléfono o folio)
-                    elseif (preg_match('/^\d{3,}$/', $word)) {
-                        $whereParts[] = "(o.paciente_telefono LIKE :tel_" . $wIdx . " OR o.folio_unico = :fol_" . $wIdx . ")";
-                        $params[':tel_' . $wIdx] = '%' . $word . '%';
-                        $params[':fol_' . $wIdx] = $word;
-                    }
-                    // Si es texto (paciente, diagnóstico)
-                    else {
-                        $whereParts[] = "(LOWER(o.paciente_nombre) LIKE :q_nom_" . $wIdx . " OR LOWER(o.diagnostico) LIKE :q_diag_" . $wIdx . ")";
-                        $likeVal = '%' . $wordLower . '%';
-                        $params[':q_nom_' . $wIdx]  = $likeVal;
-                        $params[':q_diag_' . $wIdx] = $likeVal;
-                    }
-                    $wIdx++;
-                }
-                $orderClause = "o.orden_id DESC";
-            }
-
-            $whereSql = "WHERE " . implode(' AND ', $whereParts);
-            $fetchLimit = $limInt + 1; // +1 para detectar si hay más resultados
-
-            $stmt = $db->prepare("
-                SELECT
-                    o.orden_id AS id,
-                    o.folio_unico AS folio,
-                    o.paciente_nombre AS paciente,
-                    o.paciente_telefono AS telefono,
-                    o.medico_nombre_completo AS medico,
-                    o.estado_valor AS estado,
-                    o.estado_id,
-                    o.diagnostico AS estudios,
-                    o.hora_captura AS fecha
-                FROM vw_ordenes_completas o
-                {$whereSql}
-                ORDER BY {$orderClause}
-                LIMIT {$fetchLimit}
-            ");
-            foreach ($params as $k => $v) {
-                if ($k === ':medico_id' || strpos($k, ':yr_') === 0) {
-                    $stmt->bindValue($k, (int)$v, PDO::PARAM_INT);
-                } else {
-                    $stmt->bindValue($k, $v, PDO::PARAM_STR);
-                }
-            }
-            $stmt->execute();
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        } catch (Throwable $e) {
-            DB::logFallback('ERROR', 'Fallo en MD\Negocio\Ordenes::buscarOrdenesMedico', $e->getMessage());
-            return [];
-        }
-    }
-
-    /**
-     * Cambia la contraseña del médico autenticado utilizando Delight Auth
-     * y purga tokens huérfanos de persistencia y resets.
-     */
-    public static function cambiarPasswordPropia(string $oldPassword, string $newPassword, int $userId): array {
-        try {
-            if (strlen($newPassword) !== 10) {
-                return ['success' => false, 'ack' => false, 'error' => 'La nueva contraseña debe tener exactamente 10 caracteres.'];
-            }
-
-            $auth = \Flight::auth();
-            $auth->changePassword($oldPassword, $newPassword);
-
-            // Limpieza de tokens persistentes de recordarme y resets huérfanos
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `Ordenes.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-<?php
-/**
- * md/negocio/ordenes.php — Capa de Negocio para Solicitudes Médicas Digitales (Médicos)
- *
- * Maneja la emisión de solicitudes digitales, persistencia PDO, Stored Procedures
- * (laesh_db.CrearOrdenLaboratorio), trazabilidad y auditoría.
- */
-
-namespace MD\Negocio;
-
-use Common\DB;
-use Common\Logger;
-use PDO;
-use Throwable;
-
-class Ordenes {
-
-    /**
-     * Emite una solicitud médica digital desde el portal de médicos
-     *
-     * H3/H4/H6 (auditoría 2026-09-20): mismo tratamiento que
-     * RC\Negocio\Ordenes::crearOrden() — todo el flujo en una transacción (evita
-     * la ventana de carrera del folio y una orden a medias si detalle_ordenes
-     * falla), y la notificación 'nueva_orden' se persiste (outbox) dentro de la
-     * misma transacción, con el push por WS después del commit.
-     */
-    public static function crearSolicitudDigital(array $datos, int $userId, int $intento = 1): array {
-        $db = DB::connect();
-        $db->beginTransaction();
-
-        try {
-            // 1. Buscar o crear el paciente en pacientes
-            $pacienteId = \RC\Negocio\Ordenes::buscarOCrearPaciente($datos);
-
-            // 2. El id del médico (medico_id) corresponde a su user_id según el esquema
-            $medicoId = $userId;
-
-            $edad          = intval($datos['edad'] ?? 0);
-            $diagnostico   = trim($datos['diagnostico'] ?? '');
-            $otrosEstudios = trim($datos['otros_estudios'] ?? '');
-            $estudiosArray = $datos['estudios'] ?? [];
-            $estudiosJson  = is_array($estudiosArray) ? json_encode($estudiosArray, JSON_UNESCAPED_UNICODE) : $estudiosArray;
-
-            // Validar edad obligatoria (1-120 años) ANTES de tocar el SP/FK
-            if ($edad <= 0 || $edad > 120) {
-                throw new \InvalidArgumentException("La edad es obligatoria y debe estar entre 1 y 120 años.");
-            }
-            if (is_array($estudiosArray) && !empty($estudiosArray)) {
-                $idsNumericos = array_values(array_filter($estudiosArray, 'is_numeric'));
-                if (!empty($idsNumericos)) {
-                    $placeholders = implode(',', array_fill(0, count($idsNumericos), '?'));
-                    $stmtCheck = $db->prepare("SELECT id FROM cat_estudios WHERE id IN ({$placeholders})");
-                    $stmtCheck->execute($idsNumericos);
-                    $idsExistentes = array_map('intval', $stmtCheck->fetchAll(PDO::FETCH_COLUMN));
-                    $idsFaltantes = array_diff(array_map('intval', $idsNumericos), $idsExistentes);
-                    if (!empty($idsFaltantes)) {
-                        throw new \InvalidArgumentException('Uno o más estudios seleccionados ya no existen en el catálogo (id: ' . implode(', ', $idsFaltantes) . '). Recargue la página e intente de nuevo.');
-                    }
-                }
-            }
-
-            // 3. Ejecutar Stored Procedure CrearOrdenLaboratorio
-            // Auditoría E2E (2026-09-20): quitado el prefijo 'laesh_db.' hardcodeado
-            // — ver comentario detallado en RC\Negocio\Ordenes::crearOrden().
-            $stmtProc = $db->prepare("
-                CALL CrearOrdenLaboratorio(
-                    :paciente_id,
-                    :medico_id,
-                    :recepcion_id,
-                    :edad_al_emitir,
-                    :diagnostico,
-                    :otros_estudios,
-                    :estudios_json,
-                    @p_folio
-                )
-            ");
-
-            $stmtProc->execute([
-                'paciente_id'    => $pacienteId,
-                'medico_id'      => $medicoId,
-                'recepcion_id'   => null, // Emitida por médico digitalmente
-                'edad_al_emitir' => $edad,
-                'diagnostico'    => $diagnostico,
-                'otros_estudios' => $otrosEstudios,
-                'estudios_json'  => $estudiosJson
-            ]);
-
-            // Obtener el folio generado por el Stored Procedure
-            $folioRow = $db->query("SELECT @p_folio AS folio")->fetch(PDO::FETCH_ASSOC);
-            $folio = $folioRow['folio'] ?? '1';
-
-            // Obtener la orden recién creada para responder con orden_id
-            $stmtOrd = $db->prepare("SELECT id FROM ordenes WHERE folio_unico = ? LIMIT 1");
-            $stmtOrd->execute([$folio]);
-            $ordenId = (int)$stmtOrd->fetchColumn();
-
-            // 4. Inserción en detalle_ordenes si se enviaron IDs
-            if (is_array($estudiosArray)) {
-                $stmtDet = $db->prepare("INSERT INTO detalle_ordenes (orden_id, estudio_id) VALUES (?, ?)");
-                foreach ($estudiosArray as $estudioId) {
-                    if (is_numeric($estudioId)) {
-                        $stmtDet->execute([$ordenId, $estudioId]);
-                    }
-                }
-            }
-
-            // 5. Actualizar contador de órdenes del médico en perfiles_medicos (GAP-03)
-            $db->prepare("UPDATE perfiles_medicos SET total_ordenes = total_ordenes + 1 WHERE user_id = ?")
-               ->execute([$medicoId]);
-
-            // 6. Logger y Auditoría
-            $pacienteNombre = trim(($datos['paciente_nombre'] ?? $datos['paciente'] ?? 'Paciente'));
-            Logger::logAlways('INFO', "Solicitud Médica Digital {$folio} creada para {$pacienteNombre} por médico user_id={$userId}", $userId);
-
-            // 7. H6 — Outbox: persistir la notificación dentro de la misma transacción.
-            $persisted = \Common\Notifier::persist($db, 'nueva_orden', [
-                'folio'          => $folio,
-                'orden_id'       => $ordenId,
-                'titulo'         => 'Nueva Solicitud Médica Digital (' . $folio . ')',
-                'mensaje'        => 'Solicitud enviada para ' . $pacienteNombre,
-                'actor_user_id'  => $userId,
-            ]);
-
-            $db->commit();
-
-            // 8. Push por WS — después del commit.
-            \Common\Notifier::push($persisted, 'nueva_orden', [
-                'folio'    => $folio,
-                'orden_id' => $ordenId,
-                'titulo'   => 'Nueva Solicitud Médica Digital (' . $folio . ')',
-                'mensaje'  => 'Solicitud enviada para ' . $pacienteNombre,
-            ]);
-
-            return [
-                'success'  => true,
-                'folio'    => $folio,
-                'orden_id' => $ordenId,
-                'paciente' => $pacienteNombre,
-                'mensaje'  => "✓ Solicitud Médica Digital {$folio} creada exitosamente para {$pacienteNombre}."
-            ];
-
-        } catch (Throwable $e) {
-            if ($db->inTransaction()) {
-                $db->rollBack();
-            }
-            // H3: mismo retry que RC\Negocio\Ordenes::crearOrden() — conflicto de
-            // serialización transitorio de MariaDB (1020/1213), el motor sugiere
-            // reintentar la transacción completa.
-            if ($intento < 5 && \RC\Negocio\Ordenes::esConflictoSerializacion($e)) {
-                usleep(random_int(10000, 50000));
-                return self::crearSolicitudDigital($datos, $userId, $intento + 1);
-            }
-            DB::logFallback('ERROR', 'Fallo en MD\Negocio\Ordenes::crearSolicitudDigital', $e->getMessage());
-            Logger::log('ERROR', 'Error al crear solicitud médica digital: ' . $e->getMessage(), $userId);
-            return [
-                'success' => false,
-                'error'   => 'No se pudo crear la solicitud digital: ' . $e->getMessage()
-            ];
-        }
-    }
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `periodo`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 7:10 pm
 
 ---
 
-## Agent Response
+### Code Edit
 
-### Actions
-
-**Tool:** `view_file`
-**File:** `Ordenes.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
+**Status:** Reset
+**Created:** 27 Sept 2026, 7:11 pm
 
 ---
 
-<details>
-<summary>File: `Unknown file` (L334-439)</summary>
+### Terminal Command Execution
 
-**Path:** `Unknown file`
-
-```
-            DB::logFallback('ERROR', 'Fallo en MD\Negocio\Ordenes::obtenerResultadoPDFPropio', $e->getMessage());
-            return ['success' => false, 'error' => 'No se pudo obtener el PDF: ' . $e->getMessage()];
-        }
-    }
-
-    private static function construirFiltroPeriodoAnterioresMedico(string $periodo, string $alias = 'o.', string $fechaInicio = '', string $fechaFin = '', array &$params = []): string {
-        switch ($periodo) {
-            case '15':
-            case '15d':
-                return "{$alias}hora_captura >= DATE_SUB(CURDATE(), INTERVAL 15 DAY) AND DATE({$alias}hora_captura) < CURDATE()";
-            case 'fecha':
-            case 'fechas':
-                $conds = ["DATE({$alias}hora_captura) < CURDATE()"];
-                $valIni = (!empty($fechaInicio) && preg_match('/^\d{4}-\d{2}-\d{2}$/', $fechaInicio)) ? $fechaInicio : null;
-                $valFin = (!empty($fechaFin) && preg_match('/^\d{4}-\d{2}-\d{2}$/', $fechaFin)) ? $fechaFin : null;
-
-                // Poka-Yoke: Si el usuario solo capturó una fecha, se asume ese mismo día exacto
-                if ($valIni !== null && $valFin === null) {
-                    $valFin = $valIni;
-                } elseif ($valIni === null && $valFin !== null) {
-                    $valIni = $valFin;
-                }
-
-                // Poka-Yoke: Si las fechas vienen invertidas (inicio > fin), se auto-corrigen
-                if ($valIni !== null && $valFin !== null && $valIni > $valFin) {
-                    $tmp = $valIni;
-                    $valIni = $valFin;
-                    $valFin = $tmp;
-                }
-
-                if ($valIni !== null) {
-                    $pIni = ':f_ini_' . str_replace('.', '', $alias);
-                    $conds[] = "DATE({$alias}hora_captura) >= {$pIni}";
-                    $params[$pIni] = $valIni;
-                }
-                if ($valFin !== null) {
-                    $pFin = ':f_fin_' . str_replace('.', '', $alias);
-                    $conds[] = "DATE({$alias}hora_captura) <= {$pFin}";
-                    $params[$pFin] = $valFin;
-                }
-                if ($valIni === null && $valFin === null) {
-                    return "{$alias}hora_captura >= DATE_SUB(CURDATE(), INTERVAL 30 DAY) AND DATE({$alias}hora_captura) < CURDATE()";
-                }
-                return implode(' AND ', $conds);
-            case '90':
-            case '90d':
-                return "{$alias}hora_captura >= DATE_SUB(CURDATE(), INTERVAL 90 DAY) AND DATE({$alias}hora_captura) < CURDATE()";
-            case '30':
-            case '30d':
-            default:
-                return "{$alias}hora_captura >= DATE_SUB(CURDATE(), INTERVAL 30 DAY) AND DATE({$alias}hora_captura) < CURDATE()";
-        }
-    }
-
-    /**
-     * Obtiene las solicitudes de órdenes de DÍAS ANTERIORES emitidas por el médico logueado,
-     * con ordenamiento, búsqueda, paginación y filtro de período (default: 30 días, o calendario por rango de fechas).
-     * Precedencia del buscador: si $search tiene contenido, busca en todo el historial (< hoy).
-     */
-    public static function obtenerOrdenesAnterioresMedico(int $userId, int $limit = 25, int $offset = 0, string $search = '', string $orderBy = 'fecha', string $orderDir = 'DESC', string $periodo = '30d', string $fechaInicio = '', string $fechaFin = ''): array {
-        try {
-            $db = DB::connect();
-
-            $allowedSorts = [
-                'folio'           => 'CAST(o.folio_unico AS UNSIGNED)',
-                'paciente'        => 'o.paciente_nombre',
-                'fecha'           => 'o.hora_captura',
-                'fecha_resultado' => 'o.fecha_resultado',
-                'estado'          => 'o.estado_id',
-                'id'              => 'o.orden_id'
-            ];
-            $sortCol = $allowedSorts[$orderBy] ?? 'o.orden_id';
-            $dir = strtoupper($orderDir) === 'ASC' ? 'ASC' : 'DESC';
-
-            $params = [':user_id' => $userId];
-            $search = trim(mb_strtolower($search, 'UTF-8'));
-
-            // Opción B (Filtro Combinado): El filtro de período/calendario siempre se aplica como base
-            $filtroPeriodo = self::construirFiltroPeriodoAnterioresMedico($periodo, 'o.', $fechaInicio, $fechaFin, $params);
-
-            if ($search !== '') {
-                if (preg_match('/^(?:laesh-?|lsh-?|s2y-?|#)?(\d{1,8})$/i', $search, $mFolio)) {
-                    $rawNum = (int)$mFolio[1];
-                    $pad5   = sprintf('%05d', $rawNum);
-                    $whereSql = "WHERE o.medico_user_id = :user_id AND DATE(o.hora_captura) < CURDATE() AND (LOWER(o.folio_unico) = :q_fol_raw OR LOWER(o.folio_unico) = :q_fol_clean OR LOWER(o.folio_unico) = :q_fol_unpad OR LOWER(o.folio_unico) = :q_fol_full OR LOWER(o.folio_unico) LIKE :q_fol_like) ";
-                    $params[':q_fol_raw']   = $search;
-                    $params[':q_fol_clean'] = $mFolio[1];
-                    $params[':q_fol_unpad'] = (string)$rawNum;
-                    $params[':q_fol_full']  = 'laesh-' . $pad5;
-                    $params[':q_fol_like']  = '%' . $pad5 . '%';
-                } else {
-                    $whereSql = "WHERE o.medico_user_id = :user_id AND ({$filtroPeriodo}) AND (LOWER(o.paciente_nombre) LIKE :q1 OR LOWER(o.paciente_telefono) LIKE :q2 OR LOWER(o.diagnostico) LIKE :q3 OR LOWER(o.folio_unico) LIKE :q4) ";
-                    $qVal = '%' . $search . '%';
-                    $params[':q1'] = $qVal;
-                    $params[':q2'] = $qVal;
-                    $params[':q3'] = $qVal;
-                    $params[':q4'] = $qVal;
-                }
-            } else {
-                $whereSql = "WHERE o.medico_user_id = :user_id AND " . $filtroPeriodo;
-            }
-
-            $limInt = max(1, $limit);
-            $offInt = max(0, $offset);
-
-            $sql = "
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `Ordenes.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L749-834)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-    /**
-     * Busca órdenes por coincidencia inteligente (Folio exacto, Teléfono 7-10 dígitos, o Multicriterio Nombre + Año + Teléfono)
-     */
-    public static function buscarOrdenes(string $term, int $limit = 15): array {
-        try {
-            $term = trim($term);
-            if (strlen($term) < 1) return [];
-
-            $db = DB::connect();
-            $limInt = max(1, min(50, (int)$limit));
-            $params = [];
-            $whereParts = [];
-
-            // 1. Caso numérico puro (1 a 6 dígitos): Folio exacto o prefijo
-            if (preg_match('/^\d{1,6}$/', $term)) {
-                $whereParts[] = "(o.folio_unico = :f_exact OR o.folio_unico LIKE :f_pref)";
-                $params[':f_exact'] = $term;
-                $params[':f_pref']  = $term . '%';
-                $orderClause = "(o.folio_unico = :f_ord) DESC, CAST(o.folio_unico AS UNSIGNED) ASC, o.orden_id DESC";
-                $params[':f_ord'] = $term;
-            }
-            // 2. Caso numérico largo (7 a 10 dígitos): Teléfono directo o folio
-            elseif (preg_match('/^\d{7,10}$/', $term)) {
-                $whereParts[] = "(o.paciente_telefono LIKE :tel OR o.folio_unico = :fol_tel)";
-                $params[':tel'] = '%' . $term . '%';
-                $params[':fol_tel'] = $term;
-                $orderClause = "o.orden_id DESC";
-            }
-            // 3. Caso texto o multicriterio (Nombre, Año, Teléfono parcial)
-            else {
-                $words = preg_split('/\s+/', $term, -1, PREG_SPLIT_NO_EMPTY);
-                $wIdx = 1;
-                foreach ($words as $word) {
-                    $wordLower = mb_strtolower($word, 'UTF-8');
-                    // Si es un año de 4 dígitos entre 2000 y 2099
-                    if (preg_match('/^(20\d\d)$/', $word, $mYear)) {
-                        $whereParts[] = "YEAR(o.hora_captura) = :yr_" . $wIdx;
-                        $params[':yr_' . $wIdx] = (int)$mYear[1];
-                    }
-                    // Si es un fragmento numérico (ej. 3+ dígitos de teléfono o folio)
-                    elseif (preg_match('/^\d{3,}$/', $word)) {
-                        $whereParts[] = "(o.paciente_telefono LIKE :tel_" . $wIdx . " OR o.folio_unico = :fol_" . $wIdx . ")";
-                        $params[':tel_' . $wIdx] = '%' . $word . '%';
-                        $params[':fol_' . $wIdx] = $word;
-                    }
-                    // Si es texto (médico, paciente, diagnóstico)
-                    else {
-                        $whereParts[] = "(LOWER(o.paciente_nombre) LIKE :q_nom_" . $wIdx . " OR LOWER(o.medico_nombre_completo) LIKE :q_med_" . $wIdx . " OR LOWER(o.diagnostico) LIKE :q_diag_" . $wIdx . ")";
-                        $likeVal = '%' . $wordLower . '%';
-                        $params[':q_nom_' . $wIdx]  = $likeVal;
-                        $params[':q_med_' . $wIdx]  = $likeVal;
-                        $params[':q_diag_' . $wIdx] = $likeVal;
-                    }
-                    $wIdx++;
-                }
-                $orderClause = "o.orden_id DESC";
-            }
-
-            if (empty($whereParts)) return [];
-
-            $whereSql = "WHERE " . implode(' AND ', $whereParts);
-            $fetchLimit = $limInt + 1; // +1 para detectar si hay más resultados para la paginación de la lupita
-
-            $stmt = $db->prepare("
-                SELECT
-                    o.orden_id AS id,
-                    o.folio_unico AS folio,
-                    o.paciente_nombre AS paciente,
-                    o.paciente_telefono AS telefono,
-                    o.medico_nombre_completo AS medico,
-                    o.estado_valor AS estado,
-                    o.estado_id,
-                    o.diagnostico AS estudios,
-                    o.hora_captura AS fecha,
-                    pdf.folio_extraido
-                FROM vw_ordenes_completas o
-                LEFT JOIN (
-                    SELECT p1.orden_id, p1.folio_extraido
-                    FROM resultados_pdf p1
-                    INNER JOIN (
-                        SELECT orden_id, MAX(id) AS max_id
-                        FROM resultados_pdf
-                        GROUP BY orden_id
-                    ) p2 ON p1.id = p2.max_id
-                ) pdf ON pdf.orden_id = o.orden_id
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `seed_dataset_2years.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-<?php
-/**
- * seed_dataset_2years.php — Generador Ultra-Quirúrgico de Dataset de 2 Años [SIM2Y]
- *
- * Simula 2 años (~730 días) de operación clínica real con ~1,500 órdenes
- * distribuidas estratégicamente para probar:
- *   - Zona A (Hoy): 12 órdenes para la grilla de Órdenes de Hoy.
- *   - Zona B (1d - 15d): 50 órdenes (visibles en filtro 15 y 30d).
- *   - Zona C (16d - 30d): 50 órdenes (visibles en 30d default, ocultas en 15).
- *   - Zona D (31d - 730d): ~1,400 órdenes históricas (visibles con Fechas o Lupita).
- *
- * Todos los registros portan el prefijo/etiqueta [SIM2Y] y folios S2Y-XXXXX.
- * 100% reversible en <1s mediante tests/clean_dataset_2years.php.
- *
- * Uso:
- *   php tests/seed_dataset_2years.php
- *   php tests/seed_dataset_2years.php --clean-first
- *   LAESH_DB_PORT=6002 php tests/seed_dataset_2years.php
- */
-
-declare(strict_types=1);
-
-if (!getenv('LAESH_DB_PORT') && !file_exists('/.dockerenv')) {
-    putenv('LAESH_DB_PORT=6002');
-}
-
-require_once __DIR__ . '/../laesh-swbldi/commons/DB.php';
-
-$cleanFirst = in_array('--clean-first', $argv, true);
-
-echo "\n" . str_repeat('=', 70) . "\n";
-echo "  🌱 LAESH — GENERADOR DE DATASET DE 2 AÑOS (730 DÍAS) [SIM2Y]\n";
-echo str_repeat('=', 70) . "\n";
-
-try {
-    $db = \Common\DB::connect();
-    echo "✓ Conectado a la base de datos: " . $db->query("SELECT DATABASE()")->fetchColumn() . "\n";
-
-    // 1. Verificar si ya existen datos simulados
-    $prevCount = (int)$db->query("SELECT COUNT(*) FROM ordenes WHERE folio_unico LIKE 'S2Y-%'")->fetchColumn();
-    if ($prevCount > 0) {
-        if ($cleanFirst) {
-            echo "ℹ Opción --clean-first detectada. Ejecutando limpieza previa...\n";
-            require __DIR__ . '/clean_dataset_2years.php';
-        } else {
-            echo "⚠️  Ya existen {$prevCount} órdenes simuladas con prefijo S2Y-.\n";
-            echo "   Para sobrescribir, ejecute: php tests/seed_dataset_2years.php --clean-first\n";
-            echo "   O limpie manualmente con: php tests/clean_dataset_2years.php\n\n";
-            exit(0);
-        }
-    }
-
-    // 2. Obtener médicos disponibles
-    $stmtMed = $db->query("
-        SELECT u.id, COALESCE(pm.nombre_completo, CONCAT(em.nombre, ' ', em.apellidos)) as nombre, COALESCE(pm.especialidad, 'Medicina General') as especialidad
-        FROM users u
-        LEFT JOIN perfiles_medicos pm ON u.id = pm.user_id
-        LEFT JOIN empleados em ON u.id = em.user_id
-        WHERE em.rol = 'MEDICO' OR pm.user_id IS NOT NULL
-        ORDER BY u.id ASC
-    ");
-    $medicos = $stmtMed->fetchAll(PDO::FETCH_ASSOC);
-    if (empty($medicos)) {
-        // Fallback IDs conocidos
-        $medicos = [
-            ['id' => 3, 'nombre' => 'Dr(a). Hedilberto Reyes Venegas', 'especialidad' => 'Medicina Interna'],
-            ['id' => 4, 'nombre' => 'Dr(a). Elena Torres Vance', 'especialidad' => 'Ginecología y Obstetricia'],
-            ['id' => 5, 'nombre' => 'Dr(a). Carlos Fuentes Morales', 'especialidad' => 'Pediatría y Patología'],
-            ['id' => 6, 'nombre' => 'Dr(a). Sofía Medina Ortiz', 'especialidad' => 'Cardiología'],
-            ['id' => 7, 'nombre' => 'Dr(a). Roberto Mendoza Silva', 'especialidad' => 'Medicina General'],
-        ];
-    }
-    echo "✓ Médicos activos detectados: " . count($medicos) . "\n";
-
-    // 3. Obtener catálogo de estudios
-    $estudiosCat = $db->query("SELECT id, nombre, clave FROM cat_estudios ORDER BY id ASC")->fetchAll(PDO::FETCH_ASSOC);
-    if (empty($estudiosCat)) {
-        throw new \RuntimeException("No hay estudios en cat_estudios para vincular a las órdenes.");
-    }
-    echo "✓ Estudios de laboratorio disponibles: " . count($estudiosCat) . "\n";
-
-    // 4. Catálogo de nombres, apellidos y diagnósticos para realismo
-    $nombresH = ['Juan Carlos', 'Miguel Ángel', 'Luis Fernando', 'José Antonio', 'Alejandro', 'Roberto', 'David', 'Jorge', 'Ricardo', 'Eduardo', 'Gabriel', 'Daniel', 'Carlos', 'Manuel', 'Fernando'];
-    $nombresM = ['María Elena', 'Guadalupe', 'Sofía', 'Valentina', 'Mariana', 'Daniela', 'Camila', 'Andrea', 'Ana Paula', 'Fernanda', 'Gabriela', 'Lucía', 'Carmen', 'Patricia', 'Adriana'];
-    $apellidos = ['Hernández', 'García', 'Martínez', 'López', 'González', 'Pérez', 'Rodríguez', 'Sánchez', 'Ramírez', 'Cruz', 'Flores', 'Gómez', 'Morales', 'Vázquez', 'Jiménez', 'Reyes', 'Díaz', 'Torres', 'Gutiérrez', 'Ruiz'];
-
-    $diagnosticos = [
-        'Control de diabetes mellitus tipo 2',
-        'Infección de vías urinarias recurrente',
-        'Hipertensión arterial sistémica en control',
-        'Dolor abdominal en fosa ilíaca derecha',
-        'Perfil lipídico de control anual',
-        'Evaluación preoperatoria completa',
-        'Sospecha de hipotiroidismo primario',
-        'Checkup preventivo ejecutivo anual',
-        'Control prenatal rutinario primer trimestre',
-        'Fiebre de origen a determinar',
-        'Anemia ferropénica en tratamiento',
-        'Lumbalgia mecánica crónica',
-        'Astenia y adinamia en estudio',
-        'Dislipidemia mixta no controlada',
-        'Síndrome metabólico en seguimiento',
-        'Artritis en estudio serológico',
-        'Control post-infección respiratoria',
-        'Dermatitis atópica en estudio de alergias',
-        'Seguimiento de función renal',
-        'Control rutinario de medicina preventiva'
-    ];
-
-    $startGlobal = microtime(true);
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `seed_dataset_2years.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L109-219)</summary>
-
-**Path:** `Unknown file`
-
-```
-    $startGlobal = microtime(true);
-    $db->beginTransaction();
-
-    // 5. Crear pacientes simulados (~250 pacientes para que haya recurrencia clínica)
-    echo "\n  Generando pacientes clínicos simulados...";
-    $stmtPac = $db->prepare("
-        INSERT INTO pacientes (nombre_completo, fecha_nacimiento, sexo, telefono, creado_en)
-        VALUES (:nombre, :f_nac, :sexo, :tel, :creado)
-    ");
-
-    $pacientesIds = [];
-    $totalPacientes = 250;
-    for ($p = 0; $p < $totalPacientes; $p++) {
-        $sexo = ($p % 2 === 0) ? 'H' : 'M';
-        $nom = ($sexo === 'H') ? $nombresH[array_rand($nombresH)] : $nombresM[array_rand($nombresM)];
-        $ape1 = $apellidos[array_rand($apellidos)];
-        $ape2 = $apellidos[array_rand($apellidos)];
-        $nombreCompleto = "{$nom} {$ape1} {$ape2} [SIM2Y]";
-
-        $anioNac = rand(1950, 2012);
-        $mesNac = str_pad((string)rand(1, 12), 2, '0', STR_PAD_LEFT);
-        $diaNac = str_pad((string)rand(1, 28), 2, '0', STR_PAD_LEFT);
-        $fechaNac = "{$anioNac}-{$mesNac}-{$diaNac}";
-        $tel = "55" . rand(10000000, 99999999);
-        $creadoEn = date('Y-m-d H:i:s', strtotime("-730 days"));
-
-        $stmtPac->execute([
-            ':nombre' => $nombreCompleto,
-            ':f_nac'  => $fechaNac,
-            ':sexo'   => $sexo,
-            ':tel'    => $tel,
-            ':creado' => $creadoEn,
-        ]);
-        $pacientesIds[] = [
-            'id' => (int)$db->lastInsertId(),
-            'nombre' => $nombreCompleto,
-            'f_nac' => $fechaNac,
-            'sexo' => $sexo
-        ];
-    }
-    echo " ✓ {$totalPacientes} pacientes creados.\n";
-
-    // 6. Preparar Sentencias SQL para Inserción Rápida
-    $stmtOrd = $db->prepare("
-        INSERT INTO ordenes (
-            folio_unico, paciente_id, medico_id, recepcion_id, estado_id,
-            edad_al_emitir, diagnostico, otros_estudios, estudios,
-            hora_captura, fecha_resultado, actualizado_en
-        ) VALUES (
-            :folio, :paciente_id, :medico_id, :recepcion_id, :estado_id,
-            :edad, :diagnostico, :otros, :estudios,
-            :hora_captura, :fecha_resultado, :actualizado_en
-        )
-    ");
-
-    $stmtDet = $db->prepare("INSERT INTO detalle_ordenes (orden_id, estudio_id) VALUES (?, ?)");
-
-    $stmtHist = $db->prepare("
-        INSERT INTO historial_estados_orden (
-            orden_id, estado_anterior_id, estado_nuevo_id, cambiado_por_user_id, observacion, creado_en
-        ) VALUES (?, ?, ?, ?, ?, ?)
-    ");
-
-    $stmtPdf = $db->prepare("
-        INSERT INTO resultados_pdf (
-            orden_id, nombre_archivo, ruta_storage, subido_por, tipo_entrega, folio_extraido, creado_en
-        ) VALUES (?, ?, ?, ?, ?, ?, ?)
-    ");
-
-    $stmtNotif = $db->prepare("
-        INSERT INTO notificaciones (
-            user_id, tipo, folio_referencia, mensaje, leido, entregado_ws, retry_count, creado_en
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-    ");
-
-    // 7. Generación de las Órdenes en las 4 Zonas Temporales
-    echo "  Generando órdenes en las 4 zonas temporales...\n";
-
-    $folioIndex = 1;
-    $statsZonas = ['A_Hoy' => 0, 'B_15d' => 0, 'C_30d' => 0, 'D_2Años' => 0];
-    $statsEstados = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0];
-    $notifTargets = [];
-
-    // Helper para armar JSON de estudios
-    $fnSeleccionarEstudios = function() use ($estudiosCat) {
-        $num = rand(1, 4);
-        $claves = array_rand($estudiosCat, $num);
-        if (!is_array($claves)) $claves = [$claves];
-        $res = [];
-        foreach ($claves as $k) {
-            $e = $estudiosCat[$k];
-            $res[] = ['id' => (int)$e['id'], 'nombre' => $e['nombre']];
-        }
-        return $res;
-    };
-
-    // Helper para insertar una orden completa con historial y pdf
-    $fnInsertarOrden = function(string $folio, array $paciente, array $medico, int $estadoId, string $horaCapturaStr, string $zonaKey)
-        use (
-            $db, $stmtOrd, $stmtDet, $stmtHist, $stmtPdf, $diagnosticos,
-            $fnSeleccionarEstudios, &$folioIndex, &$statsZonas, &$statsEstados
-        ): int
-    {
-        $fechaCaptura = new DateTime($horaCapturaStr);
-        $fechaNac = new DateTime($paciente['f_nac']);
-        $edadAlEmitir = max(1, min(105, (int)$fechaCaptura->diff($fechaNac)->y));
-
-        $diag = $diagnosticos[array_rand($diagnosticos)];
-        $estudiosSeleccionados = $fnSeleccionarEstudios();
-        $estudiosJson = json_encode($estudiosSeleccionados, JSON_UNESCAPED_UNICODE);
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `seed_dataset_2years.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L449-523)</summary>
-
-**Path:** `Unknown file`
-
-```
-    if (isset($notifTargets['8m'])) {
-        $t = $notifTargets['8m'];
-        $stmtNotif->execute([
-            $t['medico_id'], 'orden_actualizada', $t['folio'],
-            "Historial actualizado orden {$t['folio']} de {$t['paciente']} [SIM2Y]",
-            0, 1, 0, date('Y-m-d H:i:s', strtotime('-8 months'))
-        ]);
-    }
-
-    // Notif 5: Notificación para Recepción (User 2) sobre orden de Hoy
-    if (isset($notifTargets['hoy'])) {
-        $t = $notifTargets['hoy'];
-        $stmtNotif->execute([
-            2, 'nueva_orden', $t['folio'],
-            "Recepción: Médico emitió orden {$t['folio']} para paciente {$t['paciente']} [SIM2Y]",
-            0, 1, 0, date('Y-m-d H:i:s')
-        ]);
-    }
-
-    // ─────────────────────────────────────────────────────────────
-    // 9. Actualizar contadores de perfiles médicos
-    // ─────────────────────────────────────────────────────────────
-    $db->exec("
-        UPDATE perfiles_medicos pm
-        SET total_ordenes = (
-            SELECT COUNT(*) FROM ordenes o WHERE o.medico_id = pm.user_id
-        )
-    ");
-
-    $db->commit();
-    $elapsed = round(microtime(true) - $startGlobal, 2);
-
-    // ─────────────────────────────────────────────────────────────
-    // 10. Reporte Ejecutivo del Dataset
-    // ─────────────────────────────────────────────────────────────
-    $totalOrdenes = array_sum($statsZonas);
-    echo "\n" . str_repeat('=', 70) . "\n";
-    echo "  🎉 DATASET SIMULADO [SIM2Y] GENERADO EXITOSAMENTE ({$elapsed} seg)\n";
-    echo str_repeat('=', 70) . "\n";
-    echo "  Total de Órdenes creadas:   " . number_format($totalOrdenes) . "\n";
-    echo "  Total de Pacientes creados: " . number_format($totalPacientes) . "\n";
-    echo "  Total de Notificaciones:    5 (Hoy, 5d, 20d, 8 meses, Recepción)\n\n";
-
-    echo "  Distribución por Zonas Temporales (Reglas de Filtro Período):\n";
-    echo "  ┌───────────────────────┬──────────┬────────────────────────────────────────┐\n";
-    echo "  │ Zona Temporal         │  Órdenes │ Regla de Visualización en UI           │\n";
-    echo "  ├───────────────────────┼──────────┼────────────────────────────────────────┤\n";
-    echo "  │ A: Hoy (0 días)       │ " . str_pad((string)$statsZonas['A_Hoy'], 8, ' ', STR_PAD_LEFT) . " │ Solo pestaña 'Órdenes de Hoy'          │\n";
-    echo "  │ B: 1d a 15d           │ " . str_pad((string)$statsZonas['B_15d'], 8, ' ', STR_PAD_LEFT) . " │ Visibles en '15' y en '30d'            │\n";
-    echo "  │ C: 16d a 30d          │ " . str_pad((string)$statsZonas['C_30d'], 8, ' ', STR_PAD_LEFT) . " │ Visibles en '30d' (OCULTAS en '15')    │\n";
-    echo "  │ D: 31d a 730d (2 años)│ " . str_pad((string)$statsZonas['D_2Años'], 8, ' ', STR_PAD_LEFT) . " │ Visibles con 'Fechas' o con la Lupita │\n";
-    echo "  └───────────────────────┴──────────┴────────────────────────────────────────┘\n\n";
-
-    echo "  Distribución por Estados Clínicos:\n";
-    echo "  - 1: Remitido:           {$statsEstados[1]}\n";
-    echo "  - 2: En Atención:        {$statsEstados[2]}\n";
-    echo "  - 3: Resultados Listos:  {$statsEstados[3]} (con PDF vinculado)\n";
-    echo "  - 4: Cerrada:            {$statsEstados[4]} (con PDF vinculado)\n";
-    echo "  - 5: Cancelada:          {$statsEstados[5]}\n\n";
-
-    echo "  Folios generados: S2Y-00001 al " . sprintf('S2Y-%05d', $totalOrdenes) . "\n";
-    echo "  Para limpiar 100% este dataset ejecute:\n";
-    echo "    php tests/clean_dataset_2years.php\n";
-    echo str_repeat('=', 70) . "\n\n";
-
-} catch (\Throwable $e) {
-    if (isset($db) && $db->inTransaction()) {
-        $db->rollBack();
-        echo "✗ Transacción revertida (Rollback ejecutado).\n";
-    }
-    echo "✗ ERROR: " . $e->getMessage() . "\n";
-    echo "  En: " . $e->getFile() . ":" . $e->getLine() . "\n\n";
-    exit(1);
-}
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Initial data shows a distribution of orders across time zones; a significant portion of orders (approximately 92%) falls within the 31-730 day range (Zona D). This distribution provides a base understanding of order volume across different time periods. Analyzing the twenty-six test cases for Suite 2 will begin with a focus on Block D, specifically those involving "Rapid Period" and "Calendar" filters.
-
-
-Analyzing default and rapid period filter behaviors in Block D: the default is a 30-day lookback, excluding today's orders and focusing on Zones B and C. The rapid filter uses a 15-day range, only including Zone B. Calendar filters offer historical date ranges, single dates with Poka-yoke correction, and inverted date handling, also with Poka-yoke adjustments and fallback to default if no date is given.
-
-Next, evaluating Block E, which details various search criteria within a two-year dataset: These searches encompass patient names (exact or partial), surnames, combinations with years, clinical diagnoses, partial phone numbers, and folios with prefixes.
-
-
-Examining Block E's search capabilities, several folio formats need validation, including both uppercase and lowercase prefixes, as well as numeric folios. Specific search scenarios in Zona D require testing to bypass the 30-day filter; verifying data access is critical. A limit of sixteen records is expected to ensure fast responses and correct handling of non-existent search terms which should return an empty array with a 200 OK.
-
-Considering Block F, pagination features require verification, specifically demonstrating correct handling of offset and limit parameters. Verifying that the total record count matches the paginated records, and that sorting parameters are retained across paginated requests. The test suite, comprised of 26 automated cases across Blocks D, E, and F, is planned to give coverage to all specified criteria.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `clean_dataset_2years.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 2.393770509s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-<?php
-/**
- * clean_dataset_2years.php — Limpieza Ultra-Quirúrgica de Dataset Simulado (SIM2Y)
- *
- * Elimina de forma atómica y en cascada controlada todos los registros generados
- * por seed_dataset_2years.php (prefijo S2Y- / [SIM2Y]), sin tocar ningún registro
- * real ni modificar la estructura de la base de datos.
- *
- * Uso:
- *   php tests/clean_dataset_2years.php
- *   php tests/clean_dataset_2years.php --dry-run
- *   LAESH_DB_PORT=6002 php tests/clean_dataset_2years.php
- */
-
-declare(strict_types=1);
-
-if (!getenv('LAESH_DB_PORT') && !file_exists('/.dockerenv')) {
-    putenv('LAESH_DB_PORT=6002');
-}
-
-require_once __DIR__ . '/../laesh-swbldi/commons/DB.php';
-
-$isDryRun = in_array('--dry-run', $argv, true);
-
-echo "\n" . str_repeat('=', 70) . "\n";
-echo "  🧹 LAESH — LIMPIEZA ATÓMICA DE DATASET SIMULADO [SIM2Y]\n";
-echo str_repeat('=', 70) . "\n";
-
-try {
-    $db = \Common\DB::connect();
-    echo "✓ Conectado a la base de datos: " . $db->query("SELECT DATABASE()")->fetchColumn() . "\n";
-
-    // 1. Conteo previo de elementos a eliminar
-    $cntNotif = (int)$db->query("SELECT COUNT(*) FROM notificaciones WHERE folio_referencia LIKE 'S2Y-%' OR mensaje LIKE '%[SIM2Y]%'")->fetchColumn();
-    $cntPdf   = (int)$db->query("SELECT COUNT(*) FROM resultados_pdf WHERE folio_extraido LIKE 'S2Y-%' OR ruta_storage LIKE '%SIM2Y%' OR orden_id IN (SELECT id FROM ordenes WHERE folio_unico LIKE 'S2Y-%')")->fetchColumn();
-    $cntDet   = (int)$db->query("SELECT COUNT(*) FROM detalle_ordenes WHERE orden_id IN (SELECT id FROM ordenes WHERE folio_unico LIKE 'S2Y-%')")->fetchColumn();
-    $cntHist  = (int)$db->query("SELECT COUNT(*) FROM historial_estados_orden WHERE orden_id IN (SELECT id FROM ordenes WHERE folio_unico LIKE 'S2Y-%')")->fetchColumn();
-    $cntOrd   = (int)$db->query("SELECT COUNT(*) FROM ordenes WHERE folio_unico LIKE 'S2Y-%'")->fetchColumn();
-    $cntPac   = (int)$db->query("SELECT COUNT(*) FROM pacientes WHERE nombre_completo LIKE '%[SIM2Y]%'")->fetchColumn();
-
-    $totalRegistros = $cntNotif + $cntPdf + $cntDet + $cntHist + $cntOrd + $cntPac;
-
-    echo "\n  Registros identificados con etiqueta [SIM2Y]:\n";
-    echo "  - Notificaciones:           " . number_format($cntNotif) . "\n";
-    echo "  - Resultados PDF:           " . number_format($cntPdf) . "\n";
-    echo "  - Detalle de Órdenes:       " . number_format($cntDet) . "\n";
-    echo "  - Historial de Estados:     " . number_format($cntHist) . "\n";
-    echo "  - Órdenes:                  " . number_format($cntOrd) . "\n";
-    echo "  - Pacientes simulados:      " . number_format($cntPac) . "\n";
-    echo "  " . str_repeat('-', 40) . "\n";
-    echo "  TOTAL A LIMPIAR:            " . number_format($totalRegistros) . "\n\n";
-
-    if ($totalRegistros === 0) {
-        echo "ℹ No se encontraron registros simulados con marca [SIM2Y]. Base de datos limpia.\n\n";
-        exit(0);
-    }
-
-    if ($isDryRun) {
-        echo "🔎 [DRY-RUN] Modo simulación activado. No se ejecutó ninguna eliminación.\n\n";
-        exit(0);
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `Ordenes.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L439-519)</summary>
-
-**Path:** `Unknown file`
-
-```
-            $sql = "
-                SELECT o.orden_id as id, o.folio_unico as folio, o.hora_captura as creado_en, o.fecha_resultado,
-                       o.diagnostico, o.otros_estudios, o.estudios_json as estudios, o.edad_al_emitir,
-                       o.paciente_nombre, o.paciente_sexo, o.paciente_telefono as telefono,
-                       o.estado_id, o.estado_valor AS estado_nombre, o.estado_color AS color_badge,
-                       o.motivo_cancelacion,
-                       parc.parciales_fechas
-                FROM vw_ordenes_completas o
-                LEFT JOIN (
-                    SELECT orden_id, GROUP_CONCAT(creado_en ORDER BY id ASC SEPARATOR '|') AS parciales_fechas
-                    FROM resultados_pdf
-                    WHERE tipo_entrega = 'parcial'
-                    GROUP BY orden_id
-                ) parc ON parc.orden_id = o.orden_id
-                {$whereSql}
-                ORDER BY {$sortCol} {$dir}
-                LIMIT {$limInt} OFFSET {$offInt}
-            ";
-
-            $stmt = $db->prepare($sql);
-            foreach ($params as $k => $v) {
-                if ($k === ':user_id') {
-                    $stmt->bindValue($k, (int)$v, PDO::PARAM_INT);
-                } else {
-                    $stmt->bindValue($k, $v, PDO::PARAM_STR);
-                }
-            }
-            $stmt->execute();
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        } catch (Throwable $e) {
-            DB::logFallback('ERROR', 'Fallo en MD\Negocio\Ordenes::obtenerOrdenesAnterioresMedico', $e->getMessage());
-            return [];
-        }
-    }
-
-    /**
-     * Cuenta el total de órdenes de DÍAS ANTERIORES del médico según filtro de búsqueda y período
-     */
-    public static function contarOrdenesAnterioresMedico(int $userId, string $search = '', string $periodo = '30d', string $fechaInicio = '', string $fechaFin = ''): int {
-        try {
-            $db = DB::connect();
-            $params = [':user_id' => $userId];
-            $search = trim(mb_strtolower($search, 'UTF-8'));
-
-            // Opción B (Filtro Combinado): El filtro de período/calendario siempre se aplica como base
-            $filtroPeriodo = self::construirFiltroPeriodoAnterioresMedico($periodo, '', $fechaInicio, $fechaFin, $params);
-
-            if ($search !== '') {
-                if (preg_match('/^(?:laesh-?|lsh-?|s2y-?|#)?(\d{1,8})$/i', $search, $mFolio)) {
-                    $rawNum = (int)$mFolio[1];
-                    $pad5   = sprintf('%05d', $rawNum);
-                    $whereSql = "WHERE medico_user_id = :user_id AND DATE(hora_captura) < CURDATE() AND (LOWER(folio_unico) = :q_fol_raw OR LOWER(folio_unico) = :q_fol_clean OR LOWER(folio_unico) = :q_fol_unpad OR LOWER(folio_unico) = :q_fol_full OR LOWER(folio_unico) LIKE :q_fol_like) ";
-                    $params[':q_fol_raw']   = $search;
-                    $params[':q_fol_clean'] = $mFolio[1];
-                    $params[':q_fol_unpad'] = (string)$rawNum;
-                    $params[':q_fol_full']  = 'laesh-' . $pad5;
-                    $params[':q_fol_like']  = '%' . $pad5 . '%';
-                } else {
-                    $whereSql = "WHERE medico_user_id = :user_id AND ({$filtroPeriodo}) AND (LOWER(paciente_nombre) LIKE :q1 OR LOWER(paciente_telefono) LIKE :q2 OR LOWER(diagnostico) LIKE :q3 OR LOWER(folio_unico) LIKE :q4) ";
-                    $qVal = '%' . $search . '%';
-                    $params[':q1'] = $qVal;
-                    $params[':q2'] = $qVal;
-                    $params[':q3'] = $qVal;
-                    $params[':q4'] = $qVal;
-                }
-            } else {
-                $whereSql = "WHERE medico_user_id = :user_id AND " . $filtroPeriodo;
-            }
-
-            $stmt = $db->prepare("SELECT COUNT(*) FROM vw_ordenes_completas {$whereSql}");
-            foreach ($params as $k => $v) {
-                if ($k === ':user_id') {
-                    $stmt->bindValue($k, (int)$v, PDO::PARAM_INT);
-                } else {
-                    $stmt->bindValue($k, $v, PDO::PARAM_STR);
-                }
-            }
-            $stmt->execute();
-            return (int)$stmt->fetchColumn();
-        } catch (Throwable $e) {
-            DB::logFallback('ERROR', 'Fallo en MD\Negocio\Ordenes::contarOrdenesAnterioresMedico', $e->getMessage());
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Examining the test suite, focusing on the "Filtros de Período Rápido y Calendario" block. Specifically, test D-01 focuses on the initial load with a 30-day default. The calls to `contarOrdenesAnterioresMedico` and `obtenerOrdenesAnterioresMedico` are core to verifying the initial state. The parameters used in these functions are key to understanding the expected behavior and data retrieval.
-
-
-D-01's checks confirm the 30-day default filter; validating that data retrieved excludes today's entries and adheres to the specified date range, implicitly excluding older historical orders. D-02 assesses a 15-day subset, confirming all entries fall within the narrower range, strictly contained within the 30-day set, and excludes data from the 16-30 day window. D-03 focuses on historical date ranges, ensuring data retrieval within a 90-120 day window, exceeding the 30-day limit.
-
-D-04 tests single-day date filtering, verifying that an empty end date infers a single-day range, and the returned data is restricted to that specific day. D-05 investigates inverted dates (future start, past end) and verifies the system's auto-correction, confirming that the query executes successfully after inverting date parameters. The last test case will handle empty or missing date parameters.
-
-
-Initial hypothesis: Test case E-01 verifies patient name searches, confirming both physician association and name/diagnosis matching.
-
-Proceeding to E-02, testing searches by surname to validate precise patient match retrieval. E-03's focus is on multi-criteria searches (name + year), verifying both tokens' correct parsing (year and name).
-
-E-04 addresses surname plus year searches, ensuring logical AND conjunction of both criteria. E-05 explores clinical diagnosis searches, validating the successful search of the provided term within diagnoses.
-
-
-Analyzing search functionalities; E-08 aims to validate partial phone number searches with a 3+ digit fragment, confirming `LIKE` matching. E-09 will test canonical folio searches (e.g., S2Y-XXXXX), expecting exact folio retrieval.
-
-E-10 verifies case-insensitive folio matching. E-11 tests pure numeric folio searches, checking priority ordering for exact matches. E-12 confirms historical searches bypass date filters to locate old Zone D orders.
-
-E-13 validates the anti-choke limit (16 results max) for generic search terms. E-14 ensures searches with no matches return an empty result set without errors. E-15 focuses on sanitization of multiple spaces in search terms.
-
-
-Test E-16 assesses strict medical isolation, verifying that orders associated with one medical user ID are not accessible with a different ID. Tests F-01 and F-02 validate paginated retrieval of orders, confirming correct limit/offset behavior and no overlap between pages.
-
-F-03 ensures the total order count is consistent with paginated results. F-04 verifies the flexibility of the ordering parameters, confirming correct sorting by different fields (folio, paciente, estado) in both ascending and descending order, and that incorrect column names do not cause the query to fail.
-
-
-The PHP test suite file, `tests/test_search_periodo_dataset_suite.php`, needs creation to encapsulate the 26 automated cases. A bash script, `tests/run_all_refresh_search_suites.sh`, will orchestrate all 44 cases, including the existing Node.js suite. The orchestrator script will check prerequisites, accept arguments, and offer a unified dashboard reporting the test execution.
-
-Next, I need to create the `test_search_periodo_dataset_suite.php` file, and subsequently the bash script. Then, syntax validation must be performed for both before presenting the reporting structure. Execution will be explicitly avoided.
-
-
-
-
-### Actions
-
-**Tool:** `write_to_file`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 24.502728234s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
+**Status:** Reset
+**Created:** 27 Sept 2026, 7:11 pm
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 7:11 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 7:11 pm
-
----
-
-## Agent Response
-
-### Thinking
-
-A syntax check passed for the specified test suite. The next step involves creating a script to orchestrate the execution of all 44 automated test cases. The initial focus will be on defining the features of this master script, starting with the Frontend & Lifecycle Suite (18 cases). The first block to be addressed within this suite is Recarga Laptop/Desktop, containing cases A-01 through A-05.
-
-
-
-
-### Actions
-
-**Tool:** `write_to_file`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.093904542s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 7:11 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 7:11 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
-**Created:** 27 Sept 2026, 7:11 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 7:12 pm
 
 ---
 
-## Agent Response
+### Local File Search
 
-### Thinking
-
-Three test files were created. One file holds test configurations, likely defining the parameters or data for the tests. Another file contains the test assertions, determining what constitutes a pass or fail. The third file houses the test definitions that call the test cases and their results. The tests are ready for execution, however, they have not been run.
-
-
-Two test suites are defined: one for frontend interactions simulating refresh scenarios across different devices, and another focused on backend period filtering, pagination, and data set handling. An orchestration script exists to run these suites with specific flags for selective execution. This structure suggests a layered testing approach, first validating UI refresh behaviors and then backend data consistency.
-
-
-
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.657127994s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-<?php
-/**
- * ═══════════════════════════════════════════════════════════════════════
- * test_search_periodo_dataset_suite.php — Suite Automatizada de Backend
- * Filtros de Período Rápido, Calendario, Búsqueda Lupita Mixta y Paginación
- * Dataset: Generador de 2 Años de Historial Clínico [SIM2Y]
- * ═══════════════════════════════════════════════════════════════════════
- *
- * Automatiza 26 Casos de Prueba:
- *   - Bloque D: Filtros de Período Rápido y Calendario (D-01 a D-06)
- *   - Bloque E: Búsqueda con Lupita y Matriz Multicriterio (E-01 a E-16)
- *   - Bloque F: Paginación y Retención de Parámetros (F-01 a F-04)
- *
- * Uso:
- *   LAESH_DB_PORT=6002 php tests/test_search_periodo_dataset_suite.php
- * ═══════════════════════════════════════════════════════════════════════
- */
-
-declare(strict_types=1);
-
-// ── 1. Inicialización de Entorno y Conexión ─────────────────────────
-if (!getenv('LAESH_DB_PORT') && !file_exists('/.dockerenv')) {
-    putenv('LAESH_DB_PORT=6002');
-}
-putenv('LAESH_DB_USER=' . (getenv('LAESH_DB_USER') ?: 'root'));
-putenv('LAESH_DB_PASS=' . (getenv('LAESH_DB_PASS') ?: 'comite_2026'));
-putenv('LAESH_DB_NAME=' . (getenv('LAESH_DB_NAME') ?: 'laesh_db'));
-
-define('BASE_DIR', dirname(__DIR__));
-require_once BASE_DIR . '/laesh-swbldi/commons/autoload.php';
-require_once BASE_DIR . '/laesh-swbldi/commons/DB.php';
-require_once BASE_DIR . '/laesh-swbldi/md/negocio/Ordenes.php';
-require_once BASE_DIR . '/laesh-swbldi/rc/negocio/Ordenes.php';
-```
-
-</details>
-
----
-
-## User Request
-
-AUDITA el codigo de todas las prueba q has elaborado a modo preventivo identificar gaps, issue u omisines y se pueda corregir el stack de pruebas antes de proceder a ejcutarlas, dame informe.
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `Tecnica_Modelo_Datos.html`
-**Language:** html
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `test_client_refresh_draft_suite.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-/**
- * tests/test_client_refresh_draft_suite.js — Suite Automatizada de Frontend & Ciclo de Vida
- *
- * Automatiza 18 Casos de Prueba Manuales:
- *   - Bloque A: Recarga en Laptop / Desktop (A-01 a A-05)
- *   - Bloque B: Recarga en Móviles & Tabletas (B-01 a B-05)
- *   - Bloque C: Ciclo de Vida y Limpieza Atómica (C-01 a C-03)
- *   - Bloque G: Notificaciones, Snapshot en RAM y Barra de Retorno (G-01 a G-05)
- *
- * Ejecución:
- *   node tests/test_client_refresh_draft_suite.js
- */
-
-'use strict';
-
-const assert = require('assert');
-
-// ── 1. Emulador Ultraligero del Entorno DOM y Navegador ───────────────────────────
-class LocalStorageMock {
-    constructor() { this.store = {}; }
-    getItem(k) { return Object.prototype.hasOwnProperty.call(this.store, k) ? this.store[k] : null; }
-    setItem(k, v) { this.store[k] = String(v); }
-    removeItem(k) { delete this.store[k]; }
-    clear() { this.store = {}; }
-    get length() { return Object.keys(this.store).length; }
-    key(i) { return Object.keys(this.store)[i] || null; }
-}
-
-const localStorageMock = new LocalStorageMock();
-global.window = {
-    localStorage: localStorageMock,
-    addEventListener: () => {},
-    removeEventListener: () => {},
-    laeshTop20EstMed: [
-        { id: 1, nombre: 'GLUCOSA SERICA', clave: 'GLU' },
-        { id: 2, nombre: 'BIOMETRIA HEMATICA COMPLETA', clave: 'BHC' },
-        { id: 3, nombre: 'EXAMEN GENERAL DE ORINA (EGO)', clave: 'EGO' },
-        { id: 4, nombre: 'CREATININA SERICA', clave: 'CRE' },
-        { id: 5, nombre: 'ACIDO URICO', clave: 'ACU' }
-    ]
-};
-
-class ElementMock {
-    constructor(tagName, id = '', name = '') {
-        this.tagName = tagName.toUpperCase();
-        this.id = id;
-        this.name = name;
-        this.value = '';
-        this.checked = false;
-        this.type = tagName === 'input' ? 'text' : '';
-        this.attributes = {};
-        this.children = [];
-        this.parentNode = null;
-        this.style = {};
-        this.classList = new Set();
-        this.innerHTML = '';
-        this.textContent = '';
-        this.listeners = {};
-    }
-
-    setAttribute(k, v) { this.attributes[k] = String(v); }
-    getAttribute(k) { return this.attributes[k] !== undefined ? this.attributes[k] : null; }
-    hasAttribute(k) { return Object.prototype.hasOwnProperty.call(this.attributes, k); }
-    removeAttribute(k) { delete this.attributes[k]; }
-
-    appendChild(child) {
-        child.parentNode = this;
-        this.children.push(child);
-        return child;
-    }
-
-    remove() {
-        if (this.parentNode) {
-            const idx = this.parentNode.children.indexOf(this);
-            if (idx !== -1) this.parentNode.children.splice(idx, 1);
-            this.parentNode = null;
-        }
-    }
-
-    addEventListener(evt, fn) {
-        if (!this.listeners[evt]) this.listeners[evt] = [];
-        this.listeners[evt].push(fn);
-    }
-
-    dispatchEvent(evt) {
-        const fns = this.listeners[evt.type] || [];
-        fns.forEach(fn => fn.call(this, evt));
-    }
-
-    querySelector(sel) {
-        const matches = this.querySelectorAll(sel);
-        return matches.length > 0 ? matches[0] : null;
-    }
-
-    querySelectorAll(sel) {
-        let results = [];
-        for (const child of this.children) {
-            if (matchesSelector(child, sel)) results.push(child);
-            results = results.concat(child.querySelectorAll(sel));
-        }
-        return results;
-    }
-}
-
-function matchesSelector(el, sel) {
-    if (sel.startsWith('#')) return el.id === sel.slice(1);
-    if (sel.startsWith('.')) return el.classList.has(sel.slice(1));
-    if (sel === 'input[name="estudios[]"]') return el.tagName === 'INPUT' && el.name === 'estudios[]';
-    if (sel === 'input[name="estudios[]"]:checked') return el.tagName === 'INPUT' && el.name === 'estudios[]' && el.checked;
-    if (sel === 'input[name="sexo"]:checked') return el.tagName === 'INPUT' && el.name === 'sexo' && el.checked;
-    if (sel === 'input[name="sexo"][value="M"]') return el.tagName === 'INPUT' && el.name === 'sexo' && el.value === 'M';
-    if (sel === 'input[name="sexo"][value="H"]') return el.tagName === 'INPUT' && el.name === 'sexo' && el.value === 'H';
-    return false;
-}
-
-class DocumentMock {
-    constructor() {
-        this.registry = {};
-        this.body = new ElementMock('body');
-        this.listeners = {};
-        this.visibilityState = 'visible';
-    }
-
-    register(id, el) { this.registry[id] = el; }
-    getElementById(id) { return this.registry[id] || null; }
-    querySelector(sel) { return this.body.querySelector(sel); }
-    querySelectorAll(sel) { return this.body.querySelectorAll(sel); }
-    createElement(tag) { return new ElementMock(tag); }
-
-    addEventListener(evt, fn) {
-        if (!this.listeners[evt]) this.listeners[evt] = [];
-        this.listeners[evt].push(fn);
-    }
-
-    dispatchEvent(evt) {
-        const fns = this.listeners[evt.type] || [];
-        fns.forEach(fn => fn.call(this, evt));
-    }
-}
-
-// ── 2. Ensamblador de Entorno DOM de Solicitud Médica ──────────────────────────────
-function crearEntornoDOM(userId = 12) {
-    const doc = new DocumentMock();
-    global.document = doc;
-
-    const form = new ElementMock('form', 'form-orden');
-    form.setAttribute('data-medico-user-id', String(userId));
-    doc.register('form-orden', form);
-    doc.body.appendChild(form);
-
-    const grid = new ElementMock('div', 'fichas-estudios-grid');
-    doc.register('fichas-estudios-grid', grid);
-    form.appendChild(grid);
-
-    const listEl = new ElementMock('div', 'estudios-chips-list');
-    doc.register('estudios-chips-list', listEl);
-
-    const emptyEl = new ElementMock('div', 'estudios-chips-empty');
-    doc.register('estudios-chips-empty', emptyEl);
-
-    const badgeEl = new ElementMock('span', 'cnt-estudios-chips-num');
-    doc.register('cnt-estudios-chips-num', badgeEl);
-
-    const tabText = new ElementMock('span', 'tab-generar-text');
-    doc.register('tab-generar-text', tabText);
-
-    const otrosInput = new ElementMock('input', 'otros-estudios', 'otros_estudios');
-    doc.register('otros-estudios', otrosInput);
-    form.appendChild(otrosInput);
-
-    const pacienteInput = new ElementMock('input', 'paciente', 'paciente');
-    doc.register('paciente', pacienteInput);
-    form.appendChild(pacienteInput);
-
-    const edadInput = new ElementMock('input', 'edad', 'edad');
-    doc.register('edad', edadInput);
-    form.appendChild(edadInput);
-
-    const celularInput = new ElementMock('input', 'celular', 'celular');
-    doc.register('celular', celularInput);
-    form.appendChild(celularInput);
-
-    const diagInput = new ElementMock('input', 'diagnostico', 'diagnostico');
-    doc.register('diagnostico', diagInput);
-    form.appendChild(diagInput);
-
-    const radioM = new ElementMock('input', 'sexo-m', 'sexo');
-    radioM.type = 'radio';
-    radioM.value = 'M';
-    doc.register('sexo-m', radioM);
-    form.appendChild(radioM);
-
-    const radioH = new ElementMock('input', 'sexo-h', 'sexo');
-    radioH.type = 'radio';
-    radioH.value = 'H';
-    doc.register('sexo-h', radioH);
-    form.appendChild(radioH);
-
-    // Barra de Retorno de Notificaciones
-    const barraRetorno = new ElementMock('div', 'barra-retorno-busqueda');
-    barraRetorno.style.display = 'none';
-    doc.register('barra-retorno-busqueda', barraRetorno);
-    doc.body.appendChild(barraRetorno);
-
-    return {
-        doc, form, grid, listEl, emptyEl, badgeEl, tabText,
-        otrosInput, pacienteInput, edadInput, celularInput, diagInput,
-        radioM, radioH, barraRetorno
-    };
-}
-
-// ── 3. Motor Lógico Canónico (Réplica Fiel de medicos.js & ws-client.js) ──────────
-function instanciarLogica(env) {
-    const DRAFT_PREFIX = 'laesh_md_draft_u_';
-    let isRestoring = false;
-    let isInitialized = false;
-
-    const SafeStorage = {
-        get: (k) => { try { return global.window.localStorage.getItem(k); } catch (e) { return null; } },
-        set: (k, v) => { try { global.window.localStorage.setItem(k, v); return true; } catch (e) { return false; } },
-        remove: (k) => { try { global.window.localStorage.removeItem(k); return true; } catch (e) { return false; } }
-    };
-
-    function getUserId(f) {
-        const raw = f.getAttribute('data-medico-user-id');
-        return raw ? (parseInt(raw, 10) || 0) : 0;
-    }
-
-    function getStorageKey(f) { return DRAFT_PREFIX + getUserId(f); }
-
-    function recolectarDatos(f) {
-        const paciente    = env.pacienteInput.value.trim();
-        const edad        = env.edadInput.value.trim();
-        const celular     = env.celularInput.value.trim();
-        const diagnostico = env.diagInput.value.trim();
-        const otros       = env.otrosInput.value.trim();
-        const sexo        = env.radioM.checked ? 'M' : (env.radioH.checked ? 'H' : '');
-
-        const cbs = f.querySelectorAll('input[name="estudios[]"]:checked');
-        let estudios = Array.from(cbs).map(cb => cb.value.trim()).filter(Boolean);
-        estudios = estudios.filter((v, i, a) => a.indexOf(v) === i);
-
-        const estaVacio = !paciente && !edad && !celular && !diagnostico && !otros && !sexo && estudios.length === 0;
-
-        return {
-            estaVacio,
-            payload: {
-                ts: Date.now(),
-                userId: getUserId(f),
-                paciente, edad, sexo, celular, diagnostico, estudios,
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `test_client_refresh_draft_suite.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L249-499)</summary>
-
-**Path:** `Unknown file`
-
-```
-                paciente, edad, sexo, celular, diagnostico, estudios,
-                otros_estudios: otros
-            }
-        };
-    }
-
-    function ejecutarGuardado() {
-        if (!isInitialized || isRestoring) return;
-        const data = recolectarDatos(env.form);
-        if (!data) return;
-        const key = getStorageKey(env.form);
-        if (data.estaVacio) SafeStorage.remove(key);
-        else SafeStorage.set(key, JSON.stringify(data.payload));
-    }
-
-    function restaurarBorrador(f, gr) {
-        const key = getStorageKey(f);
-        const rawStr = SafeStorage.get(key);
-        if (!rawStr) return false;
-        let draft = null;
-        try { draft = JSON.parse(rawStr); } catch (e) { return false; }
-        if (!draft || !draft.ts) return false;
-
-        // Validar aislamiento de usuario
-        const curUser = getUserId(f);
-        if (curUser > 0 && draft.userId && draft.userId !== curUser) return false;
-
-        isRestoring = true;
-        try {
-            if (draft.paciente !== undefined) env.pacienteInput.value = draft.paciente;
-            if (draft.edad !== undefined) env.edadInput.value = draft.edad;
-            if (draft.celular !== undefined) env.celularInput.value = draft.celular;
-            if (draft.diagnostico !== undefined) env.diagInput.value = draft.diagnostico;
-            if (draft.otros_estudios !== undefined) env.otrosInput.value = draft.otros_estudios;
-
-            if (draft.sexo === 'M') env.radioM.checked = true;
-            if (draft.sexo === 'H') env.radioH.checked = true;
-
-            if (Array.isArray(draft.estudios) && draft.estudios.length > 0) {
-                const unicos = draft.estudios.filter((v, i, a) => a.indexOf(v) === i);
-                unicos.forEach(val => {
-                    if (!val) return;
-                    const found = Array.from(f.querySelectorAll('input[name="estudios[]"]')).find(cb => cb.value === val);
-                    if (found) {
-                        found.checked = true;
-                    } else {
-                        const hidden = env.doc.createElement('input');
-                        hidden.type = 'checkbox';
-                        hidden.name = 'estudios[]';
-                        hidden.value = val;
-                        hidden.checked = true;
-                        hidden.setAttribute('data-auto-added', 'true');
-                        f.appendChild(hidden);
-                    }
-                });
-            }
-        } finally {
-            isRestoring = false;
-            isInitialized = true;
-        }
-        return true;
-    }
-
-    function populateMandatoryGrid() {
-        const top20 = global.window.laeshTop20EstMed || [];
-        const checkedVals = Array.from(env.grid.querySelectorAll('input[name="estudios[]"]:checked')).map(cb => cb.value);
-
-        env.grid.children = [];
-        const top20Nombres = [];
-
-        top20.forEach(est => {
-            const label = env.doc.createElement('label');
-            const cb = env.doc.createElement('input');
-            cb.type = 'checkbox';
-            cb.name = 'estudios[]';
-            cb.value = est.nombre;
-            cb.checked = checkedVals.indexOf(est.nombre) !== -1;
-            label.appendChild(cb);
-            env.grid.appendChild(label);
-            top20Nombres.push(est.nombre);
-        });
-
-        // Preservar estudios deslistados como hidden inputs
-        checkedVals.forEach(val => {
-            if (top20Nombres.indexOf(val) === -1) {
-                const exists = Array.from(env.form.querySelectorAll('input[name="estudios[]"]')).some(cb => cb.value === val);
-                if (!exists) {
-                    const hidden = env.doc.createElement('input');
-                    hidden.type = 'checkbox';
-                    hidden.name = 'estudios[]';
-                    hidden.value = val;
-                    hidden.checked = true;
-                    hidden.setAttribute('data-auto-added', 'true');
-                    env.form.appendChild(hidden);
-                }
-            }
-        });
-
-        updateChipsContainer();
-    }
-
-    function updateTotalBadge(count) {
-        const num = (typeof count === 'number') ? count : 0;
-        if (num > 0) env.tabText.innerHTML = `Solicitud Nueva <span class="tab-badge-estudios">(${num} Est.)</span>`;
-        else env.tabText.innerHTML = 'Solicitud Nueva';
-    }
-
-    function updateChipsContainer() {
-        const checked = env.form.querySelectorAll('input[name="estudios[]"]:checked');
-        let selectedVals = Array.from(checked).map(cb => cb.value.trim()).filter(Boolean);
-        selectedVals = selectedVals.filter((v, i, a) => a.indexOf(v) === i);
-
-        let otrosVals = [];
-        if (env.otrosInput && env.otrosInput.value) {
-            const raw = env.otrosInput.value.split(',').map(s => s.trim()).filter(Boolean);
-            const lowerSelected = selectedVals.map(s => s.toLowerCase());
-            const seen = {};
-            raw.forEach(s => {
-                const l = s.toLowerCase();
-                if (!seen[l] && lowerSelected.indexOf(l) === -1) {
-                    seen[l] = true;
-                    otrosVals.push(s);
-                }
-            });
-        }
-
-        const totalCount = selectedVals.length + otrosVals.length;
-        if (totalCount === 0) {
-            env.emptyEl.style.display = 'block';
-            env.badgeEl.textContent = '0 seleccionados';
-            env.listEl.innerHTML = '';
-        } else {
-            env.emptyEl.style.display = 'none';
-            env.badgeEl.textContent = `${totalCount} ${totalCount === 1 ? 'seleccionado' : 'seleccionados'}`;
-            env.listEl.innerHTML = `chips count: ${totalCount}`;
-        }
-
-        updateTotalBadge(totalCount);
-        ejecutarGuardado();
-    }
-
-    function removeChip(val) {
-        const checkboxes = env.form.querySelectorAll('input[name="estudios[]"]');
-        checkboxes.forEach(cb => {
-            if (cb.value === val) {
-                cb.checked = false;
-                if (cb.hasAttribute('data-auto-added')) cb.remove();
-            }
-        });
-
-        if (env.otrosInput && env.otrosInput.value) {
-            const restantes = env.otrosInput.value.split(',')
-                .map(s => s.trim())
-                .filter(s => s.length > 0 && s.toLowerCase() !== val.toLowerCase());
-            env.otrosInput.value = restantes.join(', ');
-        }
-        updateChipsContainer();
-    }
-
-    function limpiarBorrador() {
-        const key = getStorageKey(env.form);
-        SafeStorage.remove(key);
-    }
-
-    // ── Subsistema RAM Snapshot de Notificaciones (ws-client.js) ──────────────
-    let _busquedaPreviaSnapshot = null;
-
-    function capturarEstadoBusquedaPrevia(tabId = 'tab-anteriores', params = { periodo: 'fechas', f_ini: '2026-01-01', f_fin: '2026-06-30' }, scrollY = 420) {
-        _busquedaPreviaSnapshot = { tabId, params, scrollY, ts: Date.now() };
-        env.barraRetorno.style.display = 'block';
-        env.barraRetorno.innerHTML = '← Volver a mi búsqueda anterior';
-        return true;
-    }
-
-    function handleRetornoBusqueda() {
-        if (!_busquedaPreviaSnapshot) return null;
-        const restored = { ..._busquedaPreviaSnapshot };
-        _busquedaPreviaSnapshot = null;
-        env.barraRetorno.style.display = 'none';
-        return restored;
-    }
-
-    return {
-        init: (f, gr) => {
-            const res = restaurarBorrador(f, gr);
-            isInitialized = true;
-            return res;
-        },
-        populateMandatoryGrid,
-        updateChipsContainer,
-        updateTotalBadge,
-        removeChip,
-        limpiarBorrador,
-        ejecutarGuardado,
-        capturarEstadoBusquedaPrevia,
-        handleRetornoBusqueda,
-        getSnapshotState: () => _busquedaPreviaSnapshot
-    };
-}
-
-// ── 4. EJECUCIÓN SECUENCIAL DE LOS 18 CASOS DE PRUEBA ─────────────────────────────
-console.log('\n' + '='.repeat(70));
-console.log('  🧪 SUITE 1 (NODE.JS) — FRONTEND, REFRESH & PERSISTENCIA (18 CASOS)');
-console.log('='.repeat(70) + '\n');
-
-let passCount = 0;
-function pass(id, desc) {
-    passCount++;
-    console.log(`  ✓ [${id}] ${desc}`);
-}
-
-// ==================================================================================
-// BLOQUE A: Eventos de Recarga en Laptop / Desktop (A-01 a A-05)
-// ==================================================================================
-console.log('── BLOQUE A: Recarga en Laptop / Desktop ─────────────────────────');
-
-localStorageMock.clear();
-let e1 = crearEntornoDOM(12);
-let l1 = instanciarLogica(e1);
-l1.populateMandatoryGrid();
-l1.init(e1.form, e1.grid);
-
-// A-01: F5 / Recarga Estándar
-e1.pacienteInput.value = 'Juan Pérez';
-e1.edadInput.value = '45';
-e1.radioM.checked = true;
-e1.diagInput.value = 'Control rutinario';
-let cbGlu = e1.grid.querySelectorAll('input[name="estudios[]"]')[0];
-let cbCre = e1.grid.querySelectorAll('input[name="estudios[]"]')[3];
-cbGlu.checked = true;
-cbCre.checked = true;
-e1.otrosInput.value = 'Perfil Tiroideo Libre';
-l1.updateChipsContainer();
-
-assert.strictEqual(e1.badgeEl.textContent, '3 seleccionados');
-assert.ok(e1.tabText.innerHTML.includes('(3 Est.)'));
-
-// Simular F5 (Recreación total de DOM)
-let eA01 = crearEntornoDOM(12);
-let lA01 = instanciarLogica(eA01);
-lA01.populateMandatoryGrid();
-let restA01 = lA01.init(eA01.form, eA01.grid);
-lA01.updateChipsContainer();
-
-assert.strictEqual(restA01, true);
-assert.strictEqual(eA01.pacienteInput.value, 'Juan Pérez');
-assert.strictEqual(eA01.badgeEl.textContent, '3 seleccionados');
-assert.ok(eA01.tabText.innerHTML.includes('(3 Est.)'));
-pass('A-01', 'F5 / Recarga Estándar restaura 100% datos y paridad Panel=Tab (3 Est.)');
-
-// A-02: Ctrl+F5 / Hard Refresh
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `test_client_refresh_draft_suite.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L499-703)</summary>
-
-**Path:** `Unknown file`
-
-```
-// A-02: Ctrl+F5 / Hard Refresh
-let eA02 = crearEntornoDOM(12);
-let lA02 = instanciarLogica(eA02);
-lA02.populateMandatoryGrid();
-lA02.init(eA02.form, eA02.grid);
-lA02.updateChipsContainer();
-assert.strictEqual(eA02.badgeEl.textContent, '3 seleccionados');
-pass('A-02', 'Ctrl+F5 / Hard Refresh lee localStorage y recupera estado intacto');
-
-// A-03: Botón Recargar del Navegador
-let eA03 = crearEntornoDOM(12);
-let lA03 = instanciarLogica(eA03);
-lA03.populateMandatoryGrid();
-lA03.init(eA03.form, eA03.grid);
-lA03.updateChipsContainer();
-assert.strictEqual(eA03.pacienteInput.value, 'Juan Pérez');
-pass('A-03', 'Botón Recargar 🔄 preserva sin pérdida');
-
-// A-04: Reabrir Pestaña Cerrada (Ctrl+Shift+T)
-let savedDraft = JSON.parse(localStorageMock.getItem('laesh_md_draft_u_12'));
-assert.ok(savedDraft && savedDraft.paciente === 'Juan Pérez');
-let eA04 = crearEntornoDOM(12);
-let lA04 = instanciarLogica(eA04);
-lA04.populateMandatoryGrid();
-lA04.init(eA04.form, eA04.grid);
-lA04.updateChipsContainer();
-assert.strictEqual(eA04.badgeEl.textContent, '3 seleccionados');
-pass('A-04', 'Reapertura Ctrl+Shift+T preserva sesión y borrador');
-
-// A-05: Historial Atrás / BFCache (pageshow persisted = true)
-let pageshowEvt = { type: 'pageshow', persisted: true };
-let eA05 = crearEntornoDOM(12);
-let lA05 = instanciarLogica(eA05);
-lA05.populateMandatoryGrid();
-if (pageshowEvt.persisted) {
-    lA05.init(eA05.form, eA05.grid);
-    lA05.updateChipsContainer();
-}
-assert.strictEqual(eA05.badgeEl.textContent, '3 seleccionados');
-pass('A-05', 'Navegación BFCache (pageshow) re-sincroniza sin descuadres');
-
-// ==================================================================================
-// BLOQUE B: Eventos de Recarga en Móviles & Tabletas (B-01 a B-05)
-// ==================================================================================
-console.log('\n── BLOQUE B: Recarga en Móviles & Tabletas ───────────────────────');
-
-// B-01: Pull-to-refresh nativo con texto en otros-estudios (sin pulsar Enter ni +)
-let eB01 = crearEntornoDOM(12);
-let lB01 = instanciarLogica(eB01);
-lB01.populateMandatoryGrid();
-lB01.init(eB01.form, eB01.grid);
-eB01.pacienteInput.value = 'Ana Lucía Gómez';
-eB01.grid.querySelectorAll('input[name="estudios[]"]')[1].checked = true; // BHC
-eB01.grid.querySelectorAll('input[name="estudios[]"]')[2].checked = true; // EGO
-eB01.otrosInput.value = 'EGO Especial'; // Texto libre sin enter
-lB01.updateChipsContainer();
-
-// Pull-to-refresh en móvil destruye el DOM
-let eB01_after = crearEntornoDOM(12);
-let lB01_after = instanciarLogica(eB01_after);
-lB01_after.populateMandatoryGrid();
-lB01_after.init(eB01_after.form, eB01_after.grid);
-lB01_after.updateChipsContainer();
-assert.strictEqual(eB01_after.badgeEl.textContent, '3 seleccionados');
-assert.ok(eB01_after.tabText.innerHTML.includes('(3 Est.)'));
-pass('B-01', 'Pull-to-refresh preserva texto libre reactivo y paridad Panel=Tab');
-
-// B-02: Menú Navegador → Recargar
-let eB02 = crearEntornoDOM(12);
-let lB02 = instanciarLogica(eB02);
-lB02.populateMandatoryGrid();
-lB02.init(eB02.form, eB02.grid);
-lB02.updateChipsContainer();
-assert.strictEqual(eB02.pacienteInput.value, 'Ana Lucía Gómez');
-pass('B-02', 'Menú de tres puntitos recarga sin relogeo ni pérdida de datos');
-
-// B-03: Gesto Back del SO (Android / iOS)
-let eB03 = crearEntornoDOM(12);
-let lB03 = instanciarLogica(eB03);
-lB03.populateMandatoryGrid();
-lB03.init(eB03.form, eB03.grid);
-lB03.updateChipsContainer();
-assert.strictEqual(eB03.badgeEl.textContent, '3 seleccionados');
-pass('B-03', 'Gesto Back del SO restaura el borrador de inmediato al volver');
-
-// B-04: Suspensión en RAM (visibilitychange hidden -> visible)
-let visHiddenEvt = { type: 'visibilitychange', state: 'hidden' };
-lB01_after.ejecutarGuardado(); // Flush síncrono obligatorio
-let eB04 = crearEntornoDOM(12);
-let lB04 = instanciarLogica(eB04);
-lB04.populateMandatoryGrid();
-lB04.init(eB04.form, eB04.grid);
-lB04.updateChipsContainer();
-assert.strictEqual(eB04.badgeEl.textContent, '3 seleccionados');
-pass('B-04', 'Suspensión en RAM ejecuta flush y restaura íntegro');
-
-// B-05: Rotación de Pantalla (Resize / OrientationChange)
-lB04.updateChipsContainer();
-assert.strictEqual(eB04.pacienteInput.value, 'Ana Lucía Gómez');
-pass('B-05', 'Rotación de pantalla (resize) no altera formulario ni badges');
-
-// ==================================================================================
-// BLOQUE C: Ciclo de Vida y Limpieza Atómica (C-01 a C-03)
-// ==================================================================================
-console.log('\n── BLOQUE C: Ciclo de Vida y Limpieza Atómica ────────────────────');
-
-// C-01: Envío Exitoso de Orden (ordenCreada purga borrador)
-lB04.limpiarBorrador();
-let eC01 = crearEntornoDOM(12);
-let lC01 = instanciarLogica(eC01);
-lC01.populateMandatoryGrid();
-let restC01 = lC01.init(eC01.form, eC01.grid);
-lC01.updateChipsContainer();
-assert.strictEqual(restC01, false);
-assert.strictEqual(eC01.badgeEl.textContent, '0 seleccionados');
-assert.strictEqual(eC01.tabText.innerHTML, 'Solicitud Nueva');
-pass('C-01', 'Envío exitoso de orden purga borrador; posterior refresh queda limpio (0)');
-
-// C-02: Botón Limpiar Formulario
-let eC02 = crearEntornoDOM(12);
-let lC02 = instanciarLogica(eC02);
-lC02.populateMandatoryGrid();
-lC02.init(eC02.form, eC02.grid);
-eC02.pacienteInput.value = 'Borrador Descartable';
-lC02.updateChipsContainer();
-assert.strictEqual(eC02.badgeEl.textContent, '0 seleccionados'); // sin estudios
-lC02.limpiarBorrador();
-
-let eC02_after = crearEntornoDOM(12);
-let lC02_after = instanciarLogica(eC02_after);
-lC02_after.populateMandatoryGrid();
-let restC02 = lC02_after.init(eC02_after.form, eC02_after.grid);
-assert.strictEqual(restC02, false);
-assert.strictEqual(eC02_after.pacienteInput.value, '');
-pass('C-02', 'Botón Limpiar destruye borrador; refresh no resucita datos');
-
-// C-03: Aislamiento Estricto Multi-Médico
-let eDoc12 = crearEntornoDOM(12);
-let lDoc12 = instanciarLogica(eDoc12);
-lDoc12.populateMandatoryGrid();
-lDoc12.init(eDoc12.form, eDoc12.grid);
-eDoc12.pacienteInput.value = 'Paciente Privado de Dr 12';
-lDoc12.updateChipsContainer();
-
-// Entra Dr con userId 15 en el mismo browser
-let eDoc15 = crearEntornoDOM(15);
-let lDoc15 = instanciarLogica(eDoc15);
-lDoc15.populateMandatoryGrid();
-let restDoc15 = lDoc15.init(eDoc15.form, eDoc15.grid);
-assert.strictEqual(restDoc15, false);
-assert.strictEqual(eDoc15.pacienteInput.value, '');
-pass('C-03', 'Aislamiento estricto multi-médico: Dr 15 no ve borrador de Dr 12');
-
-// ==================================================================================
-// BLOQUE G: Notificaciones, Snapshot en RAM y Barra de Retorno (G-01 a G-05)
-// ==================================================================================
-console.log('\n── BLOQUE G: Notificaciones, Snapshot RAM & Retorno ───────────────');
-
-let eG = crearEntornoDOM(12);
-let lG = instanciarLogica(eG);
-lG.populateMandatoryGrid();
-lG.init(eG.form, eG.grid);
-
-// G-01 & G-02: Captura de Snapshot en RAM al pulsar Notificación
-let snapCaptured = lG.capturarEstadoBusquedaPrevia('tab-anteriores', { periodo: 'fechas', f_ini: '2025-01-01', f_fin: '2025-12-31' }, 650);
-assert.strictEqual(snapCaptured, true);
-assert.strictEqual(eG.barraRetorno.style.display, 'block');
-pass('G-01', 'Captura de Snapshot en RAM al hacer clic en notificación');
-pass('G-02', 'Despliegue visible de barra: ← Volver a mi búsqueda anterior');
-
-// G-03: Retorno Fiel al Estado Previo
-let snapRestored = lG.handleRetornoBusqueda();
-assert.ok(snapRestored);
-assert.strictEqual(snapRestored.tabId, 'tab-anteriores');
-assert.strictEqual(snapRestored.params.periodo, 'fechas');
-assert.strictEqual(snapRestored.scrollY, 650);
-assert.strictEqual(eG.barraRetorno.style.display, 'none');
-pass('G-03', 'Retorno fiel restituye pestaña, filtros, término y scroll');
-
-// G-04: Protección de Solicitud en Redacción vs Notificación
-eG.pacienteInput.value = 'María López';
-eG.grid.querySelectorAll('input[name="estudios[]"]')[0].checked = true;
-lG.updateChipsContainer();
-
-// Simular clic en notificación sin guardar
-lG.capturarEstadoBusquedaPrevia('tab-hoy', { folio: 'S2Y-00001' }, 0);
-// Médico revisa y pulsa volver a solicitud nueva
-assert.strictEqual(eG.pacienteInput.value, 'María López');
-assert.strictEqual(eG.badgeEl.textContent, '1 seleccionado');
-pass('G-04', 'Navegación por notificación convive con borrador en redacción');
-
-// G-05: Refresh durante Barra de Retorno
-let snapAntes = lG.getSnapshotState();
-assert.ok(snapAntes !== null);
-// Al hacer refresh, la RAM se reinicia
-let eG_refresh = crearEntornoDOM(12);
-let lG_refresh = instanciarLogica(eG_refresh);
-assert.strictEqual(lG_refresh.getSnapshotState(), null);
-assert.strictEqual(eG_refresh.barraRetorno.style.display, 'none');
-pass('G-05', 'F5 durante barra de retorno purga RAM de forma limpia sin elementos huérfanos');
-
-console.log('\n' + '='.repeat(70));
-console.log(`  🎉 SUITE 1 COMPLETADA CON ÉXITO: ${passCount}/18 PRUEBAS APROBADAS`);
-console.log('='.repeat(70) + '\n');
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Line 587 indicates a save operation; line 625 asserts a specific state after the save, but this doesn't directly confirm the draft save behavior. The question is whether `updateChipsContainer()` triggers a draft save when `pacienteInput.value` is set to 'Borrador Descartable'. Examining line 243, with the `estaVacio` variable definition, suggests looking for conditions that might trigger saving when inputs are empty.
-
-
-If a patient is marked as 'Borrador Descartable' and some conditions are met, the data is saved, but then the draft is cleaned. This clearing operation utilizes a key derived from a user ID. The logic clears the saved draft data. The subsequent assertion confirms the input field is cleared after the operation. This sequence suggests a draft save, followed by immediate cleanup, and is linked to the user context. The draft data is saved for user 12 but then immediately removed.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `test_search_periodo_dataset_suite.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.470412433s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L29-179)</summary>
-
-**Path:** `Unknown file`
-
-```
-require_once BASE_DIR . '/laesh-swbldi/commons/autoload.php';
-require_once BASE_DIR . '/laesh-swbldi/commons/DB.php';
-require_once BASE_DIR . '/laesh-swbldi/md/negocio/Ordenes.php';
-require_once BASE_DIR . '/laesh-swbldi/rc/negocio/Ordenes.php';
-
-use Common\DB;
-use MD\Negocio\Ordenes as MDOrdenes;
-use RC\Negocio\Ordenes as RCOrdenes;
-
-// ── 2. Colores ANSI y Utilerías de Consola ───────────────────────────
-define('C_RESET',  "\033[0m");
-define('C_GREEN',  "\033[32m");
-define('C_RED',    "\033[31m");
-define('C_YELLOW', "\033[33m");
-define('C_CYAN',   "\033[36m");
-define('C_BOLD',   "\033[1m");
-define('C_GRAY',   "\033[90m");
-
-$totalCases = 0;
-$passedCases = 0;
-$failedCases = 0;
-$failures = [];
-$startTime = microtime(true);
-
-function assertCase(string $id, string $description, bool $condition, string $detail = ''): void {
-    global $totalCases, $passedCases, $failedCases, $failures;
-    $totalCases++;
-
-    $paddedId = str_pad($id, 7, ' ');
-    if ($condition) {
-        $passedCases++;
-        echo "  " . C_GREEN . "✓ PASS" . C_RESET . " [{$paddedId}] {$description}\n";
-        if (!empty($detail)) {
-            echo "         " . C_GRAY . "→ {$detail}" . C_RESET . "\n";
-        }
-    } else {
-        $failedCases++;
-        $failures[] = "[$id] $description — $detail";
-        echo "  " . C_RED . "✗ FAIL" . C_RESET . " [{$paddedId}] {$description}\n";
-        if (!empty($detail)) {
-            echo "         " . C_YELLOW . "→ Detalle: {$detail}" . C_RESET . "\n";
-        }
-    }
-}
-
-echo "\n" . C_BOLD . str_repeat('═', 78) . C_RESET . "\n";
-echo C_CYAN . C_BOLD . "  🔬 SUITE AUTOMATIZADA: FILTROS PERÍODO, LUPITA MIXTA Y DATASET SIM2Y" . C_RESET . "\n";
-echo "  Portales: Médico (MD) y Recepción (RC) | Total Casos: 26\n";
-echo C_BOLD . str_repeat('═', 78) . C_RESET . "\n\n";
-
-try {
-    $db = DB::connect();
-    echo "  " . C_GREEN . "✓ Conectado a la base de datos:" . C_RESET . " " . $db->query("SELECT DATABASE()")->fetchColumn() . "\n";
-
-    // Verificar presencia del Dataset SIM2Y
-    $simCount = (int)$db->query("SELECT COUNT(*) FROM ordenes WHERE folio_unico LIKE 'S2Y-%'")->fetchColumn();
-    echo "  " . C_CYAN . "ℹ Órdenes simuladas detectadas (SIM2Y):" . C_RESET . " {$simCount} órdenes\n";
-
-    if ($simCount === 0) {
-        echo "\n  " . C_YELLOW . "⚠️  ADVERTENCIA: El dataset [SIM2Y] no ha sido sembrado aún." . C_RESET . "\n";
-        echo "     Para sembrar los 2 años de historial ejecute previamente:\n";
-        echo "     LAESH_DB_PORT=6002 php tests/seed_dataset_2years.php\n\n";
-    }
-
-    // Seleccionar un médico de prueba que tenga órdenes
-    $medicoRow = $db->query("
-        SELECT u.id, COALESCE(pm.nombre_completo, 'Dr. Médico Test') AS nombre, COUNT(o.id) AS total_ordenes
-        FROM users u
-        INNER JOIN ordenes o ON o.medico_id = u.id
-        LEFT JOIN perfiles_medicos pm ON pm.user_id = u.id
-        GROUP BY u.id
-        ORDER BY total_ordenes DESC
-        LIMIT 1
-    ")->fetch(PDO::FETCH_ASSOC);
-
-    if (!$medicoRow) {
-        // Fallback al médico id=3
-        $medicoId = 3;
-        $medicoNombre = 'Dr. Hedilberto Reyes Venegas';
-    } else {
-        $medicoId = (int)$medicoRow['id'];
-        $medicoNombre = (string)$medicoRow['nombre'];
-    }
-
-    echo "  " . C_CYAN . "ℹ Médico de prueba activo:" . C_RESET . " ID {$medicoId} ({$medicoNombre})\n\n";
-
-    // ═════════════════════════════════════════════════════════════════
-    // BLOQUE D: Filtros de Período Rápido y Calendario (D-01 a D-06)
-    // ═════════════════════════════════════════════════════════════════
-    echo C_BOLD . "── BLOQUE D: Filtros de Período Rápido y Calendario (6 Casos) ───────" . C_RESET . "\n";
-
-    // D-01: Carga por defecto '30d' (excluye hoy, abarca 1d a 30d)
-    $ordenes30d = MDOrdenes::obtenerOrdenesAnterioresMedico($medicoId, 50, 0, '', 'fecha', 'DESC', '30d');
-    $hoy = date('Y-m-d');
-    $allBeforeToday = true;
-    $allWithin30d = true;
-    $limite30d = date('Y-m-d', strtotime('-30 days'));
-
-    foreach ($ordenes30d as $ord) {
-        $fOrd = substr($ord['creado_en'], 0, 10);
-        if ($fOrd >= $hoy) $allBeforeToday = false;
-        if ($fOrd < $limite30d) $allWithin30d = false;
-    }
-    assertCase(
-        'D-01',
-        "Filtro por defecto '30d' excluye órdenes de Hoy y acota a ventana de 30 días",
-        $allBeforeToday && $allWithin30d,
-        "Total órdenes obtenidas: " . count($ordenes30d) . " | Límite inferior: {$limite30d}"
-    );
-
-    // D-02: Filtro rápido '15d' (subconjunto estricto de 30d)
-    $ordenes15d = MDOrdenes::obtenerOrdenesAnterioresMedico($medicoId, 50, 0, '', 'fecha', 'DESC', '15d');
-    $total15d = MDOrdenes::contarOrdenesAnterioresMedico($medicoId, '', '15d');
-    $total30d = MDOrdenes::contarOrdenesAnterioresMedico($medicoId, '', '30d');
-    $allWithin15d = true;
-    $limite15d = date('Y-m-d', strtotime('-15 days'));
-
-    foreach ($ordenes15d as $ord) {
-        $fOrd = substr($ord['creado_en'], 0, 10);
-        if ($fOrd < $limite15d || $fOrd >= $hoy) $allWithin15d = false;
-    }
-    assertCase(
-        'D-02',
-        "Filtro '15d' restringe estrictamente a ventana de 15 días (<= total 30d)",
-        $allWithin15d && ($total15d <= $total30d),
-        "Total 15d: {$total15d} <= Total 30d: {$total30d} | Límite inferior: {$limite15d}"
-    );
-
-    // D-03: Filtro 'fechas' con rango válido histórico (ej. 3 a 4 meses atrás)
-    $fIniHist = date('Y-m-d', strtotime('-120 days'));
-    $fFinHist = date('Y-m-d', strtotime('-90 days'));
-    $ordenesRango = MDOrdenes::obtenerOrdenesAnterioresMedico($medicoId, 50, 0, '', 'fecha', 'DESC', 'fechas', $fIniHist, $fFinHist);
-    $allInRange = true;
-    foreach ($ordenesRango as $ord) {
-        $fOrd = substr($ord['creado_en'], 0, 10);
-        if ($fOrd < $fIniHist || $fOrd > $fFinHist) $allInRange = false;
-    }
-    assertCase(
-        'D-03',
-        "Filtro 'fechas' con rango histórico válido recupera órdenes en ventana exacta",
-        $allInRange,
-        "Rango probado: {$fIniHist} a {$fFinHist} | Órdenes encontradas: " . count($ordenesRango)
-    );
-
-    // D-04: Filtro 'fechas' con día único (Poka-Yoke: fechaInicio sin fechaFin)
-    $fUnica = date('Y-m-d', strtotime('-45 days'));
-    $ordenesDiaUnico = MDOrdenes::obtenerOrdenesAnterioresMedico($medicoId, 50, 0, '', 'fecha', 'DESC', 'fechas', $fUnica, '');
-    $allSameDay = true;
-    foreach ($ordenesDiaUnico as $ord) {
-        $fOrd = substr($ord['creado_en'], 0, 10);
-        if ($fOrd !== $fUnica) $allSameDay = false;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `test_search_periodo_dataset_suite.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L179-349)</summary>
-
-**Path:** `Unknown file`
-
-```
-        if ($fOrd !== $fUnica) $allSameDay = false;
-    }
-    assertCase(
-        'D-04',
-        "Poka-Yoke: fechaInicio con fechaFin vacía auto-asume día exacto único",
-        $allSameDay,
-        "Día probado: {$fUnica} | Órdenes retornadas del día: " . count($ordenesDiaUnico)
-    );
-
-    // D-05: Filtro 'fechas' invertidas (Poka-Yoke: fechaInicio > fechaFin)
-    $fInvIni = date('Y-m-d', strtotime('-60 days'));
-    $fInvFin = date('Y-m-d', strtotime('-80 days')); // Menor que inicio
-    $ordenesInvertidas = MDOrdenes::obtenerOrdenesAnterioresMedico($medicoId, 50, 0, '', 'fecha', 'DESC', 'fechas', $fInvIni, $fInvFin);
-    $invertedCorrected = true;
-    foreach ($ordenesInvertidas as $ord) {
-        $fOrd = substr($ord['creado_en'], 0, 10);
-        if ($fOrd < $fInvFin || $fOrd > $fInvIni) $invertedCorrected = false;
-    }
-    assertCase(
-        'D-05',
-        "Poka-Yoke: Fechas invertidas (inicio > fin) se intercambian y ejecutan sin error SQL",
-        $invertedCorrected,
-        "Enviado: {$fInvIni} a {$fInvFin} | Corregido a: {$fInvFin} a {$fInvIni} | Total: " . count($ordenesInvertidas)
-    );
-
-    // D-06: Filtro 'fechas' vacías (Fallback Poka-Yoke: cae a default 30d)
-    $ordenesFechasVacias = MDOrdenes::obtenerOrdenesAnterioresMedico($medicoId, 50, 0, '', 'fecha', 'DESC', 'fechas', '', '');
-    $cntFechasVacias = count($ordenesFechasVacias);
-    $cnt30d = count($ordenes30d);
-    assertCase(
-        'D-06',
-        "Fallback Poka-Yoke: 'fechas' sin valores cae limpiamente a default 30d sin error 500",
-        $cntFechasVacias === $cnt30d,
-        "Resultados con fechas vacías: {$cntFechasVacias} === Resultados 30d: {$cnt30d}"
-    );
-
-    echo "\n";
-
-    // ═════════════════════════════════════════════════════════════════
-    // BLOQUE E: Búsqueda con Lupita y Matriz de Textos de Entrada (SIM2Y)
-    // ═════════════════════════════════════════════════════════════════
-    echo C_BOLD . "── BLOQUE E: Búsqueda Lupita y Matriz Multicriterio (16 Casos) ────────" . C_RESET . "\n";
-
-    // E-01: Búsqueda por Nombre de Paciente
-    $resNom = MDOrdenes::buscarOrdenesMedico($medicoId, 'Carlos', 15);
-    $validNom = is_array($resNom);
-    $matchNom = true;
-    foreach ($resNom as $r) {
-        if (stripos($r['paciente'], 'Carlos') === false && stripos($r['estudios'], 'Carlos') === false) {
-            $matchNom = false;
-        }
-    }
-    assertCase(
-        'E-01',
-        "Lupita: Búsqueda por Nombre de Paciente ('Carlos')",
-        $validNom && $matchNom,
-        "Coincidencias encontradas: " . count($resNom)
-    );
-
-    // E-02: Búsqueda por Apellido Paterno/Materno
-    $resApe = MDOrdenes::buscarOrdenesMedico($medicoId, 'García', 15);
-    $validApe = is_array($resApe);
-    $matchApe = true;
-    foreach ($resApe as $r) {
-        if (stripos($r['paciente'], 'García') === false && stripos($r['estudios'], 'García') === false) {
-            $matchApe = false;
-        }
-    }
-    assertCase(
-        'E-02',
-        "Lupita: Búsqueda por Apellido ('García')",
-        $validApe && $matchApe,
-        "Coincidencias encontradas: " . count($resApe)
-    );
-
-    // E-03: Búsqueda Mixta Multicriterio: Nombre + Año (ej. 'Carlos 2025' o 'Carlos 2024')
-    $resNomAnio = MDOrdenes::buscarOrdenesMedico($medicoId, 'Carlos 2025', 15);
-    $matchNomAnio = true;
-    foreach ($resNomAnio as $r) {
-        $anio = substr($r['fecha'], 0, 4);
-        if ($anio !== '2025') $matchNomAnio = false;
-        if (stripos($r['paciente'], 'Carlos') === false && stripos($r['estudios'], 'Carlos') === false) {
-            $matchNomAnio = false;
-        }
-    }
-    assertCase(
-        'E-03',
-        "Lupita Mixta: Multicriterio Nombre + Año ('Carlos 2025') resuelve ambos tokens",
-        is_array($resNomAnio) && $matchNomAnio,
-        "Coincidencias de 2025 con Carlos: " . count($resNomAnio)
-    );
-
-    // E-04: Búsqueda Mixta Multicriterio: Apellido + Año (ej. 'López 2025')
-    $resApeAnio = MDOrdenes::buscarOrdenesMedico($medicoId, 'López 2025', 15);
-    $matchApeAnio = true;
-    foreach ($resApeAnio as $r) {
-        $anio = substr($r['fecha'], 0, 4);
-        if ($anio !== '2025') $matchApeAnio = false;
-        if (stripos($r['paciente'], 'López') === false && stripos($r['estudios'], 'López') === false) {
-            $matchApeAnio = false;
-        }
-    }
-    assertCase(
-        'E-04',
-        "Lupita Mixta: Multicriterio Apellido + Año ('López 2025')",
-        is_array($resApeAnio) && $matchApeAnio,
-        "Coincidencias de 2025 con López: " . count($resApeAnio)
-    );
-
-    // E-05: Búsqueda por Diagnóstico Clínico
-    $resDiag = MDOrdenes::buscarOrdenesMedico($medicoId, 'Diabetes', 15);
-    $matchDiag = true;
-    foreach ($resDiag as $r) {
-        if (stripos($r['estudios'], 'Diabetes') === false && stripos($r['paciente'], 'Diabetes') === false) {
-            $matchDiag = false;
-        }
-    }
-    assertCase(
-        'E-05',
-        "Lupita: Búsqueda por Diagnóstico Clínico ('Diabetes')",
-        is_array($resDiag) && $matchDiag,
-        "Coincidencias de diagnóstico Diabetes: " . count($resDiag)
-    );
-
-    // E-06: Búsqueda Mixta Multicriterio: Diagnóstico + Año ('Diabetes 2025')
-    $resDiagAnio = MDOrdenes::buscarOrdenesMedico($medicoId, 'Diabetes 2025', 15);
-    $matchDiagAnio = true;
-    foreach ($resDiagAnio as $r) {
-        $anio = substr($r['fecha'], 0, 4);
-        if ($anio !== '2025') $matchDiagAnio = false;
-        if (stripos($r['estudios'], 'Diabetes') === false && stripos($r['paciente'], 'Diabetes') === false) {
-            $matchDiagAnio = false;
-        }
-    }
-    assertCase(
-        'E-06',
-        "Lupita Mixta: Multicriterio Diagnóstico + Año ('Diabetes 2025')",
-        is_array($resDiagAnio) && $matchDiagAnio,
-        "Coincidencias: " . count($resDiagAnio)
-    );
-
-    // E-07: Búsqueda por Teléfono Numérico Largo (7-10 dígitos)
-    // Tomar un teléfono real de una orden existente
-    $sampleTelRow = $db->query("SELECT paciente_telefono FROM vw_ordenes_completas WHERE medico_user_id = {$medicoId} AND paciente_telefono != '' LIMIT 1")->fetch(PDO::FETCH_ASSOC);
-    $sampleTel = $sampleTelRow ? $sampleTelRow['paciente_telefono'] : '5512345678';
-    $resTel = MDOrdenes::buscarOrdenesMedico($medicoId, $sampleTel, 15);
-    $matchTel = false;
-    foreach ($resTel as $r) {
-        if (strpos($r['telefono'], $sampleTel) !== false) {
-            $matchTel = true;
-            break;
-        }
-    }
-    assertCase(
-        'E-07',
-        "Lupita: Búsqueda directa por Teléfono (7-10 dígitos: '{$sampleTel}')",
-        !empty($resTel) && $matchTel,
-        "Órdenes localizadas por teléfono: " . count($resTel)
-    );
-
-    // E-08: Búsqueda por Teléfono Numérico Parcial (3+ dígitos)
-    $prefixTel = substr($sampleTel, 0, 4); // ej. '5512'
-    $resTelParcial = MDOrdenes::buscarOrdenesMedico($medicoId, $prefixTel, 15);
-    $matchTelParcial = false;
-    foreach ($resTelParcial as $r) {
-        if (strpos($r['telefono'], $prefixTel) !== false || strpos($r['folio'], $prefixTel) !== false) {
-            $matchTelParcial = true;
-            break;
-        }
-    }
-    assertCase(
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `test_search_periodo_dataset_suite.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L349-564)</summary>
-
-**Path:** `Unknown file`
-
-```
-    assertCase(
-        'E-08',
-        "Lupita: Fragmento numérico de teléfono o folio ('{$prefixTel}')",
-        !empty($resTelParcial) && $matchTelParcial,
-        "Coincidencias encontradas: " . count($resTelParcial)
-    );
-
-    // E-09: Búsqueda por Folio Canónico Completo (ej. S2Y-00042 o similar)
-    $sampleFolRow = $db->query("SELECT folio_unico FROM vw_ordenes_completas WHERE medico_user_id = {$medicoId} LIMIT 1")->fetch(PDO::FETCH_ASSOC);
-    $sampleFolio = $sampleFolRow ? $sampleFolRow['folio_unico'] : 'S2Y-00001';
-    $resFolio = MDOrdenes::buscarOrdenesMedico($medicoId, $sampleFolio, 15);
-    $matchFolioExact = false;
-    foreach ($resFolio as $r) {
-        if ($r['folio'] === $sampleFolio) {
-            $matchFolioExact = true;
-            break;
-        }
-    }
-    assertCase(
-        'E-09',
-        "Lupita: Folio canónico completo ('{$sampleFolio}')",
-        $matchFolioExact,
-        "Folio exacto encontrado en posición 1: " . ($resFolio[0]['folio'] ?? 'ninguno')
-    );
-
-    // E-10: Búsqueda por Folio en Minúsculas
-    $folioLower = strtolower($sampleFolio);
-    $resFolioLower = MDOrdenes::buscarOrdenesMedico($medicoId, $folioLower, 15);
-    $matchFolioLower = false;
-    foreach ($resFolioLower as $r) {
-        if (strtolower($r['folio']) === $folioLower) {
-            $matchFolioLower = true;
-            break;
-        }
-    }
-    assertCase(
-        'E-10',
-        "Lupita: Folio con prefijo en minúsculas ('{$folioLower}') es Case-Insensitive",
-        $matchFolioLower,
-        "Coincidencia lograda: " . count($resFolioLower) . " resultados"
-    );
-
-    // E-11: Búsqueda por Folio Numérico Puro sin Prefijo (ej. '42' o '1')
-    $rawNum = preg_replace('/\D/', '', $sampleFolio);
-    $numTerm = ltrim($rawNum, '0') ?: '1';
-    $resNumPuro = MDOrdenes::buscarOrdenesMedico($medicoId, $numTerm, 15);
-    assertCase(
-        'E-11',
-        "Lupita: Folio numérico sin padding ('{$numTerm}') resuelve con orden prioritario",
-        is_array($resNumPuro) && !empty($resNumPuro),
-        "Total órdenes retornadas para término numérico '{$numTerm}': " . count($resNumPuro)
-    );
-
-    // E-12: Búsqueda en Historial Profundo (> 30 días, Bypass de Período)
-    // Localizar una orden de Zona D (más de 60 días de antigüedad)
-    $sampleDeepRow = $db->query("
-        SELECT folio_unico, paciente_nombre, hora_captura
-        FROM vw_ordenes_completas
-        WHERE medico_user_id = {$medicoId}
-          AND hora_captura < DATE_SUB(CURDATE(), INTERVAL 60 DAY)
-        LIMIT 1
-    ")->fetch(PDO::FETCH_ASSOC);
-
-    if ($sampleDeepRow) {
-        $deepFolio = $sampleDeepRow['folio_unico'];
-        $resDeep = MDOrdenes::buscarOrdenesMedico($medicoId, $deepFolio, 15);
-        $foundDeep = false;
-        foreach ($resDeep as $r) {
-            if ($r['folio'] === $deepFolio) {
-                $foundDeep = true;
-                break;
-            }
-        }
-        assertCase(
-            'E-12',
-            "Lupita Bypass: Encuentra orden profunda de {$sampleDeepRow['hora_captura']} (> 60d)",
-            $foundDeep,
-            "Folio histórico: {$deepFolio} localizado exitosamente sin restricción de 30 días"
-        );
-    } else {
-        assertCase(
-            'E-12',
-            "Lupita Bypass: Sin órdenes > 60d en base para probar bypass profundo",
-            true,
-            "Omitido por ausencia de órdenes > 60d (sembrar dataset SIM2Y para validar)"
-        );
-    }
-
-    // E-13: Límite Anti-Ahogo (Anti-Choke LIMIT 16)
-    // Se pide con término genérico que coincide con cientos de registros
-    $resAntiChoke = MDOrdenes::buscarOrdenesMedico($medicoId, 'a', 15);
-    $countChoke = count($resAntiChoke);
-    // Nota: El método pide limit + 1 = 16 filas para paginación rápida
-    assertCase(
-        'E-13',
-        "Límite Anti-Ahogo: Consulta con término genérico ('a') nunca retorna más de 16 filas",
-        $countChoke <= 16,
-        "Total filas retornadas: {$countChoke} (protección de RAM y respuesta en <15ms)"
-    );
-
-    // E-14: Búsqueda sin Coincidencias (Zero-Matches)
-    $resZero = MDOrdenes::buscarOrdenesMedico($medicoId, 'TERMINO_INEXISTENTE_XYZ_9999', 15);
-    assertCase(
-        'E-14',
-        "Zero-Matches: Término inexistente retorna array vacío sin warnings ni excepciones",
-        is_array($resZero) && empty($resZero),
-        "Array retornado: []"
-    );
-
-    // E-15: Sanitización de Espacios Múltiples y Tokens Sucios
-    $resSpaces = MDOrdenes::buscarOrdenesMedico($medicoId, "   Carlos     2025   ", 15);
-    assertCase(
-        'E-15',
-        "Sanitización: Entrada con espacios redundantes tokeniza limpiamente sin romper SQL",
-        is_array($resSpaces),
-        "Tokens procesados limpiamente. Resultados: " . count($resSpaces)
-    );
-
-    // E-16: Aislamiento Estricto por Médico (RBAC / Multi-Tenant Isolation)
-    // Las órdenes retornadas por buscarOrdenesMedico DEBEN pertenecer exclusivamente al médico autenticado
-    $resIsolation = MDOrdenes::buscarOrdenesMedico($medicoId, 'SIM2Y', 30);
-    $isolated = true;
-    if (!empty($resIsolation)) {
-        $ids = array_map(function($r) { return (int)$r['id']; }, $resIsolation);
-        $inClause = implode(',', $ids);
-        $alienCount = (int)$db->query("
-            SELECT COUNT(*) FROM ordenes WHERE id IN ({$inClause}) AND medico_id != {$medicoId}
-        ")->fetchColumn();
-        if ($alienCount > 0) $isolated = false;
-    }
-    assertCase(
-        'E-16',
-        "Aislamiento RBAC: Las órdenes retornadas pertenecen estrictamente al médico autenticado",
-        $isolated,
-        "Auditoría cruzada en DB: 0 órdenes de otros médicos en los resultados"
-    );
-
-    echo "\n";
-
-    // ═════════════════════════════════════════════════════════════════
-    // BLOQUE F: Paginación y Retención de Parámetros (F-01 a F-04)
-    // ═════════════════════════════════════════════════════════════════
-    echo C_BOLD . "── BLOQUE F: Paginación y Retención de Parámetros (4 Casos) ───────────" . C_RESET . "\n";
-
-    // F-01: Paginación Página 1 en '30d' (25 registros)
-    $pag1 = MDOrdenes::obtenerOrdenesAnterioresMedico($medicoId, 25, 0, '', 'fecha', 'DESC', '30d');
-    assertCase(
-        'F-01',
-        "Paginación Página 1 (Limit 25, Offset 0) retorna bloque inicial ordenado DESC",
-        count($pag1) <= 25,
-        "Registros obtenidos en Pág 1: " . count($pag1)
-    );
-
-    // F-02: Paginación Página 2 (Offset 25) sin solapamientos
-    $pag2 = MDOrdenes::obtenerOrdenesAnterioresMedico($medicoId, 25, 25, '', 'fecha', 'DESC', '30d');
-    $idsPag1 = array_map(function($r) { return $r['id']; }, $pag1);
-    $idsPag2 = array_map(function($r) { return $r['id']; }, $pag2);
-    $intersect = array_intersect($idsPag1, $idsPag2);
-    assertCase(
-        'F-02',
-        "Paginación Página 2 (Offset 25) sin traslape de registros con Página 1",
-        empty($intersect),
-        "Solapamientos detectados: " . count($intersect) . " | Registros en Pág 2: " . count($pag2)
-    );
-
-    // F-03: Consistencia Total: Conteo vs Paginación
-    $countCalculated = MDOrdenes::contarOrdenesAnterioresMedico($medicoId, '', '30d');
-    $expectedAtLeast = count($pag1);
-    assertCase(
-        'F-03',
-        "Consistencia de Metadatos: contarOrdenesAnterioresMedico >= registros página 1",
-        $countCalculated >= $expectedAtLeast,
-        "Conteo total reportado: {$countCalculated} >= Registros Pág 1: {$expectedAtLeast}"
-    );
-
-    // F-04: Retención y Flexibilidad de Ordenamiento
-    $sortFolioAsc = MDOrdenes::obtenerOrdenesAnterioresMedico($medicoId, 10, 0, '', 'folio', 'ASC', '30d');
-    $sortPacDesc  = MDOrdenes::obtenerOrdenesAnterioresMedico($medicoId, 10, 0, '', 'paciente', 'DESC', '30d');
-    $sortEstAsc   = MDOrdenes::obtenerOrdenesAnterioresMedico($medicoId, 10, 0, '', 'estado', 'ASC', '30d');
-    $sortsWork = is_array($sortFolioAsc) && is_array($sortPacDesc) && is_array($sortEstAsc);
-    assertCase(
-        'F-04',
-        "Retención de Ordenamiento: 'folio ASC', 'paciente DESC', 'estado ASC' válidos",
-        $sortsWork,
-        "Las 3 variantes de ordenamiento compilaron y ejecutaron exitosamente"
-    );
-
-    echo "\n";
-
-} catch (Throwable $e) {
-    echo "\n" . C_RED . "✗ ERROR FATAL EN EJECUCIÓN DE LA SUITE:" . C_RESET . " " . $e->getMessage() . "\n";
-    echo "  Archivo: " . $e->getFile() . ":" . $e->getLine() . "\n\n";
-    exit(1);
-}
-
-// ── 3. Resumen Ejecutivo de la Suite ────────────────────────────────
-$duration = round(microtime(true) - $startTime, 3);
-echo C_BOLD . str_repeat('═', 78) . C_RESET . "\n";
-echo C_CYAN . C_BOLD . "  📊 RESUMEN EJECUTIVO — SUITE DE BÚSQUEDA Y FILTROS SIM2Y" . C_RESET . "\n";
-echo C_BOLD . str_repeat('═', 78) . C_RESET . "\n";
-echo "  Total de Casos Evaluados:   {$totalCases}\n";
-echo "  " . C_GREEN . "Casos Aprobados (PASS):     {$passedCases}" . C_RESET . "\n";
-if ($failedCases > 0) {
-    echo "  " . C_RED . "Casos Fallidos (FAIL):      {$failedCases}" . C_RESET . "\n";
-    echo "\n  " . C_RED . "Detalle de Fallas:" . C_RESET . "\n";
-    foreach ($failures as $f) {
-        echo "    - {$f}\n";
-    }
-} else {
-    echo "  " . C_GREEN . "Estado Final:               TODOS LOS CASOS APROBADOS (100%)" . C_RESET . "\n";
-}
-echo "  Tiempo de Ejecución:        {$duration} segundos\n";
-echo C_BOLD . str_repeat('═', 78) . C_RESET . "\n\n";
-
-exit($failedCases > 0 ? 1 : 0);
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `CREATE OR REPLACE VIEW vw_ordenes_completas`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
+**Status:** Reset
+**Created:** 27 Sept 2026, 7:25 pm
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 7:25 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `vw_ordenes_completas`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 7:25 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `vw_ordenes_completas`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 7:25 pm
-
----
-
-## Agent Response
-
-### Thinking
-
-Inspecting the `vw_ordenes_completas` view definition within the specified file and line number is needed to understand the data structure. The query on line 441 reveals the specific columns that the view exposes, which provides the necessary context for further operations. This column information will inform how the data is handled.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `seed_dataset_2years.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.044186484s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L219-299)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-        $fechaResultado = null;
-        if (in_array($estadoId, [3, 4], true)) {
-            $dtRes = clone $fechaCaptura;
-            $dtRes->modify('+' . rand(3, 8) . ' hours');
-            $fechaResultado = $dtRes->format('Y-m-d H:i:s');
-        }
-
-        $stmtOrd->execute([
-            ':folio'           => $folio,
-            ':paciente_id'     => $paciente['id'],
-            ':medico_id'       => $medico['id'],
-            ':recepcion_id'    => 2, // Recepción
-            ':estado_id'       => $estadoId,
-            ':edad'            => $edadAlEmitir,
-            ':diagnostico'     => $diag,
-            ':otros'           => '',
-            ':estudios'        => $estudiosJson,
-            ':hora_captura'    => $horaCapturaStr,
-            ':fecha_resultado' => $fechaResultado,
-            ':actualizado_en'  => $fechaResultado ?? $horaCapturaStr,
-        ]);
-        $ordenId = (int)$db->lastInsertId();
-
-        // Detalle de estudios
-        foreach ($estudiosSeleccionados as $est) {
-            $stmtDet->execute([$ordenId, $est['id']]);
-        }
-
-        // Historial progresivo de estados
-        // 1: Remitido (al momento de captura)
-        $stmtHist->execute([
-            $ordenId, null, 1, $medico['id'],
-            'Solicitud Digital emitida por médico [SIM2Y]', $horaCapturaStr
-        ]);
-
-        if ($estadoId >= 2) {
-            $dtH2 = clone $fechaCaptura;
-            $dtH2->modify('+1 hour');
-            $stmtHist->execute([
-                $ordenId, 1, 2, 2,
-                'Recepción inició atención de muestras [SIM2Y]', $dtH2->format('Y-m-d H:i:s')
-            ]);
-        }
-        if ($estadoId >= 3 && $estadoId !== 5) {
-            $dtH3 = clone $fechaCaptura;
-            $dtH3->modify('+4 hours');
-            $stmtHist->execute([
-                $ordenId, 2, 3, 2,
-                'Resultados PDF cargados por laboratorio [SIM2Y]', $dtH3->format('Y-m-d H:i:s')
-            ]);
-        }
-        if ($estadoId === 4) {
-            $dtH4 = clone $fechaCaptura;
-            $dtH4->modify('+6 hours');
-            $stmtHist->execute([
-                $ordenId, 3, 4, 2,
-                'Orden completada y entregada al paciente [SIM2Y]', $dtH4->format('Y-m-d H:i:s')
-            ]);
-        }
-        if ($estadoId === 5) {
-            $dtH5 = clone $fechaCaptura;
-            $dtH5->modify('+2 hours');
-            $stmtHist->execute([
-                $ordenId, 1, 5, $medico['id'],
-                'Orden cancelada a solicitud del médico/paciente [SIM2Y]', $dtH5->format('Y-m-d H:i:s')
-            ]);
-        }
-
-        // Si tiene resultados listos o cerrada, adjuntar resultado PDF simulado
-        if (in_array($estadoId, [3, 4], true)) {
-            $pdfName = "resultado_{$folio}.pdf";
-            $pdfPath = "/storage/resultados/sim2y/{$pdfName}";
-            $stmtPdf->execute([
-                $ordenId, $pdfName, $pdfPath, 2, 'completo', $folio,
-                $fechaResultado ?? $horaCapturaStr
-            ]);
-        }
-
-        $statsZonas[$zonaKey]++;
-        $statsEstados[$estadoId]++;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `seed_dataset_2years.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L299-439)</summary>
-
-**Path:** `Unknown file`
-
-```
-        $statsEstados[$estadoId]++;
-        $folioIndex++;
-
-        return $ordenId;
-    };
-
-    // ─────────────────────────────────────────────────────────────
-    // ZONA A: HOY (CURDATE, 0 días) -> 12 órdenes
-    // Estados: 1 (Remitido), 2 (En Atención), 3 (Resultados Listos), 4 (Cerrada)
-    // ─────────────────────────────────────────────────────────────
-    $hoyStr = date('Y-m-d');
-    $horasHoy = ['08:15', '09:00', '09:45', '10:30', '11:15', '12:00', '12:45', '13:30', '14:15', '15:00', '15:45', '16:30'];
-    $estadosHoy = [1, 2, 2, 1, 2, 3, 3, 2, 4, 1, 3, 4];
-
-    for ($i = 0; $i < 12; $i++) {
-        $folio = sprintf('S2Y-%05d', $folioIndex);
-        $pac = $pacientesIds[array_rand($pacientesIds)];
-        $med = $medicos[$i % count($medicos)];
-        $estId = $estadosHoy[$i];
-        $hCap = "{$hoyStr} {$horasHoy[$i]}:00";
-
-        $ordId = $fnInsertarOrden($folio, $pac, $med, $estId, $hCap, 'A_Hoy');
-        if ($i === 0) {
-            $notifTargets['hoy'] = ['folio' => $folio, 'medico_id' => $med['id'], 'paciente' => $pac['nombre'], 'orden_id' => $ordId];
-        }
-    }
-
-    // ─────────────────────────────────────────────────────────────
-    // ZONA B: ÚLTIMOS 15 DÍAS (1d - 15d) -> 50 órdenes
-    // Casos frontera: Ayer (1d), día 14, día 15
-    // ─────────────────────────────────────────────────────────────
-    $diasZonaB = [1, 1, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 13, 14, 14, 14, 14, 15, 15, 15, 15];
-    // Rellenar hasta 50
-    while (count($diasZonaB) < 50) {
-        $diasZonaB[] = rand(2, 13);
-    }
-    sort($diasZonaB);
-
-    foreach ($diasZonaB as $idx => $diasAtras) {
-        $folio = sprintf('S2Y-%05d', $folioIndex);
-        $pac = $pacientesIds[array_rand($pacientesIds)];
-        $med = $medicos[$idx % count($medicos)];
-        // En días anteriores predominan estados completados o en atención
-        $estadosDistrib = [2, 3, 3, 4, 4, 4, 5];
-        $estId = $estadosDistrib[array_rand($estadosDistrib)];
-        $horaRand = str_pad((string)rand(8, 18), 2, '0', STR_PAD_LEFT) . ':' . str_pad((string)rand(0, 59), 2, '0', STR_PAD_LEFT) . ':00';
-        $hCap = date('Y-m-d', strtotime("-{$diasAtras} days")) . " {$horaRand}";
-
-        $ordId = $fnInsertarOrden($folio, $pac, $med, $estId, $hCap, 'B_15d');
-        if ($diasAtras === 5 && !isset($notifTargets['5d'])) {
-            $notifTargets['5d'] = ['folio' => $folio, 'medico_id' => $med['id'], 'paciente' => $pac['nombre'], 'orden_id' => $ordId];
-        }
-    }
-
-    // ─────────────────────────────────────────────────────────────
-    // ZONA C: DÍAS 16 A 30 (16d - 30d) -> 50 órdenes
-    // Casos frontera: día 16 (inmediato exterior de 15), día 29, día 30 (límite de 30d)
-    // ─────────────────────────────────────────────────────────────
-    $diasZonaC = [16, 16, 16, 16, 17, 17, 18, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 29, 30, 30, 30, 30];
-    while (count($diasZonaC) < 50) {
-        $diasZonaC[] = rand(17, 28);
-    }
-    sort($diasZonaC);
-
-    foreach ($diasZonaC as $idx => $diasAtras) {
-        $folio = sprintf('S2Y-%05d', $folioIndex);
-        $pac = $pacientesIds[array_rand($pacientesIds)];
-        $med = $medicos[$idx % count($medicos)];
-        $estadosDistrib = [3, 4, 4, 4, 5];
-        $estId = $estadosDistrib[array_rand($estadosDistrib)];
-        $horaRand = str_pad((string)rand(8, 18), 2, '0', STR_PAD_LEFT) . ':' . str_pad((string)rand(0, 59), 2, '0', STR_PAD_LEFT) . ':00';
-        $hCap = date('Y-m-d', strtotime("-{$diasAtras} days")) . " {$horaRand}";
-
-        $ordId = $fnInsertarOrden($folio, $pac, $med, $estId, $hCap, 'C_30d');
-        if ($diasAtras === 20 && !isset($notifTargets['20d'])) {
-            $notifTargets['20d'] = ['folio' => $folio, 'medico_id' => $med['id'], 'paciente' => $pac['nombre'], 'orden_id' => $ordId];
-        }
-    }
-
-    // ─────────────────────────────────────────────────────────────
-    // ZONA D: HISTÓRICO 2 AÑOS (31d - 730d) -> ~1,400 órdenes
-    // Casos frontera: día 31 (primer día fuera de 30d), 6 meses, 1 año, 2 años
-    // ─────────────────────────────────────────────────────────────
-    $totalHistoricas = 1400;
-    // Sembrar primero casos frontera obligatorios
-    $fronterasD = [31, 31, 31, 31, 45, 60, 90, 120, 180, 240, 365, 500, 720, 730];
-    foreach ($fronterasD as $idx => $diasAtras) {
-        $folio = sprintf('S2Y-%05d', $folioIndex);
-        $pac = $pacientesIds[array_rand($pacientesIds)];
-        $med = $medicos[$idx % count($medicos)];
-        $estId = (rand(1, 10) === 10) ? 5 : 4; // Mayoría cerradas
-        $horaRand = str_pad((string)rand(8, 18), 2, '0', STR_PAD_LEFT) . ':' . str_pad((string)rand(0, 59), 2, '0', STR_PAD_LEFT) . ':00';
-        $hCap = date('Y-m-d', strtotime("-{$diasAtras} days")) . " {$horaRand}";
-        $ordId = $fnInsertarOrden($folio, $pac, $med, $estId, $hCap, 'D_2Años');
-
-        if ($diasAtras === 240 && !isset($notifTargets['8m'])) {
-            $notifTargets['8m'] = ['folio' => $folio, 'medico_id' => $med['id'], 'paciente' => $pac['nombre'], 'orden_id' => $ordId];
-        }
-    }
-
-    // Distribuir el resto (~1,386) uniformemente a lo largo de los 700 días restantes
-    $restantes = $totalHistoricas - count($fronterasD);
-    for ($k = 0; $k < $restantes; $k++) {
-        $diasAtras = rand(32, 729);
-        $folio = sprintf('S2Y-%05d', $folioIndex);
-        $pac = $pacientesIds[array_rand($pacientesIds)];
-        $med = $medicos[$k % count($medicos)];
-        $estId = (rand(1, 12) === 12) ? 5 : 4; // Histórico: casi todas cerradas o canceladas
-        $horaRand = str_pad((string)rand(8, 18), 2, '0', STR_PAD_LEFT) . ':' . str_pad((string)rand(0, 59), 2, '0', STR_PAD_LEFT) . ':00';
-        $hCap = date('Y-m-d', strtotime("-{$diasAtras} days")) . " {$horaRand}";
-
-        $fnInsertarOrden($folio, $pac, $med, $estId, $hCap, 'D_2Años');
-    }
-
-    // ─────────────────────────────────────────────────────────────
-    // 8. Inyección de Notificaciones Quirúrgicas para Pruebas UI
-    // ─────────────────────────────────────────────────────────────
-    echo "  Inyectando notificaciones de prueba vinculadas a cada zona...\n";
-
-    // Notif 1: Hoy (Zona A)
-    if (isset($notifTargets['hoy'])) {
-        $t = $notifTargets['hoy'];
-        $stmtNotif->execute([
-            $t['medico_id'], 'nueva_orden', $t['folio'],
-            "Nueva orden digital {$t['folio']} registrada para {$t['paciente']} [SIM2Y]",
-            0, 1, 0, date('Y-m-d H:i:s')
-        ]);
-    }
-
-    // Notif 2: Hace 5 días (Zona B, visible en 15 y 30d)
-    if (isset($notifTargets['5d'])) {
-        $t = $notifTargets['5d'];
-        $stmtNotif->execute([
-            $t['medico_id'], 'resultados_listos', $t['folio'],
-            "Resultados listos para entrega: {$t['folio']} — {$t['paciente']} [SIM2Y]",
-            0, 1, 0, date('Y-m-d H:i:s', strtotime('-5 days'))
-        ]);
-    }
-
-    // Notif 3: Hace 20 días (Zona C, visible solo en 30d, oculta en 15)
-    if (isset($notifTargets['20d'])) {
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Orders are distributed round-robin across all zones (A, B, C, D) in the seeding script, ensuring each doctor receives orders in every zone. Initial focus shifts to meticulously examining the test suite file. Beginning the audit with the first test case, labeled D-01, where a specific function is called.
-
-
-The code filters orders within the last 30 days. The comparison logic needs review, as orders on the 30th day are included in the MariaDB query but can be incorrectly excluded by the PHP code if only the date part is compared. Empty result sets are also a potential scenario that needs consideration. The MariaDB query and PHP date comparisons are being cross-referenced.
-
-
-A crucial flaw has been identified: the initial 30-day filter can incorrectly pass even with no orders. The condition requires an assertion to ensure the order count is not zero when applying the filter. The 15-day filter's constraints are examined next.
-
-Further, the total count for the 15-day filter is verified to be less than or equal to the 30-day filter's count. This condition should be strictly maintained if there are orders within the 30-day window.
-
-
-The code snippet appears to be retrieving orders within a specific historical date range. Reviewing the PHP code, especially the date comparison logic, is essential to ensure accurate filtering. Suspect the date range is correctly applied in the database query. However, the date comparison logic in the PHP loop might have an off-by-one error. The database query parameters `f_ini_o` and `f_fin_o` are observed, which should be verified against the intended date range.
-
-
-The database query's parameterization is reviewed, specifically the binding of `:user_id` as an integer. Within `contarOrdenesAnterioresMedico`, an empty alias is passed to a filter function, implying direct date parameter usage. The empty alias observation raises a potential concern regarding parameter naming and date range handling in the `contarOrdenesAnterioresMedico` function. This parameter assignment works as expected in that specific function, though further examination is necessary to ensure consistent date handling. Reviewing test case D-05 reveals an instance of inverted date filtering, providing a potential test case.
-
-
-A potential edge case where the inverted order result is affected by empty results is identified. To rigorously validate the "poka-yoke" correction logic, it's essential to confirm that swapping the date parameters in the underlying function results in identical query results. This verification is crucial to establish the effectiveness of the correction. Test case D-05 needs augmentation to include assertions validating the identical counts from both date orderings.
-
-The subsequent test, D-06, focuses on verifying the fallback mechanism when date filters are empty, confirming it defaults to the 30-day window. The assertion is in place to compare the order count with empty date filters against the established 30-day order count.
-
-
-The initial assumption of a 50-order limit in a 30-day window needs further validation. Cross-referencing order counts and row results between different methods is the only way to guarantee parity.
-
-Now investigating the "Bloque E" test cases. Specifically, test case E-01 examines patient name searches. Further review of the search function reveals the 'estudios' key in the result corresponds to the 'diagnostico' column in the database, requiring an adjustment to the search criteria within the loop. The returned data uses `paciente_nombre` and `diagnostico` as the respective columns for patient name and studies.
-
-
-The search logic's current implementation uses 'estudios' for diagnoses, requiring correction.  A doctor-specific search for 'Carlos' might fail if no such patient exists. The current approach uses hardcoded search terms; therefore, a dynamic sample query from the database, mirroring the folio retrieval, can be employed to fetch relevant search terms for E-01 through E-07 test cases. Using sample data will avoid cases where a static search term is missing from a particular doctor's data.
-
-
-A dynamic sample query is proposed to retrieve patient name, diagnosis, and year for test case E-01 through E-07.  This data-driven approach removes dependency on hardcoded test terms, improving test reliability regardless of dataset seeding.  This uses data from SIM2Y, if seeded, or clinic data if not, ensuring functionality with either scenario. This approach eliminates a major testing gap. The proposed method will ensure that the tests in E-03 and E-04 are valid.
-
-
-A potential flaw in the name search logic where an empty result could lead to an incorrect positive match has been discovered. Replacing the hardcoded search term with a dynamic query that checks for the existence of relevant data provides a robust solution. The data-driven approach using sample queries ensures valid search terms and fixes a testing gap in the E-01 through E-07 test cases. The dynamic approach will produce a more robust test. Verification of test cases E-05 and E-06, applying the same data-driven approach. Examining how phone number searches are handled will resolve the issue. Line 658 of the `MD\Negocio\Ordenes.php` file is the focus for understanding the expected behavior of 7-10 digit numbers.
-
-
-The phone number search's reliance on a regex `^\d{7,10}$` might fail with formatted numbers.  The database seeds ten-digit numbers, and the code cleans them.  The cleaned numbers should match the regex.
-
-Reviewing the "E-11" folio search, the numeric term is cleaned of non-digits and leading zeros.  The `buscarOrdenesMedico` function handles numeric terms with a regex `^\d{1,6}$` to search for exact or prefixed folios. This suggests potential inconsistencies in the handling of pure numeric searches between phone numbers and folios.
-
-
-The `buscarOrdenesMedico` function's folio search logic is flawed; the LIKE clause will not correctly match prefixes like "S2Y-" as observed with simulation folios. In the simulation data, the LIKE operator will produce incorrect matches for folios beginning with alphanumeric prefixes. Examining the `obtenerOrdenesAnterioresMedico` function reveals a more robust search that can correctly handle the alphanumeric prefix. It uses several checks including exact match and a LIKE with a padded numeric part. This reveals a testing gap where simulation folios are handled inconsistently.
-
-
-The folio search logic in `buscarOrdenesMedico` is insufficient, failing to handle alphanumeric prefixes present in simulation data, which will lead to incorrect search results. The logic searches only for exact numeric matches or numeric prefixes. The `obtenerOrdenesAnterioresMedico` function uses a more robust approach, including exact match and padded numeric checks, making it more reliable for alphanumeric folio searches. This difference reveals a crucial testing gap.
-
-
-The `buscarOrdenesMedico` function's folio search has a critical limitation: it does not handle wildcard searches that include prefixes, whereas `obtenerOrdenesAnterioresMedico` does.  This discrepancy affects simulation data folio searches. The numeric search only handles exact matches or prefixes; therefore, it misses folios like `S2Y-00042` if the search is simply `42`. The current logic would not find the folio without adding a `LIKE` check like in the other function.
-
-
-A test case for numeric-only folio searches will fail due to the search function using an exact or prefix match against the database where folios have alphanumeric prefixes. Consequently, the query will return an empty result, leading to a failed assertion. Comparing `buscarOrdenesMedico` with a more robust search function, `obtenerOrdenesAnterioresMedico`, highlights a functional gap. The latter correctly handles prefixes and exact matches.
-
-
-The code's folio search logic is now under scrutiny within the `buscarOrdenesMedico` function, specifically lines 649-693 of `Ordenes.php`. It is being checked for its actual capabilities. The specific handling of folio searches is examined in detail.
-
-The code's structure appears to implement distinct search strategies based on folio format (pure numeric, long numeric, or text/multicriteria). The logic for numerical folio searches is being inspected to understand prefix and exact matching. The potential for inconsistent handling, given the observed alphanumeric prefixes in simulation folios, is being assessed.
-
-
-The code's folio search logic employs different strategies based on input. For numeric inputs of 3+ digits, the code attempts an exact match or a prefix search on the `folio_unico` column. This approach is sufficient for numerical folios. However, simulation data contains folios with alphanumeric prefixes, which the current `buscarOrdenesMedico` function's logic will miss. Consequently, test cases relying on these prefixes will produce incorrect results.
-
-
-The search function logic's text branch, used for alphanumeric terms, does *not* include a check against the `folio_unico` column. This means alphanumeric folio prefixes are *not* correctly handled in this branch.  The code logic prioritizes name/diagnosis searches. This confirms the inconsistency in folio search handling where alphanumeric prefixes are missed in specific search branches. This introduces a significant testing gap for simulation data.
-
-
-The `buscarOrdenesMedico` function's search logic misses alphanumeric folio prefixes because the `folio_unico` column is omitted from the `else` branch, prioritizing name and diagnosis searches. This omission is a significant flaw, as simulation data relies on these prefixes, potentially leading to incorrect search results and failed test assertions. The logic prioritizes other data, which is an oversight. The `obtenerOrdenesAnterioresMedico` uses a more complete approach, which makes the former flawed. The function `obtenerOrdenesAnterioresMedico` includes both exact matching and `LIKE` checks, properly handling these prefixes. The implementation in `obtenerOrdenesAnteriores` includes the necessary check, and therefore represents the correct approach for simulation.
-
-
-The `buscarOrdenesMedico` function's folio search is incomplete, as it fails to include wildcard (LIKE) searches or handle alphanumeric prefixes, unlike the more comprehensive `obtenerOrdenesAnterioresMedico` function. This disparity leads to inconsistent search results and potentially failed assertions when using simulation folios. Test case E-11 is designed to verify this, focusing on exact matches, which does not consider the prefix. Reviewing the function in detail helps identify these specific flaws.
-
-
-The `buscarOrdenesMedico` function's folio search has a critical inconsistency. It does not correctly handle alphanumeric prefixes, especially in the text search branch where it omits checks against the `folio_unico` column. The search logic handles exact matches or prefixes in the numeric branch, but the text branch omits these checks. This discrepancy results in incorrect search results when handling alphanumeric folio prefixes. The `obtenerOrdenesAnterioresMedico` function handles this case correctly. The identified pattern suggests alignment is required for uniform search results.
-
-
-The test case F-01 uses `obtenerOrdenesAnterioresMedico` with a 30-day filter. The logic of `obtenerOrdenesAnterioresMedico` requires examination to ensure proper pagination. The test verifies the record count against a limit, but it may have an issue. Potential pagination issues could result from inconsistencies in date handling during querying or filtering. This requires a deeper dive into pagination logic.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `run_all_refresh_search_suites.sh`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 28.997432351s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-#!/usr/bin/env bash
-# ═══════════════════════════════════════════════════════════════════════
-# run_all_refresh_search_suites.sh — Orquestador Master de 44 Casos
-# Automatización Completa: Refresh, Ciclo de Vida, Filtros, Lupita y SIM2Y
-# ═══════════════════════════════════════════════════════════════════════
-#
-# Uso:
-#   bash tests/run_all_refresh_search_suites.sh
-#   bash tests/run_all_refresh_search_suites.sh --seed
-#   bash tests/run_all_refresh_search_suites.sh --clean
-#   bash tests/run_all_refresh_search_suites.sh --only-frontend
-#   bash tests/run_all_refresh_search_suites.sh --only-backend
-# ═══════════════════════════════════════════════════════════════════════
-
-set -e
-
-DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-cd "$DIR"
-
-# Colores ANSI
-BOLD="\033[1m"
-GREEN="\033[32m"
-RED="\033[31m"
-YELLOW="\033[33m"
-CYAN="\033[36m"
-RESET="\033[0m"
-
-# Flags
-DO_SEED=false
-DO_CLEAN=false
-RUN_FRONTEND=true
-RUN_BACKEND=true
-
-for arg in "$@"; do
-    case "$arg" in
-        --seed)
-            DO_SEED=true
-            ;;
-        --clean)
-            DO_CLEAN=true
-            ;;
-        --only-frontend)
-            RUN_BACKEND=false
-            ;;
-        --only-backend)
-            RUN_FRONTEND=false
-            ;;
-        --help|-h)
-            echo "Uso: bash tests/run_all_refresh_search_suites.sh [OPCIONES]"
-            echo "Opciones:"
-            echo "  --seed           Siembra el dataset SIM2Y (2 años / 1,512 órdenes) antes de la suite"
-            echo "  --clean          Limpia atómicamente el dataset SIM2Y al concluir"
-            echo "  --only-frontend  Ejecuta solo la Suite 1 de Node.js (18 casos)"
-            echo "  --only-backend   Ejecuta solo la Suite 2 de PHP CLI (26 casos)"
-            exit 0
-            ;;
-    esac
-done
-
-export LAESH_DB_PORT="${LAESH_DB_PORT:-6002}"
-export LAESH_DB_USER="${LAESH_DB_USER:-root}"
-export LAESH_DB_PASS="${LAESH_DB_PASS:-comite_2026}"
-export LAESH_DB_NAME="${LAESH_DB_NAME:-laesh_db}"
-
-echo -e "\n${BOLD}══════════════════════════════════════════════════════════════════════${RESET}"
-echo -e "${CYAN}${BOLD}  🚀 ORQUESTADOR MASTER: SUITE COMPLETA DE 44 CASOS AUTOMATIZADOS${RESET}"
-echo -e "  Stack: Node.js (Frontend 18) + PHP CLI / PDO MariaDB (Backend 26)"
-echo -e "${BOLD}══════════════════════════════════════════════════════════════════════${RESET}\n"
-
-START_ALL=$(date +%s)
-
-# Paso Opcional: Siembra del Dataset SIM2Y
-if [ "$DO_SEED" = true ]; then
-    echo -e "${YELLOW}🌱 Sembrando Dataset Clínico SIM2Y (2 años de historial)...${RESET}"
-    php tests/seed_dataset_2years.php --clean-first
-    echo ""
-fi
-
-STATUS_SUITE1=0
-STATUS_SUITE2=0
-
-# PARTE 1: Frontend & Ciclo de Vida (18 Casos)
-if [ "$RUN_FRONTEND" = true ]; then
-    echo -e "${BOLD}▶ PARTE 1: Suite Frontend & Ciclo de Vida (18 Casos en Node.js)${RESET}"
-    echo -e "  Bloques: A (Laptop F5/Ctrl+F5), B (Móviles PTR/Back), C (Limpieza Atómica), G (Notificaciones)"
-    echo -e "  Archivo: tests/test_client_refresh_draft_suite.js\n"
-    
-    if node tests/test_client_refresh_draft_suite.js; then
-        STATUS_SUITE1=0
-    else
-        STATUS_SUITE1=1
-    fi
-    echo ""
-fi
-
-# PARTE 2: Backend Search, Filtros y Dataset SIM2Y (26 Casos)
-if [ "$RUN_BACKEND" = true ]; then
-    echo -e "${BOLD}▶ PARTE 2: Suite Backend, Filtros Período y Lupita Mixta (26 Casos en PHP CLI)${RESET}"
-    echo -e "  Bloques: D (Períodos 30d/15d/Fechas), E (Lupita Matriz Multicriterio), F (Paginación)"
-    echo -e "  Archivo: tests/test_search_periodo_dataset_suite.php\n"
-    
-    if php tests/test_search_periodo_dataset_suite.php; then
-        STATUS_SUITE2=0
-    else
-        STATUS_SUITE2=1
-    fi
-    echo ""
-fi
-
-# Paso Opcional: Limpieza atómica post-pruebas
-if [ "$DO_CLEAN" = true ]; then
-    echo -e "${YELLOW}🧹 Limpiando atómicamente registros del Dataset SIM2Y...${RESET}"
-    php tests/clean_dataset_2years.php
-    echo ""
-fi
-
-END_ALL=$(date +%s)
-DURATION=$((END_ALL - START_ALL))
-
-echo -e "${BOLD}══════════════════════════════════════════════════════════════════════${RESET}"
-echo -e "${CYAN}${BOLD}  🏁 REPORTE CONSOLIDADO FINAL — STACK DE 44 CASOS AUTOMATIZADOS${RESET}"
-echo -e "${BOLD}══════════════════════════════════════════════════════════════════════${RESET}"
-
-if [ "$STATUS_SUITE1" -eq 0 ] && [ "$STATUS_SUITE2" -eq 0 ]; then
-    echo -e "  Estado General:        ${GREEN}${BOLD}✓ TODAS LAS SUITES APROBADAS (100%)${RESET}"
-    echo -e "  Suite 1 (Frontend):    ${GREEN}✓ 18/18 Casos PASS${RESET}"
-    echo -e "  Suite 2 (Backend):     ${GREEN}✓ 26/26 Casos PASS${RESET}"
-    echo -e "  Total de Casos:        ${GREEN}${BOLD}44 Casos Automatizados Verificados${RESET}"
-else
-    echo -e "  Estado General:        ${RED}${BOLD}✗ HUBO FALLAS EN LAS SUITES${RESET}"
-    [ "$STATUS_SUITE1" -ne 0 ] && echo -e "  Suite 1 (Frontend):    ${RED}✗ Falló Suite de Node.js${RESET}"
-    [ "$STATUS_SUITE2" -ne 0 ] && echo -e "  Suite 2 (Backend):     ${RED}✗ Falló Suite de PHP${RESET}"
-fi
-echo -e "  Tiempo Total:          ${DURATION}s"
-echo -e "${BOLD}══════════════════════════════════════════════════════════════════════${RESET}\n"
-
-if [ "$STATUS_SUITE1" -ne 0 ] || [ "$STATUS_SUITE2" -ne 0 ]; then
-    exit 1
-fi
-exit 0
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-The `set -e` in the script sets the "errexit" option; however, the `if` statement correctly captures the exit code of the test command even when it fails. Therefore, `STATUS_SUITE1=1` is correctly assigned if the test suite fails, which means the script is behaving as intended.
-
-
-Analyzing another test suite's exit code assignment confirms the expected behavior: suite failure sets the status to 1. The script's final exit condition correctly reflects test suite outcomes, exiting with code 1 if any suite fails. The focus shifts to examining production code implementations for potential gaps related to the user's search functionality request.
-
-
-The search logic's flawed folio matching necessitates investigating the `'buscarOrdenesMedico'` function. Inputting numeric folios directly will fail to locate alphanumeric folios because of an overly restrictive comparison. Alphanumeric folios are never matched against the folio column. To fix this, the alphanumeric input needs inclusion in the folio matching.
-
-
-Analyzing the search logic reveals that both the Reception and Doctor search functions lack comprehensive folio matching. The current implementation in both lacks the crucial `LOWER(o.folio_unico) LIKE :q_fol_N` condition. The absence of this condition prevents searches using alphanumeric folios and mixed search terms. Adding this condition to both search functions ensures folio searches are more flexible.
-
-
-The test suite `tests/test_search_periodo_dataset.php` requires a thorough review to ensure comprehensive folio search testing. Initial inspection suggests current tests may not fully cover alphanumeric folio matching with prefixes like "S2Y-" or mixed inputs. Adding tests to cover the identified gap in folio matching will be essential.
-
-
-The current test for the 30-day filter is flawed: it passes vacuously if no records are returned, regardless of the query's validity. This oversight requires modifying the assertion to ensure a non-empty result set when the dataset is seeded. The corrected test needs an additional check to verify that records exist within the expected timeframe.
-
-
-The date inversion auto-correction must be validated by comparing the count of records retrieved in both inverted and normal date order. The absence of records when dates are inverted must not lead to a false positive.
-
-The test suite relies on hardcoded data, which can lead to false positives if the sample data does not exist in the database. Instead of the hardcoded data, sample data should be queried dynamically for a given doctor. This ensures more reliable and meaningful test outcomes.
-
-
-Analyzing how to extract sample data from the database for testing. The plan is to execute a query retrieving a sample record for a specific doctor, extracting data for testing folio, date, and other search criteria. This approach avoids hardcoding and ensures meaningful test results.
-
-
-The current search functionality, particularly in the `buscarOrdenesMedico` function, incorrectly filters folios. The existing code checks against `paciente_nombre` and `diagnostico` instead of `folio_unico`. The code lacks a `LOWER(o.folio_unico) LIKE :q_fol_N` condition. This omission prevents accurate folio searches.
-
-
-The existing search functions neglect folio matching within the text-based search branch.  This omission is a critical bug.  The numeric folio search is also flawed, as it fails to account for prefixes or exact matches, preventing successful lookups.
-
-The `obtenerOrdenesAnterioresMedico` function's folio search relies on a regular expression that permits prefixes. However, it only performs an exact match or checks for a string of leading numbers. This implementation is problematic, given that the other search functions omit a check on the folio.
-
-
-The `obtenerOrdenesAnterioresMedico` function now correctly handles folio searches, including prefixes and text-based searches. However, the `buscarOrdenesMedico` and `buscarOrdenes` methods still require updates to align with the improved folio matching. These functions have not been updated for folio matching within the text search branch or for supporting prefixed numeric folios. The report needs to highlight this discrepancy. Additionally, the pagination logic in Bloque F requires examination for potential issues.
-
-
-Pagination testing requires dynamically determining the page size based on the number of orders, using a range to cover multiple-page scenarios. Verifying sort order in the code involves checking data consistency after applying `ORDER BY` clauses to confirm sort behavior.
-
-The frontend test suite cases will be examined to assess completeness and coverage of scenarios.
-
-
-Reviewed scenarios for testing client-side draft preservation and refresh behavior, focusing on various triggers like DOM recreation, hard refresh, and back/forward navigation. A potential gap was identified regarding how tab text and badge content are updated and verified, specifically around the `tabText` update. The process of updating `tabText` relies on several functions, including `updateChipsContainer()` which calls `updateTotalBadge()`, with `totalCount` calculated from the grid and `otros-estudios`.
-
-
-Adding `process.exit(0);` or a try-catch block to the test script clarifies exit behavior, ensuring a clean exit with code 1 on any error. This enhances compatibility with CLI expectations.
-
-Examining database methods `MD\Negocio\Ordenes::buscarOrdenesMedico` and `RC\Negocio\Ordenes::buscarOrdenes` is critical to ensure test suite E-01 through E-16 pass consistently. The code snippet is being used to find potential mismatches.
-
-The current folio search implementation in `MD\Negocio\Ordenes.php` employs regular expressions for numeric folio prefixes. Checking the matching strategy shows that it's incomplete.
-
-
-The search functions still need the folio matching implemented for text-based queries and prefixes to avoid errors. The search for folios currently functions by exact match only; this causes incorrect behavior when users input partial folios or those with prefixes. The `buscarOrdenesMedico` and `buscarOrdenes` methods lack the improved folio handling and must be updated.
-
-
-The numeric folio search now uses a more flexible approach, searching for exact matches, prefixes, and suffixes, including padded zeros. Order results prioritize exact matches and padded matches. This expanded search will likely improve the folio matching. The search is improved because it now addresses all the prefixes.
-
-
-The folio search now supports year, prefixed alphanumeric, and numeric fragments, updating the `whereParts` array based on identified patterns.  Exact folio, padded numeric folio (for partial matches), and phone number searches are incorporated within a single `WHERE` clause.
-
-
-The improved folio search implementation now handles a comprehensive set of search scenarios, including direct folio input, prefixed alphanumeric folios, and partial folio matches. This expanded matching logic is now present in both `MD\Negocio\Ordenes::buscarOrdenesMedico` and `RC\Negocio\Ordenes::buscarOrdenes`, with the text search including `folio_unico`. The comprehensive folio matching covers a wide array of test cases.
-
-
-The test suite `tests/test_search_periodo_dataset_suite.php` requires enhancements for robust, non-vacuous assertions. Dynamic data extraction will replace hardcoded values with doctor-specific samples for more accurate testing of multi-criteria search combinations including name, year, diagnosis, phone, and folio, also generic terms. Assertions will be added to ensure the presence of results in relevant tests (D-01, D-02, D-03, D-05, D-06). Pagination tests (F-01, F-02) will adapt the page size calculation dynamically and assert the presence of items on different pages with no overlap.
-
-
-The `test_search_periodo_dataset_suite.php` and its assertions need updating to confirm the sort order with count >= 2. The pagination tests must use dynamic page size and verify the presence of all expected results.
-
-The test suite needs expansion to cover cases E-09, E-10, and E-11, by updating `MD\Negocio\Ordenes.php` and `RC\Negocio\Ordenes.php`, and ensuring folio search includes the  `folio_unico` column in text searches for consistent and correct matching.
-
-The test stack audit revealed necessary improvements to folio searching to cover the search cases, the plan includes fixing the test `tests/test_search_periodo_dataset_suite.php`, but also to apply the folio search to both the `buscarOrdenesMedico` and `buscarOrdenes` functions.
-
-
-
-
-### Actions
-
-**Tool:** `write_to_file`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 42.819179388s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 7:26 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 7:27 pm
-
----
-
-## Agent Response
-
-### Thinking
-
-No syntax errors were found in the PHP test suite. Now the JavaScript test file will be examined to identify potential gaps or issues, focusing on the `matchesSelector` function. The code within this function is particularly relevant, specifically lines 105-114, to ensure proper functionality.
-
-
-The `matchesSelector` function directly addresses the difference between the selectors `input[name="estudios[]"]` and `input[name="estudios[]"]:checked`. The `querySelectorAll` function appears to recursively handle nested elements, which is important for comprehensive selection. ID registration is handled during DOM creation, enabling `getElementById` functionality. The use of `querySelectorAll` followed by `Array.from()` is expected to work as intended for checkbox processing.
-
-
-Examining the JavaScript test suite reveals the use of `process.exit(0)` to ensure clean termination after test completion. Inspection of the test suite output confirms 18 passing tests in Suite 1, along with the standard `console.log` output. The current focus shifts to addressing the user's request concerning the "Lupita" search feature, requiring an audit of existing code to identify potential gaps in test coverage, particularly for the mixed search functionality described in a prior user request. The code locations in the PHP files are now under review in relation to the search feature.
-
-
-Identified and corrected three gaps in the PHP test suite: The first involved vacuous truth assertions by ensuring non-empty dataset checks and positive database counts. The second gap, addressed through dynamic data extraction, replaced hardcoded values with actual order details.  The final fix implemented adaptive pagination calculation to ensure valid records on all pages.
-
-
-
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 3.608187755s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-<?php
-/**
- * ═══════════════════════════════════════════════════════════════════════
- * test_search_periodo_dataset_suite.php — Suite Automatizada de Backend
- * Filtros de Período Rápido, Calendario, Búsqueda Lupita Mixta y Paginación
- * Dataset: Generador de 2 Años de Historial Clínico [SIM2Y]
- * ═══════════════════════════════════════════════════════════════════════
- *
- * Automatiza 26 Casos de Prueba (Auditoría Preventiva y Anti-Gaps):
- *   - Bloque D: Filtros de Período Rápido y Calendario (D-01 a D-06)
- *   - Bloque E: Búsqueda con Lupita y Matriz Multicriterio (E-01 a E-16)
- *   - Bloque F: Paginación y Retención de Parámetros (F-01 a F-04)
- *
- * Uso:
- *   LAESH_DB_PORT=6002 php tests/test_search_periodo_dataset_suite.php
- * ═══════════════════════════════════════════════════════════════════════
- */
-
-declare(strict_types=1);
-
-// ── 1. Inicialización de Entorno y Conexión ─────────────────────────
-if (!getenv('LAESH_DB_PORT') && !file_exists('/.dockerenv')) {
-    putenv('LAESH_DB_PORT=6002');
-}
-putenv('LAESH_DB_USER=' . (getenv('LAESH_DB_USER') ?: 'root'));
-putenv('LAESH_DB_PASS=' . (getenv('LAESH_DB_PASS') ?: 'comite_2026'));
-putenv('LAESH_DB_NAME=' . (getenv('LAESH_DB_NAME') ?: 'laesh_db'));
-
-define('BASE_DIR', dirname(__DIR__));
-require_once BASE_DIR . '/laesh-swbldi/commons/autoload.php';
-require_once BASE_DIR . '/laesh-swbldi/commons/DB.php';
-require_once BASE_DIR . '/laesh-swbldi/md/negocio/Ordenes.php';
-require_once BASE_DIR . '/laesh-swbldi/rc/negocio/Ordenes.php';
-```
-
-</details>
-
----
-
-## User Request
-
-precisión: los folios seran unicamente numericos iniciando en: 1 , no alfanumericos. corrige  alinea e informa me.
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `test_search_periodo_dataset_suite.php`
-**Language:** php
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-The crucial clarification dictates folio numbers must be strictly numeric, starting from 1. Initial implementation might have allowed alphanumeric values; reviewing the relevant module is essential to ensure only numeric folios are generated and assigned. This constraint directly impacts how the folio generation and assignment logic operates.
-
-
-Numeric folio generation is the primary focus; the script initially used alphanumeric prefixes. The cleaning script appears to identify simulated data using a `[SIM2Y]` marker within various fields like patient names, notifications, and order details, even if the folios themselves are alphanumeric. It is necessary to understand how the cleaning script functions, specifically lines 30-55. The cleaning script queries the database for records associated with `S2Y-` and `[SIM2Y]`.
-
-
-Numeric folios are handled in the `Ordenes.php` module. The code explicitly checks for numeric input using a regular expression. The numeric folio is extracted and utilized directly. It now seems that there may have been prior handling for alphanumeric folios, but the focus is clearly numeric now.
-
-
-The search logic in `Ordenes.php` uses an exact match and prefix search for folio lookups, prioritizing exact matches. The current implementation, however, has a flaw: the numeric fragment matching requires a minimum of three digits. This prevents accurate matching of folios with one or two digits. The regular expression needs adjustment to correctly identify and match single and double-digit folio numbers present in multi-word queries.
-
-
-
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `CrearOrdenLaboratorio`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 2.963725991s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 7:36 pm
-
----
-
-## Agent Response
-
-### Thinking
-
-The system generates numerical folios through auto-increment in at least one identified function. The user requires purely numeric folios starting from 1, excluding any alphanumeric prefixes or formats. The codebase must be checked for all instances of folio generation to ensure compliance with the user's precision mandate.
-
-A specific file utilizing a prefix and formatted numbering needs adjustment. It requires replacement of the existing alphanumeric format with a pure numeric sequence starting from 1.
-
-
-Revised data detection criteria now leverage `paciente_id` linked to the patient's full name containing a specific identifier for simulated data.  File names, paths for result PDFs, and notifications are updated to reference the numeric folio directly.  The data cleaning script requires adjustment to reflect the revised patient identification and folio references, along with associated data deletion logic.  The order search function must be reviewed to ensure folio searches are precise and prioritize exact matches.
-
-
-Examining the multi-criteria search, it's clear the system correctly interprets mixed queries, such as "Carlos 42 2025," matching each term to the appropriate database fields. The folio search in a specific function provides a cleaner and faster approach when strictly numerical. This confirms folio search precision needs to be prioritized.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `seed_dataset_2years.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 1.228967238s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L34-59)</summary>
-
-**Path:** `Unknown file`
-
-```
-try {
-    $db = \Common\DB::connect();
-    echo "✓ Conectado a la base de datos: " . $db->query("SELECT DATABASE()")->fetchColumn() . "\n";
-
-    // 1. Verificar si ya existen datos simulados
-    $prevCount = (int)$db->query("SELECT COUNT(*) FROM ordenes WHERE folio_unico LIKE 'S2Y-%'")->fetchColumn();
-    if ($prevCount > 0) {
-        if ($cleanFirst) {
-            echo "ℹ Opción --clean-first detectada. Ejecutando limpieza previa...\n";
-            require __DIR__ . '/clean_dataset_2years.php';
-        } else {
-            echo "⚠️  Ya existen {$prevCount} órdenes simuladas con prefijo S2Y-.\n";
-            echo "   Para sobrescribir, ejecute: php tests/seed_dataset_2years.php --clean-first\n";
-            echo "   O limpie manualmente con: php tests/clean_dataset_2years.php\n\n";
-            exit(0);
-        }
-    }
-
-    // 2. Obtener médicos disponibles
-    $stmtMed = $db->query("
-        SELECT u.id, COALESCE(pm.nombre_completo, CONCAT(em.nombre, ' ', em.apellidos)) as nombre, COALESCE(pm.especialidad, 'Medicina General') as especialidad
-        FROM users u
-        LEFT JOIN perfiles_medicos pm ON u.id = pm.user_id
-        LEFT JOIN empleados em ON u.id = em.user_id
-        WHERE em.rol = 'MEDICO' OR pm.user_id IS NOT NULL
-        ORDER BY u.id ASC
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 7:36 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 7:36 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 7:36 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 7:36 pm
-
----
-
-## Agent Response
-
-### Thinking
-
-The database contains pre-existing alphanumeric order entries, contradicting the requirement for purely numeric folios starting from 1. The user explicitly requests correction to enforce numeric folios; current data includes mixed numeric and alphanumeric orders (e.g., "S2Y-0", "LAESH"). The seed dataset generation needs adjustment to strictly produce numeric folios as per the user's precision.
-
-
-
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.035689546s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 7:37 pm
 
 ---
 
-## Agent Response
+### Terminal Command Execution
 
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
+**Status:** Reset
+**Created:** 27 Sept 2026, 7:37 pm
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 7:37 pm
-
----
-
-## Agent Response
-
-### Thinking
-
-The stored procedure assigns a character representation to the folio, derived from an incrementing integer. The user's requirement specifies purely numeric folios starting from 1. The code currently converts the integer to a character string, which fulfills the numeric requirement, but it seems there's no need for an alfanumeric folio.
-
-
-The script should generate numeric folios starting from 1, considering existing data.  The `--clean-first` option resets the folio sequence to 1 by clearing simulated orders; however, if `--clean-first` isn't used, the script must determine the next available numeric folio. The system needs to read the maximum existing folio or respect user input to start from 1.  Potential collisions with existing `folio_unico` values require verification of the existing dataset and how data cleanup functions.
-
-
-
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.561494352s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 7:37 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 27 Sept 2026, 7:37 pm
-
----
-
-## Agent Response
-
-### Thinking
-
-The `folios_control` table stores the last used folio number for 'orden_laboratorio', currently at 99. The `CrearOrdenLaboratorio` procedure increments this folio number and then retrieves the updated value. The plan is to cast this retrieved value to `p_folio_unico`.
-
-
-Folios must be strictly numeric, starting from 1, aligning with the user's explicit requirement. If the dataset generation is initiated, the system must handle potential conflicts if existing orders occupy folio numbers starting at 1. The implication is that simulated datasets may begin from 1 only after cleaning previous test data or checking the maximum existing folio.
-
-
-Analysis reveals that existing folio search logic incorrectly handles numeric folios. The current system treats single and double-digit numbers as text when multi-criteria searches are performed. Addressing this, any word matching a numeric pattern within a multi-criteria search should be checked against both `folio_unico` and patient identifiers. This ensures correct folio identification in searches.
-
-
-The folio search logic in multiple files must be synchronized to ensure consistent numeric folio handling. Specifically, numeric patterns, including those prefixed with `#`, should be checked against `folio_unico` and patient identifiers to identify the correct records, similar to how it's handled in `obtenerOrdenesAnterioresMedico`. The dataset generation must start folio numbering at 1, but should consider existing data for conflict avoidance.
-
-
-The system must handle potential conflicts when starting folio numbering at 1, specifically addressing existing test orders with numeric folios.  Simulated orders can be identified by patient names containing `[SIM2Y]`. The cleaning script's behavior regarding test orders must be verified.  It's crucial to ensure the cleaning mechanism addresses conflicts between existing test data and the desired folio numbering start at 1. The total number of orders in the `ordenes` table needs to be checked.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `clean_dataset_2years.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 4.652100515s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L24-59)</summary>
-
-**Path:** `Unknown file`
-
-```
-echo "\n" . str_repeat('=', 70) . "\n";
-echo "  🧹 LAESH — LIMPIEZA ATÓMICA DE DATASET SIMULADO [SIM2Y]\n";
-echo str_repeat('=', 70) . "\n";
-
-try {
-    $db = \Common\DB::connect();
-    echo "✓ Conectado a la base de datos: " . $db->query("SELECT DATABASE()")->fetchColumn() . "\n";
-
-    // 1. Conteo previo de elementos a eliminar
-    $cntNotif = (int)$db->query("SELECT COUNT(*) FROM notificaciones WHERE folio_referencia LIKE 'S2Y-%' OR mensaje LIKE '%[SIM2Y]%'")->fetchColumn();
-    $cntPdf   = (int)$db->query("SELECT COUNT(*) FROM resultados_pdf WHERE folio_extraido LIKE 'S2Y-%' OR ruta_storage LIKE '%SIM2Y%' OR orden_id IN (SELECT id FROM ordenes WHERE folio_unico LIKE 'S2Y-%')")->fetchColumn();
-    $cntDet   = (int)$db->query("SELECT COUNT(*) FROM detalle_ordenes WHERE orden_id IN (SELECT id FROM ordenes WHERE folio_unico LIKE 'S2Y-%')")->fetchColumn();
-    $cntHist  = (int)$db->query("SELECT COUNT(*) FROM historial_estados_orden WHERE orden_id IN (SELECT id FROM ordenes WHERE folio_unico LIKE 'S2Y-%')")->fetchColumn();
-    $cntOrd   = (int)$db->query("SELECT COUNT(*) FROM ordenes WHERE folio_unico LIKE 'S2Y-%'")->fetchColumn();
-    $cntPac   = (int)$db->query("SELECT COUNT(*) FROM pacientes WHERE nombre_completo LIKE '%[SIM2Y]%'")->fetchColumn();
-
-    $totalRegistros = $cntNotif + $cntPdf + $cntDet + $cntHist + $cntOrd + $cntPac;
-
-    echo "\n  Registros identificados con etiqueta [SIM2Y]:\n";
-    echo "  - Notificaciones:           " . number_format($cntNotif) . "\n";
-    echo "  - Resultados PDF:           " . number_format($cntPdf) . "\n";
-    echo "  - Detalle de Órdenes:       " . number_format($cntDet) . "\n";
-    echo "  - Historial de Estados:     " . number_format($cntHist) . "\n";
-    echo "  - Órdenes:                  " . number_format($cntOrd) . "\n";
-    echo "  - Pacientes simulados:      " . number_format($cntPac) . "\n";
-    echo "  " . str_repeat('-', 40) . "\n";
-    echo "  TOTAL A LIMPIAR:            " . number_format($totalRegistros) . "\n\n";
-
-    if ($totalRegistros === 0) {
-        echo "ℹ No se encontraron registros simulados con marca [SIM2Y]. Base de datos limpia.\n\n";
-        exit(0);
-    }
-
-    if ($isDryRun) {
-        echo "🔎 [DRY-RUN] Modo simulación activado. No se ejecutó ninguna eliminación.\n\n";
-        exit(0);
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Orders generated through simulation with numeric folios can be identified using a database query searching the `paciente_id` within the `pacientes` table, filtered by a name containing "[SIM2Y]". Additionally, for existing simulated orders with the "S2Y-" prefix, a separate `folio_unico` search ensures these 1,512 existing entries are also handled. A count of orders with the `S2Y-` prefix will be retrieved from the database to assist in validating the approach.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `clean_dataset_2years.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.100055110s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L59-114)</summary>
-
-**Path:** `Unknown file`
-
-```
-        exit(0);
-    }
-
-    // 2. Ejecución atómica dentro de transacción
-    $start = microtime(true);
-    $db->beginTransaction();
-
-    // Paso A: Notificaciones
-    $delNotif = $db->exec("DELETE FROM notificaciones WHERE folio_referencia LIKE 'S2Y-%' OR mensaje LIKE '%[SIM2Y]%'");
-
-    // Paso B: Resultados PDF
-    $delPdf = $db->exec("DELETE FROM resultados_pdf WHERE folio_extraido LIKE 'S2Y-%' OR ruta_storage LIKE '%SIM2Y%' OR orden_id IN (SELECT id FROM ordenes WHERE folio_unico LIKE 'S2Y-%')");
-
-    // Paso C: Detalle de Órdenes
-    $delDet = $db->exec("DELETE FROM detalle_ordenes WHERE orden_id IN (SELECT id FROM ordenes WHERE folio_unico LIKE 'S2Y-%')");
-
-    // Paso D: Historial de Estados
-    $delHist = $db->exec("DELETE FROM historial_estados_orden WHERE orden_id IN (SELECT id FROM ordenes WHERE folio_unico LIKE 'S2Y-%')");
-
-    // Paso E: Órdenes
-    $delOrd = $db->exec("DELETE FROM ordenes WHERE folio_unico LIKE 'S2Y-%'");
-
-    // Paso F: Pacientes
-    $delPac = $db->exec("DELETE FROM pacientes WHERE nombre_completo LIKE '%[SIM2Y]%'");
-
-    // Paso G: Recalcular total_ordenes en perfiles_medicos para mantener paridad
-    $db->exec("
-        UPDATE perfiles_medicos pm
-        SET total_ordenes = (
-            SELECT COUNT(*) FROM ordenes o WHERE o.medico_id = pm.user_id
-        )
-    ");
-
-    $db->commit();
-    $elapsed = round((microtime(true) - $start) * 1000, 2);
-
-    echo "✓ Limpieza completada con éxito en {$elapsed} ms.\n";
-    echo "✓ Registros eliminados de manera quirúrgica:\n";
-    echo "  - notificaciones:         {$delNotif}\n";
-    echo "  - resultados_pdf:         {$delPdf}\n";
-    echo "  - detalle_ordenes:        {$delDet}\n";
-    echo "  - historial_estados_orden: {$delHist}\n";
-    echo "  - ordenes:                {$delOrd}\n";
-    echo "  - pacientes:              {$delPac}\n";
-    echo "✓ Contadores de perfiles médicos sincronizados.\n";
-    echo str_repeat('=', 70) . "\n\n";
-
-} catch (\Throwable $e) {
-    if (isset($db) && $db->inTransaction()) {
-        $db->rollBack();
-        echo "✗ Transacción revertida (Rollback ejecutado).\n";
-    }
-    echo "✗ ERROR: " . $e->getMessage() . "\n";
-    echo "  En: " . $e->getFile() . ":" . $e->getLine() . "\n\n";
-    exit(1);
-}
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Investigating the data cleaning script, the goal is to sanitize entries matching 'S2Y-%' and those linked to patient IDs with names like '%[SIM2Y]%'. A key concern is the handling of existing test orders with numeric folios from 2 to 24. It is possible to identify existing folios via the seeding script to identify conflicts.
-
-
-The folio index assignment utilizes a strict numeric sequence, starting at one and incrementing.  Crucially, it skips already-occupied folios to prevent collisions, ensuring uniqueness. This approach appears robust and simplifies the folio generation process by preventing collisions, making this a clean starting point. The goal is to compare search logic between two different files to understand any discrepancies.
-
-
-Examining the search logic reveals a multi-faceted approach based on the input term. Different criteria are applied depending on whether the input is a phone number, a single value, or multiple terms. Numerical input is handled differently, parsing it as a year, folio, or phone number fragment based on its format and length. The intent is to construct a flexible search query that accommodates diverse search patterns.
-
-
-The search logic parses input terms and constructs a dynamic SQL `WHERE` clause. Numeric inputs are treated as either folio numbers or partial phone numbers, allowing flexible matching. Textual input triggers a case-insensitive search across patient names and diagnoses.
-
-The order of search results depends on input type: Folio matches are prioritized, followed by broader partial matches or text-based results. The complete query construction involves creating parameterized queries to prevent SQL injection vulnerabilities.
-
-
-Search behavior is complex, handling folio, phone, and text-based queries differently, with various combinations using `AND`. Several files appear to share this pattern. Numerical input is parsed flexibly depending on its format. The logic branches based on whether the input is purely numeric or mixed with text.
-
-
-Analysis focuses on how numeric input is handled within the search queries across different files, specifically when searching by folio. The code employs regular expressions to distinguish between exact and partial folio searches. The queries construct parameterized SQL `WHERE` clauses based on the input type, ensuring data type considerations for the search.
-
-The first file constructs the query to search based on a numeric folio, prioritizes exact matches before partial matches. The second file does the same thing, with parameterized SQL preventing SQL injection. The test cases will check the correctness of these implementations, verifying that searches for exact folio numbers work as intended.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `Ordenes.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 5.875964504s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L414-434)</summary>
-
-**Path:** `Unknown file`
-
-```
-            if ($search !== '') {
-                if (preg_match('/^(?:laesh-?|lsh-?|s2y-?|#)?(\d{1,8})$/i', $search, $mFolio)) {
-                    $rawNum = (int)$mFolio[1];
-                    $pad5   = sprintf('%05d', $rawNum);
-                    $whereSql = "WHERE o.medico_user_id = :user_id AND DATE(o.hora_captura) < CURDATE() AND (LOWER(o.folio_unico) = :q_fol_raw OR LOWER(o.folio_unico) = :q_fol_clean OR LOWER(o.folio_unico) = :q_fol_unpad OR LOWER(o.folio_unico) = :q_fol_full OR LOWER(o.folio_unico) LIKE :q_fol_like) ";
-                    $params[':q_fol_raw']   = $search;
-                    $params[':q_fol_clean'] = $mFolio[1];
-                    $params[':q_fol_unpad'] = (string)$rawNum;
-                    $params[':q_fol_full']  = 'laesh-' . $pad5;
-                    $params[':q_fol_like']  = '%' . $pad5 . '%';
-                } else {
-                    $whereSql = "WHERE o.medico_user_id = :user_id AND ({$filtroPeriodo}) AND (LOWER(o.paciente_nombre) LIKE :q1 OR LOWER(o.paciente_telefono) LIKE :q2 OR LOWER(o.diagnostico) LIKE :q3 OR LOWER(o.folio_unico) LIKE :q4) ";
-                    $qVal = '%' . $search . '%';
-                    $params[':q1'] = $qVal;
-                    $params[':q2'] = $qVal;
-                    $params[':q3'] = $qVal;
-                    $params[':q4'] = $qVal;
-                }
-            } else {
-                $whereSql = "WHERE o.medico_user_id = :user_id AND " . $filtroPeriodo;
-            }
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `Ordenes.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L484-506)</summary>
-
-**Path:** `Unknown file`
-
-```
-            $filtroPeriodo = self::construirFiltroPeriodoAnterioresMedico($periodo, '', $fechaInicio, $fechaFin, $params);
-
-            if ($search !== '') {
-                if (preg_match('/^(?:laesh-?|lsh-?|s2y-?|#)?(\d{1,8})$/i', $search, $mFolio)) {
-                    $rawNum = (int)$mFolio[1];
-                    $pad5   = sprintf('%05d', $rawNum);
-                    $whereSql = "WHERE medico_user_id = :user_id AND DATE(hora_captura) < CURDATE() AND (LOWER(folio_unico) = :q_fol_raw OR LOWER(folio_unico) = :q_fol_clean OR LOWER(folio_unico) = :q_fol_unpad OR LOWER(folio_unico) = :q_fol_full OR LOWER(folio_unico) LIKE :q_fol_like) ";
-                    $params[':q_fol_raw']   = $search;
-                    $params[':q_fol_clean'] = $mFolio[1];
-                    $params[':q_fol_unpad'] = (string)$rawNum;
-                    $params[':q_fol_full']  = 'laesh-' . $pad5;
-                    $params[':q_fol_like']  = '%' . $pad5 . '%';
-                } else {
-                    $whereSql = "WHERE medico_user_id = :user_id AND ({$filtroPeriodo}) AND (LOWER(paciente_nombre) LIKE :q1 OR LOWER(paciente_telefono) LIKE :q2 OR LOWER(diagnostico) LIKE :q3 OR LOWER(folio_unico) LIKE :q4) ";
-                    $qVal = '%' . $search . '%';
-                    $params[':q1'] = $qVal;
-                    $params[':q2'] = $qVal;
-                    $params[':q3'] = $qVal;
-                    $params[':q4'] = $qVal;
-                }
-            } else {
-                $whereSql = "WHERE medico_user_id = :user_id AND " . $filtroPeriodo;
-            }
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `Ordenes.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L644-694)</summary>
-
-**Path:** `Unknown file`
-
-```
-            $limInt = max(1, min(50, (int)$limit));
-            $params = [':medico_id' => $medicoId];
-            $whereParts = ["o.medico_user_id = :medico_id"];
-
-            // 1. Caso numérico puro (1 a 6 dígitos): Folio exacto o prefijo
-            if (preg_match('/^\d{1,6}$/', $term)) {
-                $whereParts[] = "(o.folio_unico = :f_exact OR o.folio_unico LIKE :f_pref)";
-                $params[':f_exact'] = $term;
-                $params[':f_pref']  = $term . '%';
-                $orderClause = "(o.folio_unico = :f_ord) DESC, CAST(o.folio_unico AS UNSIGNED) ASC, o.orden_id DESC";
-                $params[':f_ord'] = $term;
-            }
-            // 2. Caso numérico largo (7 a 10 dígitos): Teléfono directo o folio
-            elseif (preg_match('/^\d{7,10}$/', $term)) {
-                $whereParts[] = "(o.paciente_telefono LIKE :tel OR o.folio_unico = :fol_tel)";
-                $params[':tel'] = '%' . $term . '%';
-                $params[':fol_tel'] = $term;
-                $orderClause = "o.orden_id DESC";
-            }
-            // 3. Caso texto o multicriterio (Nombre, Año, Teléfono parcial)
-            else {
-                $words = preg_split('/\s+/', $term, -1, PREG_SPLIT_NO_EMPTY);
-                $wIdx = 1;
-                foreach ($words as $word) {
-                    $wordLower = mb_strtolower($word, 'UTF-8');
-                    // Si es un año de 4 dígitos entre 2000 y 2099
-                    if (preg_match('/^(20\d\d)$/', $word, $mYear)) {
-                        $whereParts[] = "YEAR(o.hora_captura) = :yr_" . $wIdx;
-                        $params[':yr_' . $wIdx] = (int)$mYear[1];
-                    }
-                    // Si es un fragmento numérico (ej. 3+ dígitos de teléfono o folio)
-                    elseif (preg_match('/^\d{3,}$/', $word)) {
-                        $whereParts[] = "(o.paciente_telefono LIKE :tel_" . $wIdx . " OR o.folio_unico = :fol_" . $wIdx . ")";
-                        $params[':tel_' . $wIdx] = '%' . $word . '%';
-                        $params[':fol_' . $wIdx] = $word;
-                    }
-                    // Si es texto (paciente, diagnóstico)
-                    else {
-                        $whereParts[] = "(LOWER(o.paciente_nombre) LIKE :q_nom_" . $wIdx . " OR LOWER(o.diagnostico) LIKE :q_diag_" . $wIdx . ")";
-                        $likeVal = '%' . $wordLower . '%';
-                        $params[':q_nom_' . $wIdx]  = $likeVal;
-                        $params[':q_diag_' . $wIdx] = $likeVal;
-                    }
-                    $wIdx++;
-                }
-                $orderClause = "o.orden_id DESC";
-            }
-
-            $whereSql = "WHERE " . implode(' AND ', $whereParts);
-            $fetchLimit = $limInt + 1; // +1 para detectar si hay más resultados
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Analyzing code block. The script checks if a word is a numeric fragment with three or more digits. If so, constructs a conditional for the query that searches both patient phone number and unique folio using that word as a search term, linking it with an OR condition. The phone number comparison and the folio search both use a LIKE operator for partial matching.
-
-
-The current logic only considers numeric fragments of three or more digits for folio and phone number searches, potentially missing shorter folios. It seems folios might start at 1, so the regex `^\d{3,}$` is too restrictive. Adjusting this regex to `/^#?(\d{1,6})$/` allows for 1-6 digit numbers, and accounts for an optional '#' prefix, recognizing that folio entries may have this format. Additionally, the code needs a condition to search for phone numbers when given long numeric input.
-
-
-Analyzing the code further, the logic prioritizes exact folio matches when a numeric value or prefixed numeric value is entered. Examining the `obtenerOrdenesAnterioresMedico` function confirms that an optional '#' prefix is correctly handled and an exact folio match is prioritized using a similar pattern matching approach.
-
-The code now correctly identifies and handles folio searches that include an optional '#' prefix and allows for folios of 1 to 6 digits, while also searching other fields when the input is not just a folio. The phone number search is still correctly implemented with the LIKE operator to search.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 3.883294335s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 7:38 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 7:38 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 7:38 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `Ordenes.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L754-809)</summary>
-
-**Path:** `Unknown file`
-
-```
-        try {
-            $term = trim($term);
-            if (strlen($term) < 1) return [];
-
-            $db = DB::connect();
-            $limInt = max(1, min(50, (int)$limit));
-            $params = [];
-            $whereParts = [];
-
-            // 1. Caso numérico puro (1 a 6 dígitos): Folio exacto o prefijo
-            if (preg_match('/^\d{1,6}$/', $term)) {
-                $whereParts[] = "(o.folio_unico = :f_exact OR o.folio_unico LIKE :f_pref)";
-                $params[':f_exact'] = $term;
-                $params[':f_pref']  = $term . '%';
-                $orderClause = "(o.folio_unico = :f_ord) DESC, CAST(o.folio_unico AS UNSIGNED) ASC, o.orden_id DESC";
-                $params[':f_ord'] = $term;
-            }
-            // 2. Caso numérico largo (7 a 10 dígitos): Teléfono directo o folio
-            elseif (preg_match('/^\d{7,10}$/', $term)) {
-                $whereParts[] = "(o.paciente_telefono LIKE :tel OR o.folio_unico = :fol_tel)";
-                $params[':tel'] = '%' . $term . '%';
-                $params[':fol_tel'] = $term;
-                $orderClause = "o.orden_id DESC";
-            }
-            // 3. Caso texto o multicriterio (Nombre, Año, Teléfono parcial)
-            else {
-                $words = preg_split('/\s+/', $term, -1, PREG_SPLIT_NO_EMPTY);
-                $wIdx = 1;
-                foreach ($words as $word) {
-                    $wordLower = mb_strtolower($word, 'UTF-8');
-                    // Si es un año de 4 dígitos entre 2000 y 2099
-                    if (preg_match('/^(20\d\d)$/', $word, $mYear)) {
-                        $whereParts[] = "YEAR(o.hora_captura) = :yr_" . $wIdx;
-                        $params[':yr_' . $wIdx] = (int)$mYear[1];
-                    }
-                    // Si es un fragmento numérico (ej. 3+ dígitos de teléfono o folio)
-                    elseif (preg_match('/^\d{3,}$/', $word)) {
-                        $whereParts[] = "(o.paciente_telefono LIKE :tel_" . $wIdx . " OR o.folio_unico = :fol_" . $wIdx . ")";
-                        $params[':tel_' . $wIdx] = '%' . $word . '%';
-                        $params[':fol_' . $wIdx] = $word;
-                    }
-                    // Si es texto (médico, paciente, diagnóstico)
-                    else {
-                        $whereParts[] = "(LOWER(o.paciente_nombre) LIKE :q_nom_" . $wIdx . " OR LOWER(o.medico_nombre_completo) LIKE :q_med_" . $wIdx . " OR LOWER(o.diagnostico) LIKE :q_diag_" . $wIdx . ")";
-                        $likeVal = '%' . $wordLower . '%';
-                        $params[':q_nom_' . $wIdx]  = $likeVal;
-                        $params[':q_med_' . $wIdx]  = $likeVal;
-                        $params[':q_diag_' . $wIdx] = $likeVal;
-                    }
-                    $wIdx++;
-                }
-                $orderClause = "o.orden_id DESC";
-            }
-
-            if (empty($whereParts)) return [];
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 7:39 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `seed_dataset_2years.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L37-51)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-    // 1. Verificar si ya existen datos simulados
-    $prevCount = (int)$db->query("SELECT COUNT(*) FROM ordenes WHERE folio_unico LIKE 'S2Y-%'")->fetchColumn();
-    if ($prevCount > 0) {
-        if ($cleanFirst) {
-            echo "ℹ Opción --clean-first detectada. Ejecutando limpieza previa...\n";
-            require __DIR__ . '/clean_dataset_2years.php';
-        } else {
-            echo "⚠️  Ya existen {$prevCount} órdenes simuladas con prefijo S2Y-.\n";
-            echo "   Para sobrescribir, ejecute: php tests/seed_dataset_2years.php --clean-first\n";
-            echo "   O limpie manualmente con: php tests/clean_dataset_2years.php\n\n";
-            exit(0);
-        }
-    }
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-The code consistently uses `sprintf('S2Y-%05d', $folioIndex)` to generate a folio identifier within multiple loops. This suggests a pattern where `$folioIndex` is incremented and used to create unique identifiers. The repetition across different loop structures warrants further investigation into how `$folioIndex` is initialized and managed to ensure uniqueness.
-
-
-The folio index is initialized to 1 and incremented with each assignment. A potential for collision with existing order folios is identified. A function that ensures folio uniqueness by checking against existing entries in the database is defined and utilized, confirming that the folio generation strategy is designed to prevent conflicts and maintain a sequential numeric pattern, even with pre-existing data.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 4.687904478s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 7:39 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `seed_dataset_2years.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L184-214)</summary>
-
-**Path:** `Unknown file`
-
-```
-    // 7. Generación de las Órdenes en las 4 Zonas Temporales
-    echo "  Generando órdenes en las 4 zonas temporales...\n";
-
-    $folioIndex = 1;
-    $statsZonas = ['A_Hoy' => 0, 'B_15d' => 0, 'C_30d' => 0, 'D_2Años' => 0];
-    $statsEstados = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0];
-    $notifTargets = [];
-
-    // Helper para armar JSON de estudios
-    $fnSeleccionarEstudios = function() use ($estudiosCat) {
-        $num = rand(1, 4);
-        $claves = array_rand($estudiosCat, $num);
-        if (!is_array($claves)) $claves = [$claves];
-        $res = [];
-        foreach ($claves as $k) {
-            $e = $estudiosCat[$k];
-            $res[] = ['id' => (int)$e['id'], 'nombre' => $e['nombre']];
-        }
-        return $res;
-    };
-
-    // Helper para insertar una orden completa con historial y pdf
-    $fnInsertarOrden = function(string $folio, array $paciente, array $medico, int $estadoId, string $horaCapturaStr, string $zonaKey)
-        use (
-            $db, $stmtOrd, $stmtDet, $stmtHist, $stmtPdf, $diagnosticos,
-            $fnSeleccionarEstudios, &$folioIndex, &$statsZonas, &$statsEstados
-        ): int
-    {
-        $fechaCaptura = new DateTime($horaCapturaStr);
-        $fechaNac = new DateTime($paciente['f_nac']);
-        $edadAlEmitir = max(1, min(105, (int)$fechaCaptura->diff($fechaNac)->y));
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Checking for existing simulated data to determine if a cleanup is needed before seeding the dataset. The query looks for order folios starting with "S2Y-" or patient names containing "[SIM2Y]". If data exists and the `--clean-first` option is present, then a dataset cleanup is triggered before proceeding with simulation.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `seed_dataset_2years.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.087877770s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L309-414)</summary>
-
-**Path:** `Unknown file`
-
-```
-    $hoyStr = date('Y-m-d');
-    $horasHoy = ['08:15', '09:00', '09:45', '10:30', '11:15', '12:00', '12:45', '13:30', '14:15', '15:00', '15:45', '16:30'];
-    $estadosHoy = [1, 2, 2, 1, 2, 3, 3, 2, 4, 1, 3, 4];
-
-    for ($i = 0; $i < 12; $i++) {
-        $folio = sprintf('S2Y-%05d', $folioIndex);
-        $pac = $pacientesIds[array_rand($pacientesIds)];
-        $med = $medicos[$i % count($medicos)];
-        $estId = $estadosHoy[$i];
-        $hCap = "{$hoyStr} {$horasHoy[$i]}:00";
-
-        $ordId = $fnInsertarOrden($folio, $pac, $med, $estId, $hCap, 'A_Hoy');
-        if ($i === 0) {
-            $notifTargets['hoy'] = ['folio' => $folio, 'medico_id' => $med['id'], 'paciente' => $pac['nombre'], 'orden_id' => $ordId];
-        }
-    }
-
-    // ─────────────────────────────────────────────────────────────
-    // ZONA B: ÚLTIMOS 15 DÍAS (1d - 15d) -> 50 órdenes
-    // Casos frontera: Ayer (1d), día 14, día 15
-    // ─────────────────────────────────────────────────────────────
-    $diasZonaB = [1, 1, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 13, 14, 14, 14, 14, 15, 15, 15, 15];
-    // Rellenar hasta 50
-    while (count($diasZonaB) < 50) {
-        $diasZonaB[] = rand(2, 13);
-    }
-    sort($diasZonaB);
-
-    foreach ($diasZonaB as $idx => $diasAtras) {
-        $folio = sprintf('S2Y-%05d', $folioIndex);
-        $pac = $pacientesIds[array_rand($pacientesIds)];
-        $med = $medicos[$idx % count($medicos)];
-        // En días anteriores predominan estados completados o en atención
-        $estadosDistrib = [2, 3, 3, 4, 4, 4, 5];
-        $estId = $estadosDistrib[array_rand($estadosDistrib)];
-        $horaRand = str_pad((string)rand(8, 18), 2, '0', STR_PAD_LEFT) . ':' . str_pad((string)rand(0, 59), 2, '0', STR_PAD_LEFT) . ':00';
-        $hCap = date('Y-m-d', strtotime("-{$diasAtras} days")) . " {$horaRand}";
-
-        $ordId = $fnInsertarOrden($folio, $pac, $med, $estId, $hCap, 'B_15d');
-        if ($diasAtras === 5 && !isset($notifTargets['5d'])) {
-            $notifTargets['5d'] = ['folio' => $folio, 'medico_id' => $med['id'], 'paciente' => $pac['nombre'], 'orden_id' => $ordId];
-        }
-    }
-
-    // ─────────────────────────────────────────────────────────────
-    // ZONA C: DÍAS 16 A 30 (16d - 30d) -> 50 órdenes
-    // Casos frontera: día 16 (inmediato exterior de 15), día 29, día 30 (límite de 30d)
-    // ─────────────────────────────────────────────────────────────
-    $diasZonaC = [16, 16, 16, 16, 17, 17, 18, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 29, 30, 30, 30, 30];
-    while (count($diasZonaC) < 50) {
-        $diasZonaC[] = rand(17, 28);
-    }
-    sort($diasZonaC);
-
-    foreach ($diasZonaC as $idx => $diasAtras) {
-        $folio = sprintf('S2Y-%05d', $folioIndex);
-        $pac = $pacientesIds[array_rand($pacientesIds)];
-        $med = $medicos[$idx % count($medicos)];
-        $estadosDistrib = [3, 4, 4, 4, 5];
-        $estId = $estadosDistrib[array_rand($estadosDistrib)];
-        $horaRand = str_pad((string)rand(8, 18), 2, '0', STR_PAD_LEFT) . ':' . str_pad((string)rand(0, 59), 2, '0', STR_PAD_LEFT) . ':00';
-        $hCap = date('Y-m-d', strtotime("-{$diasAtras} days")) . " {$horaRand}";
-
-        $ordId = $fnInsertarOrden($folio, $pac, $med, $estId, $hCap, 'C_30d');
-        if ($diasAtras === 20 && !isset($notifTargets['20d'])) {
-            $notifTargets['20d'] = ['folio' => $folio, 'medico_id' => $med['id'], 'paciente' => $pac['nombre'], 'orden_id' => $ordId];
-        }
-    }
-
-    // ─────────────────────────────────────────────────────────────
-    // ZONA D: HISTÓRICO 2 AÑOS (31d - 730d) -> ~1,400 órdenes
-    // Casos frontera: día 31 (primer día fuera de 30d), 6 meses, 1 año, 2 años
-    // ─────────────────────────────────────────────────────────────
-    $totalHistoricas = 1400;
-    // Sembrar primero casos frontera obligatorios
-    $fronterasD = [31, 31, 31, 31, 45, 60, 90, 120, 180, 240, 365, 500, 720, 730];
-    foreach ($fronterasD as $idx => $diasAtras) {
-        $folio = sprintf('S2Y-%05d', $folioIndex);
-        $pac = $pacientesIds[array_rand($pacientesIds)];
-        $med = $medicos[$idx % count($medicos)];
-        $estId = (rand(1, 10) === 10) ? 5 : 4; // Mayoría cerradas
-        $horaRand = str_pad((string)rand(8, 18), 2, '0', STR_PAD_LEFT) . ':' . str_pad((string)rand(0, 59), 2, '0', STR_PAD_LEFT) . ':00';
-        $hCap = date('Y-m-d', strtotime("-{$diasAtras} days")) . " {$horaRand}";
-        $ordId = $fnInsertarOrden($folio, $pac, $med, $estId, $hCap, 'D_2Años');
-
-        if ($diasAtras === 240 && !isset($notifTargets['8m'])) {
-            $notifTargets['8m'] = ['folio' => $folio, 'medico_id' => $med['id'], 'paciente' => $pac['nombre'], 'orden_id' => $ordId];
-        }
-    }
-
-    // Distribuir el resto (~1,386) uniformemente a lo largo de los 700 días restantes
-    $restantes = $totalHistoricas - count($fronterasD);
-    for ($k = 0; $k < $restantes; $k++) {
-        $diasAtras = rand(32, 729);
-        $folio = sprintf('S2Y-%05d', $folioIndex);
-        $pac = $pacientesIds[array_rand($pacientesIds)];
-        $med = $medicos[$k % count($medicos)];
-        $estId = (rand(1, 12) === 12) ? 5 : 4; // Histórico: casi todas cerradas o canceladas
-        $horaRand = str_pad((string)rand(8, 18), 2, '0', STR_PAD_LEFT) . ':' . str_pad((string)rand(0, 59), 2, '0', STR_PAD_LEFT) . ':00';
-        $hCap = date('Y-m-d', strtotime("-{$diasAtras} days")) . " {$horaRand}";
-
-        $fnInsertarOrden($folio, $pac, $med, $estId, $hCap, 'D_2Años');
-    }
-
-    // ─────────────────────────────────────────────────────────────
-    // 8. Inyección de Notificaciones Quirúrgicas para Pruebas UI
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 7:39 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 7:39 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `seed_dataset_2years.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L319-434)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-    // ─────────────────────────────────────────────────────────────
-    // ZONA A: HOY (CURDATE, 0 días) -> 12 órdenes
-    // Estados: 1 (Remitido), 2 (En Atención), 3 (Resultados Listos), 4 (Cerrada)
-    // ─────────────────────────────────────────────────────────────
-    $hoyStr = date('Y-m-d');
-    $horasHoy = ['08:15', '09:00', '09:45', '10:30', '11:15', '12:00', '12:45', '13:30', '14:15', '15:00', '15:45', '16:30'];
-    $estadosHoy = [1, 2, 2, 1, 2, 3, 3, 2, 4, 1, 3, 4];
-
-    for ($i = 0; $i < 12; $i++) {
-        $folio = sprintf('S2Y-%05d', $folioIndex);
-        $pac = $pacientesIds[array_rand($pacientesIds)];
-        $med = $medicos[$i % count($medicos)];
-        $estId = $estadosHoy[$i];
-        $hCap = "{$hoyStr} {$horasHoy[$i]}:00";
-
-        $ordId = $fnInsertarOrden($folio, $pac, $med, $estId, $hCap, 'A_Hoy');
-        if ($i === 0) {
-            $notifTargets['hoy'] = ['folio' => $folio, 'medico_id' => $med['id'], 'paciente' => $pac['nombre'], 'orden_id' => $ordId];
-        }
-    }
-
-    // ─────────────────────────────────────────────────────────────
-    // ZONA B: ÚLTIMOS 15 DÍAS (1d - 15d) -> 50 órdenes
-    // Casos frontera: Ayer (1d), día 14, día 15
-    // ─────────────────────────────────────────────────────────────
-    $diasZonaB = [1, 1, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 13, 14, 14, 14, 14, 15, 15, 15, 15];
-    // Rellenar hasta 50
-    while (count($diasZonaB) < 50) {
-        $diasZonaB[] = rand(2, 13);
-    }
-    sort($diasZonaB);
-
-    foreach ($diasZonaB as $idx => $diasAtras) {
-        $folio = sprintf('S2Y-%05d', $folioIndex);
-        $pac = $pacientesIds[array_rand($pacientesIds)];
-        $med = $medicos[$idx % count($medicos)];
-        // En días anteriores predominan estados completados o en atención
-        $estadosDistrib = [2, 3, 3, 4, 4, 4, 5];
-        $estId = $estadosDistrib[array_rand($estadosDistrib)];
-        $horaRand = str_pad((string)rand(8, 18), 2, '0', STR_PAD_LEFT) . ':' . str_pad((string)rand(0, 59), 2, '0', STR_PAD_LEFT) . ':00';
-        $hCap = date('Y-m-d', strtotime("-{$diasAtras} days")) . " {$horaRand}";
-
-        $ordId = $fnInsertarOrden($folio, $pac, $med, $estId, $hCap, 'B_15d');
-        if ($diasAtras === 5 && !isset($notifTargets['5d'])) {
-            $notifTargets['5d'] = ['folio' => $folio, 'medico_id' => $med['id'], 'paciente' => $pac['nombre'], 'orden_id' => $ordId];
-        }
-    }
-
-    // ─────────────────────────────────────────────────────────────
-    // ZONA C: DÍAS 16 A 30 (16d - 30d) -> 50 órdenes
-    // Casos frontera: día 16 (inmediato exterior de 15), día 29, día 30 (límite de 30d)
-    // ─────────────────────────────────────────────────────────────
-    $diasZonaC = [16, 16, 16, 16, 17, 17, 18, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 29, 30, 30, 30, 30];
-    while (count($diasZonaC) < 50) {
-        $diasZonaC[] = rand(17, 28);
-    }
-    sort($diasZonaC);
-
-    foreach ($diasZonaC as $idx => $diasAtras) {
-        $folio = sprintf('S2Y-%05d', $folioIndex);
-        $pac = $pacientesIds[array_rand($pacientesIds)];
-        $med = $medicos[$idx % count($medicos)];
-        $estadosDistrib = [3, 4, 4, 4, 5];
-        $estId = $estadosDistrib[array_rand($estadosDistrib)];
-        $horaRand = str_pad((string)rand(8, 18), 2, '0', STR_PAD_LEFT) . ':' . str_pad((string)rand(0, 59), 2, '0', STR_PAD_LEFT) . ':00';
-        $hCap = date('Y-m-d', strtotime("-{$diasAtras} days")) . " {$horaRand}";
-
-        $ordId = $fnInsertarOrden($folio, $pac, $med, $estId, $hCap, 'C_30d');
-        if ($diasAtras === 20 && !isset($notifTargets['20d'])) {
-            $notifTargets['20d'] = ['folio' => $folio, 'medico_id' => $med['id'], 'paciente' => $pac['nombre'], 'orden_id' => $ordId];
-        }
-    }
-
-    // ─────────────────────────────────────────────────────────────
-    // ZONA D: HISTÓRICO 2 AÑOS (31d - 730d) -> ~1,400 órdenes
-    // Casos frontera: día 31 (primer día fuera de 30d), 6 meses, 1 año, 2 años
-    // ─────────────────────────────────────────────────────────────
-    $totalHistoricas = 1400;
-    // Sembrar primero casos frontera obligatorios
-    $fronterasD = [31, 31, 31, 31, 45, 60, 90, 120, 180, 240, 365, 500, 720, 730];
-    foreach ($fronterasD as $idx => $diasAtras) {
-        $folio = sprintf('S2Y-%05d', $folioIndex);
-        $pac = $pacientesIds[array_rand($pacientesIds)];
-        $med = $medicos[$idx % count($medicos)];
-        $estId = (rand(1, 10) === 10) ? 5 : 4; // Mayoría cerradas
-        $horaRand = str_pad((string)rand(8, 18), 2, '0', STR_PAD_LEFT) . ':' . str_pad((string)rand(0, 59), 2, '0', STR_PAD_LEFT) . ':00';
-        $hCap = date('Y-m-d', strtotime("-{$diasAtras} days")) . " {$horaRand}";
-        $ordId = $fnInsertarOrden($folio, $pac, $med, $estId, $hCap, 'D_2Años');
-
-        if ($diasAtras === 240 && !isset($notifTargets['8m'])) {
-            $notifTargets['8m'] = ['folio' => $folio, 'medico_id' => $med['id'], 'paciente' => $pac['nombre'], 'orden_id' => $ordId];
-        }
-    }
-
-    // Distribuir el resto (~1,386) uniformemente a lo largo de los 700 días restantes
-    $restantes = $totalHistoricas - count($fronterasD);
-    for ($k = 0; $k < $restantes; $k++) {
-        $diasAtras = rand(32, 729);
-        $folio = sprintf('S2Y-%05d', $folioIndex);
-        $pac = $pacientesIds[array_rand($pacientesIds)];
-        $med = $medicos[$k % count($medicos)];
-        $estId = (rand(1, 12) === 12) ? 5 : 4; // Histórico: casi todas cerradas o canceladas
-        $horaRand = str_pad((string)rand(8, 18), 2, '0', STR_PAD_LEFT) . ':' . str_pad((string)rand(0, 59), 2, '0', STR_PAD_LEFT) . ':00';
-        $hCap = date('Y-m-d', strtotime("-{$diasAtras} days")) . " {$horaRand}";
-
-        $fnInsertarOrden($folio, $pac, $med, $estId, $hCap, 'D_2Años');
-    }
-
-    // ─────────────────────────────────────────────────────────────
-    // 8. Inyección de Notificaciones Quirúrgicas para Pruebas UI
-    // ─────────────────────────────────────────────────────────────
-    echo "  Inyectando notificaciones de prueba vinculadas a cada zona...\n";
-
-    // Notif 1: Hoy (Zona A)
-    if (isset($notifTargets['hoy'])) {
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-The code requires adjustment; lines 329-428 of the specified file should utilize the folio generation function. Additionally, `&$folioIndex` can be removed from the `use` clause of `$fnInsertarOrden` since the folio is now passed directly. Examining line 510 will verify the folio generation details.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.474021140s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 7:40 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `seed_dataset_2years.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L499-538)</summary>
-
-**Path:** `Unknown file`
-
-```
-    $totalOrdenes = array_sum($statsZonas);
-    echo "\n" . str_repeat('=', 70) . "\n";
-    echo "  🎉 DATASET SIMULADO [SIM2Y] GENERADO EXITOSAMENTE ({$elapsed} seg)\n";
-    echo str_repeat('=', 70) . "\n";
-    echo "  Total de Órdenes creadas:   " . number_format($totalOrdenes) . "\n";
-    echo "  Total de Pacientes creados: " . number_format($totalPacientes) . "\n";
-    echo "  Total de Notificaciones:    5 (Hoy, 5d, 20d, 8 meses, Recepción)\n\n";
-
-    echo "  Distribución por Zonas Temporales (Reglas de Filtro Período):\n";
-    echo "  ┌───────────────────────┬──────────┬────────────────────────────────────────┐\n";
-    echo "  │ Zona Temporal         │  Órdenes │ Regla de Visualización en UI           │\n";
-    echo "  ├───────────────────────┼──────────┼────────────────────────────────────────┤\n";
-    echo "  │ A: Hoy (0 días)       │ " . str_pad((string)$statsZonas['A_Hoy'], 8, ' ', STR_PAD_LEFT) . " │ Solo pestaña 'Órdenes de Hoy'          │\n";
-    echo "  │ B: 1d a 15d           │ " . str_pad((string)$statsZonas['B_15d'], 8, ' ', STR_PAD_LEFT) . " │ Visibles en '15' y en '30d'            │\n";
-    echo "  │ C: 16d a 30d          │ " . str_pad((string)$statsZonas['C_30d'], 8, ' ', STR_PAD_LEFT) . " │ Visibles en '30d' (OCULTAS en '15')    │\n";
-    echo "  │ D: 31d a 730d (2 años)│ " . str_pad((string)$statsZonas['D_2Años'], 8, ' ', STR_PAD_LEFT) . " │ Visibles con 'Fechas' o con la Lupita │\n";
-    echo "  └───────────────────────┴──────────┴────────────────────────────────────────┘\n\n";
-
-    echo "  Distribución por Estados Clínicos:\n";
-    echo "  - 1: Remitido:           {$statsEstados[1]}\n";
-    echo "  - 2: En Atención:        {$statsEstados[2]}\n";
-    echo "  - 3: Resultados Listos:  {$statsEstados[3]} (con PDF vinculado)\n";
-    echo "  - 4: Cerrada:            {$statsEstados[4]} (con PDF vinculado)\n";
-    echo "  - 5: Cancelada:          {$statsEstados[5]}\n\n";
-
-    echo "  Folios generados: S2Y-00001 al " . sprintf('S2Y-%05d', $totalOrdenes) . "\n";
-    echo "  Para limpiar 100% este dataset ejecute:\n";
-    echo "    php tests/clean_dataset_2years.php\n";
-    echo str_repeat('=', 70) . "\n\n";
-
-} catch (\Throwable $e) {
-    if (isset($db) && $db->inTransaction()) {
-        $db->rollBack();
-        echo "✗ Transacción revertida (Rollback ejecutado).\n";
-    }
-    echo "✗ ERROR: " . $e->getMessage() . "\n";
-    echo "  En: " . $e->getFile() . ":" . $e->getLine() . "\n\n";
-    exit(1);
-}
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 7:40 pm
 
 ---
 
-## Agent Response
-
-### Thinking
-
-Reviewing the test suite to ensure alignment, specifically focusing on simulated order detection within lines 84-93. It retrieves the count of simulated orders using a database query that identifies orders with a specific folio or patient name pattern. Sample order extraction logic also needs examination.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `test_search_periodo_dataset_suite.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.017781515s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L354-439)</summary>
-
-**Path:** `Unknown file`
-
-```
-        if (stripos($r['estudios'], $sampleDiagToken) === false && stripos($r['paciente'], $sampleDiagToken) === false) {
-            $matchDiagAnio = false;
-        }
-    }
-    assertCase(
-        'E-06',
-        "Lupita Mixta: Multicriterio Diagnóstico + Año ('{$searchDiagAnio}')",
-        is_array($resDiagAnio) && $matchDiagAnio && (!empty($resDiagAnio) || $simCount === 0),
-        "Coincidencias con {$searchDiagAnio}: " . count($resDiagAnio)
-    );
-
-    // E-07: Búsqueda por Teléfono Numérico Largo (7-10 dígitos)
-    $resTel = MDOrdenes::buscarOrdenesMedico($medicoId, $sampleTel, 15);
-    $matchTel = false;
-    foreach ($resTel as $r) {
-        if (strpos(preg_replace('/\D/', '', $r['telefono']), $sampleTel) !== false) {
-            $matchTel = true;
-            break;
-        }
-    }
-    assertCase(
-        'E-07',
-        "Lupita: Búsqueda directa por Teléfono (7-10 dígitos: '{$sampleTel}')",
-        !empty($resTel) && $matchTel,
-        "Órdenes localizadas por teléfono: " . count($resTel)
-    );
-
-    // E-08: Búsqueda por Teléfono Numérico Parcial (3+ dígitos)
-    $prefixTel = substr($sampleTel, 0, 4);
-    $resTelParcial = MDOrdenes::buscarOrdenesMedico($medicoId, $prefixTel, 15);
-    $matchTelParcial = false;
-    foreach ($resTelParcial as $r) {
-        if (strpos(preg_replace('/\D/', '', $r['telefono']), $prefixTel) !== false || strpos($r['folio'], $prefixTel) !== false) {
-            $matchTelParcial = true;
-            break;
-        }
-    }
-    assertCase(
-        'E-08',
-        "Lupita: Fragmento numérico de teléfono o folio ('{$prefixTel}')",
-        !empty($resTelParcial) && $matchTelParcial,
-        "Coincidencias encontradas: " . count($resTelParcial)
-    );
-
-    // E-09: Búsqueda por Folio Canónico Completo (ej. S2Y-00042 o similar)
-    $resFolio = MDOrdenes::buscarOrdenesMedico($medicoId, $sampleFolio, 15);
-    $matchFolioExact = false;
-    foreach ($resFolio as $r) {
-        if ($r['folio'] === $sampleFolio) {
-            $matchFolioExact = true;
-            break;
-        }
-    }
-    assertCase(
-        'E-09',
-        "Lupita: Folio canónico completo ('{$sampleFolio}')",
-        $matchFolioExact,
-        "Folio exacto encontrado: " . ($resFolio[0]['folio'] ?? 'ninguno') . " (Total: " . count($resFolio) . ")"
-    );
-
-    // E-10: Búsqueda por Folio en Minúsculas
-    $folioLower = strtolower($sampleFolio);
-    $resFolioLower = MDOrdenes::buscarOrdenesMedico($medicoId, $folioLower, 15);
-    $matchFolioLower = false;
-    foreach ($resFolioLower as $r) {
-        if (strtolower($r['folio']) === $folioLower) {
-            $matchFolioLower = true;
-            break;
-        }
-    }
-    assertCase(
-        'E-10',
-        "Lupita: Folio con prefijo en minúsculas ('{$folioLower}') es Case-Insensitive",
-        $matchFolioLower,
-        "Coincidencia lograda: " . count($resFolioLower) . " resultados"
-    );
-
-    // E-11: Búsqueda por Folio Numérico Puro sin Prefijo (ej. '42' o '1')
-    $rawNum = preg_replace('/\D/', '', $sampleFolio);
-    $numTerm = ltrim($rawNum, '0') ?: '1';
-    $resNumPuro = MDOrdenes::buscarOrdenesMedico($medicoId, $numTerm, 15);
-    assertCase(
-        'E-11',
-        "Lupita: Folio numérico sin padding ('{$numTerm}') resuelve con orden prioritario",
-        is_array($resNumPuro) && !empty($resNumPuro),
-        "Total órdenes retornadas para término numérico '{$numTerm}': " . count($resNumPuro)
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Analyzing test cases E-09 and E-10 related to folio searches. E-09 tests pure numeric folio searches, calling a specific function with the folio and verifying the returned folio matches the search term. E-10 tests searches that begin with a '#'. The objective is to evaluate the behavior of the search functionality under these different input conditions.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.102939544s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 7:40 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `test_search_periodo_dataset_suite.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L464-484)</summary>
-
-**Path:** `Unknown file`
-
-```
-            "Lupita Bypass: Sin órdenes > 60d en base para probar bypass profundo",
-            true,
-            "Omitido por ausencia de órdenes > 60d (sembrar dataset SIM2Y para validar)"
-        );
-    }
-
-    // E-13: Límite Anti-Ahogo (Anti-Choke LIMIT 16)
-    $resAntiChoke = MDOrdenes::buscarOrdenesMedico($medicoId, 'a', 15);
-    $countChoke = count($resAntiChoke);
-    assertCase(
-        'E-13',
-        "Límite Anti-Ahogo: Consulta con término genérico ('a') nunca retorna más de 16 filas",
-        $countChoke <= 16,
-        "Total filas retornadas: {$countChoke} (protección de RAM y respuesta en <15ms)"
-    );
-
-    // E-14: Búsqueda sin Coincidencias (Zero-Matches)
-    $resZero = MDOrdenes::buscarOrdenesMedico($medicoId, 'TERMINO_INEXISTENTE_XYZ_9999', 15);
-    assertCase(
-        'E-14',
-        "Zero-Matches: Término inexistente retorna array vacío sin warnings ni excepciones",
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `test_search_periodo_dataset_suite.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L499-524)</summary>
-
-**Path:** `Unknown file`
-
-```
-    $resIsolation = MDOrdenes::buscarOrdenesMedico($medicoId, 'SIM2Y', 30);
-    $isolated = true;
-    if (!empty($resIsolation)) {
-        $ids = array_map(function($r) { return (int)$r['id']; }, $resIsolation);
-        $inClause = implode(',', $ids);
-        $alienCount = (int)$db->query("
-            SELECT COUNT(*) FROM ordenes WHERE id IN ({$inClause}) AND medico_id != {$medicoId}
-        ")->fetchColumn();
-        if ($alienCount > 0) $isolated = false;
-    }
-    assertCase(
-        'E-16',
-        "Aislamiento RBAC: Las órdenes retornadas pertenecen estrictamente al médico autenticado",
-        $isolated,
-        "Auditoría cruzada en DB: 0 órdenes de otros médicos en los resultados"
-    );
-
-    echo "\n";
-
-    // ═════════════════════════════════════════════════════════════════
-    // BLOQUE F: Paginación y Retención de Parámetros (F-01 a F-04)
-    // ═════════════════════════════════════════════════════════════════
-    echo C_BOLD . "── BLOQUE F: Paginación y Retención de Parámetros (4 Casos) ───────────" . C_RESET . "\n";
-
-    // F-01: Paginación Página 1
-    // Usar tamaño adaptativo si total órdenes < 50, o 25 estándar
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `test_client_refresh_draft_suite.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L679-694)</summary>
-
-**Path:** `Unknown file`
-
-```
-eG.pacienteInput.value = 'María López';
-eG.grid.querySelectorAll('input[name="estudios[]"]')[0].checked = true;
-lG.updateChipsContainer();
-
-// Simular clic en notificación sin guardar
-lG.capturarEstadoBusquedaPrevia('tab-hoy', { folio: 'S2Y-00001' }, 0);
-// Médico revisa y pulsa volver a solicitud nueva
-assert.strictEqual(eG.pacienteInput.value, 'María López');
-assert.strictEqual(eG.badgeEl.textContent, '1 seleccionado');
-pass('G-04', 'Navegación por notificación convive con borrador en redacción');
-
-// G-05: Refresh durante Barra de Retorno
-let snapAntes = lG.getSnapshotState();
-assert.ok(snapAntes !== null);
-// Al hacer refresh, la RAM se reinicia
-let eG_refresh = crearEntornoDOM(12);
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 7:41 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 7:41 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 7:41 pm
-
----
-
-## Agent Response
-
-### Thinking
-
-Identified several files potentially relevant to folio number handling: application logic for order processing, dataset cleaning, dataset seeding, and several test suites. These files likely contain the relevant code to modify for numeric-only folio numbers starting from 1. The test suites suggest areas where the folio number validation should be tested.
-
-
-
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.000426593s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1584-1622)</summary>
-
-**Path:** `Unknown file`
-
-```
-                           COALESCE(m.universidad_nombre, '') AS universidad,
-                           COALESCE(m.lugar_trabajo_nombre, '') AS lugar
-                    FROM vw_ordenes_completas o
-                    LEFT JOIN vw_medicos_completos m ON m.user_id = o.medico_user_id
-                    WHERE o.folio_unico = :folio";
-            if ($medicoIdRestriccion !== null) {
-                $sql .= " AND o.medico_user_id = :medico_id";
-            }
-            $sql .= " LIMIT 1";
-
-            $stmt = $db->prepare($sql);
-            $stmt->bindValue(':folio', $folio);
-            if ($medicoIdRestriccion !== null) {
-                $stmt->bindValue(':medico_id', $medicoIdRestriccion, PDO::PARAM_INT);
-            }
-            $stmt->execute();
-            $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-            return $row ?: null;
-        } catch (Throwable $e) {
-            DB::logFallback('ERROR', 'Fallo en RC\Negocio\Ordenes::obtenerOrdenPorFolio', $e->getMessage());
-            return null;
-        }
-    }
-
-    // ═══════════════════════════════════════════════════════════════════════
-    // GESTIÓN DE RECEPCIONISTAS (CRUD, BAJA LÓGICA, PAUSA, CONTRASEÑAS)
-    // ═══════════════════════════════════════════════════════════════════════
-
-    /**
-     * Obtiene la lista completa de recepcionistas registrados en el sistema.
-     */
-    public static function obtenerRecepcionistas(): array {
-        $pdo = DB::connect();
-        try {
-            $sql = "SELECT 
-                        e.id AS empleado_id,
-                        e.user_id,
-                        e.nombre,
-```
-
-</details>
-
----
-
-## User Request
-
-Realiza la ejecución de las pruebas, con precisión, dame informe incluidos gaps e issues.
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `07_seed_catalogs.sql`
-**Language:** oracle-sql
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Explicit permission is granted to execute the tests; the test orchestrator script is identified as the execution entry point. Preliminary data from the database will be checked to inform the test run. The goal is to generate a comprehensive report that will include gaps and issues.
-
-
-
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.165986878s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 7:56 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 7:57 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `test_client_refresh_draft_suite.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L544-569)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-// B-01: Pull-to-refresh nativo con texto en otros-estudios (sin pulsar Enter ni +)
-let eB01 = crearEntornoDOM(12);
-let lB01 = instanciarLogica(eB01);
-lB01.populateMandatoryGrid();
-lB01.init(eB01.form, eB01.grid);
-eB01.pacienteInput.value = 'Ana Lucía Gómez';
-eB01.grid.querySelectorAll('input[name="estudios[]"]')[1].checked = true; // BHC
-eB01.grid.querySelectorAll('input[name="estudios[]"]')[2].checked = true; // EGO
-eB01.otrosInput.value = 'EGO Especial'; // Texto libre sin enter
-lB01.updateChipsContainer();
-
-// Pull-to-refresh en móvil destruye el DOM
-let eB01_after = crearEntornoDOM(12);
-let lB01_after = instanciarLogica(eB01_after);
-lB01_after.populateMandatoryGrid();
-lB01_after.init(eB01_after.form, eB01_after.grid);
-lB01_after.updateChipsContainer();
-assert.strictEqual(eB01_after.badgeEl.textContent, '3 seleccionados');
-assert.ok(eB01_after.tabText.innerHTML.includes('(3 Est.)'));
-pass('B-01', 'Pull-to-refresh preserva texto libre reactivo y paridad Panel=Tab');
-
-// B-02: Menú Navegador → Recargar
-let eB02 = crearEntornoDOM(12);
-let lB02 = instanciarLogica(eB02);
-lB02.populateMandatoryGrid();
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-The `lB01.init()` function call is critical; it likely initializes the user interface with data. The content of `localStorage` before this call, specifically under the key `laesh_md_draft_u_12` within Bloque A and sub-item A-01, shows that checkboxes associated with "GLUCOSA SERICA" and "cbCre" are set to checked.
-
-This suggests that the initialization might be pre-populating the UI with saved draft data or user preferences. Understanding how `lB01.init()` interacts with `localStorage` is key.
-
-
-The `lB01.init()` function appears to merge existing `localStorage` drafts with new form data. Without clearing the draft, tests intended to start fresh, like B-01, will inherit previous selections (GLU, CRE, `Perfil Tiroideo Libre`), leading to unexpected results (5 selected studies). Clearing the draft before running B-01 ensures only the specifically intended studies (BHC, EGO, 'EGO Especial') are selected, as desired for a new patient form. This suggests a need to use the clear function before scenarios that create a draft for a new patient with a known number of studies.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.885566675s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 7:57 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `test_client_refresh_draft_suite.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L654-664)</summary>
-
-**Path:** `Unknown file`
-
-```
-// ==================================================================================
-// BLOQUE G: Notificaciones, Snapshot en RAM y Barra de Retorno (G-01 a G-05)
-// ==================================================================================
-console.log('\n── BLOQUE G: Notificaciones, Snapshot RAM & Retorno ───────────────');
-
-let eG = crearEntornoDOM(12);
-let lG = instanciarLogica(eG);
-lG.populateMandatoryGrid();
-lG.init(eG.form, eG.grid);
-
-// G-01 & G-02: Captura de Snapshot en RAM al pulsar Notificación
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 7:57 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 7:57 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 7:57 pm
-
----
-
-## Agent Response
-
-### Thinking
-
-One test failed, specifically when searching for the prefix '9535'. The system found zero matches, despite the presence of the phone number '9535324290'. Further investigation is needed to determine why the prefix search failed.
-
-
-The input '9535' triggered Branch 1, which searches `folio_unico`. This branch does *not* search the phone number field. Branch 2, which searches the phone number, only activates for 7-10 digit inputs. Because '9535' has only 4 digits, this branch is not activated. This explains why the search for the phone number prefix failed.
-
-
-The code uses a conditional search based on input length. Short numerical inputs (1-6 digits) trigger a search across `folio_unico` (exact match and prefix) and `paciente_telefono` (fragment match). This search strategy is consistent across multiple code locations. Reviewing the `MD\Negocio\Ordenes.php` file confirms the same logic is implemented there.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 1.986423904s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 7:58 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 7:58 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 7:58 pm
-
----
-
-## Agent Response
-
-### Thinking
-
-All test cases in Suite 2 passed successfully, indicating a robust implementation. However, the presence of zero simulated orders, coupled with a warning about an unseeded dataset, warrants further investigation. The absence of simulated orders is unexpected given the nature of the tests, prompting a need to understand this discrepancy.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `test_search_periodo_dataset_suite.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.093622867s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L79-94)</summary>
-
-**Path:** `Unknown file`
-
-```
-try {
-    $db = DB::connect();
-    echo "  " . C_GREEN . "✓ Conectado a la base de datos:" . C_RESET . " " . $db->query("SELECT DATABASE()")->fetchColumn() . "\n";
-
-    // 1. Verificar presencia del Dataset SIM2Y
-    $simCount = (int)$db->query("SELECT COUNT(*) FROM ordenes WHERE folio_unico LIKE 'S2Y-%'")->fetchColumn();
-    echo "  " . C_CYAN . "ℹ Órdenes simuladas detectadas (SIM2Y):" . C_RESET . " {$simCount} órdenes\n";
-
-    if ($simCount === 0) {
-        echo "  " . C_YELLOW . "⚠️  ADVERTENCIA: El dataset [SIM2Y] no ha sido sembrado aún." . C_RESET . "\n";
-        echo "     Para sembrar los 2 años de historial ejecute previamente:\n";
-        echo "     LAESH_DB_PORT=6002 php tests/seed_dataset_2years.php\n";
-    }
-
-    // 2. Seleccionar un médico de prueba que tenga órdenes reales o simuladas
-    $medicoRow = $db->query("
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 7:59 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 27 Sept 2026, 7:59 pm
 
 ---
@@ -22904,6 +17174,7623 @@ The code snippet describes a date formatting function for displaying a MariaDB t
 <summary>Metadata</summary>
 
 - **Thinking Duration:** 0.067618329s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+## User Request
+
+Para pantalla de solicitud_dac_impr.php, aNalizar , ajustar y corregir lo necesario respecto de correcto formateo y distribución de contenidos.  Para la solicitud con folio: 30 :
+- AL ser largo el nombre del paciente , la label "Paciente:" , se corta de lado izquierdo. COrregir para no se corte contenido de esta, ni de ninguna sección cuando los texto son largos.
+- Caso edge si la solicitud tuviera 50 estudios que se genere otra pagina con header, footer,etc; y aparezca en esa segunda hoja la lista de los estudios que no alcanzaron en la primera hoja.
+- EN la vista que se desplega en moviles analiza como se le puede hacer zoom para que el medico la vea completa y no cortada.
+
+---
+
+### CORTEX_STEP_TYPE_SYSTEM_MESSAGE
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:19 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `solicitud_dac_impr`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:19 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `solicitud_dac_impr.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:19 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `solicitud_dac_impr.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+/**
+ * rc/views/solicitud_dac_impr.php — Solicitud Digital de Análisis Clínicos
+ *
+ * Fuente SSOT HTML: portafolio-dev-2026/blocklabgd/v1.2/mockup1.0/uipv1/solicitud_dac_impr.html (R15.1 — NUNCA BORRAR)
+ * URL:              /laesh/rc/views/solicitud_dac_impr.php
+ *
+ * Contexto de uso:
+ *   Abierta como overlay/iframe desde medicos.php (/laesh/md/) y
+ *   labadmin.php (/laesh/rc/). El usuario ya está autenticado en el
+ *   portal padre — esta página NO requiere auth propia (documento imprimible).
+ *
+ * Seguridad:
+ *   - CSP + frame-ancestors 'self' via header PHP (más efectivo que <meta>).
+ *   - X-Frame-Options: SAMEORIGIN — doble capa con nginx.
+ *   - noindex, nofollow — no indexar.
+ *   - Sin commons.php ni RBAC propia — la petición AJAX a
+ *     /laesh/{portal}/api/orden que hace solicitud-dac.js sí pasa por el
+ *     guard de sesión/RBAC de esa ruta (esta página en sí no toca BD).
+ *
+ * Datos (GAP-RC-01, cerrado 2026-09-21):
+ *   Solo recibe `id` (folio) y `portal` (rc|md) por URL. solicitud-dac.js
+ *   consulta la orden real vía fetch() a GET /laesh/{portal}/api/orden —
+ *   fuente única de verdad, ya no querystring con ~14 campos armados a mano.
+ */
+
+declare(strict_types=1);
+
+// ── Cache-busting por mtime real del archivo (2026-09-24) ───────────────────
+// Antes: query param "v" con la función time() — cambiaba en CADA request, sin importar si el
+// archivo se tocó o no. Esta ventana se abre repetidamente por sesión (cada
+// clic a un folio), así que nunca se beneficiaba de caché del navegador —
+// re-descargaba los 6 CSS + 2 JS desde cero cada vez, aportando varios
+// segundos de pantalla en blanco en conexiones móviles lentas (reportado
+// 2026-09-23, Android/Chrome). Con filemtime(), el valor solo cambia cuando
+// el archivo realmente se modifica — y como deploy.sh usa rsync -a (preserva
+// mtime del origen), el próximo deploy invalida la caché automáticamente sin
+// pasos extra.
+// Sin commons.php aquí (ver docstring arriba) — detección Docker/KVM2 igual
+// que en commons/config.php, porque en KVM2 el webapp (/opt/laesh/www/) y los
+// assets (/opt/laesh/assets/) NO son carpetas hermanas como sí lo son en
+// Docker local (montaje único bajo www/).
+function laeshAssetVer(string $relPath): string {
+    static $base = null;
+    if ($base === null) {
+        $base = file_exists('/.dockerenv')
+            ? __DIR__ . '/../../../laesh-web-assets-uipv1a'
+            : '/opt/laesh/assets/laesh-web-assets-uipv1a';
+    }
+    $mtime = @filemtime($base . $relPath);
+    // Fallback a time() si el archivo no se encuentra — nunca rompe la carga,
+    // solo pierde el beneficio de caché para ese archivo puntual.
+    return (string)($mtime !== false ? $mtime : time());
+}
+
+// ── Headers de seguridad (R15 — más efectivos que <meta>) ───────────────────
+header("X-Frame-Options: SAMEORIGIN");
+header("Content-Security-Policy: default-src 'self'; style-src 'self'; font-src 'self'; img-src 'self'; script-src 'self'; frame-ancestors 'self'");
+header("X-Content-Type-Options: nosniff");
+header("Referrer-Policy: strict-origin-when-cross-origin");
+header("Cache-Control: no-store");
+?>
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+    <meta charset="UTF-8">
+    <meta name="color-scheme" content="light">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="theme-color" content="#71CA11">
+    <title>Solicitud Digital de Análisis Clínicos — LAESH</title>
+    <meta name="description" content="Solicitud digital de análisis clínicos LAESH. Formulario de referencia médica para estudios de hematología, química clínica y bacteriología.">
+    <link rel="icon" type="image/svg+xml" href="/laesh-web-assets-uipv1a/img/favicon.svg">
+
+    <!-- device-detect.js debe ir ANTES del CSS y SIN defer/async — a
+         propósito (ver docstring del propio archivo): estampa data-os/
+         data-browser/data-input en <html> ANTES de que targeting.css se
+         evalúe, para que sus selectores [data-os="ios"] etc. apliquen desde
+         el primer pintado. Moverlo o diferirlo causaría un parpadeo de
+         estilo incorrecto — NO tocar el orden, solo el cache-busting. -->
+    <script src="/laesh-web-assets-uipv1a/js/device-detect.js?v=<?= laeshAssetVer('/js/device-detect.js') ?>"></script>
+    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/tokens.css?v=<?= laeshAssetVer('/css/tokens.css') ?>">
+    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/fonts.css?v=<?= laeshAssetVer('/css/fonts.css') ?>">
+    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/style.css?v=<?= laeshAssetVer('/css/style.css') ?>">
+    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/docs.css?v=<?= laeshAssetVer('/css/docs.css') ?>">
+    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/solicitud-dac.css?v=<?= laeshAssetVer('/css/solicitud-dac.css') ?>">
+    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/targeting.css?v=<?= laeshAssetVer('/css/targeting.css') ?>">
+
+    <!-- 2026-09-30: config-compiled.js expone window.laeshConfig (dirección,
+         WhatsApp, etc. de la tabla `configuraciones`) — generado por
+         ConfigBuilder::build() solo cuando se guarda el CMS (admrc/index.php),
+         nunca consultado en cada carga de esta vista. Debe cargar ANTES de
+         solicitud-dac.js, que lo lee para poblar el footer. -->
+    <script src="/laesh-web-assets-uipv1a/js/config-compiled.js?v=<?= laeshAssetVer('/js/config-compiled.js') ?>"></script>
+
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Ir al contenido principal</a>
+
+    <!-- ── Toolbar flotante fija (No se imprime) ── -->
+    <div class="toolbar no-print">
+        <div class="toolbar-controls">
+            <!-- Botón Imprimir -->
+            <button type="button" id="btn-dac-print" class="btn btn-primary" aria-label="Mandar a impresora" title="Mandar a impresora">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                <span class="btn-print-text">Guardar e imprimir solicitud</span>
+            </button>
+
+            <!-- Cruz pequeña para cerrar ventana -->
+            <button type="button" id="btn-dac-close" class="btn-close-icon" aria-label="Cerrar ventana">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+        </div>
+    </div>
+
+    <div class="doc-container doc-container--narrow" role="main" id="main-content">
+
+        <!-- ── Header: Logos (Izquierda y Derecha) + Slogan Centro ─ -->
+        <div class="doc-header">
+            <div class="doc-logo-area">
+                <img src="/laesh-web-assets-uipv1a/img/logo-laesh.webp"
+                     alt="LAESH — Laboratorio de Especialidades Hematológicas"
+                     class="doc-logo-img">
+            </div>
+
+            <div class="doc-header-center">
+                <p class="doc-slogan">&ldquo;Somos Qu&iacute;micos Especialistas y con Postgrado&rdquo;</p>
+            </div>
+
+            <div class="doc-verified">
+                <img src="/laesh-web-assets-uipv1a/img/logo-solicitud.jpeg"
+                     alt="LAESH Solicitud Logo"
+                     class="doc-logo-solicitud-img">
+            </div>
+        </div>
+
+        <!-- ── Título y Subtítulo Abajo de los Logotipos ────────── -->
+        <div class="doc-title-box">
+            <h1 class="doc-title">SOLICITUD DIGITAL DE AN&Aacute;LISIS CL&Iacute;NICOS</h1>
+            <p class="doc-subtitle">Presentar en el &aacute;rea de Recepci&oacute;n para toma de muestras</p>
+        </div>
+
+        <hr class="doc-accent-line">
+
+        <!-- ── Datos del Paciente ───────────────────────────────── -->
+        <div class="doc-info-box">
+            <div class="doc-info-row">
+                <div class="doc-info-item doc-info-paciente"><strong>Paciente:</strong> <span id="dac-paciente">—</span></div>
+                <div class="doc-info-item doc-info-cel"><strong>Celular:</strong> <span id="dac-celular">—</span></div>
+                <span class="doc-info-linebreak" aria-hidden="true"></span>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `solicitud_dac_impr.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L149-223)</summary>
+
+**Path:** `Unknown file`
+
+```
+                <span class="doc-info-linebreak" aria-hidden="true"></span>
+                <div class="doc-info-item doc-info-edad"><strong>Edad:</strong> <span id="dac-edad">—</span></div>
+                <div class="doc-info-item doc-info-sexo"><strong>Sexo:</strong> <span id="dac-sexo">—</span></div>
+                <div class="doc-info-item doc-info-fecha"><strong>Fecha:</strong> <span id="dac-fecha">—</span></div>
+                <div class="doc-info-item doc-info-folio"><strong>Folio:</strong> <span id="dac-folio">—</span></div>
+            </div>
+        </div>
+
+        <!-- ── Contenido: Estudios + Panel derecho ─────────────── -->
+        <div class="doc-content">
+            <div class="doc-studies">
+                <h3>Estudios Solicitados</h3>
+                <ol id="dac-estudios-list">
+                    <!-- Llenado dinámico por solicitud-dac.js vía fetch() a /api/orden -->
+                </ol>
+            </div>
+            <div class="doc-side">
+                <div class="doc-diagnosis">
+                    <strong>Diagn&oacute;stico:</strong>
+                    <span id="dac-diagnostico">—</span>
+                </div>
+                <div class="doc-obs">
+                    <strong>Observaciones:</strong>
+                    <p>El laboratorio se pondr&aacute; en contacto con usted y le enviar&aacute; informaci&oacute;n de:</p>
+                    <ul>
+                        <li>Indicaciones completas para la toma de muestra.</li>
+                        <li>Costo de los estudios.</li>
+                        <li>Tiempo de entrega de resultados.</li>
+                        <li>Compartir&aacute; la ubicaci&oacute;n y horarios de atenci&oacute;n.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── Firma y Datos del Médico Tratante ────────────────── -->
+        <div class="doc-doctor">
+            <p class="doc-doctor-name" id="dac-medico-nombre">Dr. Hedilberto Reyes Venegas</p>
+            <!-- 2026-09-29 (pedido explícito): especialidad y cédula en el
+                 mismo renglón, separadas por una barra vertical (mismo patrón
+                 ya usado para universidad/lugar). -->
+            <p class="doc-doctor-specinfo">
+                <span class="doc-doctor-spec" id="dac-medico-especialidad">—</span>
+                <span class="doc-doctor-vsep" aria-hidden="true">|</span>
+                <span class="doc-doctor-info" id="dac-medico-cedula">—</span>
+            </p>
+            <!-- 2026-09-29 (pedido explícito): ya no se muestra el lugar de
+                 trabajo del médico — solo queda la universidad. -->
+            <p class="doc-doctor-lugar-box">
+                <span id="dac-medico-universidad">Universidad Autónoma Benito Juárez de Oaxaca</span>
+            </p>
+        </div>
+
+        <!-- ── Footer Barra Azul de Contacto y Ubicación ────────── -->
+        <div class="doc-footer-info">
+            <div class="doc-footer-left">
+                <span class="doc-badge-contact">¡Contáctanos!</span>
+                <span class="doc-phone">
+                    <svg class="doc-icon-inline" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.001 2C6.478 2 2 6.477 2 12c0 1.821.487 3.53 1.338 5.003L2 22l5.144-1.35A9.958 9.958 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12.001 2zm0 18.06c-1.647 0-3.196-.469-4.51-1.281l-.324-.196-3.353.88.9-3.275-.212-.335A7.988 7.988 0 0 1 4 12c0-4.418 3.582-8 8-8 4.417 0 8 3.582 8 8 0 4.417-3.583 8-8 8z"/><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg><span id="dac-whatsapp-numero">953 119 00 74</span>
+                </span>
+            </div>
+            <div class="doc-footer-right">
+                <span class="doc-address">
+                    <svg class="doc-icon-inline" width="14" height="14" viewBox="0 0 24 24" fill="#ef4444" stroke="#ef4444" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3" fill="#ffffff"/></svg>
+                    <span id="dac-direccion-calle">Azucenas # 8, Jardines del Sur.</span><br><span id="dac-direccion-ciudad-estado">Huajuapan de León, Oaxaca.</span>
+                </span>
+            </div>
+        </div>
+
+    </div><!-- /doc-container -->
+
+    <script src="/laesh-web-assets-uipv1a/js/solicitud-dac.js?v=<?= laeshAssetVer('/js/solicitud-dac.js') ?>"></script>
+
+</body>
+</html>
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `_abrirSolOverlay`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:20 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `app.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L19-59)</summary>
+
+**Path:** `Unknown file`
+
+```
+// queda atrapado viendo el spinner sin ninguna salida. Se agrega cierre por
+// click en el fondo oscuro y por tecla Escape, a nivel del overlay padre —
+// funciona sin importar si el iframe ya cargó o no. _solOverlayEscHandler
+// es una función nombrada estable (no una closure nueva en cada llamada) —
+// remove+add previene apilar listeners de keydown en aperturas repetidas.
+function _solOverlayEscHandler(e) {
+    if (e.key === 'Escape') {
+        var ovl = document.getElementById('sol-overlay');
+        if (ovl) ovl.remove();
+    }
+}
+function _abrirSolOverlay(url) {
+    var prev = document.getElementById('sol-overlay');
+    if (prev) prev.remove();
+    var overlay = document.createElement('div');
+    overlay.id = 'sol-overlay';
+    overlay.className = 'sol-overlay';
+    // Cerrar al tocar el fondo oscuro (fuera del documento) — el iframe es un
+    // elemento hijo distinto, un click sobre él nunca deja e.target === overlay.
+    overlay.addEventListener('click', function(e) {
+        if (e.target === overlay) overlay.remove();
+    });
+    var spinner = document.createElement('div');
+    spinner.className = 'sol-overlay-spinner';
+    spinner.setAttribute('role', 'status');
+    spinner.setAttribute('aria-label', 'Cargando solicitud…');
+    overlay.appendChild(spinner);
+    var iframe = document.createElement('iframe');
+    iframe.src = url;
+    iframe.title = 'Solicitud Digital de Análisis Clínicos';
+    overlay.appendChild(iframe);
+    document.body.appendChild(overlay);
+    document.removeEventListener('keydown', _solOverlayEscHandler);
+    document.addEventListener('keydown', _solOverlayEscHandler);
+}
+window._abrirSolOverlay = _abrirSolOverlay;
+
+// ─────────────────────────────────────────────────────────────
+// Portal Header + Nav‑Strip — labadmin.html, medicos.html
+//
+// En tablet/móvil (≤1024px) el header y la tira de iconos son
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `solicitud-dac.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+        :root {
+            --bg-color: #eef2f5;
+            --primary-color: #0052B7;
+            --primary-hover: #003e8c;
+            --danger-color: #c53030;
+            --text-dark: #2d3748;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', 'Cabin', sans-serif;
+        }
+
+        body {
+            background-color: #ffffff !important;
+            color: var(--text-dark);
+            min-height: 100vh;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            justify-content: flex-start !important; /* Fuerza inicio superior sin centrado vertical */
+            padding-top: 36px !important; /* Estricto a 36px: la caja azul inicia justo bajo la barra */
+            padding-bottom: 10px !important;
+            margin: 0 !important;
+        }
+
+        /* ── Toolbar flotante fija (No se imprime) ── */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 36px !important;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 0 10px !important;
+            z-index: 1000;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+        }
+
+
+
+
+        .toolbar-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 9px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+            text-decoration: none;
+            line-height: 1.2;
+        }
+
+        /* Cruz pequeña en la esquina superior derecha (justificada arriba a la derecha) */
+        .btn-close-icon {
+            position: fixed;
+            top: 4px;
+            right: 8px;
+            z-index: 1002;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: 1px solid #cbd5e1;
+            background: #ffffff;
+            color: #1e293b;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            padding: 0;
+            flex-shrink: 0;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+        }
+        .btn-close-icon:hover {
+            background: #fee2e2;
+            color: #dc2626;
+            border-color: #fca5a5;
+        }
+
+        #btn-dac-print, #btn-dac-close {
+            min-height: unset !important;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: #fff;
+        }@media (hover: hover) and (pointer: fine) {
+    .btn-primary:hover {
+        background-color: var(--primary-hover);
+    }
+}
+
+
+        /* Contenedor del documento */
+        /* 2026-09-30: BUG-DAC-CORNERS-ROOT-01 — este selector no llevaba
+           !important y ganaba en pantalla por cargar después de docs.css
+           (misma especificidad, gana el último). Tenía border-radius:10px,
+           mientras docs.css definía 16px y el bloque @media print de abajo
+           ya usaba 16px !important — pantalla e impresión NUNCA coincidían.
+           Se fija aquí a 16px explícito (mismo valor que docs.css y que el
+           @media print de este archivo) para que sea la fuente de verdad
+           real en pantalla y quede alineado a propósito, no por accidente
+           de orden de carga. */
+        .doc-container {
+            width: 100%;
+            max-width: 820px;
+            background: #fff;
+            margin: 0 auto !important;
+            margin-top: 0 !important; /* Inicia flush sin margen superior bajo los 36px de toolbar */
+            box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+            border-radius: 16px;
+            border: 2px solid var(--primary-color);
+            position: relative;
+            box-sizing: border-box;
+        }
+
+        /* ── Estilos de Impresión (@media print) ──
+           2026-09-29 (pedido explícito del usuario): la hoja impresa debe verse
+           IGUAL que en pantalla — antes este bloque re-definía casi cada
+           tamaño de fuente/espaciado a valores más chicos ("compactación para
+           ajuste a media hoja"), lo que hacía que lo impreso no coincidiera
+           con lo que el médico/recepción veía en el navegador. Ahora solo se
+           ajusta lo estrictamente necesario para papel (tamaño de página,
+           ocultar la toolbar, quitar sombra/bordes redondeados del
+           contenedor) — la tipografía y el layout los hereda tal cual de las
+           reglas de pantalla de más abajo. */
+        @media print {
+            @page {
+                size: letter portrait;
+                margin: 0.8cm;
+            }
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `solicitud-dac.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L150-349)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+            body {
+                background: #fff !important;
+                padding-top: 0 !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                display: block !important;
+            }
+
+            .no-print {
+                display: none !important;
+            }
+
+            /* 2026-09-29 (pedido explícito): esquinas redondeadas también al
+               imprimir — antes border-radius:0 aquí cuadraba el marco solo
+               en el PDF/impresión, sin coincidir con las 16px de pantalla
+               (docs.css .doc-container). overflow pasa a hidden (como en
+               pantalla) para que el contenido no sobresalga de la esquina
+               redondeada — visible solo servía para el caso 0 de antes. */
+            .doc-container {
+                width: 100% !important;
+                max-width: 100% !important;
+                min-height: 0 !important;
+                max-height: none !important;
+                overflow: hidden !important;
+                box-shadow: none !important;
+                border: 2px solid var(--primary-color) !important;
+                border-radius: 16px !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+
+        }
+
+.doc-info-box {
+    border: none !important;
+    border-bottom: 1px solid #cbd5e1 !important;
+    border-radius: 0 !important;
+    margin: 0 16px 14px !important;
+    padding: 6px 0 10px !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+/* GAP-DAC-PACIENTE-2R-01 (2026-09-29): se pasa de flex a CSS Grid de 4
+   columnas — necesario para el pedido de "Celular centrado respecto a Fecha
+   y Folio": con flex + space-between la posición horizontal de cada
+   renglón dependía de cuánto contenido tuviera CADA renglón por separado,
+   sin forma confiable de alinear un elemento de un renglón con dos de otro.
+   Con grid, Fecha y Folio ocupan las columnas 3 y 4 en el renglón 2, y
+   Celular ocupa EXACTAMENTE ese mismo tramo (columnas 3-4) en el renglón 1,
+   centrado dentro de él — su punto medio coincide por diseño (mismas líneas
+   de grid), no por cálculo aproximado. .doc-info-linebreak ya no hace falta
+   (el salto de línea ahora es explícito por fila de grid, no forzado por
+   flex-wrap) — se mantiene en el HTML mismo pero oculto, sin efecto. */
+.doc-info-row {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    align-items: center !important;
+    width: 100% !important;
+    gap: 8px 16px !important;
+}
+.doc-info-linebreak {
+    display: none !important;
+}
+/* 2026-09-29 (pedido explícito): todos los datos del paciente centrados,
+   en ambos renglones — antes Paciente/Edad/Sexo/Fecha/Folio iban alineados
+   a la izquierda dentro de su columna, solo Celular ya estaba centrado. */
+.doc-info-paciente {
+    grid-column: 1 / 3 !important;
+    grid-row: 1 !important;
+    justify-self: center !important;
+    text-align: center !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+.doc-info-cel {
+    grid-column: 3 / 5 !important;
+    grid-row: 1 !important;
+    justify-self: center !important;
+    text-align: center !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+.doc-info-edad,
+.doc-info-sexo,
+.doc-info-fecha,
+.doc-info-folio {
+    grid-row: 2 !important;
+    justify-self: center !important;
+    text-align: center !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+.doc-info-edad  { grid-column: 1 !important; }
+.doc-info-sexo  { grid-column: 2 !important; }
+.doc-info-fecha { grid-column: 3 !important; }
+.doc-info-folio { grid-column: 4 !important; }
+
+/* 2026-09-29: factor +4 sobre el tamaño anterior en todos los datos de la
+   hoja (pedido explícito del usuario) — 0.85rem (13.6px) pasa a 1.1rem
+   (17.6px), y así sucesivamente en el resto de las reglas de este bloque.
+   2026-09-29 (segundo pedido, mismo día): +25% adicional sobre esos 1.1rem/
+   1.11rem — quedan en 1.375rem/1.3875rem.
+   2026-09-29 (tercer pedido, mismo día): medido con Puppeteer contra la
+   página real — a 1.375rem los 5 datos del segundo renglón (Celular/Edad/
+   Sexo/Fecha/Folio) no caben en una sola línea dentro del ancho del
+   contenedor (820px), Folio se iba a un tercer renglón. Paciente SÍ tiene
+   todo el ancho para él solo, así que se queda en 1.375rem; el segundo
+   renglón baja a 1.2rem — el mínimo necesario, confirmado visualmente, para
+   que los 5 datos quepan siempre en un solo renglón. */
+.doc-info-item {
+    color: #1e293b !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+}
+
+.doc-info-paciente {
+    font-size: 1.375rem !important;
+}
+.doc-info-paciente strong {
+    font-size: 1.3875rem !important;
+}
+
+.doc-info-cel {
+    font-size: 1.2rem !important;
+}
+.doc-info-cel strong {
+    font-size: 1.21rem !important;
+}
+
+/* 2026-09-29 (pedido explícito): -1px sobre 1.2rem/1.21rem (19.2px/19.36px)
+   SOLO para el segundo renglón (Edad/Sexo/Fecha/Folio) — Celular se queda en
+   su tamaño actual, comparte renglón con Paciente, no con estos. */
+.doc-info-edad,
+.doc-info-sexo,
+.doc-info-folio,
+.doc-info-fecha {
+    font-size: 1.1375rem !important;
+}
+.doc-info-edad strong,
+.doc-info-sexo strong,
+.doc-info-folio strong,
+.doc-info-fecha strong {
+    font-size: 1.1475rem !important;
+}
+
+.doc-info-item strong {
+    color: #0052B7 !important;
+    font-weight: 700 !important;
+}
+
+/* 2026-09-29 (pedido explícito): mismo tamaño que .doc-doctor-spec
+   ("Medicina Interna", 16px/1rem en docs.css) — antes 1.1rem quedaba más
+   grande que la especialidad. */
+.doc-doctor-info {
+    font-size: 1rem !important;
+    font-weight: 700 !important;
+    color: #1e293b !important;
+}
+.doc-doctor-lugar-box {
+    font-size: 1.1rem !important;
+    font-weight: 400 !important;
+    color: #475569 !important;
+    margin-top: 2px !important;
+    margin-bottom: 2px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    white-space: nowrap !important;
+}
+
+
+/* ── Footer de Contacto y Ubicación ──
+   2026-09-29 (pedido explícito del usuario): sin color de fondo — el texto
+   pasa de blanco (necesitaba el fondo azul para contraste) a azul fuerte
+   LAESH (var(--primary-color)), que ya tiene buen contraste sobre blanco.
+   2026-09-29: el badge "¡Contáctanos!" también pierde su relleno verde
+   (pedido explícito del usuario) — queda solo el contorno, texto verde. */
+/* 2026-09-29 (pedido explícito): la dirección debe quedar en la esquina
+   superior derecha del footer, junto a ¡Contáctanos!/teléfono — antes con
+   flex-wrap:wrap, al crecer el teléfono ya no cabía en la misma línea y la
+   dirección se iba completa a un renglón nuevo por debajo (vacía la esquina
+   marcada). Con nowrap, footer-left y footer-right SIEMPRE comparten
+   renglón; footer-right se encoge y dentro de ÉL la dirección envuelve a
+   sus propias 2 líneas (ver .doc-address más abajo). align-items:flex-start
+   para que ambos arranquen alineados arriba si footer-right queda más alto. */
+.doc-footer-info {
+    display: flex;
+    justify-content: space-between;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `solicitud-dac.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L349-499)</summary>
+
+**Path:** `Unknown file`
+
+```
+    justify-content: space-between;
+    align-items: flex-start;
+    background: none;
+    color: var(--primary-color);
+    padding: 10px 18px;
+    margin-top: 12px;
+    font-size: 1.1rem;
+    flex-wrap: nowrap;
+    gap: 8px;
+}
+.doc-footer-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+}
+/* 2026-09-29 (pedido explícito): contorno y texto negros (antes verde).
+   2026-09-30 (pedido explícito): contorno más tenue — de #000000 a
+   #94a3b8 (gris suave), texto se mantiene negro. */
+.doc-badge-contact {
+    background: none;
+    color: #000000;
+    border: 2px solid #94a3b8;
+    padding: 2px 11px;
+    border-radius: 6px;
+    font-size: 1.03rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+}
+/* 2026-09-29: un poco más grande que antes (1.17rem → 1.3rem).
+   2026-09-29 (segundo pedido, mismo día): +50% adicional sobre 1.3rem —
+   queda en 1.95rem.
+   2026-09-29 (tercer pedido, mismo día): +6px adicional sobre 1.95rem
+   (31.2px) — queda en 2.325rem (37.2px).
+   2026-09-29 (cuarto pedido, mismo día): -3px sobre 37.2px — queda en
+   2.1375rem (34.2px).
+   2026-09-29 (quinto pedido, mismo día): -3px adicional sobre 34.2px —
+   queda en 1.95rem (31.2px).
+   2026-09-29 (sexto pedido, mismo día): -2px adicional sobre 31.2px —
+   queda en 1.825rem (29.2px), pedido explícito.
+   2026-09-30 (séptimo pedido): -2px adicional sobre 29.2px — queda en
+   1.7rem (27.2px), pedido explícito. */
+.doc-phone {
+    font-size: 1.7rem;
+    font-weight: 600;
+    white-space: nowrap;
+    color: var(--primary-color);
+}
+.doc-footer-right {
+    text-align: right;
+    font-size: 1.05rem;
+    line-height: 1.25;
+    color: var(--primary-color);
+    flex-shrink: 1;
+    min-width: 0;
+}
+/* 2026-09-29 (pedido explícito, revierte el "un solo renglón" de antes):
+   la dirección ahora SÍ envuelve — a dos líneas naturales dentro del ancho
+   que le deja footer-right (ver .doc-footer-info arriba: nowrap en el
+   contenedor mantiene la dirección en la esquina superior derecha en vez de
+   caer a un renglón aparte por debajo). */
+.doc-address {
+    white-space: normal;
+}
+.doc-footer-right strong {
+    font-weight: 700;
+    color: var(--primary-color);
+}
+.doc-icon-inline {
+    vertical-align: -2px;
+    margin-right: 4px;
+}
+/* 2026-09-30 (pedido explícito): ícono del teléfono proporcional al tamaño
+   del texto (antes 15px fijo en el atributo width/height del SVG, sin
+   relación con los múltiples cambios de tamaño de .doc-phone de esta
+   sesión). Em relativo al font-size heredado de .doc-phone — escala junto
+   con el texto automáticamente en vez de quedar un valor fijo desfasado. */
+.doc-phone .doc-icon-inline {
+    width: 0.75em;
+    height: 0.75em;
+}
+
+/* 2026-09-29: +6px sobre el tamaño anterior (76px → 82px), pedido explícito. */
+/* 2026-09-29 (segundo pedido, mismo día): +8% adicional sobre 82px — queda
+   en 88.56px (max-height 90px → 97.2px), pedido explícito. */
+/* 2026-09-30: +20% adicional sobre 88.56px — queda en 106.27px (max-height
+   97.2px → 116.64px), pedido explícito ("está muy pequeño"). */
+.doc-logo-solicitud-img {
+    height: 106.27px;
+    max-height: 116.64px;
+    width: auto;
+    object-fit: contain;
+}
+
+/* BUG-DAC-DEVICE-WIDTH-01 (2026-09-29): ", screen and (max-device-width:
+   1024px)" es sintaxis obsoleta que evalúa la RESOLUCIÓN FÍSICA del
+   dispositivo, no el ancho real de la ventana/viewport — en ciertos entornos
+   (confirmado en pruebas headless, y potencialmente en laptops/monitores con
+   reporte de device-width atípico) esta condición podía activarse aunque la
+   ventana estuviera mucho más ancha que 1024px, aplicando de golpe TODOS los
+   tamaños reducidos de este bloque sin ningún motivo real. Se deja solo
+   max-width (basado en viewport), que es lo único fiable y el mismo patrón
+   que usa el resto del proyecto. */
+@media (max-width: 1024px) {
+    body {
+        padding-top: 36px !important;
+        padding-bottom: 8px !important;
+        background-color: #ffffff !important;
+    }
+    .toolbar {
+        height: 36px !important;
+        padding: 0 8px !important;
+        justify-content: flex-start !important; /* El botón de imprimir queda a la izq / centro y la cruz fija a la derecha superior */
+    }
+    .btn-print-text {
+        display: none !important;
+    }
+    #btn-dac-print {
+        padding: 0 !important;
+        width: 32px !important;
+        height: 32px !important;
+        min-width: 32px !important;
+        min-height: 32px !important;
+        max-width: 32px !important;
+        max-height: 32px !important;
+        border-radius: 6px !important;
+        justify-content: center !important;
+    }
+    .doc-header {
+        padding: 6px 10px !important;
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        gap: 6px !important;
+    }
+    .doc-logo-area {
+        flex: 0 1 auto !important;
+        max-width: 52% !important;
+    }
+    /* BUG-DAC-FOOTER-1024-STALE-01 (mismo patrón, 2026-09-29): igual que
+       subtitle/slogan/title/footer/phone — estos clamp() venían de antes de
+       todos los ajustes de tamaño de hoy y SIEMPRE aplican en impresión real
+       (papel < 1024px). Sincronizados con el tamaño actual de escritorio. */
+    .doc-logo-img {
+        height: 106.27px !important;
+        max-height: 116.64px !important;
+        width: auto !important;
+        max-width: 100% !important;
+        object-fit: contain !important;
+    }
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `solicitud-dac.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L500-706)</summary>
+
+**Path:** `Unknown file`
+
+```
+    .doc-verified {
+        flex: 0 1 auto !important;
+        max-width: 32% !important;
+    }
+    .doc-logo-solicitud-img {
+        height: 106.27px !important;
+        max-height: 116.64px !important;
+        width: auto !important;
+        max-width: 100% !important;
+        object-fit: contain !important;
+    }
+    .doc-header-center {
+        flex: 1 1 auto !important;
+        text-align: center !important;
+        min-width: 0 !important;
+        padding: 0 2px !important;
+    }
+    /* BUG-DAC-FOOTER-1024-STALE-01 (mismo patrón, 2026-09-29): igual que
+       subtitle/footer/phone — sincronizado con el valor de escritorio. El
+       nowrap+ellipsis de .doc-title también se quita aquí (mismo motivo que
+       en escritorio: truncaba el título del documento oficial). */
+    .doc-slogan {
+        font-size: 15.5px !important;
+        line-height: 1.15 !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    .doc-title-box {
+        padding: 4px 8px 2px !important;
+        text-align: center !important;
+    }
+    .doc-title {
+        font-size: 19px !important;
+        line-height: 1.18 !important;
+        margin: 0 !important;
+        letter-spacing: -0.01em !important;
+        white-space: normal !important;
+        overflow: visible !important;
+        text-overflow: clip !important;
+        color: var(--primary-color) !important;
+        font-weight: 700 !important;
+    }
+    /* BUG-DAC-FOOTER-1024-STALE-01 (mismo patrón, 2026-09-29): valor viejo
+       (clamp con techo 10.5px) nunca sincronizado con el 19px de escritorio
+       — igual que footer/phone, esto SIEMPRE aplica en impresión real. */
+    .doc-subtitle {
+        font-size: 19px !important;
+        margin: 1px 0 2px !important;
+        color: #718096 !important;
+    }
+    .doc-accent-line {
+        margin: 0 8px 6px !important;
+        height: 2px !important;
+    }
+    .doc-info-box {
+        margin: 0 8px 6px !important;
+        padding: 4px 0 8px !important;
+        border: none !important;
+        border-bottom: 1px solid #cbd5e1 !important;
+        border-radius: 0 !important;
+        display: flex !important;
+        flex-direction: row !important;
+        background: transparent !important;
+    }
+    /* BUG-DAC-PACIENTE-2R-MOBILE-01 (2026-09-29): este bloque (≤1024px —
+       cubre la mayoría de laptops/tablets, no solo teléfonos) tenía su
+       propio juego de reglas SIN el split de Paciente a renglón propio y con
+       tamaños de fuente de antes de todos los ajustes de hoy (10px, muy por
+       debajo del 1.375rem/22px de escritorio) — quien viera la hoja en una
+       ventana ≤1024px de ancho (la mayoría de los casos reales) nunca veía
+       ninguno de los cambios pedidos, porque esta regla más específica de
+       viewport ganaba siempre sobre las de arriba. Ahora coincide con el
+       comportamiento de escritorio: Paciente en su propio renglón + mismo
+       tamaño de fuente. */
+    .doc-info-row {
+        display: grid !important;
+        grid-template-columns: repeat(4, 1fr) !important;
+        align-items: center !important;
+        width: 100% !important;
+        gap: 6px 12px !important;
+    }
+    .doc-info-linebreak {
+        display: none !important;
+    }
+    .doc-info-paciente {
+        grid-column: 1 / 3 !important;
+        grid-row: 1 !important;
+        justify-self: center !important;
+        text-align: center !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    .doc-info-cel {
+        grid-column: 3 / 5 !important;
+        grid-row: 1 !important;
+        justify-self: center !important;
+        text-align: center !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    .doc-info-edad,
+    .doc-info-sexo,
+    .doc-info-fecha,
+    .doc-info-folio {
+        grid-row: 2 !important;
+        justify-self: center !important;
+        text-align: center !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    .doc-info-edad  { grid-column: 1 !important; }
+    .doc-info-sexo  { grid-column: 2 !important; }
+    .doc-info-fecha { grid-column: 3 !important; }
+    .doc-info-folio { grid-column: 4 !important; }
+    .doc-info-item {
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 3px !important;
+        white-space: nowrap !important;
+        flex-shrink: 0 !important;
+    }
+    .doc-info-paciente {
+        font-size: 1.375rem !important;
+    }
+    .doc-info-paciente strong {
+        font-size: 1.3875rem !important;
+    }
+    .doc-info-cel {
+        font-size: 1.2rem !important;
+    }
+    .doc-info-cel strong {
+        font-size: 1.21rem !important;
+    }
+    .doc-info-edad,
+    .doc-info-sexo,
+    .doc-info-folio,
+    .doc-info-fecha {
+        font-size: 1.1375rem !important;
+    }
+    .doc-info-edad strong,
+    .doc-info-sexo strong,
+    .doc-info-folio strong,
+    .doc-info-fecha strong {
+        font-size: 1.1475rem !important;
+    }
+    .doc-info-item strong {
+        color: #0052B7 !important;
+    }
+    /* BUG-DAC-FOOTER-1024-STALE-01 (2026-09-29): estos 4 valores nunca se
+       habían tocado en toda la sesión de ajustes de hoy — como el papel
+       carta impreso (≈774px útiles) SIEMPRE es más angosto que 1024px, TODA
+       impresión real caía en este bloque, ignorando por completo los
+       aumentos de tamaño pedidos (footer, badge, teléfono, dirección)
+       aunque en pantalla ancha sí se vieran aplicados. Sincronizados ahora
+       con los valores actuales de escritorio (arriba en este mismo archivo). */
+    .doc-footer-info {
+        padding: 8px 10px !important;
+        font-size: 1.1rem !important;
+        gap: 6px !important;
+    }
+    .doc-badge-contact {
+        font-size: 1.03rem !important;
+        padding: 2px 10px !important;
+    }
+    .doc-phone {
+        font-size: 1.7rem !important;
+    }
+    .doc-footer-right {
+        font-size: 1.05rem !important;
+        line-height: 1.25 !important;
+    }
+}
+
+/* ── Notificaciones Toast en Solicitud DAC ── */
+#toast-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 99999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    pointer-events: none;
+}
+
+.laesh-toast {
+    color: #ffffff;
+    padding: 12px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 500;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: auto;
+    max-width: min(420px, calc(100vw - 40px));
+    word-break: break-word;
+}
+
+.laesh-toast-success { background: #10b981; }
+.laesh-toast-error   { background: #ef4444; }
+.laesh-toast-info    { background: #334155; }
+.laesh-toast-warning { background: #f59e0b; }
+
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `docs.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+/* ============================================================
+   LAESH — Document Pages (docs.css)
+   Estilos para: solicitud_dac_impr
+   Requiere: style.css (variables :root, body, fuentes, .btn)
+   ============================================================ */
+
+/* ── Contenedor raíz de página ─────────────────────────────── */
+/* body de style.css ya es flex + justify-content:center        */
+.doc-container {
+    width: 100%;
+    background: var(--bg-surface);
+    border: 3px solid var(--primary);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 82, 183, 0.12);
+    align-self: flex-start;  /* evita que se estire verticalmente */
+}
+
+.doc-container--narrow { max-width: 820px; }
+
+/* ── Header ──────────────────────────────────────────────────── */
+/* 2026-09-29 (pedido explícito del usuario): sin padding superior — el
+   header queda pegado al margen superior de la tarjeta (antes 8px lo
+   separaba del borde). */
+.doc-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 16px 8px;
+    background: var(--bg-surface);
+    border-bottom: 2px solid var(--border);
+    flex-wrap: nowrap;
+    gap: 12px;
+}
+
+.doc-logo-area {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 0 0 auto;
+}
+
+/* 2026-09-29: +6px sobre el tamaño anterior (76px → 82px).
+   2026-09-29 (segundo pedido, mismo día): +8% adicional sobre 82px — queda
+   en 88.56px (max-height 90px → 97.2px), pedido explícito.
+   2026-09-30: +20% adicional sobre 88.56px — queda en 106.27px (max-height
+   97.2px → 116.64px), pedido explícito ("está muy pequeño"). */
+.doc-logo-img { height: 106.27px; max-height: 116.64px; object-fit: contain; display: block; }
+
+.doc-header-center {
+    flex: 1 1 auto;
+    text-align: center;
+    min-width: 0;
+    padding: 0 4px;
+}
+
+
+
+/* Verificado badge */
+.doc-verified {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-left: auto;
+    flex-shrink: 0;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--primary);
+    font-weight: 600;
+}
+
+
+/* ── Slogan ────────────────────────────────────────────────── */
+.doc-slogan {
+    text-align: center;
+    font-style: italic;
+    color: var(--primary-green);
+    font-size: 15.5px;
+    font-weight: 600;
+    margin: 0 0 2px;
+    padding: 0;
+}
+
+/* ── Bloque de título ──────────────────────────────────────── */
+.doc-title-box {
+    text-align: center;
+    padding: 2px 16px 0;
+}
+
+/* h1 hereda font-family de style.css (Arial Black/Impact) */
+.doc-title {
+    font-size: 19px;
+    color: var(--primary);
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: -0.01em;
+    /* 2026-09-29: se quita el nowrap+ellipsis — con el tamaño +4 el título
+       ya no cabe en una sola línea sin truncarse; ahora envuelve a 2 líneas
+       en vez de recortar el texto del documento oficial. */
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+}
+
+/* 2026-09-29: +2px sobre el 15px original (queda en 17px).
+   2026-09-29 (segundo pedido, mismo día): +2px adicional sobre 17px — queda
+   en 19px, pedido explícito. */
+.doc-subtitle {
+    font-size: 19px;
+    color: var(--text-muted);
+    margin: 2px 0 0;
+}
+
+/* ── Línea de acento verde ─────────────────────────────────── */
+.doc-accent-line {
+    border: none;
+    height: 3px;
+    background: var(--primary-green);
+    margin: 0 24px 16px;
+    border-radius: 2px;
+}
+
+/* ── Caja de datos del paciente / info ─────────────────────── */
+.doc-info-box {
+    border: none;
+    border-bottom: 1px solid #cbd5e1;
+    border-radius: 0;
+    margin: 0 24px 14px;
+    padding: 6px 0 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    background: transparent;
+}
+
+.doc-info-row {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+}
+
+/* GAP-DAC-PACIENTE-2R-01: Paciente en su propio renglón, el resto fluye
+   debajo — ver misma nota en solicitud-dac.css (que es la regla que
+   realmente gana en pantalla vía !important; esta se mantiene en sincronía). */
+.doc-info-paciente {
+    flex: 1 1 100%;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `solicitud-dac.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+/**
+ * solicitud-dac.js — Ventana de impresión de Solicitud Digital de Análisis Clínicos
+ *
+ * GAP-RC-01 (cerrado 2026-09-21): antes, cada portal (Médico/Recepción)
+ * reconstruía manualmente los ~14 campos de la orden y los empujaba por
+ * querystring — mecanismo frágil que causó 4 bugs reales el mismo día
+ * (grilla de estudios rota, diagnóstico perdido, fecha confundida con un
+ * estudio, celular/edad/sexo faltantes), todos por el mismo patrón: lógica
+ * duplicada entre medicos.js/labadmin.js + datos sincronizados a mano en
+ * varios archivos sin ninguna alerta cuando algo se quedaba fuera.
+ *
+ * Ahora esta ventana solo recibe `id` (folio) y `portal` (rc|md) por URL, y
+ * consulta la orden real directamente a BD vía GET /laesh/{portal}/api/orden
+ * — fuente única de verdad. Ver RC\Negocio\Ordenes::obtenerOrdenPorFolio().
+ */
+(function() {
+    var p = new URLSearchParams(window.location.search);
+    var id = p.get('id') || '';
+    var portal = (p.get('portal') === 'md') ? 'md' : 'rc';
+    var esNueva = p.get('nueva') === '1';
+
+    var set = function(elId, val) {
+        var el = document.getElementById(elId);
+        if (el) el.textContent = val || '';
+    };
+
+    /* 2026-09-30: dirección/WhatsApp del footer vienen de window.laeshConfig
+       (config-compiled.js, generado por ConfigBuilder::build() al guardar el
+       CMS — sección "Ubicación y Contacto" / "Atención, Redes Sociales y Chat
+       vía WhatsApp"). Solo se sobreescribe si el dato existe: si
+       config-compiled.js no cargó (instalación nueva, permisos), se conserva
+       el texto fijo que ya trae el HTML como respaldo. */
+    (function popularConfigGlobal() {
+        var cfg = window.laeshConfig || {};
+        if (cfg.whatsapp_numero) {
+            set('dac-whatsapp-numero', cfg.whatsapp_numero);
+        }
+        if (cfg.direccion_calle) {
+            var calle = cfg.direccion_calle.trim();
+            set('dac-direccion-calle', calle + (/[.,]$/.test(calle) ? '' : '.'));
+        }
+        var ciudadEstado = [cfg.ciudad, cfg.estado].filter(Boolean).join(', ');
+        if (ciudadEstado) {
+            set('dac-direccion-ciudad-estado', ciudadEstado + '.');
+        }
+    })();
+
+    function formatFechaDDMMYYYY(fechaStr) {
+        if (!fechaStr) {
+            var now = new Date();
+            var dd = String(now.getDate()).padStart(2, '0');
+            var mm = String(now.getMonth() + 1).padStart(2, '0');
+            var yyyy = now.getFullYear();
+            return dd + ' - ' + mm + ' - ' + yyyy;
+        }
+        var str = fechaStr.toString().trim();
+        var meses = {
+            'enero': '01', 'febrero': '02', 'marzo': '03', 'abril': '04',
+            'mayo': '05', 'junio': '06', 'julio': '07', 'agosto': '08',
+            'septiembre': '09', 'octubre': '10', 'noviembre': '11', 'diciembre': '12'
+        };
+        var textMatch = str.match(/^(\d{1,2})\s+de\s+([a-z]+)\s+de\s+(\d{4})/i);
+        if (textMatch) {
+            var d = textMatch[1].padStart(2, '0');
+            var m = meses[textMatch[2].toLowerCase()] || '01';
+            var y = textMatch[3];
+            return d + ' - ' + m + ' - ' + y;
+        }
+        // hora_captura de MariaDB llega como "YYYY-MM-DD HH:MM:SS"
+        var isoMatch = str.match(/^(\d{4})[-/](\d{1,2})[-/](\d{1,2})/);
+        if (isoMatch) {
+            return isoMatch[3].padStart(2, '0') + ' - ' + isoMatch[2].padStart(2, '0') + ' - ' + isoMatch[1];
+        }
+        var dmyMatch = str.match(/^(\d{1,2})[-/](\d{1,2})[-/](\d{4})/);
+        if (dmyMatch) {
+            return dmyMatch[1].padStart(2, '0') + ' - ' + dmyMatch[2].padStart(2, '0') + ' - ' + dmyMatch[3];
+        }
+        return str;
+    }
+
+    function mostrarError(mensaje) {
+        set('dac-paciente', '—');
+        set('dac-celular', '—');
+        set('dac-edad', '—');
+        set('dac-sexo', '—');
+        set('dac-folio', id || '—');
+        set('dac-fecha', formatFechaDDMMYYYY(null));
+        set('dac-diagnostico', mensaje || 'No se pudo cargar la solicitud.');
+        var ol = document.getElementById('dac-estudios-list');
+        if (ol) {
+            ol.innerHTML = '';
+            var li = document.createElement('li');
+            li.textContent = mensaje || 'No se pudo cargar la solicitud.';
+            ol.appendChild(li);
+        }
+    }
+
+    function poblarDocumento(orden) {
+        var paciente = orden.paciente || '—';
+        var celular = orden.celular || '—';
+        var diagnostico = orden.diagnostico || '';
+
+        var estudiosArr = [];
+        try {
+            estudiosArr = JSON.parse(orden.estudios || '[]');
+            if (!Array.isArray(estudiosArr)) estudiosArr = [];
+        } catch (e) { estudiosArr = []; }
+        if (orden.otros_estudios) estudiosArr.push('Otros estudios: ' + orden.otros_estudios);
+
+        var medico = (orden.medico || 'Médico General').toString();
+        // Sanitizar cualquier duplicación de "Dr(a). Dr(a)." o "Dr. Dr."
+        medico = medico.replace(/^(Dr\(a\)\.|\bDr\.\b|\bDra\.\b|\bDr\b)\s*(?:Dr\(a\)\.|\bDr\.\b|\bDra\.\b|\bDr\b\s*)*/gi, 'Dr. ').trim();
+
+        var folio = orden.folio || id || '1';
+
+        // Construir nombre sugerido para PDF: sd-laesh-#folio-nombre-completo-persona.pdf
+        var folioSanit = folio.toString().trim().replace(/[^a-zA-Z0-9]/g, '');
+        var pacienteSanit = paciente.toString().trim().toLowerCase()
+            .normalize("NFD").replace(/[̀-ͯ]/g, "") // remover acentos
+            .replace(/[^a-z0-9]/g, '-')                     // guiones para espacios/especiales
+            .replace(/-+/g, '-')                            // evitar guiones dobles
+            .replace(/^-|-$/g, '');                         // quitar guiones bordes
+
+        var suggestedPdfName = 'sd-laesh-' + (folioSanit || '0') + (pacienteSanit ? '-' + pacienteSanit : '');
+        document.title = suggestedPdfName;
+
+        set('tb-folio', folio);
+        set('tb-paciente', paciente);
+
+        // Normalizar valor de Sexo a Masculino o Femenino
+        var sexoFormatted = (orden.sexo || '').toString().trim();
+        if (/^masc|^homb|^h$/i.test(sexoFormatted)) sexoFormatted = 'Masculino';
+        else if (/^fem|^muj|^m$/i.test(sexoFormatted)) sexoFormatted = 'Femenino';
+
+        // Formatear Edad
+        var edadFormatted = (orden.edad === null || orden.edad === undefined) ? '' : orden.edad.toString().trim();
+        if (edadFormatted && !/año|ano/i.test(edadFormatted) && /^\d+$/.test(edadFormatted)) {
+            edadFormatted += ' años';
+        }
+
+        var fechaFormatted = formatFechaDDMMYYYY(orden.fecha);
+
+        set('dac-paciente', paciente);
+        set('dac-celular', celular);
+        set('dac-edad', edadFormatted || '—');
+        set('dac-sexo', sexoFormatted || '—');
+        set('dac-folio', folio);
+        set('dac-fecha', fechaFormatted);
+        set('dac-diagnostico', diagnostico || 'Sin diagnóstico especificado.');
+        set('dac-medico-nombre', medico);
+        set('dac-medico-especialidad', orden.especialidad || 'Medicina General');
+
+        // Formateo de Cédula Profesional y Cédula de Especialidad:
+        // "Cedula Profesional: Dato real   |   Cedula Especialidad: Dato real"
+        var cedulaProf = (orden.cedula && orden.cedula !== 'CED-N/A') ? orden.cedula.toString().trim() : '';
+        var cedulaEsp = (orden.cedula_especialidad) ? orden.cedula_especialidad.toString().trim() : '';
+
+        var textoCedula = '';
+        if (cedulaProf) {
+            textoCedula = 'Cedula Profesional: ' + cedulaProf;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `solicitud-dac.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L160-299)</summary>
+
+**Path:** `Unknown file`
+
+```
+            if (cedulaEsp) {
+                textoCedula += '   |   Cedula Especialidad: ' + cedulaEsp;
+            }
+        } else if (cedulaEsp) {
+            textoCedula = 'Cedula Especialidad: ' + cedulaEsp;
+        } else {
+            textoCedula = 'Cedula Profesional: Sin registrar';
+        }
+        set('dac-medico-cedula', textoCedula);
+
+        set('dac-medico-universidad', orden.universidad || '');
+
+        var ol = document.getElementById('dac-estudios-list');
+        if (ol) {
+            ol.innerHTML = '';
+            if (estudiosArr.length === 0) {
+                var li = document.createElement('li');
+                li.textContent = 'Sin estudios especificados.';
+                ol.appendChild(li);
+            } else {
+                estudiosArr.forEach(function(e) {
+                    var liE = document.createElement('li');
+                    liE.textContent = e;
+                    ol.appendChild(liE);
+                });
+            }
+        }
+    }
+
+    // Limpiar query-params de la barra de direcciones (popup queda limpio)
+    try { history.replaceState({}, '', window.location.pathname); } catch (e) {}
+
+    // Ack real de esta ventana: la carga de datos de la orden. Éxito → puebla
+    // el documento y notifica (toast queda por encima del overlay, z-index
+    // corregido en app.js). Fallo → cierra el overlay en la ventana padre y
+    // solo deja el toast de error (no tiene caso mostrar un documento vacío).
+    function cerrarConError(mensaje) {
+        notificarAck(mensaje || 'No se pudo cargar la solicitud.', 'error');
+        try {
+            if (window.parent && window.parent !== window) {
+                var overlay = window.parent.document.getElementById('sol-overlay');
+                if (overlay) { overlay.remove(); return; }
+            }
+        } catch (e) {}
+        // Fallback (ventana standalone sin overlay padre): mostrar el error en el propio documento.
+        mostrarError(mensaje);
+    }
+
+    if (!id) {
+        cerrarConError('Folio no especificado.');
+    } else {
+        fetch('/laesh/' + portal + '/api/orden?folio=' + encodeURIComponent(id), { credentials: 'same-origin' })
+            .then(function(res) { return res.json(); })
+            .then(function(data) {
+                if (data && data.success && data.orden) {
+                    poblarDocumento(data.orden);
+                    // GAP-PERF-DAC-01 (2026-09-24): avisa al overlay padre (app.js,
+                    // _abrirSolOverlay) que el documento ya tiene datos reales — recién
+                    // ahora se revela el iframe (opacity, ver style.css) y se oculta el
+                    // spinner. Antes de esto el iframe se veía en blanco (su propio
+                    // fondo #fff) durante todo el fetch. Mismo patrón ya usado en este
+                    // archivo para cerrar el overlay (acceso directo same-origin).
+                    try {
+                        if (window.parent && window.parent !== window) {
+                            var overlayReady = window.parent.document.getElementById('sol-overlay');
+                            if (overlayReady) overlayReady.classList.add('sol-ready');
+                        }
+                    } catch (e) {}
+                    // El ack de "creada con éxito" solo aplica cuando esta ventana se
+                    // abrió justo tras crear la orden (?nueva=1) — si el usuario solo
+                    // está viendo/reimprimiendo una solicitud ya existente desde la
+                    // búsqueda, no hay nada que "confirmar", el documento cargado ya
+                    // es la confirmación. Mostrar ese toast en ese caso era engañoso.
+                    if (esNueva) {
+                        notificarAck('✓ Solicitud creada con éxito.', 'success');
+                    }
+                } else if (esNueva) {
+                    // La orden ya fue creada (por eso se abrió esta ventana) — lo que
+                    // falló es solo la carga de sus datos para imprimir. Aclarar esto
+                    // explícitamente evita que el usuario crea que la creación falló
+                    // y reintente, generando una orden duplicada.
+                    var errDetalle = (data && data.error) ? data.error : 'no se encontró la solicitud';
+                    cerrarConError('La solicitud ' + id + ' se creó correctamente, pero no se pudo cargar la vista de impresión (' + errDetalle + '). Búscala en la tabla para reimprimirla.');
+                } else {
+                    cerrarConError((data && data.error) || 'No se pudo cargar la solicitud ' + id + '.');
+                }
+            })
+            .catch(function() {
+                if (esNueva) {
+                    cerrarConError('La solicitud ' + id + ' se creó correctamente, pero no se pudo cargar la vista de impresión por un error de conexión. Búscala en la tabla para reimprimirla.');
+                } else {
+                    cerrarConError('Error de conexión al cargar la solicitud ' + id + '.');
+                }
+            });
+    }
+
+    // Auto-ajustar ventana si se abre como popup
+    function ajustarVentana() {
+        try {
+            var docH = document.documentElement.scrollHeight;
+            var chrome = window.outerHeight - window.innerHeight;
+            window.resizeTo(window.outerWidth, docH + chrome + 8);
+        } catch (e) {}
+    }
+    window.addEventListener('load', function() {
+        ajustarVentana();
+        setTimeout(ajustarVentana, 300);
+    });
+})();
+
+// Sistema Toast compatible (local en iframe o delegable al portal padre)
+function notificarAck(mensaje, tipo) {
+    tipo = tipo || 'success';
+    // 1. Si existe showToast en el parent (portal médico / recepción), usarlo
+    try {
+        if (window.parent && window.parent !== window && typeof window.parent.showToast === 'function') {
+            window.parent.showToast(mensaje, tipo);
+            return;
+        }
+    } catch(e) {}
+
+    // 2. Si no o en standalone popup, mostrar toast local
+    var container = document.getElementById('toast-container');
+    if (!container) {
+        container = document.createElement('div');
+        container.id = 'toast-container';
+        container.setAttribute('aria-live', 'polite');
+        container.setAttribute('aria-atomic', 'true');
+        document.body.appendChild(container);
+    }
+
+    var toast = document.createElement('div');
+    toast.className = 'laesh-toast laesh-toast-' + tipo;
+    toast.style.position = 'relative';
+    toast.style.paddingRight = '36px';
+
+    var msgSpan = document.createElement('span');
+    msgSpan.textContent = mensaje;
+    toast.appendChild(msgSpan);
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:21 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `class DB`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:21 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:21 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `DB.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+// DB.php - Clase para conexión PDO e interacción transaccional con la base de datos
+
+namespace Common;
+
+use PDO;
+use PDOException;
+
+class DB {
+    private static ?PDO $instance = null;
+
+    /**
+     * Establece la conexión PDO singleton
+     */
+    public static function connect(): PDO {
+        if (self::$instance === null) {
+            $config = require __DIR__ . '/config.php';
+            $dbConf = $config['db'];
+
+            $dsn = sprintf(
+                "mysql:host=%s;port=%d;dbname=%s;charset=%s",
+                $dbConf['host'],
+                $dbConf['port'],
+                $dbConf['name'],
+                $dbConf['charset']
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:21 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:21 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `config.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+// config.php — Configuración del ecosistema LAESH (Bloc Digital)
+//
+// Credenciales leídas desde variables de entorno (mínimo privilegio):
+//   LAESH_DB_USER / LAESH_DB_PASS / LAESH_DB_HOST / LAESH_DB_PORT / LAESH_DB_NAME
+//
+// Fallbacks por ambiente (env var siempre tiene prioridad):
+//   Docker local  (/.dockerenv existe) → host=db,        port=3306
+//   KVM2 Hostinger / OCI / nativo      → host=127.0.0.1, port=3306
+//   (En todos los entornos nativo las env vars se inyectan vía PHP-FPM pool
+//    y cache_renew.cron — el fallback no-Docker solo aplica si la inyección falla)
+// Nota: ya NO se usa root. Usuario dedicado laesh_app con privilegios mínimos en laesh_db.
+
+$inDocker = file_exists('/.dockerenv');
+
+// ── JWT Secret: falla explícita en producción si no se inyectó vía entorno ──
+// Hallazgo 2026-09-18: el secreto vivía hardcodeado como fallback silencioso,
+// visible en el código fuente — invalidaba la garantía de firma HMAC para los
+// 3 portales (md/rc/admrc). Producción NUNCA debe operar con un secreto conocido.
+$appEnv = getenv('APP_ENV') ?: 'development';
+$jwtSecret = getenv('LAESH_JWT_SECRET') ?: '';
+if ($jwtSecret === '') {
+    if ($appEnv === 'production') {
+        throw new \RuntimeException(
+            'LAESH_JWT_SECRET no está definida en el entorno. ' .
+            'Producción no puede operar con un secreto JWT hardcodeado/conocido. ' .
+            'Verificar env[LAESH_JWT_SECRET] en php-fpm-laesh.conf / EnvironmentFile de swoole-laesh.service.'
+        );
+    }
+    // Solo desarrollo local: valor fijo y claramente marcado como no apto para producción.
+    $jwtSecret = 'DEV_ONLY_INSECURE_SECRET_never_use_in_prod_2026';
+}
+
+return [
+    'db' => [
+        'host'    => getenv('LAESH_DB_HOST') ?: ($inDocker ? 'db'   : '127.0.0.1'),
+        'port'    => (int)(getenv('LAESH_DB_PORT') ?: 3306),   // 3306 en todos los entornos nativo (KVM2/OCI)
+        'user'    => getenv('LAESH_DB_USER') ?: 'laesh_app',
+        'pass'    => getenv('LAESH_DB_PASS') ?: 'laesh_2026_dev',
+        'name'    => getenv('LAESH_DB_NAME') ?: 'laesh_db',
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:21 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:21 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:21 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:22 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:22 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:22 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+Investigating the request for folio 30, the database indicates this folio might be missing or specifically tested with a long patient name. The user's instruction to format the `solicitud_dac_impr.php` screen and correct content distribution focuses on handling potentially lengthy patient names. The focus is now on adjusting the label "Paciente:" for this condition.
+
+
+The CSS suggests a fixed layout with a flex container and grid rows. This setup could cause the patient name label to be truncated if the content overflows the available space, especially with `justify-content: flex-start`. Addressing this requires investigating the CSS of the relevant elements and considering options like allowing text wrapping or adjusting the layout to accommodate long text strings without clipping.
+
+
+The `.doc-info-paciente` element's centered and `nowrap` behavior, within its constrained grid column, causes long names to overflow equally on both sides. This symmetrical overflow could cause the left portion of the name to be hidden, conflicting with the desired display. The layout might need adjustments to prevent horizontal clipping.
+
+
+The combination of center alignment, `white-space: nowrap`, and `overflow: hidden` is causing the left-side text truncation. The use of `!important` on `white-space: nowrap` and `justify-self: center` requires further scrutiny. The layout design should allow long patient names to either wrap, overflow appropriately, or occupy the available width to avoid clipping.
+
+
+The element occupies columns 1-2 in the grid, not 1/3 as initially thought. The comment confirms a 4-column grid setup where the "Celular" field in row 1 aligns with "Fecha" and "Folio" in row 2, which led to this layout decision. With `justify-self: center` and `white-space: nowrap`, longer names cause left-side truncation. Potential solutions involve using `justify-self: start`, allowing text wrapping, or ensuring adequate width.
+
+
+The current configuration's `white-space: nowrap !important;` and centered alignment are the primary culprits for the left-side truncation. Replacing these will enable either wrapping or proper overflow handling. A thorough check of other sections is necessary to determine if similar issues exist and apply consistent fixes. It's necessary to verify the diagnosis, doctor info, observations, and header text sections for potential text-overflow problems.
+
+
+The requirement specifies handling cases with numerous studies by generating additional pages. The current structure, particularly the studies list within the HTML, must be examined to understand how it currently manages multiple studies. The existing HTML structure, with a single `<ol>` element for the studies, likely presents a challenge for pagination. The next step is to analyze the code to determine how to split the studies across multiple pages, including the header and footer on subsequent pages.
+
+
+The CSS `page-break-inside: avoid` on `.doc-container` prevents the list of studies from splitting across pages, which is the root cause of the overflow issue. With numerous studies, the form breaks visually and on print, creating an undesirable effect. The single container approach is clearly the problem.
+
+The user's requirement necessitates generating a new page with a header, footer, and the remaining studies when the first page is full. The existing code needs modification to handle study pagination across multiple pages and avoid clipping or awkward breaks in the printed output, requiring restructuring the studies listing into a paginated format.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `docs.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 9.570402626s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L150-299)</summary>
+
+**Path:** `Unknown file`
+
+```
+    text-align: left;
+    padding: 0;
+    margin: 0;
+}
+.doc-info-sexo,
+.doc-info-folio,
+.doc-info-cel,
+.doc-info-edad,
+.doc-info-fecha {
+    flex: 0 0 auto;
+    text-align: left;
+    padding: 0;
+    margin: 0;
+}
+
+.doc-info-item {
+    font-size: 17px;
+    color: var(--text-muted);
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.doc-info-item strong {
+    color: var(--primary);
+    font-size: 17px;
+    font-weight: 700;
+}
+
+/* ── Layout de contenido: lista + panel derecho ────────────── */
+.doc-content {
+    display: flex;
+    padding: 0 24px 16px;
+    gap: 32px;
+}
+
+.doc-studies { flex: 1.2; }
+
+.doc-studies h3 {
+    color: var(--primary);
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 10px;
+    text-transform: none;
+    letter-spacing: 0.03em;
+    border-bottom: 2px solid var(--primary-green);
+    padding-bottom: 4px;
+}
+
+.doc-studies ol {
+    margin: 0;
+    padding-left: 20px;
+    font-size: 17px;
+    line-height: 1.8;
+    color: var(--text-main);
+}
+
+.doc-studies ol li::marker {
+    color: var(--primary);
+    font-weight: 700;
+}
+
+.doc-side { flex: 1; }
+
+/* ── Diagnóstico ───────────────────────────────────────────── */
+.doc-diagnosis {
+    margin-bottom: 14px;
+    padding: 10px 14px;
+    background: var(--bg-page);
+    border-left: 3px solid var(--primary-green);
+    border-radius: 0 8px 8px 0;
+}
+
+.doc-diagnosis strong {
+    color: var(--primary);
+    font-size: 16px;
+    display: block;
+    margin-bottom: 2px;
+}
+
+.doc-diagnosis span {
+    font-size: 17px;
+    color: var(--text-main);
+}
+
+/* ── Observaciones ─────────────────────────────────────────── */
+.doc-obs { font-size: 17px; }
+
+.doc-obs strong {
+    color: var(--primary);
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 700;
+}
+
+/* 2026-09-29: -1px sobre el 16px original (queda en 15px).
+   2026-09-29 (segundo pedido, mismo día): -1px adicional sobre 15px — queda
+   en 14px, pedido explícito. */
+.doc-obs p {
+    margin: 0 0 8px;
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+.doc-obs ul {
+    margin: 0;
+    padding-left: 18px;
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--text-main);
+}
+
+.doc-obs ul li::marker { color: var(--primary-green); }
+
+/* ── Firma del médico ──────────────────────────────────────── */
+.doc-doctor {
+    text-align: center;
+    margin: 8px 24px 16px;
+    padding-top: 14px;
+    border-top: 2px solid var(--border);
+}
+
+.doc-doctor-name {
+    color: var(--primary);
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0;
+}
+
+/* 2026-09-29 (pedido explícito): especialidad + cédula ahora comparten
+   renglón (ver .doc-doctor-specinfo) — .doc-doctor-spec/.doc-doctor-info
+   son <span> dentro de ese contenedor flex, ya no <p> independientes. */
+.doc-doctor-specinfo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin: 4px 0;
+    flex-wrap: wrap;
+}
+.doc-doctor-spec {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-main);
+}
+.doc-doctor-vsep {
+    color: #cbd5e1;
+    font-weight: 400;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `.sol-overlay`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:22 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `style.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L544-614)</summary>
+
+**Path:** `Unknown file`
+
+```
+}
+
+/* ── Overlay Solicitud Digital — iframe embebido, sin nueva ventana ── */
+.sol-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+.sol-overlay iframe {
+    width: min(900px, 98vw);
+    height: 92vh;
+    border: none;
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+    /* GAP-PERF-DAC-01 (2026-09-24): oculto hasta que solicitud-dac.js marca
+       #sol-overlay.sol-ready (datos ya poblados) — evita el rectángulo
+       blanco vacío mientras el fetch de la orden está en curso.
+       Autoauditoría (mismo día): opacity:0 solo no basta —
+       - pointer-events:none evita interactuar con un documento a medio
+         poblar (ej. el botón Imprimir del propio iframe) mientras es
+         invisible pero técnicamente seguiría siendo clicable.
+       - visibility:hidden saca el iframe del árbol de accesibilidad
+         mientras carga — sin esto, un lector de pantalla podría anunciar
+         los placeholders "—" antes de que el documento tenga datos reales.
+         visibility no anima, pero al pasar a "visible" al mismo tiempo que
+         empieza el fade-in de opacity no se necesita ningún ajuste de
+         transition-delay (el caso inverso — ocultar de nuevo — no ocurre
+         aquí, el iframe nunca vuelve a taparse tras revelarse). */
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.15s ease;
+}
+.sol-overlay.sol-ready iframe {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+.sol-overlay-spinner {
+    position: absolute;
+    width: 42px;
+    height: 42px;
+    border: 4px solid rgba(255, 255, 255, 0.25);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: sol-overlay-spin 0.8s linear infinite;
+}
+.sol-overlay.sol-ready .sol-overlay-spinner {
+    display: none;
+}
+@keyframes sol-overlay-spin {
+    to { transform: rotate(360deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+    .sol-overlay-spinner {
+        animation: none;
+    }
+}
+/* Al imprimir desde el overlay iframe en portales:
+   Ocultar SOLO elementos del portal (.portal-access-header, .app-layout) — estas
+   clases NO existen en solicitud_dac_impr.html, por lo que esta regla no afecta
+   el print de la solicitud cuando imprime desde su propio contexto. */
+
+/* ── Barras de Reportes — colores CSP-safe (sin inline style) ── */
+.bar-fill           { height: 100%; }
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Analyzing the CSS, focusing on the `.sol-overlay` and `.sol-overlay iframe` elements. The overlay uses a fixed position, spanning the entire viewport, with a high z-index and a semi-transparent background. The iframe is styled with a white background and rounded borders, fitting within the overlay's dimensions.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `.doc-content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.001598488s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:22 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `docs.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L379-409)</summary>
+
+**Path:** `Unknown file`
+
+```
+       carga después y ya lo corrige a 16px), pero se sincroniza aquí también
+       para no dejar un 0 inconsistente en este archivo. */
+    .doc-container {
+        border: 2px solid var(--primary) !important;
+        box-shadow: none !important;
+        border-radius: 16px !important;
+        max-width: 100% !important;
+    }
+
+    .doc-footer-info { border-radius: 0 !important; }
+}
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 600px) {
+    .doc-content {
+        flex-direction: column;
+        gap: 16px;
+        padding: 0 14px 14px;
+    }
+
+    .doc-info-box { margin: 0 14px 14px; }
+    .doc-accent-line { margin: 0 14px 14px; }
+    .doc-doctor { margin: 8px 14px 14px; }
+
+    .doc-header { padding: 12px 16px; }
+    .doc-logo-img { height: 46px; }
+}
+
+/* ── P-LAESH-01: lista_costos_2026 column widths ── */
+.ta-center             { text-align: center; }
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Investigating the CSS, specifically the `solicitud-dac.css` file within the `@media (max-width: 1024px)` block, to understand the layout. Noticing the `grid-template-columns: repeat(4, 1fr)` definition, especially on mobile widths. Will correlate this observation with any potential layout issues.
+
+
+Analyzing the CSS, the `inline-flex`, `white-space: nowrap`, and larger font sizes, particularly for patient and cell info, will cause horizontal overflow on a 360px screen. The four columns in row 2, each intended to be ~80px wide, combined with text content that exceeds this width due to the `nowrap` rule, will lead to clipping or, potentially, horizontal scrollbars, if the container doesn't have an explicit width setting. The `overflow: hidden` on a parent could cause content clipping as well.
+
+
+Observing the current mobile behavior, the document doesn't auto-scale to fit within the iframe, leading to clipped content due to the fixed design and print-oriented layout. The user explicitly requests complete visibility and zoom functionality on mobile. The existing viewport meta tag is likely insufficient given the fixed document structure.
+
+
+The `align-items: center !important;` style on the `body` element is preventing the content from scaling or enabling pinch-to-zoom within the iframe on mobile devices. Several options are being considered: auto-scaling the content to fit the screen with zoom controls, implementing pinch-to-zoom gestures with an "adjust" button, or adding zoom controls to the existing toolbar. The toolbar approach seems promising since it already adapts for mobile, hiding the print button text to provide space.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 3.055392827s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:23 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:23 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `folio_unico`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:24 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+If testing a specific folio, ensure an order exists with the corresponding `folio_unico` value. This also requires a patient name that is representative of an edge case, such as a very long patient name. Investigate whether this setup already exists.
+
+
+An order with `folio_unico = '30'` is needed; insertion or update is confirmed to facilitate testing `id=30`. The impact of long patient names on the DOM and CSS will be explored using sample names like `Lic. Juan Carlos de los Monteros y González de la Vega`. Requirement analysis begins with an examination of relevant CSS classes and media queries for patient information display, focusing on potential text truncation.
+
+
+The clipping is caused by negative positioning of the `.doc-info-item` element due to `justify-self: center` within a grid cell narrower than the content's width, combined with `overflow: hidden` on the container. The `white-space: nowrap` prevents text wrapping, exacerbating the width issue. The limited number of columns in the row further constrains the available space.
+
+
+The current layout unnecessarily restricts patient name display due to the arbitrary column split and centering. The `grid-column: 1 / 3` assignment for patient names within a fixed-width grid restricts available space. A start alignment or text wrapping on the patient name could prevent clipping. Investigating why the user is reporting the label is cut off helps diagnose the root cause of the issue.
+
+
+Analysis extends to other potential truncation points within the document layout. Specific CSS classes like `.doc-diagnosis span`, `.doc-obs p`, `.doc-obs ul`, `.doc-doctor-lugar-box` and various `.doc-info-item` elements are assessed for handling long text strings. The objective is to identify and correct any CSS rules that might lead to text overflow or clipping, especially within doctor information and patient data sections.
+
+
+Applying `justify-self: start` or `safe center` in the affected CSS avoids the left edge going into negative coordinates. The goal is to accommodate long names within `.doc-info-paciente` by using `white-space: normal` and `display: inline` (or `inline-flex` with `flex-wrap: wrap`) to allow wrapping. The placement of `.doc-info-cel` and `.doc-info-paciente` within the grid columns is confirmed, with cell phone centered in columns 3/5 and patient name in 1/3. Padding adjustments might also be necessary.
+
+
+The clipping of the patient name label is directly due to the combination of `justify-self: center` and `white-space: nowrap`, which are now confirmed as the root cause. Changing to `justify-self: start` (or `safe center`) resolves the left-side truncation. Applying `white-space: normal` or implementing word-wrapping addresses content overflow. Overflow guards will be added to other sections.
+
+The system will need to generate a new page with header and footer if a long list of studies exists. Assessing the number of studies that can fit on the first page, the page layout and element dimensions, is next. Page one includes a header with logos and slogan.
+
+
+Available vertical space for studies on the first page is approximately 410px after accounting for header, info, and footer elements. A single study entry occupies roughly 31px with the current font size and line height.
+
+This suggests that 12 to 14 studies can be displayed comfortably on the first page. For documents with a larger study list (e.g., 50), the remainder will be rendered on subsequent pages.
+
+The second page layout omits diagnosis and observations, allowing more studies to be displayed. Potentially 36-40 items can fit on the second page depending on column layout.
+
+
+The pagination strategy is evaluated for handling variable study counts. A conditional approach ensures single-page layouts remain unchanged for typical orders. For larger lists, the first page will display a maximum number of studies, with the remaining studies rendered on subsequent pages. A second page includes a continuation header and uses an ordered list with the correct starting number for seamless numbering across pages. The study list on subsequent pages will also be arranged in balanced columns if the remaining list is large.
+
+
+The layout for print and screen rendering is being designed with page breaks to accommodate long study lists. CSS `@media print` rules will enforce page breaks after each `.doc-page` except the last. On-screen rendering will display pages as distinct sheets with separators, indicating the current page number.
+
+The logic for populating the document with studies resides within the `poblarDocumento(orden)` function in `solicitud-dac.js`, which renders the `estudiosArr` into the `#dac-estudios-list` element. The file has now been examined to confirm this.
+
+
+The maximum number of studies to display on Page 1 is determined based on available vertical space, considering the fixed height of the adjacent `.doc-side` element and expected study list item height.  The `MAX_PAGE_1` value is estimated as between 12 and 14 to avoid pushing other content off the page.  A pagination strategy is required for lists exceeding this threshold, with subsequent pages handling the remaining studies.  The subsequent pages will use a two column approach and be designed to accommodate up to 36 studies, or more.
+
+
+The iframe's content is rendered within a fixed overlay on mobile, creating layout constraints. The overlay's CSS includes padding and centering, which reduces the effective available width for the iframe itself. This suggests the iframe will be narrower than the mobile screen width.
+
+Within the iframe's content, the header's combined width (logos and slogan) and the grid layout of the `.doc-info-row` will influence the horizontal space available for displaying patient information, potentially causing text to overflow. The meta viewport tag confirms the document is responsive, but the CSS layout within that responsive environment is being examined for further constraints.
+
+
+The document's display issues stem from its width exceeding the iframe viewport and disabled mobile zoom. A CSS transform scale will be calculated to fit the document to the screen. Specifically, the scale factor will be calculated using `scale = (iframeWidth - padding) / documentWidth`.  Zoom controls are planned to augment the auto-fit behavior, allowing user-driven scaling within the document.
+
+
+A mobile-specific CSS rule ensures the overlay covers the full screen to maximize iframe real estate.  The document will initially fit the screen width, avoiding content cutoff. Zoom functionality will be added through buttons and gestures (pinch/double-tap) for detailed inspection. After zooming, horizontal and vertical scrolling enables panning across the enlarged document.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 18.105537459s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:24 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `/api/orden`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:25 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L725-764)</summary>
+
+**Path:** `Unknown file`
+
+```
+// ── GET /api/orden — GAP-RC-01: fuente única de verdad para el popup de
+// impresión de Solicitud Digital (ver RC\Negocio\Ordenes::obtenerOrdenPorFolio).
+// Ownership: el médico solo puede consultar sus propias órdenes.
+Flight::route('GET /api/orden', function () {
+    $folio = trim($_GET['folio'] ?? '');
+    if ($folio === '') {
+        Flight::json(['success' => false, 'error' => 'Folio requerido'], 400);
+        return;
+    }
+
+    $userId = (int)Flight::auth()->getUserId();
+    $orden = \RC\Negocio\Ordenes::obtenerOrdenPorFolio($folio, $userId);
+    if (!$orden) {
+        Flight::json(['success' => false, 'error' => 'Solicitud no encontrada'], 404);
+        return;
+    }
+
+    Flight::json(['success' => true, 'orden' => $orden]);
+});
+
+// ── GET /api/notificaciones — Endpoint Polling Fallback ─────────────────────
+Flight::route('GET /api/notificaciones', function () {
+    $db = Flight::db();
+    $userId = (int)Flight::auth()->getUserId();
+    $since  = (int)($_GET['since'] ?? 0);
+
+    if ($since <= 0) {
+        // 2026-09-24: ver nota completa en rc/index.php — antes filtraba por
+        // vw_notificaciones_pendientes (leido=0 únicamente); el clic en la
+        // campana marca todo como leído de inmediato, así que abrir el panel
+        // justo tras un evento lo mostraba vacío aunque acabara de llegar.
+        // 2026-09-25: ver nota completa en rc/index.php — LEFT JOIN a ordenes
+        // para incluir el estado_id ACTUAL de la orden asociada (el camino
+        // polling nunca traía ningún campo de estado, así que el fallback de
+        // navegarYResaltarOrden() asumía siempre "sin PDF" para cualquier
+        // notificación entregada por este camino).
+        // BUG-NOTIF-ANTERIORES-01 (2026-09-28): ver nota completa en rc/index.php
+        // — un único LIMIT 15 compartido entre "Hoy" y "Anteriores" dejaba el
+        // abanico "Anteriores (últimos 30 días)" vacío en cualquier día con
+        // volumen alto. Se separan en dos consultas independientes.
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `function obtenerOrdenPorFolio`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:25 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Ordenes.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1822-1859)</summary>
+
+**Path:** `Unknown file`
+
+```
+    public static function obtenerOrdenPorFolio(string $folio, ?int $medicoIdRestriccion = null): ?array {
+        try {
+            $db = DB::connect();
+
+            $sql = "SELECT o.folio_unico AS folio, o.hora_captura AS fecha, o.diagnostico,
+                           o.otros_estudios, o.estudios_json AS estudios, o.edad_al_emitir AS edad,
+                           o.paciente_nombre AS paciente, o.paciente_sexo AS sexo,
+                           o.paciente_telefono AS celular, o.medico_user_id,
+                           COALESCE(o.medico_nombre_completo, 'Médico General') AS medico,
+                           COALESCE(o.medico_especialidad, 'Medicina General') AS especialidad,
+                           COALESCE(o.medico_cedula, 'CED-N/A') AS cedula,
+                           COALESCE(m.cedula_especialidad, '') AS cedula_especialidad,
+                           COALESCE(m.universidad_nombre, '') AS universidad,
+                           COALESCE(m.lugar_trabajo_nombre, '') AS lugar
+                    FROM vw_ordenes_completas o
+                    LEFT JOIN vw_medicos_completos m ON m.user_id = o.medico_user_id
+                    WHERE o.folio_unico = :folio";
+            if ($medicoIdRestriccion !== null) {
+                $sql .= " AND o.medico_user_id = :medico_id";
+            }
+            $sql .= " LIMIT 1";
+
+            $stmt = $db->prepare($sql);
+            $stmt->bindValue(':folio', $folio);
+            if ($medicoIdRestriccion !== null) {
+                $stmt->bindValue(':medico_id', $medicoIdRestriccion, PDO::PARAM_INT);
+            }
+            $stmt->execute();
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            return $row ?: null;
+        } catch (Throwable $e) {
+            DB::logFallback('ERROR', 'Fallo en RC\Negocio\Ordenes::obtenerOrdenPorFolio', $e->getMessage());
+            return null;
+        }
+    }
+
+    // ═══════════════════════════════════════════════════════════════════════
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The system retrieves order details by folio number, specifically using a database query. Absence of a record for a given folio, such as '30', triggers a 404 error. The user's feedback, referencing folio '30', indicates a potential display issue related to long patient names causing label truncation.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.144558877s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:25 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:25 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:25 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:25 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+Observing the `paciente` value, it appears to be a name that will be rendered within `solicitud_dac_impr.php`. Now investigating the CSS applied to that element, specifically the container's `max-width` and `.doc-info-row` styles, to understand the current layout constraints. The grid layout with four columns is an important factor.
+
+
+Calculating the available width for the patient name reveals a significant layout problem. The calculated width of the text string, considering font size and characters, significantly exceeds the allocated grid cell size.  The `justify-self: center` style results in a negative offset, causing text clipping due to the container's `overflow: hidden` property, specifically cutting off the beginning of the label "Paciente:".
+
+
+Initial hypothesis: adjusting the `doc-info-paciente` style to `justify-self: start !important;` will ensure the "Paciente:" label is never clipped from the left.  Implementing `white-space: normal !important;` and `display: inline-block !important;` or `display: flex !important; flex-wrap: wrap !important;` within the `doc-info-paciente` element allows the patient name to wrap, preventing horizontal overflow.  Consideration: this change necessitates evaluating how the "Celular" information will render, as this may push it outside the allocated grid cell in the `doc-info-row`.
+
+
+Analyzing layout constraints confirms `doc-info-paciente` spans columns 1-2 in the first row, while `doc-info-cel` occupies columns 3-4 of the same row.  The design necessitates preserving this arrangement.
+
+Adjusting `doc-info-paciente`'s styles, specifically setting `justify-self: start`, `text-align: left`, and enabling text wrapping, successfully renders long patient names across two lines within the allocated columns without overlapping `doc-info-cel`. This modification also correctly displays shorter names without issue.
+
+
+Reviewing historical context, the user explicitly requested centered patient data. The current centered layout with `white-space: nowrap` causes clipping of the left label on long names. Experimentation with `justify-self: center` with `white-space: normal` or `overflow-wrap: break-word` is needed.
+
+A safer approach uses `justify-self: safe center` to center the content if it fits within the available columns, otherwise, it aligns to the start to prevent clipping. This satisfies the centering requirement while addressing the overflow issue with longer patient names.
+
+
+Exploring alternative CSS strategies for accommodating long patient names. Considering `display: inline-block` or a flexbox with wrapping for `doc-info-paciente`, potentially with `justify-content: center` to maintain visual alignment. Font size adjustments are considered as a fallback. `max-width: 100%` ensures content stays within the container's bounds.
+
+Investigating mobile layout in relation to the `Paciente` field. Recognizing that smaller screen widths, particularly 360px, present layout challenges, considering dedicated rows for "Paciente" to avoid truncation. The existing media query suggests a four-column grid on mobile; this will be checked to confirm correct responsive behavior.
+
+
+The current viewport meta tag (`width=device-width, initial-scale=1.0`) doesn't explicitly enable user scaling in the iframe. Mobile browsers may disable zoom within iframes by default. Ensuring the prescription displays completely on mobile requires addressing this limitation to allow zooming for readability.
+
+Considering the layout's fixed-document nature, the goal is to present the complete prescription sheet within the iframe. The user needs to view the entire prescription, including all data elements and the signature, without horizontal clipping. Enabling zoom within the iframe ensures readability on mobile.
+
+
+The mobile iframe currently restricts zoom and displays content poorly due to fixed dimensions. The primary approach focuses on enabling user scaling and providing a full-screen mobile view. This involves adding a viewport meta tag with `user-scalable=yes` alongside minimum/maximum scale values within the relevant file.
+
+To provide a full-screen experience, a media query in the stylesheet adjusts the overlay and iframe dimensions to 100vw/100vh on small screens.  Finally, zoom controls will be added to the toolbar in the main file using a responsive zoom bar component.
+
+
+A viewport/zoom manager will be implemented to address mobile display issues. Initial calculation of a `fitScale` factor will ensure the document fits the screen width without horizontal overflow on smaller screens. This involves applying a `transform: scale()` property and `transform-origin` with smooth scrolling.
+
+A zoom control will be added with preset zoom levels. Zoom levels will include the `fitScale`, and incremental zoom levels for improved readability. Pinch-to-zoom gestures will be enabled for real-time scaling.
+
+
+Examining the multi-page requirement, the current single `.doc-container` structure needs modification to support pagination. Specifically, the JavaScript code receiving the order data will now need to handle splitting content across multiple pages, including managing headers, footers, and study lists. This includes analyzing the content of `estudiosArr` to detect overflow beyond page boundaries.
+
+The primary change will involve dynamically creating additional `.doc-container` elements as needed and populating them with the appropriate data subsets. Each new page will incorporate the standard header and footer elements. The existing `poblarDocumento(orden)` function in `solicitud-dac.js` will require modification to manage this pagination logic.
+
+
+Determining the study layout across multiple pages requires calculating study capacity per page and handling overflow. The initial page accommodates 14 studies, and subsequent pages can fit up to 36 studies due to the absence of the side panel.  A mechanism must be implemented to create new pages when study counts exceed the current page's capacity.
+
+
+Determining the ideal study layout for multi-page documents requires calculating page capacity and managing overflow to support both screen and print views. The initial page will accommodate 14 studies, with subsequent pages potentially holding up to 36 due to the absence of the side panel.  A dynamic page-creation mechanism is required to handle study counts exceeding these limits.
+
+Pagination implementation demands modifying the existing JavaScript to handle multiple `.doc-container` elements.  The logic must split content across new pages, incorporating headers, footers, and study lists on each page. Modification of the data population function is necessary to incorporate this pagination logic, analyzing study array size against page capacities.
+
+
+A multi-page implementation demands modifying the JavaScript code to handle multiple `.doc-container` elements dynamically. The pagination logic necessitates splitting content across these new pages. The existing data population function needs adjustment to handle study array size exceeding page capacities.
+
+The core change involves detecting content overflow from `estudiosArr` to trigger the creation of additional pages. Each new page necessitates incorporating header and footer elements and populating with the remaining study data.
+
+To correctly manage pagination, the study layout calculation must consider the studies fitting in the first page (up to 14) and subsequent pages (up to 36). Creating the new pages based on the studies count, inserting header and footers, and populating data is crucial.
+
+
+The grid layout and patient name length necessitate careful width allocation. Applying `flex-wrap: wrap` to patient information allows it to wrap within columns 1-2, avoiding overlap with "Celular" in columns 3-4.
+
+Setting `justify-self: start` and text-wrapping correctly positions long patient names within their allocated columns, while `min-width: 0; word-break: break-word;` is necessary for "Celular" to handle potentially long phone numbers.
+
+Verification is needed to confirm if existing styles for `.doc-info-edad`, `.doc-info-sexo`, `.doc-info-folio`, and `.doc-info-fecha` are appropriate.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 18.651444612s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:26 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:26 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:26 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+The initial check confirms HTTPS connectivity on the expected port. The next step is validating a specific API endpoint, suspecting authentication is required due to the route's behavior. Previous tests suggest the core functionality of the API call retrieves order data.
+
+
+Considering an edge case where an order contains 50 studies, the focus shifts to implementing pagination to handle potential overflow across multiple pages. The goal is to modify the document generation process to create additional pages with consistent header, footer, and the remaining study list. Inspecting the existing document structure and its components is the immediate next step.
+
+
+The document structure analysis reveals a conditional single-page/multi-page behavior based on the number of studies. Implementing pagination will involve dynamically generating content for each page based on this study count threshold. The primary focus is generating subsequent pages with a continuation header and a separate section for the remaining studies.
+
+
+Considering the implementation, a two-column layout for the study list is being evaluated to optimize space and readability across multiple pages. CSS will be adapted to support print media, enabling page breaks and consistent margin handling for printed documents. The current single-page structure is being assessed for modifications to handle multiple pages.
+
+JavaScript's dynamic cloning and appending seem like the most effective method, especially given the identified structure of the existing content. The approach will involve cloning common elements and dynamically adding new page containers.
+
+
+A detailed calculation determined the maximum number of studies fitting on Page 1 is fourteen, utilizing the available vertical space. A two-column layout on subsequent pages allows fitting the remaining studies, accommodating up to 36 studies on a single continuation page. Thus, Page 1's limit will be 14 while continuation pages can accommodate more than this number.
+
+
+Calculating page capacity indicates that approximately 14 studies fit on the first page, with continuation pages supporting up to 36 studies each. Subsequent pages will dynamically display a continuation header and footer, including the necessary page numbering. The prompt's requirement for overflow handling dictates this pagination approach.
+
+The mobile zoom requirement necessitates analyzing the existing mobile view and user interaction with the displayed information, which currently seems to be handled with `_abrirSolOverlay`. The aim is to ensure the complete document is viewable on mobile devices.
+
+
+The current mobile layout calculation, where the iframe content is displayed within the `sol-overlay` element, results in horizontal clipping of the letter document on small screens due to padding. A media query targeting screens ≤ 768px will remove the padding from the overlay and set the iframe width and height to 100% of the viewport. This should allow the document to fit completely and allow for browser-level zooming.
+
+
+A zoom viewport wrapper will be added to `solicitud_dac_impr.php` to contain the document. The CSS/JS includes a responsive zoom implementation that calculates a scaling factor based on screen width, ensuring the document fits within the viewport by adjusting its size. The scaling factor is calculated as `min(1, availableWidth / 820)`, with available width reducing by 16px to account for padding.
+
+
+The existing zoom interaction controls will be analyzed to understand the document's zoom behavior within the current application context, particularly on desktop environments. The zoom levels are being verified against the documented zoom factor values to ensure correct implementation of specific functions. The zoom behavior on desktop devices will be checked.
+
+
+The existing CSS definition of `.doc-info-row` is being reviewed within `solicitud-dac.css` to address the truncation issue. The goal is to prevent content clipping when text is long. The grid layout properties will be analyzed to determine if modifications can prevent the text from being cut off.
+
+
+Reviewing the CSS, specific properties of the `.doc-info-row`, `.doc-info-paciente`, and `.doc-info-item` elements are being examined. The aim is to ensure proper content display within the document's structure, particularly on different screen sizes. Examining the grid layout reveals the intended positioning of elements within the document header. The focus is on adapting the layout for mobile and small screens.
+
+The `@media (max-width: 1024px)` block's styles, are also under review. The goal is to identify possible modifications that will prevent long text truncation on smaller devices. The grid column and row properties, along with text alignment, are inspected for mobile display.
+
+
+The CSS causing the text truncation is identified as a combination of `white-space: nowrap` and `justify-self: center` applied to specific elements within a grid container that has `overflow: hidden`. The `justify-self: center` pushes the element's left edge off-screen if the content exceeds the grid column's width. The proposed solution involves changing `justify-self` to `start`, removing `white-space: nowrap` and applying `text-align: left`, padding, and appropriate text-wrapping properties to ensure text stays within the container and wraps correctly. The change is verified for shorter patient names.
+
+
+Analyzing CSS grid properties, the intention is to ensure patient names and other long text fields do not truncate, especially on smaller screens. The grid layout is being adapted for mobile responsiveness. Suspect CSS conflicts are causing truncation, especially `justify-self: center` and `white-space: nowrap`. The fix involves resetting these properties and implementing text wrapping and alignment. The solution will prevent text from going off-screen on the left side. The change is verified for proper behavior with short names, ensuring the layout remains consistent.
+
+
+Adjustments to the document's CSS are being considered to handle long patient names and ensure proper layout across different screen sizes. Initial hypothesis involves using grid properties and text-wrapping techniques to prevent truncation. A mobile-first approach is being considered, where adjustments will be tested and verified to ensure long patient names wrap correctly. Additional checks will verify that the layout and alignment are correct across various devices, considering both desktop and mobile orientations. The goal is to make patient names and related information adapt gracefully.
+
+
+The identified toolbar section will be the appropriate location to insert zoom controls. The addition aims to provide consistent access to zoom functionality across both desktop and mobile views. The implementation will ensure accessibility through appropriate ARIA labels and titles.
+
+
+Zoom control placement within the identified toolbar is confirmed, verifying its location across desktop and mobile. Accessibility standards will be met through ARIA labels and titles.
+
+The approach involves dynamically adding the zoom wrapper within the `solicitud_dac_impr.php` content, which seems correct based on current analysis. Calculations will verify the correct scaling factors. The goal is consistent zoom control visibility.
+
+
+The zoom control group's styling is being reviewed to ensure visual consistency and correct behavior. The `.doc-container`'s location is being verified within the document structure. Zoom manager implementation within the JavaScript file is being analyzed to comprehend the existing interaction logic.
+
+
+The scaling factor calculation is being examined to ensure the document fits properly within the zoomable wrapper.  The zoom function implementation is under review, with focus on how `transformOrigin` affects the layout.  The aim is to prevent scrolling issues that may arise from applied scaling. The calculations for `naturalHeight` and wrapper `height` are being inspected, considering possible errors when the scaling is applied.
+
+
+The initial zoom level is being determined based on device screen width, setting the initial scale to fit mobile displays. Zoom control event handlers are being configured for increasing, decreasing, and fitting the content within the zoomable viewport. The logic for each zoom button is being analyzed to ensure proper scaling increments and minimum/maximum boundaries are respected. A function `calcularFitScale()` determines initial scaling for mobile.
+
+
+Double-tap event listeners are added to toggle between "Fit" and "100%" zoom on desktop. A double-tap event is added on mobile to switch between "Fit" and "Legible" zoom levels (1.20). Native pinch-to-zoom is enabled by capturing start and move events to calculate the zoom factor.
+
+
+The zoom manager initialization is being assessed, focusing on the calculation of the initial `fitScale` for mobile devices. The aim is to ensure the document scales appropriately based on screen width. Event listeners for touch events are set up to handle pinch-to-zoom and end-of-touch events. A `resize` event listener will recalculate and reapply the `fitScale` value upon screen rotation or size changes. The zoom functionality itself is being reviewed, considering its impact on scroll behavior and content overflow. Finally, the scaling calculation related to element's natural height is under inspection for potential errors.
+
+
+The JavaScript code responsible for populating the document will be modified to handle the pagination logic. The process will parse the existing study data, converting it into a JavaScript array. A conditional structure will implement a single-page or multi-page output based on the number of studies.
+
+For orders with more than 14 studies, the first page will display the initial 14. Subsequent pages will display the remaining studies in a two-column layout. The calculated maximum capacity of the second page is 36 studies.
+
+The document's structure will be adapted to handle the study list across multiple pages. Content for the subsequent pages will be generated. The process will conditionally create pagination, adding a header and footer to continuation pages, while the initial page will remain unchanged.
+
+
+The maximum continuation page capacity is confirmed as 36 studies, allowing for a third page to handle a study count up to 86. The structure of continuation pages will include a cloned header, a title box indicating page numbering, and an info box with patient details. The primary goal is generating the continuation page's content.
+
+The analysis focuses on the HTML structure of the continuation page containers, which are distinct from the initial page.  The continuation page's header is an exact clone of the initial page's header. The new title box will display the pagination information and an info box identical in format will include patient details.
+
+
+A new structure is being constructed for the continuation pages. The new title will include page numbering and a patient info box is created in the clone. The design will support printing with page breaks.
+
+The continuation page structure is verified to include full header, page numbering, patient info, a two-column study list, the doctor's signature box, and the footer. CSS is being reviewed for the two-column study list.
+
+
+The CSS for study list pagination on mobile is being updated to use a single column if the screen is narrow or if zoomed in. To ensure idempotence, any previously generated continuation pages will be removed before generating new pages. The focus shifts to reviewing the CSS grid layout, specifically properties in `solicitud-dac.css` and `@media (max-width: 1024px)`, to resolve long patient name truncation within the document header. The intention is to prevent text overflow in the `.doc-info-row` and related elements.
+
+
+The identified CSS truncation issue requires a layout adaptation. The existing grid layout with `white-space: nowrap` and `justify-self: center` causes text overflow to the left. The fix involves setting `justify-self: start`, enabling text wrapping, and applying `text-align: left` to the affected elements. Initial tests with short names are confirming the change's correctness.
+
+
+The implemented CSS fix for truncation is verified, ensuring correct text wrapping with short and long names. The focus transitions to integrating the pagination logic within the JavaScript code to dynamically generate the document's content across multiple pages. Data parsing and study grouping are the next tasks. The JavaScript modification will incorporate a conditional statement, implementing either single or multi-page output.
+
+
+The CSS is being modified to prevent text truncation in the document header for all screen sizes. This involves adjusting grid properties, specifically changing `justify-self` to `start`, removing `white-space: nowrap`, and enabling text wrapping and appropriate alignment within the grid container. A media query is being added for mobile screens to optimize the grid layout.
+
+
+Further CSS analysis in `solicitud-dac.css` focuses on preventing content overflow in various document sections, ensuring text wrapping and word breaking where necessary. Viewport meta tags and a zoom control toolbar will be added to the `solicitud_dac_impr.php` for mobile responsiveness. Document content will be wrapped in a zoom viewport wrapper.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `solicitud_dac_impr.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 33.048625615s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L94-129)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Ir al contenido principal</a>
+
+    <!-- ── Toolbar flotante fija (No se imprime) ── -->
+    <div class="toolbar no-print">
+        <div class="toolbar-controls">
+            <!-- Botón Imprimir -->
+            <button type="button" id="btn-dac-print" class="btn btn-primary" aria-label="Mandar a impresora" title="Mandar a impresora">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                <span class="btn-print-text">Guardar e imprimir solicitud</span>
+            </button>
+
+            <!-- Cruz pequeña para cerrar ventana -->
+            <button type="button" id="btn-dac-close" class="btn-close-icon" aria-label="Cerrar ventana">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+        </div>
+    </div>
+
+    <div class="doc-container doc-container--narrow" role="main" id="main-content">
+
+        <!-- ── Header: Logos (Izquierda y Derecha) + Slogan Centro ─ -->
+        <div class="doc-header">
+            <div class="doc-logo-area">
+                <img src="/laesh-web-assets-uipv1a/img/logo-laesh.webp"
+                     alt="LAESH — Laboratorio de Especialidades Hematológicas"
+                     class="doc-logo-img">
+            </div>
+
+            <div class="doc-header-center">
+                <p class="doc-slogan">&ldquo;Somos Qu&iacute;micos Especialistas y con Postgrado&rdquo;</p>
+            </div>
+
+            <div class="doc-verified">
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `solicitud_dac_impr.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L199-223)</summary>
+
+**Path:** `Unknown file`
+
+```
+        </div>
+
+        <!-- ── Footer Barra Azul de Contacto y Ubicación ────────── -->
+        <div class="doc-footer-info">
+            <div class="doc-footer-left">
+                <span class="doc-badge-contact">¡Contáctanos!</span>
+                <span class="doc-phone">
+                    <svg class="doc-icon-inline" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.001 2C6.478 2 2 6.477 2 12c0 1.821.487 3.53 1.338 5.003L2 22l5.144-1.35A9.958 9.958 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12.001 2zm0 18.06c-1.647 0-3.196-.469-4.51-1.281l-.324-.196-3.353.88.9-3.275-.212-.335A7.988 7.988 0 0 1 4 12c0-4.418 3.582-8 8-8 4.417 0 8 3.582 8 8 0 4.417-3.583 8-8 8z"/><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg><span id="dac-whatsapp-numero">953 119 00 74</span>
+                </span>
+            </div>
+            <div class="doc-footer-right">
+                <span class="doc-address">
+                    <svg class="doc-icon-inline" width="14" height="14" viewBox="0 0 24 24" fill="#ef4444" stroke="#ef4444" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3" fill="#ffffff"/></svg>
+                    <span id="dac-direccion-calle">Azucenas # 8, Jardines del Sur.</span><br><span id="dac-direccion-ciudad-estado">Huajuapan de León, Oaxaca.</span>
+                </span>
+            </div>
+        </div>
+
+    </div><!-- /doc-container -->
+
+    <script src="/laesh-web-assets-uipv1a/js/solicitud-dac.js?v=<?= laeshAssetVer('/js/solicitud-dac.js') ?>"></script>
+
+</body>
+</html>
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Initial viewport settings are present, which suggests responsiveness is considered. The `no-print` class on the toolbar is important; zoom controls are likely being added there.
+
+
+Zoom controls are implemented, and the print button is present. The zoom buttons suggest a dynamic interface. The print button may need specific handling to avoid unintended print outputs based on current zoom level.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 5.722268640s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:27 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `solicitud_dac_impr.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L224-238)</summary>
+
+**Path:** `Unknown file`
+
+```
+            <div class="doc-footer-right">
+                <span class="doc-address">
+                    <svg class="doc-icon-inline" width="14" height="14" viewBox="0 0 24 24" fill="#ef4444" stroke="#ef4444" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3" fill="#ffffff"/></svg>
+                    <span id="dac-direccion-calle">Azucenas # 8, Jardines del Sur.</span><br><span id="dac-direccion-ciudad-estado">Huajuapan de León, Oaxaca.</span>
+                </span>
+            </div>
+        </div>
+
+    </div><!-- /doc-container -->
+
+    <script src="/laesh-web-assets-uipv1a/js/solicitud-dac.js?v=<?= laeshAssetVer('/js/solicitud-dac.js') ?>"></script>
+
+</body>
+</html>
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:27 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `solicitud-dac.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L209-299)</summary>
+
+**Path:** `Unknown file`
+
+```
+   (el salto de línea ahora es explícito por fila de grid, no forzado por
+   flex-wrap) — se mantiene en el HTML mismo pero oculto, sin efecto. */
+.doc-info-row {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    align-items: center !important;
+    width: 100% !important;
+    gap: 8px 16px !important;
+}
+.doc-info-linebreak {
+    display: none !important;
+}
+/* 2026-09-29 (pedido explícito): todos los datos del paciente centrados,
+   en ambos renglones — antes Paciente/Edad/Sexo/Fecha/Folio iban alineados
+   a la izquierda dentro de su columna, solo Celular ya estaba centrado. */
+.doc-info-paciente {
+    grid-column: 1 / 3 !important;
+    grid-row: 1 !important;
+    justify-self: center !important;
+    text-align: center !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+.doc-info-cel {
+    grid-column: 3 / 5 !important;
+    grid-row: 1 !important;
+    justify-self: center !important;
+    text-align: center !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+.doc-info-edad,
+.doc-info-sexo,
+.doc-info-fecha,
+.doc-info-folio {
+    grid-row: 2 !important;
+    justify-self: center !important;
+    text-align: center !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+.doc-info-edad  { grid-column: 1 !important; }
+.doc-info-sexo  { grid-column: 2 !important; }
+.doc-info-fecha { grid-column: 3 !important; }
+.doc-info-folio { grid-column: 4 !important; }
+
+/* 2026-09-29: factor +4 sobre el tamaño anterior en todos los datos de la
+   hoja (pedido explícito del usuario) — 0.85rem (13.6px) pasa a 1.1rem
+   (17.6px), y así sucesivamente en el resto de las reglas de este bloque.
+   2026-09-29 (segundo pedido, mismo día): +25% adicional sobre esos 1.1rem/
+   1.11rem — quedan en 1.375rem/1.3875rem.
+   2026-09-29 (tercer pedido, mismo día): medido con Puppeteer contra la
+   página real — a 1.375rem los 5 datos del segundo renglón (Celular/Edad/
+   Sexo/Fecha/Folio) no caben en una sola línea dentro del ancho del
+   contenedor (820px), Folio se iba a un tercer renglón. Paciente SÍ tiene
+   todo el ancho para él solo, así que se queda en 1.375rem; el segundo
+   renglón baja a 1.2rem — el mínimo necesario, confirmado visualmente, para
+   que los 5 datos quepan siempre en un solo renglón. */
+.doc-info-item {
+    color: #1e293b !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+}
+
+.doc-info-paciente {
+    font-size: 1.375rem !important;
+}
+.doc-info-paciente strong {
+    font-size: 1.3875rem !important;
+}
+
+.doc-info-cel {
+    font-size: 1.2rem !important;
+}
+.doc-info-cel strong {
+    font-size: 1.21rem !important;
+}
+
+/* 2026-09-29 (pedido explícito): -1px sobre 1.2rem/1.21rem (19.2px/19.36px)
+   SOLO para el segundo renglón (Edad/Sexo/Fecha/Folio) — Celular se queda en
+   su tamaño actual, comparte renglón con Paciente, no con estos. */
+.doc-info-edad,
+.doc-info-sexo,
+.doc-info-folio,
+.doc-info-fecha {
+    font-size: 1.1375rem !important;
+}
+.doc-info-edad strong,
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Inspecting the provided CSS, `.doc-info-paciente` appears to be a key element within a grid layout. The properties suggest it occupies the first grid row and spans two columns, starting at the left with left-aligned text and specific padding and margins. The intent seems to be full-width utilization within its grid cell.
+
+
+Analyzing different scenarios for the layout, the focus shifts to ensuring responsive behavior. If 'Celular' is positioned in specific columns, the style attributes need adjustment to center text and prevent overflow. Further investigation reveals a similar responsive design section in another CSS file that requires an update. A new media query is necessary to reconfigure the grid layout for smaller screens, defining how each element should be positioned.
+
+
+Examining the provided CSS, the focus shifts to grid layout properties for different document information sections, specifically on positioning and alignment. The date and folio elements are assigned specific grid positions within the layout.
+
+Zoom and multi-page functionality is being addressed by identifying CSS classes that manage viewport, wrapper, and individual page styles, including responsive behaviors and pagination. These styles define the structure and responsive capabilities of the document display.
+
+
+Examining the code reveals two-column layouts for study lists and reduced information rows intended for continuation pages.  Zoom controls are styled within a toolbar group with specific border and sizing attributes; further refinement of zoom functionality is needed. These styles define the structure and responsive capabilities of the document display.
+
+
+Print-specific styles are being examined to ensure proper document formatting during printing. The focus is on overriding zoom-related and layout properties to achieve a clean printed output. Properties like `width`, `height`, and `overflow` need to be adjusted to display all content effectively.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `solicitud-dac.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 3.656498835s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L219-289)</summary>
+
+**Path:** `Unknown file`
+
+```
+    display: none !important;
+}
+/* 2026-09-29 (pedido explícito): todos los datos del paciente centrados,
+   en ambos renglones — antes Paciente/Edad/Sexo/Fecha/Folio iban alineados
+   a la izquierda dentro de su columna, solo Celular ya estaba centrado. */
+.doc-info-paciente {
+    grid-column: 1 / 3 !important;
+    grid-row: 1 !important;
+    justify-self: center !important;
+    text-align: center !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+.doc-info-cel {
+    grid-column: 3 / 5 !important;
+    grid-row: 1 !important;
+    justify-self: center !important;
+    text-align: center !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+.doc-info-edad,
+.doc-info-sexo,
+.doc-info-fecha,
+.doc-info-folio {
+    grid-row: 2 !important;
+    justify-self: center !important;
+    text-align: center !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+.doc-info-edad  { grid-column: 1 !important; }
+.doc-info-sexo  { grid-column: 2 !important; }
+.doc-info-fecha { grid-column: 3 !important; }
+.doc-info-folio { grid-column: 4 !important; }
+
+/* 2026-09-29: factor +4 sobre el tamaño anterior en todos los datos de la
+   hoja (pedido explícito del usuario) — 0.85rem (13.6px) pasa a 1.1rem
+   (17.6px), y así sucesivamente en el resto de las reglas de este bloque.
+   2026-09-29 (segundo pedido, mismo día): +25% adicional sobre esos 1.1rem/
+   1.11rem — quedan en 1.375rem/1.3875rem.
+   2026-09-29 (tercer pedido, mismo día): medido con Puppeteer contra la
+   página real — a 1.375rem los 5 datos del segundo renglón (Celular/Edad/
+   Sexo/Fecha/Folio) no caben en una sola línea dentro del ancho del
+   contenedor (820px), Folio se iba a un tercer renglón. Paciente SÍ tiene
+   todo el ancho para él solo, así que se queda en 1.375rem; el segundo
+   renglón baja a 1.2rem — el mínimo necesario, confirmado visualmente, para
+   que los 5 datos quepan siempre en un solo renglón. */
+.doc-info-item {
+    color: #1e293b !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+}
+
+.doc-info-paciente {
+    font-size: 1.375rem !important;
+}
+.doc-info-paciente strong {
+    font-size: 1.3875rem !important;
+}
+
+.doc-info-cel {
+    font-size: 1.2rem !important;
+}
+.doc-info-cel strong {
+    font-size: 1.21rem !important;
+}
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `solicitud-dac.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L579-639)</summary>
+
+**Path:** `Unknown file`
+
+```
+        gap: 6px 12px !important;
+    }
+    .doc-info-linebreak {
+        display: none !important;
+    }
+    .doc-info-paciente {
+        grid-column: 1 / 3 !important;
+        grid-row: 1 !important;
+        justify-self: center !important;
+        text-align: center !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    .doc-info-cel {
+        grid-column: 3 / 5 !important;
+        grid-row: 1 !important;
+        justify-self: center !important;
+        text-align: center !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    .doc-info-edad,
+    .doc-info-sexo,
+    .doc-info-fecha,
+    .doc-info-folio {
+        grid-row: 2 !important;
+        justify-self: center !important;
+        text-align: center !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    .doc-info-edad  { grid-column: 1 !important; }
+    .doc-info-sexo  { grid-column: 2 !important; }
+    .doc-info-fecha { grid-column: 3 !important; }
+    .doc-info-folio { grid-column: 4 !important; }
+    .doc-info-item {
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 3px !important;
+        white-space: nowrap !important;
+        flex-shrink: 0 !important;
+    }
+    .doc-info-paciente {
+        font-size: 1.375rem !important;
+    }
+    .doc-info-paciente strong {
+        font-size: 1.3875rem !important;
+    }
+    .doc-info-cel {
+        font-size: 1.2rem !important;
+    }
+    .doc-info-cel strong {
+        font-size: 1.21rem !important;
+    }
+    .doc-info-edad,
+    .doc-info-sexo,
+    .doc-info-folio,
+    .doc-info-fecha {
+        font-size: 1.1375rem !important;
+    }
+    .doc-info-edad strong,
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `solicitud-dac.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L159-199)</summary>
+
+**Path:** `Unknown file`
+
+```
+            .no-print {
+                display: none !important;
+            }
+
+            /* 2026-09-29 (pedido explícito): esquinas redondeadas también al
+               imprimir — antes border-radius:0 aquí cuadraba el marco solo
+               en el PDF/impresión, sin coincidir con las 16px de pantalla
+               (docs.css .doc-container). overflow pasa a hidden (como en
+               pantalla) para que el contenido no sobresalga de la esquina
+               redondeada — visible solo servía para el caso 0 de antes. */
+            .doc-container {
+                width: 100% !important;
+                max-width: 100% !important;
+                min-height: 0 !important;
+                max-height: none !important;
+                overflow: hidden !important;
+                box-shadow: none !important;
+                border: 2px solid var(--primary-color) !important;
+                border-radius: 16px !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+
+        }
+
+.doc-info-box {
+    border: none !important;
+    border-bottom: 1px solid #cbd5e1 !important;
+    border-radius: 0 !important;
+    margin: 0 16px 14px !important;
+    padding: 6px 0 10px !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The focus shifts to editing the specified CSS file. Identified two key sections for modification: the `@media print` rules and the main styles. The print media query requires adding support for specific classes related to document pagination, including `page-break-after: always !important;`.
+
+The main styles necessitate updating `doc-info-paciente` and `doc-info-item`. Changes will involve setting `justify-self: start !important;`, `text-align: left !important;`, and modifying padding.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `solicitud-dac.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.116010196s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L669-706)</summary>
+
+**Path:** `Unknown file`
+
+```
+        line-height: 1.25 !important;
+    }
+}
+
+/* ── Notificaciones Toast en Solicitud DAC ── */
+#toast-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 99999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    pointer-events: none;
+}
+
+.laesh-toast {
+    color: #ffffff;
+    padding: 12px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 500;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: auto;
+    max-width: min(420px, calc(100vw - 40px));
+    word-break: break-word;
+}
+
+.laesh-toast-success { background: #10b981; }
+.laesh-toast-error   { background: #ef4444; }
+.laesh-toast-info    { background: #334155; }
+.laesh-toast-warning { background: #f59e0b; }
+
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The initial CSS update targets elements with specific classes, aiming to override existing transformations, enforce a full-width and auto-height display, and reset padding and margin properties, ensuring content overflows visibly. This modification is designed to alter the presentation of document viewing components.
+
+
+The previous CSS modifications might have caused horizontal clipping of long names within document containers due to centered justification and `white-space: nowrap`. Setting `justify-self: start` will ensure names start at the left, preventing leftward overflow and text cutoff. Allowing natural word wrapping (`white-space: normal`, `overflow-wrap: break-word`) will further prevent clipping and potential layout conflicts.
+
+
+This CSS targets specific document information containers to adjust their layout within a grid. It sets content to start at the left, enables word wrapping, and adjusts spacing. The goal is a consistent and readable display.
+
+Subsequent styles are designed to center specific data points within their respective grid cells while ensuring they also have appropriate text alignment and spacing for a polished presentation. This ensures each piece of information is positioned and formatted correctly within the layout.
+
+
+
+
+### Actions
+
+**Tool:** `multi_replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 9.183971304s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:28 pm
+
+---
+
+<details>
+<summary>Conversation History</summary>
+
+# Conversation History
+Here are the conversation IDs, titles, and summaries of your most recent 2 conversations, in reverse chronological order:
+
+<conversation_summaries>
+## Conversation 7e9d2ff0-deb9-465a-9e04-fdb13823ced4: Consultar Estados Solicitudes Digitales
+- Created: 2026-09-24T15:13:22Z
+- Last modified: 2026-09-30T20:32:52Z
+
+## Conversation b05a5b41-a7c7-4d90-9813-7abd9e8e85cf: Limpieza De Código PTR
+- Created: 2026-09-27T17:17:20Z
+- Last modified: 2026-09-29T20:44:24Z
+
+</conversation_summaries>
+
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:29 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `solicitud_dac_impr.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+/**
+ * rc/views/solicitud_dac_impr.php — Solicitud Digital de Análisis Clínicos
+ *
+ * Fuente SSOT HTML: portafolio-dev-2026/blocklabgd/v1.2/mockup1.0/uipv1/solicitud_dac_impr.html (R15.1 — NUNCA BORRAR)
+ * URL:              /laesh/rc/views/solicitud_dac_impr.php
+ *
+ * Contexto de uso:
+ *   Abierta como overlay/iframe desde medicos.php (/laesh/md/) y
+ *   labadmin.php (/laesh/rc/). El usuario ya está autenticado en el
+ *   portal padre — esta página NO requiere auth propia (documento imprimible).
+ *
+ * Seguridad:
+ *   - CSP + frame-ancestors 'self' via header PHP (más efectivo que <meta>).
+ *   - X-Frame-Options: SAMEORIGIN — doble capa con nginx.
+ *   - noindex, nofollow — no indexar.
+ *   - Sin commons.php ni RBAC propia — la petición AJAX a
+ *     /laesh/{portal}/api/orden que hace solicitud-dac.js sí pasa por el
+ *     guard de sesión/RBAC de esa ruta (esta página en sí no toca BD).
+ *
+ * Datos (GAP-RC-01, cerrado 2026-09-21):
+ *   Solo recibe `id` (folio) y `portal` (rc|md) por URL. solicitud-dac.js
+ *   consulta la orden real vía fetch() a GET /laesh/{portal}/api/orden —
+ *   fuente única de verdad, ya no querystring con ~14 campos armados a mano.
+ */
+
+declare(strict_types=1);
+
+// ── Cache-busting por mtime real del archivo (2026-09-24) ───────────────────
+// Antes: query param "v" con la función time() — cambiaba en CADA request, sin importar si el
+// archivo se tocó o no. Esta ventana se abre repetidamente por sesión (cada
+// clic a un folio), así que nunca se beneficiaba de caché del navegador —
+// re-descargaba los 6 CSS + 2 JS desde cero cada vez, aportando varios
+// segundos de pantalla en blanco en conexiones móviles lentas (reportado
+// 2026-09-23, Android/Chrome). Con filemtime(), el valor solo cambia cuando
+// el archivo realmente se modifica — y como deploy.sh usa rsync -a (preserva
+// mtime del origen), el próximo deploy invalida la caché automáticamente sin
+// pasos extra.
+// Sin commons.php aquí (ver docstring arriba) — detección Docker/KVM2 igual
+// que en commons/config.php, porque en KVM2 el webapp (/opt/laesh/www/) y los
+// assets (/opt/laesh/assets/) NO son carpetas hermanas como sí lo son en
+// Docker local (montaje único bajo www/).
+function laeshAssetVer(string $relPath): string {
+    static $base = null;
+    if ($base === null) {
+        $base = file_exists('/.dockerenv')
+            ? __DIR__ . '/../../../laesh-web-assets-uipv1a'
+            : '/opt/laesh/assets/laesh-web-assets-uipv1a';
+    }
+    $mtime = @filemtime($base . $relPath);
+    // Fallback a time() si el archivo no se encuentra — nunca rompe la carga,
+    // solo pierde el beneficio de caché para ese archivo puntual.
+    return (string)($mtime !== false ? $mtime : time());
+}
+
+// ── Headers de seguridad (R15 — más efectivos que <meta>) ───────────────────
+header("X-Frame-Options: SAMEORIGIN");
+header("Content-Security-Policy: default-src 'self'; style-src 'self'; font-src 'self'; img-src 'self'; script-src 'self'; frame-ancestors 'self'");
+header("X-Content-Type-Options: nosniff");
+header("Referrer-Policy: strict-origin-when-cross-origin");
+header("Cache-Control: no-store");
+?>
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+    <meta charset="UTF-8">
+    <meta name="color-scheme" content="light">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.25, maximum-scale=5.0, user-scalable=yes">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="theme-color" content="#71CA11">
+    <title>Solicitud Digital de Análisis Clínicos — LAESH</title>
+    <meta name="description" content="Solicitud digital de análisis clínicos LAESH. Formulario de referencia médica para estudios de hematología, química clínica y bacteriología.">
+    <link rel="icon" type="image/svg+xml" href="/laesh-web-assets-uipv1a/img/favicon.svg">
+
+    <!-- device-detect.js debe ir ANTES del CSS y SIN defer/async — a
+         propósito (ver docstring del propio archivo): estampa data-os/
+         data-browser/data-input en <html> ANTES de que targeting.css se
+         evalúe, para que sus selectores [data-os="ios"] etc. apliquen desde
+         el primer pintado. Moverlo o diferirlo causaría un parpadeo de
+         estilo incorrecto — NO tocar el orden, solo el cache-busting. -->
+    <script src="/laesh-web-assets-uipv1a/js/device-detect.js?v=<?= laeshAssetVer('/js/device-detect.js') ?>"></script>
+    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/tokens.css?v=<?= laeshAssetVer('/css/tokens.css') ?>">
+    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/fonts.css?v=<?= laeshAssetVer('/css/fonts.css') ?>">
+    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/style.css?v=<?= laeshAssetVer('/css/style.css') ?>">
+    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/docs.css?v=<?= laeshAssetVer('/css/docs.css') ?>">
+    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/solicitud-dac.css?v=<?= laeshAssetVer('/css/solicitud-dac.css') ?>">
+    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/targeting.css?v=<?= laeshAssetVer('/css/targeting.css') ?>">
+
+    <!-- 2026-09-30: config-compiled.js expone window.laeshConfig (dirección,
+         WhatsApp, etc. de la tabla `configuraciones`) — generado por
+         ConfigBuilder::build() solo cuando se guarda el CMS (admrc/index.php),
+         nunca consultado en cada carga de esta vista. Debe cargar ANTES de
+         solicitud-dac.js, que lo lee para poblar el footer. -->
+    <script src="/laesh-web-assets-uipv1a/js/config-compiled.js?v=<?= laeshAssetVer('/js/config-compiled.js') ?>"></script>
+
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Ir al contenido principal</a>
+
+    <!-- ── Toolbar flotante fija (No se imprime) ── -->
+    <div class="toolbar no-print">
+        <div class="toolbar-controls">
+            <!-- Controles de Zoom para móviles / desktop -->
+            <div class="toolbar-zoom-group" id="dac-zoom-group">
+                <button type="button" id="btn-dac-zoom-out" class="btn-zoom-action" aria-label="Alejar" title="Alejar (Zoom -)">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                </button>
+                <button type="button" id="btn-dac-zoom-fit" class="btn-zoom-fit" aria-label="Ajustar a pantalla" title="Ver completa / Ajustar">
+                    <span id="dac-zoom-val">100%</span>
+                </button>
+                <button type="button" id="btn-dac-zoom-in" class="btn-zoom-action" aria-label="Acercar" title="Acercar (Zoom +)">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                </button>
+            </div>
+
+            <!-- Botón Imprimir -->
+            <button type="button" id="btn-dac-print" class="btn btn-primary" aria-label="Mandar a impresora" title="Mandar a impresora">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                <span class="btn-print-text">Guardar e imprimir solicitud</span>
+            </button>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `solicitud_dac_impr.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L119-240)</summary>
+
+**Path:** `Unknown file`
+
+```
+            </button>
+
+            <!-- Cruz pequeña para cerrar ventana -->
+            <button type="button" id="btn-dac-close" class="btn-close-icon" aria-label="Cerrar ventana">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+        </div>
+    </div>
+
+    <div class="doc-zoom-viewport" id="doc-zoom-viewport">
+        <div class="doc-pages-wrapper" id="doc-pages-wrapper">
+            <div class="doc-container doc-container--narrow doc-page doc-page-1" role="main" id="main-content">
+
+        <!-- ── Header: Logos (Izquierda y Derecha) + Slogan Centro ─ -->
+        <div class="doc-header">
+            <div class="doc-logo-area">
+                <img src="/laesh-web-assets-uipv1a/img/logo-laesh.webp"
+                     alt="LAESH — Laboratorio de Especialidades Hematológicas"
+                     class="doc-logo-img">
+            </div>
+
+            <div class="doc-header-center">
+                <p class="doc-slogan">&ldquo;Somos Qu&iacute;micos Especialistas y con Postgrado&rdquo;</p>
+            </div>
+
+            <div class="doc-verified">
+                <img src="/laesh-web-assets-uipv1a/img/logo-solicitud.jpeg"
+                     alt="LAESH Solicitud Logo"
+                     class="doc-logo-solicitud-img">
+            </div>
+        </div>
+
+        <!-- ── Título y Subtítulo Abajo de los Logotipos ────────── -->
+        <div class="doc-title-box">
+            <h1 class="doc-title">SOLICITUD DIGITAL DE AN&Aacute;LISIS CL&Iacute;NICOS</h1>
+            <p class="doc-subtitle">Presentar en el &aacute;rea de Recepci&oacute;n para toma de muestras</p>
+        </div>
+
+        <hr class="doc-accent-line">
+
+        <!-- ── Datos del Paciente ───────────────────────────────── -->
+        <div class="doc-info-box">
+            <div class="doc-info-row">
+                <div class="doc-info-item doc-info-paciente"><strong>Paciente:</strong> <span id="dac-paciente">—</span></div>
+                <div class="doc-info-item doc-info-cel"><strong>Celular:</strong> <span id="dac-celular">—</span></div>
+                <span class="doc-info-linebreak" aria-hidden="true"></span>
+                <div class="doc-info-item doc-info-edad"><strong>Edad:</strong> <span id="dac-edad">—</span></div>
+                <div class="doc-info-item doc-info-sexo"><strong>Sexo:</strong> <span id="dac-sexo">—</span></div>
+                <div class="doc-info-item doc-info-fecha"><strong>Fecha:</strong> <span id="dac-fecha">—</span></div>
+                <div class="doc-info-item doc-info-folio"><strong>Folio:</strong> <span id="dac-folio">—</span></div>
+            </div>
+        </div>
+
+        <!-- ── Contenido: Estudios + Panel derecho ─────────────── -->
+        <div class="doc-content">
+            <div class="doc-studies">
+                <h3>Estudios Solicitados</h3>
+                <ol id="dac-estudios-list">
+                    <!-- Llenado dinámico por solicitud-dac.js vía fetch() a /api/orden -->
+                </ol>
+            </div>
+            <div class="doc-side">
+                <div class="doc-diagnosis">
+                    <strong>Diagn&oacute;stico:</strong>
+                    <span id="dac-diagnostico">—</span>
+                </div>
+                <div class="doc-obs">
+                    <strong>Observaciones:</strong>
+                    <p>El laboratorio se pondr&aacute; en contacto con usted y le enviar&aacute; informaci&oacute;n de:</p>
+                    <ul>
+                        <li>Indicaciones completas para la toma de muestra.</li>
+                        <li>Costo de los estudios.</li>
+                        <li>Tiempo de entrega de resultados.</li>
+                        <li>Compartir&aacute; la ubicaci&oacute;n y horarios de atenci&oacute;n.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── Firma y Datos del Médico Tratante ────────────────── -->
+        <div class="doc-doctor">
+            <p class="doc-doctor-name" id="dac-medico-nombre">Dr. Hedilberto Reyes Venegas</p>
+            <!-- 2026-09-29 (pedido explícito): especialidad y cédula en el
+                 mismo renglón, separadas por una barra vertical (mismo patrón
+                 ya usado para universidad/lugar). -->
+            <p class="doc-doctor-specinfo">
+                <span class="doc-doctor-spec" id="dac-medico-especialidad">—</span>
+                <span class="doc-doctor-vsep" aria-hidden="true">|</span>
+                <span class="doc-doctor-info" id="dac-medico-cedula">—</span>
+            </p>
+            <!-- 2026-09-29 (pedido explícito): ya no se muestra el lugar de
+                 trabajo del médico — solo queda la universidad. -->
+            <p class="doc-doctor-lugar-box">
+                <span id="dac-medico-universidad">Universidad Autónoma Benito Juárez de Oaxaca</span>
+            </p>
+        </div>
+
+        <!-- ── Footer Barra Azul de Contacto y Ubicación ────────── -->
+        <div class="doc-footer-info">
+            <div class="doc-footer-left">
+                <span class="doc-badge-contact">¡Contáctanos!</span>
+                <span class="doc-phone">
+                    <svg class="doc-icon-inline" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.001 2C6.478 2 2 6.477 2 12c0 1.821.487 3.53 1.338 5.003L2 22l5.144-1.35A9.958 9.958 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12.001 2zm0 18.06c-1.647 0-3.196-.469-4.51-1.281l-.324-.196-3.353.88.9-3.275-.212-.335A7.988 7.988 0 0 1 4 12c0-4.418 3.582-8 8-8 4.417 0 8 3.582 8 8 0 4.417-3.583 8-8 8z"/><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg><span id="dac-whatsapp-numero">953 119 00 74</span>
+                </span>
+            </div>
+            <div class="doc-footer-right">
+                <span class="doc-address">
+                    <svg class="doc-icon-inline" width="14" height="14" viewBox="0 0 24 24" fill="#ef4444" stroke="#ef4444" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3" fill="#ffffff"/></svg>
+                    <span id="dac-direccion-calle">Azucenas # 8, Jardines del Sur.</span><br><span id="dac-direccion-ciudad-estado">Huajuapan de León, Oaxaca.</span>
+                </span>
+            </div>
+        </div>
+
+    </div><!-- /doc-container -->
+        </div><!-- /doc-pages-wrapper -->
+    </div><!-- /doc-zoom-viewport -->
+
+    <script src="/laesh-web-assets-uipv1a/js/solicitud-dac.js?v=<?= laeshAssetVer('/js/solicitud-dac.js') ?>"></script>
+
+</body>
+</html>
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `solicitud-dac.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+/**
+ * solicitud-dac.js — Ventana de impresión de Solicitud Digital de Análisis Clínicos
+ *
+ * GAP-RC-01 (cerrado 2026-09-21): antes, cada portal (Médico/Recepción)
+ * reconstruía manualmente los ~14 campos de la orden y los empujaba por
+ * querystring — mecanismo frágil que causó 4 bugs reales el mismo día
+ * (grilla de estudios rota, diagnóstico perdido, fecha confundida con un
+ * estudio, celular/edad/sexo faltantes), todos por el mismo patrón: lógica
+ * duplicada entre medicos.js/labadmin.js + datos sincronizados a mano en
+ * varios archivos sin ninguna alerta cuando algo se quedaba fuera.
+ *
+ * Ahora esta ventana solo recibe `id` (folio) y `portal` (rc|md) por URL, y
+ * consulta la orden real directamente a BD vía GET /laesh/{portal}/api/orden
+ * — fuente única de verdad. Ver RC\Negocio\Ordenes::obtenerOrdenPorFolio().
+ */
+(function() {
+    var p = new URLSearchParams(window.location.search);
+    var id = p.get('id') || '';
+    var portal = (p.get('portal') === 'md') ? 'md' : 'rc';
+    var esNueva = p.get('nueva') === '1';
+
+    var set = function(elId, val) {
+        var el = document.getElementById(elId);
+        if (el) el.textContent = val || '';
+    };
+
+    /* 2026-09-30: dirección/WhatsApp del footer vienen de window.laeshConfig
+       (config-compiled.js, generado por ConfigBuilder::build() al guardar el
+       CMS — sección "Ubicación y Contacto" / "Atención, Redes Sociales y Chat
+       vía WhatsApp"). Solo se sobreescribe si el dato existe: si
+       config-compiled.js no cargó (instalación nueva, permisos), se conserva
+       el texto fijo que ya trae el HTML como respaldo. */
+    (function popularConfigGlobal() {
+        var cfg = window.laeshConfig || {};
+        if (cfg.whatsapp_numero) {
+            set('dac-whatsapp-numero', cfg.whatsapp_numero);
+        }
+        if (cfg.direccion_calle) {
+            var calle = cfg.direccion_calle.trim();
+            set('dac-direccion-calle', calle + (/[.,]$/.test(calle) ? '' : '.'));
+        }
+        var ciudadEstado = [cfg.ciudad, cfg.estado].filter(Boolean).join(', ');
+        if (ciudadEstado) {
+            set('dac-direccion-ciudad-estado', ciudadEstado + '.');
+        }
+    })();
+
+    function formatFechaDDMMYYYY(fechaStr) {
+        if (!fechaStr) {
+            var now = new Date();
+            var dd = String(now.getDate()).padStart(2, '0');
+            var mm = String(now.getMonth() + 1).padStart(2, '0');
+            var yyyy = now.getFullYear();
+            return dd + ' - ' + mm + ' - ' + yyyy;
+        }
+        var str = fechaStr.toString().trim();
+        var meses = {
+            'enero': '01', 'febrero': '02', 'marzo': '03', 'abril': '04',
+            'mayo': '05', 'junio': '06', 'julio': '07', 'agosto': '08',
+            'septiembre': '09', 'octubre': '10', 'noviembre': '11', 'diciembre': '12'
+        };
+        var textMatch = str.match(/^(\d{1,2})\s+de\s+([a-z]+)\s+de\s+(\d{4})/i);
+        if (textMatch) {
+            var d = textMatch[1].padStart(2, '0');
+            var m = meses[textMatch[2].toLowerCase()] || '01';
+            var y = textMatch[3];
+            return d + ' - ' + m + ' - ' + y;
+        }
+        // hora_captura de MariaDB llega como "YYYY-MM-DD HH:MM:SS"
+        var isoMatch = str.match(/^(\d{4})[-/](\d{1,2})[-/](\d{1,2})/);
+        if (isoMatch) {
+            return isoMatch[3].padStart(2, '0') + ' - ' + isoMatch[2].padStart(2, '0') + ' - ' + isoMatch[1];
+        }
+        var dmyMatch = str.match(/^(\d{1,2})[-/](\d{1,2})[-/](\d{4})/);
+        if (dmyMatch) {
+            return dmyMatch[1].padStart(2, '0') + ' - ' + dmyMatch[2].padStart(2, '0') + ' - ' + dmyMatch[3];
+        }
+        return str;
+    }
+
+    function mostrarError(mensaje) {
+        set('dac-paciente', '—');
+        set('dac-celular', '—');
+        set('dac-edad', '—');
+        set('dac-sexo', '—');
+        set('dac-folio', id || '—');
+        set('dac-fecha', formatFechaDDMMYYYY(null));
+        set('dac-diagnostico', mensaje || 'No se pudo cargar la solicitud.');
+        var ol = document.getElementById('dac-estudios-list');
+        if (ol) {
+            ol.innerHTML = '';
+            var li = document.createElement('li');
+            li.textContent = mensaje || 'No se pudo cargar la solicitud.';
+            ol.appendChild(li);
+        }
+    }
+
+    function poblarDocumento(orden) {
+        var paciente = orden.paciente || '—';
+        var celular = orden.celular || '—';
+        var diagnostico = orden.diagnostico || '';
+
+        var estudiosArr = [];
+        try {
+            estudiosArr = JSON.parse(orden.estudios || '[]');
+            if (!Array.isArray(estudiosArr)) estudiosArr = [];
+        } catch (e) { estudiosArr = []; }
+        if (orden.otros_estudios) estudiosArr.push('Otros estudios: ' + orden.otros_estudios);
+
+        var medico = (orden.medico || 'Médico General').toString();
+        // Sanitizar cualquier duplicación de "Dr(a). Dr(a)." o "Dr. Dr."
+        medico = medico.replace(/^(Dr\(a\)\.|\bDr\.\b|\bDra\.\b|\bDr\b)\s*(?:Dr\(a\)\.|\bDr\.\b|\bDra\.\b|\bDr\b\s*)*/gi, 'Dr. ').trim();
+
+        var folio = orden.folio || id || '1';
+
+        // Construir nombre sugerido para PDF: sd-laesh-#folio-nombre-completo-persona.pdf
+        var folioSanit = folio.toString().trim().replace(/[^a-zA-Z0-9]/g, '');
+        var pacienteSanit = paciente.toString().trim().toLowerCase()
+            .normalize("NFD").replace(/[̀-ͯ]/g, "") // remover acentos
+            .replace(/[^a-z0-9]/g, '-')                     // guiones para espacios/especiales
+            .replace(/-+/g, '-')                            // evitar guiones dobles
+            .replace(/^-|-$/g, '');                         // quitar guiones bordes
+
+        var suggestedPdfName = 'sd-laesh-' + (folioSanit || '0') + (pacienteSanit ? '-' + pacienteSanit : '');
+        document.title = suggestedPdfName;
+
+        set('tb-folio', folio);
+        set('tb-paciente', paciente);
+
+        // Normalizar valor de Sexo a Masculino o Femenino
+        var sexoFormatted = (orden.sexo || '').toString().trim();
+        if (/^masc|^homb|^h$/i.test(sexoFormatted)) sexoFormatted = 'Masculino';
+        else if (/^fem|^muj|^m$/i.test(sexoFormatted)) sexoFormatted = 'Femenino';
+
+        // Formatear Edad
+        var edadFormatted = (orden.edad === null || orden.edad === undefined) ? '' : orden.edad.toString().trim();
+        if (edadFormatted && !/año|ano/i.test(edadFormatted) && /^\d+$/.test(edadFormatted)) {
+            edadFormatted += ' años';
+        }
+
+        var fechaFormatted = formatFechaDDMMYYYY(orden.fecha);
+
+        set('dac-paciente', paciente);
+        set('dac-celular', celular);
+        set('dac-edad', edadFormatted || '—');
+        set('dac-sexo', sexoFormatted || '—');
+        set('dac-folio', folio);
+        set('dac-fecha', fechaFormatted);
+        set('dac-diagnostico', diagnostico || 'Sin diagnóstico especificado.');
+        set('dac-medico-nombre', medico);
+        set('dac-medico-especialidad', orden.especialidad || 'Medicina General');
+
+        // Formateo de Cédula Profesional y Cédula de Especialidad:
+        // "Cedula Profesional: Dato real   |   Cedula Especialidad: Dato real"
+        var cedulaProf = (orden.cedula && orden.cedula !== 'CED-N/A') ? orden.cedula.toString().trim() : '';
+        var cedulaEsp = (orden.cedula_especialidad) ? orden.cedula_especialidad.toString().trim() : '';
+
+        var textoCedula = '';
+        if (cedulaProf) {
+            textoCedula = 'Cedula Profesional: ' + cedulaProf;
+            if (cedulaEsp) {
+                textoCedula += '   |   Cedula Especialidad: ' + cedulaEsp;
+            }
+        } else if (cedulaEsp) {
+            textoCedula = 'Cedula Especialidad: ' + cedulaEsp;
+        } else {
+            textoCedula = 'Cedula Profesional: Sin registrar';
+        }
+        set('dac-medico-cedula', textoCedula);
+
+        set('dac-medico-universidad', orden.universidad || '');
+
+        var ol = document.getElementById('dac-estudios-list');
+        if (ol) {
+            ol.innerHTML = '';
+            if (estudiosArr.length === 0) {
+                var li = document.createElement('li');
+                li.textContent = 'Sin estudios especificados.';
+                ol.appendChild(li);
+            } else {
+                estudiosArr.forEach(function(e) {
+                    var liE = document.createElement('li');
+                    liE.textContent = e;
+                    ol.appendChild(liE);
+                });
+            }
+        }
+    }
+
+    // Limpiar query-params de la barra de direcciones (popup queda limpio)
+    try { history.replaceState({}, '', window.location.pathname); } catch (e) {}
+
+    // Ack real de esta ventana: la carga de datos de la orden. Éxito → puebla
+    // el documento y notifica (toast queda por encima del overlay, z-index
+    // corregido en app.js). Fallo → cierra el overlay en la ventana padre y
+    // solo deja el toast de error (no tiene caso mostrar un documento vacío).
+    function cerrarConError(mensaje) {
+        notificarAck(mensaje || 'No se pudo cargar la solicitud.', 'error');
+        try {
+            if (window.parent && window.parent !== window) {
+                var overlay = window.parent.document.getElementById('sol-overlay');
+                if (overlay) { overlay.remove(); return; }
+            }
+        } catch (e) {}
+        // Fallback (ventana standalone sin overlay padre): mostrar el error en el propio documento.
+        mostrarError(mensaje);
+    }
+
+    if (!id) {
+        cerrarConError('Folio no especificado.');
+    } else {
+        fetch('/laesh/' + portal + '/api/orden?folio=' + encodeURIComponent(id), { credentials: 'same-origin' })
+            .then(function(res) { return res.json(); })
+            .then(function(data) {
+                if (data && data.success && data.orden) {
+                    poblarDocumento(data.orden);
+                    // GAP-PERF-DAC-01 (2026-09-24): avisa al overlay padre (app.js,
+                    // _abrirSolOverlay) que el documento ya tiene datos reales — recién
+                    // ahora se revela el iframe (opacity, ver style.css) y se oculta el
+                    // spinner. Antes de esto el iframe se veía en blanco (su propio
+                    // fondo #fff) durante todo el fetch. Mismo patrón ya usado en este
+                    // archivo para cerrar el overlay (acceso directo same-origin).
+                    try {
+                        if (window.parent && window.parent !== window) {
+                            var overlayReady = window.parent.document.getElementById('sol-overlay');
+                            if (overlayReady) overlayReady.classList.add('sol-ready');
+                        }
+                    } catch (e) {}
+                    // El ack de "creada con éxito" solo aplica cuando esta ventana se
+                    // abrió justo tras crear la orden (?nueva=1) — si el usuario solo
+                    // está viendo/reimprimiendo una solicitud ya existente desde la
+                    // búsqueda, no hay nada que "confirmar", el documento cargado ya
+                    // es la confirmación. Mostrar ese toast en ese caso era engañoso.
+                    if (esNueva) {
+                        notificarAck('✓ Solicitud creada con éxito.', 'success');
+                    }
+                } else if (esNueva) {
+                    // La orden ya fue creada (por eso se abrió esta ventana) — lo que
+                    // falló es solo la carga de sus datos para imprimir. Aclarar esto
+                    // explícitamente evita que el usuario crea que la creación falló
+                    // y reintente, generando una orden duplicada.
+                    var errDetalle = (data && data.error) ? data.error : 'no se encontró la solicitud';
+                    cerrarConError('La solicitud ' + id + ' se creó correctamente, pero no se pudo cargar la vista de impresión (' + errDetalle + '). Búscala en la tabla para reimprimirla.');
+                } else {
+                    cerrarConError((data && data.error) || 'No se pudo cargar la solicitud ' + id + '.');
+                }
+            })
+            .catch(function() {
+                if (esNueva) {
+                    cerrarConError('La solicitud ' + id + ' se creó correctamente, pero no se pudo cargar la vista de impresión por un error de conexión. Búscala en la tabla para reimprimirla.');
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `solicitud-dac.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L249-376)</summary>
+
+**Path:** `Unknown file`
+
+```
+                    cerrarConError('La solicitud ' + id + ' se creó correctamente, pero no se pudo cargar la vista de impresión por un error de conexión. Búscala en la tabla para reimprimirla.');
+                } else {
+                    cerrarConError('Error de conexión al cargar la solicitud ' + id + '.');
+                }
+            });
+    }
+
+    // Auto-ajustar ventana si se abre como popup
+    function ajustarVentana() {
+        try {
+            var docH = document.documentElement.scrollHeight;
+            var chrome = window.outerHeight - window.innerHeight;
+            window.resizeTo(window.outerWidth, docH + chrome + 8);
+        } catch (e) {}
+    }
+    window.addEventListener('load', function() {
+        ajustarVentana();
+        setTimeout(ajustarVentana, 300);
+    });
+})();
+
+// Sistema Toast compatible (local en iframe o delegable al portal padre)
+function notificarAck(mensaje, tipo) {
+    tipo = tipo || 'success';
+    // 1. Si existe showToast en el parent (portal médico / recepción), usarlo
+    try {
+        if (window.parent && window.parent !== window && typeof window.parent.showToast === 'function') {
+            window.parent.showToast(mensaje, tipo);
+            return;
+        }
+    } catch(e) {}
+
+    // 2. Si no o en standalone popup, mostrar toast local
+    var container = document.getElementById('toast-container');
+    if (!container) {
+        container = document.createElement('div');
+        container.id = 'toast-container';
+        container.setAttribute('aria-live', 'polite');
+        container.setAttribute('aria-atomic', 'true');
+        document.body.appendChild(container);
+    }
+
+    var toast = document.createElement('div');
+    toast.className = 'laesh-toast laesh-toast-' + tipo;
+    toast.style.position = 'relative';
+    toast.style.paddingRight = '36px';
+
+    var msgSpan = document.createElement('span');
+    msgSpan.textContent = mensaje;
+    toast.appendChild(msgSpan);
+
+    var closeTimer;
+    var remove = function() {
+        clearTimeout(closeTimer);
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(10px)';
+        toast.addEventListener('transitionend', function() {
+            if (toast.parentNode) toast.parentNode.removeChild(toast);
+        });
+    };
+
+    var btnClose = document.createElement('button');
+    btnClose.type = 'button';
+    btnClose.setAttribute('aria-label', 'Cerrar notificación');
+    btnClose.textContent = '×';
+    Object.assign(btnClose.style, {
+        position: 'absolute',
+        top: '4px',
+        right: '8px',
+        background: 'transparent',
+        border: 'none',
+        color: 'inherit',
+        fontSize: '1.1rem',
+        lineHeight: '1',
+        cursor: 'pointer',
+        opacity: '0.8',
+        padding: '4px'
+    });
+    btnClose.addEventListener('click', remove);
+    toast.appendChild(btnClose);
+
+    container.appendChild(toast);
+
+    requestAnimationFrame(function() {
+        toast.style.opacity = '1';
+        toast.style.transform = 'translateY(0)';
+    });
+
+    // Cierre automático a 1 minuto — el usuario también puede cerrarlo con la X
+    closeTimer = setTimeout(remove, 60000);
+}
+
+/* U-01: Botones de acción del toolbar — sin onclick inline */
+document.addEventListener('DOMContentLoaded', function() {
+    var btnPrint = document.getElementById('btn-dac-print');
+    var btnClose = document.getElementById('btn-dac-close');
+
+    if (btnPrint) {
+        btnPrint.addEventListener('click', function() {
+            // El ack de "solicitud creada con éxito" ya se notificó al cargar los
+            // datos (ver arriba) — el navegador no expone si el usuario completa
+            // o cancela el diálogo de impresión, así que no hay un ack real que
+            // reportar aquí. Solo se avisa si algo truena ANTES de abrir el diálogo.
+            try {
+                window.print();
+            } catch (err) {
+                console.error('Error al imprimir orden:', err);
+                notificarAck('⚠️ Error al procesar la solicitud para impresión.', 'error');
+            }
+        });
+    }
+
+    if (btnClose) {
+        btnClose.addEventListener('click', function() {
+            /* Si estamos dentro de un overlay iframe → cerrar el overlay en la ventana padre */
+            if (window.parent !== window) {
+                try {
+                    var overlay = window.parent.document.getElementById('sol-overlay');
+                    if (overlay) { overlay.remove(); return; }
+                } catch(e) {}
+            }
+            /* Fallback: navegación directa o popup clásico */
+            if (window.history.length > 1) { window.history.back(); }
+            else { window.close(); }
+        });
+    }
+});
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `solicitud-dac.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+        :root {
+            --bg-color: #eef2f5;
+            --primary-color: #0052B7;
+            --primary-hover: #003e8c;
+            --danger-color: #c53030;
+            --text-dark: #2d3748;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', 'Cabin', sans-serif;
+        }
+
+        body {
+            background-color: #ffffff !important;
+            color: var(--text-dark);
+            min-height: 100vh;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            justify-content: flex-start !important; /* Fuerza inicio superior sin centrado vertical */
+            padding-top: 36px !important; /* Estricto a 36px: la caja azul inicia justo bajo la barra */
+            padding-bottom: 10px !important;
+            margin: 0 !important;
+        }
+
+        /* ── Toolbar flotante fija (No se imprime) ── */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 36px !important;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 0 10px !important;
+            z-index: 1000;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+        }
+
+
+
+
+        .toolbar-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 9px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+            text-decoration: none;
+            line-height: 1.2;
+        }
+
+        /* Cruz pequeña en la esquina superior derecha (justificada arriba a la derecha) */
+        .btn-close-icon {
+            position: fixed;
+            top: 4px;
+            right: 8px;
+            z-index: 1002;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: 1px solid #cbd5e1;
+            background: #ffffff;
+            color: #1e293b;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            padding: 0;
+            flex-shrink: 0;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+        }
+        .btn-close-icon:hover {
+            background: #fee2e2;
+            color: #dc2626;
+            border-color: #fca5a5;
+        }
+
+        #btn-dac-print, #btn-dac-close {
+            min-height: unset !important;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: #fff;
+        }@media (hover: hover) and (pointer: fine) {
+    .btn-primary:hover {
+        background-color: var(--primary-hover);
+    }
+}
+
+
+        /* Contenedor del documento */
+        /* 2026-09-30: BUG-DAC-CORNERS-ROOT-01 — este selector no llevaba
+           !important y ganaba en pantalla por cargar después de docs.css
+           (misma especificidad, gana el último). Tenía border-radius:10px,
+           mientras docs.css definía 16px y el bloque @media print de abajo
+           ya usaba 16px !important — pantalla e impresión NUNCA coincidían.
+           Se fija aquí a 16px explícito (mismo valor que docs.css y que el
+           @media print de este archivo) para que sea la fuente de verdad
+           real en pantalla y quede alineado a propósito, no por accidente
+           de orden de carga. */
+        .doc-container {
+            width: 100%;
+            max-width: 820px;
+            background: #fff;
+            margin: 0 auto !important;
+            margin-top: 0 !important; /* Inicia flush sin margen superior bajo los 36px de toolbar */
+            box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+            border-radius: 16px;
+            border: 2px solid var(--primary-color);
+            position: relative;
+            box-sizing: border-box;
+        }
+
+        /* ── Estilos de Impresión (@media print) ──
+           2026-09-29 (pedido explícito del usuario): la hoja impresa debe verse
+           IGUAL que en pantalla — antes este bloque re-definía casi cada
+           tamaño de fuente/espaciado a valores más chicos ("compactación para
+           ajuste a media hoja"), lo que hacía que lo impreso no coincidiera
+           con lo que el médico/recepción veía en el navegador. Ahora solo se
+           ajusta lo estrictamente necesario para papel (tamaño de página,
+           ocultar la toolbar, quitar sombra/bordes redondeados del
+           contenedor) — la tipografía y el layout los hereda tal cual de las
+           reglas de pantalla de más abajo. */
+        @media print {
+            @page {
+                size: letter portrait;
+                margin: 0.8cm;
+            }
+
+            body {
+                background: #fff !important;
+                padding-top: 0 !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                display: block !important;
+            }
+
+            .no-print {
+                display: none !important;
+            }
+
+            /* 2026-09-29 (pedido explícito): esquinas redondeadas también al
+               imprimir — antes border-radius:0 aquí cuadraba el marco solo
+               en el PDF/impresión, sin coincidir con las 16px de pantalla
+               (docs.css .doc-container). overflow pasa a hidden (como en
+               pantalla) para que el contenido no sobresalga de la esquina
+               redondeada — visible solo servía para el caso 0 de antes. */
+            .doc-zoom-viewport,
+            .doc-pages-wrapper {
+                transform: none !important;
+                width: 100% !important;
+                height: auto !important;
+                display: block !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                overflow: visible !important;
+            }
+
+            .doc-container,
+            .doc-page {
+                width: 100% !important;
+                max-width: 100% !important;
+                min-height: 0 !important;
+                max-height: none !important;
+                overflow: hidden !important;
+                box-shadow: none !important;
+                border: 2px solid var(--primary-color) !important;
+                border-radius: 16px !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+
+            .doc-page {
+                page-break-after: always !important;
+                break-after: page !important;
+            }
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `solicitud-dac.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L199-449)</summary>
+
+**Path:** `Unknown file`
+
+```
+            }
+
+            .doc-page:last-child {
+                page-break-after: avoid !important;
+                break-after: avoid !important;
+            }
+
+        }
+
+.doc-info-box {
+    border: none !important;
+    border-bottom: 1px solid #cbd5e1 !important;
+    border-radius: 0 !important;
+    margin: 0 16px 14px !important;
+    padding: 6px 0 10px !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+/* GAP-DAC-PACIENTE-2R-01 (2026-09-29): se pasa de flex a CSS Grid de 4
+   columnas — necesario para el pedido de "Celular centrado respecto a Fecha
+   y Folio": con flex + space-between la posición horizontal de cada
+   renglón dependía de cuánto contenido tuviera CADA renglón por separado,
+   sin forma confiable de alinear un elemento de un renglón con dos de otro.
+   Con grid, Fecha y Folio ocupan las columnas 3 y 4 en el renglón 2, y
+   Celular ocupa EXACTAMENTE ese mismo tramo (columnas 3-4) en el renglón 1,
+   centrado dentro de él — su punto medio coincide por diseño (mismas líneas
+   de grid), no por cálculo aproximado. .doc-info-linebreak ya no hace falta
+   (el salto de línea ahora es explícito por fila de grid, no forzado por
+   flex-wrap) — se mantiene en el HTML mismo pero oculto, sin efecto. */
+.doc-info-row {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    align-items: center !important;
+    width: 100% !important;
+    gap: 8px 16px !important;
+}
+.doc-info-linebreak {
+    display: none !important;
+}
+/* FIX-DAC-PACIENTE-NOCLIP (2026-09-30):
+   Al usar justify-self: center con white-space: nowrap, los nombres largos
+   se desbordaban simétricamente a la izquierda y derecha. Debido a que el
+   contenedor tiene overflow: hidden, el desbordamiento izquierdo se colocaba
+   en coordenadas negativas, cortando la etiqueta "Paciente:".
+   Solución: justify-self: start garantiza que el inicio del texto siempre esté
+   anclado a la izquierda (x=0 relativo a su track). Se permite wrap natural del
+   nombre (white-space: normal, overflow-wrap: break-word) para que nunca se
+   corte a la izquierda ni choque con Celular. */
+.doc-info-paciente {
+    grid-column: 1 / 3 !important;
+    grid-row: 1 !important;
+    justify-self: start !important;
+    text-align: left !important;
+    padding: 0 0 0 6px !important;
+    margin: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    white-space: normal !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: baseline !important;
+    gap: 4px 6px !important;
+    line-height: 1.25 !important;
+}
+.doc-info-paciente strong {
+    flex-shrink: 0 !important;
+    white-space: nowrap !important;
+}
+.doc-info-paciente span {
+    overflow-wrap: break-word !important;
+    word-break: break-word !important;
+    min-width: 0 !important;
+}
+.doc-info-cel {
+    grid-column: 3 / 5 !important;
+    grid-row: 1 !important;
+    justify-self: center !important;
+    text-align: center !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    min-width: 0 !important;
+}
+.doc-info-edad,
+.doc-info-sexo,
+.doc-info-fecha,
+.doc-info-folio {
+    grid-row: 2 !important;
+    justify-self: center !important;
+    text-align: center !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    min-width: 0 !important;
+}
+.doc-info-edad  { grid-column: 1 !important; }
+.doc-info-sexo  { grid-column: 2 !important; }
+.doc-info-fecha { grid-column: 3 !important; }
+.doc-info-folio { grid-column: 4 !important; }
+
+.doc-info-item {
+    color: #1e293b !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+    min-width: 0 !important;
+}
+
+.doc-info-paciente {
+    font-size: 1.375rem !important;
+}
+.doc-info-paciente strong {
+    font-size: 1.3875rem !important;
+}
+
+.doc-info-cel {
+    font-size: 1.2rem !important;
+}
+.doc-info-cel strong {
+    font-size: 1.21rem !important;
+}
+
+/* 2026-09-29 (pedido explícito): -1px sobre 1.2rem/1.21rem (19.2px/19.36px)
+   SOLO para el segundo renglón (Edad/Sexo/Fecha/Folio) — Celular se queda en
+   su tamaño actual, comparte renglón con Paciente, no con estos. */
+.doc-info-edad,
+.doc-info-sexo,
+.doc-info-folio,
+.doc-info-fecha {
+    font-size: 1.1375rem !important;
+}
+.doc-info-edad strong,
+.doc-info-sexo strong,
+.doc-info-folio strong,
+.doc-info-fecha strong {
+    font-size: 1.1475rem !important;
+}
+
+.doc-info-item strong {
+    color: #0052B7 !important;
+    font-weight: 700 !important;
+}
+
+/* 2026-09-29 (pedido explícito): mismo tamaño que .doc-doctor-spec
+   ("Medicina Interna", 16px/1rem en docs.css) — antes 1.1rem quedaba más
+   grande que la especialidad. */
+.doc-doctor-info {
+    font-size: 1rem !important;
+    font-weight: 700 !important;
+    color: #1e293b !important;
+}
+.doc-doctor-lugar-box {
+    font-size: 1.1rem !important;
+    font-weight: 400 !important;
+    color: #475569 !important;
+    margin-top: 2px !important;
+    margin-bottom: 2px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    white-space: nowrap !important;
+}
+
+
+/* ── Footer de Contacto y Ubicación ──
+   2026-09-29 (pedido explícito del usuario): sin color de fondo — el texto
+   pasa de blanco (necesitaba el fondo azul para contraste) a azul fuerte
+   LAESH (var(--primary-color)), que ya tiene buen contraste sobre blanco.
+   2026-09-29: el badge "¡Contáctanos!" también pierde su relleno verde
+   (pedido explícito del usuario) — queda solo el contorno, texto verde. */
+/* 2026-09-29 (pedido explícito): la dirección debe quedar en la esquina
+   superior derecha del footer, junto a ¡Contáctanos!/teléfono — antes con
+   flex-wrap:wrap, al crecer el teléfono ya no cabía en la misma línea y la
+   dirección se iba completa a un renglón nuevo por debajo (vacía la esquina
+   marcada). Con nowrap, footer-left y footer-right SIEMPRE comparten
+   renglón; footer-right se encoge y dentro de ÉL la dirección envuelve a
+   sus propias 2 líneas (ver .doc-address más abajo). align-items:flex-start
+   para que ambos arranquen alineados arriba si footer-right queda más alto. */
+.doc-footer-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    background: none;
+    color: var(--primary-color);
+    padding: 10px 18px;
+    margin-top: 12px;
+    font-size: 1.1rem;
+    flex-wrap: nowrap;
+    gap: 8px;
+}
+.doc-footer-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+}
+/* 2026-09-29 (pedido explícito): contorno y texto negros (antes verde).
+   2026-09-30 (pedido explícito): contorno más tenue — de #000000 a
+   #94a3b8 (gris suave), texto se mantiene negro. */
+.doc-badge-contact {
+    background: none;
+    color: #000000;
+    border: 2px solid #94a3b8;
+    padding: 2px 11px;
+    border-radius: 6px;
+    font-size: 1.03rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+}
+/* 2026-09-29: un poco más grande que antes (1.17rem → 1.3rem).
+   2026-09-29 (segundo pedido, mismo día): +50% adicional sobre 1.3rem —
+   queda en 1.95rem.
+   2026-09-29 (tercer pedido, mismo día): +6px adicional sobre 1.95rem
+   (31.2px) — queda en 2.325rem (37.2px).
+   2026-09-29 (cuarto pedido, mismo día): -3px sobre 37.2px — queda en
+   2.1375rem (34.2px).
+   2026-09-29 (quinto pedido, mismo día): -3px adicional sobre 34.2px —
+   queda en 1.95rem (31.2px).
+   2026-09-29 (sexto pedido, mismo día): -2px adicional sobre 31.2px —
+   queda en 1.825rem (29.2px), pedido explícito.
+   2026-09-30 (séptimo pedido): -2px adicional sobre 29.2px — queda en
+   1.7rem (27.2px), pedido explícito. */
+.doc-phone {
+    font-size: 1.7rem;
+    font-weight: 600;
+    white-space: nowrap;
+    color: var(--primary-color);
+}
+.doc-footer-right {
+    text-align: right;
+    font-size: 1.05rem;
+    line-height: 1.25;
+    color: var(--primary-color);
+    flex-shrink: 1;
+    min-width: 0;
+}
+/* 2026-09-29 (pedido explícito, revierte el "un solo renglón" de antes):
+   la dirección ahora SÍ envuelve — a dos líneas naturales dentro del ancho
+   que le deja footer-right (ver .doc-footer-info arriba: nowrap en el
+   contenedor mantiene la dirección en la esquina superior derecha en vez de
+   caer a un renglón aparte por debajo). */
+.doc-address {
+    white-space: normal;
+}
+.doc-footer-right strong {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `solicitud-dac.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L749-964)</summary>
+
+**Path:** `Unknown file`
+
+```
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: auto;
+    max-width: min(420px, calc(100vw - 40px));
+    word-break: break-word;
+}
+
+.laesh-toast-success { background: #10b981; }
+.laesh-toast-error   { background: #ef4444; }
+.laesh-toast-info    { background: #334155; }
+.laesh-toast-warning { background: #f59e0b; }
+
+/* ── Zoom Viewport y Wrapper Responsivo para Móviles y Escritorio ── */
+.doc-zoom-viewport {
+    width: 100%;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-bottom: 24px;
+    overflow-x: auto;
+    overflow-y: visible;
+    -webkit-overflow-scrolling: touch;
+}
+
+.doc-pages-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 820px;
+    transform-origin: top center;
+    transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1);
+    box-sizing: border-box;
+}
+
+/* ── Estilos de Paginación Multi-Hoja (para 50+ estudios) ── */
+.doc-page {
+    width: 100%;
+    max-width: 820px;
+    box-sizing: border-box;
+}
+
+.doc-page + .doc-page {
+    margin-top: 24px !important;
+}
+
+.doc-page-continuation {
+    background: #ffffff;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    border-radius: 16px;
+    border: 2px solid var(--primary-color);
+    position: relative;
+    box-sizing: border-box;
+    overflow: hidden;
+    width: 100%;
+    max-width: 820px;
+}
+
+.doc-studies-list-cols {
+    column-count: 2;
+    column-gap: 36px;
+    column-rule: 1px solid #e2e8f0;
+    margin: 0;
+    padding-left: 24px;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text-dark);
+}
+.doc-studies-list-cols li {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    padding-bottom: 4px;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+.doc-studies-list-cols li::marker {
+    color: var(--primary-color);
+    font-weight: 700;
+}
+
+.doc-info-row--continuation {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    width: 100% !important;
+    padding: 0 8px !important;
+    flex-wrap: wrap !important;
+    gap: 8px 16px !important;
+}
+
+/* ── Controles de Zoom en Toolbar ── */
+.toolbar-zoom-group {
+    display: inline-flex;
+    align-items: center;
+    background: #f1f5f9;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    padding: 2px 4px;
+    gap: 4px;
+    height: 28px;
+    margin-right: 8px;
+}
+.btn-zoom-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    color: #1e293b;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    padding: 0;
+}
+.btn-zoom-action:hover {
+    background: #e2e8f0;
+    color: var(--primary-color);
+}
+.btn-zoom-fit {
+    background: transparent;
+    border: none;
+    font-size: 0.76rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    padding: 0 4px;
+    cursor: pointer;
+    min-width: 44px;
+    text-align: center;
+}
+.btn-zoom-fit:hover {
+    text-decoration: underline;
+}
+
+/* ── Protección contra desbordamiento en secciones de texto ── */
+.doc-diagnosis span {
+    display: block;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    min-width: 0;
+}
+.doc-obs p, .doc-obs ul li {
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+.doc-doctor-name {
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+.doc-doctor-lugar-box {
+    white-space: normal !important;
+    overflow-wrap: break-word !important;
+    word-break: break-word !important;
+    text-align: center !important;
+}
+.doc-doctor-specinfo {
+    flex-wrap: wrap !important;
+    overflow-wrap: break-word !important;
+}
+.doc-studies ol li {
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+.doc-footer-right {
+    min-width: 0;
+    overflow-wrap: break-word;
+}
+
+/* ── Optimización móvil pequeña (≤ 600px) ── */
+@media (max-width: 600px) {
+    .doc-info-row {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 8px 12px !important;
+    }
+    .doc-info-paciente {
+        grid-column: 1 / -1 !important;
+        grid-row: 1 !important;
+    }
+    .doc-info-cel {
+        grid-column: 1 / -1 !important;
+        grid-row: 2 !important;
+        justify-self: start !important;
+        text-align: left !important;
+        padding-left: 6px !important;
+    }
+    .doc-info-edad {
+        grid-column: 1 !important;
+        grid-row: 3 !important;
+        justify-self: start !important;
+        padding-left: 6px !important;
+    }
+    .doc-info-sexo {
+        grid-column: 2 !important;
+        grid-row: 3 !important;
+        justify-self: start !important;
+    }
+    .doc-info-fecha {
+        grid-column: 1 !important;
+        grid-row: 4 !important;
+        justify-self: start !important;
+        padding-left: 6px !important;
+    }
+    .doc-info-folio {
+        grid-column: 2 !important;
+        grid-row: 4 !important;
+        justify-self: start !important;
+    }
+    .doc-studies-list-cols {
+        column-count: 1 !important;
+    }
+}
+
+
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The `solicitud_dac_impr.php` file already includes the necessary viewport meta tag, a zoom toolbar, and the required wrapper elements for the document viewer. Also, relevant CSS fixes related to potential clipping issues for the "Paciente" section are present in `solicitud-dac.css`.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `sol-overlay`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.121187401s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:29 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `style.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L544-614)</summary>
+
+**Path:** `Unknown file`
+
+```
+}
+
+/* ── Overlay Solicitud Digital — iframe embebido, sin nueva ventana ── */
+.sol-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+.sol-overlay iframe {
+    width: min(900px, 98vw);
+    height: 92vh;
+    border: none;
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+    /* GAP-PERF-DAC-01 (2026-09-24): oculto hasta que solicitud-dac.js marca
+       #sol-overlay.sol-ready (datos ya poblados) — evita el rectángulo
+       blanco vacío mientras el fetch de la orden está en curso.
+       Autoauditoría (mismo día): opacity:0 solo no basta —
+       - pointer-events:none evita interactuar con un documento a medio
+         poblar (ej. el botón Imprimir del propio iframe) mientras es
+         invisible pero técnicamente seguiría siendo clicable.
+       - visibility:hidden saca el iframe del árbol de accesibilidad
+         mientras carga — sin esto, un lector de pantalla podría anunciar
+         los placeholders "—" antes de que el documento tenga datos reales.
+         visibility no anima, pero al pasar a "visible" al mismo tiempo que
+         empieza el fade-in de opacity no se necesita ningún ajuste de
+         transition-delay (el caso inverso — ocultar de nuevo — no ocurre
+         aquí, el iframe nunca vuelve a taparse tras revelarse). */
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.15s ease;
+}
+.sol-overlay.sol-ready iframe {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+.sol-overlay-spinner {
+    position: absolute;
+    width: 42px;
+    height: 42px;
+    border: 4px solid rgba(255, 255, 255, 0.25);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: sol-overlay-spin 0.8s linear infinite;
+}
+.sol-overlay.sol-ready .sol-overlay-spinner {
+    display: none;
+}
+@keyframes sol-overlay-spin {
+    to { transform: rotate(360deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+    .sol-overlay-spinner {
+        animation: none;
+    }
+}
+/* Al imprimir desde el overlay iframe en portales:
+   Ocultar SOLO elementos del portal (.portal-access-header, .app-layout) — estas
+   clases NO existen en solicitud_dac_impr.html, por lo que esta regla no afecta
+   el print de la solicitud cuando imprime desde su propio contexto. */
+
+/* ── Barras de Reportes — colores CSP-safe (sin inline style) ── */
+.bar-fill           { height: 100%; }
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The CSS defines a full-screen overlay with an iframe centered within it. This overlay likely serves as a modal or dialog. The `min()` function ensures the iframe's width doesn't exceed 900px or 98vw, while `height` is set to 92vh. It creates a visually appealing dialog box.
+
+
+Considering mobile devices, the existing padding and height constraints on the overlay significantly reduce available screen space. Applying a media query removes the padding and sets the iframe's dimensions to 100vw and 100vh respectively, maximizing the viewport utilization on mobile.
+
+The issue of the truncated "Paciente:" label arises from the centering and `white-space: nowrap` applied to `.doc-info-paciente` within a constrained container. This causes overflow because the label attempts to center long text that exceeds the container width, and the container's `overflow: hidden` property prevents it from expanding.
+
+
+Updated the CSS to prevent text truncation by modifying `doc-info-paciente` to ensure left alignment, flexible wrapping, and word-breaking.  Applied similar protective measures universally across diagnosis, observations, doctor information, studies list, and the footer to handle overflow.
+
+Considering a potential edge case with numerous studies, the system needs to generate a second page, including header, footer, etc., to display any overflowing studies list.
+
+
+Examining the layout reveals the first page can accommodate roughly 12-14 studies within its natural height. Any studies exceeding this limit necessitate a second page. The second page requires a complete header, a title, and the remaining studies.
+
+
+The design for the second page includes a distinct header, a "Continuation" title, and a data reference bar to maintain continuity. The studies list on the second page will utilize a two-column layout to accommodate a larger number of entries, fully utilizing the available width. Print media styling has been added to ensure proper page breaks to avoid splitting content between pages.
+
+
+A conditional logic must be implemented to manage the printing and PDF generation for the two-page document based on the number of studies. A two-page document is required only when the total studies exceed 14 entries.
+
+To address the mobile display, a "fit-to-screen" initial zoom calculation is needed to present the document correctly. This involves calculating a scaling factor using the screen width and the designed document width to ensure the content is displayed entirely without cutting off content or requiring excessive scrolling. This approach maximizes readability on smaller screens.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `solicitud-dac.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 5.849059210s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L94-194)</summary>
+
+**Path:** `Unknown file`
+
+```
+        }
+    }
+
+    function poblarDocumento(orden) {
+        var paciente = orden.paciente || '—';
+        var celular = orden.celular || '—';
+        var diagnostico = orden.diagnostico || '';
+
+        var estudiosArr = [];
+        try {
+            estudiosArr = JSON.parse(orden.estudios || '[]');
+            if (!Array.isArray(estudiosArr)) estudiosArr = [];
+        } catch (e) { estudiosArr = []; }
+        if (orden.otros_estudios) estudiosArr.push('Otros estudios: ' + orden.otros_estudios);
+
+        var medico = (orden.medico || 'Médico General').toString();
+        // Sanitizar cualquier duplicación de "Dr(a). Dr(a)." o "Dr. Dr."
+        medico = medico.replace(/^(Dr\(a\)\.|\bDr\.\b|\bDra\.\b|\bDr\b)\s*(?:Dr\(a\)\.|\bDr\.\b|\bDra\.\b|\bDr\b\s*)*/gi, 'Dr. ').trim();
+
+        var folio = orden.folio || id || '1';
+
+        // Construir nombre sugerido para PDF: sd-laesh-#folio-nombre-completo-persona.pdf
+        var folioSanit = folio.toString().trim().replace(/[^a-zA-Z0-9]/g, '');
+        var pacienteSanit = paciente.toString().trim().toLowerCase()
+            .normalize("NFD").replace(/[̀-ͯ]/g, "") // remover acentos
+            .replace(/[^a-z0-9]/g, '-')                     // guiones para espacios/especiales
+            .replace(/-+/g, '-')                            // evitar guiones dobles
+            .replace(/^-|-$/g, '');                         // quitar guiones bordes
+
+        var suggestedPdfName = 'sd-laesh-' + (folioSanit || '0') + (pacienteSanit ? '-' + pacienteSanit : '');
+        document.title = suggestedPdfName;
+
+        set('tb-folio', folio);
+        set('tb-paciente', paciente);
+
+        // Normalizar valor de Sexo a Masculino o Femenino
+        var sexoFormatted = (orden.sexo || '').toString().trim();
+        if (/^masc|^homb|^h$/i.test(sexoFormatted)) sexoFormatted = 'Masculino';
+        else if (/^fem|^muj|^m$/i.test(sexoFormatted)) sexoFormatted = 'Femenino';
+
+        // Formatear Edad
+        var edadFormatted = (orden.edad === null || orden.edad === undefined) ? '' : orden.edad.toString().trim();
+        if (edadFormatted && !/año|ano/i.test(edadFormatted) && /^\d+$/.test(edadFormatted)) {
+            edadFormatted += ' años';
+        }
+
+        var fechaFormatted = formatFechaDDMMYYYY(orden.fecha);
+
+        set('dac-paciente', paciente);
+        set('dac-celular', celular);
+        set('dac-edad', edadFormatted || '—');
+        set('dac-sexo', sexoFormatted || '—');
+        set('dac-folio', folio);
+        set('dac-fecha', fechaFormatted);
+        set('dac-diagnostico', diagnostico || 'Sin diagnóstico especificado.');
+        set('dac-medico-nombre', medico);
+        set('dac-medico-especialidad', orden.especialidad || 'Medicina General');
+
+        // Formateo de Cédula Profesional y Cédula de Especialidad:
+        // "Cedula Profesional: Dato real   |   Cedula Especialidad: Dato real"
+        var cedulaProf = (orden.cedula && orden.cedula !== 'CED-N/A') ? orden.cedula.toString().trim() : '';
+        var cedulaEsp = (orden.cedula_especialidad) ? orden.cedula_especialidad.toString().trim() : '';
+
+        var textoCedula = '';
+        if (cedulaProf) {
+            textoCedula = 'Cedula Profesional: ' + cedulaProf;
+            if (cedulaEsp) {
+                textoCedula += '   |   Cedula Especialidad: ' + cedulaEsp;
+            }
+        } else if (cedulaEsp) {
+            textoCedula = 'Cedula Especialidad: ' + cedulaEsp;
+        } else {
+            textoCedula = 'Cedula Profesional: Sin registrar';
+        }
+        set('dac-medico-cedula', textoCedula);
+
+        set('dac-medico-universidad', orden.universidad || '');
+
+        var ol = document.getElementById('dac-estudios-list');
+        if (ol) {
+            ol.innerHTML = '';
+            if (estudiosArr.length === 0) {
+                var li = document.createElement('li');
+                li.textContent = 'Sin estudios especificados.';
+                ol.appendChild(li);
+            } else {
+                estudiosArr.forEach(function(e) {
+                    var liE = document.createElement('li');
+                    liE.textContent = e;
+                    ol.appendChild(liE);
+                });
+            }
+        }
+    }
+
+    // Limpiar query-params de la barra de direcciones (popup queda limpio)
+    try { history.replaceState({}, '', window.location.pathname); } catch (e) {}
+
+    // Ack real de esta ventana: la carga de datos de la orden. Éxito → puebla
+    // el documento y notifica (toast queda por encima del overlay, z-index
+    // corregido en app.js). Fallo → cierra el overlay en la ventana padre y
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Focusing on the `poblarDocumento` function, the rendering of studies within the list is being examined. It checks for an existing ordered list element. If the list is empty, a specific message is added; otherwise, it iterates through the study array.
+
+
+The `paginarEstudios` function's logic is being considered, specifically how to handle study pagination across two pages when the study array exceeds a defined maximum. A constant `MAX_ESTUDIOS_HOJA1` is defined. The function will conditionally create and populate a second page (`#doc-page-2`) if the number of studies requires it. The contents of the second page's header are also under consideration.
+
+
+The pagination logic now dictates the structure of the second page's content, specifically the arrangement of the study list. The header for the second page must include patient, folio, and date information, and be consistent with the first. A conditional statement determines if the second page should be added and populated.
+
+
+The second page's structure is defined based on the requirement for pagination, including the continued study list, doctor's signature, and footer identical to the first page.  The provided HTML snippet provides the exact structure for the second page header and content, ensuring proper rendering of study continuation. The zoom functionality for mobile is now under consideration for implementation.
+
+
+A function to calculate the "fit" scale for the document based on viewport width is under evaluation; it considers a standard document width and a margin for mobile devices. The calculated scale is clamped to a range between 0.25 and 1.0, rounding to two decimal places.
+
+Another function to apply the calculated scale and update the document's visual transformation is under inspection, including the scaling of a wrapper element and adjusting its bottom margin to simulate the scaled height. The applied scale is clamped between 0.25 and 3.0, and the zoom level is displayed.
+
+
+A conditional statement will initialize the zoom level based on device width; mobile devices start in "fit" mode. Event listeners are being set up to handle zoom-in, zoom-out, and "fit" actions triggered by UI buttons.
+
+The code listens for window resize events to recalculate the "fit" scale, but only if the document is in "fit" mode and the screen width is less than a certain threshold.  Touch event support for pinch-to-zoom and double-tap interactions is being prepared.
+
+
+Two-finger pinch-to-zoom is being implemented, tracking initial distance and scale to calculate zoom factor dynamically. A double-tap gesture alternates between "fit" scale and a fixed zoom level, preventing default behaviors on double tap. The `touchmove` event applies calculated scales, preventing scrolling when zooming. The `touchend` event resets the initial distance, allowing zoom to restart on subsequent gestures.
+
+
+The document height calculation, particularly for popup windows, is being investigated, considering potential multi-page scenarios. The `scrollHeight` should encompass content across multiple pages.
+
+The styling of the overlay and iframe within a mobile context is under review.  A media query is being assessed to adjust padding and iframe width on screens narrower than 768px.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 6.419355348s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:30 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `solicitud-dac.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L94-214)</summary>
+
+**Path:** `Unknown file`
+
+```
+        }
+    }
+
+    function poblarDocumento(orden) {
+        var paciente = orden.paciente || '—';
+        var celular = orden.celular || '—';
+        var diagnostico = orden.diagnostico || '';
+
+        var estudiosArr = [];
+        try {
+            estudiosArr = JSON.parse(orden.estudios || '[]');
+            if (!Array.isArray(estudiosArr)) estudiosArr = [];
+        } catch (e) { estudiosArr = []; }
+        if (orden.otros_estudios) estudiosArr.push('Otros estudios: ' + orden.otros_estudios);
+
+        var medico = (orden.medico || 'Médico General').toString();
+        // Sanitizar cualquier duplicación de "Dr(a). Dr(a)." o "Dr. Dr."
+        medico = medico.replace(/^(Dr\(a\)\.|\bDr\.\b|\bDra\.\b|\bDr\b)\s*(?:Dr\(a\)\.|\bDr\.\b|\bDra\.\b|\bDr\b\s*)*/gi, 'Dr. ').trim();
+
+        var folio = orden.folio || id || '1';
+
+        // Construir nombre sugerido para PDF: sd-laesh-#folio-nombre-completo-persona.pdf
+        var folioSanit = folio.toString().trim().replace(/[^a-zA-Z0-9]/g, '');
+        var pacienteSanit = paciente.toString().trim().toLowerCase()
+            .normalize("NFD").replace(/[̀-ͯ]/g, "") // remover acentos
+            .replace(/[^a-z0-9]/g, '-')                     // guiones para espacios/especiales
+            .replace(/-+/g, '-')                            // evitar guiones dobles
+            .replace(/^-|-$/g, '');                         // quitar guiones bordes
+
+        var suggestedPdfName = 'sd-laesh-' + (folioSanit || '0') + (pacienteSanit ? '-' + pacienteSanit : '');
+        document.title = suggestedPdfName;
+
+        set('tb-folio', folio);
+        set('tb-paciente', paciente);
+
+        // Normalizar valor de Sexo a Masculino o Femenino
+        var sexoFormatted = (orden.sexo || '').toString().trim();
+        if (/^masc|^homb|^h$/i.test(sexoFormatted)) sexoFormatted = 'Masculino';
+        else if (/^fem|^muj|^m$/i.test(sexoFormatted)) sexoFormatted = 'Femenino';
+
+        // Formatear Edad
+        var edadFormatted = (orden.edad === null || orden.edad === undefined) ? '' : orden.edad.toString().trim();
+        if (edadFormatted && !/año|ano/i.test(edadFormatted) && /^\d+$/.test(edadFormatted)) {
+            edadFormatted += ' años';
+        }
+
+        var fechaFormatted = formatFechaDDMMYYYY(orden.fecha);
+
+        set('dac-paciente', paciente);
+        set('dac-celular', celular);
+        set('dac-edad', edadFormatted || '—');
+        set('dac-sexo', sexoFormatted || '—');
+        set('dac-folio', folio);
+        set('dac-fecha', fechaFormatted);
+        set('dac-diagnostico', diagnostico || 'Sin diagnóstico especificado.');
+        set('dac-medico-nombre', medico);
+        set('dac-medico-especialidad', orden.especialidad || 'Medicina General');
+
+        // Formateo de Cédula Profesional y Cédula de Especialidad:
+        // "Cedula Profesional: Dato real   |   Cedula Especialidad: Dato real"
+        var cedulaProf = (orden.cedula && orden.cedula !== 'CED-N/A') ? orden.cedula.toString().trim() : '';
+        var cedulaEsp = (orden.cedula_especialidad) ? orden.cedula_especialidad.toString().trim() : '';
+
+        var textoCedula = '';
+        if (cedulaProf) {
+            textoCedula = 'Cedula Profesional: ' + cedulaProf;
+            if (cedulaEsp) {
+                textoCedula += '   |   Cedula Especialidad: ' + cedulaEsp;
+            }
+        } else if (cedulaEsp) {
+            textoCedula = 'Cedula Especialidad: ' + cedulaEsp;
+        } else {
+            textoCedula = 'Cedula Profesional: Sin registrar';
+        }
+        set('dac-medico-cedula', textoCedula);
+
+        set('dac-medico-universidad', orden.universidad || '');
+
+        var ol = document.getElementById('dac-estudios-list');
+        if (ol) {
+            ol.innerHTML = '';
+            if (estudiosArr.length === 0) {
+                var li = document.createElement('li');
+                li.textContent = 'Sin estudios especificados.';
+                ol.appendChild(li);
+            } else {
+                estudiosArr.forEach(function(e) {
+                    var liE = document.createElement('li');
+                    liE.textContent = e;
+                    ol.appendChild(liE);
+                });
+            }
+        }
+    }
+
+    // Limpiar query-params de la barra de direcciones (popup queda limpio)
+    try { history.replaceState({}, '', window.location.pathname); } catch (e) {}
+
+    // Ack real de esta ventana: la carga de datos de la orden. Éxito → puebla
+    // el documento y notifica (toast queda por encima del overlay, z-index
+    // corregido en app.js). Fallo → cierra el overlay en la ventana padre y
+    // solo deja el toast de error (no tiene caso mostrar un documento vacío).
+    function cerrarConError(mensaje) {
+        notificarAck(mensaje || 'No se pudo cargar la solicitud.', 'error');
+        try {
+            if (window.parent && window.parent !== window) {
+                var overlay = window.parent.document.getElementById('sol-overlay');
+                if (overlay) { overlay.remove(); return; }
+            }
+        } catch (e) {}
+        // Fallback (ventana standalone sin overlay padre): mostrar el error en el propio documento.
+        mostrarError(mensaje);
+    }
+
+    if (!id) {
+        cerrarConError('Folio no especificado.');
+    } else {
+        fetch('/laesh/' + portal + '/api/orden?folio=' + encodeURIComponent(id), { credentials: 'same-origin' })
+            .then(function(res) { return res.json(); })
+            .then(function(data) {
+                if (data && data.success && data.orden) {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Focusing on the creation of the second sheet when the study array exceeds 14 elements. The first 14 studies are displayed on the first sheet within a specific list. When the array has more than 14 elements, the first sheet's subtitle indicates a multi-page document (e.g., "Page 1 of 2").
+
+
+A new element with ID `doc-page-2` will be created or updated within the `doc-pages-wrapper`, structuring the second page. This new page replicates the header, title and subtitle, and reference info-box from the first page, indicating a continuation.  The section of studies will include "Estudios Solicitados (Continuación)" to signify that this page presents the remaining studies.
+
+
+The second page, `doc-page-2`, needs to be populated with the remaining studies starting from the 15th element. The "Estudios Solicitados (Continuación)" section is being added to distinguish this continuation from the first page's list. I am replicating the doctor's signature and the footer information on the new page.
+
+
+The logic now considers the case where the study array's length is less than or equal to fourteen. If this occurs, the second page element is removed, if present. The original subtitle is restored on the first page, indicating a single-page document.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `solicitud-dac.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 3.053928351s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L249-376)</summary>
+
+**Path:** `Unknown file`
+
+```
+                    cerrarConError('La solicitud ' + id + ' se creó correctamente, pero no se pudo cargar la vista de impresión por un error de conexión. Búscala en la tabla para reimprimirla.');
+                } else {
+                    cerrarConError('Error de conexión al cargar la solicitud ' + id + '.');
+                }
+            });
+    }
+
+    // Auto-ajustar ventana si se abre como popup
+    function ajustarVentana() {
+        try {
+            var docH = document.documentElement.scrollHeight;
+            var chrome = window.outerHeight - window.innerHeight;
+            window.resizeTo(window.outerWidth, docH + chrome + 8);
+        } catch (e) {}
+    }
+    window.addEventListener('load', function() {
+        ajustarVentana();
+        setTimeout(ajustarVentana, 300);
+    });
+})();
+
+// Sistema Toast compatible (local en iframe o delegable al portal padre)
+function notificarAck(mensaje, tipo) {
+    tipo = tipo || 'success';
+    // 1. Si existe showToast en el parent (portal médico / recepción), usarlo
+    try {
+        if (window.parent && window.parent !== window && typeof window.parent.showToast === 'function') {
+            window.parent.showToast(mensaje, tipo);
+            return;
+        }
+    } catch(e) {}
+
+    // 2. Si no o en standalone popup, mostrar toast local
+    var container = document.getElementById('toast-container');
+    if (!container) {
+        container = document.createElement('div');
+        container.id = 'toast-container';
+        container.setAttribute('aria-live', 'polite');
+        container.setAttribute('aria-atomic', 'true');
+        document.body.appendChild(container);
+    }
+
+    var toast = document.createElement('div');
+    toast.className = 'laesh-toast laesh-toast-' + tipo;
+    toast.style.position = 'relative';
+    toast.style.paddingRight = '36px';
+
+    var msgSpan = document.createElement('span');
+    msgSpan.textContent = mensaje;
+    toast.appendChild(msgSpan);
+
+    var closeTimer;
+    var remove = function() {
+        clearTimeout(closeTimer);
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(10px)';
+        toast.addEventListener('transitionend', function() {
+            if (toast.parentNode) toast.parentNode.removeChild(toast);
+        });
+    };
+
+    var btnClose = document.createElement('button');
+    btnClose.type = 'button';
+    btnClose.setAttribute('aria-label', 'Cerrar notificación');
+    btnClose.textContent = '×';
+    Object.assign(btnClose.style, {
+        position: 'absolute',
+        top: '4px',
+        right: '8px',
+        background: 'transparent',
+        border: 'none',
+        color: 'inherit',
+        fontSize: '1.1rem',
+        lineHeight: '1',
+        cursor: 'pointer',
+        opacity: '0.8',
+        padding: '4px'
+    });
+    btnClose.addEventListener('click', remove);
+    toast.appendChild(btnClose);
+
+    container.appendChild(toast);
+
+    requestAnimationFrame(function() {
+        toast.style.opacity = '1';
+        toast.style.transform = 'translateY(0)';
+    });
+
+    // Cierre automático a 1 minuto — el usuario también puede cerrarlo con la X
+    closeTimer = setTimeout(remove, 60000);
+}
+
+/* U-01: Botones de acción del toolbar — sin onclick inline */
+document.addEventListener('DOMContentLoaded', function() {
+    var btnPrint = document.getElementById('btn-dac-print');
+    var btnClose = document.getElementById('btn-dac-close');
+
+    if (btnPrint) {
+        btnPrint.addEventListener('click', function() {
+            // El ack de "solicitud creada con éxito" ya se notificó al cargar los
+            // datos (ver arriba) — el navegador no expone si el usuario completa
+            // o cancela el diálogo de impresión, así que no hay un ack real que
+            // reportar aquí. Solo se avisa si algo truena ANTES de abrir el diálogo.
+            try {
+                window.print();
+            } catch (err) {
+                console.error('Error al imprimir orden:', err);
+                notificarAck('⚠️ Error al procesar la solicitud para impresión.', 'error');
+            }
+        });
+    }
+
+    if (btnClose) {
+        btnClose.addEventListener('click', function() {
+            /* Si estamos dentro de un overlay iframe → cerrar el overlay en la ventana padre */
+            if (window.parent !== window) {
+                try {
+                    var overlay = window.parent.document.getElementById('sol-overlay');
+                    if (overlay) { overlay.remove(); return; }
+                } catch(e) {}
+            }
+            /* Fallback: navegación directa o popup clásico */
+            if (window.history.length > 1) { window.history.back(); }
+            else { window.close(); }
+        });
+    }
+});
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Analyzing the detailed implementation for the specified JavaScript file. Initial focus on how to construct "Hoja 2 de continuación", beginning by examining the `escapeHtml` function definition within the code.
+
+
+Determining how to handle the page split based on the number of studies provided is now the focus. The function divides studies into two arrays, `estudiosHoja1` and `estudiosHoja2`, with a maximum of 14 studies on the first page. Examining the conditional logic for scenarios with and without studies to ensure correct page rendering. The code includes a check for an empty `estudiosArr`. If the array is empty, it needs to render a message and handle the second page element's visibility.
+
+
+Handling the case of only one page is now the priority. If `estudiosHoja2` is empty, the second page element must be removed, and the first page's subtitle needs updating to indicate a single-page document. Conversely, if `estudiosHoja2` has elements, page 1's subtitle will indicate a two-page document, while also ensuring the creation of page 2 if it doesn't exist. Details from the first-page footer, or configuration, will populate the second page's header and content.
+
+
+Focusing on the HTML structure for the second page, specifically the header and data sections. The provided HTML structure will populate the header with the clinic's logo, slogan, and patient information from the first page, even on page two. The core content area, containing the studies, will be rendered dynamically based on the split arrays.
+
+Ensuring the 'Continuación — Página 2 de 2' subtitle correctly reflects the two-page document, which depends on the existence of elements in `estudiosHoja2`. Considering how to handle the edge case of an empty array and correct subtitle adjustment.
+
+
+The HTML structure for the second page will populate the header using data from the configuration and first page. The studies section uses `estudiosHoja2`.  The doctor's signature and the footer information are also incorporated onto page two. The logic must account for an empty `estudiosHoja2`, which will lead to modifying the displayed content. The goal is to accurately show a two-page document, but to remove the second page if the data dictates a single page.
+
+
+The second page footer requires dynamic data population, fetching values for phone, address and city, and rendering them within the designated HTML structure. The `escapeHtml` function will sanitize the content. The logic will need to insert the phone and address data within the footer container on page two only.
+
+
+The scaling of the document wrapper, `#doc-pages-wrapper`, is being investigated, focusing on how CSS `scale()` affects its height and how to prevent unwanted scrollbars. Initially, the browser's visual reduction doesn't alter the layout flow's bounding box; height and margin adjustments become necessary to control the viewport's scrolling. Height is set to the scaled height when the scale factor is less than one to ensure no extra vertical scrolling.
+
+The width scaling for mobile is also being calculated.  Considering a screen of 390px width and an assumed document width of 820px, the scaling factor (`fitScale`) results in a scaled width that fits within the viewport.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 12.497077322s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:30 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `solicitud-dac.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L409-539)</summary>
+
+**Path:** `Unknown file`
+
+```
+            })
+            .catch(function() {
+                if (esNueva) {
+                    cerrarConError('La solicitud ' + id + ' se creó correctamente, pero no se pudo cargar la vista de impresión por un error de conexión. Búscala en la tabla para reimprimirla.');
+                } else {
+                    cerrarConError('Error de conexión al cargar la solicitud ' + id + '.');
+                }
+            });
+    }
+
+    // Auto-ajustar ventana si se abre como popup
+    function ajustarVentana() {
+        try {
+            var docH = document.documentElement.scrollHeight;
+            var chrome = window.outerHeight - window.innerHeight;
+            window.resizeTo(window.outerWidth, docH + chrome + 8);
+        } catch (e) {}
+    }
+    window.addEventListener('load', function() {
+        ajustarVentana();
+        setTimeout(ajustarVentana, 300);
+    });
+})();
+
+// Sistema Toast compatible (local en iframe o delegable al portal padre)
+function notificarAck(mensaje, tipo) {
+    tipo = tipo || 'success';
+    // 1. Si existe showToast en el parent (portal médico / recepción), usarlo
+    try {
+        if (window.parent && window.parent !== window && typeof window.parent.showToast === 'function') {
+            window.parent.showToast(mensaje, tipo);
+            return;
+        }
+    } catch(e) {}
+
+    // 2. Si no o en standalone popup, mostrar toast local
+    var container = document.getElementById('toast-container');
+    if (!container) {
+        container = document.createElement('div');
+        container.id = 'toast-container';
+        container.setAttribute('aria-live', 'polite');
+        container.setAttribute('aria-atomic', 'true');
+        document.body.appendChild(container);
+    }
+
+    var toast = document.createElement('div');
+    toast.className = 'laesh-toast laesh-toast-' + tipo;
+    toast.style.position = 'relative';
+    toast.style.paddingRight = '36px';
+
+    var msgSpan = document.createElement('span');
+    msgSpan.textContent = mensaje;
+    toast.appendChild(msgSpan);
+
+    var closeTimer;
+    var remove = function() {
+        clearTimeout(closeTimer);
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(10px)';
+        toast.addEventListener('transitionend', function() {
+            if (toast.parentNode) toast.parentNode.removeChild(toast);
+        });
+    };
+
+    var btnClose = document.createElement('button');
+    btnClose.type = 'button';
+    btnClose.setAttribute('aria-label', 'Cerrar notificación');
+    btnClose.textContent = '×';
+    Object.assign(btnClose.style, {
+        position: 'absolute',
+        top: '4px',
+        right: '8px',
+        background: 'transparent',
+        border: 'none',
+        color: 'inherit',
+        fontSize: '1.1rem',
+        lineHeight: '1',
+        cursor: 'pointer',
+        opacity: '0.8',
+        padding: '4px'
+    });
+    btnClose.addEventListener('click', remove);
+    toast.appendChild(btnClose);
+
+    container.appendChild(toast);
+
+    requestAnimationFrame(function() {
+        toast.style.opacity = '1';
+        toast.style.transform = 'translateY(0)';
+    });
+
+    // Cierre automático a 1 minuto — el usuario también puede cerrarlo con la X
+    closeTimer = setTimeout(remove, 60000);
+}
+
+/* U-01: Botones de acción del toolbar — sin onclick inline */
+document.addEventListener('DOMContentLoaded', function() {
+    var btnPrint = document.getElementById('btn-dac-print');
+    var btnClose = document.getElementById('btn-dac-close');
+
+    if (btnPrint) {
+        btnPrint.addEventListener('click', function() {
+            // El ack de "solicitud creada con éxito" ya se notificó al cargar los
+            // datos (ver arriba) — el navegador no expone si el usuario completa
+            // o cancela el diálogo de impresión, así que no hay un ack real que
+            // reportar aquí. Solo se avisa si algo truena ANTES de abrir el diálogo.
+            try {
+                window.print();
+            } catch (err) {
+                console.error('Error al imprimir orden:', err);
+                notificarAck('⚠️ Error al procesar la solicitud para impresión.', 'error');
+            }
+        });
+    }
+
+    if (btnClose) {
+        btnClose.addEventListener('click', function() {
+            /* Si estamos dentro de un overlay iframe → cerrar el overlay en la ventana padre */
+            if (window.parent !== window) {
+                try {
+                    var overlay = window.parent.document.getElementById('sol-overlay');
+                    if (overlay) { overlay.remove(); return; }
+                } catch(e) {}
+            }
+            /* Fallback: navegación directa o popup clásico */
+            if (window.history.length > 1) { window.history.back(); }
+            else { window.close(); }
+        });
+    }
+});
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Deciding on the integration point for `ZoomManager` within `solicitud-dac.js`, considering its relationship to the toolbar listeners. Examining `ZoomManager`'s purpose, suspecting it handles zoom functionality and responsive mobile/desktop interactions. Understanding its internal state through declared variables like `currentScale`, `fitScale`, and the elements it interacts with.
+
+
+Examining the code reveals how the zoom and fit-to-width functionality are implemented, calculating a target scale based on viewport width. The `aplicarEscala` function applies the calculated scale and dynamically adjusts the wrapper's height for smooth scrolling at zoom levels less than 1. This suggests responsive layout management based on device screen size and zoom level.
+
+
+The `autoAjustar` function determines initial and responsive scaling based on the viewport's width, applying `fitScale` for smaller screens and a default scale for larger screens. Zoom controls are implemented via event listeners attached to buttons, incrementing or decrementing the scale, or fitting to screen size dynamically. The `resize` event listener ensures the zoom level is recalibrated upon screen resize or rotation.
+
+
+Touch interaction handlers are defined for pinch-to-zoom and double-tap gestures on touch devices, using touchstart, touchmove, and touchend events. Double tap functionality toggles between fit-to-width and original size. Pinch-to-zoom updates the scale dynamically based on the distance between touch points. The viewport, identified by ID or wrapper element, is the target for these gestures.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 5.216011545s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:30 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:30 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:31 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:31 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:31 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:31 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `DB_PASS`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:31 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:31 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:31 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:31 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:31 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:31 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `obtenerOrdenPorFolio`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:32 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:32 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:32 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:32 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:33 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:33 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+The query for order "30" yielded the expected data, including patient information, contact details, age, sex, diagnosis, and requested studies. This confirms the data retrieval function operates correctly for the specified order folio.
+
+
+Verifying the formatting requirements for patient data involves inspecting CSS properties to prevent text clipping and ensure proper layout. Specifically, the agent will check for negative margins, centered justification with no wrapping, and correct text alignment and wrapping.
+
+An automated test will be built to simulate an order with fifty studies, validating pagination and content across multiple pages, including headers, footers, and study lists. This includes checking for correct study numbering, and the presence of all required elements.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.371602552s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:33 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `test_puppeteer.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+const puppeteer = require('puppeteer');
+(async () => {
+    const browser = await puppeteer.launch({headless: true, args: ['--no-sandbox']});
+    const page = await browser.newPage();
+    await page.goto('https://maps.google.com/maps?q=Laboratorio+de+Especialidades+Hematologicas+S.C.,+Huajuapan+de+Leon,+Oaxaca&output=embed', {waitUntil: 'networkidle2'});
+    const content = await page.content();
+    const frame = page.mainFrame();
+    const url = frame.url();
+    console.log("URL:", url);
+    await browser.close();
+})();
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:33 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Cancelled
+**Created:** 30 Sept 2026, 4:33 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `manage_task`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_GENERIC
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:34 pm
+
+---
+
+### CORTEX_STEP_TYPE_SYSTEM_MESSAGE
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:34 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:34 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:34 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `run_all_refresh_search_suites.sh`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+#!/usr/bin/env bash
+# ═══════════════════════════════════════════════════════════════════════
+# run_all_refresh_search_suites.sh — Orquestador Master de 44 Casos
+# Automatización Completa: Refresh, Ciclo de Vida, Filtros, Lupita y SIM2Y
+# ═══════════════════════════════════════════════════════════════════════
+#
+# Uso:
+#   bash tests/run_all_refresh_search_suites.sh
+#   bash tests/run_all_refresh_search_suites.sh --seed
+#   bash tests/run_all_refresh_search_suites.sh --clean
+#   bash tests/run_all_refresh_search_suites.sh --only-frontend
+#   bash tests/run_all_refresh_search_suites.sh --only-backend
+# ═══════════════════════════════════════════════════════════════════════
+
+set -e
+
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$DIR"
+
+# Colores ANSI
+BOLD="\033[1m"
+GREEN="\033[32m"
+RED="\033[31m"
+YELLOW="\033[33m"
+CYAN="\033[36m"
+RESET="\033[0m"
+
+# Flags
+DO_SEED=false
+DO_CLEAN=false
+RUN_FRONTEND=true
+RUN_BACKEND=true
+
+for arg in "$@"; do
+    case "$arg" in
+        --seed)
+            DO_SEED=true
+            ;;
+        --clean)
+            DO_CLEAN=true
+            ;;
+        --only-frontend)
+            RUN_BACKEND=false
+            ;;
+        --only-backend)
+            RUN_FRONTEND=false
+            ;;
+        --help|-h)
+            echo "Uso: bash tests/run_all_refresh_search_suites.sh [OPCIONES]"
+            echo "Opciones:"
+            echo "  --seed           Siembra el dataset SIM2Y (2 años / 1,512 órdenes) antes de la suite"
+            echo "  --clean          Limpia atómicamente el dataset SIM2Y al concluir"
+            echo "  --only-frontend  Ejecuta solo la Suite 1 de Node.js (18 casos)"
+            echo "  --only-backend   Ejecuta solo la Suite 2 de PHP CLI (26 casos)"
+            exit 0
+            ;;
+    esac
+done
+
+export LAESH_DB_PORT="${LAESH_DB_PORT:-6002}"
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The plan is to construct a dedicated, thorough test for the DAC request, focusing on folio 30 and long text formatting within `tests/test_solicitud_dac_format.js`. The test will specifically validate that the `Paciente:` label and its content adhere to the specified style rules, explicitly checking for the absence of undesirable style combinations, and the presence of expected style attributes such as `justify-self`, `text-align`, `white-space`, `flex-wrap`, `min-width`, and `word-break`. This will involve verifying multiple style requirements to ensure correct display.
+
+
+Focus is now on testing for text overflow and multi-page rendering of study lists.  The overflow tests will apply specific CSS protection rules to ensure long text in patient information and other sections doesn't break the layout. Edge cases of 4, 14, and 50 studies will test the multi-page logic, specifically confirming the correct page structure, content, and pagination.  A final edge case tests removal of the second page after a new request with fewer than 50 studies is received.
+
+
+
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 9.066821508s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:35 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:35 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:35 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+All 44 tests have passed successfully. The next step involves a real browser test using a tool to capture visual screenshots. The objective is to verify that text truncation ("Paciente:") is avoided on folio 30, that a second page is generated correctly with 50 studies, and that the layout adapts correctly to mobile screen width. A temporary script will be written to automate the checks.
+
+
+
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.102478500s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:35 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:35 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `manage_task`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_GENERIC
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:36 pm
+
+---
+
+### CORTEX_STEP_TYPE_SYSTEM_MESSAGE
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:36 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `login`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:36 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `test_multiplatform_mobile_suite.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+/**
+ * test_multiplatform_mobile_suite.js
+ * 
+ * Suite Automatizada E2E con Puppeteer-Core + Chrome Real para verificar
+ * la arquitectura de navegación móvil, historial, BFCache, Early Check
+ * y blindaje contra bucles de redirección en LAESH.
+ */
+
+const fs = require('fs');
+const path = require('path');
+const puppeteer = require('/home/carlos/.npm/_npx/668c188756b835f3/node_modules/puppeteer-core');
+
+const BASE_URL = 'https://laesh.mx';
+const CHROME_PATH = '/usr/bin/google-chrome';
+
+const CREDENTIALS = {
+    medico: { tel: '9990000003', pw: '04041982' },
+    recepcion: { tel: '9990000002', pw: '04041981' },
+    admin: { tel: '9990000001', pw: '04041980' }
+};
+
+const results = [];
+
+function recordResult(testName, passed, detail) {
+    results.push({ name: testName, passed, detail });
+    const status = passed ? '✅ PASS' : '❌ FAIL';
+    console.log(`[${status}] ${testName}`);
+    if (detail) console.log(`       -> ${detail}`);
+}
+
+async function clickLoginTrigger(page) {
+    const isMobileNav = await page.evaluate(() => {
+        const hb = document.getElementById('nav-hamburger');
+        return hb && window.getComputedStyle(hb).display !== 'none';
+    });
+    if (isMobileNav) {
+        const isOpen = await page.evaluate(() => {
+            const nav = document.getElementById('nav-links-mobile');
+            return nav && nav.classList.contains('mobile-open');
+        });
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Examined `test_multiplatform_mobile_suite.js` to extract relevant configuration details: the Chrome executable path, user credentials for "recepcion" (reception) and "medico" (doctor), and the local URL for testing. The plan is to update `tests/verify_dac_visual.js` to first authenticate as "recepcion" using the identified credentials, and then navigate to the specified local address.
+
+
+
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.104178333s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:36 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:37 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `input`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** CORTEX_STEP_STATUS_ERROR
+**Created:** 30 Sept 2026, 4:37 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `login.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:37 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `login.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L339-379)</summary>
+
+**Path:** `Unknown file`
+
+```
+        </div>
+        <?php endif; ?>
+
+        <form method="POST"
+              action="/laesh/login/login.php"
+              autocomplete="off" novalidate>
+            <!-- R14.12: CSRF token — primer campo del formulario -->
+            <input type="hidden" name="csrf_token"
+                   value="<?= htmlspecialchars($_SESSION['csrf_token'], ENT_QUOTES, 'UTF-8') ?>">
+            <input type="hidden" name="portal"
+                   value="<?= htmlspecialchars($portal, ENT_QUOTES, 'UTF-8') ?>">
+
+            <div class="login-field">
+                <label for="telefono">Número de Teléfono (10 dígitos)</label>
+                <input type="tel" id="telefono" name="telefono"
+                       maxlength="10" pattern="[0-9]{10}" inputmode="numeric"
+                       autocomplete="off" required placeholder="9531234567"
+                       value="<?= htmlspecialchars($_POST['telefono'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
+            </div>
+
+            <div class="login-field">
+                <label for="password">Contraseña</label>
+                <div class="login-pw-wrap">
+                    <input type="password" id="password" name="password"
+                           autocomplete="off" required placeholder="••••••••">
+                    <button type="button" id="btn-login-eye" class="login-btn-eye" title="Ver/Ocultar contraseña" aria-label="Ver/Ocultar contraseña">
+                        <svg id="login-eye-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </button>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-login">Ingresar</button>
+        </form>
+
+        <a href="/laesh/" target="_blank" rel="noopener" class="login-back">
+            ← Volver al sitio web
+        </a>
+    </div>
+</div>
+<script>
+(function() {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:37 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Cancelled
+**Created:** 30 Sept 2026, 4:37 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `manage_task`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_GENERIC
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:37 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `manage_task`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_GENERIC
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:37 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `manage_task`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_GENERIC
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:37 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+The mobile view testing begins with setting the viewport to an iPhone 13's dimensions, reloading the page, and waiting for the DOM element with the ID 'dac-paciente' to be present. This suggests the test is trying to verify the visual presentation or behavior of that specific element in a mobile context. The `networkidle2` parameter indicates a wait until network activity is minimal before asserting the element's existence.
+
+
+
+
+### Actions
+
+**Tool:** `manage_task`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.093023451s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_GENERIC
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:38 pm
+
+---
+
+### CORTEX_STEP_TYPE_SYSTEM_MESSAGE
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:38 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:38 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:38 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+Analyzing the extracted data, the "Paciente" information is correctly extracted, specifically the patient's name. The `isClippedLeft: false` indicates the text isn't truncated. The `offsetFromDocBorder` value seems reasonable, confirming the data extraction's accuracy and that the extraction isn't missing data.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.095820549s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:38 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 30 Sept 2026, 4:38 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
 - **Model:** Gemini 3.8 Flash (High)
 </details>
 
