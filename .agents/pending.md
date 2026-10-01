@@ -9,6 +9,16 @@
 
 ## 🔵 EN ESPERA DE DEFINICIÓN DE NEGOCIO
 
+### P-LAESH-AUDITORIA-20261001 🔵 [LAESH] Pendientes abiertos tras la auditoría de código muerto (2026-10-01)
+**Estado**: Registrado 2026-10-01 (Claude Code). Detalle en `www/docs-dev/runbook-pendientes-laesh.md`.
+- PEN-LAESH-08 ✅ vistas retiradas con m008 (KVM2 + local).
+- PEN-LAESH-09 🔵 decidir `cat_categorias` (FK `cat_estudios.categoria_id`, R14.2).
+- PEN-LAESH-11 🔵 CSS del hero sin uso vs. Regla 25 (`.hero-glass-card`) — decidir antes de tocar el hero.
+- PEN-LAESH-12 🟡 validar suites WS contra producción (crean órdenes de prueba; requiere autorización).
+- PEN-LAESH-13 🔴 `keyssh.sh` en historial git — posible contraseña de `sysadmin`.
+- PEN-LAESH-14 🟢 mover tests de Voice-KDS fuera de `www/tests/`.
+- PEN-LAESH-15 🟡 commit de lo trabajado 2026-09-30/10-01 (esperar instrucción).
+
 ### P-LAESH-CATALOGO-NOMBRES-SUCIOS-01 🔵 [LAESH Bloc Digital] 3 estudios del catálogo con datos sucios provenientes del Excel maestro — usuario corregirá desde CMS
 **Estado**: Investigado y confirmado (2026-09-21, Claude Code). **No tocado en BD** — el usuario decidió corregirlo él mismo desde el panel admrc en vez de que se corrija por script.
 
