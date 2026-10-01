@@ -7,9 +7,9 @@
 | **Trajectory ID** | `6e357b7e-c91b-4705-961b-75dfa5c7e94c` |
 | **Cascade ID** | `707376e8-5501-46d1-bf86-a189f5b11f9d` |
 | **Type** | Agent Conversation |
-| **Total Steps** | 13313 |
+| **Total Steps** | 13730 |
 | **Started** | 21 Sept 2026, 3:55 pm |
-| **Completed** | 1 Oct 2026, 10:07 am |
+| **Completed** | 1 Oct 2026, 11:25 am |
 
 ---
 
@@ -19053,331 +19053,990 @@
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Oct 2026, 9:54 am
 
 ---
 
-## Agent Response
+### Code Edit
 
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
+**Status:** Reset
+**Created:** 1 Oct 2026, 9:55 am
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Oct 2026, 9:55 am
 
 ---
 
-## Agent Response
+### Local File Search
 
-### Actions
-
-**Tool:** `view_file`
-**File:** `medicos.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
+**Status:** Reset
+**Created:** 1 Oct 2026, 9:55 am
 
 ---
 
-<details>
-<summary>File: `Unknown file` (L374-384)</summary>
+### Local File Search
 
-**Path:** `Unknown file`
-
-```
-                                        <button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;"><span class="pag-label-text">Siguiente</span> ›</button>
-                                    <?php endif; ?>
-                                </div>
-                            </div>
-                            <div id="ordenes-hoy-md-search-wrap" style="display: flex; gap: 0.5rem; align-items: center;">
-                                <input type="text" id="input-buscar-orden-hoy-md" name="q" class="form-input form-input--bg" autocomplete="off" spellcheck="false" placeholder="🔍 Buscar por folio, paciente..." style="width: 220px;" hx-get="/laesh/md/tabla-ordenes" hx-target="#tabla-medico" hx-swap="outerHTML" hx-trigger="keyup changed delay:250ms, search">
-                            </div>
-                        </div>
-                        <div class="card mt-0" style="padding: 0; overflow: hidden; border: 1px solid var(--border); border-radius: 8px;">
-                            <div class="table-responsive" style="max-height: calc(100vh - 250px); overflow-y: auto; overflow-x: auto; -webkit-overflow-scrolling: touch; width: 100%;">
-                                <table class="table" id="tabla-medico" hx-get="/laesh/md/tabla-ordenes" hx-target="#tabla-medico" hx-swap="outerHTML" hx-trigger="refresh, ordenCreada from:body, ordenActualizada from:body" style="margin-bottom: 0; width: 100%; min-width: <?= mdOrdenesTablaMinWidth() ?>px; table-layout: fixed; border-collapse: collapse;">
-```
-
-</details>
+**Status:** Reset
+**Created:** 1 Oct 2026, 9:55 am
 
 ---
 
-## Agent Response
+### Local File Search
 
-### Actions
-
-**Tool:** `view_file`
-**File:** `medicos.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
+**Status:** Reset
+**Created:** 1 Oct 2026, 9:55 am
 
 ---
 
-<details>
-<summary>File: `Unknown file` (L469-479)</summary>
+### Local File Search
 
-**Path:** `Unknown file`
-
-```
-                        </div>
-
-                        <!-- Separador Vertical -->
-                        <div class="toolbar-separator" aria-hidden="true"></div>
-
-                        <!-- Buscador con ancho confortable -->
-                        <div id="ordenes-anteriores-md-search-wrap" style="display: flex; gap: 0.5rem; align-items: center;">
-                            <input type="text" id="input-buscar-orden-anteriores-md" name="q" class="form-input form-input--bg search-input-anteriores" autocomplete="off" spellcheck="false" placeholder="🔍 Buscar por folio, paciente..." hx-get="/laesh/md/tabla-ordenes-anteriores" hx-target="#tabla-historial-completo" hx-swap="outerHTML" hx-include="#input-buscar-orden-anteriores-md, #select-periodo-anteriores-md, #fecha-inicio-anteriores-md, #fecha-fin-anteriores-md" hx-trigger="keyup changed delay:250ms, search">
-                        </div>
-                    </div>
-                </div>
-```
-
-</details>
+**Status:** Reset
+**Created:** 1 Oct 2026, 9:55 am
 
 ---
 
-## Agent Response
+### Local File Search
 
-### Actions
-
-**Tool:** `view_file`
-**File:** `medicos.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L514-524)</summary>
-
-**Path:** `Unknown file`
-
-```
-                            </div>
-
-                            <!-- Buscador de Pacientes -->
-                            <div style="display: flex; gap: 0.5rem; align-items: center; position: relative; flex: 1 1 240px; max-width: 380px;">
-                                <input type="text" id="input-buscar-paciente-medico" name="q" class="form-input form-input--bg" autocomplete="off" spellcheck="false" placeholder="🔍 Buscar por paciente, celular, diagnóstico..." style="width: 100%; font-size: 0.88rem;" hx-get="/laesh/md/tabla-pacientes" hx-target="#tabla-pacientes-medico" hx-swap="outerHTML" hx-trigger="keyup changed delay:250ms, search">
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Grilla Completa de Pacientes (Mis Pacientes) -->
-                    <div class="card" style="padding: 0; overflow: hidden; border: 1px solid var(--border); border-radius: 8px;">
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `multi_replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
+**Status:** Reset
+**Created:** 1 Oct 2026, 9:56 am
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
-**Created:** 1 Oct 2026, 9:55 am
+**Status:** Reset
+**Created:** 1 Oct 2026, 9:56 am
 
 ---
 
-## Agent Response
+### Code Edit
 
-### Actions
-
-**Tool:** `view_file`
-**File:** `labadmin.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
+**Status:** Reset
+**Created:** 1 Oct 2026, 9:56 am
 
 ---
 
-<details>
-<summary>File: `Unknown file` (L1699-1734)</summary>
+### Code Edit
 
-**Path:** `Unknown file`
-
-```
-        }
-    }
-
-    var lugarSelect = document.getElementById('pm-lugar');
-    if (lugarSelect) {
-        if (item.lugar_trabajo_id) {
-            lugarSelect.value = item.lugar_trabajo_id;
-        } else if (item.lugar_trabajo_nombre) {
-            for (var j = 0; j < lugarSelect.options.length; j++) {
-                if (lugarSelect.options[j].text.trim() === item.lugar_trabajo_nombre.trim()) {
-                    lugarSelect.selectedIndex = j;
-                    break;
-                }
-            }
-        }
-    }
-
-    var title = document.getElementById('modal-medico-title');
-    if (title) title.textContent = 'Editar Perfil Médico';
-
-    var btnSave = document.getElementById('btn-guardar-medico');
-    if (btnSave) btnSave.textContent = 'Actualizar Perfil';
-
-    if (typeof window.abrirModalMedico === 'function') {
-        window.abrirModalMedico();
-    } else {
-        var m = document.getElementById('modal-medico');
-        if (m) m.classList.add('show');
-    }
-}
-window.abrirEditarMedicoModal = abrirEditarMedicoModal;
-
-function renderMedicosPagination(totalPages, currentPage) {
-    var container = document.getElementById('flat-medicos-pagination');
-    if (!container) return;
-
-```
-
-</details>
+**Status:** Reset
+**Created:** 1 Oct 2026, 9:56 am
 
 ---
 
-## Agent Response
+### Code Edit
 
-### Actions
+**Status:** Reset
+**Created:** 1 Oct 2026, 9:57 am
 
-**Tool:** `grep_search`
-**Query:** `/api/ordenes/buscar`
+---
 
-<details>
-<summary>Metadata</summary>
+### Terminal Command Execution
 
-- **Model:** Gemini 3.8 Flash (High)
-</details>
+**Status:** Reset
+**Created:** 1 Oct 2026, 9:57 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:00 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:00 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:02 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:02 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:02 am
+
+---
+
+### CORTEX_STEP_TYPE_GENERIC
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:02 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:02 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:03 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:03 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:03 am
+
+---
+
+### CORTEX_STEP_TYPE_GENERIC
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:03 am
+
+---
+
+### CORTEX_STEP_TYPE_SYSTEM_MESSAGE
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:03 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:03 am
+
+---
+
+### CORTEX_STEP_TYPE_GENERIC
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:05 am
+
+---
+
+### CORTEX_STEP_TYPE_GENERIC
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:05 am
+
+---
+
+### CORTEX_STEP_TYPE_GENERIC
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:05 am
+
+---
+
+### CORTEX_STEP_TYPE_SYSTEM_MESSAGE
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:05 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:05 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:05 am
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
-**Created:** 1 Oct 2026, 9:55 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `ordenes/buscar`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:06 am
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
-**Created:** 1 Oct 2026, 9:55 am
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:06 am
 
 ---
 
-## Agent Response
+### Terminal Command Execution
 
-### Actions
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:06 am
 
-**Tool:** `grep_search`
-**Query:** `api/ordenes`
+---
 
-<details>
-<summary>Metadata</summary>
+### Terminal Command Execution
 
-- **Model:** Gemini 3.8 Flash (High)
-</details>
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:07 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:27 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:27 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:27 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:27 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:27 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:28 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:28 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:28 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:28 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:28 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:28 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:28 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:28 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:29 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:29 am
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
-**Created:** 1 Oct 2026, 9:55 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `buscarOrdenes`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:29 am
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
-**Created:** 1 Oct 2026, 9:55 am
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:29 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:29 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:29 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:31 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:31 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:31 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:31 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:31 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:31 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:31 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:32 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:33 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:33 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:33 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:34 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:34 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:34 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:34 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:35 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:35 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:35 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:36 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:36 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:36 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:36 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:37 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:37 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:37 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:37 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:37 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:37 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:38 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:38 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:38 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:38 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:38 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:38 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:38 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:38 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:38 am
+
+---
+
+### CORTEX_STEP_TYPE_GENERIC
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:39 am
+
+---
+
+### CORTEX_STEP_TYPE_GENERIC
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:39 am
+
+---
+
+### CORTEX_STEP_TYPE_SYSTEM_MESSAGE
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:39 am
+
+---
+
+### CORTEX_STEP_TYPE_GENERIC
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:39 am
+
+---
+
+### CORTEX_STEP_TYPE_GENERIC
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:39 am
+
+---
+
+### CORTEX_STEP_TYPE_GENERIC
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:39 am
+
+---
+
+### CORTEX_STEP_TYPE_SYSTEM_MESSAGE
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:39 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:39 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:39 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:39 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:40 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:40 am
+
+---
+
+### CORTEX_STEP_TYPE_GENERIC
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:40 am
+
+---
+
+### CORTEX_STEP_TYPE_SYSTEM_MESSAGE
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:40 am
+
+---
+
+### CORTEX_STEP_TYPE_GENERIC
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:40 am
+
+---
+
+### CORTEX_STEP_TYPE_SYSTEM_MESSAGE
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:40 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:40 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:41 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:47 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:47 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:47 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:48 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:48 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:49 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:49 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:49 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:49 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:49 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:49 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:49 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:50 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:50 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:50 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:50 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:51 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:51 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:51 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:51 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:51 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 10:51 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 11:04 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 11:04 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 11:05 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 11:05 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 11:05 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 11:05 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 11:06 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 11:06 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 1 Oct 2026, 11:07 am
 
 ---
 
@@ -19397,32 +20056,45 @@ function renderMedicosPagination(totalPages, currentPage) {
 ---
 
 <details>
-<summary>File: `Unknown file` (L2079-2099)</summary>
+<summary>File: `Unknown file` (L711-744)</summary>
 
 **Path:** `Unknown file`
 
 ```
-    Flight::json(['success' => true]);
-});
+        }
 
-// ── GET /api/buscar-ordenes — Búsqueda en vivo de órdenes y pacientes (MariaDB SSOT) ──
-Flight::route('GET /api/buscar-ordenes', function () {
-    Flight::rbac()->requirePermission('gestionar_ordenes');
-    $q = trim($_GET['q'] ?? $_GET['term'] ?? '');
-    $ordenes = \RC\Negocio\Ordenes::buscarOrdenes($q);
-    Flight::json(['success' => true, 'ordenes' => $ordenes]);
-});
+        $persisted = \Common\Notifier::persist($db, 'orden_actualizada', [
+            'folio'          => $resultado['folio'] ?? '',
+            'orden_id'       => $ordenId,
+            'medico_id'      => $userId,
+            'estado'         => 5,
+            'titulo'         => 'Solicitud Cancelada · #' . ($resultado['folio'] ?? ''),
+            'mensaje'        => 'Cancelada por el médico.' . ($obsGuardar !== '' ? ' Motivo: ' . $obsGuardar : ''),
+            'actor_user_id'  => $userId,
+        ]);
 
-// ── POST /orden/subir-pdf — Carga física de archivo PDF de resultados ──────────────
-// H2 (auditoría 2026-09-20): antes sin validación CSRF.
-Flight::route('POST /orden/subir-pdf', function () {
-    Flight::rbac()->requirePermission('gestionar_ordenes');
-
-    $sendError = function(string $msg) {
+        $db->commit();
+    } catch (\Throwable $e) {
+        if ($db->inTransaction()) {
+            $db->rollBack();
+        }
+        \Common\DB::logFallback('ERROR', 'Fallo en POST /orden/cancelar (médico)', $e->getMessage());
         header('HX-Trigger: ' . json_encode([
-            'mostrarToast' => ['mensaje' => $msg, 'tipo' => 'error']
+            'mostrarToast' => ['mensaje' => 'Error al cancelar la solicitud.', 'tipo' => 'error']
         ]));
-        \Common\Response::htmxError($msg);
+        \Common\Response::htmxError('Error al cancelar la solicitud.');
+    }
+
+    \Common\Notifier::push($persisted, 'orden_actualizada', [
+        'folio'     => $resultado['folio'] ?? '',
+        'orden_id'  => $ordenId,
+        'medico_id' => $userId,
+        'estado'    => 5,
+        'titulo'    => 'Solicitud Cancelada · #' . ($resultado['folio'] ?? ''),
+        'mensaje'   => 'Cancelada por el médico.' . ($observacion !== '' ? ' Motivo: ' . $observacion : ''),
+    ]);
+
+    $toastMsg = "✓ Solicitud {$resultado['folio']} cancelada exitosamente.";
 ```
 
 </details>
@@ -19433,8 +20105,381 @@ Flight::route('POST /orden/subir-pdf', function () {
 
 ### Actions
 
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 1 Oct 2026, 11:07 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 1 Oct 2026, 11:07 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 1 Oct 2026, 11:07 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 1 Oct 2026, 11:07 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 1 Oct 2026, 11:08 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 1 Oct 2026, 11:08 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 1 Oct 2026, 11:08 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 1 Oct 2026, 11:08 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 1 Oct 2026, 11:08 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 1 Oct 2026, 11:08 am
+
+---
+
+## Agent Response
+
+### Thinking
+
+The folio #23 information has been updated. The patient's initial presentation in reception is replaced with "Jorge luis del Dr(a). Hedilberto Reyes Venegas" in both the "Paciente en Atención" and the "Resultado Parcial" entries. The patient's name has been successfully extracted and recorded.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.091165427s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 1 Oct 2026, 11:09 am
+
+---
+
+## Agent Response
+
+### Thinking
+
+Analyzing patient data records. There are entries indicating patients "pepe lopez," "Jorge luis," and "Juan perez sarmiento" are under the care of Dr. Hedilberto Reyes Venegas. Some records show "Resultado Parcial" (Partial Result) associated with "Jorge luis" and "Juan perez sarmiento," with a PDF available for Jorge Luis.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.168748431s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 1 Oct 2026, 11:09 am
+
+---
+
+## Agent Response
+
+### Thinking
+
+Observed three entries. ID 179 indicates a delivered request, while IDs 139 and 137 show canceled requests with specific patient and doctor information. These cancellations include an explanation, suggesting the requests did not proceed.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.094633821s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 1 Oct 2026, 11:09 am
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+/**
+ * rc/negocio/Ordenes.php — Capa de Negocio para Órdenes y Pacientes (Recepción)
+ *
+ * Maneja la lógica de dominio, persistencia PDO, ejecución de Stored Procedures
+ * (laesh_db.CrearOrdenLaboratorio), secuencias (folios_control), auditoría y logs.
+ */
+
+namespace RC\Negocio;
+
+use Common\DB;
+use Common\Logger;
+use PDO;
+use Throwable;
+
+class Ordenes {
+
+    const BUSQ_TEXT_COLS_RC = ['paciente_nombre', 'medico_nombre_completo', 'paciente_telefono', 'diagnostico', 'otros_estudios', 'estudios_json', 'folio_extraido'];
+
+    /**
+     * Busca un paciente existente por teléfono o nombre, o crea uno nuevo en laesh_db.pacientes
+     */
+    public static function buscarOCrearPaciente(array $datos): int {
+        $db = DB::connect();
+        
+        $nombreCompleto = trim($datos['paciente_nombre'] ?? $datos['paciente'] ?? '');
+        $apellidoPaterno = trim($datos['apellido_paterno'] ?? '');
+        if (!empty($apellidoPaterno) && strpos($nombreCompleto, $apellidoPaterno) === false) {
+            $nombreCompleto .= ' ' . $apellidoPaterno;
+        }
+        $telefono = trim($datos['celular'] ?? $datos['telefono'] ?? '');
+        $sexo = ($datos['sexo'] ?? 'H') === 'M' ? 'M' : 'H';
+
+        if (empty($nombreCompleto)) {
+            $nombreCompleto = 'Paciente Sin Nombre';
+        }
+
+        // M3 (auditoría 2026-09-20): sin UNIQUE en telefono/nombre_completo (a
+        // propósito — dos pacientes reales distintos pueden compartir teléfono de
+```
+
+</details>
+
+---
+
+## User Request
+
+este cuando ocurre: "Resultado Parcial · #23
+Paciente: Jorge luis del Dr(a). Hedilberto Reyes Venegas — Avance en PDF disponible.
+21:44 · 30/09/2026" ?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `Ordenes.php`
+**Language:** php
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
 **Tool:** `grep_search`
-**Query:** `buscar-ordenes`
+**Query:** `subirResultados`
 
 <details>
 <summary>Metadata</summary>
@@ -19447,7 +20492,29 @@ Flight::route('POST /orden/subir-pdf', function () {
 ### Local File Search
 
 **Status:** Completed
-**Created:** 1 Oct 2026, 9:56 am
+**Created:** 1 Oct 2026, 11:19 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `Resultado Parcial`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 1 Oct 2026, 11:19 am
 
 ---
 
@@ -19456,7 +20523,7 @@ Flight::route('POST /orden/subir-pdf', function () {
 ### Actions
 
 **Tool:** `view_file`
-**File:** `labadmin.js`
+**File:** `Ordenes.php`
 
 <details>
 <summary>Metadata</summary>
@@ -19467,211 +20534,242 @@ Flight::route('POST /orden/subir-pdf', function () {
 ---
 
 <details>
-<summary>File: `Unknown file` (L64-94)</summary>
+<summary>File: `Unknown file` (L959-1079)</summary>
 
 **Path:** `Unknown file`
 
 ```
-            inputBuscador.addEventListener('input', function() {
-                const query = this.value.trim();
-                if (searchTimerAdmin) clearTimeout(searchTimerAdmin);
+    /**
+     * Guarda la metadata del PDF subido para una orden. Si $tipoEntrega es 'completo'
+     * y la orden aún no llegó a "Resultados Listos", transiciona el estado (2/1→3).
+     * Si es 'parcial', la orden se queda en su estado actual — resultados parciales
+     * de laboratorio (P-LAESH-RESULTADOS-PARCIALES-01, 2026-09-23): el laboratorio
+     * entrega los estudios de una orden en días distintos, acumulados en el mismo
+     * PDF, y es Recepción quien decide (radio Parcial/Completado en la UI) cuándo
+     * la orden queda realmente lista.
+     *
+     * H3/H4/H6 (auditoría 2026-09-20): INSERT del PDF + cambio de estado + persist()
+     * de la notificación 'resultado_disponible', todo en una transacción — si algo
+     * falla a medio camino (ej. la transición es inválida porque la orden ya está
+     * Cerrada), no queda un PDF huérfano registrado sin el cambio de estado.
+     * DB::connect() es singleton — cambiarEstado() reusa esta misma conexión/
+     * transacción sin necesidad de pasarla explícitamente.
+     */
+    public static function guardarResultadoPDF(int $ordenId, string $nombreOriginal, string $rutaStorage, int $userId, string $tipoEntrega = 'parcial', ?string $folioExtraido = null): array {
+        $tipoEntrega = ($tipoEntrega === 'completo') ? 'completo' : 'parcial';
+        $db = DB::connect();
+        $db->beginTransaction();
 
-                const isNumeric = /^\d+$/.test(query);
-                // Si está vacío, o si no es numérico y tiene menos de 3 caracteres: esperar
-                if (query.length < 1 || (!isNumeric && query.length < 3)) {
-                    autoBox.style.display = 'none';
-                    autoBox.innerHTML = '';
-                    return;
-                }
+        try {
+            // 1. Insertar en resultados_pdf
+            $stmt = $db->prepare("
+                INSERT INTO resultados_pdf (orden_id, nombre_archivo, ruta_storage, subido_por, tipo_entrega, folio_extraido, creado_en)
+                VALUES (?, ?, ?, ?, ?, ?, NOW())
+            ");
+            $stmt->execute([$ordenId, $nombreOriginal, $rutaStorage, $userId, $tipoEntrega, $folioExtraido]);
 
-                searchTimerAdmin = setTimeout(function() {
-                    fetch('/laesh/rc/api/buscar-ordenes?q=' + encodeURIComponent(query))
-                        .then(res => res.json())
-                        .then(data => {
-                            if (data.success && Array.isArray(data.ordenes) && data.ordenes.length > 0) {
-                                window.__RC_SEARCH_RESULTS__ = {};
-                                const hasMore = data.ordenes.length > 15;
-                                const displayList = data.ordenes.slice(0, 15);
+            // 2. Obtener estado actual y folio de la orden
+            $stmtSt = $db->prepare("SELECT estado_id, folio_unico FROM ordenes WHERE id = ? LIMIT 1");
+            $stmtSt->execute([$ordenId]);
+            $ordRow = $stmtSt->fetch(PDO::FETCH_ASSOC);
 
-                                let itemsHtml = displayList.map(m => {
-                                    // Caché indexado SOLO por folio (único): mezclar claves de orden_id
-                                    // colisionaba — desde id 10, folio = id-1.
-                                    const folVal = m.folio;
-                                    window.__RC_SEARCH_RESULTS__[folVal] = m;
-                                    const estVal = m.estado || 'Emitida';
-                                    const estadoColorMap = {
-                                        1: '#0284c7', // Remitido / Emitida
-                                        2: '#d97706', // En Atención
-                                        3: '#16a34a', // Resultados Listos
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `labadmin.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1024-1049)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-            // sidebar-rail.js emite este evento al expandir → cerrar SFS
-            document.addEventListener('laesh:sidebarExpand', closeSFS);
-
-            let sfsTimerAdmin = null;
-            function renderSFS(query) {
-                sfsRes.innerHTML = '';
-                sfsRes.classList.remove('sfs-r-open');
-                if (query.length < 1) return;
-                if (sfsTimerAdmin) clearTimeout(sfsTimerAdmin);
-
-                sfsTimerAdmin = setTimeout(function() {
-                    fetch('/laesh/rc/api/buscar-ordenes?q=' + encodeURIComponent(query))
-                        .then(res => res.json())
-                        .then(data => {
-                            sfsRes.innerHTML = '';
-                            if (data.success && Array.isArray(data.ordenes) && data.ordenes.length > 0) {
-                                window.__RC_SEARCH_RESULTS__ = window.__RC_SEARCH_RESULTS__ || {};
-                                data.ordenes.forEach(function(m) {
-                                    const folVal = m.folio;
-                                    window.__RC_SEARCH_RESULTS__[folVal] = m;
-                                    const estVal = m.estado || 'Emitida';
-                                    const estadoColorMap = {
-                                        1: '#0284c7', 2: '#d97706', 3: '#16a34a', 4: '#64748b', 5: '#dc2626'
-                                    };
-                                    const estColor = estadoColorMap[m.estado_id] || '#0284c7';
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `medicos.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L534-564)</summary>
-
-**Path:** `Unknown file`
-
-```
-                const autocompleteList = document.getElementById('autocomplete-list-medico');
-
-                if (searchTimerMedico) clearTimeout(searchTimerMedico);
-
-                const isNumeric = /^\d+$/.test(query);
-                if (query.length < 1 || (!isNumeric && query.length < 3)) {
-                    if (autocompleteList) {
-                        autocompleteList.style.display = 'none';
-                        autocompleteList.innerHTML = '';
-                    }
-                    return;
-                }
-
-                searchTimerMedico = setTimeout(function() {
-                    fetch('/laesh/md/api/buscar-ordenes?q=' + encodeURIComponent(query))
-                        .then(res => res.json())
-                        .then(data => {
-                            if (!autocompleteList) return;
-                            if (data.success && Array.isArray(data.ordenes) && data.ordenes.length > 0) {
-                                window.__MD_SEARCH_RESULTS__ = {};
-                                const hasMore = data.ordenes.length > 15;
-                                const displayList = data.ordenes.slice(0, 15);
-
-                                let itemsHtml = displayList.map(m => {
-                                    // Caché indexado SOLO por folio (único): mezclar claves de orden_id
-                                    // colisionaba — desde id 10, folio = id-1.
-                                    const folVal  = m.folio;
-                                    window.__MD_SEARCH_RESULTS__[folVal] = m;
-                                    const nameVal = m.paciente || '';
-                                    const estVal  = m.estado || 'Emitida';
-                                    const estadoColorMap = {
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `medicos.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L924-954)</summary>
-
-**Path:** `Unknown file`
-
-```
-                if (sfsRes) { sfsRes.classList.remove('sfs-r-open'); sfsRes.innerHTML = ''; }
-                if (sfsInput) sfsInput.value = '';
+            if (!$ordRow) {
+                $db->rollBack();
+                return ['success' => false, 'error' => 'Solicitud no encontrada.'];
             }
 
-            // sidebar-rail.js emite este evento al expandir → cerrar SFS
-            document.addEventListener('laesh:sidebarExpand', closeSFS);
+            $currEstado = (int)$ordRow['estado_id'];
+            $folio      = $ordRow['folio_unico'];
 
-            let sfsTimerMedico = null;
-            function renderSFS(query) {
-                sfsRes.innerHTML = '';
-                sfsRes.classList.remove('sfs-r-open');
-                if (query.length < 1) return;
-                if (sfsTimerMedico) clearTimeout(sfsTimerMedico);
+            // 3. Transicionar a "Resultados Listos" SOLO si Recepción marcó "Completado"
+            //    y la orden aún no había llegado ahí. Un resultado "parcial" nunca
+            //    transiciona — la orden se queda en su estado actual (normalmente 2,
+            //    En Atención) mientras el laboratorio sigue entregando estudios.
+            if ($tipoEntrega === 'completo' && $currEstado < 3) {
+                $resultado = self::cambiarEstado($ordenId, 3, $userId, "Resultados PDF completados: {$nombreOriginal}");
+                if (!$resultado['success']) {
+                    $db->rollBack();
+                    return $resultado;
+                }
+            } elseif ($currEstado < 3) {
+                // Parcial mientras la orden sigue en curso (normalmente estado 2): no hay
+                // transición de estado que registrar vía CambiarEstadoOrden (el SP rechaza
+                // N→N — confirmado en su whitelist de transiciones), así que se deja
+                // trazabilidad manual igual que el camino de re-subida post-completado
+                // de abajo. fecha_resultado NO se toca aquí — solo la transición a 3
+                // marca "resultado disponible" en el sentido que el resto del sistema
+                // ya asume (reportes de tiempos de entrega, etc.).
+                $histStmt = $db->prepare("
+                    INSERT INTO historial_estados_orden (orden_id, estado_anterior_id, estado_nuevo_id, cambiado_por_user_id, observacion)
+                    VALUES (?, ?, ?, ?, ?)
+                ");
+                $histStmt->execute([$ordenId, $currEstado, $currEstado, $userId, "Resultado parcial adjuntado: {$nombreOriginal}"]);
+            } else {
+                // Si ya está en estado 3 (Resultados Listos) o 4 (Cerrada), actualizamos fecha_resultado
+                // y registramos la trazabilidad de re-subida sin forzar una auto-transición 3->3 en el SP.
+                $updStmt = $db->prepare("UPDATE ordenes SET fecha_resultado = NOW() WHERE id = ?");
+                $updStmt->execute([$ordenId]);
 
-                sfsTimerMedico = setTimeout(function() {
-                    fetch('/laesh/md/api/buscar-ordenes?q=' + encodeURIComponent(query))
-                        .then(res => res.json())
-                        .then(data => {
-                            sfsRes.innerHTML = '';
-                            if (data.success && Array.isArray(data.ordenes) && data.ordenes.length > 0) {
-                                window.__MD_SEARCH_RESULTS__ = window.__MD_SEARCH_RESULTS__ || {};
-                                data.ordenes.forEach(function(m) {
-                                    const folVal  = m.folio;
-                                    window.__MD_SEARCH_RESULTS__[folVal] = m;
-                                    const nameVal = m.paciente || '';
-                                    const estVal  = m.estado || 'Emitida';
-                                    const estadoColorMap = {
-                                        1: '#0284c7', 2: '#d97706', 3: '#16a34a', 4: '#64748b', 5: '#dc2626'
-                                    };
-                                    const estColor = estadoColorMap[m.estado_id] || '#0284c7';
-                                    var div = document.createElement('div');
+                $histStmt = $db->prepare("
+                    INSERT INTO historial_estados_orden (orden_id, estado_anterior_id, estado_nuevo_id, cambiado_por_user_id, observacion)
+                    VALUES (?, ?, ?, ?, ?)
+                ");
+                $histStmt->execute([$ordenId, $currEstado, $currEstado, $userId, "Actualización de PDF de resultados: {$nombreOriginal}"]);
+            }
+
+            $infoRow = $db->prepare("
+                SELECT o.medico_id, o.paciente_id,
+                       p.nombre_completo AS paciente_nombre,
+                       COALESCE(pm.nombre_completo, NULLIF(CONCAT(IFNULL(em.nombre,''), ' ', IFNULL(em.apellidos,'')), ' '), 'Médico') AS medico_nombre
+                FROM ordenes o
+                LEFT JOIN pacientes p ON p.id = o.paciente_id
+                LEFT JOIN users u ON u.id = o.medico_id
+                LEFT JOIN perfiles_medicos pm ON pm.user_id = u.id
+                LEFT JOIN empleados em ON em.user_id = u.id
+                WHERE o.id = ? LIMIT 1
+            ");
+            $infoRow->execute([$ordenId]);
+            $ordInfo = $infoRow->fetch(\PDO::FETCH_ASSOC) ?: [];
+            $medicoId = (int)($ordInfo['medico_id'] ?? 0);
+            $pacienteNombre = trim($ordInfo['paciente_nombre'] ?? 'Paciente');
+            $medicoNombre = trim((string)($ordInfo['medico_nombre'] ?? 'Médico'));
+            if ($medicoNombre !== '' && $medicoNombre !== 'Médico') {
+                if (!str_starts_with($medicoNombre, 'Dr(a).')) {
+                    $medicoNombre = 'Dr(a). ' . preg_replace('/^(Dr|Dra)\.?\s*/i', '', $medicoNombre);
+                }
+            } else {
+                $medicoNombre = 'Dr(a).';
+            }
+            $pacienteDelMedico = "Paciente: {$pacienteNombre} del {$medicoNombre}";
+
+            $tituloNotif = ($tipoEntrega === 'parcial')
+                ? 'Resultado Parcial · #' . $folio
+                : 'Resultados Listos · #' . $folio;
+            $mensajeNotif = ($tipoEntrega === 'parcial')
+                ? $pacienteDelMedico . ' — Avance en PDF disponible.'
+                : $pacienteDelMedico . ' — Concluido, PDF disponible.';
+
+            // 2026-09-25: se agrega 'estado' al payload (mismo nombre de campo
+            // que ya usa 'orden_actualizada') — le permite al cliente decidir
+            // de forma síncrona, sin sondear la red, si el fallback de
+            // navegación (ws-client.js::navegarYResaltarOrden) debe abrir el
+            // PDF de resultados o la solicitud digital: estado>=3 implica que
+            // el PDF ya existe (se acaba de subir, arriba), estado<3 no.
+            // $estadoFinal replica exactamente la transición ya resuelta unas
+            // líneas arriba (completo+currEstado<3 → 3; en cualquier otro
+            // caso el estado no cambió, sigue siendo $currEstado).
+            $estadoFinal = ($tipoEntrega === 'completo' && $currEstado < 3) ? 3 : $currEstado;
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `guardarResultadoPDF`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 1 Oct 2026, 11:19 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L2199-2259)</summary>
+
+**Path:** `Unknown file`
+
+```
+    }
+
+    if (!@is_writable($uploadDir)) {
+        $sendError('Error de permisos en servidor: La carpeta de almacenamiento (' . $uploadDir . ') no es escribible.');
+    }
+
+    // P-LAESH-RESULTADOS-PARCIALES-01 (2026-09-23): nombre determinístico (sin
+    // time()) — el laboratorio entrega resultados parciales acumulados EN EL
+    // MISMO documento, así que cada subida debe sobrescribir literalmente el
+    // PDF anterior de esta orden, no acumular archivos nuevos. Escritura
+    // atómica (tmp + rename, mismo patrón que Cache::set()) para que dos
+    // subidas casi simultáneas a la misma orden no dejen un archivo corrupto
+    // a medio escribir.
+    $filename    = 'resultado_ord_' . $ordenId . '.pdf';
+    $targetPath  = $uploadDir . $filename;
+    $tmpPath     = $targetPath . '.tmp.' . getmypid() . '.' . uniqid();
+    $relativeUrl = ($isOptOk) ? '/laesh-uploads/pdfs/' . $filename : '/uploads/pdfs/' . $filename;
+
+    $wroteTmp = @move_uploaded_file($file['tmp_name'], $tmpPath) || @copy($file['tmp_name'], $tmpPath);
+    if (!$wroteTmp) {
+        $sendError('Error al guardar el archivo PDF en el servidor. Verifique permisos o espacio libre.');
+    }
+    if (!@rename($tmpPath, $targetPath)) {
+        @unlink($tmpPath);
+        $sendError('Error al finalizar el guardado del archivo PDF en el servidor.');
+    }
+
+    // 5. Criterio de Recepción — Parcial (default) o Completado. Whitelist
+    // estricta: cualquier valor inesperado cae a 'parcial' (fail-safe: nunca
+    // transiciona la orden por accidente ante un valor corrupto/inesperado).
+    $tipoEntrega = ($_POST['tipo_entrega'] ?? 'parcial') === 'completo' ? 'completo' : 'parcial';
+
+    // 5b. P-LAESH-FOLIO-EXTRAIDO-01 (2026-09-24): extracción best-effort del folio
+    // del equipo/software de laboratorio embebido en el PDF ya escrito en disco.
+    // Deliberadamente fuera de la transacción de guardarResultadoPDF() — un fallo
+    // aquí (PDF escaneado, formato inesperado) nunca debe impedir la subida.
+    $folioExtraido = \RC\Negocio\Ordenes::extraerFolioLaboratorio($targetPath);
+
+    // 6. Asociar resultado PDF a la orden en MariaDB
+    $resultado = \RC\Negocio\Ordenes::guardarResultadoPDF($ordenId, $file['name'], $relativeUrl, $userId, $tipoEntrega, $folioExtraido);
+
+    if (!$resultado['success']) {
+        // No se borra $targetPath: con nombre determinístico, ese archivo puede
+        // ser el resultado de una subida ANTERIOR ya exitosa — borrarlo aquí
+        // destruiría un PDF válido por el fallo de ESTA subida.
+        $sendError($resultado['error'] ?? 'Error al asociar el PDF con la solicitud.');
+    }
+
+    // H6: notificación 'resultado_disponible' enviada por WS en Ordenes::guardarResultadoPDF()
+    $successMsg = "✓ PDF {$file['name']} cargado correctamente para la solicitud {$resultado['folio']}.";
+    header('HX-Trigger: ' . json_encode([
+        'ordenActualizada' => ['ordenId' => $ordenId],
+        'mostrarToast'     => ['mensaje' => $successMsg, 'tipo' => 'success']
+    ]));
+    \Common\Response::htmxSuccess($successMsg);
+});
+
+// ── GET /orden/pdf — Descarga / visualización del PDF de resultados ─────────────────
+Flight::route('GET /orden/pdf', function () {
+    $ordenId = (int)($_GET['id'] ?? 0);
+    if ($ordenId <= 0) {
 ```
 
 </details>
@@ -19682,28 +20780,28 @@ Flight::route('POST /orden/subir-pdf', function () {
 
 ### Thinking
 
-The identified issue in `medicos.js` requires updating a regular expression and adding a length check within a conditional statement. This fix involves modifying the `isNumeric` check to allow for an optional hash symbol and enforcing a minimum query length. These changes mirror those needed in `labadmin.js`. The focus now shifts to implementing these specific updates within both files. The objective is to apply these modifications to ensure consistent behavior across the application.
+Each order in the Reception Portal grid will have a mechanism for uploading PDF results, either a button or a drag-and-drop area. The upload modal provides options. The default option is "Parcial" (Partial), for when the lab delivers initial results.
 
 
 
 
 ### Actions
 
-**Tool:** `multi_replace_file_content`
+**Tool:** `run_command`
 
 <details>
 <summary>Metadata</summary>
 
-- **Thinking Duration:** 0.087580065s
+- **Thinking Duration:** 0.100056550s
 - **Model:** Gemini 3.8 Flash (High)
 </details>
 
 ---
 
-### Code Edit
+### Terminal Command Execution
 
 **Status:** Completed
-**Created:** 1 Oct 2026, 9:56 am
+**Created:** 1 Oct 2026, 11:19 am
 
 ---
 
@@ -19711,7 +20809,7 @@ The identified issue in `medicos.js` requires updating a regular expression and 
 
 ### Actions
 
-**Tool:** `multi_replace_file_content`
+**Tool:** `run_command`
 
 <details>
 <summary>Metadata</summary>
@@ -19721,10 +20819,169 @@ The identified issue in `medicos.js` requires updating a regular expression and 
 
 ---
 
-### Code Edit
+### Terminal Command Execution
 
 **Status:** Completed
-**Created:** 1 Oct 2026, 9:56 am
+**Created:** 1 Oct 2026, 11:20 am
+
+---
+
+## Agent Response
+
+### Thinking
+
+Examining the provided timeline for folio #23, Dr. Hedilberto Reyes Venegas initiated a digital request for "Jorge luis" on 2026-09-26. The initial status was "Remitido".
+
+The patient, "Jorge luis," presented at the clinic on 2026-09-30, and the status was updated to "En Atención." This represents the core chronological events regarding the patient's request and clinical visit.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.001142978s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+## User Request
+
+Para  portal medico que las notificaciones no contengan "del Dr(a). Hedilberto Reyes Venegas" , pues el mismo medico es quien esta autentica es redundnate y sobre todo ocupa espacio en mobiles. ¿ me explico ?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `Ordenes.php`
+**Language:** php
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The user's feedback is astute; removing the doctor's name from notifications is logical because the doctor is the authenticator in this scenario. This redundancy wastes space, especially on mobile devices. Considering the Reception portal handles patients for multiple doctors, the notification context should be general.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.096888616s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L819-909)</summary>
+
+**Path:** `Unknown file`
+
+```
+        $stmtHoy = $db->prepare(
+            "SELECT n.id, n.tipo, n.folio_referencia, n.titulo, n.mensaje, n.leido, n.creado_en, o.estado_id AS estado
+             FROM notificaciones n
+             LEFT JOIN ordenes o ON o.folio_unico = n.folio_referencia
+             WHERE n.user_id = :user_id AND n.creado_en >= CURDATE()
+             ORDER BY n.id DESC LIMIT 30"
+        );
+        $stmtHoy->execute(['user_id' => $userId]);
+        $hoy = $stmtHoy->fetchAll(\PDO::FETCH_ASSOC);
+
+        $stmtAnt = $db->prepare(
+            "SELECT n.id, n.tipo, n.folio_referencia, n.titulo, n.mensaje, n.leido, n.creado_en, o.estado_id AS estado
+             FROM notificaciones n
+             LEFT JOIN ordenes o ON o.folio_unico = n.folio_referencia
+             WHERE n.user_id = :user_id
+               AND n.creado_en < CURDATE()
+               AND n.creado_en >= DATE_SUB(NOW(), INTERVAL 30 DAY)
+             ORDER BY n.id DESC LIMIT 15"
+        );
+        $stmtAnt->execute(['user_id' => $userId]);
+        $notifs = array_merge($hoy, $stmtAnt->fetchAll(\PDO::FETCH_ASSOC));
+    } else {
+        // BUG-NOTIF-ANTERIORES-01 (continuación, 2026-09-28): ver nota completa
+        // en rc/index.php — mismo LIMIT 15 único compartido en el poll
+        // recurrente, con el riesgo agravado de que "OR n.leido = 0" puede
+        // agotar el cupo con backlog viejo sin leer y bloquear la entrega en
+        // vivo de notificaciones nuevas de HOY. Se separa igual.
+        $stmtHoy = $db->prepare(
+            "SELECT n.id, n.tipo, n.folio_referencia, n.titulo, n.mensaje, n.leido, n.creado_en, o.estado_id AS estado
+             FROM notificaciones n
+             LEFT JOIN ordenes o ON o.folio_unico = n.folio_referencia
+             WHERE n.user_id = :user_id
+               AND n.creado_en >= CURDATE()
+               AND (UNIX_TIMESTAMP(n.creado_en) > :since_creado OR n.leido = 0 OR UNIX_TIMESTAMP(n.actualizado_en) > :since_upd)
+             ORDER BY n.id DESC LIMIT 30"
+        );
+        $stmtHoy->execute(['user_id' => $userId, 'since_creado' => $since, 'since_upd' => $since]);
+        $hoy = $stmtHoy->fetchAll(\PDO::FETCH_ASSOC);
+
+        $stmtAnt = $db->prepare(
+            "SELECT n.id, n.tipo, n.folio_referencia, n.titulo, n.mensaje, n.leido, n.creado_en, o.estado_id AS estado
+             FROM notificaciones n
+             LEFT JOIN ordenes o ON o.folio_unico = n.folio_referencia
+             WHERE n.user_id = :user_id
+               AND n.creado_en < CURDATE()
+               AND n.creado_en >= DATE_SUB(NOW(), INTERVAL 30 DAY)
+               AND (UNIX_TIMESTAMP(n.creado_en) > :since_creado OR n.leido = 0 OR UNIX_TIMESTAMP(n.actualizado_en) > :since_upd)
+             ORDER BY n.id DESC LIMIT 15"
+        );
+        $stmtAnt->execute(['user_id' => $userId, 'since_creado' => $since, 'since_upd' => $since]);
+        $notifs = array_merge($hoy, $stmtAnt->fetchAll(\PDO::FETCH_ASSOC));
+    }
+
+    foreach ($notifs as &$n) {
+        if (empty($n['titulo'])) {
+            $folioN = $n['folio_referencia'] ?? '';
+            $n['titulo'] = match ($n['tipo']) {
+                'nueva_orden'        => 'Nueva Solicitud · #' . $folioN,
+                'resultados_listos'  => (stripos($n['mensaje'] ?? '', 'parcial') !== false ? 'Resultado Parcial · #' : 'Resultados Listos · #') . $folioN,
+                'orden_actualizada'  => (stripos($n['mensaje'] ?? '', 'cancelad') !== false ? 'Solicitud Cancelada · #' : (stripos($n['mensaje'] ?? '', 'atención') !== false || stripos($n['mensaje'] ?? '', 'recibido') !== false ? 'Paciente en Atención · #' : 'Solicitud Actualizada · #')) . $folioN,
+                'catalogo_actualizado' => 'Catálogo Actualizado',
+                default              => 'Notificación · #' . $folioN,
+            };
+        }
+    }
+    unset($n);
+
+    Flight::json([
+        'success'        => true,
+        'notificaciones' => $notifs,
+        'timestamp'      => time(),
+        'server_time'    => time()
+    ]);
+});
+
+// ── POST /api/notificaciones/marcar-leida — Confirmación y marcado de lectura ─────
+Flight::route('POST /api/notificaciones/marcar-leida', function () {
+    $db = Flight::db();
+    $userId = (int)Flight::auth()->getUserId();
+
+    $data = json_decode(Flight::request()->getBody(), true) ?: $_POST;
+    $notifId = (int)($data['id'] ?? 0);
+    $folio   = trim($data['folio'] ?? '');
+    $markAll = !empty($data['all']);
+
+    if ($markAll) {
+        $stmt = $db->prepare("UPDATE notificaciones SET leido = 1 WHERE user_id = ? AND leido = 0");
+        $stmt->execute([$userId]);
+    } elseif ($notifId > 0) {
+        $stmt = $db->prepare("UPDATE notificaciones SET leido = 1 WHERE id = ? AND user_id = ?");
+        $stmt->execute([$notifId, $userId]);
+```
+
+</details>
 
 ---
 
@@ -19733,7 +20990,7 @@ The identified issue in `medicos.js` requires updating a regular expression and 
 ### Actions
 
 **Tool:** `view_file`
-**File:** `medicos.js`
+**File:** `notifier.php`
 
 <details>
 <summary>Metadata</summary>
@@ -19744,42 +21001,365 @@ The identified issue in `medicos.js` requires updating a regular expression and 
 ---
 
 <details>
-<summary>File: `Unknown file` (L719-749)</summary>
+<summary>File: `Unknown file` (L189-249)</summary>
 
 **Path:** `Unknown file`
 
 ```
-            const totalLabel = document.getElementById('medico-catalog-total');
-            const paginationWrap = document.getElementById('medico-catalog-pagination');
-            if (!tbody) return;
-
-            medicoCatalogCurrentPage = page || 1;
-            var catalog = getFlatCatalog();
-
-            // Filtrado multicampo en tiempo real
-            var q = (medicoCatalogSearchQuery || '').trim().toLowerCase();
-            var filtered = catalog;
-            if (q) {
-                filtered = catalog.filter(item => {
-                    var cName = (item.nombre || '').toLowerCase();
-                    var cClave = (item.clave || '').toString().toLowerCase();
-                    var cArea = (item.categoriaNombre || item.categoria || '').toLowerCase();
-                    var cPrep = (item.preparacion || '').toLowerCase();
-                    var cMuestra = (item.muestra || '').toLowerCase();
-                    var cPruebas = Array.isArray(item.pruebas_incluidas) ? item.pruebas_incluidas.join(' ').toLowerCase() : (item.pruebas_incluidas || '').toLowerCase();
-                    return cName.includes(q) || cClave.includes(q) || cArea.includes(q) || cPrep.includes(q) || cMuestra.includes(q) || cPruebas.includes(q);
-                });
+                // antes se saltaba en silencio — el evento de negocio (orden creada,
+                // resultado listo...) no dejaba NINGÚN rastro, ni fila en
+                // notificaciones ni log. `notificaciones.user_id` es NOT NULL, así
+                // que insertar sin destinatario no es viable — pero al menos queda
+                // registrado que el evento ocurrió y por qué no se persistió.
+                Logger::log('WARN', "Notifier::persist — evento '{$event}' (folio={$folio}) sin destinatario resuelto, no se persistió ninguna notificación.");
             }
+        } catch (\Throwable $e) {
+            // H6: a diferencia de la versión anterior, este catch NO es silencioso —
+            // si el INSERT falla, se propaga (rompe la transacción del caller, que es
+            // lo correcto: mejor abortar el cambio de negocio que perder la notificación
+            // en silencio). Se loguea para diagnóstico antes de relanzar.
+            Logger::log('ERROR', "Notifier::persist — fallo al insertar notificación '{$event}': " . $e->getMessage());
+            throw $e;
+        }
 
-            var totalText = 'Total: ' + filtered.length + ' estudios';
-            if (totalLabel) totalLabel.textContent = totalText;
+        // A5 (auditoría 2026-09-20): notif_ids nunca viajaba en el payload de push()
+        // — el dedup del cliente (ws-client.js, seenNotifIds) solo protegía el
+        // camino de polling; una notificación que fallaba el push inicial y luego
+        // el cron de reintento la entregaba por WS llegaba DUPLICADA (una vía poll,
+        // otra vía WS). Un solo broadcast de Swoole llega a varios $fd a la vez, así
+        // que no basta un id plano — se construye un mapa user_id => notif_id (los
+        // arrays van en el mismo orden porque se llenan en el mismo foreach) para
+        // que swoole_server.php inyecte el id correcto a cada conexión.
+        $notifIdsByUser = [];
+        if ($targetUserIds && count($targetUserIds) === count($notifIds)) {
+            $notifIdsByUser = array_combine($targetUserIds, $notifIds);
+        } elseif ($medicoUserId && count($notifIds) === 1) {
+            $notifIdsByUser = [$medicoUserId => $notifIds[0]];
+        }
 
-            if (filtered.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding: 2rem; color: #94a3b8; font-weight: 500;">No se encontraron estudios que coincidan con la búsqueda.</td></tr>';
-                if (paginationWrap) paginationWrap.innerHTML = '';
+        return [
+            'notif_ids'         => $notifIds,
+            'notif_ids_by_user' => $notifIdsByUser,
+            'target_user_ids'   => $targetUserIds,
+            'folio'             => $folio,
+            'mensaje'           => $mensaje,
+        ];
+    }
+
+    /**
+     * Fase 2 del outbox — push por WS. Llamar DESPUÉS del commit() del caller.
+     * Nunca inserta: solo actualiza por id las filas que persist() ya garantizó.
+     */
+    public static function push(array $persisted, string $event, array $payload): void {
+        $notifIds = $persisted['notif_ids'] ?? [];
+        $targetUserIds = $persisted['target_user_ids'] ?? null;
+        $notifIdsByUser = $persisted['notif_ids_by_user'] ?? [];
+
+        $payload['event'] = $event;
+        $payload['timestamp'] = time();
+        if ($targetUserIds !== null) {
+            $payload['target_user_ids'] = $targetUserIds;
+        }
+        // A5: swoole_server.php lee esto, lo usa para inyectar 'id' por conexión
+        // antes de reenviar, y lo quita del payload final — nunca llega al cliente.
+        if (!empty($notifIdsByUser)) {
+            $payload['notif_ids_by_user'] = $notifIdsByUser;
+        }
+
+        $targetUrl = self::resolveTargetUrl();
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `ws-client.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L69-179)</summary>
+
+**Path:** `Unknown file`
+
+```
+                       encontraba su propio id ya marcado "visto" por este mismo
+                       bucle un instante antes y retornaba de inmediato en su
+                       primera línea — sin pintar el ítem, sin encender el globito,
+                       sin incrementar el contador. El panel de notificaciones (Hoy
+                       Y Anteriores) quedaba vacío en CUALQUIER carga de página
+                       excepto por eventos push en vivo vía WS (que sí llegan "no
+                       vistos" porque nunca pasan por este bucle). Se retira el
+                       marcado duplicado aquí — handleWsEvent ya es la única
+                       autoridad de dedup, correcta para ambos caminos (WS y
+                       polling) porque comparten el mismo mapa seenNotifIds. */
+                    data.notificaciones.slice().reverse().forEach(function(n) {
+                        handleWsEvent({
+                            id: n.id,
+                            event: n.tipo,
+                            folio: n.folio_referencia || '',
+                            folio_referencia: n.folio_referencia || '',
+                            orden_id: n.orden_id || null,
+                            titulo: n.titulo || ((n.tipo === 'nueva_orden') ? 'Nueva Solicitud · #' + (n.folio_referencia || '') : (n.tipo === 'catalogo_actualizado') ? 'Catálogo Actualizado' : 'Actualización de Solicitud · #' + (n.folio_referencia || '')),
+                            mensaje: n.mensaje,
+                            creado_en: n.creado_en,
+                            // 2026-09-25: estado_id ACTUAL de la orden (LEFT JOIN en
+                            // GET /api/notificaciones) — sin esto, el fallback de
+                            // navegarYResaltarOrden() (PDF de resultados vs solicitud
+                            // digital) asumía siempre "sin PDF" para cualquier
+                            // notificación entregada por este camino de polling.
+                            estado: n.estado,
+                            // 2026-09-24: ya no se filtra por leido en el backend (ver
+                            // GET /api/notificaciones) — se pasa el estado para que el
+                            // panel distinga visualmente leída/no leída en vez de
+                            // ocultar por completo lo ya leído.
+                            leido: (n.leido === undefined || n.leido === null) ? 0 : n.leido
+                        });
+                    });
+                }
+            })
+            .catch(function(err) {});
+    }
+
+    var POLLING_INTERVAL_MS = 120000; // Polling HTTP activo cada 120s (DB)
+
+    function startPollingFallback() {
+        if (pollingTimer) return;
+        console.info('[LAESH Notif] Servidor Ws no disponible. Polling HTTP activo cada 120s (DB)');
+        pollingTimer = setInterval(pollNotifications, POLLING_INTERVAL_MS);
+        pollNotifications();
+    }
+
+    // Corrección 2026-09-22: bug real encontrado en producción (RC no recibía
+    // notificaciones en vivo, requería refresh manual). El servidor cierra la
+    // conexión de inmediato si falla la validación del JWT/JTI al abrir (ver
+    // swoole_server.php on('open')) — pero onopen SIEMPRE se dispara primero
+    // (el handshake WS ya se completó) y reseteaba reconnectAttempts a 0 antes
+    // de que llegara el close casi instantáneo. Resultado: reconexión infinita
+    // cada 3s sin jamás alcanzar maxReconnects, así que startPollingFallback()
+    // nunca se activaba — cero actualizaciones en vivo ni por WS ni por polling.
+    // Se distingue una conexión "flapping" (cerrada casi de inmediato) de una
+    // estable: solo una conexión que duró >= MIN_STABLE_MS resetea el contador;
+    // una que "flapea" activa el polling de inmediato (no espera a agotar
+    // maxReconnects) mientras sigue reintentando WS en segundo plano.
+    var MIN_STABLE_MS = 2000;
+    var wsOpenedAt = 0;
+
+    // 2026-10-01: keepalive de aplicación. Swoole cierra todo socket sin tráfico
+    // entrante en 600s (heartbeat_idle_time); el navegador no envía nada por su
+    // cuenta, así que cada pestaña inactiva se cortaba y reconectaba cada ~11 min.
+    // Un frame cada 4 min lo evita; el servidor ignora el contenido (on('message')
+    // vacío) pero cuenta el frame como actividad. Los JWT vencidos los sigue
+    // cerrando el barrido M10 del servidor, independiente del heartbeat.
+    var PING_INTERVAL_MS = 4 * 60 * 1000;
+    var pingTimer = null;
+    function stopPing() {
+        if (pingTimer) { clearInterval(pingTimer); pingTimer = null; }
+    }
+    function startPing() {
+        stopPing();
+        pingTimer = setInterval(function() {
+            if (ws && ws.readyState === WebSocket.OPEN) {
+                try { ws.send('{"type":"ping"}'); } catch (e) { /* onclose reconecta */ }
+            }
+        }, PING_INTERVAL_MS);
+    }
+
+    function initWebSocket() {
+        if (ws && (ws.readyState === WebSocket.OPEN || ws.readyState === WebSocket.CONNECTING)) {
+            return;
+        }
+
+        try {
+            ws = new WebSocket(getWsUrl());
+
+            ws.onopen = function() {
+                wsOpenedAt = Date.now();
+                reconnectAttempts = 0;
+                if (pollingTimer) {
+                    clearInterval(pollingTimer);
+                    pollingTimer = null;
+                }
+                console.log('[LAESH WS] Conectado al Servidor Ws');
+                startPing();
+            };
+
+            ws.onmessage = function(evt) {
+                try {
+                    var data = JSON.parse(evt.data);
+                    // "ACK QoS Nivel 2" (auditoría 2026-09-20): eliminado — el servidor
+                    // (swoole_server.php on('message')) nunca procesó este ack desde que
+                    // se escribió; la condición para dispararlo tampoco se cumplía nunca
+                    // hasta el fix de A5 (el payload no llevaba 'id'). Con A5 ya sí se
+                    // cumpliría, pero el servidor lo seguiría descartando en silencio —
+                    // tráfico sin ningún efecto. Implementar la confirmación real
+                    // requeriría un puente HTTP inverso Swoole→PHP-FPM (Swoole no tiene
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `function handleWsEvent`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 1 Oct 2026, 11:24 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `ws-client.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1074-1179)</summary>
+
+**Path:** `Unknown file`
+
+```
+        });
+    }
+
+    function handleWsEvent(data) {
+        if (!data || (!data.event && !data.tipo)) return;
+
+        // Manejo prioritario de expulsión/revocación de sesión por acción administrativa (UX-01)
+        if (data.event === 'force_logout' || data.tipo === 'force_logout') {
+            var msg = data.message || 'Tu sesión ha finalizado. Redirigiendo al login...';
+            if (typeof window.showToast === 'function') {
+                window.showToast('⚠️ ' + msg, 'error', 8000);
+            }
+            if (pollingTimer) {
+                clearInterval(pollingTimer);
+                pollingTimer = null;
+            }
+            setTimeout(function() {
+                var isMed = !!document.getElementById('tabla-medico') || window.location.pathname.indexOf('/md/') !== -1;
+                var portalParam = isMed ? '?portal=medico' : '';
+                window.location.replace('/laesh/login/login.php' + portalParam);
+            }, 2000);
+            return;
+        }
+
+        // Regla de retención: Notificaciones con antigüedad > 30 días no se procesan ni muestran
+        if (data.creado_en) {
+            var notifTime = new Date(data.creado_en).getTime();
+            if (!isNaN(notifTime) && (Date.now() - notifTime) > (30 * 24 * 60 * 60 * 1000)) {
                 return;
             }
+        }
 
+        /* Dedup path WS: el path polling ya añade a seenNotifIds antes de llamar handleWsEvent.
+           El path WS llama handleWsEvent directo (ws.onmessage) sin pasar por ese check,
+           así que se duplicaría si la misma notificación ya llegó por polling.
+           Swoole inyecta data.id por conexión (A5 auditoría 2026-09-20). */
+        if (data.id) {
+            if (seenNotifIds[data.id]) {
+                // BUG-NOTIF-LEIDO-SYNC-01 (2026-09-28): antes esto retornaba sin
+                // más — si la misma notificación llegaba de nuevo (poll siguiente)
+                // con leido=1 porque se marcó desde otra pestaña/dispositivo, el
+                // ítem ya pintado se quedaba "no leído" hasta un refresh manual.
+                // Se actualiza en el sitio, sin reprocesar el resto del evento.
+                actualizarNotifYaRenderizada(data);
+                return;
+            }
+            seenNotifIds[data.id] = true;
+        } else if (data.event) {
+            // BUG-NOTIF-DEDUP-CATALOGO-01 (2026-09-28): 'catalogo_actualizado' NO
+            // trae data.id cuando llega al propio actor (persist() lo excluye
+            // de destinatarios — ver notifier.php), así que el bloque de arriba
+            // nunca deduplicaba para esa conexión: cada entrega repetida del
+            // mismo push en vivo (reconexión WS, doble tab, etc.) reprocesaba
+            // TODO el evento de nuevo — recarga completa de catalog-compiled.js
+            // + log repetido en consola por cada una. Fallback de dedup por
+            // event+timestamp (push() siempre setea ambos) para este caso sin
+            // id, sin tocar el camino normal (con id) de arriba.
+            var dedupKey = data.event + '_' + (data.timestamp || '');
+            if (seenNotifIds[dedupKey]) return;
+            seenNotifIds[dedupKey] = true;
+        }
+
+        var isMedicoPortal = !!document.getElementById('tabla-medico');
+        var isCatalogoEvent = (data.event === 'catalogo_actualizado');
+        // 2026-09-24: catalogo_actualizado ya no genera NINGUNA notificación
+        // visible en el Portal Médico (pedido explícito del usuario, elimina
+        // el abanico dedicado que existía desde 2026-09-21). RC/Admin no se
+        // tocan. El refresco de catalog-compiled.js (más abajo) sigue
+        // aplicando para médico independientemente de este flag.
+        var skipNotifItem = (isMedicoPortal && isCatalogoEvent);
+
+        // GAP-NOTIF-01 (2026-09-22): catalogo_actualizado es sincronización
+        // administrativa en segundo plano ("no requiere acción suya", ver
+        // comentario de ensureAccordionStructure) — se sigue registrando en
+        // su propio abanico para trazabilidad, pero YA NO enciende la
+        // campanita/globito rojo ni el contador de pestaña. Diagnóstico real
+        // (2026-09-22): médicos/recepción reportaban una "alerta falsa" en
+        // cada login — el badge se encendía por un catalogo_actualizado
+        // genuinamente sin leer (acumulado de ediciones de catálogo de
+        // otros usuarios), pero como cae en un abanico colapsado por
+        // defecto y no en Hoy/Ayer (lo que el usuario revisa primero),
+        // percibía la alerta como "sin mensajes". Ver también el fix de
+        // actor_user_id en CatalogBuilder::build() — evita que Recepción/
+        // Admin se autonotifique al editar el catálogo.
+        // 2026-09-24: desde que el panel deja de filtrar por leido=0, este
+        // handler también recibe ítems que YA estaban marcados leídos (ej. se
+        // abrió el panel en otra pestaña, o se marcó "leer todo" antes de este
+        // poll) — esos no deben volver a sumar al contador de no-leídos.
+        var yaLeidoParaContador = !!(data.leido && Number(data.leido) === 1);
+        if (!isCatalogoEvent && !yaLeidoParaContador) {
+            // Incrementar contador de pestaña
+            unreadCount++;
+            updateTitleCounter();
+
+            // Actualizar globitos rojos de notificación con animación
+            var badges = document.querySelectorAll('#badge-recepcion, #badge-resultados, .bell-badge');
+            badges.forEach(function(b) {
+                var count = parseInt(b.textContent || '0', 10) + 1;
+                b.textContent = count;
+                b.classList.add('show', 'pulse');
+                b.style.display = 'inline-flex';
+                b.style.opacity = '1';
+            });
+        }
+
+        // Inyectar ítem visual en los abanicos del panel lateral — se omite
 ```
 
 </details>
@@ -19791,7 +21371,7 @@ The identified issue in `medicos.js` requires updating a regular expression and 
 ### Actions
 
 **Tool:** `view_file`
-**File:** `medicos.js`
+**File:** `ws-client.js`
 
 <details>
 <summary>Metadata</summary>
@@ -19802,105 +21382,204 @@ The identified issue in `medicos.js` requires updating a regular expression and 
 ---
 
 <details>
-<summary>File: `Unknown file` (L769-809)</summary>
+<summary>File: `Unknown file` (L1179-1299)</summary>
 
 **Path:** `Unknown file`
 
 ```
-                } else if (typeof item.pruebas_incluidas === 'string') {
-                    pruebasListStr = item.pruebas_incluidas.trim();
-                }
+        // Inyectar ítem visual en los abanicos del panel lateral — se omite
+        // por completo para catalogo_actualizado en médico (skipNotifItem).
+        var notifLists = skipNotifItem ? [] : document.querySelectorAll('.sidebar-right-body, .sidebar-right .sidebar-right-body, .sidebar-right .modal-body, #sidebar-right .sidebar-right-body, #sidebar-right .modal-body');
+        notifLists.forEach(function(container) {
+            ensureAccordionStructure(container);
 
-                var reqPruebas = '<span style="color:#94a3b8; font-style:italic;">Consultar en LAESH</span>';
-                if (pruebasListStr !== '') {
-                    var items = pruebasListStr.split(/[\n,]+/).map(s => s.trim()).filter(s => s !== '');
-                    reqPruebas = '<ul style="margin:0; padding-left:1.1rem; font-size:0.85em; color:#334155;">' + items.map(s => '<li>' + s + '</li>').join('') + '</ul>';
-                }
+            var isToday = isCreatedToday(data.creado_en);
+            var targetBody = isToday ? container.querySelector('.notif-body-hoy') : container.querySelector('.notif-body-anteriores');
+            var cntBadge   = isToday ? container.querySelector('.badge-cnt-hoy') : container.querySelector('.badge-cnt-anteriores');
 
-                return `
-                    <tr style="background-color: ${idx % 2 === 0 ? '#ffffff' : '#f1f5f9'}; border-bottom: 1px solid #f1f5f9;">
-                        <td style="text-align: center; font-weight: 600; color: #64748b; font-size: 0.85rem;">${rowNum}</td>
-                        <td style="white-space: normal; min-width: 240px; font-weight: 600; color: #0f172a; font-size: 0.88rem;">${item.nombre || ''}</td>
-                        <td style="white-space: normal; color: #334155; font-size: 0.85rem;">${reqMuestra}</td>
-                        <td style="white-space: normal; color: #334155; font-size: 0.85rem;">${reqContenedor}</td>
-                        <td style="color: #334155; font-size: 0.85rem;">${reqTiempo}</td>
-                        <td style="white-space: normal; color: #475569; font-size: 0.85rem;">${item.categoriaNombre || item.categoria || '—'}</td>
-                        <td style="white-space: normal; min-width: 220px; color: #1e293b; font-size: 0.85rem;">${reqPrep}</td>
-                        <td style="white-space: normal; min-width: 260px; font-size: 0.85rem;"><div style="max-height:80px; overflow-y:auto;">${reqPruebas}</div></td>
-                    </tr>
-                `;
-            }).join('');
+            if (!targetBody) return;
 
-            // Renderizar controles de paginación minimalistas de 7 en 7
-            function buildPaginationControls(container) {
-                if (!container) return;
-                container.innerHTML = '';
-                if (totalPages <= 1) return;
+            var yaLeido = !!(data.leido && Number(data.leido) === 1);
 
-                var maxButtons = 7;
-                var startP = Math.max(1, medicoCatalogCurrentPage - Math.floor(maxButtons / 2));
-                var endP = Math.min(totalPages, startP + maxButtons - 1);
-                if (endP - startP + 1 < maxButtons) startP = Math.max(1, endP - maxButtons + 1);
+            var item = document.createElement('div');
+            item.className = 'card card-sm border-left-primary notif-item-clickable' + (yaLeido ? ' notif-leido' : '');
+            if (data.id) {
+                item.dataset.notifId = data.id;
+            }
+            item.style.padding = '8px 12px';
+            item.style.fontSize = '0.82rem';
+            item.style.background = isToday ? '#ffffff' : '#f8fafc';
+            item.style.borderLeft = isToday ? '3px solid #0052b7' : '3px solid #94a3b8';
+            item.style.borderRadius = '6px';
+            item.style.boxShadow = '0 1px 3px rgba(0,0,0,0.05)';
+            item.style.cursor = 'pointer';
+            item.style.transition = 'transform 0.15s ease, box-shadow 0.15s ease';
+            // 2026-09-24: si ya llega marcada leída (ej. se abrió el panel y se
+            // marcó todo, o se leyó en otra pestaña/dispositivo), se muestra
+            // atenuada desde el inicio en vez de a full opacidad — mismo
+            // tratamiento visual que al hacer clic (ver abajo), pero sin
+            // ocultarla ni tratarla como "nunca pasó".
+            if (yaLeido) item.style.opacity = '0.55';
 
-                var baseStyle = "background: transparent; border: none; color: #475569; cursor: pointer; padding: 4px 8px; font-size: 0.92rem; font-weight: 600; min-width: 28px; display: inline-flex; align-items: center; justify-content: center; user-select: none; transition: color 0.15s ease;";
-                var activeStyle = "background: transparent; border: none; border-bottom: 2px solid #0052B7; color: #0052B7; font-weight: 800; cursor: default; padding: 4px 8px; font-size: 0.95rem; min-width: 28px; display: inline-flex; align-items: center; justify-content: center; user-select: none;";
-                var disabledStyle = "background: transparent; border: none; color: #cbd5e1; cursor: not-allowed; padding: 4px 8px; font-size: 0.92rem; font-weight: 600; min-width: 28px; display: inline-flex; align-items: center; justify-content: center; opacity: 0.4; user-select: none;";
+            var folioRef = data.folio || data.folio_referencia || '';
+            if (folioRef) {
+                item.title = 'Haz clic para ir a la solicitud ' + folioRef + (yaLeido ? ' (leído)' : '');
+            }
 
-                // Botón Anterior « (Avanza 7 páginas atrás)
-                var btnPrev = document.createElement('button');
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `medicos.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L839-864)</summary>
-
-**Path:** `Unknown file`
-
-```
-                var btnNext = document.createElement('button');
-                btnNext.type = 'button';
-                btnNext.innerHTML = '»';
-                btnNext.title = '7 páginas adelante';
-                btnNext.setAttribute('aria-label', '7 páginas adelante');
-                if (medicoCatalogCurrentPage < totalPages) {
-                    btnNext.style = baseStyle;
-                    btnNext.onclick = function() { renderMedicoCatalogTable(Math.min(totalPages, medicoCatalogCurrentPage + 7)); };
+            // Formatear hora y, si pertenece a "Anteriores (últimos 30 días)", concatenar fecha dd/mm/yyyy
+            var timeStr = data.creado_en ? new Date(data.creado_en).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            var timeDisplay = timeStr;
+            if (!isToday && data.creado_en) {
+                var fStr = String(data.creado_en).trim();
+                var m = fStr.match(/^(\d{4})-(\d{2})-(\d{2})/);
+                var fDDMMYYYY = '';
+                if (m) {
+                    fDDMMYYYY = m[3] + '/' + m[2] + '/' + m[1];
                 } else {
-                    btnNext.style = disabledStyle;
-                    btnNext.disabled = true;
+                    var dObj = new Date(fStr);
+                    if (!isNaN(dObj.getTime())) {
+                        var dia = String(dObj.getDate()).padStart(2, '0');
+                        var mes = String(dObj.getMonth() + 1).padStart(2, '0');
+                        fDDMMYYYY = dia + '/' + mes + '/' + dObj.getFullYear();
+                    }
                 }
-                container.appendChild(btnNext);
+                if (fDDMMYYYY) {
+                    timeDisplay = timeStr + ' · ' + fDDMMYYYY;
+                }
             }
 
-            buildPaginationControls(paginationWrap);
+            item.innerHTML = '<strong style="color: #0f172a;">' + escapeHtml(data.titulo || 'Nueva Notificación') + '</strong><br>' +
+                             '<span class="txt-muted-sm" style="color: #475569; font-size: 0.78rem;">' + escapeHtml(data.mensaje || 'Se ha registrado una nueva actividad.') + '</span>' +
+                             '<div style="font-size:0.7rem; color:#94a3b8; margin-top:2px;">' + timeDisplay + '</div>';
+
+            // Hover UX
+            item.addEventListener('mouseenter', function() {
+                item.style.transform = 'translateY(-1px)';
+                item.style.boxShadow = '0 3px 6px rgba(0,0,0,0.1)';
+            });
+            item.addEventListener('mouseleave', function() {
+                item.style.transform = 'none';
+                item.style.boxShadow = '0 1px 3px rgba(0,0,0,0.05)';
+            });
+
+            // Click Handler: Navegar a la pestaña (Hoy / Anteriores) y resaltar el renglón correspondiente.
+            // 2026-09-24: la rama "isMedicoPortal && isCatalogoEvent" que colapsaba
+            // el panel sin navegar se eliminó — ese combo ya no llega aquí, el ítem
+            // ni siquiera se crea para médico (ver skipNotifItem arriba).
+            item.addEventListener('click', function() {
+                // 2026-09-21 (corrección del usuario): el ítem NO se elimina del
+                // abanico — se queda visible como historial, pero se marca "leído"
+                // (visualmente atenuado) y deja de contar como no-leído. El contador
+                // de la sección (Hoy / Ayer y Anteriores) y el globito de la
+                // campanita reflejan solo los no-leídos. Idempotente: un segundo
+                // clic sobre el mismo ítem ya leído no vuelve a decrementar.
+                if (!item.classList.contains('notif-leido')) {
+                    item.classList.add('notif-leido');
+                    item.style.opacity = '0.55';
+                    item.title = (item.title || '') + ' (leído)';
+
+                    if (cntBadge) {
+                        cntBadge.textContent = Math.max(0, parseInt(cntBadge.textContent || '0', 10) - 1);
+                    }
+
+                    // catalogo_actualizado (Recepción/Admin — médico ya no llega
+                    // aquí) nunca incrementó unreadCount/campanita (ver GAP-NOTIF-01
+                    // arriba) — decrementarlos aquí restaría de cuenta real de otros
+                    // eventos sí-contados. Solo el contador de sección (cntBadge,
+                    // arriba) aplica para este tipo de ítem.
+                    if (!isCatalogoEvent) {
+                        unreadCount = Math.max(0, unreadCount - 1);
+                        updateTitleCounter();
+
+                        var bellBadges = document.querySelectorAll('#badge-recepcion, #badge-resultados, .bell-badge');
+                        bellBadges.forEach(function(b) {
+                            var nuevo = Math.max(0, parseInt(b.textContent || '0', 10) - 1);
+                            b.textContent = nuevo;
+                            if (nuevo === 0) {
+                                b.classList.remove('show', 'pulse');
+                                b.style.opacity = '0';
+                            }
+                        });
+                    }
+
+                    // Sincronización SSOT en MariaDB: persistir marcado de lectura
+                    var notifId = item.dataset.notifId || data.id;
+                    var payload = {};
+                    if (notifId) payload.id = parseInt(notifId, 10);
+                    if (folioRef) payload.folio = folioRef;
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The code defines `isMedicoPortal` based on the presence of a specific HTML element or a particular URL path. This variable's value impacts how a message is rendered within the application. Specifically, the rendering logic conditionally modifies a message's text based on the `isMedicoPortal` flag. This likely indicates portal-specific display adjustments.
+
+
+The front-end code removes the redundant "del Dr(a)..." from messages in the medical portal to conserve space on mobile devices.  This logic is replicated on the backend within the notification retrieval API (`GET /api/notificaciones`), ensuring consistency by removing the same redundant text. Both front and back ends now consistently omit the doctor's designation in the medical portal context.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `data.mensaje`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.669062029s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 1 Oct 2026, 11:25 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `ws-client.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1134-1145)</summary>
+
+**Path:** `Unknown file`
+
+```
         }
 
-        function refreshCatalog() {
-            renderMedicoCatalogTable(1);
-        }
+        var isMedicoPortal = !!document.getElementById('tabla-medico');
+        var isCatalogoEvent = (data.event === 'catalogo_actualizado');
+        // 2026-09-24: catalogo_actualizado ya no genera NINGUNA notificación
+        // visible en el Portal Médico (pedido explícito del usuario, elimina
+        // el abanico dedicado que existía desde 2026-09-21). RC/Admin no se
+        // tocan. El refresco de catalog-compiled.js (más abajo) sigue
+        // aplicando para médico independientemente de este flag.
+        var skipNotifItem = (isMedicoPortal && isCatalogoEvent);
 
-        // Listener del buscador en tiempo real de Catálogo (Pacientes usa hx-get en la vista — GAP-MD-01)
-        document.addEventListener('DOMContentLoaded', function() {
-            var inputSearchCat = document.getElementById('input-buscar-catalogo-medico');
-            if (inputSearchCat) {
+        // GAP-NOTIF-01 (2026-09-22): catalogo_actualizado es sincronización
 ```
 
 </details>
@@ -19912,7 +21591,7 @@ The identified issue in `medicos.js` requires updating a regular expression and 
 ### Actions
 
 **Tool:** `view_file`
-**File:** `medicos.js`
+**File:** `index.php`
 
 <details>
 <summary>Metadata</summary>
@@ -19923,32 +21602,32 @@ The identified issue in `medicos.js` requires updating a regular expression and 
 ---
 
 <details>
-<summary>File: `Unknown file` (L864-884)</summary>
+<summary>File: `Unknown file` (L869-889)</summary>
 
 **Path:** `Unknown file`
 
 ```
-            if (inputSearchCat) {
-                inputSearchCat.addEventListener('input', function() {
-                    medicoCatalogSearchQuery = this.value;
-                    renderMedicoCatalogTable(1);
-                });
-            }
-        });
+        $notifs = array_merge($hoy, $stmtAnt->fetchAll(\PDO::FETCH_ASSOC));
+    }
 
-        // Cambiar Paneles / Tabs en Portal Médico (Rock-Solid)
-        const panelLabels = {
-            'panel-nueva-orden':       'Nueva Solicitud',
-            'panel-historial-medico':  'Solicitudes Anteriores',
-            'panel-pacientes-medico':  'Pacientes',
-            'panel-reportes-medico':   'Reportes',
-            'panel-catalogo-medico':   'Catálogo de Estudios'
-        };
-        function cambiarTabMedico(panelId, el) {
-            document.querySelectorAll('.sidebar .nav-item').forEach(i => i.classList.remove('active'));
-            if (el) {
-                el.classList.add('active');
-            } else {
+    foreach ($notifs as &$n) {
+        if (empty($n['titulo'])) {
+            $folioN = $n['folio_referencia'] ?? '';
+            $n['titulo'] = match ($n['tipo']) {
+                'nueva_orden'        => 'Nueva Solicitud · #' . $folioN,
+                'resultados_listos'  => (stripos($n['mensaje'] ?? '', 'parcial') !== false ? 'Resultado Parcial · #' : 'Resultados Listos · #') . $folioN,
+                'orden_actualizada'  => (stripos($n['mensaje'] ?? '', 'cancelad') !== false ? 'Solicitud Cancelada · #' : (stripos($n['mensaje'] ?? '', 'atención') !== false || stripos($n['mensaje'] ?? '', 'recibido') !== false ? 'Paciente en Atención · #' : 'Solicitud Actualizada · #')) . $folioN,
+                'catalogo_actualizado' => 'Catálogo Actualizado',
+                default              => 'Notificación · #' . $folioN,
+            };
+        }
+    }
+    unset($n);
+
+    Flight::json([
+        'success'        => true,
+        'notificaciones' => $notifs,
+        'timestamp'      => time(),
 ```
 
 </details>
@@ -19957,35 +21636,6 @@ The identified issue in `medicos.js` requires updating a regular expression and 
 
 ## Agent Response
 
-### Thinking
-
-The code snippet shows a search filter for a medical catalog. The filtering logic appears to trigger when a search query is present and either numeric or at least three characters long. Shorter queries (one or two characters) are not being filtered, as expected.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.006345601s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 1 Oct 2026, 9:56 am
-
----
-
-## Agent Response
-
 ### Actions
 
 **Tool:** `replace_file_content`
@@ -20001,443 +21651,7 @@ The code snippet shows a search filter for a medical catalog. The filtering logi
 ### Code Edit
 
 **Status:** Completed
-**Created:** 1 Oct 2026, 9:57 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 1 Oct 2026, 9:57 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 1 Oct 2026, 10:00 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 1 Oct 2026, 10:00 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 1 Oct 2026, 10:02 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 1 Oct 2026, 10:02 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 1 Oct 2026, 10:02 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `manage_task`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### CORTEX_STEP_TYPE_GENERIC
-
-**Status:** Completed
-**Created:** 1 Oct 2026, 10:02 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 1 Oct 2026, 10:02 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 1 Oct 2026, 10:03 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 1 Oct 2026, 10:03 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 1 Oct 2026, 10:03 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `manage_task`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### CORTEX_STEP_TYPE_GENERIC
-
-**Status:** CORTEX_STEP_STATUS_ERROR
-**Created:** 1 Oct 2026, 10:03 am
-
----
-
-### CORTEX_STEP_TYPE_SYSTEM_MESSAGE
-
-**Status:** Completed
-**Created:** 1 Oct 2026, 10:03 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 1 Oct 2026, 10:03 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `manage_task`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### CORTEX_STEP_TYPE_GENERIC
-
-**Status:** Completed
-**Created:** 1 Oct 2026, 10:05 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `manage_task`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### CORTEX_STEP_TYPE_GENERIC
-
-**Status:** Completed
-**Created:** 1 Oct 2026, 10:05 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `manage_task`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### CORTEX_STEP_TYPE_GENERIC
-
-**Status:** Completed
-**Created:** 1 Oct 2026, 10:05 am
-
----
-
-### CORTEX_STEP_TYPE_SYSTEM_MESSAGE
-
-**Status:** Completed
-**Created:** 1 Oct 2026, 10:05 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 1 Oct 2026, 10:05 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 1 Oct 2026, 10:05 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `CREATE TABLE.*notificaciones`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 1 Oct 2026, 10:06 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `notificaciones`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 1 Oct 2026, 10:06 am
+**Created:** 1 Oct 2026, 11:25 am
 
 ---
 
@@ -20446,7 +21660,7 @@ The code snippet shows a search filter for a medical catalog. The filtering logi
 ### Actions
 
 **Tool:** `view_file`
-**File:** `03_transactional_schema.sql`
+**File:** `ws-client.js`
 
 <details>
 <summary>Metadata</summary>
@@ -20457,72 +21671,25 @@ The code snippet shows a search filter for a medical catalog. The filtering logi
 ---
 
 <details>
-<summary>File: `Unknown file` (L119-179)</summary>
+<summary>File: `Unknown file` (L1234-1247)</summary>
 
 **Path:** `Unknown file`
 
 ```
--- ---------------------------------------------------------------------------
--- NOTIFICACIONES — SSOT de notificaciones con soporte QoS híbrido
--- QoS: slow-path (BD) + fast-path (Swoole WS) + fallback (AJAX poll)
--- D-redesign: user_id (era destinatario_id)
--- ---------------------------------------------------------------------------
-CREATE TABLE IF NOT EXISTS `notificaciones` (
-    `id`              INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    `user_id`         INT UNSIGNED NOT NULL COMMENT 'FK users.id (médico o recepción)',
-    `tipo`            ENUM('nueva_orden','resultados_listos','orden_actualizada','catalogo_actualizado') NOT NULL,
-    `folio_referencia` VARCHAR(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL
-                        COMMENT 'folio_unico LAESH-NNNNN de la orden referenciada',
-    `titulo`          VARCHAR(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL
-                        COMMENT 'Título conciso para encabezado de notificación (ej. Nueva Solicitud · #29, Paciente en Atención · #15)',
-    `mensaje`         VARCHAR(500) COLLATE utf8mb4_unicode_ci NOT NULL,
-    `leido`           TINYINT(1) NOT NULL DEFAULT 0,
-    `actualizado_en`  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-                        COMMENT 'BUG-NOTIF-LEIDO-SYNC-01: se refresca al UPDATE leido — permite que el poll incremental detecte una transición no-leído→leído desde otro dispositivo/pestaña y reenvíe la fila una vez más',
-    `entregado_ws`    TINYINT(1) NOT NULL DEFAULT 0
-                        COMMENT 'Fast-path: 1 = entregado vía Swoole WS',
-    `retry_count`     TINYINT UNSIGNED NOT NULL DEFAULT 0
-                        COMMENT 'Intentos de entrega WS fallidos',
-    `creado_en`       TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (`id`),
-    KEY `idx_user`         (`user_id`),
-    KEY `idx_fallback_poll` (`user_id`, `entregado_ws`, `leido`)
-      COMMENT 'Índice para poll: WHERE user_id=? AND (entregado_ws=0 OR leido=0)',
-    CONSTRAINT `fk_notif_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
-  COMMENT='Notificaciones sistema — SSOT QoS: Swoole WS + fallback AJAX poll';
+                }
+                if (fDDMMYYYY) {
+                    timeDisplay = timeStr + ' · ' + fDDMMYYYY;
+                }
+            }
 
--- P-LAESH-NOTIF-SEMANTICA-01 (2026-09-30) — desacoplamiento de título y cuerpo
--- para eliminar redundancias en notificaciones WS/Polling. Idempotente.
-ALTER TABLE `notificaciones`
-  ADD COLUMN IF NOT EXISTS `titulo` VARCHAR(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL
-    COMMENT 'Título conciso para encabezado de notificación'
-    AFTER `folio_referencia`;
+            item.innerHTML = '<strong style="color: #0f172a;">' + escapeHtml(data.titulo || 'Nueva Notificación') + '</strong><br>' +
+                             '<span class="txt-muted-sm" style="color: #475569; font-size: 0.78rem;">' + escapeHtml(data.mensaje || 'Se ha registrado una nueva actividad.') + '</span>' +
+                             '<div style="font-size:0.7rem; color:#94a3b8; margin-top:2px;">' + timeDisplay + '</div>';
 
--- Gap 3 (auditoría WS 2026-09-18, §2.4c): 'catalogo_actualizado' agregado al ENUM.
--- Antes, ese evento no tenía fallback de persistencia — si Swoole estaba caído al
--- guardar un cambio de catálogo, ningún cliente se enteraba después. Idempotente:
--- re-declarar el mismo ENUM (o uno más amplio) no falla en ejecuciones repetidas.
-ALTER TABLE `notificaciones`
-  MODIFY COLUMN `tipo` ENUM('nueva_orden','resultados_listos','orden_actualizada','catalogo_actualizado') NOT NULL;
-
--- Deuda QoS-01 (2026-09-18) — estadísticas estructuradas de fallback WS: se agrega
--- fallback_reason (motivo corto del fallo cuando entregado_ws=0, poblado por
--- notifier.php) para poder distinguir timeout / http_error / respuesta inválida /
--- excepción, en vez de solo el bit binario que ya existía en entregado_ws.
--- ADD COLUMN IF NOT EXISTS: idempotente en MariaDB 10.4+ (re-ejecutar no falla).
--- La vista de estadísticas (vw_ws_fallback_stats) que consume esta columna vive
--- en 09_views.sql (SSOT de vistas del proyecto), no aquí.
--- Hallazgo 2026-09-19: 'no_recipients_connected' agregado — /publish respondía
--- status=success con sent_to_clients=0 (destinatario no conectado) y notifier.php
--- lo contaba como entrega exitosa; ahora se trata como fallback real.
-ALTER TABLE `notificaciones`
-  ADD COLUMN IF NOT EXISTS `fallback_reason` VARCHAR(40) COLLATE utf8mb4_unicode_ci DEFAULT NULL
-    COMMENT 'Motivo del fallo cuando entregado_ws=0: timeout|http_error_NNN|response_invalid|exception|no_curl_no_stream|no_recipients_connected'
-    AFTER `retry_count`;
-
--- P-LAESH-RESULTADOS-PARCIALES-01 (2026-09-23) — resultados parciales de
--- laboratorio: el laboratorio entrega los estudios de una orden en días
+            // Hover UX
+            item.addEventListener('mouseenter', function() {
+                item.style.transform = 'translateY(-1px)';
+                item.style.boxShadow = '0 3px 6px rgba(0,0,0,0.1)';
 ```
 
 </details>
@@ -20533,7 +21700,7 @@ ALTER TABLE `notificaciones`
 
 ### Actions
 
-**Tool:** `run_command`
+**Tool:** `replace_file_content`
 
 <details>
 <summary>Metadata</summary>
@@ -20543,10 +21710,10 @@ ALTER TABLE `notificaciones`
 
 ---
 
-### Terminal Command Execution
+### Code Edit
 
 **Status:** Completed
-**Created:** 1 Oct 2026, 10:06 am
+**Created:** 1 Oct 2026, 11:25 am
 
 ---
 
@@ -20554,7 +21721,7 @@ ALTER TABLE `notificaciones`
 
 ### Actions
 
-**Tool:** `run_command`
+**Tool:** `replace_file_content`
 
 <details>
 <summary>Metadata</summary>
@@ -20564,31 +21731,10 @@ ALTER TABLE `notificaciones`
 
 ---
 
-### Terminal Command Execution
+### Code Edit
 
 **Status:** Completed
-**Created:** 1 Oct 2026, 10:07 am
-
----
-
-## Agent Response
-
-### Thinking
-
-Examining the user's directives, the focus is on optimizing notification messages. The task involves analyzing message semantics within provided images of notification panels, identifying redundant content, and referencing the database table containing the messages. The goal is concise, non-redundant messages, tailored to the recipient and the request's action or status.
-
-
-The visual redundancy stems from the database storing only the full message, while the application unnecessarily prefixes the message with a hardcoded title in the frontend. This title duplication, alongside repeated folio information and ambiguous phrases, clutters the notifications.  Analyzing the sample messages reveals this pattern across different notification types, confirming the need to streamline message structure and eliminate redundancy by separating title and content at the data level.
-
-
-
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 1.263277520s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
+**Created:** 1 Oct 2026, 11:25 am
 
 ---
 
