@@ -7,9 +7,9 @@
 | **Trajectory ID** | `6e357b7e-c91b-4705-961b-75dfa5c7e94c` |
 | **Cascade ID** | `707376e8-5501-46d1-bf86-a189f5b11f9d` |
 | **Type** | Agent Conversation |
-| **Total Steps** | 13730 |
+| **Total Steps** | 13818 |
 | **Started** | 21 Sept 2026, 3:55 pm |
-| **Completed** | 1 Oct 2026, 11:25 am |
+| **Completed** | 1 Oct 2026, 11:35 am |
 
 ---
 
@@ -20040,845 +20040,129 @@
 
 ---
 
-## Agent Response
+### Code Edit
 
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
+**Status:** Reset
+**Created:** 1 Oct 2026, 11:07 am
 
 ---
 
-<details>
-<summary>File: `Unknown file` (L711-744)</summary>
+### Terminal Command Execution
 
-**Path:** `Unknown file`
-
-```
-        }
-
-        $persisted = \Common\Notifier::persist($db, 'orden_actualizada', [
-            'folio'          => $resultado['folio'] ?? '',
-            'orden_id'       => $ordenId,
-            'medico_id'      => $userId,
-            'estado'         => 5,
-            'titulo'         => 'Solicitud Cancelada · #' . ($resultado['folio'] ?? ''),
-            'mensaje'        => 'Cancelada por el médico.' . ($obsGuardar !== '' ? ' Motivo: ' . $obsGuardar : ''),
-            'actor_user_id'  => $userId,
-        ]);
-
-        $db->commit();
-    } catch (\Throwable $e) {
-        if ($db->inTransaction()) {
-            $db->rollBack();
-        }
-        \Common\DB::logFallback('ERROR', 'Fallo en POST /orden/cancelar (médico)', $e->getMessage());
-        header('HX-Trigger: ' . json_encode([
-            'mostrarToast' => ['mensaje' => 'Error al cancelar la solicitud.', 'tipo' => 'error']
-        ]));
-        \Common\Response::htmxError('Error al cancelar la solicitud.');
-    }
-
-    \Common\Notifier::push($persisted, 'orden_actualizada', [
-        'folio'     => $resultado['folio'] ?? '',
-        'orden_id'  => $ordenId,
-        'medico_id' => $userId,
-        'estado'    => 5,
-        'titulo'    => 'Solicitud Cancelada · #' . ($resultado['folio'] ?? ''),
-        'mensaje'   => 'Cancelada por el médico.' . ($observacion !== '' ? ' Motivo: ' . $observacion : ''),
-    ]);
-
-    $toastMsg = "✓ Solicitud {$resultado['folio']} cancelada exitosamente.";
-```
-
-</details>
+**Status:** Reset
+**Created:** 1 Oct 2026, 11:07 am
 
 ---
 
-## Agent Response
+### Terminal Command Execution
 
-### Actions
+**Status:** Reset
+**Created:** 1 Oct 2026, 11:07 am
 
-**Tool:** `replace_file_content`
+---
 
-<details>
-<summary>Metadata</summary>
+### Terminal Command Execution
 
-- **Model:** Gemini 3.8 Flash (High)
-</details>
+**Status:** Reset
+**Created:** 1 Oct 2026, 11:07 am
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
-**Created:** 1 Oct 2026, 11:07 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
+**Status:** Reset
+**Created:** 1 Oct 2026, 11:08 am
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
-**Created:** 1 Oct 2026, 11:07 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
+**Status:** Reset
+**Created:** 1 Oct 2026, 11:08 am
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
-**Created:** 1 Oct 2026, 11:07 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 1 Oct 2026, 11:07 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `write_to_file`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
+**Status:** Reset
+**Created:** 1 Oct 2026, 11:08 am
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Oct 2026, 11:08 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Oct 2026, 11:08 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Oct 2026, 11:08 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 1 Oct 2026, 11:08 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
-**Created:** 1 Oct 2026, 11:08 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 1 Oct 2026, 11:08 am
-
----
-
-## Agent Response
-
-### Thinking
-
-The folio #23 information has been updated. The patient's initial presentation in reception is replaced with "Jorge luis del Dr(a). Hedilberto Reyes Venegas" in both the "Paciente en Atención" and the "Resultado Parcial" entries. The patient's name has been successfully extracted and recorded.
-
-
-
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.091165427s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Oct 2026, 11:09 am
 
 ---
 
-## Agent Response
+### Terminal Command Execution
 
-### Thinking
-
-Analyzing patient data records. There are entries indicating patients "pepe lopez," "Jorge luis," and "Juan perez sarmiento" are under the care of Dr. Hedilberto Reyes Venegas. Some records show "Resultado Parcial" (Partial Result) associated with "Jorge luis" and "Juan perez sarmiento," with a PDF available for Jorge Luis.
-
-
-
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.168748431s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
+**Status:** Reset
+**Created:** 1 Oct 2026, 11:09 am
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Oct 2026, 11:09 am
-
----
-
-## Agent Response
-
-### Thinking
-
-Observed three entries. ID 179 indicates a delivered request, while IDs 139 and 137 show canceled requests with specific patient and doctor information. These cancellations include an explanation, suggesting the requests did not proceed.
-
-
-
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.094633821s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 1 Oct 2026, 11:09 am
-
----
-
-## Agent Response
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-<?php
-/**
- * rc/negocio/Ordenes.php — Capa de Negocio para Órdenes y Pacientes (Recepción)
- *
- * Maneja la lógica de dominio, persistencia PDO, ejecución de Stored Procedures
- * (laesh_db.CrearOrdenLaboratorio), secuencias (folios_control), auditoría y logs.
- */
-
-namespace RC\Negocio;
-
-use Common\DB;
-use Common\Logger;
-use PDO;
-use Throwable;
-
-class Ordenes {
-
-    const BUSQ_TEXT_COLS_RC = ['paciente_nombre', 'medico_nombre_completo', 'paciente_telefono', 'diagnostico', 'otros_estudios', 'estudios_json', 'folio_extraido'];
-
-    /**
-     * Busca un paciente existente por teléfono o nombre, o crea uno nuevo en laesh_db.pacientes
-     */
-    public static function buscarOCrearPaciente(array $datos): int {
-        $db = DB::connect();
-        
-        $nombreCompleto = trim($datos['paciente_nombre'] ?? $datos['paciente'] ?? '');
-        $apellidoPaterno = trim($datos['apellido_paterno'] ?? '');
-        if (!empty($apellidoPaterno) && strpos($nombreCompleto, $apellidoPaterno) === false) {
-            $nombreCompleto .= ' ' . $apellidoPaterno;
-        }
-        $telefono = trim($datos['celular'] ?? $datos['telefono'] ?? '');
-        $sexo = ($datos['sexo'] ?? 'H') === 'M' ? 'M' : 'H';
-
-        if (empty($nombreCompleto)) {
-            $nombreCompleto = 'Paciente Sin Nombre';
-        }
-
-        // M3 (auditoría 2026-09-20): sin UNIQUE en telefono/nombre_completo (a
-        // propósito — dos pacientes reales distintos pueden compartir teléfono de
-```
-
-</details>
-
----
-
-## User Request
-
-este cuando ocurre: "Resultado Parcial · #23
-Paciente: Jorge luis del Dr(a). Hedilberto Reyes Venegas — Avance en PDF disponible.
-21:44 · 30/09/2026" ?
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `Ordenes.php`
-**Language:** php
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `subirResultados`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Oct 2026, 11:19 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `Resultado Parcial`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Oct 2026, 11:19 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `Ordenes.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L959-1079)</summary>
-
-**Path:** `Unknown file`
-
-```
-    /**
-     * Guarda la metadata del PDF subido para una orden. Si $tipoEntrega es 'completo'
-     * y la orden aún no llegó a "Resultados Listos", transiciona el estado (2/1→3).
-     * Si es 'parcial', la orden se queda en su estado actual — resultados parciales
-     * de laboratorio (P-LAESH-RESULTADOS-PARCIALES-01, 2026-09-23): el laboratorio
-     * entrega los estudios de una orden en días distintos, acumulados en el mismo
-     * PDF, y es Recepción quien decide (radio Parcial/Completado en la UI) cuándo
-     * la orden queda realmente lista.
-     *
-     * H3/H4/H6 (auditoría 2026-09-20): INSERT del PDF + cambio de estado + persist()
-     * de la notificación 'resultado_disponible', todo en una transacción — si algo
-     * falla a medio camino (ej. la transición es inválida porque la orden ya está
-     * Cerrada), no queda un PDF huérfano registrado sin el cambio de estado.
-     * DB::connect() es singleton — cambiarEstado() reusa esta misma conexión/
-     * transacción sin necesidad de pasarla explícitamente.
-     */
-    public static function guardarResultadoPDF(int $ordenId, string $nombreOriginal, string $rutaStorage, int $userId, string $tipoEntrega = 'parcial', ?string $folioExtraido = null): array {
-        $tipoEntrega = ($tipoEntrega === 'completo') ? 'completo' : 'parcial';
-        $db = DB::connect();
-        $db->beginTransaction();
-
-        try {
-            // 1. Insertar en resultados_pdf
-            $stmt = $db->prepare("
-                INSERT INTO resultados_pdf (orden_id, nombre_archivo, ruta_storage, subido_por, tipo_entrega, folio_extraido, creado_en)
-                VALUES (?, ?, ?, ?, ?, ?, NOW())
-            ");
-            $stmt->execute([$ordenId, $nombreOriginal, $rutaStorage, $userId, $tipoEntrega, $folioExtraido]);
-
-            // 2. Obtener estado actual y folio de la orden
-            $stmtSt = $db->prepare("SELECT estado_id, folio_unico FROM ordenes WHERE id = ? LIMIT 1");
-            $stmtSt->execute([$ordenId]);
-            $ordRow = $stmtSt->fetch(PDO::FETCH_ASSOC);
-
-            if (!$ordRow) {
-                $db->rollBack();
-                return ['success' => false, 'error' => 'Solicitud no encontrada.'];
-            }
-
-            $currEstado = (int)$ordRow['estado_id'];
-            $folio      = $ordRow['folio_unico'];
-
-            // 3. Transicionar a "Resultados Listos" SOLO si Recepción marcó "Completado"
-            //    y la orden aún no había llegado ahí. Un resultado "parcial" nunca
-            //    transiciona — la orden se queda en su estado actual (normalmente 2,
-            //    En Atención) mientras el laboratorio sigue entregando estudios.
-            if ($tipoEntrega === 'completo' && $currEstado < 3) {
-                $resultado = self::cambiarEstado($ordenId, 3, $userId, "Resultados PDF completados: {$nombreOriginal}");
-                if (!$resultado['success']) {
-                    $db->rollBack();
-                    return $resultado;
-                }
-            } elseif ($currEstado < 3) {
-                // Parcial mientras la orden sigue en curso (normalmente estado 2): no hay
-                // transición de estado que registrar vía CambiarEstadoOrden (el SP rechaza
-                // N→N — confirmado en su whitelist de transiciones), así que se deja
-                // trazabilidad manual igual que el camino de re-subida post-completado
-                // de abajo. fecha_resultado NO se toca aquí — solo la transición a 3
-                // marca "resultado disponible" en el sentido que el resto del sistema
-                // ya asume (reportes de tiempos de entrega, etc.).
-                $histStmt = $db->prepare("
-                    INSERT INTO historial_estados_orden (orden_id, estado_anterior_id, estado_nuevo_id, cambiado_por_user_id, observacion)
-                    VALUES (?, ?, ?, ?, ?)
-                ");
-                $histStmt->execute([$ordenId, $currEstado, $currEstado, $userId, "Resultado parcial adjuntado: {$nombreOriginal}"]);
-            } else {
-                // Si ya está en estado 3 (Resultados Listos) o 4 (Cerrada), actualizamos fecha_resultado
-                // y registramos la trazabilidad de re-subida sin forzar una auto-transición 3->3 en el SP.
-                $updStmt = $db->prepare("UPDATE ordenes SET fecha_resultado = NOW() WHERE id = ?");
-                $updStmt->execute([$ordenId]);
-
-                $histStmt = $db->prepare("
-                    INSERT INTO historial_estados_orden (orden_id, estado_anterior_id, estado_nuevo_id, cambiado_por_user_id, observacion)
-                    VALUES (?, ?, ?, ?, ?)
-                ");
-                $histStmt->execute([$ordenId, $currEstado, $currEstado, $userId, "Actualización de PDF de resultados: {$nombreOriginal}"]);
-            }
-
-            $infoRow = $db->prepare("
-                SELECT o.medico_id, o.paciente_id,
-                       p.nombre_completo AS paciente_nombre,
-                       COALESCE(pm.nombre_completo, NULLIF(CONCAT(IFNULL(em.nombre,''), ' ', IFNULL(em.apellidos,'')), ' '), 'Médico') AS medico_nombre
-                FROM ordenes o
-                LEFT JOIN pacientes p ON p.id = o.paciente_id
-                LEFT JOIN users u ON u.id = o.medico_id
-                LEFT JOIN perfiles_medicos pm ON pm.user_id = u.id
-                LEFT JOIN empleados em ON em.user_id = u.id
-                WHERE o.id = ? LIMIT 1
-            ");
-            $infoRow->execute([$ordenId]);
-            $ordInfo = $infoRow->fetch(\PDO::FETCH_ASSOC) ?: [];
-            $medicoId = (int)($ordInfo['medico_id'] ?? 0);
-            $pacienteNombre = trim($ordInfo['paciente_nombre'] ?? 'Paciente');
-            $medicoNombre = trim((string)($ordInfo['medico_nombre'] ?? 'Médico'));
-            if ($medicoNombre !== '' && $medicoNombre !== 'Médico') {
-                if (!str_starts_with($medicoNombre, 'Dr(a).')) {
-                    $medicoNombre = 'Dr(a). ' . preg_replace('/^(Dr|Dra)\.?\s*/i', '', $medicoNombre);
-                }
-            } else {
-                $medicoNombre = 'Dr(a).';
-            }
-            $pacienteDelMedico = "Paciente: {$pacienteNombre} del {$medicoNombre}";
-
-            $tituloNotif = ($tipoEntrega === 'parcial')
-                ? 'Resultado Parcial · #' . $folio
-                : 'Resultados Listos · #' . $folio;
-            $mensajeNotif = ($tipoEntrega === 'parcial')
-                ? $pacienteDelMedico . ' — Avance en PDF disponible.'
-                : $pacienteDelMedico . ' — Concluido, PDF disponible.';
-
-            // 2026-09-25: se agrega 'estado' al payload (mismo nombre de campo
-            // que ya usa 'orden_actualizada') — le permite al cliente decidir
-            // de forma síncrona, sin sondear la red, si el fallback de
-            // navegación (ws-client.js::navegarYResaltarOrden) debe abrir el
-            // PDF de resultados o la solicitud digital: estado>=3 implica que
-            // el PDF ya existe (se acaba de subir, arriba), estado<3 no.
-            // $estadoFinal replica exactamente la transición ya resuelta unas
-            // líneas arriba (completo+currEstado<3 → 3; en cualquier otro
-            // caso el estado no cambió, sigue siendo $currEstado).
-            $estadoFinal = ($tipoEntrega === 'completo' && $currEstado < 3) ? 3 : $currEstado;
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `guardarResultadoPDF`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Oct 2026, 11:19 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L2199-2259)</summary>
-
-**Path:** `Unknown file`
-
-```
-    }
-
-    if (!@is_writable($uploadDir)) {
-        $sendError('Error de permisos en servidor: La carpeta de almacenamiento (' . $uploadDir . ') no es escribible.');
-    }
-
-    // P-LAESH-RESULTADOS-PARCIALES-01 (2026-09-23): nombre determinístico (sin
-    // time()) — el laboratorio entrega resultados parciales acumulados EN EL
-    // MISMO documento, así que cada subida debe sobrescribir literalmente el
-    // PDF anterior de esta orden, no acumular archivos nuevos. Escritura
-    // atómica (tmp + rename, mismo patrón que Cache::set()) para que dos
-    // subidas casi simultáneas a la misma orden no dejen un archivo corrupto
-    // a medio escribir.
-    $filename    = 'resultado_ord_' . $ordenId . '.pdf';
-    $targetPath  = $uploadDir . $filename;
-    $tmpPath     = $targetPath . '.tmp.' . getmypid() . '.' . uniqid();
-    $relativeUrl = ($isOptOk) ? '/laesh-uploads/pdfs/' . $filename : '/uploads/pdfs/' . $filename;
-
-    $wroteTmp = @move_uploaded_file($file['tmp_name'], $tmpPath) || @copy($file['tmp_name'], $tmpPath);
-    if (!$wroteTmp) {
-        $sendError('Error al guardar el archivo PDF en el servidor. Verifique permisos o espacio libre.');
-    }
-    if (!@rename($tmpPath, $targetPath)) {
-        @unlink($tmpPath);
-        $sendError('Error al finalizar el guardado del archivo PDF en el servidor.');
-    }
-
-    // 5. Criterio de Recepción — Parcial (default) o Completado. Whitelist
-    // estricta: cualquier valor inesperado cae a 'parcial' (fail-safe: nunca
-    // transiciona la orden por accidente ante un valor corrupto/inesperado).
-    $tipoEntrega = ($_POST['tipo_entrega'] ?? 'parcial') === 'completo' ? 'completo' : 'parcial';
-
-    // 5b. P-LAESH-FOLIO-EXTRAIDO-01 (2026-09-24): extracción best-effort del folio
-    // del equipo/software de laboratorio embebido en el PDF ya escrito en disco.
-    // Deliberadamente fuera de la transacción de guardarResultadoPDF() — un fallo
-    // aquí (PDF escaneado, formato inesperado) nunca debe impedir la subida.
-    $folioExtraido = \RC\Negocio\Ordenes::extraerFolioLaboratorio($targetPath);
-
-    // 6. Asociar resultado PDF a la orden en MariaDB
-    $resultado = \RC\Negocio\Ordenes::guardarResultadoPDF($ordenId, $file['name'], $relativeUrl, $userId, $tipoEntrega, $folioExtraido);
-
-    if (!$resultado['success']) {
-        // No se borra $targetPath: con nombre determinístico, ese archivo puede
-        // ser el resultado de una subida ANTERIOR ya exitosa — borrarlo aquí
-        // destruiría un PDF válido por el fallo de ESTA subida.
-        $sendError($resultado['error'] ?? 'Error al asociar el PDF con la solicitud.');
-    }
-
-    // H6: notificación 'resultado_disponible' enviada por WS en Ordenes::guardarResultadoPDF()
-    $successMsg = "✓ PDF {$file['name']} cargado correctamente para la solicitud {$resultado['folio']}.";
-    header('HX-Trigger: ' . json_encode([
-        'ordenActualizada' => ['ordenId' => $ordenId],
-        'mostrarToast'     => ['mensaje' => $successMsg, 'tipo' => 'success']
-    ]));
-    \Common\Response::htmxSuccess($successMsg);
-});
-
-// ── GET /orden/pdf — Descarga / visualización del PDF de resultados ─────────────────
-Flight::route('GET /orden/pdf', function () {
-    $ordenId = (int)($_GET['id'] ?? 0);
-    if ($ordenId <= 0) {
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Each order in the Reception Portal grid will have a mechanism for uploading PDF results, either a button or a drag-and-drop area. The upload modal provides options. The default option is "Parcial" (Partial), for when the lab delivers initial results.
-
-
-
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.100056550s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Oct 2026, 11:19 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Oct 2026, 11:20 am
-
----
-
-## Agent Response
-
-### Thinking
-
-Examining the provided timeline for folio #23, Dr. Hedilberto Reyes Venegas initiated a digital request for "Jorge luis" on 2026-09-26. The initial status was "Remitido".
-
-The patient, "Jorge luis," presented at the clinic on 2026-09-30, and the status was updated to "En Atención." This represents the core chronological events regarding the patient's request and clinical visit.
-
-
-
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.001142978s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-## User Request
-
-Para  portal medico que las notificaciones no contengan "del Dr(a). Hedilberto Reyes Venegas" , pues el mismo medico es quien esta autentica es redundnate y sobre todo ocupa espacio en mobiles. ¿ me explico ?
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `Ordenes.php`
-**Language:** php
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-The user's feedback is astute; removing the doctor's name from notifications is logical because the doctor is the authenticator in this scenario. This redundancy wastes space, especially on mobile devices. Considering the Reception portal handles patients for multiple doctors, the notification context should be general.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.096888616s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
@@ -21735,6 +21019,1360 @@ The front-end code removes the redundant "del Dr(a)..." from messages in the med
 
 **Status:** Completed
 **Created:** 1 Oct 2026, 11:25 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 1 Oct 2026, 11:25 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 1 Oct 2026, 11:26 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 1 Oct 2026, 11:26 am
+
+---
+
+## Agent Response
+
+### Thinking
+
+Identified a typo where "jorge luis" and "—" are concatenated in a message. This appears to stem from a regex that removes extraneous medical professional information. The regex likely captured a space that should have been outside its matching scope. The original database text confirms the presence of the space.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.080096499s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 1 Oct 2026, 11:26 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 1 Oct 2026, 11:26 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 1 Oct 2026, 11:26 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `ws-client.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1237-1247)</summary>
+
+**Path:** `Unknown file`
+
+```
+                }
+            }
+
+            var msgFinal = data.mensaje || 'Se ha registrado una nueva actividad.';
+            if (isMedicoPortal) {
+                msgFinal = msgFinal.replace(/\s+del\s+Dr\(a\)\.[^—–-]+/gi, '').trim();
+            }
+
+            item.innerHTML = '<strong style="color: #0f172a;">' + escapeHtml(data.titulo || 'Nueva Notificación') + '</strong><br>' +
+                             '<span class="txt-muted-sm" style="color: #475569; font-size: 0.78rem;">' + escapeHtml(msgFinal) + '</span>' +
+                             '<div style="font-size:0.7rem; color:#94a3b8; margin-top:2px;">' + timeDisplay + '</div>';
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 1 Oct 2026, 11:26 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 1 Oct 2026, 11:27 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 1 Oct 2026, 11:27 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 1 Oct 2026, 11:27 am
+
+---
+
+## Agent Response
+
+### Thinking
+
+The doctor's message format is being refined, removing the unnecessary inclusion of the doctor's name from the patient message. Attention messages will also be formatted, indicating a change in status.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `titulo VARCHAR`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.081430860s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 1 Oct 2026, 11:27 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `CREATE TABLE IF NOT EXISTS notificaciones`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 1 Oct 2026, 11:27 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `TABLE.*notificaciones`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 1 Oct 2026, 11:28 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `notificaciones`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 1 Oct 2026, 11:28 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `03_transactional_schema.sql`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L144-164)</summary>
+
+**Path:** `Unknown file`
+
+```
+      COMMENT 'Índice para poll: WHERE user_id=? AND (entregado_ws=0 OR leido=0)',
+    CONSTRAINT `fk_notif_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+  COMMENT='Notificaciones sistema — SSOT QoS: Swoole WS + fallback AJAX poll';
+
+-- P-LAESH-NOTIF-SEMANTICA-01 (2026-09-30) — desacoplamiento de título y cuerpo
+-- para eliminar redundancias en notificaciones WS/Polling. Idempotente.
+ALTER TABLE `notificaciones`
+  ADD COLUMN IF NOT EXISTS `titulo` VARCHAR(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+    COMMENT 'Título conciso para encabezado de notificación'
+    AFTER `folio_referencia`;
+
+-- Gap 3 (auditoría WS 2026-09-18, §2.4c): 'catalogo_actualizado' agregado al ENUM.
+-- Antes, ese evento no tenía fallback de persistencia — si Swoole estaba caído al
+-- guardar un cambio de catálogo, ningún cliente se enteraba después. Idempotente:
+-- re-declarar el mismo ENUM (o uno más amplio) no falla en ejecuciones repetidas.
+ALTER TABLE `notificaciones`
+  MODIFY COLUMN `tipo` ENUM('nueva_orden','resultados_listos','orden_actualizada','catalogo_actualizado') NOT NULL;
+
+-- Deuda QoS-01 (2026-09-18) — estadísticas estructuradas de fallback WS: se agrega
+-- fallback_reason (motivo corto del fallo cuando entregado_ws=0, poblado por
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Understood the user's observation about redundant text in the doctor's portal, recognizing it consumes valuable screen space on mobile devices. Decided to confirm this understanding explicitly in the response. Planning to explain the specific differentiation that addresses this issue.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.059538509s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+## User Request
+
+Auto auditate para identificar alguna falla, gaps,issues resultantes de los fixe, re-fixes y realización de features; incluye desde ayer 6 pm, hasta hoy (11:32 am MX) has realizado. Dame informe.
+
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `ws-client.js`
+**Language:** javascript
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Reviewing the request, the core task is a self-audit focusing on defects introduced by fixes, re-fixes, and new features since yesterday evening. The starting point will be examining version control changes from the specified time onwards to identify relevant modifications. This will be the basis for evaluating potential issues.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.093886738s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 1 Oct 2026, 11:32 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 1 Oct 2026, 11:33 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 1 Oct 2026, 11:33 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 1 Oct 2026, 11:33 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 1 Oct 2026, 11:33 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 1 Oct 2026, 11:33 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 1 Oct 2026, 11:33 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 1 Oct 2026, 11:33 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 1 Oct 2026, 11:33 am
+
+---
+
+## Agent Response
+
+### Thinking
+
+Changes since yesterday at 18:00 are being reviewed. Commit `d426ade` at approximately 20:06 affected several files related to grids, cell widths, and mobile views. Then commit `b089bc6` at roughly 21:30 involved other files.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.043936113s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 1 Oct 2026, 11:33 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `.gitignore`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# Ignore Vosk models and large archives
+web-assets/models/
+*.tar.gz
+!web-assets/libs/models/vosk-model-small-es-0.42.tar.gz
+
+# Contexto de IA y Ground Truth heredado
+/.agents
+/.chatledger
+/.claude
+/.mcp.json
+/CLAUDE.md
+/GEMINI.md
+/.clauderules
+/docs-dev/ga-cl-ia
+
+# 2026-10-01 (auditoría): artefactos locales que no deben versionarse
+# CA mkcert local — la genera contenedor/setup-ssl.sh
+/ca.crt
+# El log real vive en /opt/laesh/logs (config.php)
+laesh-swbldi/logs/*.log
+
+# Caché de Expo (proyecto purificadoraAgua) — generada, no se versiona
+.expo/
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 1 Oct 2026, 11:33 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 1 Oct 2026, 11:33 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 1 Oct 2026, 11:33 am
+
+---
+
+## Agent Response
+
+### Thinking
+
+Commit `4d0ed10` encapsulates the work completed this morning; the complete set from yesterday 18:00 consists of commits `d426ade`, `b089bc6`, `b8042bb`, `290c11b`, `e4329a4`, and `4d0ed10`. Starting a detailed audit of all work performed during that period, identifying specific tasks and fixes. Proceeding to a comprehensive review.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.029983721s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 1 Oct 2026, 11:34 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 1 Oct 2026, 11:34 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 1 Oct 2026, 11:34 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 1 Oct 2026, 11:34 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 1 Oct 2026, 11:34 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 1 Oct 2026, 11:34 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 1 Oct 2026, 11:35 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `notifier.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L249-284)</summary>
+
+**Path:** `Unknown file`
+
+```
+        $targetUrl = self::resolveTargetUrl();
+        $jsonPayload = json_encode($payload);
+        $swooleSuccess = false;
+        $fallbackReason = null;
+        $response = null;
+        $internalToken = self::resolveInternalToken();
+
+        if (function_exists('curl_init')) {
+            $ch = curl_init($targetUrl);
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonPayload);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json', 'X-Internal-Token: ' . $internalToken]);
+            curl_setopt($ch, CURLOPT_TIMEOUT, 2);
+
+            $res = curl_exec($ch);
+            $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            $curlErrno = curl_errno($ch);
+            curl_close($ch);
+
+            if ($http_code === 200) {
+                $response = json_decode((string)$res, true);
+                $swooleSuccess = isset($response['status']) && $response['status'] === 'success';
+                if (!$swooleSuccess) $fallbackReason = 'response_invalid';
+            } elseif ($curlErrno === CURLE_OPERATION_TIMEDOUT) {
+                $fallbackReason = 'timeout';
+            } elseif ($curlErrno !== 0) {
+                $fallbackReason = 'curl_error_' . $curlErrno;
+            } else {
+                $fallbackReason = 'http_error_' . $http_code;
+            }
+        } else {
+            $opts = [
+                'http' => [
+                    'method'  => 'POST',
+                    'header'  => "Content-Type: application/json\r\nX-Internal-Token: " . $internalToken . "\r\n",
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `notifier.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L339-399)</summary>
+
+**Path:** `Unknown file`
+
+```
+     * md/negocio/Ordenes.php::crearSolicitudDigital(), rc/negocio/Ordenes.php::cambiarEstado()/guardarResultadoPDF()).
+     */
+    public static function emit(string $event, array $payload): bool {
+        try {
+            $db = \Flight::db();
+        } catch (\Throwable $e) {
+            return false;
+        }
+        try {
+            $persisted = self::persist($db, $event, $payload);
+        } catch (\Throwable $e) {
+            // persist() ya logueó el detalle; emit() histórico no relanza para no
+            // romper callers que no esperan excepciones.
+            return false;
+        }
+        self::push($persisted, $event, $payload);
+        return true;
+    }
+
+    /**
+     * Gap 6 (2026-09-18): avisa a Swoole que cierre el/los socket(s) de una sesión
+     * ya revocada en BD+Cache — antes, un WS ya conectado seguía activo hasta su
+     * expiración natural (máx. 24h) sin importar la revocación. Mismo puente HTTP
+     * que emit()/publish, apuntando a /revoke en vez de /publish. Fire-and-forget:
+     * si Swoole está caído, la revocación en BD/Cache ya es efectiva para HTTP
+     * (RbacManager) — este método solo acelera el cierre del canal WS, no es
+     * la fuente de verdad de la revocación misma.
+     *
+     * @param string|null $jti     Cierra solo el socket de esa sesión (preferido).
+     * @param int|null    $userId  Cierra TODOS los sockets de ese usuario — usar solo
+     *                             cuando no se tiene el jti individual (ej. revocación
+     *                             masiva por admin). Sin caller PHP actual tras eliminar
+     *                             JwtManager::revokeAllUserSessions() por código muerto
+     *                             (2026-09-20) — modo soportado igual por el endpoint.
+     */
+    public static function revokeSession(?string $jti = null, ?int $userId = null, ?string $reason = null): bool
+    {
+        if (empty($jti) && empty($userId)) return false;
+
+        $targetUrl = 'http://swoole:9502/revoke';
+        if (!gethostbyname('swoole') || gethostbyname('swoole') === 'swoole') {
+            $config = require __DIR__ . '/config.php';
+            $swoolePort = $config['swoole']['port'] ?? 9502;
+            $targetUrl = 'http://127.0.0.1:' . $swoolePort . '/revoke';
+        }
+
+        $payload = [];
+        if (!empty($jti)) $payload['jti'] = $jti;
+        if (!empty($userId)) $payload['user_id'] = $userId;
+        if (!empty($reason)) $payload['reason'] = $reason;
+        $jsonPayload = json_encode($payload);
+
+        if (!function_exists('curl_init')) return false;
+
+        $ch = curl_init($targetUrl);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonPayload);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json', 'X-Internal-Token: ' . self::resolveInternalToken()]);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 2);
+        $res = curl_exec($ch);
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `function resolveInternalToken`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 1 Oct 2026, 11:35 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `notifier.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L59-89)</summary>
+
+**Path:** `Unknown file`
+
+```
+     */
+    public static function resolveInternalToken(): string {
+        $config = require __DIR__ . '/config.php';
+        $jwtSecret = $config['jwt']['secret'] ?? '';
+        return hash_hmac('sha256', 'ws-internal-bridge', $jwtSecret);
+    }
+
+    /**
+     * Fase 1 del outbox — calcula destinatarios e INSERTa en notificaciones
+     * usando la conexión del caller (participa en su transacción de negocio).
+     *
+     * @return array{notif_ids: int[], target_user_ids: ?int[], folio: string, mensaje: string}
+     *   notif_ids vacío si el evento no generó ninguna fila (ej. catalogo_actualizado
+     *   sin destinatarios de fallback resueltos).
+     */
+    public static function persist(\PDO $db, string $event, array $payload): array {
+        $targetUserIds = null;
+        $medicoUserId = null;
+        // Gap 3 (2026-09-18): lista SOLO para el fallback de persistencia en BD de
+        // 'catalogo_actualizado' — a propósito NUNCA se usa para filtrar el push WS
+        // en vivo (ver push()), porque ese evento es genuinamente para todos.
+        $catalogFallbackUserIds = null;
+
+        try {
+            if (in_array($event, ['nueva_orden', 'orden_actualizada'], true)) {
+                $targetUserIds = $db->query(
+                    "SELECT user_id FROM vw_empleados_usuarios
+                     WHERE rol IN ('RECEPCION','ADMIN') AND activo = 1"
+                )->fetchAll(\PDO::FETCH_COLUMN);
+                $targetUserIds = array_map('intval', $targetUserIds);
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `swoole_server.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L169-239)</summary>
+
+**Path:** `Unknown file`
+
+```
+// handshakes RECHAZADOS por verifyWsJwt() — antes invisibles por completo.
+// jti/user_id pueden ser null (ver docblock de verifyWsJwt()).
+function auditWsRejection(string $reason, ?string $jti, ?int $userId, ?string $ip): void {
+    if (!function_exists('curl_init')) return;
+
+    $payload = json_encode([
+        'event'   => 'reject',
+        'motivo'  => $reason,
+        'jti'     => $jti,
+        'user_id' => $userId,
+        'ip'      => $ip,
+    ]);
+
+    $ch = curl_init('https://127.0.0.1/internal/ws-audit');
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 2);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+    @curl_exec($ch);
+    curl_close($ch);
+}
+
+$server = new Server($swooleHost, $swoolePort);
+
+$server->set([
+    // ── Workers ──────────────────────────────────────────────
+    // 1 worker: OBLIGATORIO mientras $clients sea un array PHP normal — con
+    // más de 1 worker, cada proceso tiene su propia copia y /publish, /revoke
+    // y /status solo ven una fracción de los clientes (incidente 2026-09-19,
+    // verificado con clientes reales en KVM2). Migrar a Swoole\Table antes de
+    // subir este número — carga real (~0.07 msg/s) no lo necesita de todas
+    // formas; solo considerar si se agrega lógica pesada por mensaje (DB
+    // writes, email, PDF) o usuarios simultáneos > 200, y solo junto con
+    // Swoole\Table para $clients.
+    'worker_num'               => 1,
+
+    // Reinicia cada worker tras N requests para liberar memoria.
+    // 5 000 ≈ ~2.5 días con carga proyectada (5 000 / (83 msg/h * 24h)).
+    'max_request'              => 5000,
+
+    // ── Conexiones concurrentes ───────────────────────────────
+    // Límite de fds (WebSocket + HTTP bridge). 200 usuarios
+    // simultáneos + margen generoso para picos.
+    'max_conn'                 => 500,
+
+    // ── Heartbeat / Limpieza de sockets ──────────────────────
+    // Clínica: portales abiertos todo el turno (≤10h).
+    // Intervalo de escaneo cada 60s (vs 30s anterior).
+    'heartbeat_check_interval' => 60,
+    // Socket inactivo > 600s (10 min) se cierra automáticamente.
+    // Permite reconexión del cliente sin perder sesión de corta
+    // ausencia (coffee break, consulta breve).
+    'heartbeat_idle_time'      => 600,
+
+    // ── Buffers ───────────────────────────────────────────────
+    // 2 MB por worker: suficiente para payloads JSON de órdenes
+    // de laboratorio (<5 KB típico).
+    'buffer_output_size'       => 2 * 1024 * 1024,
+    // 128 MB total de buffer de socket (compartido entre fds).
+    'socket_buffer_size'       => 128 * 1024 * 1024,
+
+    // ── TCP KeepAlive ─────────────────────────────────────────
+    'open_tcp_keepalive'       => true,
+    'tcp_keepidle'             => 60,   // sondear tras 60s inactivo
+    'tcp_keepinterval'         => 10,   // reintento cada 10s
+    'tcp_keepcount'            => 3,    // cerrar tras 3 fallos
+
+    // ── Logging ───────────────────────────────────────────────
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `swoole_server.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L369-439)</summary>
+
+**Path:** `Unknown file`
+
+```
+            $sent = 0;
+            foreach ($clients as $fd => $identity) {
+                if (!$server->isEstablished($fd)) continue;
+                $uid = (int)($identity['user_id'] ?? 0);
+                if ($targetIds !== null && !in_array($uid, $targetIds, true)) continue;
+                $outgoing = $data;
+                // notif_ids_by_user llega con claves string (JSON no tiene claves int)
+                if (isset($notifIdsByUser[(string)$uid])) {
+                    $outgoing['id'] = $notifIdsByUser[(string)$uid];
+                }
+                $server->push($fd, json_encode($outgoing), 1, true);
+                $sent++;
+            }
+
+            $response->status(200);
+            $response->header('Content-Type', 'application/json');
+            $response->end(json_encode([
+                'status'            => 'success',
+                'sent_to_clients'   => $sent,
+                'total_clients'     => count($clients),
+            ]));
+            return;
+        }
+
+        $response->status(400);
+        $response->header('Content-Type', 'application/json');
+        $response->end(json_encode(['error' => 'Invalid JSON payload']));
+        return;
+    }
+
+    // ── Gap 6 (auditoría 2026-09-18) — Revocación activa de sockets ya abiertos ──
+    // Antes: verifyWsJwt() solo corría en on('open') — un socket revocado mientras
+    // ya estaba conectado seguía recibiendo eventos hasta expirar (máx. 24h). Mismo
+    // patrón de puente que /publish, en dirección análoga: JwtManager::revokeJti()
+    // llama aquí tras confirmar la revocación en BD+Cache.
+    // Body: {"jti": "..."}  → cierra el fd exacto de esa sesión (preferido, específico)
+    //       {"user_id": N}  → cierra TODOS los fd de ese usuario (todos sus dispositivos)
+    //                          — sin caller PHP actual tras eliminar revokeAllUserSessions()
+    //                          por código muerto (2026-09-20); el endpoint sigue soportando
+    //                          este modo por si se invoca directo o se reconecta a futuro.
+    // Si vienen ambos, jti gana (más específico) — evita cerrar de más por error.
+    if ($method === 'POST' && $uri === '/revoke') {
+        $raw  = $request->rawContent();
+        $data = json_decode($raw, true);
+
+        if (!is_array($data) || (empty($data['jti']) && empty($data['user_id']))) {
+            $response->status(400);
+            $response->header('Content-Type', 'application/json');
+            $response->end(json_encode(['error' => 'Se requiere jti o user_id']));
+            return;
+        }
+
+        $closed = 0;
+        $reason = $data['reason'] ?? 'session_revoked';
+        $logoutMsg = ($reason === 'medico_pausado_por_admin')
+            ? 'Tu cuenta ha sido pausada por el administrador.'
+            : (($reason === 'password_reset_by_admin')
+                ? 'Tu contraseña fue restablecida por el administrador. Inicia sesión nuevamente.'
+                : 'Tu sesión ha finalizado.');
+
+        foreach ($clients as $fd => $identity) {
+            if (!$server->isEstablished($fd)) continue;
+
+            $matches = false;
+            if (!empty($data['jti'])) {
+                $matches = (($identity['jti'] ?? null) === (string)$data['jti']);
+            } elseif (!empty($data['user_id'])) {
+                $matches = ((int)($identity['user_id'] ?? 0) === (int)$data['user_id']);
+            }
+
+            if ($matches) {
+```
+
+</details>
 
 ---
 

@@ -18,6 +18,10 @@
 - PEN-LAESH-13 🔴 `keyssh.sh` en historial git — posible contraseña de `sysadmin`.
 - PEN-LAESH-14 🟢 mover tests de Voice-KDS fuera de `www/tests/`.
 - PEN-LAESH-15 🟡 commit de lo trabajado 2026-09-30/10-01 (esperar instrucción).
+- PEN-LAESH-16 ✅ `folio_extraido` en `vw_ordenes_completas`: estaba en `09_views.sql` (10:19), faltaba aplicarlo en Docker local y OCI — aplicado; suite local 141/141, KVM2 141/141. PxLab solo en Recepción.
+- PEN-LAESH-19 🔴 `laesh_app` en KVM2 usa la contraseña de desarrollo (`laesh_2026_dev`, pública en el repo). Solo loopback; rotar antes del Go-Live **con autorización del usuario** (procedimiento en el runbook).
+- PEN-LAESH-17 🔴 buscadores RC con `hx-trigger` que requiere eval (`allowEval:false`) — no disparan al teclear.
+- PEN-LAESH-18 🟡 403 del puente PHP→Swoole (30/09): mitigado con huellas, verificación en deploy/monitor y bridge sin DNS. **Evitar deploys en ráfaga desde dos agentes a la vez.**
 
 ### P-LAESH-CATALOGO-NOMBRES-SUCIOS-01 🔵 [LAESH Bloc Digital] 3 estudios del catálogo con datos sucios provenientes del Excel maestro — usuario corregirá desde CMS
 **Estado**: Investigado y confirmado (2026-09-21, Claude Code). **No tocado en BD** — el usuario decidió corregirlo él mismo desde el panel admrc en vez de que se corrija por script.
