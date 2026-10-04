@@ -7,9 +7,9 @@
 | **Trajectory ID** | `d9db939d-316b-4b76-977d-f767304cf5c0` |
 | **Cascade ID** | `71fe41a8-1855-4b9a-9a77-479f63c09911` |
 | **Type** | Agent Conversation |
-| **Total Steps** | 1022 |
+| **Total Steps** | 1115 |
 | **Started** | 2 Oct 2026, 2:13 pm |
-| **Completed** | 3 Oct 2026, 3:25 pm |
+| **Completed** | 3 Oct 2026, 3:34 pm |
 
 ---
 
@@ -24942,6 +24942,2414 @@ Identified the components to be modified: the search input, notification element
 
 **Status:** Completed
 **Created:** 3 Oct 2026, 3:25 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L354-449)</summary>
+
+**Path:** `Unknown file`
+
+```
+                    </div><!-- /subtab-generar -->
+
+                    <!-- ── Sub-tab 2: Mis Órdenes de Hoy ── -->
+                    <!-- GAP-MD-02/03 (2026-09-22): se homologa el control de búsqueda/total/
+                         paginación con Recepción / Órdenes Hoy; la grilla y sus columnas
+                         propias del médico se conservan sin cambio. Hoy y Anteriores usan
+                         ahora las mismas mdRenderOrdenesTablaHeader/Body (ver md/index.php)
+                         — garantiza que ambas listas ofrezcan exactamente lo mismo. -->
+                    <div id="subtab-ordenes-hoy" class="portal-tab-panel" role="tabpanel" aria-labelledby="tab-ordenes-hoy">
+                        <div class="cms-panel-header" id="ordenes-hoy-md-header" style="margin-bottom: 1rem; display: flex; justify-content: flex-end; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                            <div id="ordenes-hoy-md-pagination-wrap" style="display: flex; align-items: center; gap: 0.5rem;">
+                                <span id="ordenes-hoy-md-total-records" style="font-size: 0.88rem; color: var(--text-muted); font-weight: 600;">Total: <?= (int)($totalOrdenesPropias ?? 0) ?></span>
+                                <span style="color: #cbd5e1; display: inline;">|</span>
+                                <div style="display: flex; gap: 0.25rem; align-items: center;">
+                                    <?php $totPgsHoyMd = max(1, (int)ceil(($totalOrdenesPropias ?? 0) / 25)); ?>
+                                    <button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;">‹ <span class="pag-label-text">Ant.</span></button>
+                                    <span style="font-size:0.82rem; font-weight:600; color:var(--text-muted); padding: 0 4px;">1 / <?= $totPgsHoyMd ?></span>
+                                    <?php if ($totPgsHoyMd > 1): ?>
+                                        <button type="button" class="btn btn-secondary btn-sm" style="padding: 2px 8px; font-size: 0.8rem;" hx-get="/laesh/md/tabla-ordenes?page=2" hx-target="#tabla-medico" hx-swap="outerHTML" hx-include="#input-buscar-orden-hoy-md"><span class="pag-label-text">Sig.</span> ›</button>
+                                    <?php else: ?>
+                                        <button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;"><span class="pag-label-text">Sig.</span> ›</button>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                            <div id="ordenes-hoy-md-search-wrap" class="search-bar-unified">
+                                <input type="text" id="input-buscar-orden-hoy-md" name="q" class="form-input form-input--bg search-bar-input" autocomplete="off" spellcheck="false" placeholder="🔍 Folio, paciente o tel..." hx-get="/laesh/md/tabla-ordenes" hx-target="#tabla-medico" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms, search">
+                                <button type="button" class="btn-search-clear" data-target="#input-buscar-orden-hoy-md" title="Limpiar búsqueda" aria-label="Limpiar búsqueda">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <path d="m7 21-4.3-4.3c-1-1-1-2.5 0-3.4l9.6-9.6c1-1 2.5-1 3.4 0l5.6 5.6c1 1 1 2.5 0 3.4L13 21"></path>
+                                        <path d="M22 21H7"></path>
+                                        <path d="m5 11 9 9"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card mt-0" style="padding: 0; overflow: hidden; border: 1px solid var(--border); border-radius: 8px;">
+                            <div class="table-responsive" style="max-height: calc(100vh - 250px); overflow-y: auto; overflow-x: auto; -webkit-overflow-scrolling: touch; width: 100%;">
+                                <table class="table" id="tabla-medico" hx-get="/laesh/md/tabla-ordenes" hx-target="#tabla-medico" hx-swap="outerHTML" hx-trigger="refresh, ordenCreada from:body, ordenActualizada from:body" style="margin-bottom: 0; width: 100%; min-width: <?= mdOrdenesTablaMinWidth() ?>px; table-layout: fixed; border-collapse: collapse;">
+                                    <?= mdRenderOrdenesColgroup() ?>
+                                    <thead>
+                                        <?= mdRenderOrdenesTablaHeader('fecha', 'desc', '', '/laesh/md/tabla-ordenes', '#tabla-medico', '#input-buscar-orden-hoy-md') ?>
+                                    </thead>
+                                    <?= mdRenderOrdenesTablaBody($ordenesPropias ?? [], $csrfToken ?? '', '') ?>
+                                </table>
+                            </div>
+                        </div>
+                    </div><!-- /subtab-ordenes-hoy -->
+                </div><!-- /panel-nueva-orden -->
+
+            <!-- Panel 2: Solicitudes Anteriores — Consulta retroactiva desde MariaDB -->
+            <!-- GAP-MD-01 (2026-09-21): se elimina el combo "Período" (filtrado client-side)
+                 y se adopta el mismo patrón de grilla HTMX con ordenamiento/búsqueda/paginación
+                 server-side ya usado por Recepción / Órdenes Anteriores (ver rc/views/labadmin.php). -->
+            <div class="tab-panel d-none" id="panel-historial-medico">
+                <!-- 2026-09-25 (pedido del usuario): título propio de vuelta — antes se
+                     había quitado (ver historial abajo) confiando solo en el breadcrumb,
+                     pero el usuario pidió un título reducido visible aquí. Reutiliza
+                     .panel-nueva-orden-title (mismo estilo compacto que el panel Nueva
+                     Solicitud) para no duplicar CSS. En móvil, la paginación de abajo
+                     (#ordenes-anteriores-md-pagination-wrap) ahora se oculta — ver
+                     portal.css @media(max-width:767px) — así que ya no compite por
+                     espacio con este título en la misma fila.
+                     2026-09-24 (histórico): header homologado 1:1 con #ordenes-hoy-md-header
+                     (mismo patrón que ya usan mdRenderOrdenesTablaHeader/Body para la
+                     grilla) — antes traía un <h2>+<p> propio que "Hoy" no tenía, rompiendo
+                     la simetría pedida y desbordando en móvil (el título no cabía junto a
+                     paginación+buscador en flex-wrap:nowrap). -->
+                <h2 class="panel-nueva-orden-title">Solicitudes Digitales Anteriores</h2>
+                <div class="cms-panel-header ordenes-anteriores-toolbar-md" id="ordenes-anteriores-md-header" style="margin-bottom: 1rem; display: flex; align-items: center; flex-wrap: wrap; gap: 0.85rem;">
+                    <!-- A la izquierda: Paginador y Total en Cápsula (aprovecha el espacio libre de la izquierda en laptop/desktop) -->
+                    <div id="ordenes-anteriores-md-pagination-wrap" class="toolbar-pagination-capsule">
+                        <span id="ordenes-anteriores-md-total-records" style="font-size: 0.88rem; color: var(--text-muted); font-weight: 600;">Total: <?= (int)($totalOrdenesAnteriores ?? 0) ?></span>
+                        <span style="color: #cbd5e1; display: inline;">|</span>
+                        <div style="display: flex; gap: 0.25rem; align-items: center;">
+                            <?php $totPgsAntMd = max(1, (int)ceil(($totalOrdenesAnteriores ?? 0) / 25)); ?>
+                            <button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;">‹ <span class="pag-label-text">Ant.</span></button>
+                            <span style="font-size:0.82rem; font-weight:600; color:var(--text-muted); padding: 0 4px;">1 / <?= $totPgsAntMd ?></span>
+                            <?php if ($totPgsAntMd > 1): ?>
+                                <button type="button" class="btn btn-secondary btn-sm" style="padding: 2px 8px; font-size: 0.8rem;" hx-get="/laesh/md/tabla-ordenes-anteriores?page=2&periodo=30d" hx-target="#tabla-historial-completo" hx-swap="outerHTML" hx-include="#input-buscar-orden-anteriores-md, #select-periodo-anteriores-md, #fecha-inicio-anteriores-md, #fecha-fin-anteriores-md"><span class="pag-label-text">Sig.</span> ›</button>
+                            <?php else: ?>
+                                <button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;"><span class="pag-label-text">Sig.</span> ›</button>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+
+                    <!-- A la derecha: Filtros y Búsqueda con Separadores y Agrupado Tenue -->
+                    <div class="toolbar-md-right-controls" style="display: flex; align-items: center; gap: 0.85rem; flex-wrap: wrap;">
+                        <!-- Combo List de Período y Rango de Fechas con Agrupado Tenue -->
+                        <div id="ordenes-anteriores-md-periodo-container" class="periodo-container">
+                            <div class="periodo-select-group">
+                                <label for="select-periodo-anteriores-md" class="periodo-select-label">Período</label>
+                                <select id="select-periodo-anteriores-md" name="periodo" class="form-select select-sm" style="padding: 4px 10px; font-size: 0.82rem; border-radius: 6px; border: 1px solid var(--border); background: #ffffff; color: var(--text-dark); cursor: pointer;"
+                                        hx-get="/laesh/md/tabla-ordenes-anteriores"
+                                        hx-target="#tabla-historial-completo"
+                                        hx-swap="outerHTML"
+                                        hx-include="#input-buscar-orden-anteriores-md, #select-periodo-anteriores-md, #fecha-inicio-anteriores-md, #fecha-fin-anteriores-md"
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L450-489)</summary>
+
+**Path:** `Unknown file`
+
+```
+                                        hx-trigger="change">
+                                    <option value="30d" selected>30 d</option>
+                                    <option value="15d">15 d</option>
+                                    <option value="fecha">Fechas</option>
+                                </select>
+                            </div>
+                            <span id="rango-fechas-anteriores-md" class="rango-fechas-group d-none" style="display: none;">
+                                <div class="fecha-field-wrap">
+                                    <label for="fecha-inicio-anteriores-md" class="fecha-field-label">Inicial</label>
+                                    <input type="date" id="fecha-inicio-anteriores-md" name="fecha_inicio" class="select-sm form-input" style="padding: 3px 6px; font-size: 0.8rem; border-radius: 6px; border: 1px solid var(--border); width: 130px; background: #ffffff;" max="<?= date('Y-m-d', strtotime('-1 day')) ?>" title="Fecha inicial" aria-label="Fecha inicial">
+                                </div>
+                                <div class="fecha-field-wrap">
+                                    <label for="fecha-fin-anteriores-md" class="fecha-field-label">Final</label>
+                                    <input type="date" id="fecha-fin-anteriores-md" name="fecha_fin" class="select-sm form-input" style="padding: 3px 6px; font-size: 0.8rem; border-radius: 6px; border: 1px solid var(--border); width: 130px; background: #ffffff;" max="<?= date('Y-m-d', strtotime('-1 day')) ?>" title="Fecha final" aria-label="Fecha final">
+                                </div>
+                                <button type="button" id="btn-buscar-fechas-anteriores-md" class="btn-fechas-search-icon" title="Iniciar búsqueda por rango de fechas" aria-label="Iniciar búsqueda por rango de fechas"
+                                        hx-get="/laesh/md/tabla-ordenes-anteriores"
+                                        hx-target="#tabla-historial-completo"
+                                        hx-swap="outerHTML"
+                                        hx-include="#input-buscar-orden-anteriores-md, #select-periodo-anteriores-md, #fecha-inicio-anteriores-md, #fecha-fin-anteriores-md">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <circle cx="11" cy="11" r="8"></circle>
+                                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                    </svg>
+                                </button>
+                            </span>
+                        </div>
+
+                        <!-- Separador Vertical -->
+                        <div class="toolbar-separator" aria-hidden="true"></div>
+
+                        <!-- Buscador con ancho confortable -->
+                        <div id="ordenes-anteriores-md-search-wrap" class="search-bar-unified" style="margin-left: auto;">
+                            <input type="text" id="input-buscar-orden-anteriores-md" name="q" class="form-input form-input--bg search-input-anteriores search-bar-input" autocomplete="off" spellcheck="false" placeholder="🔍 Folio, paciente o tel (dentro del período)..." hx-get="/laesh/md/tabla-ordenes-anteriores" hx-target="#tabla-historial-completo" hx-swap="outerHTML" hx-include="#input-buscar-orden-anteriores-md, #select-periodo-anteriores-md, #fecha-inicio-anteriores-md, #fecha-fin-anteriores-md" hx-trigger="keyup changed delay:300ms, search">
+                            <button type="button" class="btn-search-clear" data-target="#input-buscar-orden-anteriores-md" title="Limpiar búsqueda" aria-label="Limpiar búsqueda">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="m7 21-4.3-4.3c-1-1-1-2.5 0-3.4l9.6-9.6c1-1 2.5-1 3.4 0l5.6 5.6c1 1 1 2.5 0 3.4L13 21"></path>
+                                    <path d="M22 21H7"></path>
+                                    <path d="m5 11 9 9"></path>
+                                </svg>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `laesh-notif-return-bar`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 3 Oct 2026, 3:25 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `portal.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L3569-3684)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+/* ── Barra de Retorno a Búsqueda Previa / Notificación (Desktop y Móvil) ── */
+.laesh-notif-return-bar {
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    border-left: 4px solid #0052b7;
+    border-radius: 6px;
+    padding: 6px 12px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    box-sizing: border-box;
+    width: 100%;
+}
+.laesh-notif-return-bar--error {
+    background: #fef2f2;
+    border-color: #fecaca;
+    border-left-color: #ef4444;
+}
+.notif-return-info {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.82rem;
+    color: #1e3a8a;
+    min-width: 0;
+}
+.laesh-notif-return-bar--error .notif-return-info {
+    color: #991b1b;
+}
+.notif-return-folio {
+    color: #0052b7;
+    font-weight: 700;
+}
+.laesh-notif-return-bar--error .notif-return-folio {
+    color: #b91c1c;
+}
+.notif-return-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+}
+.btn-return-busqueda {
+    padding: 4px 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #ffffff;
+    background: #0052b7;
+    border: 1px solid #004394;
+    border-radius: 5px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+    transition: background 0.15s ease;
+    line-height: 1.25;
+}
+.btn-return-busqueda:hover {
+    background: #004394;
+}
+.btn-return-close {
+    background: transparent;
+    border: none;
+    font-size: 1.1rem;
+    color: #64748b;
+    cursor: pointer;
+    line-height: 1;
+    padding: 2px 6px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.btn-return-close:hover {
+    color: #0f172a;
+    background: rgba(0,0,0,0.05);
+}
+
+.btn-return-lbl-full {
+    display: inline;
+}
+.btn-return-lbl-mob {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .laesh-notif-return-bar {
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        gap: 6px !important;
+        padding: 4px 8px !important;
+        margin-bottom: 6px !important;
+        border-radius: 6px !important;
+        min-height: 32px !important;
+    }
+    .notif-return-info {
+        font-size: 0.78rem !important;
+        line-height: 1.2 !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 4px !important;
+        flex: 1 1 auto !important;
+        min-width: 0 !important;
+    }
+    .notif-return-icon {
+        font-size: 0.85rem !important;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `portal.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L3679-3750)</summary>
+
+**Path:** `Unknown file`
+
+```
+        gap: 4px !important;
+        flex: 1 1 auto !important;
+        min-width: 0 !important;
+    }
+    .notif-return-icon {
+        font-size: 0.85rem !important;
+        line-height: 1 !important;
+        flex-shrink: 0 !important;
+    }
+    .notif-return-text {
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+    }
+    .notif-return-actions {
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 4px !important;
+        flex: 0 0 auto !important;
+        width: auto !important;
+    }
+    .btn-return-busqueda {
+        flex: 0 0 auto !important;
+        width: auto !important;
+        padding: 3px 8px !important;
+        font-size: 0.74rem !important;
+        line-height: 1.2 !important;
+        height: 26px !important;
+        white-space: nowrap !important;
+        border-radius: 4px !important;
+    }
+    .btn-return-close {
+        flex: 0 0 auto !important;
+        padding: 2px 6px !important;
+        font-size: 0.95rem !important;
+        height: 26px !important;
+        width: 24px !important;
+        line-height: 1 !important;
+        border-radius: 4px !important;
+    }
+    .btn-return-lbl-full {
+        display: none !important;
+    }
+    .btn-return-lbl-mob {
+        display: inline !important;
+    }
+}
+
+
+
+/* Columnas con wrap de hasta 40 caracteres sin cortar palabras (Recepción / Médicos) */
+#flat-medicos-table td.col-wrap-40,
+#flat-medicos-table th.col-wrap-40 {
+    white-space: normal !important;
+    overflow-wrap: break-word !important;
+    word-break: normal !important;
+    line-height: 1.35 !important;
+    vertical-align: middle !important;
+}
+
+/* Columnas con ajuste de texto sin cortar palabras (Recepción / Médicos) */
+#flat-medicos-table td.col-wrap-medicos,
+#flat-medicos-table th.col-wrap-medicos,
+#flat-medicos-table td.col-wrap-40,
+#flat-medicos-table th.col-wrap-40 {
+    white-space: normal !important;
+    overflow-wrap: break-word !important;
+    word-break: normal !important;
+    line-height: 1.35 !important;
+    vertical-align: middle !important;
+}
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `ordenes-hoy-md-header`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 3 Oct 2026, 3:25 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `portal.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1489-1569)</summary>
+
+**Path:** `Unknown file`
+
+```
+    .sidebar-action-group.sidebar-action-group--hidden {
+        display: none !important;
+    }
+    .sidebar-action-vsep {
+        display: inline-block !important;
+        width: 2px !important;
+        height: 27px !important;
+        background-color: #94a3b8 !important;
+        margin: 0 4px !important;
+        flex-shrink: 0 !important;
+    }
+    /* 2026-09-25 (pedido del usuario, revisado): en móvil, Órdenes Hoy
+       (médico) ya NO muestra ningún control de paginación (Total | ‹1/1›)
+       — se oculta por completo (antes se dejaba compacto, ver historial de
+       GAP-MD-08). El header queda con solo el buscador, a todo el ancho. */
+    .portal-tab-bar { flex-wrap: nowrap !important; }
+    #ordenes-hoy-md-header {
+        flex-wrap: nowrap !important;
+        margin-bottom: 0.5rem !important;
+    }
+    #ordenes-hoy-md-pagination-wrap {
+        display: none !important;
+    }
+    #ordenes-hoy-md-search-wrap,
+    #ordenes-anteriores-md-search-wrap {
+        flex: 1 1 auto !important;
+        min-width: 0 !important;
+        width: 100% !important;
+        justify-content: flex-start !important;
+    }
+    .search-bar-unified {
+        width: 100% !important;
+        flex: 1 1 auto !important;
+        min-width: 0 !important;
+    }
+    .search-bar-unified .search-bar-input {
+        width: 100% !important;
+        min-width: 0 !important;
+        height: 38px !important;
+        font-size: 0.88rem !important;
+        border-radius: 8px !important;
+        padding-left: 10px !important;
+        padding-right: 34px !important;
+    }
+    .search-bar-unified .btn-search-clear {
+        right: 6px !important;
+        width: 26px !important;
+        height: 26px !important;
+    }
+    #input-buscar-orden-hoy-md {
+        width: 100% !important;
+        min-width: 0 !important;
+    }
+    /* 2026-09-25 (pedido del usuario): en móvil, Solicitudes Anteriores ya NO
+       muestra ningún control de paginación (Total | ‹1/1›) — mismo criterio
+       ya aplicado a Solicitudes Hoy. El título propio volvió (título reducido
+       "Solicitudes Digitales Anteriores", ver .panel-nueva-orden-title arriba
+       en este mismo archivo) — ya no compite por espacio con la paginación,
+       así que el header queda con solo el buscador, a todo el ancho.
+       Histórico (GAP-MD-12, 2026-09-22/24): el <h2>+<p> original de este
+       header se había quitado por desbordar el viewport junto a paginación+
+       buscador bajo flex-wrap:nowrap — ya no aplica, ver arriba. */
+    #ordenes-anteriores-md-header {
+        flex-wrap: nowrap !important;
+        margin-bottom: 0.5rem !important;
+    }
+    #ordenes-anteriores-md-pagination-wrap {
+        display: none !important;
+    }
+    #ordenes-anteriores-md-search-wrap {
+        flex: 1 1 auto !important;
+        min-width: 0 !important;
+        justify-content: flex-end !important;
+    }
+    #input-buscar-orden-anteriores-md {
+        width: 100% !important;
+        min-width: 0 !important;
+    }
+    /* GAP-MD-11 (2026-09-22, ajustado 2026-09-24): filas de Órdenes Hoy/
+       Anteriores lo más compactas posible para maximizar renglones visibles
+       sin scroll — reduce padding/tipografía/line-height SOLO dentro de
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The user, a doctor, interacts with a mobile notification, likely triggered via websocket. Clicking the notification calls a function within a specific Javascript file. The interaction starts a specific process that I will examine.
+
+
+A notification bar is being constructed dynamically, its content varying based on an error condition. This bar includes informational text, an icon, and action buttons for returning to a prior state or dismissing the notification. The code subsequently attempts to identify a specific target card within the user interface, likely based on the user's role and the currently displayed section.
+
+
+The code attempts to locate a `targetCard` element within the document, prioritizing a specific element associated with a "medHoy" context, and then considering other possibilities if the initial search fails. This `targetCard` seems related to the current tab or panel's display. It appears that the notification bar will be inserted above this identified card. The identified HTML structure suggests the bar is inserted between the search header and the main table or content area.
+
+
+The goal is to arrange the search input, notification indicator, and "previous" button on a single line for mobile displays, ensuring responsiveness across all screen sizes. This requires considering how these elements will fit and flow together, especially when the notification is active. On mobile, the search input should take up the full width when no notification is present. With a notification, all three elements need to fit horizontally. Desktop layouts offer more space, potentially allowing the search input to be narrower alongside the other components.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `ws-client.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 3.789272039s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L564-614)</summary>
+
+**Path:** `Unknown file`
+
+```
+            } else if (filtroAnt) {
+                labelBotonFull = '← Volver a búsqueda (' + filtroAnt + ')';
+                labelBotonMob  = '← Volver a búsqueda';
+                resumenDetalle = 'Búsqueda: ' + filtroAnt;
+            } else if (rangoTexto) {
+                labelBotonFull = '← Volver a período (' + rangoTexto + ')';
+                labelBotonMob  = '← Volver a período';
+                resumenDetalle = 'Período: ' + rangoTexto;
+            } else {
+                labelBotonFull = snap.isMedico ? '← Ver historial completo' : '← Ver solicitudes anteriores';
+                labelBotonMob  = '← Ver anteriores';
+                resumenDetalle = snap.isMedico ? 'Historial de órdenes' : 'Solicitudes anteriores';
+            }
+        }
+
+        var existingBar = document.getElementById('laesh-notif-return-bar');
+        if (existingBar) existingBar.remove();
+
+        var esNoEncontrada = (localizada === false);
+        var bar = document.createElement('div');
+        bar.id = 'laesh-notif-return-bar';
+        bar.className = 'laesh-notif-return-bar' + (esNoEncontrada ? ' laesh-notif-return-bar--error' : '');
+
+        var esOrigenBusqueda = (_busquedaPreviaSnapshot.origen === 'busqueda');
+        var iconMsg = esNoEncontrada ? '⚠️' : (esOrigenBusqueda ? '🔍' : '🔔');
+        var textoMsg = '';
+        if (esNoEncontrada) {
+            textoMsg = 'No encontrada: <strong class="notif-return-folio">#' + escapeHtml(cleanTarget) + '</strong>';
+        } else if (esOrigenBusqueda) {
+            textoMsg = 'Viendo orden: <strong class="notif-return-folio">#' + escapeHtml(cleanTarget) + '</strong>';
+        } else {
+            textoMsg = 'Notificación: <strong class="notif-return-folio">#' + escapeHtml(cleanTarget) + '</strong>';
+        }
+
+        bar.innerHTML = 
+            '<div class="notif-return-info">' +
+                '<span class="notif-return-icon">' + iconMsg + '</span>' +
+                '<span class="notif-return-text">' + textoMsg + '</span>' +
+            '</div>' +
+            '<div class="notif-return-actions">' +
+                '<button type="button" id="btn-volver-busqueda-notif" class="btn-return-busqueda" title="Volver al estado previo (' + escapeHtml(resumenDetalle) + ')">' +
+                    '<span class="btn-return-lbl-full">' + escapeHtml(labelBotonFull) + '</span>' +
+                    '<span class="btn-return-lbl-mob">' + escapeHtml(labelBotonMob) + '</span>' +
+                '</button>' +
+                '<button type="button" id="btn-cerrar-banner-notif" class="btn-return-close" title="Descartar notificación y quedarse aquí" aria-label="Descartar notificación">✕</button>' +
+            '</div>';
+
+        var targetCard = null;
+        if (snap.isMedico) {
+            var medHist = document.getElementById('panel-historial-medico');
+            var medHoy = document.getElementById('subtab-ordenes-hoy');
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Focusing on lines 574-577, the code defines the mobile button label as "← Ver anteriores" and notification text as "Notificación: #". It includes a bell icon, which, when combined with the notification text, will form "🔔 Notificación: #32". It also identifies the "ver anteriores" button and the search input, which could be either `#input-buscar-orden-hoy-md` or `#ordenes-hoy-md-search-wrap`.
+
+
+The code snippet shows conditional logic for targeting different cards based on user type (medico or not). The goal is to determine the context where the requested elements reside in the DOM. The `targetCard` variable appears to hold a reference to the relevant container.
+
+Now, examining how these elements are currently rendered, in `ws-client.js`. the logic needs examination. This code snippet shows where the target elements are being inserted.
+
+
+The code's logic incorrectly inserts the notification bar. The `targetCard`'s parent is the tab container, meaning the bar is inserted as a sibling to the search header, leading to an unwanted layout. The problem stems from the header and notification bar being at the same DOM level, creating the layout problem.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `ordenes-anteriores-md-periodo-container`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 2.414010593s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 3 Oct 2026, 3:26 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `periodo-container`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 3 Oct 2026, 3:26 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `portal.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L3229-3269)</summary>
+
+**Path:** `Unknown file`
+
+```
+    }
+
+    .periodo-container {
+        display: inline-flex !important;
+        flex-wrap: nowrap !important;
+        align-items: flex-end !important;
+        width: auto !important;
+        box-sizing: border-box !important;
+        padding: 3px 4px !important;
+        gap: 3px !important;
+    }
+    .periodo-container.periodo-fechas-activo {
+        display: flex !important;
+        width: 100% !important;
+        padding: 3px 4px !important;
+    }
+    .periodo-select-group {
+        display: inline-flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        flex: 0 0 auto !important;
+        gap: 2px !important;
+    }
+    .periodo-select-group select {
+        width: 68px !important;
+        min-width: 68px !important;
+        padding: 2px 4px !important;
+        font-size: 0.78rem !important;
+        height: 28px !important;
+        box-sizing: border-box !important;
+    }
+    .rango-fechas-group:not(.d-none) {
+        display: inline-flex !important;
+        flex-wrap: nowrap !important;
+        align-items: flex-end !important;
+        flex: 1 1 auto !important;
+        min-width: 0 !important;
+        gap: 3px !important;
+        border-left: 1px dashed #94a3b8 !important;
+        padding-left: 4px !important;
+        margin-left: 2px !important;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `mostrarBarraRetorno`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 3 Oct 2026, 3:26 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `ws-client.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L834-864)</summary>
+
+**Path:** `Unknown file`
+
+```
+                };
+            }
+            return null;
+        }
+
+        var destinoInicial = resolverDestino(esHoy);
+        if (!destinoInicial) return;
+
+        // 2026-09-27 (pedido explícito del usuario): NO abrir de forma forzada
+        // la Solicitud Digital ni el PDF de Resultados en overlay para no interrumpir
+        // ni ocultar la pantalla de trabajo del operador. En su lugar, un aviso no intrusivo
+        // que preserva el botón de retorno a su búsqueda previa.
+        var onNoEncontrado = opciones.onNoEncontrado || function() {
+            console.log('[LAESH Notif] Solicitud #' + cleanTarget + ' no localizada en grilla.');
+            mostrarBarraRetorno(cleanTarget, false, opciones.origen || 'notificacion');
+        };
+
+        // 3-4. Intenta localizar y resaltar el renglón en un destino dado
+        // (Hoy o Anteriores). Si agota los reintentos sin encontrarlo Y aún
+        // no se probó la pestaña opuesta, cambia a esa pestaña y reintenta
+        // ahí antes de rendirse al fallback — ver nota de "corrección de
+        // raíz" arriba de resolverDestino().
+        function intentarEn(destino, yaProboOpuesta) {
+            destino.panelFn();
+
+            if (opciones.filtrarBusquedaPrimero && destino.searchId) {
+                // BUG-NAV-PERIODO-01 (2026-09-28): esta función solo llenaba el
+                // input de búsqueda — si la orden buscada (por folio, desde la
+                // lupita o una notificación) es más antigua que el período
+                // seleccionado en "Anteriores" (30 d por defecto, sin opción de
+                // "todos"), la búsqueda por folio SÍ era correcta pero el
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `ws-client.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1009-1044)</summary>
+
+**Path:** `Unknown file`
+
+```
+            var maxAttempts = 6;
+            var highlightRow = function() {
+                attempts++;
+                var table = document.getElementById(destino.tableId);
+                if (!table && attempts < maxAttempts) {
+                    setTimeout(highlightRow, 150);
+                    return;
+                }
+                if (!table) {
+                    agotado();
+                    return;
+                }
+
+                var foundRow = buscarYResaltarEn(table);
+
+                if (foundRow) {
+                    mostrarBarraRetorno(cleanTarget, true, opciones.origen || 'notificacion');
+                    if (opciones.filtrarBusquedaPrimero) {
+                        resyncDeadline = Date.now() + resyncWindowMs;
+                        document.addEventListener('htmx:afterSettle', onAfterSettle);
+                        // Limpieza de respaldo — si nunca llega otro swap en
+                        // esta tabla tras el deadline, el listener igual se
+                        // desengancha (evita acumular listeners indefinidos).
+                        setTimeout(function() {
+                            document.removeEventListener('htmx:afterSettle', onAfterSettle);
+                        }, resyncWindowMs + 200);
+                    }
+                } else if (attempts < maxAttempts) {
+                    // Reintentar si la tabla aún se está refrescando/renderizando por HTMX
+                    setTimeout(highlightRow, 200 * attempts);
+                } else {
+                    agotado();
+                }
+            };
+
+            function agotado() {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The notification triggers the `mostrarBarraRetorno` function with specific parameters. Within this function, a return bar element is created. The insertion point for this bar is then determined; previously the code was inserting it outside the toolbar, before the target card.
+
+
+The goal is to reposition the notification bar adjacent to the search input, within the header or search-wrap element. The insertion point is evaluated. A class is added to the parent when the bar is visible, and removed upon closure. The specified order in the user request is critical: search input, notification, then the "view previous" button. Therefore, the bar should be placed as a sibling to the search wrap.
+
+
+The search input, notification pill, and actions button must appear inline, in that specific order, both visually and in the DOM. On desktop, the header uses flexbox, allowing the search wrap and notification bar to fit horizontally with other elements. Mobile viewports have a smaller width (320px-430px) and hide the pagination, leaving only the search wrap and notification bar within the header.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `ws-client.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 2.360183104s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L789-839)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+        // 2. Identificar portal
+        var isMedicoPortal   = !!document.getElementById('tabla-medico') || !!document.getElementById('panel-nueva-orden');
+        var isRecepcionAdmin = !!document.getElementById('tabla-recepcion') || !!document.getElementById('panel-ordenes');
+
+        // Capturar instantánea de la búsqueda en curso si el operador estaba trabajando en una
+        capturarEstadoBusquedaPrevia(isMedicoPortal, cleanTarget);
+
+        function resolverDestino(paraHoy) {
+            if (isMedicoPortal) {
+                return paraHoy ? {
+                    panelFn: function() {
+                        if (typeof window.cambiarTabMedico === 'function') window.cambiarTabMedico('panel-nueva-orden');
+                        if (typeof window.switchSubTab === 'function') window.switchSubTab('ordenes-hoy');
+                    },
+                    tableId: 'tabla-medico',
+                    searchId: 'input-buscar-orden-hoy-md'
+                } : {
+                    panelFn: function() {
+                        if (typeof window.cambiarTabMedico === 'function') window.cambiarTabMedico('panel-historial-medico');
+                    },
+                    tableId: 'tabla-historial-completo',
+                    searchId: 'input-buscar-orden-anteriores-md',
+                    periodoId: 'select-periodo-anteriores-md',
+                    fechaInicioId: 'fecha-inicio-anteriores-md',
+                    fechaFinId: 'fecha-fin-anteriores-md',
+                    rangoWrapId: 'rango-fechas-anteriores-md'
+                };
+            } else if (isRecepcionAdmin) {
+                return paraHoy ? {
+                    panelFn: function() {
+                        if (typeof window.cambiarTabAdmin === 'function') window.cambiarTabAdmin('panel-ordenes');
+                    },
+                    tableId: 'tabla-recepcion',
+                    searchId: 'input-buscar-orden-rc'
+                } : {
+                    panelFn: function() {
+                        if (typeof window.cambiarTabAdmin === 'function') window.cambiarTabAdmin('panel-ordenes-anteriores');
+                    },
+                    tableId: 'tabla-recepcion-anteriores',
+                    searchId: 'input-buscar-orden-anteriores-rc',
+                    periodoId: 'select-periodo-anteriores-rc',
+                    fechaInicioId: 'fecha-inicio-anteriores-rc',
+                    fechaFinId: 'fecha-fin-anteriores-rc',
+                    rangoWrapId: 'rango-fechas-anteriores-rc'
+                };
+            }
+            return null;
+        }
+
+        var destinoInicial = resolverDestino(esHoy);
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Upon receiving a notification, `resolverDestino(paraHoy)` determines the relevant section. If the notification pertains to today, it directs to the 'nueva-orden' panel, 'ordenes-hoy' subtab, using a specific search ID. For past notifications, it navigates to the 'panel-historial-medico' and a different search ID. This should then allow locating the targeted element.
+I'm thinking through how to approach this.
+
+
+Considering an alternative approach, instead of targeting a specific card, identifying the active search wrap or header element seems more direct. The script must check which panel, medical history or today's orders, is visible to determine the correct search wrap or header ID. Once located, the insertion point for the new element will be either after the search wrap or as a contiguous element within the header. Additionally, a class should be added to the container or header for future styling.
+
+
+The header and search wrap elements will have classes added and removed dynamically to reflect the notification state. Specifically, classes like `has-notif-bar` and `search-wrap--with-notif` will be used on the header and search wrap respectively. CSS `:has()` selector and explicit classes will be utilized for broad browser compatibility. The goal is to ensure the "search input, notification, and 'ver anteriores' button" fit on a single line on mobile devices. Standard mobile resolutions will be considered during the development.
+
+
+To ensure the elements fit on mobile, the available width of 344px needs to be allocated between the search input and the notification return bar. The search wrap can be made compact using flexbox, with a width constraint of 60px to 105px, accommodating the input and clear button. The remaining space will be assigned to the notification return bar. The input field will be scaled to ensure `#32` is visible.
+
+
+To optimize the notification text for narrow screens, a structure with two `span` elements will be implemented. One `span` will hold the full text ("Notificación:"), while the other will display a shortened version ("Notif:"). This allows dynamic text contraction on smaller devices while retaining the full label on larger screens. The notification text will be styled to ensure that "#32" is always visible.
+
+
+Calculating space allocation for the notification bar and search input on a 360px viewport confirms they fit within a single line. The total width of 318px (search wrap, gaps, notification bar) is less than the available 344px. This holds true for even narrower screens (320-340px) due to flexible element sizes. The notification bar is removed, and the search input regains its full width when the notification is dismissed.
+
+
+The mobile header structure for past orders (`#ordenes-anteriores-md-header`) includes a search wrap, period selector, and a separator. The pagination wrap is hidden on mobile. If the notification bar is active, the period selector could be hidden temporarily to fit the search input, notification, and "view previous" button on a single line. The system navigates to "today's orders" or "medical history" upon clicking a notification.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `ws-client.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 7.897411498s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L484-664)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+    function mostrarBarraRetorno(cleanTarget, localizada, origen) {
+        if (!_busquedaPreviaSnapshot) return;
+
+        // Sellar en el snapshot qué folio se estaba revisando y si se localizó,
+        // para poder reconstruir la misma barra tras un refresh real (ver
+        // restaurarSnapshotDesdeStorage) — antes solo viajaban como parámetros
+        // de esta función y se perdían junto con el snapshot en memoria.
+        _busquedaPreviaSnapshot.folioTarget = cleanTarget;
+        _busquedaPreviaSnapshot.localizada = (localizada !== false);
+        // BUG-NAV-TEXTO-ORIGEN-01 (2026-09-28): el texto de esta barra asumía
+        // SIEMPRE que la orden venía de hacer clic en una notificación — pero
+        // esta misma función también se dispara al seleccionar un resultado de
+        // la lupita de búsqueda, donde "orden de notificación" no tiene
+        // sentido. 'origen' viaja desde navegarYResaltarOrden() (opciones.origen,
+        // default 'notificacion' para no cambiar el comportamiento de las
+        // notificaciones) y se persiste para que sobreviva un refresh real.
+        if (origen) _busquedaPreviaSnapshot.origen = origen;
+        var origenTexto = (_busquedaPreviaSnapshot.origen === 'busqueda') ? 'buscada' : 'de notificación';
+        persistirSnapshot();
+
+        var snap = _busquedaPreviaSnapshot;
+
+        function fmtFechaCorta(str) {
+            if (!str) return '';
+            var p = String(str).split('-');
+            if (p.length === 3) return p[2] + '/' + p[1];
+            return str;
+        }
+
+        var labelBotonFull = '';
+        var labelBotonMob  = '';
+        var resumenDetalle = '';
+
+        if (snap.tabActiva === 'captura') {
+            labelBotonFull = '← Volver a captura de orden';
+            labelBotonMob  = '← A captura';
+            resumenDetalle = 'Captura de orden';
+        } else if (snap.tabActiva === 'hoy') {
+            var filtroHoy = esTextoBusquedaValido(snap.textoHoy, cleanTarget) ? snap.textoHoy.trim() : '';
+            if (filtroHoy) {
+                // Sin comillas dobles redundantes dentro de paréntesis
+                labelBotonFull = '← Volver a búsqueda (' + filtroHoy + ')';
+                labelBotonMob  = '← Volver a búsqueda';
+                resumenDetalle = 'Búsqueda: ' + filtroHoy;
+            } else {
+                var estaEnAnteriores = false;
+                if (snap.isMedico) {
+                    var histMed = document.getElementById('panel-historial-medico');
+                    estaEnAnteriores = histMed && !histMed.classList.contains('d-none');
+                } else {
+                    var antRc = document.getElementById('panel-ordenes-anteriores');
+                    estaEnAnteriores = antRc && !antRc.classList.contains('d-none');
+                }
+
+                if (estaEnAnteriores) {
+                    labelBotonFull = snap.isMedico ? '← Volver a órdenes de hoy' : '← Volver a solicitudes de hoy';
+                    labelBotonMob  = '← A hoy';
+                } else {
+                    labelBotonFull = snap.isMedico ? '← Ver todas las órdenes de hoy' : '← Ver todas las solicitudes de hoy';
+                    labelBotonMob  = '← Ver todas';
+                }
+                resumenDetalle = snap.isMedico ? 'Órdenes de hoy' : 'Solicitudes de hoy';
+            }
+        } else {
+            // tabActiva === 'anteriores' (o fallback histórico)
+            var filtroAnt = esTextoBusquedaValido(snap.textoAnt, cleanTarget) ? snap.textoAnt.trim() : '';
+            var rangoTexto = '';
+            if (snap.periodoVal === 'fecha' && (snap.iniVal || snap.finVal)) {
+                var fIni = fmtFechaCorta(snap.iniVal);
+                var fFin = fmtFechaCorta(snap.finVal);
+                rangoTexto = (fIni || '') + ' al ' + (fFin || '');
+            } else if (snap.periodoVal && snap.periodoVal !== '30d') {
+                rangoTexto = snap.periodoVal === '15d' ? '15 d' : snap.periodoVal;
+            }
+
+            if (filtroAnt && rangoTexto) {
+                labelBotonFull = '← Volver a filtro (' + filtroAnt + ' · ' + rangoTexto + ')';
+                labelBotonMob  = '← Volver a filtro';
+                resumenDetalle = 'Filtro: ' + filtroAnt + ' (' + rangoTexto + ')';
+            } else if (filtroAnt) {
+                labelBotonFull = '← Volver a búsqueda (' + filtroAnt + ')';
+                labelBotonMob  = '← Volver a búsqueda';
+                resumenDetalle = 'Búsqueda: ' + filtroAnt;
+            } else if (rangoTexto) {
+                labelBotonFull = '← Volver a período (' + rangoTexto + ')';
+                labelBotonMob  = '← Volver a período';
+                resumenDetalle = 'Período: ' + rangoTexto;
+            } else {
+                labelBotonFull = snap.isMedico ? '← Ver historial completo' : '← Ver solicitudes anteriores';
+                labelBotonMob  = '← Ver anteriores';
+                resumenDetalle = snap.isMedico ? 'Historial de órdenes' : 'Solicitudes anteriores';
+            }
+        }
+
+        var existingBar = document.getElementById('laesh-notif-return-bar');
+        if (existingBar) existingBar.remove();
+
+        var esNoEncontrada = (localizada === false);
+        var bar = document.createElement('div');
+        bar.id = 'laesh-notif-return-bar';
+        bar.className = 'laesh-notif-return-bar' + (esNoEncontrada ? ' laesh-notif-return-bar--error' : '');
+
+        var esOrigenBusqueda = (_busquedaPreviaSnapshot.origen === 'busqueda');
+        var iconMsg = esNoEncontrada ? '⚠️' : (esOrigenBusqueda ? '🔍' : '🔔');
+        var textoMsg = '';
+        if (esNoEncontrada) {
+            textoMsg = 'No encontrada: <strong class="notif-return-folio">#' + escapeHtml(cleanTarget) + '</strong>';
+        } else if (esOrigenBusqueda) {
+            textoMsg = 'Viendo orden: <strong class="notif-return-folio">#' + escapeHtml(cleanTarget) + '</strong>';
+        } else {
+            textoMsg = 'Notificación: <strong class="notif-return-folio">#' + escapeHtml(cleanTarget) + '</strong>';
+        }
+
+        bar.innerHTML = 
+            '<div class="notif-return-info">' +
+                '<span class="notif-return-icon">' + iconMsg + '</span>' +
+                '<span class="notif-return-text">' + textoMsg + '</span>' +
+            '</div>' +
+            '<div class="notif-return-actions">' +
+                '<button type="button" id="btn-volver-busqueda-notif" class="btn-return-busqueda" title="Volver al estado previo (' + escapeHtml(resumenDetalle) + ')">' +
+                    '<span class="btn-return-lbl-full">' + escapeHtml(labelBotonFull) + '</span>' +
+                    '<span class="btn-return-lbl-mob">' + escapeHtml(labelBotonMob) + '</span>' +
+                '</button>' +
+                '<button type="button" id="btn-cerrar-banner-notif" class="btn-return-close" title="Descartar notificación y quedarse aquí" aria-label="Descartar notificación">✕</button>' +
+            '</div>';
+
+        var targetCard = null;
+        if (snap.isMedico) {
+            var medHist = document.getElementById('panel-historial-medico');
+            var medHoy = document.getElementById('subtab-ordenes-hoy');
+            if (medHist && !medHist.classList.contains('d-none')) {
+                targetCard = medHist.querySelector('.card');
+            } else if (medHoy && (medHoy.classList.contains('active') || !medHoy.classList.contains('d-none'))) {
+                targetCard = medHoy.querySelector('.card');
+            }
+            if (!targetCard) {
+                targetCard = document.querySelector('#panel-historial-medico:not(.d-none) .card, #subtab-ordenes-hoy.active .card, #panel-historial-medico .card, #subtab-ordenes-hoy .card');
+            }
+        } else {
+            var rcAnt = document.getElementById('panel-ordenes-anteriores');
+            var rcHoy = document.getElementById('panel-ordenes');
+            if (rcAnt && !rcAnt.classList.contains('d-none')) {
+                targetCard = rcAnt.querySelector('.card');
+            } else if (rcHoy && !rcHoy.classList.contains('d-none')) {
+                targetCard = rcHoy.querySelector('.card');
+            }
+            if (!targetCard) {
+                targetCard = document.querySelector('#panel-ordenes-anteriores:not(.d-none) .card, #panel-ordenes:not(.d-none) .card, #panel-ordenes-anteriores .card, #panel-ordenes .card');
+            }
+        }
+
+        if (targetCard && targetCard.parentNode) {
+            targetCard.parentNode.insertBefore(bar, targetCard);
+        } else {
+            var header = document.querySelector('.cms-panel-header');
+            if (header && header.parentNode) {
+                header.parentNode.insertBefore(bar, header.nextSibling);
+            }
+        }
+
+        var btnVolver = document.getElementById('btn-volver-busqueda-notif');
+        if (btnVolver) {
+            btnVolver.addEventListener('click', function(e) {
+                e.preventDefault();
+                restaurarEstadoBusquedaPrevia();
+            });
+        }
+        var btnCerrar = document.getElementById('btn-cerrar-banner-notif');
+        if (btnCerrar) {
+            btnCerrar.addEventListener('click', function(e) {
+                e.preventDefault();
+                _busquedaPreviaSnapshot = null;
+                persistirSnapshot();
+                bar.remove();
+            });
+        }
+    }
+
+    function restaurarEstadoBusquedaPrevia() {
+        if (!_busquedaPreviaSnapshot) return;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `ws-client.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L663-739)</summary>
+
+**Path:** `Unknown file`
+
+```
+    function restaurarEstadoBusquedaPrevia() {
+        if (!_busquedaPreviaSnapshot) return;
+        var snap = _busquedaPreviaSnapshot;
+        _busquedaPreviaSnapshot = null;
+        persistirSnapshot();
+
+        var bar = document.getElementById('laesh-notif-return-bar');
+        if (bar) bar.remove();
+
+        var isMed = snap.isMedico;
+        if (snap.tabActiva === 'captura') {
+            if (isMed) {
+                if (typeof window.cambiarTabMedico === 'function') window.cambiarTabMedico('panel-nueva-orden');
+                if (typeof window.switchSubTab === 'function') window.switchSubTab('generar');
+            }
+        } else if (snap.tabActiva === 'hoy') {
+            var valHoy = esTextoBusquedaValido(snap.textoHoy, snap.folioTarget) ? snap.textoHoy : '';
+            if (isMed) {
+                if (typeof window.cambiarTabMedico === 'function') window.cambiarTabMedico('panel-nueva-orden');
+                if (typeof window.switchSubTab === 'function') window.switchSubTab('ordenes-hoy');
+                var inpHoy = document.getElementById('input-buscar-orden-hoy-md');
+                if (inpHoy) {
+                    inpHoy.value = valHoy;
+                    inpHoy.dispatchEvent(new Event('search', { bubbles: true }));
+                    inpHoy.dispatchEvent(new Event('keyup', { bubbles: true }));
+                }
+            } else {
+                if (typeof window.cambiarTabAdmin === 'function') window.cambiarTabAdmin('panel-ordenes');
+                var inpHoyRc = document.getElementById('input-buscar-orden-rc');
+                if (inpHoyRc) {
+                    inpHoyRc.value = valHoy;
+                    inpHoyRc.dispatchEvent(new Event('search', { bubbles: true }));
+                    inpHoyRc.dispatchEvent(new Event('keyup', { bubbles: true }));
+                }
+            }
+        } else {
+            if (isMed) {
+                if (typeof window.cambiarTabMedico === 'function') window.cambiarTabMedico('panel-historial-medico');
+                var selMed = document.getElementById('select-periodo-anteriores-md');
+                var iniMed = document.getElementById('fecha-inicio-anteriores-md');
+                var finMed = document.getElementById('fecha-fin-anteriores-md');
+                var ranMed = document.getElementById('rango-fechas-anteriores-md');
+                var inpAntMed = document.getElementById('input-buscar-orden-anteriores-md');
+
+                if (selMed) selMed.value = snap.periodoVal;
+                if (iniMed) iniMed.value = snap.iniVal;
+                if (finMed) finMed.value = snap.finVal;
+                if (ranMed) ranMed.style.display = snap.rangoVisible ? 'inline-flex' : 'none';
+
+                var valAnt = esTextoBusquedaValido(snap.textoAnt, snap.folioTarget) ? snap.textoAnt : '';
+                if (inpAntMed) {
+                    inpAntMed.value = valAnt;
+                    inpAntMed.dispatchEvent(new Event('search', { bubbles: true }));
+                    inpAntMed.dispatchEvent(new Event('keyup', { bubbles: true }));
+                }
+            } else {
+                if (typeof window.cambiarTabAdmin === 'function') window.cambiarTabAdmin('panel-ordenes-anteriores');
+                var selRc = document.getElementById('select-periodo-anteriores-rc');
+                var iniRc = document.getElementById('fecha-inicio-anteriores-rc');
+                var finRc = document.getElementById('fecha-fin-anteriores-rc');
+                var ranRc = document.getElementById('rango-fechas-anteriores-rc');
+                var inpAntRc = document.getElementById('input-buscar-orden-anteriores-rc');
+
+                if (selRc) selRc.value = snap.periodoVal;
+                if (iniRc) iniRc.value = snap.iniVal;
+                if (finRc) finRc.value = snap.finVal;
+                if (ranRc) ranRc.style.display = snap.rangoVisible ? 'inline-flex' : 'none';
+
+                var valAntRc = esTextoBusquedaValido(snap.textoAnt, snap.folioTarget) ? snap.textoAnt : '';
+                if (inpAntRc) {
+                    inpAntRc.value = valAntRc;
+                    inpAntRc.dispatchEvent(new Event('search', { bubbles: true }));
+                    inpAntRc.dispatchEvent(new Event('keyup', { bubbles: true }));
+                }
+            }
+        }
+    }
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Analyzing the `removerBarra()` function and its usage in various contexts, specifically triggered by `btnCerrar` or `restaurarEstadoBusquedaPrevia`. Observed the existence of an auxiliary function `removerBarraNotif()`.
+Examining how `removerBarraNotif()` targets an element with the ID 'laesh-notif-return-bar' and its parent element.
+Focusing on the conditional logic within the function to understand the precise conditions under which the notification bar is removed.
+The goal is to understand precisely when and how the notification bar removal is handled.
+
+
+The code ensures a clean DOM and CSS state before inserting the new bar. The notification bar's placement needs to be alongside the search input, examining context "Solicitudes Hoy" within the header. Inserting `bar` after the search wrap, within the header element, will align them correctly because the header uses flexbox for layout.
+
+
+Analyzing different contexts for bar placement: "Solicitudes Hoy" utilizes flexbox in the header for search bar alignment. Considering "Solicitudes Anteriores", the target is within a dedicated controls container.  The `bar` will be inserted as a sibling to the search wrap in all cases.
+Reception context allows searching for the active search wrap and inserting the bar beside it. If no search wrap is found, a fallback insertion is available.
+I'm thinking through how to approach this.
+
+
+Examining the internal structure of the notification bar, specifically the text and action buttons within `#laesh-notif-return-bar`.  The text content and button labels dynamically adjust based on screen size using CSS classes and media queries. Desktop displays full labels, while mobile utilizes abbreviated versions.
+The CSS logic controls the visibility of elements based on media query breakpoints, enabling responsive text display.  A specific ID will enable triggering different flows.
+The goal is to determine the correct conditional structure, using screen size, and other variables to control the appropriate text rendering and functionality.
+
+
+Analyzing the CSS for `#ordenes-hoy-md-header` to understand the layout with and without the notification bar.  The default state shows the search bar spanning 100% width. When the notification bar is present, the header adopts a flexbox layout.  This change affects how the search bar and notification bar will be arranged.
+
+The flexbox properties applied to the header with the notification bar create a row-based layout, potentially impacting the search bar's width and alignment.  The goal is to determine how to manage the interplay between the search input, notification bar, and header container in both states. Specifically, I need to ensure the search bar remains visible and functional.
+
+
+The search bar wrapper's width needs adjustment, changing from 100% to a flexible size with a defined minimum and maximum. The search input element within needs height, font size, padding, and border-radius modifications. The clear button's dimensions and positioning require specific adjustments. The notification bar will adopt flex properties, including width, height, and border styling. Its internal elements will have inline-flex display, ensuring proper alignment.
+
+
+The notification bar's styling and layout are defined, focusing on text truncation and button appearance. These styles use `!important` to override default browser styles. Further investigation is needed to determine where the CSS properties are applied and if any conflicting styles exist.
+
+
+On desktop, the notification bar is positioned to the right of the search wrap within the header. The search wrap maintains its original width. The notification bar has an automatic width with a fixed height, preventing line breaks.
+
+In the "Solicitudes Anteriores" context, the header's structure includes pagination, a controls container, and a search wrap. The placement strategy needs to account for the presence of a "periodo-container" within the right controls.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `btn-return-busqueda`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 7.935936242s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 3 Oct 2026, 3:26 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+The relevant code appears to reside within the `ws-client.js` and `portal.css` files. Specifically, the function `mostrarBarraRetorno` within `ws-client.js` warrants further examination. Lines 580-660 of `ws-client.js` contain the logic for the return bar element.
+
+
+The code constructs a notification bar element. The bar's appearance and content vary based on whether a search returned no results, the origin was a search, or it's a regular notification. The icon and text are dynamically set depending on the condition. The bar also includes a button to return to the previous search state.
+
+
+The code aims to place the notification bar as a sibling to the search wrap element within the header container. It conditionally locates the relevant elements, prioritizing specific IDs based on a "medico" flag and visibility of certain panels. If explicit element IDs are not found, it falls back to a more general query selector. The determination of the search wrap and header containers hinges on these conditional checks to ensure correct DOM placement.
+
+
+The code dynamically determines the location of the search wrap and header container based on element visibility and the presence of a "medico" flag. It appears to prioritize specific element IDs before falling back to class-based selectors. The previous notification bar classes are removed before applying the new class and inserting the notification bar element. The notification bar is inserted immediately after the search wrap within its parent node.
+
+
+The code attempts to insert the notification bar within the appropriate DOM structure. Initially, it tries to place the bar next to a specific search wrapper. If the search wrapper isn't found, the code then checks for a set of visible panels or a fallback header container, using conditional logic based on a "medico" flag to select different target elements. Finally, it removes the notification bar from the DOM.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `btn-search-clear`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 2.890692576s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 3 Oct 2026, 3:27 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `app.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L819-864)</summary>
+
+**Path:** `Unknown file`
+
+```
+        if (input.id) {
+            btn = document.querySelector('.btn-search-clear[data-target="#' + input.id + '"]');
+        }
+        if (!btn && container) {
+            btn = container.querySelector('.btn-search-clear');
+        }
+        if (btn) {
+            if (val.length > 0) {
+                btn.classList.add('has-query');
+                btn.setAttribute('title', 'Limpiar búsqueda: "' + val + '"');
+            } else {
+                btn.classList.remove('has-query');
+                btn.setAttribute('title', 'Limpiar búsqueda');
+            }
+        }
+    }
+
+    function sincronizarTodosLosBotonesGoma() {
+        var buttons = document.querySelectorAll('.btn-search-clear');
+        buttons.forEach(function(btn) {
+            var targetSelector = btn.getAttribute('data-target');
+            var inp = targetSelector ? document.querySelector(targetSelector) : (btn.parentElement ? btn.parentElement.querySelector('input[type="text"]') : null);
+            if (inp) {
+                actualizarEstadoBotonGoma(inp);
+            }
+        });
+    }
+
+    // Delegación de clic / touch para los botones de goma
+    document.addEventListener('click', function(e) {
+        var btn = e.target.closest('.btn-search-clear');
+        if (!btn) return;
+        e.preventDefault();
+        e.stopPropagation();
+
+        var targetSelector = btn.getAttribute('data-target');
+        var inp = targetSelector ? document.querySelector(targetSelector) : (btn.parentElement ? btn.parentElement.querySelector('input[type="text"]') : null);
+        if (!inp) return;
+
+        var teniaValor = (inp.value || '').length > 0;
+        inp.value = '';
+        actualizarEstadoBotonGoma(inp);
+
+        // Remover barra de notificación previa si el usuario limpia manualmente
+        var notifBar = document.getElementById('laesh-notif-return-bar');
+        if (notifBar) {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `app.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L859-874)</summary>
+
+**Path:** `Unknown file`
+
+```
+        inp.value = '';
+        actualizarEstadoBotonGoma(inp);
+
+        // Remover barra de notificación previa si el usuario limpia manualmente
+        var notifBar = document.getElementById('laesh-notif-return-bar');
+        if (notifBar) {
+            notifBar.remove();
+        }
+
+        if (teniaValor) {
+            // Disparar eventos estándar para reactividad y HTMX
+            inp.dispatchEvent(new Event('input', { bubbles: true }));
+            inp.dispatchEvent(new Event('change', { bubbles: true }));
+            inp.dispatchEvent(new Event('search', { bubbles: true }));
+            if (window.htmx) {
+                window.htmx.trigger(inp, 'search');
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The code removes the notification bar element. Expanding this, the associated classes on headers should also be removed. This ensures a clean removal of the notification UI and its visual association with other elements. The code iterates and removes classes related to the notification bar, maintaining UI consistency.
+
+
+Inspecting the CSS reveals the desktop layout uses flexbox to arrange the search input and notification bar horizontally.  Mobile layout requires adjustments to fit these elements on a narrower screen, specifically ensuring they remain on the same row. The next step is to examine the specific mobile media queries. I will look for how the display properties are modified within the media queries affecting these elements.
+
+
+Mobile layout uses flexbox to arrange the header components, ensuring horizontal alignment. The search input has flexible width constraints, min/max values to maintain responsiveness, and specific styling for size and text truncation. The notification bar occupies remaining available space.
+
+
+Examining the CSS, the notification bar's styling employs flexbox for layout, including dimensions, borders, and background. The notification information and actions are also structured with inline-flex and various text formatting applied to the components within. This is how the notification components are structured.
+
+
+Examining the CSS, the back button's appearance is defined with specific dimensions, padding, font styling, and background/border colors. The close button also has defined dimensions, font properties, and color, along with a transparent background and no border. The media queries reveal display adaptations for very narrow screens, down to 340px. At smaller widths, labels and buttons get abbreviated or hidden.
+
+
+In the mobile layout, when the notification bar is active, specific elements are hidden to ensure the search input, notification, and return button occupy the full width without overflow. When the notification is dismissed or the user returns, these hidden elements reappear. When a notification is present, a return bar is inserted, a class is added to the header, and another to the search wrap. This restructuring ensures elements fit in a single horizontal row on the mobile screen. When no notification is present, the search input occupies the full width.
+
+
+Calculating actual widths for a 360px screen, the elements fit without wrapping. The search input (~80px) and notification bar (~228px) combined are less than the available width (344px). The available space is 31px.
+
+The JavaScript file needs modification. The `mostrarBarraRetorno()` function constructs the HTML for the notification bar and includes responsive spans. Also, it has a helper function, `limpiarBarraNotif()`, to remove the bar and associated classes. The bar will be inserted next to the search wrap in the appropriate header. The header and search wrap will be marked with specific classes. Event listeners will be added for the return button.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `ws-client.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 6.852305085s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L579-664)</summary>
+
+**Path:** `Unknown file`
+
+```
+        var existingBar = document.getElementById('laesh-notif-return-bar');
+        if (existingBar) existingBar.remove();
+
+        var esNoEncontrada = (localizada === false);
+        var bar = document.createElement('div');
+        bar.id = 'laesh-notif-return-bar';
+        bar.className = 'laesh-notif-return-bar' + (esNoEncontrada ? ' laesh-notif-return-bar--error' : '');
+
+        var esOrigenBusqueda = (_busquedaPreviaSnapshot.origen === 'busqueda');
+        var iconMsg = esNoEncontrada ? '⚠️' : (esOrigenBusqueda ? '🔍' : '🔔');
+        var textoMsg = '';
+        if (esNoEncontrada) {
+            textoMsg = 'No encontrada: <strong class="notif-return-folio">#' + escapeHtml(cleanTarget) + '</strong>';
+        } else if (esOrigenBusqueda) {
+            textoMsg = 'Viendo orden: <strong class="notif-return-folio">#' + escapeHtml(cleanTarget) + '</strong>';
+        } else {
+            textoMsg = 'Notificación: <strong class="notif-return-folio">#' + escapeHtml(cleanTarget) + '</strong>';
+        }
+
+        bar.innerHTML = 
+            '<div class="notif-return-info">' +
+                '<span class="notif-return-icon">' + iconMsg + '</span>' +
+                '<span class="notif-return-text">' + textoMsg + '</span>' +
+            '</div>' +
+            '<div class="notif-return-actions">' +
+                '<button type="button" id="btn-volver-busqueda-notif" class="btn-return-busqueda" title="Volver al estado previo (' + escapeHtml(resumenDetalle) + ')">' +
+                    '<span class="btn-return-lbl-full">' + escapeHtml(labelBotonFull) + '</span>' +
+                    '<span class="btn-return-lbl-mob">' + escapeHtml(labelBotonMob) + '</span>' +
+                '</button>' +
+                '<button type="button" id="btn-cerrar-banner-notif" class="btn-return-close" title="Descartar notificación y quedarse aquí" aria-label="Descartar notificación">✕</button>' +
+            '</div>';
+
+        var targetCard = null;
+        if (snap.isMedico) {
+            var medHist = document.getElementById('panel-historial-medico');
+            var medHoy = document.getElementById('subtab-ordenes-hoy');
+            if (medHist && !medHist.classList.contains('d-none')) {
+                targetCard = medHist.querySelector('.card');
+            } else if (medHoy && (medHoy.classList.contains('active') || !medHoy.classList.contains('d-none'))) {
+                targetCard = medHoy.querySelector('.card');
+            }
+            if (!targetCard) {
+                targetCard = document.querySelector('#panel-historial-medico:not(.d-none) .card, #subtab-ordenes-hoy.active .card, #panel-historial-medico .card, #subtab-ordenes-hoy .card');
+            }
+        } else {
+            var rcAnt = document.getElementById('panel-ordenes-anteriores');
+            var rcHoy = document.getElementById('panel-ordenes');
+            if (rcAnt && !rcAnt.classList.contains('d-none')) {
+                targetCard = rcAnt.querySelector('.card');
+            } else if (rcHoy && !rcHoy.classList.contains('d-none')) {
+                targetCard = rcHoy.querySelector('.card');
+            }
+            if (!targetCard) {
+                targetCard = document.querySelector('#panel-ordenes-anteriores:not(.d-none) .card, #panel-ordenes:not(.d-none) .card, #panel-ordenes-anteriores .card, #panel-ordenes .card');
+            }
+        }
+
+        if (targetCard && targetCard.parentNode) {
+            targetCard.parentNode.insertBefore(bar, targetCard);
+        } else {
+            var header = document.querySelector('.cms-panel-header');
+            if (header && header.parentNode) {
+                header.parentNode.insertBefore(bar, header.nextSibling);
+            }
+        }
+
+        var btnVolver = document.getElementById('btn-volver-busqueda-notif');
+        if (btnVolver) {
+            btnVolver.addEventListener('click', function(e) {
+                e.preventDefault();
+                restaurarEstadoBusquedaPrevia();
+            });
+        }
+        var btnCerrar = document.getElementById('btn-cerrar-banner-notif');
+        if (btnCerrar) {
+            btnCerrar.addEventListener('click', function(e) {
+                e.preventDefault();
+                _busquedaPreviaSnapshot = null;
+                persistirSnapshot();
+                bar.remove();
+            });
+        }
+    }
+
+    function restaurarEstadoBusquedaPrevia() {
+        if (!_busquedaPreviaSnapshot) return;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Analyzing lines 665-678 of the specified file, focusing on line 670, reveals a notification bar removal operation. Considering a unified function `limpiarBarraNotif()` enhances cleanup. Implementation of `limpiarBarraNotif()` and the direct sibling insertion of the notification bar within the header's search wrap is planned. The textual content of the notification will be examined further.
+
+
+The notification text construction logic uses conditional statements to determine the message based on the search result status.  The text includes a localized label and the target identifier, properly escaped for HTML. The action button's title and labels dynamically reflect the previous state and provide a localized "Back" action, also properly HTML escaped.
+
+
+The notification bar's HTML structure is now clear. The function `limpiarBarraNotif()` effectively removes existing notifications and related classes.  Logic to locate the `searchWrap` and `headerContainer` elements based on a medical history flag has been established, but a fallback is needed if the primary elements aren't found. This suggests a potential race condition or dynamic element loading.
+
+
+Revised element location logic now incorporates a medical history flag, prioritizing specific selectors based on the flag's state, but falling back to more general selectors if needed. Further, the insertion of the notification bar is performed conditionally, immediately to the right of the search wrap. The code adds a specific class to `searchWrap` and determines a parent header container. This header container or `searchWrap`'s parent node is used to find where to insert the notification bar.
+
+
+The code now handles the notification bar's positioning, inserting it either near a target card or, if unavailable, as a sibling to a fallback header.  Conditional logic leverages a medical history flag to select appropriate card selectors. Two event listeners are present: "Back" and "Close."  "Back" triggers a notification cleanup and previous search state restoration, while "Close" clears the search snapshot and also performs cleanup.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 8.013582948s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** CORTEX_STEP_STATUS_ERROR
+**Created:** 3 Oct 2026, 3:27 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 3 Oct 2026, 3:27 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+Execution with a zero exit code indicates the `run_command` is successful, suggesting a reliable path forward using Python scripting for precise file modifications within the `restaurantb` codebase. A Python script will be devised to update two files: `ws-client.js` and `app.js`. The `ws-client.js` script will add a notification bar element and adjust classes for styling and mobile adaptation within the header.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.080436433s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 3 Oct 2026, 3:27 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+The target file has been identified. Now the replacement for `ws-client.js` requires specific changes to ensure correct notification bar behavior. The `limpiarBarraNotif()` function must remove the `#laesh-notif-return-bar` element and remove specific CSS classes from the notification bar.
+
+Additionally, the notification bar's HTML structure demands distinct semantic spans for the text content, including full and mobile labels alongside the folio number, ensuring consistent and clear presentation of notification information.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.117995042s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 3 Oct 2026, 3:28 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 3 Oct 2026, 3:28 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+Examining `app.js` after validating `ws-client.js` syntax. Focused on lines 860-875, specifically line 864, which removes a notification bar. Considering an update to also clear specific classes associated with this bar during removal.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.050126157s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 3 Oct 2026, 3:29 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 3 Oct 2026, 3:29 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+Focus shifts to the CSS design in `portal.css`, the central aspect of the request. The user wants the search input, notification icon, and "view previous" button to be on the same line for mobile views (specifically, doctor's phone) while ensuring adequate responsiveness. This design challenge requires careful consideration of the existing CSS and how to achieve the specified layout within responsive design principles.
+
+
+Initial review focuses on the "return bar" section (lines 3570-3726) and the mobile header section (lines 1500-1570) within `portal.css`. The CSS for the return bar appears to handle both desktop and mobile views, so its existing structure is key to understanding the current layout. Examining the `display`, `flex`, and `align-items` properties within the return bar's CSS will determine how to best achieve the desired single-line mobile layout with responsiveness.
+
+
+Analyzing how the existing CSS handles the "return bar" and header in mobile view is crucial. Specifically, checking how the `display`, `flex`, and associated properties are implemented within the `@media (max-width: 768px)` media query is necessary to understand the current behavior. Understanding these properties will allow modifying the current CSS or adding new rules to ensure all required elements align as desired on smaller screens.
+
+
+Initial CSS adjustments target header elements. Implementing `display: flex`, `flex-direction: row`, and related flexbox properties on the header and return bar ensures horizontal layout with elements evenly distributed and prevents horizontal scrolling.
+
+Conditional mobile adjustments are necessary, specifically for the "previous orders" header. When a notification is present, the period container and separator elements will be hidden to prevent layout conflicts, and the right controls will adopt a flexbox row layout.
+
+Finally, the search input container requires adjustments when a notification is present on mobile. Setting appropriate `flex`, `min-width`, `max-width` and `width` values ensures the search input adapts to the available space within the header.
+
+
+Examining the detailed CSS properties of the search input, clear button, and notification bar is necessary. Reviewing the height, width, padding, border, and flexbox settings will inform how to achieve the desired responsive layout on smaller screens. The specific properties of the notification bar, including its flex settings and how it handles spacing, provide a starting point for integrating it with the search input and clear button.
+
+
+Analyzing specific CSS properties within the "return bar" section is underway, focusing on elements like the notification icon and text, the folio number, and the search button.  Assessing how these elements are styled in relation to each other is necessary for determining how to achieve the single-line layout. Understanding their current flexbox settings, padding, and margins will be key to making effective adjustments.
+
+Further investigation into the styles of the search input, clear button, and close button within the "return bar" section reveals their dimensions, positioning, and how they interact in the existing layout.  Examining their `height`, `width`, `padding`, and `border` properties, especially within media queries, is required for responsive adjustments. The clear button and close button may require explicit width and height constraints to ensure they maintain appropriate size on smaller screens.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 5.239658451s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 3 Oct 2026, 3:30 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 3 Oct 2026, 3:30 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+Examining the CSS, these rules target search bar layout within order-related sections. The intention appears to ensure the search bar takes full width and flexibly adapts within its container. This observation suggests an attempt to control the horizontal distribution and sizing of search elements.
+
+
+The initial hypothesis is the search input takes full width when no notification is present, specified by `#ordenes-hoy-md-search-wrap`. When a notification exists, the parent container gains the `.has-notif-bar` and `:has(#laesh-notif-return-bar)` classes, while the search input gains `.search-wrap--with-notif`. CSS rules are defined to specifically manage the layout with the notification bar active, setting the display to flex for proper arrangement of search, notification, and return elements.
+
+
+The provided CSS rules indicate a deliberate shrinking of the search bar to accommodate the notification element.  Specific classes and selectors are used to reduce the search input width, height, and font size when the notification is active. The `flex` properties are modified to constrain the search input.
+
+
+Analyzing styles for the close button within the search bar, particularly when the notification is present, the dimensions are explicitly set. These dimensions change to accommodate the notification's reduced search bar size. The notification bar is also styled to occupy the remaining space in a flexible container, ensuring it takes up the entire remaining horizontal space.
+
+
+The provided CSS defines styling for a notification return bar, encompassing icon, text, folio number, and action buttons. The styles specify visual details such as size, color, font, and layout properties for each element of the notification. The action buttons are also specifically styled with defined dimensions, colors, and visual effects for hover states.
+
+
+The provided CSS focuses on responsive design, specifically for the notification return bar and related elements within the search bar, particularly on smaller screens.  Different labels are shown or hidden based on screen size using `display: none !important;` and `display: inline !important;`. Media queries are used to further adjust the layout on very narrow screens. Specifically, the search bar and its container are compressed horizontally in small viewport sizes to accommodate the notification return bar.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 5.356974845s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 3 Oct 2026, 3:30 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 3 Oct 2026, 3:30 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 3 Oct 2026, 3:30 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+Examining the layout, specifically the header and search bar components, reveals conflicting flexbox properties. The header's `nowrap` and the search wrap's expansive flex values suggest a potential conflict when the header also incorporates a notification bar. This could cause layout issues if not handled correctly.
+
+
+To ensure the search wrap contracts in the presence of the notification bar, more specific selectors must be introduced, overriding the existing styles. These selectors will target the header variations (today/previous orders, with/without notification) and the search components. The input field will also require styling adjustments, reducing height, font size, and padding, to match the desired compact appearance.
+
+
+Specific CSS selectors are being added to adjust the appearance of the clear search button and its SVG icon, ensuring appropriate sizing and positioning within different header states (notification bar presence). The styles will target both the "Today" and "Previous Orders" headers, accounting for the notification bar using classes and specific `:has()` selectors. Mobile-specific behavior of the "Previous Orders" header is being analyzed, particularly its layout with and without the notification bar to determine how to best hide period controls.
+
+
+Specific CSS rules are being added to hide unnecessary elements and ensure the "Previous Orders" header displays correctly on mobile devices, even with the notification bar present. The `.laesh-notif-return-bar` design is under review, focusing on its visual appearance and component spacing. The goal is a clean, informative notification appearance that doesn't disrupt the overall layout.
+
+
+The notification bar's styling is under scrutiny; specifically, color contrast, element spacing, and button appearances require review for accessibility and visual clarity. Focus is on ensuring an effective visual hierarchy and consistent user experience, especially regarding error and success states. The design should communicate information concisely without disrupting the header layout.
+
+
+Examining the desktop and mobile CSS, specifically the flexbox properties, reveals adjustments needed for the header's layout when the notification bar is present.  Desktop styles define specific widths for the search wrap, while mobile styles aim for a unified row layout with `space-between` justification.
+
+Mobile styles require adjustments to ensure proper spacing and element visibility within the unified header row. The "Previous Orders" header's period container needs hiding, and the separator needs removal, to maintain a clean layout in the mobile view.
+
+
+Additional CSS rules are being defined to hide the period container and toolbar separator within the "Previous Orders" header when the notification bar is present.  Furthermore, the right-side controls are being adjusted to a flexbox layout to manage spacing and alignment dynamically.
+
+To ensure the search input contracts, the `flex` property is applied to the search wrap in both header variants (today/previous orders) with/without the notification bar. This creates a min-width constraint to accommodate the notification element.
+
+
+Specific styles are being introduced to address the search input field's height, font size, padding, border-radius, and line-height. These rules also manage border appearance. The clear search button is being customized for size, position, and SVG icon.
+
+These detailed changes ensure the search input and clear button maintain a consistent and compact appearance within the header variants, even with the notification bar present.
+
+
+Additional styles are being applied to the clear search button's SVG icon for size adjustments within the notification bar's context.  The notification return bar's appearance is being fully customized: flexible sizing, minimum width, height constraints, margin, padding, display, layout, visual styling (borders, background) are all being addressed.  The notification return information will also include adjustments: inline display, alignment, gap, font size, color, flexible width, text overflow, and line height. The notification icon will have font size and line height constraints to ensure correct display.
+
+
+The notification return bar's structural elements and visual styling are under detailed refinement; sizing, layout properties, and content presentation are all being addressed.  The design must ensure concise communication of return information without layout disruption, factoring in flexible sizing, and responsive text handling. Icon and textual elements within the notification are having adjustments applied to both size and line height for consistent display.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 15.631666949s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 3 Oct 2026, 3:31 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 3 Oct 2026, 3:31 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 3 Oct 2026, 3:31 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 3 Oct 2026, 3:32 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 3 Oct 2026, 3:32 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `portal.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 3 Oct 2026, 3:32 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `ws-client.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 3 Oct 2026, 3:32 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 3 Oct 2026, 3:32 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 3 Oct 2026, 3:33 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 3 Oct 2026, 3:33 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 3 Oct 2026, 3:33 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 3 Oct 2026, 3:34 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+`portal.css` and `ws-client.js` are confirmed as active in the production environment. Must adhere to the rule prohibiting automatic execution of synchronization scripts or Git operations. Synchronization, commit, and push actions will only be performed upon explicit user request. Proceeding to evaluate all required steps.
+
+
+The primary goal is to ensure the search input, notification, and "Ver Anteriores" button are on the same line, focusing on mobile responsiveness. The notification bar's DOM insertion was modified to be within the header element, right next to the search container, dynamically managing state via CSS classes. Flexbox layout properties were applied to the header container, ensuring elements arrange horizontally with appropriate spacing and responsiveness.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.219999896s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
 
 ---
 
