@@ -7,9 +7,9 @@
 | **Trajectory ID** | `51d656fb-6e4a-4305-8f1a-21d6ed5ab85c` |
 | **Cascade ID** | `d09de97c-0c45-4639-aad1-3960232baee8` |
 | **Type** | Agent Conversation |
-| **Total Steps** | 8448 |
+| **Total Steps** | 8674 |
 | **Started** | 1 Oct 2026, 3:09 pm |
-| **Completed** | 4 Oct 2026, 9:12 pm |
+| **Completed** | 5 Oct 2026, 8:29 am |
 
 ---
 
@@ -17443,6771 +17443,563 @@
 
 ---
 
-<details>
-<summary>Conversation History</summary>
-
-# Conversation History
-Here are the conversation IDs, titles, and summaries of your most recent 1 conversations, in reverse chronological order:
-
-<conversation_summaries>
-## Conversation 3c31c201-9e31-4911-9f50-4061881bf62b: Azure App Service Planning
-- Created: 2026-10-04T18:55:52Z
-- Last modified: 2026-10-04T20:29:04Z
-
-### USER Objective:
-Azure App Service Planning
-
-</conversation_summaries>
-
-</details>
-
----
-
 ### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:15 pm
 
 ---
 
-## Agent Response
-
-### Thinking
-
-Navigation and reactive filtering within reports and KPIs are failing across both the physician and reception views; the root cause likely involves style or JavaScript conflicts. The reception portal on desktops displays duplicate tooltips; the desired behavior is a single tooltip activated by mouse hover on the left-side menu icons.
-
-
-
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `tooltip`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.063524160s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:15 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `portal.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L2409-2454)</summary>
-
-**Path:** `Unknown file`
-
-```
-    color: var(--primary);
-    }
-}
-
-/* Tooltip Custom Styles */
-.nav-item[data-tooltip] { position: relative; }
-.nav-item[data-tooltip]::after {
-    content: attr(data-tooltip);
-    position: absolute;
-    left: 105%;
-    top: 50%;
-    transform: translateY(-50%);
-    background: #0f172a;
-    color: white;
-    padding: 6px 10px;
-    border-radius: 6px;
-    font-size: 0.75rem;
-    font-weight: 500;
-    white-space: nowrap;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.2s, visibility 0.2s;
-    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
-    z-index: 1000;
-    pointer-events: none;
-}@media (hover: hover) and (pointer: fine) {
-    .nav-item[data-tooltip]:hover::after { opacity: 1; visibility: visible; }
-}
-
-/* ── Bell Badge en sidebar-right ── */
-.bell-wrap {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-}
-.bell-badge {
-    position: absolute;
-    top: -5px;
-    right: -6px;
-    background: #ef4444;
-    color: #fff;
-    font-size: 0.62rem;
-    font-weight: 700;
-    height: 16px;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `data-tooltip`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:15 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `labadmin.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L89-159)</summary>
-
-**Path:** `Unknown file`
-
-```
-                <div class="sidebar-float-search" id="float-search-admin">
-                    <input class="sfs-input" id="sfs-input-admin" type="text" maxlength="30"
-                           placeholder="Paciente, folio o tel…" autocomplete="off">
-                    <div class="sfs-results" id="sfs-results-admin"></div>
-                </div>
-
-                <!-- ③ Ítems de navegación (en tablet/móvil: iconos en la tira) -->
-                <div class="nav-item active" data-panel="panel-ordenes" data-tooltip="Recibe pacientes, sube resultados PDF y entrega las solicitudes del día" role="button" tabindex="0">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M6 18h8" /><path d="M3 22h18" /><path d="M14 22a7 7 0 1 0 0-14h-1" /><path d="M9 14h2" /><path d="M9 12a2 2 0 0 1-2-2V6h6v4a2 2 0 0 1-2 2Z" /><path d="M12 6V3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3" />
-                    </svg>
-                    Solicitudes Hoy
-                </div>
-
-                <div class="nav-item" data-panel="panel-ordenes-anteriores" data-tooltip="Busca y da seguimiento a solicitudes de días anteriores" role="button" tabindex="0">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                    Solicitudes Anteriores
-                </div>
-
-                <div class="nav-item" data-panel="panel-pacientes" data-tooltip="Consulta pacientes, su médico remitente y estudios solicitados" role="button" tabindex="0">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                    Pacientes
-                </div>
-
-                <div class="nav-item" data-panel="panel-medicos" data-tooltip="Registra médicos, gestiona su acceso al portal, universidades y centros de trabajo" role="button" tabindex="0">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M11 2v2" /><path d="M5 2v2" /><path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1" /><path d="M8 15a6 6 0 0 0 12 0v-3" /><circle cx="20" cy="10" r="2" />
-                    </svg>
-                    Médicos
-                </div>
-
-                <!-- Solo desktop (ocultos en tira tablet/móvil) -->
-                <div class="nav-item sidebar-admin-extra" data-panel="panel-reportes" data-tooltip="Indicadores por periodo y trazabilidad de cada solicitud" role="button" tabindex="0">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2" />
-                    </svg>
-                    Reportes y Estadísticas
-                </div>
-
-                <div class="nav-item sidebar-admin-extra" data-panel="panel-catalogos" data-tooltip="Edita estudios, áreas y los 20 estudios de acceso rápido del médico" role="button" tabindex="0">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M14 2v6a2 2 0 0 0 .245.96l5.51 10.08A2 2 0 0 1 18 22H6a2 2 0 0 1-1.755-2.96l5.51-10.08A2 2 0 0 0 10 8V2" /><path d="M6.453 15h11.094" /><path d="M8.5 2h7" />
-                    </svg>
-                    Catálogos de Análisis
-                </div>
-
-                <?php if (!empty($isAdmin)): ?>
-                <div class="nav-item sidebar-admin-extra" data-panel="panel-recepcionistas" data-tooltip="Alta, rol, estado y contraseña de recepcionistas y administradores" role="button" tabindex="0">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                    </svg>
-                    El Personal
-                </div>
-                <div class="nav-item sidebar-admin-extra cursor-p" id="nav-gestion-web" data-tooltip="Edita banners, secciones y textos del sitio web público" role="button" tabindex="0">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
-                    Contenidos del Sitio Web
-                </div>
-                <!-- Sistema & Logs: solo ADMIN (la ruta /laesh/adrc/sistema exige rol ADMIN) -->
-                <a href="/laesh/adrc/sistema" class="nav-item sidebar-admin-extra cursor-p" id="nav-sistema" data-tooltip="Consulta logs del servidor y ajusta configuraciones globales del sistema" role="button" tabindex="0" style="text-decoration:none;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-                    Sistema &amp; Logs
-                </a>
-                <?php endif; ?>
-
-                <!-- ⑤ Mini-panel de usuario (visible al abrir hamburger en móvil) -->
-                <div class="sidebar-mobile-only">
-                    <!-- Chip iniciales — clase mob-user-chip exclusiva móvil (style.css ≤767px) -->
-                    <div class="mob-user-chip">
-                        <span class="mob-user-chip__avatar mob-user-chip__avatar--admin"><?= htmlspecialchars(strtoupper(substr($nombreUsuario ?? 'CAR', 0, 3)), ENT_QUOTES, 'UTF-8') ?></span>
-                        <span class="mob-user-chip__label txt-pgd"><?= htmlspecialchars($rolUsuario ?? 'Recepción', ENT_QUOTES, 'UTF-8') ?></span>
-                    </div>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `data-tooltip`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:15 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `labadmin.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-<!DOCTYPE html>
-<?php
-/**
- * rc/views/labadmin.php — Plantilla Plates / View PHP del Portal Recepción
- * Fuente SSOT HTML: portafolio-dev-2026/blocklabgd/v1.2/mockup1.0/uipv1/labadmin.html (R15.1 - Merge iterativo)
- */
-?>
-<html lang="es-MX">
-<head>
-    <meta charset="UTF-8">
-    <meta name="color-scheme" content="light">
-    <meta name="robots" content="noindex, nofollow">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#71CA11">
-    <meta name="description" content="Portal de recepción LAESH — registro de pacientes, solicitudes y administración de servicios.">
-    <meta name="csrf-token" content="<?= htmlspecialchars($_SESSION['csrf_token'] ?? ($csrfToken ?? ''), ENT_QUOTES, 'UTF-8') ?>">
-    <meta name="htmx-config" content='{"historyEnabled":false,"allowEval":false,"allowScriptTags":false}'>
-    <meta name="laesh-servidor-ahora" content="<?= (int)floor(microtime(true) * 1000) ?>">
-    <meta name="laesh-servidor-tz" content="<?= htmlspecialchars(date_default_timezone_get(), ENT_QUOTES, 'UTF-8') ?>">
-    <title>Portal Recepción — LAESH</title>
-    <link rel="icon" type="image/svg+xml" href="/laesh-web-assets-uipv1a/img/favicon.svg">
-
-    <script src="/laesh-web-assets-uipv1a/js/device-detect.js?v=<?= time() ?>"></script>
-    <script src="/laesh-web-assets-uipv1a/js/catalog-compiled.js?v=<?= @filemtime(__DIR__ . '/../../../laesh-web-assets-uipv1a/js/catalog-compiled.js') ?: time() ?>"></script>
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/tokens.css?v=<?= time() ?>">
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/fonts.css?v=<?= time() ?>">
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/style.css?v=<?= time() ?>">
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/portal.css?v=<?= time() ?>">
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/targeting.css?v=<?= time() ?>">
-
-</head>
-<body class="portal-medico-body-layout">
-    <a href="#main-content" class="skip-link">Ir al contenido principal</a>
-    <!-- A11Y-04: Región aria-live para anuncios de acciones (tab activa, orden creada, errores) -->
-    <div id="a11y-live" class="visually-hidden" aria-live="polite" aria-atomic="true" role="status"></div>
-    <!-- Encabezado Fijo con Breadcrumb Integrado -->
-        <nav class="portal-access-header">
-            <div class="portal-header-left">
-                <a class="logo portal-access-link" href="/laesh/" target="_blank" rel="noopener">
-                    <img src="/laesh-web-assets-uipv1a/img/logo-laesh.webp" alt="LAESH Logo" class="portal-logo" decoding="async" fetchpriority="high">
-                </a>
-                <div class="portal-header-divider"></div>
-                <!-- Breadcrumb -->
-                <div class="portal-breadcrumb-group">
-                    <h1 class="txt-main fw-600 portal-h1">Recepción</h1>
-                    <span class="header-sep-green">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
-                    </span>
-                    <span id="header-bc-current" class="txt-pgd fw-bold">Solicitudes Hoy</span>
-                </div>
-            </div>
-            <div class="portal-header-right">
-                <div class="user-badge-portal cursor-p" id="btn-perfil-usuario-rc" role="button" tabindex="0" title="Mi perfil: Cambiar contraseña">
-                    <span><?= !empty($isAdmin) ? 'Admin' : 'Recepción' ?>: <strong class="txt-pgd"><?= htmlspecialchars($nombreUsuario ?? 'Carmen', ENT_QUOTES, 'UTF-8') ?></strong></span>
-                </div>
-                <a href="/laesh/login/logout.php" class="btn-back-primary">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-                    Cerrar Sesión
-                </a>
-            </div>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `labadmin.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1579-1639)</summary>
-
-**Path:** `Unknown file`
-
-```
-                <button type="button" class="close-modal" id="btn-cerrar-perfil-rc" aria-label="Cerrar">&times;</button>
-            </div>
-            <div class="modal-body">
-                <form id="form-cambiar-password-propia-rc" class="d-flex-col-gap1">
-                    <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrfToken ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                    
-                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 10px 12px; margin-bottom: 0.2rem;">
-                        <div style="font-weight: 700; color: #1e293b; font-size: 0.95rem;"><?= htmlspecialchars($nombreUsuario ?? 'Usuario', ENT_QUOTES, 'UTF-8') ?></div>
-                        <div style="font-size: 0.82rem; color: #64748b; margin-top: 2px;">Rol: <?= !empty($isAdmin) ? 'Administrador' : 'Recepcionista' ?></div>
-                    </div>
-
-                    <div>
-                        <label for="rc_old_password" class="form-label">Contraseña Actual <span class="req">*</span></label>
-                        <div class="pw-input-wrap">
-                            <input type="password" id="rc_old_password" name="old_password" autocomplete="current-password" placeholder="••••••••••" required minlength="10" maxlength="10" class="form-input">
-                            <button type="button" id="btn-toggle-rc-old-pw" class="btn-pw-eye" title="Ver/Ocultar contraseña" aria-label="Ver/Ocultar contraseña">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                            </button>
-                        </div>
-                    </div>
-                    <div>
-                        <label for="rc_new_password" class="form-label">Nueva Contraseña / NIP (Exactamente 10 caracteres) <span class="req">*</span></label>
-                        <div class="pw-input-wrap">
-                            <input type="password" id="rc_new_password" name="new_password" autocomplete="new-password" placeholder="••••••••••" required minlength="10" maxlength="10" class="form-input">
-                            <button type="button" id="btn-toggle-rc-new-pw" class="btn-pw-eye" title="Ver/Ocultar contraseña" aria-label="Ver/Ocultar contraseña">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                            </button>
-                        </div>
-                    </div>
-                    <div>
-                        <label for="rc_confirm_password" class="form-label">Confirmar Nueva Contraseña <span class="req">*</span></label>
-                        <div class="pw-input-wrap">
-                            <input type="password" id="rc_confirm_password" name="confirm_password" autocomplete="new-password" placeholder="••••••••••" required minlength="10" maxlength="10" class="form-input">
-                            <button type="button" id="btn-toggle-rc-confirm-pw" class="btn-pw-eye" title="Ver/Ocultar contraseña" aria-label="Ver/Ocultar contraseña">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="form-row-gap" style="margin-top: 0.8rem;">
-                        <button type="button" class="btn btn-secondary flex-1" id="btn-cancelar-perfil-rc">Cancelar</button>
-                        <button type="submit" class="btn btn-primary flex-1" id="btn-guardar-perfil-rc">Actualizar Contraseña</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <script src="/laesh-web-assets-uipv1a/js/htmx.min.js"></script>
-    <!-- PEN-LAESH-01 (2026-10-01): expone window.laeshConfig (incluye
-         notif_polling_http_interval_sec) — debe cargar ANTES de ws-client.js. -->
-    <script src="/laesh-web-assets-uipv1a/js/config-compiled.js?v=<?= time() ?>" defer></script>
-    <script src="/laesh-web-assets-uipv1a/js/app.js?v=<?= time() ?>" defer></script>
-    <script src="/laesh-web-assets-uipv1a/js/ws-client.js?v=<?= time() ?>" defer></script>
-    <script src="/laesh-web-assets-uipv1a/js/portal-footer.js?v=<?= time() ?>" defer></script>
-    <script src="/laesh-web-assets-uipv1a/js/sidebar-rail.js?v=<?= time() ?>" defer></script>
-    <script src="/laesh-web-assets-uipv1a/js/labadmin.js?v=<?= time() ?>" defer></script>
-    <script src="/laesh-web-assets-uipv1a/js/catalog-builder.js?v=<?= time() ?>"></script>
-    <script src="/laesh-web-assets-uipv1a/js/reception-guard.js?v=<?= time() ?>" defer></script>
-</body>
-</html>
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `sidebar-rail.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-/**
- * sidebar-rail.js — LAESH Portal
- * Funcionalidades compartidas del sidebar colapsable en desktop (≥1025px):
- *
- *  1. syncPad  — mantiene .app-layout alineado bajo .portal-access-header fijo.
- *               (app.js hace lo mismo para medicos/labadmin; para gestion-web.html
- *               este script es el único que lo compensa.)
- *
- *  2. Rail toggle — botón #sidebar-rail-toggle que colapsa (65px) / expande (260px)
- *               el sidebar; persiste en localStorage['laesh_sidebar_expanded'].
- *               Al expandir, emite el evento 'laesh:sidebarExpand' para que el SFS
- *               de cada página sepa que debe cerrarse.
- *
- * Uso: <script src="/laesh-web-assets/js/sidebar-rail.js"></script>
- *       Incluir DESPUÉS de app.js (cuando aplique) y justo antes de </body>.
- *
- * API pública: window.laeshSidebarRail = { isExpanded, setExpanded }
- */
-(function () {
-    'use strict';
-
-    /* ── 1. syncPad ────────────────────────────────────────────────────────── */
-    /* Mide el portal-access-header y escribe paddingTop en .app-layout.
-       En medicos/labadmin app.js ya hace esto; la segunda llamada es inocua
-       (mismo valor). En gestion-web.html este bloque es el único que lo hace. */
-    var hdr = document.querySelector('.portal-access-header');
-    var lay = document.querySelector('.app-layout');
-
-    if (hdr && lay) {
-        function syncPad() {
-            if (window.innerWidth >= 1025) {
-                lay.style.paddingTop = hdr.getBoundingClientRect().height + 'px';
-            }
-            /* En tablet/móvil app.js ya gestiona el offset — no sobreescribir. */
-        }
-        requestAnimationFrame(syncPad);
-        window.addEventListener('resize', syncPad);
-    }
-
-    /* ── 2. Sidebar Rail toggle ────────────────────────────────────────────── */
-    var LS_KEY    = 'laesh_sidebar_expanded';
-    var sidebar   = document.querySelector('.app-layout > .sidebar');
-    var toggleBtn = document.getElementById('sidebar-rail-toggle');
-
-    /* Si la página no tiene rail (sin botón o sin sidebar) → salir sin error */
-    if (!sidebar || !toggleBtn) return;
-
-    var SVG_RIGHT = '<polyline points="9 18 15 12 9 6"/>';  /* › expandir  */
-    var SVG_LEFT  = '<polyline points="15 18 9 12 15 6"/>'; /* ‹ colapsar  */
-    var SVG_WRAP  = 'width="14" height="14" viewBox="0 0 24 24" fill="none" '
-                  + 'stroke="currentColor" stroke-width="2.5" '
-                  + 'stroke-linecap="round" stroke-linejoin="round"';
-
-    function isExpanded() {
-        return sidebar.classList.contains('sidebar-expanded');
-    }
-
-    function setExpanded(exp) {
-        if (exp) {
-            sidebar.classList.add('sidebar-expanded');
-            toggleBtn.innerHTML = '<svg ' + SVG_WRAP + '>' + SVG_LEFT + '</svg>';
-            try { sessionStorage.setItem(LS_KEY, '1'); } catch(e){}
-            /* Notificar a los SFS inline de cada página para que se cierren */
-            document.dispatchEvent(new CustomEvent('laesh:sidebarExpand'));
-        } else {
-            sidebar.classList.remove('sidebar-expanded');
-            toggleBtn.innerHTML = '<svg ' + SVG_WRAP + '>' + SVG_RIGHT + '</svg>';
-            try { sessionStorage.setItem(LS_KEY, '0'); } catch(e){}
-        }
-    }
-
-    /* Restaurar preferencia guardada (colapsado por defecto si no hay registro) */
-    var savedLeft = '0';
-    try { savedLeft = sessionStorage.getItem(LS_KEY); } catch(e){}
-    setExpanded(savedLeft === '1');
-
-    toggleBtn.addEventListener('click', function (e) {
-        e.stopPropagation();
-        setExpanded(!isExpanded());
-    });
-
-    /* ── 3. Sidebar Right Rail toggle ────────────────────────────────────────── */
-    var LS_KEY_RIGHT   = 'laesh_sidebar_right_expanded';
-    var sidebarRight   = document.getElementById('sidebar-right');
-    var toggleRightBtn = document.getElementById('sidebar-right-toggle');
-
-    if (sidebarRight && toggleRightBtn) {
-        var SVG_RIGHT_ARR = '<polyline points="9 18 15 12 9 6"/>';  /* › colapsar desktop  */
-        var SVG_LEFT_ARR  = '<polyline points="15 18 9 12 15 6"/>'; /* ‹ expandir desktop  */
-        var SVG_UP_ARR    = '<polyline points="18 15 12 9 6 15"/>'; /* ⌃ colapsar móvil    */
-        var SVG_DOWN_ARR  = '<polyline points="6 9 12 15 18 9"/>';  /* ⌄ expandir móvil    */
-        var SVG_WRAP_ARR  = 'width="14" height="14" viewBox="0 0 24 24" fill="none" '
-                          + 'stroke="currentColor" stroke-width="2.5" '
-                          + 'stroke-linecap="round" stroke-linejoin="round"';
-
-        function isRightExpanded() {
-            return sidebarRight.classList.contains('sidebar-right-expanded');
-        }
-
-        function setRightExpanded(exp) {
-            var isMobile = window.innerWidth <= 1024;
-            var content = sidebarRight.querySelector('.sidebar-right-content');
-            var iconSvg = isMobile
-                ? (exp ? '<svg ' + SVG_WRAP_ARR + '>' + SVG_UP_ARR + '</svg>'
-                       : '<svg ' + SVG_WRAP_ARR + '>' + SVG_DOWN_ARR + '</svg>')
-                : (exp ? '<svg ' + SVG_WRAP_ARR + '>' + SVG_RIGHT_ARR + '</svg>'
-                       : '<svg ' + SVG_WRAP_ARR + '>' + SVG_LEFT_ARR + '</svg>');
-
-            if (exp) {
-                sidebarRight.classList.add('sidebar-right-expanded');
-                if (content) content.style.display = 'block';
-                if (toggleRightBtn) toggleRightBtn.innerHTML = iconSvg;
-                try { sessionStorage.setItem(LS_KEY_RIGHT, '1'); } catch(e){}
-            } else {
-                sidebarRight.classList.remove('sidebar-right-expanded');
-                if (content) content.style.display = 'none';
-                if (toggleRightBtn) toggleRightBtn.innerHTML = iconSvg;
-                try { sessionStorage.setItem(LS_KEY_RIGHT, '0'); } catch(e){}
-            }
-        }
-
-        // Restore preference (colapsado por defecto)
-        var savedRight = '0';
-        try { savedRight = sessionStorage.getItem(LS_KEY_RIGHT); } catch(e){}
-        setRightExpanded(savedRight === '1');
-
-        toggleRightBtn.addEventListener('click', function (e) {
-            e.stopPropagation();
-            setRightExpanded(!isRightExpanded());
-        });
-
-        // En móvil (≤1024px), tocar la barra colapsable completa también abre/cierra
-        var toggleRow = sidebarRight.querySelector('.sidebar-right-toggle-row');
-        if (toggleRow) {
-            toggleRow.addEventListener('click', function (e) {
-                if (window.innerWidth <= 1024) {
-                    if (e.target && e.target.closest('#sidebar-right-toggle')) return;
-                    setRightExpanded(!isRightExpanded());
-                }
-            });
-        }
-    }
-
-    /* Exponer API para que el SFS inline de cada página consulte el estado */
-    window.laeshSidebarRail = { 
-        isExpanded: isExpanded, 
-        setExpanded: setExpanded,
-        isRightExpanded: typeof isRightExpanded === 'function' ? isRightExpanded : null,
-        setRightExpanded: typeof setRightExpanded === 'function' ? setRightExpanded : null
-    };
-
-})();
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `tooltip`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:16 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `title=`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:16 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `.nav-item`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:16 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `portal.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L549-649)</summary>
-
-**Path:** `Unknown file`
-
-```
-    .app-layout > .sidebar:not(.sidebar-expanded) .sidebar-toggle-row { justify-content: center; }
-    .app-layout > .sidebar:not(.sidebar-expanded) .logo             { display: none; }
-    .app-layout > .sidebar:not(.sidebar-expanded) .sidebar-mobile-only { display: none; }
-    .app-layout > .sidebar:not(.sidebar-expanded) .sidebar-admin-extra { display: flex; }
-    .app-layout > .sidebar:not(.sidebar-expanded) .nav-item {
-            justify-content: center;
-            padding: 0.75rem;
-            font-size: 0;
-            gap: 0;
-        }
-    .app-layout > .sidebar:not(.sidebar-expanded) .nav-item > svg { flex-shrink: 0; }
-    .app-layout > .sidebar:not(.sidebar-expanded) .nav-item .globito {
-            font-size: 0.6rem;
-            right: 6px; top: 6px;
-            transform: none;
-            height: 16px; min-width: 16px; padding: 0 3px;
-        }
-    .app-layout > .sidebar:not(.sidebar-expanded) .sidebar-search-row {
-            justify-content: center;
-            gap: 0; margin-bottom: 0.25rem;
-        }
-    .app-layout > .sidebar:not(.sidebar-expanded) .sidebar-search-wrap { display: none; }
-    .app-layout > .sidebar:not(.sidebar-expanded) .sidebar-search-row .sidebar-search-btn {
-            display: flex;
-            width: 42px; height: 42px; border-radius: 8px;
-        }
-    .sidebar-float-search {
-            position: fixed;
-            left: 72px;
-            z-index: 950;
-            width: 290px;
-            background: #fff;
-            border: 1.5px solid var(--primary);
-            border-radius: 10px;
-            box-shadow: 0 8px 28px rgba(0,0,0,0.18);
-            padding: 8px;
-            flex-direction: column;
-            gap: 4px;
-            display: none;
-        }
-    .sidebar-float-search.sfs-open { display: flex; }
-    .sidebar-float-search .sfs-input {
-            width: 100%;
-            padding: 8px 10px;
-            border: 1.5px solid #cbd5e1;
-            border-radius: 7px;
-            font-size: 0.9rem;
-            font-family: inherit;
-            outline: none;
-            box-sizing: border-box;
-            transition: border-color 0.15s;
-        }
-    .sidebar-float-search .sfs-input:focus { border-color: var(--primary); }
-    .sidebar-float-search .sfs-results {
-            max-height: 210px;
-            overflow-y: auto;
-            border: 1px solid #e2e8f0;
-            border-radius: 7px;
-            background: #fff;
-            margin-top: 2px;
-            display: none;
-        }
-    .sidebar-float-search .sfs-results.sfs-r-open { display: block; }
-    .sidebar-float-search .sfs-item {
-            padding: 8px 12px;
-            cursor: pointer;
-            border-bottom: 1px solid #f1f5f9;
-            font-size: 0.87rem;
-            line-height: 1.45;
-        }
-    .sidebar-float-search .sfs-item:last-child { border-bottom: none; }
-    .sidebar-float-search .sfs-item:hover { background: #f0f9ff; }
-    .sidebar-float-search .sfs-estado { font-size: 0.82rem; font-weight: 700; color: #dc2626; }
-    .sidebar-float-search .sfs-empty  { padding: 10px 12px; font-size: 0.85rem; color: var(--text-muted); text-align: center; font-style: italic; }
-    .app-layout > .sidebar.sidebar-expanded {
-            width: 260px;
-            padding: 1.25rem 1.5rem;
-            gap: 1.25rem;
-        }
-    .app-layout > .sidebar.sidebar-expanded .sidebar-toggle-row { justify-content: flex-end; }
-    .app-layout > .sidebar.sidebar-expanded .nav-item {
-            justify-content: flex-start;
-            padding: 0.85rem 1rem;
-            font-size: 0.95rem;
-            gap: 0.75rem;
-        }
-    .app-layout > .sidebar.sidebar-expanded .nav-item .globito {
-            font-size: 0.75rem;
-            right: 12px; top: 50%;
-            transform: translateY(-50%);
-            height: 20px; min-width: 20px; padding: 0 6px;
-        }
-    .app-layout > .sidebar.sidebar-expanded .sidebar-search-row { justify-content: flex-start; gap: 8px; margin-bottom: 0; }
-    .app-layout > .sidebar.sidebar-expanded .sidebar-search-wrap { display: block; flex: 1; width: auto; }
-    .app-layout > .sidebar.sidebar-expanded .sidebar-search-row .sidebar-search-btn { display: flex; width: 38px; height: 38px; }
-    .app-layout > .sidebar.sidebar-expanded .sidebar-admin-extra { display: flex; }
-    .app-layout > .sidebar.sidebar-expanded .sidebar-float-search { display: none; }
-    .main-content { padding-top: 1rem; }
-    body { padding-top: 0; }
-    body.portal-medico-body-layout {
-            padding-left: 0;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Examining the CSS, when `.sidebar:not(.sidebar-expanded)` is active, the sidebar adopts "rail mode" characteristics: centered navigation items, reduced padding, a font size of zero, and no gap between items. This setup suggests that when `.sidebar-expanded` is active, the styling will change to something other than the rail mode styling.
-
-
-
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `data-tooltip`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.083329298s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:16 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `tooltip`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:16 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `.title =`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:16 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `.nav-item::`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:16 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `portal.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1119-1149)</summary>
-
-**Path:** `Unknown file`
-
-```
-            min-height: 52px;
-            min-width: 44px;
-            flex-shrink: 0;
-            cursor: pointer;
-            border: none;
-            background: transparent;
-            color: var(--text-main);
-            text-align: center;
-            white-space: nowrap;
-        }
-    .sidebar-search-btn:hover,
-        .sidebar-search-btn.active { background: rgba(0,82,183,0.08); color: var(--primary); }
-    .app-layout > .sidebar .sidebar-admin-extra { display: none; }
-    .app-layout > .sidebar .nav-item::before,
-        .app-layout > .sidebar .nav-item::after { display: none; }
-    .sidebar-mobile-only { display: none; }
-    .app-layout { padding-top: var(--portal-content-offset, 140px); }
-}
-
-/* 2026-09-24: base (desktop) — solo la fecha completa; la corta (móvil,
-   sin año) se activa dentro de @media max-width:767px más abajo. Fuera de
-   un media query para que ambos estados por defecto queden explícitos y no
-   dependan de que el navegador nunca cargue portal.css sin evaluar medias. */
-.fecha-full { display: inline; }
-.fecha-corta { display: none; }
-
-/* 2026-09-24: mismo patrón que fecha-full/fecha-corta — encabezados de
-   Órdenes Hoy/Anteriores (médico) con versión corta para móvil, sin perder
-   el texto completo en desktop. Ver mdRenderOrdenesTablaHeader(). */
-.th-lbl-full { display: inline; }
-.th-lbl-corta { display: none; }
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Initial observation: line 1133 is within a media query targeting tablets or mobile devices. The current focus shifts to pinpointing the definition of lines 2414-2437. Analysis of the CSS reveals tooltip custom styles are defined in that range.
-
-
-
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `data-tooltip`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.025753950s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:16 pm
 
 ---
 
-## Agent Response
-
-### Thinking
-
-The CSS defines a tooltip style for elements with the `data-tooltip` attribute, positioning it to the right of the element. Initial opacity is set to zero, suggesting it's hidden by default and might be activated by an event. The style includes background color, text color, padding, and border-radius for visual presentation.
-
-
-
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `<title>`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.204281851s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:16 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `tooltip`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:16 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `tooltip`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:16 pm
 
 ---
 
-## Agent Response
-
-### Thinking
-
-Suspect the tooltip is rendered twice or in the wrong location. Examining the sidebar code and associated style definitions for the root cause. Considering whether the expanded/collapsed state of the sidebar impacts tooltip display. The user's description indicates an issue with redundant tooltips on the left menu icons in the desktop portal.
-
-
-Examining the provided code, there's a `data-tooltip` attribute on the menu item, suggesting a built-in tooltip mechanism. Considering that there might be tooltips on both the icon and the text. The HTML structure strongly suggests that the tooltip is directly associated with each menu item, with the tooltip text is likely displayed.
-
-
-
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `::after`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.265329998s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:16 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `portal.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L999-1139)</summary>
-
-**Path:** `Unknown file`
-
-```
-    .app-layout {
-            flex-direction: column;
-            min-height: auto;
-            width: 100%;
-            max-width: 100vw;
-            overflow-x: clip;   /* contiene desbordamientos de hijos anchos */
-        }
-    .sidebar {
-            width: 100%;
-            max-width: 100vw;
-            flex-direction: row;
-            flex-wrap: nowrap;
-            overflow-x: auto;   /* scroll interno de la tira de iconos */
-            overflow-y: visible;
-            padding: 0.75rem 1rem;
-            gap: 6px;
-            border-right: none;
-            border-bottom: 2px solid #e2e8f0;
-            background: white;
-            scrollbar-width: none;
-            /* SIN position:sticky — .app-layout > .sidebar es fixed (ver abajo) */
-        }
-    .sidebar::-webkit-scrollbar { display: none; }
-    .nav-item {
-            flex-shrink: 0;
-            padding: 0.5rem 0.85rem;
-            font-size: 0.8rem;
-        }
-    .main-content { padding: 1.5rem; }
-    .field-row   { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
-    .sidebar .logo {
-            margin-bottom: 0;
-            margin-right: 1.5rem;
-            flex-shrink: 0;
-            align-items: center;
-        }
-    .sidebar > div:last-child {
-            margin-top: 0;
-            margin-left: auto;
-            padding-top: 0;
-            border-top: none;
-            padding-left: 1.5rem;
-            border-left: 1px solid #e2e8f0;
-            flex-direction: row;
-            align-items: center;
-            gap: 12px;
-            flex-shrink: 0;
-        }
-    .portal-access-header { padding: 0.65rem 1.5rem; }
-    .portal-header-right  { display: flex; }
-    .portal-access-header .nav-hamburger { display: none; }
-    .portal-initials-mob { display: none; }
-    .app-layout > .sidebar {
-            position: fixed;  /*: sobrevive cualquier inline style del JS de paneles */
-            top: var(--portal-header-h, 84px);
-            left: 0; right: 0;
-            width: 100%;
-            flex-direction: row;
-            flex-wrap: nowrap;
-            overflow-x: auto;
-            overflow-y: visible;
-            padding: 0.4rem 1rem;
-            gap: 4px;
-            border-right: none;
-            border-bottom: 2px solid #e2e8f0;
-            background: var(--bg-surface);
-            align-items: center;
-            min-height: 56px;
-            scrollbar-width: none;
-            z-index: 990;
-        }
-    .app-layout > .sidebar::-webkit-scrollbar { display: none; }
-    .app-layout > .sidebar .nav-item {
-            flex-shrink: 0;
-            flex-direction: column;
-            padding: 0.35rem 0.65rem;
-            font-size: 0.68rem;
-            gap: 2px;
-            border-radius: 8px;
-            min-height: 52px;
-            width: auto;
-            text-align: center;
-            white-space: nowrap;
-        }
-    .sidebar-search-row { display: contents; }
-    .app-layout > .sidebar .sidebar-search-wrap { display: none; }
-    .app-layout.sidebar-search-open > .sidebar .nav-item { display: none; }
-    .app-layout.sidebar-search-open .sidebar-search-wrap {
-            display: flex;
-            flex: 1;
-            flex-direction: row;
-            align-items: center;
-            position: static;
-            padding: 0.2rem 0.3rem;
-            background: transparent;
-            border: none;
-            box-shadow: none;
-            z-index: auto;
-            width: auto;
-            max-width: none;
-            margin-bottom: 0;
-        }
-    .app-layout.sidebar-search-open .sidebar-search-wrap input {
-            font-size: 0.88rem;
-            padding: 0.35rem 0.7rem;
-            width: 100%;
-            margin-bottom: 0;
-            border: 1.5px solid var(--primary);
-            border-radius: 6px;
-            min-height: 40px;
-        }
-    .sidebar-search-btn {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 0.35rem 0.65rem;
-            font-size: 0.68rem;
-            gap: 2px;
-            border-radius: 8px;
-            min-height: 52px;
-            min-width: 44px;
-            flex-shrink: 0;
-            cursor: pointer;
-            border: none;
-            background: transparent;
-            color: var(--text-main);
-            text-align: center;
-            white-space: nowrap;
-        }
-    .sidebar-search-btn:hover,
-        .sidebar-search-btn.active { background: rgba(0,82,183,0.08); color: var(--primary); }
-    .app-layout > .sidebar .sidebar-admin-extra { display: none; }
-    .app-layout > .sidebar .nav-item::before,
-        .app-layout > .sidebar .nav-item::after { display: none; }
-    .sidebar-mobile-only { display: none; }
-    .app-layout { padding-top: var(--portal-content-offset, 140px); }
-}
-
-/* 2026-09-24: base (desktop) — solo la fecha completa; la corta (móvil,
-   sin año) se activa dentro de @media max-width:767px más abajo. Fuera de
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Inspecting the CSS, there is a section defining custom styles for tooltips within navigation items. It appears these styles position and format the tooltip's content, including background, color, padding, and font attributes. The `opacity: 0` suggests the tooltips are initially hidden, likely to appear on hover or focus.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `labadmin.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.001606714s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L64-154)</summary>
-
-**Path:** `Unknown file`
-
-```
-        <div class="app-layout">
-            <aside class="sidebar">
-
-                <!-- ⓪ Toggle rail: colapsar / expandir sidebar (solo desktop) -->
-                <div class="sidebar-toggle-row">
-                    <button type="button" class="sidebar-rail-toggle" id="sidebar-rail-toggle" title="Expandir / Colapsar menú">
-                        <svg id="rail-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-                    </button>
-                </div>
-
-                <!-- ① Fila lupita+input: en desktop ambos visibles en la misma línea;
-                         en tablet/móvil display:contents los expone como ítems directos de la tira -->
-                <div class="sidebar-search-row">
-                    <button type="button" class="sidebar-search-btn" id="sidebar-search-btn" aria-label="Buscar paciente o solicitud">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-                        Buscar
-                    </button>
-                    <div class="sidebar-search-wrap form-field">
-                        <input type="text" id="input-buscador" placeholder="Folio, nombre, tel. o dx (3+ letras)..." class="form-input-ta" autocomplete="off"><!-- P5-fix: autofocus removido; 2026-10-01: placeholder corregido (decía "5+ letras", el mínimo real es 3) y ampliado a lo que realmente busca -->
-                        <div id="autocomplete-list" class="sfs-dropdown">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Popup flotante de búsqueda (visible solo en modo colapsado) -->
-                <div class="sidebar-float-search" id="float-search-admin">
-                    <input class="sfs-input" id="sfs-input-admin" type="text" maxlength="30"
-                           placeholder="Paciente, folio o tel…" autocomplete="off">
-                    <div class="sfs-results" id="sfs-results-admin"></div>
-                </div>
-
-                <!-- ③ Ítems de navegación (en tablet/móvil: iconos en la tira) -->
-                <div class="nav-item active" data-panel="panel-ordenes" data-tooltip="Recibe pacientes, sube resultados PDF y entrega las solicitudes del día" role="button" tabindex="0">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M6 18h8" /><path d="M3 22h18" /><path d="M14 22a7 7 0 1 0 0-14h-1" /><path d="M9 14h2" /><path d="M9 12a2 2 0 0 1-2-2V6h6v4a2 2 0 0 1-2 2Z" /><path d="M12 6V3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3" />
-                    </svg>
-                    Solicitudes Hoy
-                </div>
-
-                <div class="nav-item" data-panel="panel-ordenes-anteriores" data-tooltip="Busca y da seguimiento a solicitudes de días anteriores" role="button" tabindex="0">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                    Solicitudes Anteriores
-                </div>
-
-                <div class="nav-item" data-panel="panel-pacientes" data-tooltip="Consulta pacientes, su médico remitente y estudios solicitados" role="button" tabindex="0">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                    Pacientes
-                </div>
-
-                <div class="nav-item" data-panel="panel-medicos" data-tooltip="Registra médicos, gestiona su acceso al portal, universidades y centros de trabajo" role="button" tabindex="0">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M11 2v2" /><path d="M5 2v2" /><path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1" /><path d="M8 15a6 6 0 0 0 12 0v-3" /><circle cx="20" cy="10" r="2" />
-                    </svg>
-                    Médicos
-                </div>
-
-                <!-- Solo desktop (ocultos en tira tablet/móvil) -->
-                <div class="nav-item sidebar-admin-extra" data-panel="panel-reportes" data-tooltip="Indicadores por periodo y trazabilidad de cada solicitud" role="button" tabindex="0">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2" />
-                    </svg>
-                    Reportes y Estadísticas
-                </div>
-
-                <div class="nav-item sidebar-admin-extra" data-panel="panel-catalogos" data-tooltip="Edita estudios, áreas y los 20 estudios de acceso rápido del médico" role="button" tabindex="0">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M14 2v6a2 2 0 0 0 .245.96l5.51 10.08A2 2 0 0 1 18 22H6a2 2 0 0 1-1.755-2.96l5.51-10.08A2 2 0 0 0 10 8V2" /><path d="M6.453 15h11.094" /><path d="M8.5 2h7" />
-                    </svg>
-                    Catálogos de Análisis
-                </div>
-
-                <?php if (!empty($isAdmin)): ?>
-                <div class="nav-item sidebar-admin-extra" data-panel="panel-recepcionistas" data-tooltip="Alta, rol, estado y contraseña de recepcionistas y administradores" role="button" tabindex="0">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                    </svg>
-                    El Personal
-                </div>
-                <div class="nav-item sidebar-admin-extra cursor-p" id="nav-gestion-web" data-tooltip="Edita banners, secciones y textos del sitio web público" role="button" tabindex="0">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
-                    Contenidos del Sitio Web
-                </div>
-                <!-- Sistema & Logs: solo ADMIN (la ruta /laesh/adrc/sistema exige rol ADMIN) -->
-                <a href="/laesh/adrc/sistema" class="nav-item sidebar-admin-extra cursor-p" id="nav-sistema" data-tooltip="Consulta logs del servidor y ajusta configuraciones globales del sistema" role="button" tabindex="0" style="text-decoration:none;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-                    Sistema &amp; Logs
-                </a>
-                <?php endif; ?>
-
-                <!-- ⑤ Mini-panel de usuario (visible al abrir hamburger en móvil) -->
-                <div class="sidebar-mobile-only">
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-The request indicates two tooltips appear on desktop/laptop when hovering over the left vertical menu icons; the goal is to keep only the tooltip that appears on mouse hover. This suggests a potential conflict or redundant tooltip implementation. Confirming this behavior is the initial step to isolate and address the tooltip issue.
-
-
-
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `mouseenter`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.131247177s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:17 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `mouseover`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:17 pm
 
 ---
 
-## Agent Response
-
-### Thinking
-
-The request describes a scenario on a desktop/laptop portal where two tooltips appear, and only one is desired when hovering over the left vertical menu icons. The key is understanding the effect of the mouse movement. The phrase "que" needs further analysis to determine the user's intent within the tooltip behavior.
-
-
-
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `panel-ordenes`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.286728392s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:17 pm
 
 ---
 
-## Agent Response
-
-### Thinking
-
-The request describes a situation with two tooltips appearing on a desktop/laptop portal, specifically for a left vertical menu. The goal is to retain only the tooltip that appears on mouse hover over the menu icons. This implies a need to identify and suppress the undesired tooltip while preserving the hover-based tooltip functionality.
-
-
-The primary tooltip is likely generated via CSS, attached to the `.nav-item` element with a `data-tooltip` attribute. A second tooltip could originate from an SVG's `title` attribute or a similar mechanism added in the code. Checking for such attributes in the relevant files is needed. For example, `labadmin.php` is inspected for the presence of a title attribute in an SVG.
-
-
-
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `data-tooltip`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.941926861s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:17 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `[data-`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:17 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `content:`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:17 pm
 
 ---
 
-## Agent Response
-
-### Thinking
-
-The CSS defines a tooltip style for navigation items using a `data-tooltip` attribute. This suggests a potential UI element for providing contextual information or hints, linked to specific navigation components. This style may affect the visual presentation of interactive elements.
-
-
-The user likely sees two tooltips, one for the icon and another for the expanded text. The goal is to show the tooltip *only* on the icon in the collapsed state. The sidebar toggle button has a separate tooltip defined by its `title` attribute. Investigating whether the expanded sidebar items or the toggle element itself trigger unwanted tooltips is the next step.
-
-
-
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `nav-item`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.869720620s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:17 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `labadmin.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1279-1319)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-/* ── P-LAESH-01 Phase3: event listeners (reemplaza onclick=/onchange= del HTML) ── */
-document.addEventListener('DOMContentLoaded', function() {
-    // Nav items → cambiarTabAdmin delegation
-    document.querySelectorAll('.nav-item[data-panel]').forEach(function(item) {
-        item.addEventListener('click', function() {
-            if (typeof window.cambiarTabAdmin === 'function')
-                window.cambiarTabAdmin(this.getAttribute('data-panel'), this);
-        });
-    });
-
-    // Sidebar nav → gestion-web
-    var navGestionWeb = document.getElementById('nav-gestion-web');
-    if (navGestionWeb) navGestionWeb.addEventListener('click', function(e) {
-        if (window.location.pathname.endsWith('.html') || window.location.protocol === 'file:' || window.location.pathname.includes('/uipv1a/')) {
-            e.preventDefault();
-            window.location.href = 'gestion-web.html';
-        } else {
-            window.location.href = '/laesh/adrc/';
-        }
-    });
-
-    // Filtros — IDs corregidos para coincidir con los elements reales del HTML
-    var filtroSelects = [
-        ['filtro-periodo-admin',           function() { if (typeof window.manejarCambioFiltroAdmin === 'function') window.manejarCambioFiltroAdmin(); }]
-    ];
-    filtroSelects.forEach(function(pair) {
-        var el = document.getElementById(pair[0]);
-        if (el) el.addEventListener('change', pair[1]);
-    });
-
-
-    // Close buttons
-    var closeMap = [
-        ['btn-cerrar-medico',          'cerrarModalMedico']
-    ];
-    closeMap.forEach(function(pair) {
-        var btn = document.getElementById(pair[0]);
-        if (btn) btn.addEventListener('click', function() {
-            if (typeof window[pair[1]] === 'function') window[pair[1]]();
-        });
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-The request specifies two tooltips appear on the reception portal for desktop/laptop, but only one is desired—specifically, the one triggered by mouse hover over the left vertical menu icons. The key is to isolate the logic controlling tooltip display to ensure only the intended behavior persists.
-
-
-It seems the `.nav-item` element contains both the icon and text, with the tooltip attached to the parent. The HTML `data-tooltip` attribute likely triggers the tooltip on hover for the entire element. This explains why two tooltips appear, one for the icon and another for the entire row. The goal is to disable the tooltip for text/row hover.
-
-
-
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `title`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 1.041923850s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:17 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `globito`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:17 pm
 
 ---
 
-## Agent Response
-
-### Thinking
-
-The request describes two tooltips appearing on a desktop/laptop portal, specifically targeting the left vertical menu. The goal is to retain only the tooltip that appears on mouse hover over the menu icons. This implies there is a conflict or redundancy in the tooltip behavior.
-
-
-Two tooltips are likely caused by a combination of a CSS-generated tooltip (using `data-tooltip` and `::after`) and a native browser tooltip triggered by an attribute like `title` or `aria-label` on the same element or a child element. The objective is to remove the native tooltip, keeping only the CSS one that activates on icon hover within the left vertical menu. Inspecting the HTML in `labadmin.php` within the sidebar, specifically lines 95-155, will reveal which attributes are present and causing this.
-
-
-
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `data-tooltip`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.145186409s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:17 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `data-tooltip]::after`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:17 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `style.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L369-399)</summary>
-
-**Path:** `Unknown file`
-
-```
-    border-radius: 12px;
-    margin: 2rem;
-}
-
-/* Tooltip Custom Styles */
-.nav-item[data-tooltip] {
-    position: relative;
-}
-.nav-item[data-tooltip]::after {
-    content: attr(data-tooltip);
-    position: absolute;
-    left: 105%;
-    top: 50%;
-    transform: translateY(-50%);
-    background: #0f172a; /* Dark slate */
-    color: white;
-    padding: 6px 10px;
-    border-radius: 6px;
-    font-size: 0.75rem;
-    font-weight: 500;
-    white-space: nowrap;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.2s, visibility 0.2s;
-    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
-    z-index: 1000;
-    pointer-events: none;
-}
-.nav-item[data-tooltip]:hover::after {
-    opacity: 1;
-    visibility: visible;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-The request specifies that only one tooltip should remain on the desktop/laptop reception portal's left vertical menu items/icons when hovering. Considering the tooltip behavior, it's crucial to understand how the sidebar's expanded or collapsed state affects the presence of the tooltips. The focus is to identify the condition or trigger that needs adjustment to satisfy the single tooltip requirement.
-
-
-Investigating the source code, the observed double tooltips likely stem from both a CSS-defined tooltip and a browser-generated tooltip. The HTML structure reveals `data-tooltip` attributes on menu items, suggesting the CSS tooltip. The `<button>` element for the rail toggle uses the `title` attribute, which likely triggers the browser's native tooltip. The goal now is to determine which mechanism is responsible for the unwanted second tooltip.
-
-
-The focus shifts to the user's description of two tooltips on the left vertical menu. It appears there might be a misunderstanding of what the user is reporting. One tooltip could be triggered by hovering the icon, while another is related to hovering the text item within the menu. The initial hypothesis is that the CSS-defined tooltip is activated by hovering `.nav-item`, which contains the icon; thus, hovering the icon is also hovering `.nav-item`.
-
-
-
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `::before`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 1.319844144s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:17 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `[data-tooltip]`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:17 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `tooltip`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:17 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `medicos.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L2464-2529)</summary>
-
-**Path:** `Unknown file`
-
-```
-// ── Popover de texto completo — celdas truncadas en móvil (Órdenes Hoy/
-// Anteriores + Mis Pacientes) — 2026-09-24, extendido a Mis Pacientes ──────
-// El truncado con ellipsis (portal.css, ≤767px) ya trae el texto completo
-// en title="", pero title NO se muestra con mantener presionado en
-// touch (limitación real de los navegadores móviles, no del atributo en
-// sí) — este popover hace tocable lo que title prometía y no cumplía.
-// Delegado en document (no en las <td> directamente) porque HTMX reemplaza
-// el <tbody> completo en cada sort/búsqueda/refresh — un listener puesto en
-// una <td> específica se perdería en el primer refresco de la tabla.
-(function() {
-    var SELECTOR_CELDA = '#tabla-medico .td-paciente-trunc, #tabla-medico .td-estudios-rc, '
-        + '#tabla-historial-completo .td-paciente-trunc, #tabla-historial-completo .td-estudios-rc, '
-        + '#tabla-pacientes-medico .td-trunc-md, .diag-trunc-rc, [data-tooltip]';
-
-    function cerrarPopoverCelda() {
-        var existing = document.getElementById('celda-popover');
-        if (existing) existing.remove();
-    }
-
-    document.addEventListener('click', function(e) {
-        var el = e.target.closest(SELECTOR_CELDA);
-        if (!el) {
-            cerrarPopoverCelda();
-            return;
-        }
-
-        var texto = el.getAttribute('data-tooltip') || el.getAttribute('title') || el.textContent.trim();
-        var isTruncated = el.scrollWidth > el.clientWidth + 1 || el.classList.contains('diag-trunc-rc') || el.hasAttribute('data-tooltip');
-        if (!isTruncated || !texto || texto === '—') return;
-
-        cerrarPopoverCelda();
-
-        var pop = document.createElement('div');
-        pop.id = 'celda-popover';
-        pop.className = 'celda-popover';
-        pop.setAttribute('role', 'tooltip');
-        pop.textContent = texto;
-        document.body.appendChild(pop);
-
-        var rect = el.getBoundingClientRect();
-        var maxLeft = window.innerWidth - pop.offsetWidth - 8;
-        var left = Math.min(Math.max(8, rect.left), Math.max(8, maxLeft));
-        var top = rect.bottom + 4;
-        // Si no cabe abajo (celda cerca del borde inferior), mostrar arriba.
-        if (top + pop.offsetHeight > window.innerHeight - 8) {
-            top = rect.top - pop.offsetHeight - 4;
-        }
-        pop.style.left = left + 'px';
-        pop.style.top = Math.max(8, top) + 'px';
-
-        e.stopPropagation();
-    });
-
-    // Cerrar al hacer scroll (el popover no sigue a la celda) o al redimensionar.
-    document.addEventListener('scroll', cerrarPopoverCelda, { passive: true, capture: true });
-    window.addEventListener('resize', cerrarPopoverCelda, { passive: true });
-})();
-
-
-    // Apertura de Mi Perfil desde el avatar/chip móvil
-    var btnPerfilMobMd = document.getElementById('btn-perfil-mob-md');
-    if (btnPerfilMobMd) {
-        btnPerfilMobMd.addEventListener('click', function() {
-            if (typeof window.cambiarTabMedico === 'function') {
-                window.cambiarTabMedico('panel-mi-perfil');
-            }
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `celda-popover`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:18 pm
 
 ---
 
-## Agent Response
-
-### Thinking
-
-The user reports two tooltips appearing on the desktop/laptop reception portal. The goal is to keep only the tooltip that appears on mouse hover over the left vertical menu icons. This implies a need to identify and disable the unwanted tooltip. The `celda-popover` might be related to the tooltip functionality. It is located in `medicos.js` and this might be a starting point.
-
-
-It's necessary to determine *how* the tooltips are triggered and *what* triggers the undesired second tooltip on the menu. The HTML structure of the menu items (`.nav-item`) is analyzed to understand the default behavior and hover effects. The next step is to examine the `labadmin.php` file, the live server, or a mockup to observe the tooltips directly, and inspect the relevant DOM elements. Suspect potential CSS styles in `portal.css`, specifically lines 2414-2438, which seem related to tooltip customization, so the file will be checked next.
-
-
-
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `Solicitudes Hoy`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.454883262s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:18 pm
-
----
-
-## Agent Response
-
-### Thinking
-
-Investigating the user's report of duplicate tooltips in the desktop portal reception area, focusing initial attention on `labadmin.js` and `portal.css` as potential sources. The sidebar's behavior in collapsed "rail mode" is also relevant, particularly its 65px width, as this impacts the display of menu items and their associated tooltips. This is important to ensure the user only sees one tooltip on desktop/laptop.
-
-
-
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.021614389s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:18 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:18 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:18 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:18 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:18 pm
-
----
-
-## Agent Response
-
-### Thinking
-
-Re-examining the user's second request to ensure complete understanding of the issue with tooltips on the desktop/laptop "recepcion" portal. The goal is to retain only the tooltip that appears on mouse hover over the menu icons.
-
-
-The phrase "salen dos tooltips" suggests the presence of two distinct tooltip behaviors on hover. The code indicates tooltips are generated for both the text label and the icon within a menu item. The user likely wants to disable the tooltip for the text, leaving only the icon's tooltip visible.
-
-
-
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.620876060s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:18 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `_inicializarKpiCards`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:18 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `labadmin.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L409-519)</summary>
-
-**Path:** `Unknown file`
-
-```
-            document.querySelectorAll('#kpi-cards-grid .kpi-periodo-badge').forEach(function(el) {
-                el.textContent = lblText;
-            });
-        }
-
-        function _resolverFechasParaDrillDown() {
-            // Devuelve {periodo, fechaInicio, fechaFin} en el formato que acepta tabla-ordenes-anteriores
-            if (_kpiRango === 'fecha') {
-                return { periodo: 'fecha', fechaInicio: _kpiInicio, fechaFin: _kpiFin };
-            }
-            // Para periodos nombrados: calcular fechas explícitas para pasarlas como rango
-            const hoy = _hoyServidorISO();
-            let fi = '', ff = hoy;
-            if (_kpiRango === 'dia') {
-                fi = ff; // hoy — no llega aquí (va a panel-solicitudes), pero por completitud
-            } else if (_kpiRango === 'ayer') {
-                fi = ff = _sumarDiasISO(hoy, -1);
-            } else if (_kpiRango === 'semana') {
-                const dow = new Date(hoy + 'T00:00:00Z').getUTCDay() || 7; // lunes=1
-                fi = _sumarDiasISO(hoy, -dow + 1);
-            } else if (_kpiRango === 'mes') {
-                fi = hoy.substring(0, 7) + '-01';
-            } else if (_kpiRango === 'anio') {
-                fi = hoy.substring(0, 4) + '-01-01';
-            }
-            return { periodo: 'fecha', fechaInicio: _noAntesDelMin(fi), fechaFin: ff };
-        }
-
-        function _abrirDetalleKpi(estadoId, soloParciales) {
-            const esHoy = _kpiRango === 'dia';
-
-            if (esHoy) {
-                // Navegar a panel de solicitudes del día
-                const navItem = document.querySelector('.sidebar .nav-item[data-panel="panel-ordenes"]');
-                if (typeof window.cambiarTabAdmin === 'function') window.cambiarTabAdmin('panel-ordenes', navItem);
-                // Aplicar filtro de estado si aplica (estado_id > 0)
-                if (estadoId > 0 || soloParciales) {
-                    const params = new URLSearchParams({ estado_id: estadoId || 0, solo_parciales: soloParciales ? '1' : '0' });
-                    htmx.ajax('GET', '/laesh/rc/tabla-ordenes?' + params.toString(), {
-                        target: '#tabla-recepcion', swap: 'outerHTML'
-                    });
-                }
-                return;
-            }
-
-            // Navegar a panel de historial
-            const navItem = document.querySelector('.sidebar .nav-item[data-panel="panel-ordenes-anteriores"]');
-            if (typeof window.cambiarTabAdmin === 'function') window.cambiarTabAdmin('panel-ordenes-anteriores', navItem);
-
-            // Sincronizar selector de periodo del panel historial a "fecha" con fechas calculadas
-            const { periodo, fechaInicio, fechaFin } = _resolverFechasParaDrillDown();
-            const selPeriodo = document.getElementById('select-periodo-anteriores-rc');
-            const inpInicio  = document.getElementById('fecha-inicio-anteriores-rc');
-            const inpFin     = document.getElementById('fecha-fin-anteriores-rc');
-            const rango      = document.getElementById('rango-fechas-anteriores-rc');
-            if (selPeriodo) selPeriodo.value = 'fecha';
-            if (inpInicio)  inpInicio.value  = fechaInicio;
-            if (inpFin)     inpFin.value     = fechaFin;
-            if (rango) { rango.classList.remove('d-none'); rango.style.display = 'inline-flex'; }
-
-            const params = new URLSearchParams({
-                periodo:       periodo,
-                fecha_inicio:  fechaInicio,
-                fecha_fin:     fechaFin,
-                estado_id:     estadoId || 0,
-                solo_parciales: soloParciales ? '1' : '0'
-            });
-            htmx.ajax('GET', '/laesh/rc/tabla-ordenes-anteriores?' + params.toString(), {
-                target: '#tabla-recepcion-anteriores', swap: 'outerHTML'
-            });
-        }
-
-        function _inicializarKpiCards() {
-            const grid = document.getElementById('kpi-cards-grid');
-            if (!grid) return;
-            grid.addEventListener('click', function(e) {
-                const card = e.target.closest('.kpi-card');
-                if (!card) return;
-                const estadoId     = parseInt(card.dataset.kpiEstado || '0', 10);
-                const soloParciales = card.dataset.kpiParciales === '1';
-                _abrirDetalleKpi(estadoId, soloParciales);
-            });
-            grid.addEventListener('keydown', function(e) {
-                if (e.key !== 'Enter' && e.key !== ' ') return;
-                const card = e.target.closest('.kpi-card');
-                if (!card) return;
-                e.preventDefault();
-                const estadoId     = parseInt(card.dataset.kpiEstado || '0', 10);
-                const soloParciales = card.dataset.kpiParciales === '1';
-                _abrirDetalleKpi(estadoId, soloParciales);
-            });
-        }
-
-        function manejarCambioFiltroAdmin() {
-            const select = document.getElementById('filtro-periodo-admin');
-            if (!select) return;
-            const rangeContainer = document.getElementById('rango-fechas-admin');
-            if (select.value === 'fecha') {
-                if (rangeContainer) {
-                    rangeContainer.classList.remove('d-none');
-                    rangeContainer.style.display = 'inline-flex';
-                }
-                const inputInicio = document.getElementById('fecha-inicio-admin');
-                const inputFin = document.getElementById('fecha-fin-admin');
-                
-                // Prellenado inteligente por defecto si están vacíos (mes actual hasta hoy)
-                const hoy = _hoyServidorISO();
-                if (inputInicio && !inputInicio.value) {
-                    inputInicio.value = _noAntesDelMin(hoy.substring(0, 7) + '-01');
-                }
-                if (inputFin && !inputFin.value) {
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `_inicializarKpiCardsMedico`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:18 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `medicos.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L409-534)</summary>
-
-**Path:** `Unknown file`
-
-```
-                    if (!err) return;
-                    err.textContent = 'No fue posible cargar las estadísticas. Intenta de nuevo.';
-                    err.classList.remove('d-none');
-                });
-        }
-
-        
-        // ── Drill-down desde fichas de Reportes hacia Solicitudes / Historial ──
-        function _resolverFechasReportesMedico() {
-            var select = document.getElementById('filtro-periodo-medico');
-            var val = select ? select.value : 'mes';
-            var ini = document.getElementById('fecha-inicio-medico');
-            var fin = document.getElementById('fecha-fin-medico');
-
-            if (val === 'fecha') {
-                return { periodo: 'fecha', fechaInicio: ini ? ini.value : '', fechaFin: fin ? fin.value : '' };
-            }
-
-            var hoy = new Date().toISOString().substring(0, 10);
-            var fi = '', ff = hoy;
-            if (val === 'dia') {
-                fi = ff = hoy;
-            } else if (val === 'semana') {
-                var d = new Date();
-                var day = d.getDay() || 7; // lunes=1
-                d.setDate(d.getDate() - day + 1);
-                fi = d.toISOString().substring(0, 10);
-            } else if (val === 'mes') {
-                fi = hoy.substring(0, 7) + '-01';
-            } else if (val === 'anio') {
-                fi = hoy.substring(0, 4) + '-01-01';
-            }
-            return { periodo: 'fecha', fechaInicio: fi, fechaFin: ff };
-        }
-
-        function _abrirDetalleKpiMedico(estadoId, soloParciales) {
-            var select = document.getElementById('filtro-periodo-medico');
-            var val = select ? select.value : 'mes';
-            var esHoy = (val === 'dia');
-
-            if (esHoy) {
-                // Ir a panel Nueva Orden -> Solicitudes Hoy
-                if (typeof window.cambiarTabMedico === 'function') {
-                    window.cambiarTabMedico('panel-nueva-orden');
-                }
-                var tabHoy = document.getElementById('tab-ordenes-hoy');
-                if (tabHoy && typeof window.switchSubTab === 'function') {
-                    window.switchSubTab('ordenes-hoy', tabHoy);
-                }
-                return;
-            }
-
-            // Ir a panel de Solicitudes Anteriores
-            if (typeof window.cambiarTabMedico === 'function') {
-                window.cambiarTabMedico('panel-historial-medico');
-            }
-
-            var fechas = _resolverFechasReportesMedico();
-            var selPeriodo = document.getElementById('select-periodo-anteriores-md');
-            var inpInicio  = document.getElementById('fecha-inicio-anteriores-md');
-            var inpFin     = document.getElementById('fecha-fin-anteriores-md');
-            var rango      = document.getElementById('rango-fechas-anteriores-md');
-
-            if (selPeriodo) selPeriodo.value = 'fecha';
-            if (inpInicio)  inpInicio.value  = fechas.fechaInicio;
-            if (inpFin)     inpFin.value     = fechas.fechaFin;
-            if (rango) {
-                rango.classList.remove('d-none');
-                rango.style.display = 'inline-flex';
-            }
-
-            // Disparar carga de tabla historial con las fechas configuradas
-            if (window.htmx) {
-                var params = new URLSearchParams({
-                    periodo: 'fecha',
-                    fecha_inicio: fechas.fechaInicio,
-                    fecha_fin: fechas.fechaFin
-                });
-                htmx.ajax('GET', '/laesh/md/tabla-ordenes-anteriores?' + params.toString(), {
-                    target: '#tabla-historial-completo',
-                    swap: 'outerHTML'
-                });
-            }
-        }
-        window._abrirDetalleKpiMedico = _abrirDetalleKpiMedico;
-
-        function _inicializarKpiCardsMedico() {
-            var grid1 = document.getElementById('md-stats-grid');
-            if (grid1 && !grid1._kpiWired) {
-                grid1._kpiWired = true;
-                grid1.addEventListener('click', function(e) {
-                    var card = e.target.closest('.kpi-card-md');
-                    if (!card) return;
-                    var estadoId = parseInt(card.getAttribute('data-kpi-estado') || '0', 10);
-                    var soloParciales = card.getAttribute('data-kpi-parciales') === '1';
-                    _abrirDetalleKpiMedico(estadoId, soloParciales);
-                });
-                grid1.addEventListener('keydown', function(e) {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                        var card = e.target.closest('.kpi-card-md');
-                        if (!card) return;
-                        e.preventDefault();
-                        var estadoId = parseInt(card.getAttribute('data-kpi-estado') || '0', 10);
-                        var soloParciales = card.getAttribute('data-kpi-parciales') === '1';
-                        _abrirDetalleKpiMedico(estadoId, soloParciales);
-                    }
-                });
-            }
-
-            var grid2 = document.getElementById('md-stat-distribucion');
-            if (grid2 && !grid2._kpiWired) {
-                grid2._kpiWired = true;
-                grid2.addEventListener('click', function(e) {
-                    var card = e.target.closest('.kpi-card-md');
-                    if (!card) return;
-                    var estadoId = parseInt(card.getAttribute('data-kpi-estado') || '0', 10);
-                    _abrirDetalleKpiMedico(estadoId, false);
-                });
-                grid2.addEventListener('keydown', function(e) {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                        var card = e.target.closest('.kpi-card-md');
-                        if (!card) return;
-                        e.preventDefault();
-                        var estadoId = parseInt(card.getAttribute('data-kpi-estado') || '0', 10);
-                        _abrirDetalleKpiMedico(estadoId, false);
-                    }
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-The code targets the "Today" view within the medical KPI detail. The system attempts to navigate to the "New Order" panel and specifically the "Today's Requests" tab, if the necessary function is available. It will then locate the "Today's Orders" tab element.
-
-
-
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `estado_id`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.039763869s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:18 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `estado_id`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:19 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L699-769)</summary>
-
-**Path:** `Unknown file`
-
-```
-    $sort         = trim($_GET['sort'] ?? 'fecha');
-    $dir          = trim($_GET['dir'] ?? 'desc');
-    $page         = max(1, (int)($_GET['page'] ?? 1));
-    $perPage      = max(5, min(100, (int)($_GET['per_page'] ?? 25)));
-    $offset       = ($page - 1) * $perPage;
-    $estadoFiltro = max(0, (int)($_GET['estado_id'] ?? 0));
-
-    $ordenesRecientes = \RC\Negocio\Ordenes::obtenerOrdenesRecientes($perPage, $offset, $q, $sort, $dir, $estadoFiltro);
-    $totalReg         = \RC\Negocio\Ordenes::contarOrdenesRecientes($q, $estadoFiltro);
-    $totalPages       = max(1, (int)ceil($totalReg / $perPage));
-
-    echo '<table class="table" id="tabla-recepcion" hx-get="/laesh/rc/tabla-ordenes" hx-target="#tabla-recepcion" hx-swap="outerHTML" hx-sync="this:replace" hx-trigger="refresh, ordenCreada from:body, ordenActualizada from:body" style="margin-bottom: 0; width: 100%; min-width: ' . rcOrdenesTablaMinWidth(false) . 'px; table-layout: fixed; border-collapse: collapse;">'
-       . rcRenderOrdenesColgroup(false)
-       . '<thead>'
-       . rcRenderOrdenesTablaHeader($sort, $dir, $q, '/laesh/rc/tabla-ordenes', '#tabla-recepcion', '#input-buscar-orden-rc')
-       . '</thead>'
-       . rcRenderOrdenesTablaBody($ordenesRecientes, $csrfToken, '')
-       . '</table>';
-
-    // OOB Swap para paginador y total de órdenes hoy
-    $qParam = !empty($q) ? '&q=' . urlencode($q) : '';
-    echo '<div id="ordenes-pagination-wrap" hx-swap-oob="outerHTML" style="display: flex; align-items: center; gap: 0.5rem;">'
-       . '<span id="ordenes-total-records" style="font-size: 0.88rem; color: var(--text-muted); font-weight: 600;">Total: ' . $totalReg . '</span>'
-       . '<span style="color: #cbd5e1; display: inline;">|</span>'
-       . '<div id="ordenes-pagination" style="display: flex; gap: 0.25rem; align-items: center;">';
-    if ($page > 1) {
-        $prevPage = $page - 1;
-        echo '<button type="button" class="btn btn-secondary btn-sm" style="padding: 2px 8px; font-size: 0.8rem;" hx-get="/laesh/rc/tabla-ordenes?page=' . $prevPage . $qParam . '&sort=' . $sort . '&dir=' . $dir . '&per_page=' . $perPage . '" hx-target="#tabla-recepcion" hx-swap="outerHTML" hx-include="#input-buscar-orden-rc">‹ Ant.</button>';
-    } else {
-        echo '<button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;">‹ Ant.</button>';
-    }
-    echo '<span style="font-size:0.82rem; font-weight:600; color:var(--text-muted); padding: 0 4px;">' . $page . ' / ' . $totalPages . '</span>';
-    if ($page < $totalPages) {
-        $nextPage = $page + 1;
-        echo '<button type="button" class="btn btn-secondary btn-sm" style="padding: 2px 8px; font-size: 0.8rem;" hx-get="/laesh/rc/tabla-ordenes?page=' . $nextPage . $qParam . '&sort=' . $sort . '&dir=' . $dir . '&per_page=' . $perPage . '" hx-target="#tabla-recepcion" hx-swap="outerHTML" hx-include="#input-buscar-orden-rc">Sig. ›</button>';
-    } else {
-        echo '<button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;">Sig. ›</button>';
-    }
-    echo '</div></div>';
-});
-
-// ── GET /tabla-ordenes-anteriores — Partial HTMX ultraligero de órdenes anteriores (Recepción) ─
-Flight::route('GET /tabla-ordenes-anteriores', function () {
-    header('Content-Type: text/html; charset=utf-8');
-    $csrfToken = $_SESSION['csrf_token'] ?? '';
-
-    $q             = trim($_GET['q'] ?? '');
-    $periodo       = trim($_GET['periodo'] ?? '30d');
-    $fechaInicio   = trim($_GET['fecha_inicio'] ?? '');
-    $fechaFin      = trim($_GET['fecha_fin'] ?? '');
-    $sort          = trim($_GET['sort'] ?? 'fecha');
-    $dir           = trim($_GET['dir'] ?? 'desc');
-    $page          = max(1, (int)($_GET['page'] ?? 1));
-    $perPage       = max(5, min(100, (int)($_GET['per_page'] ?? 25)));
-    $offset        = ($page - 1) * $perPage;
-    $estadoFiltro  = max(0, (int)($_GET['estado_id'] ?? 0));
-    $soloParciales = (($_GET['solo_parciales'] ?? '0') === '1');
-
-    $ordenesAnteriores = \RC\Negocio\Ordenes::obtenerOrdenesAnteriores($perPage, $offset, $q, $sort, $dir, $periodo, $fechaInicio, $fechaFin, $estadoFiltro, $soloParciales);
-    $totalReg          = \RC\Negocio\Ordenes::contarOrdenesAnteriores($q, $periodo, $fechaInicio, $fechaFin, $estadoFiltro, $soloParciales);
-    $totalPages        = max(1, (int)ceil($totalReg / $perPage));
-
-    $includeAnt = '#input-buscar-orden-anteriores-rc, #select-periodo-anteriores-rc, #fecha-inicio-anteriores-rc, #fecha-fin-anteriores-rc';
-
-    echo '<table class="table" id="tabla-recepcion-anteriores" hx-get="/laesh/rc/tabla-ordenes-anteriores" hx-target="#tabla-recepcion-anteriores" hx-swap="outerHTML" hx-include="' . $includeAnt . '" hx-sync="this:replace" hx-trigger="refresh, ordenActualizada from:body" style="margin-bottom: 0; width: 100%; min-width: ' . rcOrdenesTablaMinWidth(true) . 'px; table-layout: fixed; border-collapse: collapse;">'
-       . rcRenderOrdenesColgroup(true)
-       . '<thead>'
-       . rcRenderOrdenesTablaHeader($sort, $dir, $q, '/laesh/rc/tabla-ordenes-anteriores', '#tabla-recepcion-anteriores', $includeAnt, true)
-       . '</thead>'
-       . rcRenderOrdenesTablaBody($ordenesAnteriores, $csrfToken, '-ant', true, $offset, $q)
-       . '</table>';
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `kpi-cards-grid`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:19 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `labadmin.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L579-649)</summary>
-
-**Path:** `Unknown file`
-
-```
-                                </span>
-                            </span>
-                        </div>
-                    </div>
-                    
-                    <div id="kpi-cards-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(185px, 1fr)); gap: 1.15rem; margin-bottom: 1.75rem;">
-                        <div class="card mb-0 ta-center kpi-card" role="button" tabindex="0" data-kpi-estado="0" style="padding: 1.25rem 1rem; border-top: 3.5px solid #0052B7; border-radius: 10px; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.03); border-left: 1px solid #e2e8f0; border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; cursor: pointer; transition: box-shadow .15s, border-color .15s;">
-                            <div id="lbl-solicitudes-admin" class="txt-muted-xs-upper" style="letter-spacing: 0.03em; font-size: 0.76rem; min-height: 2.2em; display: flex; align-items: center; justify-content: center;">Total Solicitudes Emitidas</div>
-                            <div id="stat-solicitudes-admin" class="stat-num stat-num--pgd" style="font-size: 2.15rem; font-weight: 800; line-height: 1.1; margin-top: 0.35rem;">-</div>
-                            <div class="kpi-periodo-badge txt-muted-xs" style="font-size: 0.7rem; margin-top: 0.4rem; color: #94a3b8;">-</div>
-                        </div>
-                        <div class="card mb-0 ta-center kpi-card" role="button" tabindex="0" data-kpi-estado="1" style="padding: 1.25rem 1rem; border-top: 3.5px solid #64748B; border-radius: 10px; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.03); border-left: 1px solid #e2e8f0; border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; cursor: pointer; transition: box-shadow .15s, border-color .15s;">
-                            <div class="txt-muted-xs-upper" style="letter-spacing: 0.03em; font-size: 0.76rem; min-height: 2.2em; display: flex; align-items: center; justify-content: center;">Remitidas</div>
-                            <div id="stat-remitidas-admin" class="stat-num" style="font-size: 2.15rem; font-weight: 800; line-height: 1.1; margin-top: 0.35rem; color: #475569;">-</div>
-                            <div class="kpi-periodo-badge txt-muted-xs" style="font-size: 0.7rem; margin-top: 0.4rem; color: #94a3b8;">-</div>
-                        </div>
-                        <div class="card mb-0 ta-center kpi-card" role="button" tabindex="0" data-kpi-estado="2" style="padding: 1.25rem 1rem; border-top: 3.5px solid #F59E0B; border-radius: 10px; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.03); border-left: 1px solid #e2e8f0; border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; cursor: pointer; transition: box-shadow .15s, border-color .15s;">
-                            <div class="txt-muted-xs-upper" style="letter-spacing: 0.03em; font-size: 0.76rem; min-height: 2.2em; display: flex; align-items: center; justify-content: center;">En Atención</div>
-                            <div id="stat-atencion-admin" class="stat-num stat-num--atn" style="font-size: 2.15rem; font-weight: 800; line-height: 1.1; margin-top: 0.35rem;">-</div>
-                            <div class="kpi-periodo-badge txt-muted-xs" style="font-size: 0.7rem; margin-top: 0.4rem; color: #94a3b8;">-</div>
-                        </div>
-                        <div class="card mb-0 ta-center kpi-card" role="button" tabindex="0" data-kpi-estado="3" style="padding: 1.25rem 1rem; border-top: 3.5px solid #0284C7; border-radius: 10px; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.03); border-left: 1px solid #e2e8f0; border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; cursor: pointer; transition: box-shadow .15s, border-color .15s;">
-                            <div class="txt-muted-xs-upper" style="letter-spacing: 0.03em; font-size: 0.76rem; min-height: 2.2em; display: flex; align-items: center; justify-content: center;">Resultados Listos</div>
-                            <div id="stat-listos-admin" class="stat-num stat-num--lst" style="font-size: 2.15rem; font-weight: 800; line-height: 1.1; margin-top: 0.35rem;">-</div>
-                            <div class="kpi-periodo-badge txt-muted-xs" style="font-size: 0.7rem; margin-top: 0.4rem; color: #94a3b8;">-</div>
-                        </div>
-                        <div class="card mb-0 ta-center kpi-card" role="button" tabindex="0" data-kpi-estado="4" style="padding: 1.25rem 1rem; border-top: 3.5px solid #059669; border-radius: 10px; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.03); border-left: 1px solid #e2e8f0; border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; cursor: pointer; transition: box-shadow .15s, border-color .15s;">
-                            <div class="txt-muted-xs-upper" style="letter-spacing: 0.03em; font-size: 0.76rem; min-height: 2.2em; display: flex; align-items: center; justify-content: center;">Cerradas Con Éxito</div>
-                            <div id="stat-cerradas-admin" class="stat-num stat-num--main" style="font-size: 2.15rem; font-weight: 800; line-height: 1.1; margin-top: 0.35rem;">-</div>
-                            <div class="kpi-periodo-badge txt-muted-xs" style="font-size: 0.7rem; margin-top: 0.4rem; color: #94a3b8;">-</div>
-                        </div>
-                        <div class="card mb-0 ta-center kpi-card" role="button" tabindex="0" data-kpi-estado="5" style="padding: 1.25rem 1rem; border-top: 3.5px solid #EF4444; border-radius: 10px; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.03); border-left: 1px solid #e2e8f0; border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; cursor: pointer; transition: box-shadow .15s, border-color .15s;">
-                            <div class="txt-muted-xs-upper" style="letter-spacing: 0.03em; font-size: 0.76rem; min-height: 2.2em; display: flex; align-items: center; justify-content: center;">Canceladas</div>
-                            <div id="stat-canceladas-admin" class="stat-num stat-num--danger" style="font-size: 2.15rem; font-weight: 800; line-height: 1.1; margin-top: 0.35rem;">-</div>
-                            <div class="kpi-periodo-badge txt-muted-xs" style="font-size: 0.7rem; margin-top: 0.4rem; color: #94a3b8;">-</div>
-                        </div>
-                        <div class="card mb-0 ta-center kpi-card" role="button" tabindex="0" data-kpi-estado="0" data-kpi-parciales="1" style="padding: 1.25rem 1rem; border-top: 3.5px solid #8B5CF6; border-radius: 10px; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.03); border-left: 1px solid #e2e8f0; border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; cursor: pointer; transition: box-shadow .15s, border-color .15s;">
-                            <div class="txt-muted-xs-upper" style="letter-spacing: 0.03em; font-size: 0.76rem; min-height: 2.2em; display: flex; align-items: center; justify-content: center;">PDFs Parciales Adjuntados</div>
-                            <div id="stat-parciales-admin" class="stat-num" style="font-size: 2.15rem; font-weight: 800; line-height: 1.1; margin-top: 0.35rem; color: #8B5CF6;">-</div>
-                            <div class="kpi-periodo-badge txt-muted-xs" style="font-size: 0.7rem; margin-top: 0.4rem; color: #94a3b8;">-</div>
-                        </div>
-                    </div>
-
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 1.15rem;">
-                        <!-- Top 5 Médicos con más Solicitudes Remitidas -->
-                        <div class="card mb-0" style="padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 2px 6px rgba(0,0,0,0.03); background: #fff;">
-                            <div style="margin-bottom: 1.25rem;">
-                                <h3 class="txt-pgd-lg" style="margin: 0; font-size: 1.15rem; font-weight: 700; color: #0052B7;">
-                                    Top 5 Médicos con más Solicitudes Remitidas
-                                </h3>
-                            </div>
-                            <div class="col-group" id="container-medicos-stats">
-                                <div class="text-center txt-muted" style="padding:2rem;">Cargando médicos...</div>
-                            </div>
-                        </div>
-
-                        <!-- Volumen de acciones por recepcionista -->
-                        <div class="card mb-0" style="padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 2px 6px rgba(0,0,0,0.03); background: #fff;">
-                            <h3 class="txt-pgd-lg" style="margin: 0 0 1.1rem; font-size: 1.05rem; font-weight: 700; color: #0052B7;">
-                                Volumen de Acciones por Recepcionista
-                            </h3>
-                            <div id="container-volumen-actor-stats">
-                                <div class="text-center txt-muted" style="padding:2rem;">Cargando...</div>
-                            </div>
-                        </div>
-                    </div>
-                    </div><!-- /view-reportes-indicadores -->
-
-                    <!-- ── Vista 2: Auditoría — historial de quién hizo qué y cuándo ──
-                         Fuente: historial_estados_orden.cambiado_por_user_id (ya se
-                         guardaba en cada transición, pero no existía pantalla para
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Investigating the `_abrirDetalleKpi` function, triggered by a click on a KPI card. The code checks if the KPI range is "dia" (day). If so, it attempts to navigate to a specific panel by checking for a `cambiarTabAdmin` function in the global `window` object. This suggests a tab navigation logic based on the KPI range.
-
-
-
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `cambiarTabAdmin =`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.055300134s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:19 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `labadmin.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L859-934)</summary>
-
-**Path:** `Unknown file`
-
-```
-            if (esNueva) p.set('nueva', '1');
-            if (typeof window._abrirSolOverlay === 'function') {
-                window._abrirSolOverlay('/laesh/rc/views/solicitud_dac_impr.php?' + p.toString());
-            }
-        }
-
-
-        // Cambiar Paneles / Tabs en Labadmin con actualización de Breadcrumb
-        // FUENTE DE VERDAD: textos deben ser idénticos a los del menú lateral izquierdo
-        const panelLabelsAdmin = {
-            'panel-ordenes':            'Solicitudes Hoy',
-            'panel-ordenes-anteriores': 'Solicitudes Anteriores',
-            'panel-pacientes':          'Pacientes',
-            'panel-medicos':            'Médicos',
-            'panel-recepcionistas':     'El Personal',
-            'panel-reportes':           'Reportes y Estadísticas',
-            'panel-catalogos':          'Catálogos de Análisis'
-        };
-
-        function cambiarTabAdmin(panelId, el) {
-            document.querySelectorAll('.sidebar .nav-item').forEach(i => i.classList.remove('active'));
-            if (el) {
-                el.classList.add('active');
-            } else {
-                const navItem = document.querySelector(`.sidebar .nav-item[data-panel="${panelId}"]`);
-                if (navItem) navItem.classList.add('active');
-            }
-            document.querySelectorAll('.tab-panel').forEach(p => {
-                p.style.display = 'none';
-                p.classList.add('d-none');
-            });
-            const target = document.getElementById(panelId);
-            if (target) {
-                target.classList.remove('d-none');
-                target.style.display = 'block';
-            }
-
-            const bc = document.getElementById('header-bc-current');
-            if (bc && panelLabelsAdmin[panelId]) {
-                bc.textContent = panelLabelsAdmin[panelId];
-            }
-            if (panelId === 'panel-reportes') {
-                if (typeof window.filtrarEstadisticasAdmin === 'function') {
-                    window.filtrarEstadisticasAdmin();
-                }
-            }
-            if (panelId === 'panel-catalogos') {
-                if (typeof window.loadCatalogTree === 'function') {
-                    window.loadCatalogTree();
-                }
-                const btnViewTable = document.getElementById('btn-view-table');
-                if (btnViewTable) {
-                    btnViewTable.click();
-                }
-            }
-            if (panelId === 'panel-medicos') {
-                var activeSubTab = document.querySelector('#toggle-medicos-view .cms-tab.active');
-                var viewType = activeSubTab ? activeSubTab.getAttribute('data-view') : 'table';
-                if (viewType === 'universidades' && typeof window.initUniversidadesFlatGrid === 'function') {
-                    window.initUniversidadesFlatGrid();
-                } else if (viewType === 'centros-trabajo' && typeof window.initCentrosTrabajoFlatGrid === 'function') {
-                    window.initCentrosTrabajoFlatGrid();
-                } else if (typeof window.initMedicosFlatGrid === 'function') {
-                    window.initMedicosFlatGrid();
-                }
-            }
-            if (panelId === 'panel-recepcionistas') {
-                if (typeof window.initRecepcionistasFlatGrid === 'function') {
-                    window.initRecepcionistasFlatGrid();
-                }
-            }
-        }
-        window.cambiarTabAdmin = cambiarTabAdmin;
-
-        // Refrescar tablas, badge y silbato cuando médico u otro tab actualiza localStorage
-        window.addEventListener('storage', function() {
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `_kpiRango`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:19 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `labadmin.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L299-414)</summary>
-
-**Path:** `Unknown file`
-
-```
-            const statParEl = document.getElementById('stat-parciales-admin');
-            const lblSolEl  = document.getElementById('lbl-solicitudes-admin');
-
-            if (statSolEl) statSolEl.innerText = '...';
-            if (statRemEl) statRemEl.innerText = '...';
-            if (statAtnEl) statAtnEl.innerText = '...';
-            if (statLstEl) statLstEl.innerText = '...';
-            if (statCerEl) statCerEl.innerText = '...';
-            if (statCanEl) statCanEl.innerText = '...';
-            if (statParEl) statParEl.innerText = '...';
-            if (lblSolEl)  lblSolEl.innerText = `TOTAL SOLICITUDES (${lblText})`;
-            
-            // Guardar estado activo para drill-down desde fichas KPI
-            _kpiRango  = val;
-            _kpiInicio = inicio;
-            _kpiFin    = fin;
-            _kpiLabel  = lblText;
-
-            const medContainer = document.getElementById('container-medicos-stats');
-            if (medContainer) medContainer.innerHTML = '<div class="text-center txt-muted" style="padding:2rem;">Cargando médicos...</div>';
-
-            const volActorContainer = document.getElementById('container-volumen-actor-stats');
-            if (volActorContainer) volActorContainer.innerHTML = '<div class="text-center txt-muted" style="padding:2rem;">Cargando...</div>';
-
-            try {
-                const response = await fetch(`/laesh/rc/api/estadisticas?rango=${encodeURIComponent(val)}&inicio=${encodeURIComponent(inicio)}&fin=${encodeURIComponent(fin)}`);
-                if (!response.ok) throw new Error('Error en API de estadísticas');
-                
-                const data = await response.json();
-                if (!data.success) throw new Error(data.error || 'Error interno');
-                
-                // Totals
-                if (statSolEl) statSolEl.innerText = (data.totales?.solicitudes ?? 0).toLocaleString();
-                if (statRemEl) statRemEl.innerText = (data.totales?.remitidas ?? 0).toLocaleString();
-                if (statAtnEl) statAtnEl.innerText = (data.totales?.atencion ?? 0).toLocaleString();
-                if (statLstEl) statLstEl.innerText = (data.totales?.listos ?? 0).toLocaleString();
-                if (statCerEl) statCerEl.innerText = (data.totales?.cerradas ?? 0).toLocaleString();
-                if (statCanEl) statCanEl.innerText = (data.totales?.canceladas ?? 0).toLocaleString();
-                if (statParEl) statParEl.innerText = (data.totales?.parciales ?? 0).toLocaleString();
-                _actualizarBadgesPeriodoKpi(lblText);
-
-                // Medicos
-                if (medContainer) {
-                    if (!data.medicos || data.medicos.length === 0) {
-                        medContainer.innerHTML = '<div class="text-center txt-muted" style="padding:2rem;">No hay solicitudes en este periodo</div>';
-                    } else {
-                        let medHtml = '';
-                        const medColors = ['bar-color-green', 'bar-color-blue', 'bar-color-amber', 'bar-color-purple', 'bar-color-red'];
-                        const totalMeds = data.medicos.reduce((sum, m) => sum + parseInt(m.conteo, 10), 0) || 1;
-                        
-                        data.medicos.forEach((med, idx) => {
-                            const pct = Math.round((parseInt(med.conteo, 10) / totalMeds) * 100);
-                            const color = medColors[idx % medColors.length];
-                            medHtml += `
-                            <div>
-                                <div class="progress-label">
-                                    <span>${med.nombre}</span>
-                                    <span>${pct}% (${med.conteo} solicitudes)</span>
-                                </div>
-                                <div class="progress-track">
-                                    <div class="bar-fill ${color}" style="width: ${pct}%;"></div>
-                                </div>
-                            </div>`;
-                        });
-                        medContainer.innerHTML = medHtml;
-                    }
-                }
-
-                // Volumen de acciones por recepcionista
-                if (volActorContainer) {
-                    const volActor = data.volumen_por_actor || [];
-                    if (volActor.length === 0) {
-                        volActorContainer.innerHTML = '<div class="text-center txt-muted" style="padding:2rem;">Sin acciones registradas en este periodo</div>';
-                    } else {
-                        const actorColors = ['bar-color-green', 'bar-color-blue', 'bar-color-amber', 'bar-color-purple', 'bar-color-red'];
-                        const totalActor = volActor.reduce((sum, a) => sum + parseInt(a.total, 10), 0) || 1;
-                        let volActorHtml = '';
-                        volActor.forEach((a, idx) => {
-                            const pct = Math.round((parseInt(a.total, 10) / totalActor) * 100);
-                            const color = actorColors[idx % actorColors.length];
-                            volActorHtml += `
-                            <div>
-                                <div class="progress-label">
-                                    <span>${a.actor_nombre}</span>
-                                    <span>${pct}% (${a.total} acciones)</span>
-                                </div>
-                                <div class="progress-track">
-                                    <div class="bar-fill ${color}" style="width: ${pct}%;"></div>
-                                </div>
-                            </div>`;
-                        });
-                        volActorContainer.innerHTML = volActorHtml;
-                    }
-                }
-
-            } catch (err) {
-                console.error('Error fetching estadísticas:', err);
-                [statSolEl, statRemEl, statAtnEl, statLstEl, statCerEl, statCanEl, statParEl].forEach(el => { if (el) el.innerText = 'Error'; });
-                if (medContainer) medContainer.innerHTML = '<div class="text-center" style="color:var(--color-danger); padding:2rem;">Error al cargar</div>';
-                if (volActorContainer) volActorContainer.innerHTML = '<div class="text-center" style="color:var(--color-danger); padding:2rem;">Error al cargar</div>';
-            }
-        }
-
-        // ── Estado activo del filtro de KPIs — persiste entre renders para drill-down ──
-        let _kpiRango  = 'mes';
-        let _kpiInicio = '';
-        let _kpiFin    = '';
-        let _kpiLabel  = 'ESTE MES';
-
-        function _actualizarBadgesPeriodoKpi(lblText) {
-            document.querySelectorAll('#kpi-cards-grid .kpi-periodo-badge').forEach(function(el) {
-                el.textContent = lblText;
-            });
-        }
-
-        function _resolverFechasParaDrillDown() {
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Variable assignment in `filtrarEstadisticasAdmin()` on line 313 appears problematic because the `let` declaration for `_kpiRango` is on line 404. However, the function definition precedes line 404. This should mean the variable's declaration is available by the time the function is *invoked*, assuming it's invoked *after* its definition. The original assumption regarding the TDZ might be incorrect in this context.
-
-
-The `_abrirDetalleKpi` function appears to handle KPI card click events, differentiating between "today's" data and historical data based on `_kpiRango`.  If the range is "day", the function navigates to the "orders" panel and applies a potential state filter using an external data fetching mechanism. Otherwise, it navigates to the "previous orders" panel, sets the date range, and prepares the same external data request.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.245583772s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L769-804)</summary>
-
-**Path:** `Unknown file`
-
-```
-       . '</table>';
-
-    $qParam = !empty($q) ? '&q=' . urlencode($q) : '';
-    $pParam = '&periodo=' . urlencode($periodo);
-    if ($periodo === 'fecha') {
-        if (!empty($fechaInicio)) $pParam .= '&fecha_inicio=' . urlencode($fechaInicio);
-        if (!empty($fechaFin)) $pParam .= '&fecha_fin=' . urlencode($fechaFin);
-    }
-    echo '<div id="ordenes-anteriores-pagination-wrap" class="toolbar-pagination-capsule" hx-swap-oob="outerHTML">'
-       . '<span id="ordenes-anteriores-total-records" style="font-size: 0.88rem; color: var(--text-muted); font-weight: 600;">Total: ' . $totalReg . '</span>'
-       . '<span style="color: #cbd5e1; display: inline;">|</span>'
-       . '<div id="ordenes-anteriores-pagination" style="display: flex; gap: 0.25rem; align-items: center;">';
-    if ($page > 1) {
-        $prevPage = $page - 1;
-        echo '<button type="button" class="btn btn-secondary btn-sm" style="padding: 2px 8px; font-size: 0.8rem;" hx-get="/laesh/rc/tabla-ordenes-anteriores?page=' . $prevPage . $qParam . $pParam . '&sort=' . $sort . '&dir=' . $dir . '&per_page=' . $perPage . '" hx-target="#tabla-recepcion-anteriores" hx-swap="outerHTML" hx-include="' . $includeAnt . '">‹ Ant.</button>';
-    } else {
-        echo '<button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;">‹ Ant.</button>';
-    }
-    echo '<span style="font-size:0.82rem; font-weight:600; color:var(--text-muted); padding: 0 4px;">' . $page . ' / ' . $totalPages . '</span>';
-    if ($page < $totalPages) {
-        $nextPage = $page + 1;
-        echo '<button type="button" class="btn btn-secondary btn-sm" style="padding: 2px 8px; font-size: 0.8rem;" hx-get="/laesh/rc/tabla-ordenes-anteriores?page=' . $nextPage . $qParam . $pParam . '&sort=' . $sort . '&dir=' . $dir . '&per_page=' . $perPage . '" hx-target="#tabla-recepcion-anteriores" hx-swap="outerHTML" hx-include="' . $includeAnt . '">Sig. ›</button>';
-    } else {
-        echo '<button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;">Sig. ›</button>';
-    }
-    echo '</div></div>';
-});
-
-// ── GET /tabla-auditoria — Partial HTMX de la grilla de Auditoría (Recepción) ─────
-// Reportes y Estadísticas → 2. Auditoría. Ver rcRenderAuditoriaTablaHeader/Body y
-// RC\Negocio\Ordenes::obtenerHistorialAuditoria() para el detalle completo.
-Flight::route('GET /tabla-auditoria', function () {
-    Flight::rbac()->requirePermission('gestionar_ordenes');
-    header('Content-Type: text/html; charset=utf-8');
-
-    $q           = trim($_GET['q'] ?? '');
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-The code includes specific form fields in the `hx-include` attribute when loading the table. It's crucial to identify if `estado_id` and `solo_parciales` are supposed to be included as well, but they are NOT in the rendered table's `hx-include`. This discrepancy demands further investigation to understand why these fields are excluded and how they impact the expected behavior.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `labadmin.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.086573427s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-/* labadmin.js — lógica del portal de recepción (extraído de labadmin.html) */
-
-        // Helper compartido: toggle visibilidad contraseña con SVG
-        var _svgEyeOpen = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>';
-        var _svgEyeOff  = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>';
-        function _laeshTogglePwEye(inputEl, btnEl) {
-            if (inputEl.type === 'password') {
-                inputEl.type = 'text';
-                btnEl.innerHTML = _svgEyeOff;
-            } else {
-                inputEl.type = 'password';
-                btnEl.innerHTML = _svgEyeOpen;
-            }
-        }
-
-        // P-LAESH-FOLIO-EXTRAIDO-01 (2026-09-24): formatea m.fecha ("YYYY-MM-DD HH:mm:ss",
-        // MariaDB sin TZ) como "dd/mm HH:mm" para la fecha de solicitud en resultados de
-        // la lupita. replace(' ','T') evita que el navegador la interprete como UTC.
-        function laeshFmtFechaCorta(fechaStr) {
-            if (!fechaStr) return '';
-            const d = new Date(String(fechaStr).replace(' ', 'T'));
-            if (isNaN(d.getTime())) return '';
-            const pad = n => String(n).padStart(2, '0');
-            return pad(d.getDate()) + '/' + pad(d.getMonth() + 1) + ' ' + pad(d.getHours()) + ':' + pad(d.getMinutes());
-        }
-
-        // Lógica de Autocompletado en Vivo MariaDB (por Folio, Paciente, Médico o Diagnóstico)
-        const inputBuscador = document.getElementById('input-buscador');
-        const autoBox = document.getElementById('autocomplete-list');
-        window.__RC_SEARCH_RESULTS__ = window.__RC_SEARCH_RESULTS__ || {};
-
-        if (inputBuscador && autoBox) {
-            function posicionarAutocompleteAdmin() {
-                const rect = inputBuscador.getBoundingClientRect();
-                autoBox.style.top   = (rect.bottom + 4) + 'px';
-                autoBox.style.left  = rect.left + 'px';
-                autoBox.style.width = Math.max(rect.width, 260) + 'px';
-            }
-
-            let searchTimerAdmin = null;
-
-            function triggerVerMasEnTablaAdmin(val) {
-                if (autoBox) autoBox.style.display = 'none';
-                if (typeof window.cambiarTabAdmin === 'function') {
-                    window.cambiarTabAdmin('panel-ordenes-anteriores');
-                }
-                const searchAnt = document.getElementById('input-buscar-orden-anteriores-rc');
-                if (searchAnt) {
-                    searchAnt.value = val;
-                    searchAnt.dispatchEvent(new Event('search', { bubbles: true }));
-                    searchAnt.dispatchEvent(new Event('keyup', { bubbles: true }));
-                    searchAnt.focus();
-                }
-            }
-
-            inputBuscador.addEventListener('keydown', function(e) {
-                if (e.key === 'Enter') {
-                    e.preventDefault();
-                    const val = this.value.trim();
-                    if (!val) return;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `labadmin.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L834-859)</summary>
-
-**Path:** `Unknown file`
-
-```
-            });
-        }
-
-        window.filtrarEstadisticasAdmin = filtrarEstadisticasAdmin;
-        window.manejarCambioFiltroAdmin = manejarCambioFiltroAdmin;
-        window.inicializarInputsFechaAdmin = inicializarInputsFechaAdmin;
-        window.inicializarFiltroPeriodoAnterioresAdmin = inicializarFiltroPeriodoAnterioresAdmin;
-        window.inicializarFiltroPeriodoAuditoriaAdmin = inicializarFiltroPeriodoAuditoriaAdmin;
-        window.inicializarTabsReportes = inicializarTabsReportes;
-        window._inicializarKpiCards = _inicializarKpiCards;
-
-        // GAP-RC-01 (cerrado 2026-09-21): la ventana de impresión ahora consulta la
-        // orden real por folio vía GET /laesh/rc/api/orden (ver solicitud-dac.js) —
-        // ya no hace falta reunir/pasar cada campo a mano. Esto cerró de raíz 4
-        // bugs reales del mismo día (grilla rota, diagnóstico perdido, fecha
-        // confundida con estudio, celular/edad/sexo faltantes), todos causados por
-        // el mismo patrón: lógica duplicada entre este archivo y medicos.js +
-        // datos sincronizados a mano sin ninguna alerta cuando algo faltaba.
-        function verSolicitudDigital(id, esNueva) {
-            var p = new URLSearchParams();
-            p.set('id', id || '1');
-            p.set('portal', 'rc');
-            // Recepción no crea solicitudes digitales directamente (eso lo hace el
-            // médico) — este parámetro nunca se envía en true aquí hoy, pero se deja
-            // consistente con medicos.js por si a futuro recepción también crea.
-            if (esNueva) p.set('nueva', '1');
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `labadmin.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1349-1379)</summary>
-
-**Path:** `Unknown file`
-
-```
-        var el = e.target.closest('#tabla-recepcion [data-action], #tabla-recepcion-anteriores [data-action], #tabla-auditoria-rc [data-action]');
-        if (!el) return;
-        var action = el.getAttribute('data-action');
-        if (action === 'ver-solicitud' || action === 'ver-resultados') {
-            e.preventDefault();
-            _orderAction(action, el.getAttribute('data-id'), el);
-        }
-    });
-
-    // Tabla Plana eliminada, no hay listener para tabla-catalogo-admin
-    // Inicializar listeners avanzados para inputs de fecha (calendario + captura teclado)
-    if (typeof inicializarInputsFechaAdmin === 'function') inicializarInputsFechaAdmin();
-    if (typeof inicializarFiltroPeriodoAnterioresAdmin === 'function') inicializarFiltroPeriodoAnterioresAdmin();
-    if (typeof inicializarFiltroPeriodoAuditoriaAdmin === 'function') inicializarFiltroPeriodoAuditoriaAdmin();
-    if (typeof inicializarTabsReportes === 'function') inicializarTabsReportes();
-    if (typeof window._inicializarKpiCards === 'function') window._inicializarKpiCards();
-    // Inicializar barras de reportes vía CSSOM (CSP-safe: evita inline style en HTML)
-    if (typeof filtrarEstadisticasAdmin === 'function') filtrarEstadisticasAdmin();
-
-    // autocomplete buscador admin (MariaDB SSOT)
-    var autoBoxAdmin = document.getElementById('autocomplete-list');
-    if (autoBoxAdmin) autoBoxAdmin.addEventListener('click', function(e) {
-        var enterEl = e.target.closest('[data-action="search-enter-admin"]');
-        if (enterEl) {
-            var inputBuscador = document.getElementById('input-buscador');
-            var val = inputBuscador ? inputBuscador.value.trim() : '';
-            if (autoBoxAdmin) autoBoxAdmin.style.display = 'none';
-            if (typeof window.cambiarTabAdmin === 'function') {
-                window.cambiarTabAdmin('panel-ordenes-anteriores');
-            }
-            var searchAnt = document.getElementById('input-buscar-orden-anteriores-rc');
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-The code block where the target element is sought is within a `DOMContentLoaded` listener. The script loading strategy (using `defer`) means the event might have already fired before the script executes, or might fire after. The objective now is to determine if the element is available at this point.
-
-
-
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `md-stats-grid`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.100255570s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:19 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `medicos.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L579-649)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-                    <div id="md-stat-caption" class="txt-muted-sm" style="margin: 0 0 0.85rem;">-</div>
-
-                    <div id="md-stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(185px, 1fr)); gap: 1.15rem; margin-bottom: 1.25rem;">
-                        <div class="card mb-0 ta-center kpi-card-md cursor-p" data-kpi-estado="0" role="button" tabindex="0" title="Ver todas las solicitudes emitidas en este período" style="padding: 1.25rem 1rem; border-top: 3.5px solid #0052B7; border-radius: 10px; cursor: pointer; transition: transform 0.15s ease, box-shadow 0.15s ease;">
-                            <div class="txt-muted-xs">SOLICITUDES EMITIDAS</div>
-                            <div id="md-stat-emitidas" class="stat-num stat-num--pgd" style="font-size: 2.15rem; font-weight: 800; line-height: 1.1; margin-top: 0.35rem;">-</div>
-                            <div class="md-stat-periodo txt-muted-xs" style="font-size: 0.7rem; margin-top: 0.4rem; color: #94a3b8;">-</div>
-                        </div>
-                        <div class="card mb-0 ta-center kpi-card-md cursor-p" data-kpi-estado="4" role="button" tabindex="0" title="Ver solicitudes con resultados entregados" style="padding: 1.25rem 1rem; border-top: 3.5px solid #059669; border-radius: 10px; cursor: pointer; transition: transform 0.15s ease, box-shadow 0.15s ease;">
-                            <div class="txt-muted-xs">RESULTADOS ENTREGADOS</div>
-                            <div id="md-stat-entregados" class="stat-num stat-num--main" style="font-size: 2.15rem; font-weight: 800; line-height: 1.1; margin-top: 0.35rem;">-</div>
-                            <div id="md-stat-pct-entregados" class="txt-muted-xs" style="font-size: 0.7rem; margin-top: 0.4rem; color: #94a3b8;">-</div>
-                            <div class="md-stat-periodo txt-muted-xs" style="font-size: 0.7rem; margin-top: 0.15rem; color: #94a3b8;">-</div>
-                        </div>
-                        <div class="card mb-0 ta-center kpi-card-md cursor-p" data-kpi-estado="0" data-kpi-parciales="1" role="button" tabindex="0" title="Ver solicitudes con entregas parciales en curso" style="padding: 1.25rem 1rem; border-top: 3.5px solid #8B5CF6; border-radius: 10px; cursor: pointer; transition: transform 0.15s ease, box-shadow 0.15s ease;">
-                            <div class="txt-muted-xs">PARCIALES EN CURSO</div>
-                            <div id="md-stat-parciales" class="stat-num" style="font-size: 2.15rem; font-weight: 800; line-height: 1.1; margin-top: 0.35rem; color: #8B5CF6;">-</div>
-                            <div class="txt-muted-xs" style="font-size: 0.7rem; margin-top: 0.4rem; color: #94a3b8;">Actualmente · abiertas con PDF parcial, sin importar el período</div>
-                        </div>
-                        <div class="card mb-0 ta-center kpi-card-md cursor-p" data-kpi-estado="5" role="button" tabindex="0" title="Ver solicitudes canceladas" style="padding: 1.25rem 1rem; border-top: 3.5px solid #EF4444; border-radius: 10px; cursor: pointer; transition: transform 0.15s ease, box-shadow 0.15s ease;">
-                            <div class="txt-muted-xs">CANCELADAS</div>
-                            <div id="md-stat-canceladas" class="stat-num stat-num--danger" style="font-size: 2.15rem; font-weight: 800; line-height: 1.1; margin-top: 0.35rem;">-</div>
-                            <div class="md-stat-periodo txt-muted-xs" style="font-size: 0.7rem; margin-top: 0.4rem; color: #94a3b8;">-</div>
-                            <div id="md-stat-motivo" class="txt-muted-xs" style="font-size: 0.7rem; margin-top: 0.4rem; color: #94a3b8; overflow-wrap: anywhere;">-</div>
-                        </div>
-                    </div>
-
-                    <div class="card mb-0" style="padding: 1rem 1.25rem; border-radius: 10px;">
-                        <div class="txt-muted-xs" style="margin-bottom: 0.6rem;">DISTRIBUCIÓN POR ESTADO ACTUAL · <span class="md-stat-periodo">-</span></div>
-                        <div id="md-stat-distribucion" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 0.75rem;">
-                            <div class="ta-center kpi-card-md cursor-p" data-kpi-estado="1" role="button" tabindex="0" title="Ver solicitudes en estado Remitida" style="padding: 0.5rem; border-radius: 8px; cursor: pointer; transition: background 0.15s ease;"><div class="txt-muted-xs">Remitida</div><div id="md-est-1" class="stat-num stat-num--pgd" style="font-size: 1.45rem; font-weight: 800;">-</div></div>
-                            <div class="ta-center kpi-card-md cursor-p" data-kpi-estado="2" role="button" tabindex="0" title="Ver solicitudes En atención" style="padding: 0.5rem; border-radius: 8px; cursor: pointer; transition: background 0.15s ease;"><div class="txt-muted-xs">En atención</div><div id="md-est-2" class="stat-num stat-num--atn" style="font-size: 1.45rem; font-weight: 800;">-</div></div>
-                            <div class="ta-center kpi-card-md cursor-p" data-kpi-estado="3" role="button" tabindex="0" title="Ver solicitudes con Resultados listos" style="padding: 0.5rem; border-radius: 8px; cursor: pointer; transition: background 0.15s ease;"><div class="txt-muted-xs">Resultados listos</div><div id="md-est-3" class="stat-num stat-num--lst" style="font-size: 1.45rem; font-weight: 800;">-</div></div>
-                            <div class="ta-center kpi-card-md cursor-p" data-kpi-estado="4" role="button" tabindex="0" title="Ver solicitudes Cerradas / Entregadas" style="padding: 0.5rem; border-radius: 8px; cursor: pointer; transition: background 0.15s ease;"><div class="txt-muted-xs">Cerrada</div><div id="md-est-4" class="stat-num stat-num--main" style="font-size: 1.45rem; font-weight: 800;">-</div></div>
-                            <div class="ta-center kpi-card-md cursor-p" data-kpi-estado="5" role="button" tabindex="0" title="Ver solicitudes Canceladas" style="padding: 0.5rem; border-radius: 8px; cursor: pointer; transition: background 0.15s ease;"><div class="txt-muted-xs">Cancelada</div><div id="md-est-5" class="stat-num stat-num--danger" style="font-size: 1.45rem; font-weight: 800;">-</div></div>
-                        </div>
-                    </div>
-                    <div id="md-stat-error" class="txt-muted-sm d-none" style="margin-top: 0.75rem; color: #dc2626;" role="alert"></div>
-                </div>
-
-                <!-- Panel 5: Catálogo Oficial (Modo Lectura con Buscador y Paginador) -->
-                <div class="tab-panel d-none" id="panel-catalogo-medico">
-                    <div class="medico-catalog-header">
-                        <div class="medico-catalog-title-wrap">
-                            <h2 class="txt-pgd medico-catalog-title">Catálogo de Estudios</h2>
-                        </div>
-                        
-                        <div class="medico-catalog-header-controls">
-                            <!-- Buscador Autocomplete -->
-                            <div class="medico-catalog-search-wrap">
-                                <input type="text" id="input-buscar-catalogo-medico" class="form-input form-input--bg" autocomplete="off" spellcheck="false" placeholder="🔍 Buscar por nombre, clave o área..." style="width: 100%; font-size: 0.88rem;">
-                            </div>
-
-                            <!-- Total y Paginador Superior -->
-                            <div id="medico-catalog-total-wrap" class="medico-catalog-total-wrap">
-                                <span id="medico-catalog-total">Total: 0</span>
-                                <span class="medico-catalog-total-sep">|</span>
-                                <div id="medico-catalog-pagination"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Grilla Tabular Completa (Modo Lectura) -->
-                    <div class="card" style="padding: 0; overflow: hidden; border: 1px solid var(--border); border-radius: 8px;">
-                        <div class="table-responsive" style="max-height: calc(100vh - 280px); overflow-y: auto; overflow-x: auto; -webkit-overflow-scrolling: touch; width: 100%;">
-                            <table class="table" id="tabla-catalogo-medico" style="margin-bottom: 0; width: 100%; min-width: 960px; white-space: nowrap;">
-                                <thead>
-                                    <tr style="font-size: 0.88rem;">
-                                        <th style="position: sticky; top: 0; background: #e0f2fe; color: #003e8c; z-index: 10; width: 40px; text-align: center;">#</th>
-                                        <th style="position: sticky; top: 0; background: #e0f2fe; color: #003e8c; z-index: 10; min-width: 240px; white-space: normal;">Estudio</th>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Analyzing the HTML structure of the KPI cards within the `medicos.php` file, the `data-kpi-estado` attribute appears to be a key indicator for card state. There are multiple instances where this attribute holds different values. Further investigation is required to determine the significance of these states (0, 4, etc.) in the context of the application's functionality.
-
-
-The `data-kpi-estado` attribute, observed across multiple HTML elements, appears to control application navigation, specifically based on the selected time period. If the period is "dia" (day), the code directs the application to a "Nueva Orden" panel; otherwise, it opens a "panel-historial-medico" panel. The javascript function uses this `estadoId` and determines the relevant tab based on the time period filter.
-
-
-
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `tabla-ordenes-anteriores`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.760188287s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:19 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L439-474)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-// ── GET /tabla-ordenes-anteriores — Partial HTMX de Órdenes Anteriores (orden/búsqueda/paginación) ────
-// GAP-MD-01/03 (2026-09-21/22): usa las mismas mdRenderOrdenesTablaHeader/Body que
-// Órdenes Hoy — antes el combo "Período" con filtrado client-side, y luego un par
-// de funciones de render casi idénticas por sub-tab, permitieron que Hoy y
-// Anteriores divergieran en columnas/rótulos. Con una sola función para ambas,
-// la única diferencia real es el rango de fechas que consulta el backend.
-Flight::route('GET /tabla-ordenes-anteriores', function () {
-    header('Content-Type: text/html; charset=utf-8');
-    $userId = (int)Flight::auth()->getUserId();
-    $csrfToken = $_SESSION['csrf_token'] ?? '';
-
-    $q           = trim($_GET['q'] ?? '');
-    $periodo     = trim($_GET['periodo'] ?? '30d');
-    $fechaInicio = trim($_GET['fecha_inicio'] ?? '');
-    $fechaFin    = trim($_GET['fecha_fin'] ?? '');
-    $sort        = trim($_GET['sort'] ?? 'fecha');
-    $dir         = trim($_GET['dir'] ?? 'desc');
-    $page        = max(1, (int)($_GET['page'] ?? 1));
-    $perPage     = max(5, min(100, (int)($_GET['per_page'] ?? 25)));
-    $offset      = ($page - 1) * $perPage;
-
-    $ordenesAnteriores = \MD\Negocio\Ordenes::obtenerOrdenesAnterioresMedico($userId, $perPage, $offset, $q, $sort, $dir, $periodo, $fechaInicio, $fechaFin);
-    $totalReg          = \MD\Negocio\Ordenes::contarOrdenesAnterioresMedico($userId, $q, $periodo, $fechaInicio, $fechaFin);
-    $totalPages        = max(1, (int)ceil($totalReg / $perPage));
-
-    $includeAntMd = '#input-buscar-orden-anteriores-md, #select-periodo-anteriores-md, #fecha-inicio-anteriores-md, #fecha-fin-anteriores-md';
-
-    echo '<table class="table" id="tabla-historial-completo" hx-get="/laesh/md/tabla-ordenes-anteriores" hx-target="#tabla-historial-completo" hx-swap="outerHTML" hx-include="' . $includeAntMd . '" hx-sync="this:replace" hx-trigger="refresh, ordenCreada from:body, ordenActualizada from:body" style="margin-bottom: 0; width: 100%; min-width: ' . mdOrdenesTablaMinWidth() . 'px; table-layout: fixed; border-collapse: collapse;">'
-       . mdRenderOrdenesColgroup()
-       . '<thead>'
-       . mdRenderOrdenesTablaHeader($sort, $dir, $q, '/laesh/md/tabla-ordenes-anteriores', '#tabla-historial-completo', $includeAntMd)
-       . '</thead>'
-       . mdRenderOrdenesTablaBody($ordenesAnteriores, $csrfToken, '-ant', $q)
-       . '</table>';
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `class Ordenes`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:20 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `Ordenes.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L79-139)</summary>
-
-**Path:** `Unknown file`
-
-```
-                    :edad_al_emitir,
-                    :diagnostico,
-                    :otros_estudios,
-                    :estudios_json,
-                    @p_folio
-                )
-            ");
-
-            $stmtProc->execute([
-                'paciente_id'    => $pacienteId,
-                'medico_id'      => $medicoId,
-                'recepcion_id'   => null, // Emitida por médico digitalmente
-                'edad_al_emitir' => $edad,
-                'diagnostico'    => $diagnostico,
-                'otros_estudios' => $otrosEstudios,
-                'estudios_json'  => $estudiosJson
-            ]);
-
-            // Obtener el folio generado por el Stored Procedure
-            $folioRow = $db->query("SELECT @p_folio AS folio")->fetch(PDO::FETCH_ASSOC);
-            $folio = $folioRow['folio'] ?? '1';
-
-            // Obtener la orden recién creada para responder con orden_id
-            $stmtOrd = $db->prepare("SELECT id FROM ordenes WHERE folio_unico = ? LIMIT 1");
-            $stmtOrd->execute([$folio]);
-            $ordenId = (int)$stmtOrd->fetchColumn();
-
-            // 4. Actualizar contador de órdenes del médico en perfiles_medicos (GAP-03)
-            $db->prepare("UPDATE perfiles_medicos SET total_ordenes = total_ordenes + 1 WHERE user_id = ?")
-               ->execute([$medicoId]);
-
-            // 6. Logger y Auditoría
-            $pacienteNombre = trim(($datos['paciente_nombre'] ?? $datos['paciente'] ?? 'Paciente'));
-            Logger::logAlways('INFO', "Solicitud Médica Digital {$folio} creada para {$pacienteNombre} por médico user_id={$userId}", $userId);
-
-            // Obtener el nombre del médico para complementar el mensaje de notificación
-            $stmtMed = $db->prepare(
-                "SELECT COALESCE(pm.nombre_completo, NULLIF(CONCAT(IFNULL(em.nombre,''), ' ', IFNULL(em.apellidos,'')), ' '), 'Médico')
-                 FROM users u
-                 LEFT JOIN perfiles_medicos pm ON pm.user_id = u.id
-                 LEFT JOIN empleados em ON em.user_id = u.id
-                 WHERE u.id = ? LIMIT 1"
-            );
-            $stmtMed->execute([$userId]);
-            $medicoNombre = trim((string)$stmtMed->fetchColumn());
-            if ($medicoNombre !== '' && $medicoNombre !== 'Médico') {
-                if (!str_starts_with($medicoNombre, 'Dr(a).')) {
-                    $medicoNombre = 'Dr(a). ' . preg_replace('/^(Dr|Dra)\.?\s*/i', '', $medicoNombre);
-                }
-            } else {
-                $medicoNombre = 'Dr(a).';
-            }
-
-            $mensajeNotif = "Paciente: {$pacienteNombre} del {$medicoNombre}";
-
-            // 7. H6 — Outbox: persistir la notificación dentro de la misma transacción.
-            $persisted = \Common\Notifier::persist($db, 'nueva_orden', [
-                'folio'          => $folio,
-                'orden_id'       => $ordenId,
-                'subtipo'        => 'creada',
-                'titulo'         => 'Nueva Solicitud · #' . $folio,
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `obtenerOrdenesAnterioresMedico`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:20 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `Ordenes.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L364-444)</summary>
-
-**Path:** `Unknown file`
-
-```
-     * Precedencia del buscador: si $search tiene contenido, busca en todo el historial (< hoy).
-     */
-    public static function obtenerOrdenesAnterioresMedico(int $userId, int $limit = 25, int $offset = 0, string $search = '', string $orderBy = 'fecha', string $orderDir = 'DESC', string $periodo = '30d', string $fechaInicio = '', string $fechaFin = ''): array {
-        try {
-            $db = DB::connect();
-
-            $allowedSorts = [
-                'folio'           => 'CAST(o.folio_unico AS UNSIGNED)',
-                'paciente'        => 'o.paciente_nombre',
-                'fecha'           => 'o.hora_captura',
-                'fecha_resultado' => 'o.fecha_resultado',
-                'estado'          => 'o.estado_id',
-                'id'              => 'o.orden_id'
-            ];
-            $sortCol = $allowedSorts[$orderBy] ?? 'o.orden_id';
-            $dir = strtoupper($orderDir) === 'ASC' ? 'ASC' : 'DESC';
-
-            $params = [':user_id' => $userId];
-            $search = trim(mb_strtolower($search, 'UTF-8'));
-
-            $periodoParams = [];
-            $filtroPeriodo = self::construirFiltroPeriodoAnterioresMedico($periodo, 'o.', $fechaInicio, $fechaFin, $periodoParams);
-
-            $textCols = self::BUSQ_TEXT_COLS_MD;
-            $conds    = \Common\BusquedaOrdenes::construirWhereBusqueda(
-                $search, $params, 'o.', $filtroPeriodo, $periodoParams,
-                ['o.medico_user_id = :user_id'], $textCols
-            );
-            $whereSql = "WHERE {$conds}";
-
-            $limInt = max(1, $limit);
-            $offInt = max(0, $offset);
-
-            $sql = "
-                SELECT o.orden_id as id, o.folio_unico as folio, o.hora_captura as creado_en, o.fecha_resultado,
-                       o.diagnostico, o.otros_estudios, o.estudios_json as estudios, o.edad_al_emitir,
-                       o.paciente_nombre, o.paciente_sexo, o.paciente_telefono as telefono,
-                       o.estado_id, o.estado_valor AS estado_nombre, o.estado_color AS color_badge,
-                       o.motivo_cancelacion,
-                       parc.parciales_fechas
-                FROM vw_ordenes_completas o
-                LEFT JOIN (
-                    SELECT orden_id, GROUP_CONCAT(creado_en ORDER BY id ASC SEPARATOR '|') AS parciales_fechas
-                    FROM resultados_pdf
-                    WHERE tipo_entrega = 'parcial'
-                    GROUP BY orden_id
-                ) parc ON parc.orden_id = o.orden_id
-                {$whereSql}
-                ORDER BY {$sortCol} {$dir}
-                LIMIT {$limInt} OFFSET {$offInt}
-            ";
-
-            $stmt = $db->prepare($sql);
-            foreach ($params as $k => $v) {
-                if ($k === ':user_id') {
-                    $stmt->bindValue($k, (int)$v, PDO::PARAM_INT);
-                } else {
-                    $stmt->bindValue($k, $v, PDO::PARAM_STR);
-                }
-            }
-            $stmt->execute();
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        } catch (Throwable $e) {
-            DB::logFallback('ERROR', 'Fallo en MD\Negocio\Ordenes::obtenerOrdenesAnterioresMedico', $e->getMessage());
-            return [];
-        }
-    }
-
-    /**
-     * Cuenta el total de órdenes de DÍAS ANTERIORES del médico según filtro de búsqueda y período
-     */
-    public static function contarOrdenesAnterioresMedico(int $userId, string $search = '', string $periodo = '30d', string $fechaInicio = '', string $fechaFin = ''): int {
-        try {
-            $db = DB::connect();
-            $params = [':user_id' => $userId];
-            $search = trim(mb_strtolower($search, 'UTF-8'));
-
-            $periodoParams = [];
-            $filtroPeriodo = self::construirFiltroPeriodoAnterioresMedico($periodo, '', $fechaInicio, $fechaFin, $periodoParams);
-
-            $textCols = self::BUSQ_TEXT_COLS_MD;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `Ordenes.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L139-164)</summary>
-
-**Path:** `Unknown file`
-
-```
-            if ($estadoId > 0) {
-                $whereSql .= " AND o.estado_id = :estado_id_rec";
-                $params[':estado_id_rec'] = $estadoId;
-            }
-            $search = trim(mb_strtolower($search, 'UTF-8'));
-
-            if ($search !== '') {
-                $whereSql .= ' AND ' . \Common\BusquedaOrdenes::construirWhereBusqueda(
-                    $search, $params, 'o.', '', [], [], self::BUSQ_TEXT_COLS_RC, false
-                );
-            }
-
-            $limInt = max(1, $limit);
-            $offInt = max(0, $offset);
-
-            $sql = "
-                SELECT o.orden_id as id, o.folio_unico as folio, o.hora_captura as creado_en, o.fecha_resultado,
-                       o.diagnostico, o.otros_estudios, o.estudios_json as estudios, o.edad_al_emitir,
-                       o.paciente_nombre, o.paciente_sexo, o.paciente_telefono as telefono,
-                       COALESCE(o.medico_nombre_completo, 'Médico General') AS medico_nombre,
-                       COALESCE(o.medico_especialidad, 'Medicina General') AS medico_especialidad,
-                       COALESCE(o.medico_cedula, 'CED-N/A') AS medico_cedula,
-                       o.estado_id, o.estado_valor AS estado_nombre, o.estado_color AS color_badge,
-                       o.motivo_cancelacion,
-                       pdf.nombre_archivo AS pdf_nombre,
-                       pdf.folio_extraido,
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `Ordenes.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L194-249)</summary>
-
-**Path:** `Unknown file`
-
-```
-                'id'              => 'o.orden_id'
-            ];
-            $sortCol = $allowedSorts[$orderBy] ?? 'o.orden_id';
-            $dir = strtoupper($orderDir) === 'ASC' ? 'ASC' : 'DESC';
-
-            // 2026-10-01: filtro de dueño (medico_user_id) homologado vía $extraBase —
-            // antes se aplicaba fuera del helper aquí pero dentro en
-            // obtenerOrdenesAnterioresMedico(), misma lógica efectiva, dos formas de
-            // escribirla. Mismo resultado, ahora un solo patrón en todo MD.
-            $params = [':user_id' => $userId];
-            $search = trim(mb_strtolower($search, 'UTF-8'));
-            $conds = \Common\BusquedaOrdenes::construirWhereBusqueda(
-                $search, $params, 'o.', '', [], ['o.medico_user_id = :user_id'], self::BUSQ_TEXT_COLS_MD, false
-            );
-            $whereSql = "WHERE DATE(o.hora_captura) = CURDATE() AND {$conds}";
-
-            $limInt = max(1, $limit);
-            $offInt = max(0, $offset);
-
-            $sql = "
-                SELECT o.orden_id as id, o.folio_unico as folio, o.hora_captura as creado_en, o.fecha_resultado,
-                       o.diagnostico, o.otros_estudios, o.estudios_json as estudios, o.edad_al_emitir,
-                       o.paciente_nombre, o.paciente_sexo, o.paciente_telefono as telefono,
-                       o.estado_id, o.estado_valor AS estado_nombre, o.estado_color AS color_badge,
-                       o.motivo_cancelacion,
-                       parc.parciales_fechas
-                FROM vw_ordenes_completas o
-                LEFT JOIN (
-                    SELECT orden_id, GROUP_CONCAT(creado_en ORDER BY id ASC SEPARATOR '|') AS parciales_fechas
-                    FROM resultados_pdf
-                    WHERE tipo_entrega = 'parcial'
-                    GROUP BY orden_id
-                ) parc ON parc.orden_id = o.orden_id
-                {$whereSql}
-                ORDER BY {$sortCol} {$dir}
-                LIMIT {$limInt} OFFSET {$offInt}
-            ";
-
-            $stmt = $db->prepare($sql);
-            foreach ($params as $k => $v) {
-                if ($k === ':user_id') {
-                    $stmt->bindValue($k, (int)$v, PDO::PARAM_INT);
-                } else {
-                    $stmt->bindValue($k, $v, PDO::PARAM_STR);
-                }
-            }
-            $stmt->execute();
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        } catch (Throwable $e) {
-            DB::logFallback('ERROR', 'Fallo en MD\Negocio\Ordenes::obtenerOrdenesPropias', $e->getMessage());
-            return [];
-        }
-    }
-
-    /**
-     * Cuenta el total de órdenes de HOY del médico según filtro de búsqueda
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-The code within `MD\Negocio\Ordenes` doesn't apply any filters for `$estadoId` or `$soloParciales` in several order retrieval functions. This means the backend for the Portal Médico doesn't filter by `estado_id`. Moreover, the routes `/tabla-ordenes` and `/tabla-ordenes-anteriores` in `md/index.php` also disregard these filtering parameters.
-
-
-Examining `labadmin.js`, the click handler for KPI cards calls `_abrirDetalleKpi` with `estadoId` and `soloParciales`. Further inspection of `_abrirDetalleKpi` reveals that the `estadoId` and `soloParciales` are only considered when `esHoy` is false. However, when `esHoy` is true, the function navigates to a new tab without passing these filters, replicating the filtering issue.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `labadmin.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.612738745s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L539-564)</summary>
-
-**Path:** `Unknown file`
-
-```
-                     y ESTA copia real, con contenedores dinámicos id=container-*
-                     que sí llena filtrarEstadisticasAdmin(), nunca llegaba a
-                     mostrarse. La copia vieja (y un contenedor id panel-catalogos
-                     huérfano que había quedado abierto junto a ella) se eliminó completa. -->
-                <div id="panel-reportes" class="tab-panel d-none">
-                    <!-- Fila 0: Pestañas superiores (mismo patrón que "Catálogos de Análisis") -->
-                    <div class="cms-tabs" id="toggle-reportes-view" role="tablist" aria-label="Secciones de Reportes y Estadísticas">
-                        <button type="button" class="cms-tab active" id="btn-view-reportes-indicadores">1. Indicadores</button>
-                        <button type="button" class="cms-tab" id="btn-view-reportes-auditoria">2. Trazabilidad</button>
-                    </div>
-
-                    <div id="view-reportes-indicadores">
-                    <div class="modal-sect-hd">
-                        <h2 class="txt-pgd mb-0">Reportes y Estadísticas</h2>
-                        <div class="d-inline-flex-ac flex-wrap" style="gap: 0.5rem;">
-                            <label for="filtro-periodo-admin" class="txt-muted-sm">Periodo:</label>
-                            <select id="filtro-periodo-admin" class="select-sm select-sm--bg" onchange="manejarCambioFiltroAdmin()">
-                                <option value="dia">Hoy</option>
-                                <option value="ayer">Ayer</option>
-                                <option value="semana">Esta Semana</option>
-                                <option value="mes" selected>Este Mes</option>
-                                <option value="anio">Este Año</option>
-                                <option value="fecha">Rango de Fechas</option>
-                            </select>
-                            <span id="rango-fechas-admin" class="d-none flex-ic-8" style="flex-wrap: wrap;">
-                                <span style="position: relative; display: inline-flex; align-items: center;">
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `labadmin.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L499-534)</summary>
-
-**Path:** `Unknown file`
-
-```
-            });
-        }
-
-        function manejarCambioFiltroAdmin() {
-            const select = document.getElementById('filtro-periodo-admin');
-            if (!select) return;
-            const rangeContainer = document.getElementById('rango-fechas-admin');
-            if (select.value === 'fecha') {
-                if (rangeContainer) {
-                    rangeContainer.classList.remove('d-none');
-                    rangeContainer.style.display = 'inline-flex';
-                }
-                const inputInicio = document.getElementById('fecha-inicio-admin');
-                const inputFin = document.getElementById('fecha-fin-admin');
-                
-                // Prellenado inteligente por defecto si están vacíos (mes actual hasta hoy)
-                const hoy = _hoyServidorISO();
-                if (inputInicio && !inputInicio.value) {
-                    inputInicio.value = _noAntesDelMin(hoy.substring(0, 7) + '-01');
-                }
-                if (inputFin && !inputFin.value) {
-                    inputFin.value = hoy;
-                }
-                if (inputInicio) { inputInicio.max = hoy; inputInicio.min = window.LAESH_FECHA_MIN; }
-                if (inputFin) {
-                    inputFin.max = hoy;
-                    if (inputInicio && inputInicio.value) inputFin.min = inputInicio.value;
-                }
-                
-                // Ejecutar filtro con el rango inicial sugerido
-                filtrarEstadisticasAdmin();
-
-                // GAP-CALENDARIO-AUTO-01 (2026-09-28): antes se llamaba a
-                // showPicker() aquí, abriendo el calendario nativo de inmediato
-                // al cambiar a "Rango de Fechas" — se veía desalineado porque
-                // el picker se posiciona ANTES de que el contenedor termine de
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `labadmin.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L534-554)</summary>
-
-**Path:** `Unknown file`
-
-```
-                // el picker se posiciona ANTES de que el contenedor termine de
-                // asentar su layout tras quitar d-none. Ahora solo se pone el
-                // foco (sin abrir el picker); el calendario se abre nada más
-                // con clic explícito en #btn-calendario-inicio-admin/-fin.
-                if (inputInicio) inputInicio.focus();
-            } else {
-                if (rangeContainer) {
-                    rangeContainer.style.display = 'none';
-                    rangeContainer.classList.add('d-none');
-                }
-                filtrarEstadisticasAdmin();
-            }
-        }
-
-        function inicializarInputsFechaAdmin() {
-            const inputInicio = document.getElementById('fecha-inicio-admin');
-            const inputFin = document.getElementById('fecha-fin-admin');
-            if (!inputInicio || !inputFin) return;
-
-            // Al cambiar fecha inicio: auto-ajustar min de fin y mover el foco
-            // (sin abrir el picker — ver GAP-CALENDARIO-AUTO-01 arriba)
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Tracing the `_abrirDetalleKpi` function, triggered by a KPI card click, is the next step. The function's logic branches based on a date check; if it's "today", it should navigate to a specific panel. The code appears to locate a navigation item within the sidebar to perform this redirection.
-
-
-The code checks if a specific function exists and, if so, calls it to change the active tab; otherwise, it navigates to a historical orders panel. Date calculations are performed to set the date range for the historical view; the range is adjusted based on a calculated period. A request is then made to fetch the historical data within the specified date range.
-
-
-If the `estadoId` is zero and partial orders are *not* selected, the function fails to clear or reload any existing filters on the main table. There's no mechanism to pass `estado_id` when the main table is updated via `htmx.ajax`. The table's `hx-trigger` attribute lacks any mechanism to include filter parameters on refresh or order creation events. This means any existing status filters will be retained and are potentially incorrect.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `labadmin.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 1.445176871s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L219-319)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-                <!-- Panel 1.5: Solicitudes Anteriores -->
-                <div id="panel-ordenes-anteriores" class="tab-panel d-none">
-                    <!-- Fila: Título de Sección y Controles (Total, Paginación, Buscador) alineados con el estándar cms-panel-header -->
-                    <div id="ordenes-anteriores-rc-header" class="cms-panel-header ordenes-anteriores-toolbar-rc" style="margin-top: 1rem; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
-                        <div>
-                            <h3 class="cms-h3" style="margin: 0; font-size: 1.35rem; font-weight: 800; color: #0052B7;">Solicitudes Anteriores</h3>
-                            <p class="txt-muted-4" style="margin: 0.2rem 0 0 0; font-size: 0.85rem;">Histórico de solicitudes registradas en días anteriores.</p>
-                        </div>
-                        
-                        <div class="toolbar-anteriores-wrap" style="display: flex; align-items: center; gap: 0.85rem; flex-wrap: wrap;">
-                            <!-- Paginador y Total en Cápsula Suave -->
-                            <div id="ordenes-anteriores-pagination-wrap" class="toolbar-pagination-capsule">
-                                <span id="ordenes-anteriores-total-records" style="font-size: 0.88rem; color: var(--text-muted); font-weight: 600;">Total: <?= (int)($totalOrdenesAnteriores ?? 0) ?></span>
-                                <span style="color: #cbd5e1; display: inline;">|</span>
-                                <div id="ordenes-anteriores-pagination" style="display: flex; gap: 0.25rem; align-items: center;">
-                                    <?php 
-                                        $totPgsAnt = max(1, (int)ceil(($totalOrdenesAnteriores ?? 0) / 25));
-                                    ?>
-                                    <button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;">‹ Ant.</button>
-                                    <span style="font-size:0.82rem; font-weight:600; color:var(--text-muted); padding: 0 4px;">1 / <?= $totPgsAnt ?></span>
-                                    <?php if ($totPgsAnt > 1): ?>
-                                        <button type="button" class="btn btn-secondary btn-sm" style="padding: 2px 8px; font-size: 0.8rem;" hx-get="/laesh/rc/tabla-ordenes-anteriores?page=2&periodo=30d" hx-target="#tabla-recepcion-anteriores" hx-swap="outerHTML" hx-include="#input-buscar-orden-anteriores-rc, #select-periodo-anteriores-rc, #fecha-inicio-anteriores-rc, #fecha-fin-anteriores-rc">Sig. ›</button>
-                                    <?php else: ?>
-                                        <button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;">Sig. ›</button>
-                                    <?php endif; ?>
-                                </div>
-                            </div>
-
-                            <!-- Separador Vertical 1 -->
-                            <div class="toolbar-separator" aria-hidden="true"></div>
-
-                            <!-- Combo List de Período y Rango de Fechas con Agrupado Tenue -->
-                            <div id="ordenes-anteriores-periodo-container" class="periodo-container">
-                                <div class="periodo-select-group">
-                                    <label for="select-periodo-anteriores-rc" class="periodo-select-label">Período</label>
-                                    <select id="select-periodo-anteriores-rc" name="periodo" class="form-select select-sm" style="padding: 4px 10px; font-size: 0.82rem; border-radius: 6px; border: 1px solid var(--border); background: #ffffff; color: var(--text-dark); cursor: pointer;"
-                                            hx-get="/laesh/rc/tabla-ordenes-anteriores"
-                                            hx-target="#tabla-recepcion-anteriores"
-                                            hx-swap="outerHTML"
-                                            hx-include="#input-buscar-orden-anteriores-rc, #select-periodo-anteriores-rc, #fecha-inicio-anteriores-rc, #fecha-fin-anteriores-rc"
-                                            hx-trigger="change">
-                                        <option value="30d" selected>30 d</option>
-                                        <option value="15d">15 d</option>
-                                        <option value="fecha">Fechas</option>
-                                    </select>
-                                </div>
-                                <span id="rango-fechas-anteriores-rc" class="rango-fechas-group d-none" style="display: none;">
-                                    <div class="fecha-field-wrap">
-                                        <label for="fecha-inicio-anteriores-rc" class="fecha-field-label">Inicial</label>
-                                        <input type="date" id="fecha-inicio-anteriores-rc" name="fecha_inicio" class="select-sm form-input" style="padding: 3px 6px; font-size: 0.8rem; border-radius: 6px; border: 1px solid var(--border); width: 130px; background: #ffffff;" max="<?= date('Y-m-d', strtotime('-1 day')) ?>" title="Fecha inicial" aria-label="Fecha inicial">
-                                    </div>
-                                    <div class="fecha-field-wrap">
-                                        <label for="fecha-fin-anteriores-rc" class="fecha-field-label">Final</label>
-                                        <input type="date" id="fecha-fin-anteriores-rc" name="fecha_fin" class="select-sm form-input" style="padding: 3px 6px; font-size: 0.8rem; border-radius: 6px; border: 1px solid var(--border); width: 130px; background: #ffffff;" max="<?= date('Y-m-d', strtotime('-1 day')) ?>" title="Fecha final" aria-label="Fecha final">
-                                    </div>
-                                    <button type="button" id="btn-buscar-fechas-anteriores-rc" class="btn-fechas-search-icon" title="Iniciar búsqueda por rango de fechas" aria-label="Iniciar búsqueda por rango de fechas"
-                                            hx-get="/laesh/rc/tabla-ordenes-anteriores"
-                                            hx-target="#tabla-recepcion-anteriores"
-                                            hx-swap="outerHTML"
-                                            hx-include="#input-buscar-orden-anteriores-rc, #select-periodo-anteriores-rc, #fecha-inicio-anteriores-rc, #fecha-fin-anteriores-rc">
-                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                            <circle cx="11" cy="11" r="8"></circle>
-                                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                                        </svg>
-                                    </button>
-                                </span>
-                            </div>
-
-                            <!-- Separador Vertical 2 -->
-                            <div class="toolbar-separator" aria-hidden="true"></div>
-
-                            <!-- Buscador en tiempo real con ancho confortable y estilo unificado -->
-                            <div id="ordenes-anteriores-rc-search-wrap" class="search-bar-unified" style="position:relative; z-index: 100; margin-left: auto;">
-                                <input type="text" id="input-buscar-orden-anteriores-rc" name="q" class="form-input form-input--bg search-input-anteriores search-bar-input" autocomplete="off" spellcheck="false" placeholder="🔍 Nombre, folio o tel (dentro del período)..." hx-get="/laesh/rc/tabla-ordenes-anteriores" hx-target="#tabla-recepcion-anteriores" hx-swap="outerHTML" hx-include="#input-buscar-orden-anteriores-rc, #select-periodo-anteriores-rc, #fecha-inicio-anteriores-rc, #fecha-fin-anteriores-rc" hx-trigger="keyup changed delay:300ms, search" hx-sync="this:replace">
-                                <button type="button" class="btn-search-clear" data-target="#input-buscar-orden-anteriores-rc" title="Limpiar búsqueda" aria-label="Limpiar búsqueda">
-                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                        <path d="m7 21-4.3-4.3c-1-1-1-2.5 0-3.4l9.6-9.6c1-1 2.5-1 3.4 0l5.6 5.6c1 1 1 2.5 0 3.4L13 21"></path>
-                                        <path d="M22 21H7"></path>
-                                        <path d="m5 11 9 9"></path>
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card" aria-live="polite" style="padding: 0; overflow: hidden; border: 1px solid var(--border); border-radius: 8px;">
-                        <div class="table-responsive" style="max-height: calc(100vh - 250px); overflow-y: auto; overflow-x: auto; -webkit-overflow-scrolling: touch; width: 100%;">
-                            <table class="table" id="tabla-recepcion-anteriores" hx-get="/laesh/rc/tabla-ordenes-anteriores" hx-target="#tabla-recepcion-anteriores" hx-swap="outerHTML" hx-include="#input-buscar-orden-anteriores-rc, #select-periodo-anteriores-rc, #fecha-inicio-anteriores-rc, #fecha-fin-anteriores-rc" hx-sync="this:replace" hx-trigger="refresh, ordenActualizada from:body" style="margin-bottom: 0; width: 100%; min-width: <?= rcOrdenesTablaMinWidth(true) ?>px; table-layout: fixed; border-collapse: collapse;">
-                                <?= rcRenderOrdenesColgroup(true) ?>
-                                <thead>
-                                    <?= rcRenderOrdenesTablaHeader('fecha', 'desc', '', '/laesh/rc/tabla-ordenes-anteriores', '#tabla-recepcion-anteriores', '#input-buscar-orden-anteriores-rc, #select-periodo-anteriores-rc, #fecha-inicio-anteriores-rc, #fecha-fin-anteriores-rc', true) ?>
-                                </thead>
-                                <?= rcRenderOrdenesTablaBody($ordenesAnteriores ?? [], $csrfToken ?? '', '-ant', true, 0) ?>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Panel 2: Pacientes -->
-                <div id="panel-pacientes" class="tab-panel d-none">
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-The HTML snippet reveals an `hx-include` attribute that specifies which form elements contribute data to an AJAX request. The relevant elements appear to be a search input, a period selector, and date range inputs. This suggests that filtering of a table of previous orders is controlled through these input fields. The `hx-get` attribute indicates the endpoint that receives the filtered order request.
-
-
-The code calls `_resolverFechasParaDrillDown()` to obtain a date range and period. It then updates the UI elements (period selector, start date input, end date input, and date range display) with these values. Finally, an AJAX request is made with these calculated dates and other parameters to retrieve and update a table. It's likely `_resolverFechasParaDrillDown` calculates the date range dynamically for a drill-down operation.
-
-
-
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `_hoyServidorISO`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.323024416s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:20 pm
 
 ---
 
-## Agent Response
-
-### Thinking
-
-The behavior of `_abrirDetalleKpi` needs close examination based on the `_kpiRango` value. It is critical to consider the scenario where a user navigates to "Reportes y Estadísticas" but does not interact with the dropdown. The click on "Reportes y Estadísticas" triggers a specific function call that may need inspection.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `Ordenes.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.161122399s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L169-219)</summary>
-
-**Path:** `Unknown file`
-
-```
-                    FROM resultados_pdf p1
-                    INNER JOIN (
-                        SELECT orden_id, MAX(id) AS max_id
-                        FROM resultados_pdf
-                        GROUP BY orden_id
-                    ) p2 ON p1.id = p2.max_id
-                ) pdf ON pdf.orden_id = o.orden_id
-                LEFT JOIN (
-                    SELECT orden_id, GROUP_CONCAT(creado_en ORDER BY id ASC SEPARATOR '|') AS parciales_fechas
-                    FROM resultados_pdf
-                    WHERE tipo_entrega = 'parcial'
-                    GROUP BY orden_id
-                ) parc ON parc.orden_id = o.orden_id
-                {$whereSql}
-                ORDER BY {$sortCol} {$dir}, o.orden_id DESC
-                LIMIT {$limInt} OFFSET {$offInt}
-            ";
-
-            $stmt = $db->prepare($sql);
-            foreach ($params as $k => $v) {
-                $stmt->bindValue($k, $v, PDO::PARAM_STR);
-            }
-            $stmt->execute();
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        } catch (Throwable $e) {
-            DB::logFallback('ERROR', 'Fallo en RC\Negocio\Ordenes::obtenerOrdenesRecientes', $e->getMessage());
-            return [];
-        }
-    }
-
-    /**
-     * Cuenta el total de órdenes de HOY según filtro de búsqueda
-     */
-    public static function contarOrdenesRecientes(string $search = '', int $estadoId = 0): int {
-        try {
-            $db = DB::connect();
-            $whereSql = "WHERE DATE(hora_captura) = CURDATE()";
-            $params = [];
-            $search = trim(mb_strtolower($search, 'UTF-8'));
-
-            if ($estadoId > 0) {
-                $whereSql .= " AND estado_id = :estado_id_cnt_rec";
-                $params[':estado_id_cnt_rec'] = $estadoId;
-            }
-            if ($search !== '') {
-                $whereSql .= ' AND ' . \Common\BusquedaOrdenes::construirWhereBusqueda(
-                    $search, $params, '', '', [], [], self::BUSQ_TEXT_COLS_RC, false
-                );
-            }
-
-            $stmt = $db->prepare("SELECT COUNT(*) FROM vw_ordenes_completas {$whereSql}");
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `function obtenerOrdenesAnteriores`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:20 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `Ordenes.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L246-309)</summary>
-
-**Path:** `Unknown file`
-
-```
-    public static function obtenerOrdenesAnteriores(int $limit = 25, int $offset = 0, string $search = '', string $orderBy = 'fecha', string $orderDir = 'DESC', string $periodo = '30d', string $fechaInicio = '', string $fechaFin = '', int $estadoId = 0, bool $soloParciales = false): array {
-        try {
-            $db = DB::connect();
-
-            $allowedSorts = [
-                'folio'           => 'CAST(o.folio_unico AS UNSIGNED)',
-                'paciente'        => 'o.paciente_nombre',
-                'medico'          => 'COALESCE(o.medico_nombre_completo, \'Médico General\')',
-                'fecha'           => 'o.hora_captura',
-                'fecha_resultado' => 'o.fecha_resultado',
-                'estado'          => 'o.estado_id',
-                // PxLab (folio del PDF del laboratorio): sin PxLab siempre al final;
-                // LENGTH primero para que el orden sea numérico aunque varíe la longitud.
-                'pxlab'           => 'pdf.folio_extraido IS NULL ASC, LENGTH(pdf.folio_extraido) {DIR}, pdf.folio_extraido',
-                'id'              => 'o.orden_id'
-            ];
-            $dir = strtoupper($orderDir) === 'ASC' ? 'ASC' : 'DESC';
-            $sortCol = str_replace('{DIR}', $dir, $allowedSorts[$orderBy] ?? 'o.orden_id');
-
-            $params = [];
-            $search = trim(mb_strtolower($search, 'UTF-8'));
-
-            // La búsqueda siempre se acota al período visible; la navegación lupita/WS
-            // amplía el selector (ws-client.js, BUG-NAV-PERIODO-01) cuando hace falta.
-            $periodoParams = [];
-            $filtroPeriodo = self::construirFiltroPeriodoAnteriores($periodo, 'o.', $fechaInicio, $fechaFin, $periodoParams);
-
-            $textCols = self::BUSQ_TEXT_COLS_RC;
-            $conds    = \Common\BusquedaOrdenes::construirWhereBusqueda(
-                $search, $params, 'o.', $filtroPeriodo, $periodoParams, [], $textCols
-            );
-            $whereSql = "WHERE {$conds}";
-
-            if ($estadoId > 0) {
-                $whereSql .= " AND o.estado_id = :estado_id_ant";
-                $params[':estado_id_ant'] = $estadoId;
-            }
-            if ($soloParciales) {
-                // Órdenes que tuvieron al menos un resultado parcial adjuntado en el mismo periodo
-                $whereSql .= " AND o.orden_id IN (
-                    SELECT DISTINCT orden_id FROM historial_estados_orden
-                    WHERE observacion LIKE 'Resultado parcial adjuntado:%'
-                )";
-            }
-
-            $limInt = max(1, $limit);
-            $offInt = max(0, $offset);
-
-            $sql = "
-                SELECT o.orden_id as id, o.folio_unico as folio, o.hora_captura as creado_en, o.fecha_resultado,
-                       o.diagnostico, o.otros_estudios, o.estudios_json as estudios, o.edad_al_emitir,
-                       o.paciente_nombre, o.paciente_sexo, o.paciente_telefono as telefono,
-                       COALESCE(o.medico_nombre_completo, 'Médico General') AS medico_nombre,
-                       COALESCE(o.medico_especialidad, 'Medicina General') AS medico_especialidad,
-                       COALESCE(o.medico_cedula, 'CED-N/A') AS medico_cedula,
-                       o.estado_id, o.estado_valor AS estado_nombre, o.estado_color AS color_badge,
-                       o.motivo_cancelacion,
-                       pdf.nombre_archivo AS pdf_nombre,
-                       pdf.folio_extraido,
-                       parc.parciales_fechas
-                FROM vw_ordenes_completas o
-                LEFT JOIN (
-                    SELECT p1.orden_id, p1.nombre_archivo, p1.folio_extraido
-                    FROM resultados_pdf p1
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `function construirFiltroPeriodoAnteriores`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:20 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `Ordenes.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L234-245)</summary>
-
-**Path:** `Unknown file`
-
-```
-     * MD\Negocio\Ordenes::construirFiltroPeriodoAnterioresMedico()). Se conserva el
-     * nombre y la firma del método para no tocar ningún call site existente.
-     */
-    private static function construirFiltroPeriodoAnteriores(string $periodo, string $alias = 'o.', string $fechaInicio = '', string $fechaFin = '', array &$params = []): string {
-        return \Common\BusquedaOrdenes::construirFiltroPeriodoAnteriores($periodo, $alias, $fechaInicio, $fechaFin, $params);
-    }
-
-    /**
-     * Obtiene las solicitudes de órdenes de DÍAS ANTERIORES con ordenamiento, búsqueda,
-     * paginación y filtro de período (default: 30 días, o calendario por rango de fechas).
-     * Precedencia del buscador: si $search tiene contenido, busca en todo el historial (< hoy).
-     */
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `construirFiltroPeriodoAnteriores`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:21 pm
 
 ---
 
-## Agent Response
+### Local File Search
 
-### Actions
-
-**Tool:** `view_file`
-**File:** `BusquedaOrdenes.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L47-109)</summary>
-
-**Path:** `Unknown file`
-
-```
-    public static function construirFiltroPeriodoAnteriores(string $periodo, string $alias = 'o.', string $fechaInicio = '', string $fechaFin = '', array &$params = []): string
-    {
-        switch ($periodo) {
-            case '15':
-            case '15d':
-                return "{$alias}hora_captura >= DATE_SUB(CURDATE(), INTERVAL 15 DAY) AND DATE({$alias}hora_captura) < CURDATE()";
-            case 'fecha':
-            case 'fechas':
-                $conds = ["DATE({$alias}hora_captura) < CURDATE()"];
-                $valIni = (!empty($fechaInicio) && preg_match('/^\d{4}-\d{2}-\d{2}$/', $fechaInicio)) ? $fechaInicio : null;
-                $valFin = (!empty($fechaFin) && preg_match('/^\d{4}-\d{2}-\d{2}$/', $fechaFin)) ? $fechaFin : null;
-
-                // Poka-Yoke: Si el usuario solo capturó una fecha, se asume ese mismo día exacto
-                if ($valIni !== null && $valFin === null) {
-                    $valFin = $valIni;
-                } elseif ($valIni === null && $valFin !== null) {
-                    $valIni = $valFin;
-                }
-
-                // Poka-Yoke: Si las fechas vienen invertidas (inicio > fin), se auto-corrigen
-                if ($valIni !== null && $valFin !== null && $valIni > $valFin) {
-                    $tmp = $valIni;
-                    $valIni = $valFin;
-                    $valFin = $tmp;
-                }
-
-                if ($valIni !== null) {
-                    $pIni = ':f_ini_' . str_replace('.', '', $alias);
-                    $conds[] = "DATE({$alias}hora_captura) >= {$pIni}";
-                    $params[$pIni] = $valIni;
-                }
-                if ($valFin !== null) {
-                    $pFin = ':f_fin_' . str_replace('.', '', $alias);
-                    $conds[] = "DATE({$alias}hora_captura) <= {$pFin}";
-                    $params[$pFin] = $valFin;
-                }
-                if ($valIni === null && $valFin === null) {
-                    return "{$alias}hora_captura >= DATE_SUB(CURDATE(), INTERVAL 30 DAY) AND DATE({$alias}hora_captura) < CURDATE()";
-                }
-                return implode(' AND ', $conds);
-            case '90':
-            case '90d':
-                return "{$alias}hora_captura >= DATE_SUB(CURDATE(), INTERVAL 90 DAY) AND DATE({$alias}hora_captura) < CURDATE()";
-            case '30':
-            case '30d':
-            default:
-                return "{$alias}hora_captura >= DATE_SUB(CURDATE(), INTERVAL 30 DAY) AND DATE({$alias}hora_captura) < CURDATE()";
-        }
-    }
-
-    /**
-     * Condiciones WHERE (sin la palabra WHERE) para las grillas de órdenes.
-     * La búsqueda SIEMPRE se acota a $filtroPeriodo: el período visible es el que filtra.
-     *
-     *   "5"              → folio exacto (+ teléfono parcial, ver abajo)
-     *   "#5"             → solo folio exacto, nunca teléfono (lo usa la navegación lupita/WS)
-     *   "pedro"          → LIKE en $textCols (mínimo 3 caracteres para texto)
-     *   "pedro 5"        → cada palabra es una condición; se combinan con AND
-     *   "pedro 2026"     → 2026 = año de captura (solo con otras palabras; a solas es folio)
-     *
-     * Teléfono parcial en números sin "#": en HOY/Pacientes siempre; en anteriores
-     * ($numeroSoloFolio=true) solo desde 7 dígitos, para que "1" sea el folio 1.
-     *
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-"Solicitudes Anteriores" uses a less-than comparison (`<`) with `CURDATE()`, effectively excluding today's records.  "Hoy" and related timeframes trigger a different panel (`panel-ordenes`).  Hypothesizing how "Ayer", "Esta Semana", and "Este Mes" are handled remains.
-
-
-The code suggests that a specific JavaScript function is responsible for handling date range filtering when a user clicks on a KPI card, especially when the timeframe is "Hoy." It calls a distinct function to load orders for today's requests through a separate API endpoint with state filtering capabilities. The PHP code reveals how specific filtering parameters impact order retrieval.
-
-
-The function retrieving recent orders does not support a "partial orders only" filter; it appears to be hardcoded to retrieve all recent orders when a specific state isn't selected. When the state ID is 0, the code does not trigger an AJAX call to display orders. Investigating whether clicking on a KPI card initiates any navigation.
-
-
-The click event handler for KPI cards is attached within `_inicializarKpiCards`, which retrieves the `kpiEstado` and `kpiParciales` data attributes from the clicked card. The `data-kpi-estado` attribute in `labadmin.php` is accessed as `card.dataset.kpiEstado`. `_inicializarKpiCards` is called within the `DOMContentLoaded` event listener, and the function is defined inside `labadmin.js`.
-
-
-When the "Reportes y Estadísticas" menu is clicked, a specific function is invoked to filter statistics, potentially displaying a distinct view from the KPI card interaction. This function updates a text element, but does not replace the entire KPI card grid. If a KPI card is clicked, a different function navigates to another panel. The function responsible for navigating to another panel when clicking on a KPI card is called.
-
-
-The code checks if a specific panel is displayed and then proceeds to synchronize the date range selector within that panel.  The date range is dynamically calculated using a separate function. It then updates the input fields for the date range with these computed dates.
-
-
-
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `_noAntesDelMin`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 4.058595125s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
+**Status:** Reset
+**Created:** 4 Oct 2026, 6:21 pm
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:21 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `LAESH_FECHA_MIN`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 4 Oct 2026, 6:21 pm
-
----
-
-## Agent Response
-
-### Thinking
-
-Initial focus is on `_inicializarKpiCards()` within `labadmin.js`. The function's invocation is directly linked to a conditional check on its existence, and it appears to be called only once. A key question is whether user interaction, such as clicks on a grid element, triggers any behavior tied to this function.
-
-
-User interaction with a card triggers the `_abrirDetalleKpi` function. The function's logic branches based on a date range.  If the date is "today," it redirects to a specific panel and conditionally applies a filter.
-
-Otherwise, it redirects to a different panel called 'panel-ordenes-anteriores'. The behavior of the `cambiarTabAdmin` function with this specific panel needs examination.
-
-
-The `cambiarTabAdmin` function hides all tab panels and then shows the panel specified by `panelId`.  Subsequently, an AJAX request is made to retrieve data for a table. The `target` of the AJAX call is confirmed to exist within the panel.  It updates the `outerHTML` of the table with the retrieved data.  Further investigation of related input elements within `_abrirDetalleKpi` is needed.
-
-
-Programmatically setting the value of a select element does *not* trigger a `change` event in JavaScript, which is important because the code relies on this event.  The HTMX call replaces the table's `outerHTML` based on the specified filter. The table in the HTMX response will render the filtered rows. If there are no rows matching the filter, then the empty table will be rendered. The state filter `estado_id` needs to be tracked.
-
-
-
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 2.644902683s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:21 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:22 pm
 
 ---
 
-## Agent Response
+### Local File Search
 
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `_inicializarKpiCardsMedico`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
+**Status:** Reset
+**Created:** 4 Oct 2026, 6:23 pm
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:23 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `medicos.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L529-554)</summary>
-
-**Path:** `Unknown file`
-
-```
-                        var card = e.target.closest('.kpi-card-md');
-                        if (!card) return;
-                        e.preventDefault();
-                        var estadoId = parseInt(card.getAttribute('data-kpi-estado') || '0', 10);
-                        _abrirDetalleKpiMedico(estadoId, false);
-                    }
-                });
-            }
-        }
-        window._inicializarKpiCardsMedico = _inicializarKpiCardsMedico;
-
-function inicializarReportesMedico() {
-            if (typeof _inicializarKpiCardsMedico === 'function') _inicializarKpiCardsMedico();
-            var select = document.getElementById('filtro-periodo-medico');
-            var rango  = document.getElementById('rango-fechas-medico');
-            var ini    = document.getElementById('fecha-inicio-medico');
-            var fin    = document.getElementById('fecha-fin-medico');
-            var btn    = document.getElementById('btn-aplicar-rango-medico');
-            if (!select || !rango || !ini || !fin) return;
-            actualizarTopesFechaMedico();
-            select.addEventListener('change', function() {
-                var esRango = select.value === 'fecha';
-                rango.classList.toggle('d-none', !esRango);
-                rango.style.display = esRango ? 'inline-flex' : 'none';
-                if (esRango) {
-                    var hoy = window.laeshHoyServidor();
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `inicializarReportesMedico`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:23 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `function cambiarTabMedico`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:23 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `medicos.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L979-1029)</summary>
-
-**Path:** `Unknown file`
-
-```
-            'panel-mi-perfil':         'Mi Perfil'
-        };
-        function cambiarTabMedico(panelId, el) {
-            document.querySelectorAll('.sidebar .nav-item').forEach(i => i.classList.remove('active'));
-            if (el) {
-                el.classList.add('active');
-            } else {
-                const navItem = document.querySelector(`.sidebar .nav-item[data-panel="${panelId}"]`);
-                if (navItem) navItem.classList.add('active');
-            }
-            document.querySelectorAll('.tab-panel').forEach(p => {
-                p.style.display = 'none';
-                p.classList.add('d-none');
-            });
-            const target = document.getElementById(panelId);
-            if (target) {
-                target.classList.remove('d-none');
-                target.style.display = 'block';
-            }
-            const bc = document.getElementById('header-bc-current');
-            if (bc && panelLabels[panelId]) bc.textContent = panelLabels[panelId];
-
-            if (panelId === 'panel-catalogo-medico')   refreshCatalog();
-            if (panelId === 'panel-reportes-medico')   cargarReportesMedico();
-
-            updateSidebarActionGroupVisibility();
-        }
-        window.cambiarTabMedico = cambiarTabMedico;
-
-        // Sincronización multi-pestaña delegada a ws-client.js
-
-        // ── Floating Search (SFS) — medicos ─────────────────────────────────────
-        // Toggle rail extraído a sidebar-rail.js (compartido con labadmin/gestion-web).
-        // Este bloque maneja solo la búsqueda flotante específica del Portal Médico.
-        (function() {
-            var floatEl  = document.getElementById('float-search-medico');
-            var sfsInput = document.getElementById('sfs-input-medico');
-            var sfsRes   = document.getElementById('sfs-results-medico');
-            var lupita   = document.getElementById('sidebar-search-btn');
-
-            function closeSFS() {
-                if (!floatEl) return;
-                floatEl.classList.remove('sfs-open');
-                if (sfsRes) { sfsRes.classList.remove('sfs-r-open'); sfsRes.innerHTML = ''; }
-                if (sfsInput) sfsInput.value = '';
-            }
-
-            // sidebar-rail.js emite este evento al expandir → cerrar SFS
-            document.addEventListener('laesh:sidebarExpand', closeSFS);
-
-            let sfsTimerMedico = null;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `function cargarReportesMedico`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 4 Oct 2026, 6:23 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `medicos.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L353-414)</summary>
-
-**Path:** `Unknown file`
-
-```
-        function cargarReportesMedico() {
-            var select = document.getElementById('filtro-periodo-medico');
-            if (!select) return;
-            actualizarTopesFechaMedico();
-            var ini = document.getElementById('fecha-inicio-medico');
-            var fin = document.getElementById('fecha-fin-medico');
-            var err = document.getElementById('md-stat-error');
-            var ETIQUETAS = { dia: 'Hoy', semana: 'Esta semana', mes: 'Este mes', anio: 'Este año', fecha: 'Rango' };
-            var largo = function(iso) { return iso ? iso.split('-').reverse().join('/') : ''; };
-            var corto = function(iso) { return iso ? iso.slice(8, 10) + '/' + iso.slice(5, 7) : ''; };
-            var p = new URLSearchParams({ rango: select.value });
-            if (select.value === 'fecha') {
-                if (!ini.value && !fin.value) return;
-                p.set('inicio', ini.value || fin.value);
-                p.set('fin', fin.value || ini.value);
-            }
-            var txt = function(id, v) { var el = document.getElementById(id); if (el) el.textContent = (v === undefined || v === null) ? '-' : v; };
-            var periodo = function(v) {
-                document.querySelectorAll('.md-stat-periodo').forEach(function(el) { el.textContent = v; });
-            };
-            var todos = function(v) { REPORTES_MD_IDS.forEach(function(id) { txt(id, v); }); periodo(v); txt('md-stat-caption', v); };
-
-            var mia = ++_reportesMedicoSeq;
-            todos('…');
-            if (err) err.classList.add('d-none');
-            fetch('/laesh/md/api/estadisticas?' + p.toString(), { credentials: 'same-origin' })
-                .then(function(r) { return r.json(); })
-                .then(function(d) {
-                    if (mia !== _reportesMedicoSeq) return; // llegó una respuesta más nueva
-                    if (!d || !d.success || !d.periodo) throw new Error('estadisticas');
-                    var pr = d.periodo, et = ETIQUETAS[pr.rango] || '';
-                    var fechasCortas = pr.desde === pr.hasta ? corto(pr.desde)
-                        : (pr.rango === 'anio' ? pr.desde.slice(0, 4) : corto(pr.desde) + '–' + corto(pr.hasta));
-                    var fechasLargas = pr.desde === pr.hasta ? 'del ' + largo(pr.desde) : 'del ' + largo(pr.desde) + ' al ' + largo(pr.hasta);
-                    periodo(pr.rango === 'fecha' ? largo(pr.desde) + (pr.desde === pr.hasta ? '' : ' – ' + largo(pr.hasta)) : et + ' · ' + fechasCortas);
-                    txt('md-stat-caption', 'Solicitudes emitidas ' + fechasLargas + (pr.rango === 'fecha' ? '' : ' (' + et + ')')
-                        + ', con su estado al día de hoy.');
-                    var pe = d.por_estado || {};
-                    txt('md-stat-emitidas', d.emitidas);
-                    txt('md-stat-entregados', d.entregados);
-                    txt('md-stat-pct-entregados', d.pct_entregados === null ? 'Sin solicitudes vigentes' : d.pct_entregados + '% de las no canceladas');
-                    txt('md-stat-parciales', d.parciales_en_curso);
-                    txt('md-stat-canceladas', d.canceladas);
-                    var m = d.motivo;
-                    txt('md-stat-motivo', !m ? (d.canceladas ? 'Sin motivo registrado' : 'Sin cancelaciones')
-                        : m.tipo === 'frecuente' ? 'Motivo más frecuente: ' + m.motivo + ' (' + m.veces + ')'
-                        : (d.canceladas > 1 ? 'Motivos variados · más reciente: ' : 'Motivo: ') + m.motivo);
-                    txt('md-est-1', pe.remitidas);
-                    txt('md-est-2', pe.atencion);
-                    txt('md-est-3', pe.listos);
-                    txt('md-est-4', pe.cerradas);
-                    txt('md-est-5', pe.canceladas);
-                })
-                .catch(function() {
-                    if (mia !== _reportesMedicoSeq) return;
-                    todos('-');
-                    if (!err) return;
-                    err.textContent = 'No fue posible cargar las estadísticas. Intenta de nuevo.';
-                    err.classList.remove('d-none');
-                });
-        }
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-When the condition `esHoy` is met within the `medicos.js` file, the system attempts to navigate to the "panel-nueva-orden" tab, specifically within the "Nueva Orden" section. This is achieved by invoking a function `window.cambiarTabMedico` if it exists.
-
-
-The code in `medicos.js` shows the system navigates to specific panels based on a condition, but critically, no filtering based on `estadoId` or `soloParciales` occurs. Analysis of the PHP endpoint and the business logic confirms this lack of filtering, regardless of whether it's the "today" view or historical views. The Médico view, therefore, never utilizes any KPI-driven filtering functionality. Now exploring the reception portal, I'll examine how it handles similar logic.
-
-
-In the reception portal, the code checks for the existence of a tab-switching function and calls it to navigate to either the main orders panel or the historical orders panel. Conditional filtering based on `estadoId` and `soloParciales` is applied when navigating to the main panel. The historical panel synchronizes date selectors for a specific period, constructing the appropriate request parameters.
-
-
-When drilling down from a KPI, if it's "today," the historical table doesn't reload after switching tabs because a conditional check is skipped. The date range calculation for historical periods sets the end date to "today," but the historical date input's maximum value is hardcoded as yesterday. This results in an incorrect date range if someone wants to see all orders from "This Month," "This Week," or even "Today" from a historical view.
-
-
-The code excludes today's orders from the historical view due to a date comparison.  The AJAX call to load the historical orders panel includes date parameters. However, the PHP code that generates the historical orders panel, does receive `fecha_fin` but doesn't actually limit the displayed orders to a date range that ends the day before the current one, so it needs to be updated.
-
-
-The historical orders panel AJAX request includes parameters for search query, selected period, start date, and end date through the `hx-include` attribute. The PHP code generating the historical table header also includes these parameters. The table itself is refreshed via `hx-trigger`. It appears the table is correctly including date parameters for historical queries.
-
-
-
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 5.303271910s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:24 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `PIN`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:24 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:24 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:24 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:25 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `db.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
 ### Execution Error
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:25 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `list_dir`
-**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/commons`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>Directory: `commons` (18 items)</summary>
-
-**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/commons`
-
-| Name | Type | Size |
-|------|------|------|
-| `BusquedaOrdenes.php` | File | 10711 bytes |
-| `Cache.php` | File | 11418 bytes |
-| `CatalogBuilder.php` | File | 12366 bytes |
-| `ConfigBuilder.php` | File | 1931 bytes |
-| `CsrfGuard.php` | File | 6916 bytes |
-| `DB.php` | File | 5264 bytes |
-| `JwtManager.php` | File | 18493 bytes |
-| `Logger.php` | File | 10011 bytes |
-| `PortalMap.php` | File | 1116 bytes |
-| `RbacManager.php` | File | 6168 bytes |
-| `Response.php` | File | 4522 bytes |
-| `autoload.php` | File | 1504 bytes |
-| `commons.php` | File | 5868 bytes |
-| `config.php` | File | 3957 bytes |
-| `notifier.php` | File | 27300 bytes |
-| `seed_first_users.php` | File | 14660 bytes |
-| `swoole_server.php` | File | 28687 bytes |
-| `ws_audit_receiver.php` | File | 3761 bytes |
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `config.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-<?php
-// config.php — Configuración del ecosistema LAESH (Bloc Digital)
-//
-// Credenciales leídas desde variables de entorno (mínimo privilegio):
-//   LAESH_DB_USER / LAESH_DB_PASS / LAESH_DB_HOST / LAESH_DB_PORT / LAESH_DB_NAME
-//
-// Fallbacks por ambiente (env var siempre tiene prioridad):
-//   Docker local  (/.dockerenv existe) → host=db,        port=3306
-//   KVM2 Hostinger / OCI / nativo      → host=127.0.0.1, port=3306
-//   (En todos los entornos nativo las env vars se inyectan vía PHP-FPM pool
-//    y cache_renew.cron — el fallback no-Docker solo aplica si la inyección falla)
-// Nota: ya NO se usa root. Usuario dedicado laesh_app con privilegios mínimos en laesh_db.
-
-$inDocker = file_exists('/.dockerenv');
-
-// ── JWT Secret: falla explícita en producción si no se inyectó vía entorno ──
-// Hallazgo 2026-09-18: el secreto vivía hardcodeado como fallback silencioso,
-// visible en el código fuente — invalidaba la garantía de firma HMAC para los
-// 3 portales (md/rc/admrc). Producción NUNCA debe operar con un secreto conocido.
-$appEnv = getenv('APP_ENV') ?: 'development';
-$jwtSecret = getenv('LAESH_JWT_SECRET') ?: '';
-if ($jwtSecret === '') {
-    if ($appEnv === 'production') {
-        throw new \RuntimeException(
-            'LAESH_JWT_SECRET no está definida en el entorno. ' .
-            'Producción no puede operar con un secreto JWT hardcodeado/conocido. ' .
-            'Verificar env[LAESH_JWT_SECRET] en php-fpm-laesh.conf / EnvironmentFile de swoole-laesh.service.'
-        );
-    }
-    // Solo desarrollo local: valor fijo y claramente marcado como no apto para producción.
-    $jwtSecret = 'DEV_ONLY_INSECURE_SECRET_never_use_in_prod_2026';
-}
-
-return [
-    'db' => [
-        'host'    => getenv('LAESH_DB_HOST') ?: ($inDocker ? 'db'   : '127.0.0.1'),
-        'port'    => (int)(getenv('LAESH_DB_PORT') ?: 3306),   // 3306 en todos los entornos nativo (KVM2/OCI)
-        'user'    => getenv('LAESH_DB_USER') ?: 'laesh_app',
-        'pass'    => getenv('LAESH_DB_PASS') ?: 'laesh_2026_dev',
-        'name'    => getenv('LAESH_DB_NAME') ?: 'laesh_db',
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:26 pm
-
----
-
-## Agent Response
-
-### Thinking
-
-Navigation and reactive filtering within KPI reports are reported as non-functional for both medical and reception roles. The root cause likely involves conflicts in styles or JavaScript within the specified files related to the medical portal.
-
-
-The system is intended to filter order tables based on the selected KPI card, but the necessary parameters (`estado_id`, `solo_parciales`) are not being passed in the HTMX request. The current implementation navigates to the correct panel but fails to apply the expected filters to the table in both "Hoy" and historical views. The backend endpoints (`/tabla-ordenes`, `/tabla-ordenes-anteriores`) need to be updated to accept and process these filter parameters.
-
-
-The reception portal's KPI card interactions are not correctly filtering the order table. The conditional logic prevents table reloading when the "Total Solicitudes Emitidas" card (estadoId=0) is clicked, and `solo_parciales` is completely ignored in the table data retrieval. The existing backend routines and pagination routines lack support for these crucial parameters. This leads to unfiltered data, regardless of the KPI card selected.
-
-
-Date validation is failing on the "Solicitudes Anteriores" panel because the maximum allowed date in the date input field is yesterday, while the script sets it to today's date, causing the input to be rejected. The script logic for determining the date range needs to be adjusted to ensure the end date is capped at yesterday when targeting historical order tables. The script might not be reading the period filter directly from the HTML element; ensure the current period setting from the form is used.
-
-Pagination links for historical order tables correctly include date parameters, implying that the backend logic should handle date filtering. Therefore, the focus should be on ensuring correct date handling and filter parameter passing from the frontend.
-
-
-Pagination link generation is missing the critical filter parameters, requiring modification of the generation logic to include `estado_id` and `solo_parciales`. The table's search and filter state should persist across navigation by checking for hidden inputs or active filters. A visual indicator (badge/chip) is needed to show and clear active filters.
-
-Verification of click delegation in the KPI card grid is necessary. Confirming `_inicializarKpiCards()` is called when the reports panel activates and preventing duplicate listeners using a wiring flag is important.
-
-
-The issue appears to be related to the tooltip display on the left vertical menu items. The user is reporting that two tooltips appear when hovering over menu items in the reception portal. The HTML structure includes a `data-tooltip` attribute, and the CSS defines the style for the tooltip's appearance on hover. The presence of two tooltips suggests either a duplication of the tooltip element or a conflict between different tooltip implementations. Investigation of the HTML and CSS is needed to determine the source of the duplicate tooltips.
-
-
-The goal is to determine the cause of duplicate tooltips on the left vertical menu. Initial hypothesis: the issue is related to the hover state of the menu item. The `portal.css` and `labadmin.php` files require examination to identify if there are conflicting styles or tooltip implementations. Specifically, look for rules targeting `.nav-item:hover` or related elements. Consider whether one tooltip appears on the item and another on the icon. The next step is to examine the code for conflicting tooltip implementations.
-
-
-
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `svg::after`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 6.487787834s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:26 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `svg:hover`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:26 pm
-
----
-
-## Agent Response
-
-### Thinking
-
-The user describes a desktop/laptop portal with two tooltips appearing, intending only one to remain: the one triggered by hovering over the left-side menu icons. This implies a potential UI element conflict or a redundant tooltip implementation. Investigating the code responsible for tooltip rendering on this specific portal section will be the next step. I'll need to identify the code responsible and understand how both tooltips are generated to find the conflict.
-
-
-
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `tooltip`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.078700216s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:26 pm
-
----
-
-## Agent Response
-
-### Thinking
-
-The request specifies that on the "portal recepción" for desktop/laptop, there are two tooltips, but the desired behavior is only the tooltip that appears on mouse hover over the items/icons in the vertical left menu. The user seems to be describing a specific interface problem. The objective is to determine what mechanism controls the visibility of the undesired tooltip and then disable it, leaving only the hover-over tooltip.
-
-
-Initial hypothesis: the unwanted tooltip is likely due to the current styling rule that triggers on any hover of the menu item.  The menu item structure contains the icon and text within a single container; thus, the hover state applies to the entire row.  Consider the existing `::after` pseudo-element and how to refine its trigger to only the icon. The expanded sidebar's visible text suggests the tooltip shouldn't appear if the item text is shown.
-
-
-A CSS solution using `:has()` to target the SVG hover state directly appears promising, focusing the tooltip on icon hover. The rail mode (collapsed sidebar) presents a use case where the whole item is effectively the icon; `:has()` should still function correctly.  Expanded sidebar mode confirms the desired icon-specific tooltip behavior, preventing interference with text. The solution requires verifying modern browser support for `:has()` and a fallback strategy.
-
-
-Investigation reveals the presence of `data-tooltip` attributes within specific menu items; no `title` attributes are present on `.nav-item` elements. It appears the observed dual tooltips result from the combined effects of the CSS `:hover` state on the menu item row, triggering the existing tooltip mechanism, and potential interference between text and the tooltip in the expanded sidebar. The primary CSS rule responsible for the tooltip is `[data-tooltip]::after`.
-
-Refining the CSS selector to target only icon hover seems necessary; the goal is to show the tooltip *only* on icon hover. The target becomes `.nav-item[data-tooltip]:has(> svg:hover)::after`. Consideration must be given to the fact that SVG elements may be replaced and thus, may not directly support `::after`.
-
-
-The `.nav-item` is a block/flex `div`, so the `::after` pseudo-element will reliably function.  The `:has(> svg:hover)` selector correctly targets hover on the SVG icon itself, even if hovering over internal SVG elements. Consider applying `pointer-events: auto` to the SVG.
-
-Verification involves checking if this pattern exists on the `medicos.php` page and ensuring the fix applies to the correct sections of the application, as the user mentioned the "portal recepcion" specifically. The `:has()` selector's browser support is verified as being widely available.
-
-To guarantee functionality, a more robust rule within `portal.css` targets `.nav-item[data-tooltip]:has(> svg:hover)::after`, ensuring the tooltip displays *only* upon icon hover. An additional rule could address expanded sidebar states.
-
-
-Focus shifts to investigating the KPI navigation and filtering issue. The goal is to deeply trace the KPI interaction flow within the "recepción" portal, starting with the `_inicializarKpiCards()` function in `labadmin.js`.
-
-The `_inicializarKpiCards()` function sets up click and keydown event listeners on the KPI card grid to handle user interaction triggering `_abrirDetalleKpi()`. Next step: review `_abrirDetalleKpi()` to understand the data passed and determine how the data affects the data.
-
-
-The code determines whether to show today's orders. If "Hoy" is selected, it checks for `estadoId` and `soloParciales` to filter the order table, otherwise, reloads the table with no filtering. However, the existing logic in `rc/index.php` does not allow filtering by partials in the `obtenerOrdenesRecientes` function, which needs to be modified.
-
-The `$soloParciales` parameter needs to be added to both `obtenerOrdenesRecientes` and `contarOrdenesRecientes` in the class `RC\Negocio\Ordenes` to enable filtering by partial orders from the "Hoy" KPI. The SQL filtering method for partials is known and can be reused.
-
-
-When the "Hoy" KPI is not selected, the system defaults to "Solicitudes Anteriores". The `_resolverFechasParaDrillDown()` function determines the date range. If the selected period is "ayer," the `fechaFin` is set to "ayer". For other periods like "semana," "mes," or "anio," the function calculates the start date (`fechaInicio`) and sets `fechaFin` to "ayer." The `fechaFin` being "ayer" will affect the data queried from the database.
-
-
-The code synchronizes date inputs in the "Solicitudes Anteriores" panel. The `_resolverFechasParaDrillDown()` function calculates date ranges, setting `fechaFin` to "ayer" for the "ayer" period. The system also saves the active state and "parciales" filter in hidden input fields. Specifically, `inpFin.value = fechaFin` is valid since `fechaFin` is "ayer" and doesn't violate the date constraints. This is compatible with `DATE(hora_captura) < CURDATE()` in the order search logic.
-
-
-The "Solicitudes Anteriores" table filters are preserved during sorting and pagination due to the inclusion of filter parameters in the AJAX request and the paginator's logic. A badge will be added to indicate active filters, allowing clearing and reloading the table.
-
-The "Hoy" KPI in "Solicitudes Hoy" is filtered using the `estadoId` and `soloParciales` parameters and its logic must be replicated in `md/negocio/Ordenes.php`. The functions `obtenerOrdenesPropias` and `contarOrdenesPropias` require modification to accept and use the `$estadoId` and `$soloParciales` parameters.
-
-
-The `$estadoId` and `$soloParciales` parameters are added to `obtenerOrdenesPropias` and `contarOrdenesPropias` functions, enabling filtering of orders by status and partial delivery status, respectively. These parameters are also integrated into `obtenerOrdenesAnterioresMedico` and `contarOrdenesAnterioresMedico`. The filter values from the URL are extracted and passed to the corresponding functions in `md/index.php`. The paginator links are updated to include the filtering parameters, and new anchor elements are added.
-
-
-The code determines the active tab based on a date period selection. If "Hoy" is selected, the system filters the order table using `estadoId` and `soloParciales` through an AJAX request. Otherwise, it proceeds to the "Solicitudes Anteriores" logic.
-
-The "Solicitudes Anteriores" panel uses date range calculations and filters, preserving active filters during sorting and pagination via URL parameters. A badge indicates active filters for clarity.
-
-The existing "Hoy" KPI filter logic must be replicated in `md/negocio/Ordenes.php`, and these parameters are integrated into the AJAX requests for data retrieval.
-
-
-Date filters and states are being saved in hidden input fields to preserve them during searches and pagination. An AJAX request is then triggered to load the historical order table with the selected date range, status, and partial order filter. The parameters for the AJAX request are constructed using `URLSearchParams`.
-
-
-
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `kpi-card`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 12.622930477s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:27 pm
 
 ---
 
-## Agent Response
-
-### Thinking
-
-The observed lack of `kpi-card` styles in the specified CSS file necessitates adding hover and active cursor styles there. This change will improve user interaction feedback. Applying cursor, user-select, transition, transform, and box-shadow properties will make the card visually responsive.
-
-
-Applying `pointer-events: none;` to the children of the KPI card ensures that clicks always target the card itself, enabling reliable click delegation. Reviewing the JavaScript initialization reveals that the card click listener is attached to both a grid element and the individual card elements, potentially leading to redundant event handling; ensuring `_kpiWired` check avoids duplicate listeners. The `_inicializarKpiCards` function also appears to be called multiple times which can also be a point to optimize.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.513671324s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L239-299)</summary>
-
-**Path:** `Unknown file`
-
-```
-    $nextDirEstado   = ($sort === 'estado' && strtolower($dir) === 'asc') ? 'desc' : 'asc';
-    $iconEstado      = ($sort === 'estado') ? (strtolower($dir) === 'asc' ? ' ▲' : ' ▼') : '';
-
-    $thBase = 'position: sticky; top: 0; background: #e0f2fe; color: #003e8c; z-index: 10; text-transform: none; letter-spacing: normal; font-size: 0.85rem; font-weight: 700; border-bottom: 1px solid #cbd5e1;';
-
-    $thNum = $withRowNum ? ('<th style="' . $thBase . ' white-space: normal; text-align: center;">#</th>') : '';
-
-    return '<tr style="font-size: 0.88rem;">'
-         . $thNum
-         . '<th style="' . $thBase . ' cursor: pointer; white-space: nowrap;" hx-get="' . $endpoint . '?sort=folio&dir=' . $nextDirFolio . $qParam . '" hx-target="' . $target . '" hx-swap="outerHTML" hx-include="' . $inputSearchId . '">Folio <span class="sort-icon">' . $iconFolio . '</span></th>'
-         . '<th style="' . $thBase . ' cursor: pointer; white-space: nowrap;" title="Folio extraído del PDF del equipo de laboratorio" hx-get="' . $endpoint . '?sort=pxlab&dir=' . $nextDirPxLab . $qParam . '" hx-target="' . $target . '" hx-swap="outerHTML" hx-include="' . $inputSearchId . '">PxLab <span class="sort-icon">' . $iconPxLab . '</span></th>'
-         . '<th style="' . $thBase . ' cursor: pointer; white-space: normal;" hx-get="' . $endpoint . '?sort=paciente&dir=' . $nextDirPaciente . $qParam . '" hx-target="' . $target . '" hx-swap="outerHTML" hx-include="' . $inputSearchId . '">Paciente <span class="sort-icon">' . $iconPaciente . '</span></th>'
-         . '<th style="' . $thBase . ' cursor: pointer; white-space: normal;" hx-get="' . $endpoint . '?sort=medico&dir=' . $nextDirMedico . $qParam . '" hx-target="' . $target . '" hx-swap="outerHTML" hx-include="' . $inputSearchId . '">Médico Remitente <span class="sort-icon">' . $iconMedico . '</span></th>'
-         . '<th class="th-diagnostico-rc" style="' . $thBase . ' white-space: normal;">Diagnóstico</th>'
-         . '<th style="' . $thBase . ' cursor: pointer; white-space: normal;" hx-get="' . $endpoint . '?sort=fecha&dir=' . $nextDirFecha . $qParam . '" hx-target="' . $target . '" hx-swap="outerHTML" hx-include="' . $inputSearchId . '">Fecha Solicitud <span class="sort-icon">' . $iconFecha . '</span></th>'
-         . '<th style="' . $thBase . ' cursor: pointer; white-space: normal;" hx-get="' . $endpoint . '?sort=fecha_resultado&dir=' . $nextDirFechaRes . $qParam . '" hx-target="' . $target . '" hx-swap="outerHTML" hx-include="' . $inputSearchId . '">Fecha Resultado <span class="sort-icon">' . $iconFechaRes . '</span></th>'
-         . '<th style="' . $thBase . ' cursor: pointer; white-space: normal;" hx-get="' . $endpoint . '?sort=estado&dir=' . $nextDirEstado . $qParam . '" hx-target="' . $target . '" hx-swap="outerHTML" hx-include="' . $inputSearchId . '">Estado <span class="sort-icon">' . $iconEstado . '</span></th>'
-         . '<th class="th-accion-rc" style="' . $thBase . ' white-space: nowrap;">Acción / PDF</th>'
-         . '<th class="th-observaciones-rc" style="' . $thBase . ' white-space: normal;">Observaciones</th>'
-         . '</tr>';
-}
-
-/**
- * Helper SSOT: Renderiza el <tbody> de la grilla de Órdenes
- */
-function rcRenderOrdenesTablaBody(array $ordenes, string $csrfToken, string $sufijoId = '', bool $withRowNum = false, int $offset = 0, string $qBusqueda = ''): string {
-    $html = '<tbody>';
-    if (!empty($ordenes)) {
-        $rowIdx = $offset;
-        foreach ($ordenes as $ord) {
-            $rowIdx++;
-            $tdNum = $withRowNum ? ('<td class="fw-600" style="text-align: center; color: var(--text-muted);">' . $rowIdx . '</td>') : '';
-            $eId = (int)($ord['estado_id'] ?? 1);
-            $badgeClass = 'badge-remitido';
-            if ($eId === 2) $badgeClass = 'badge-atencion';
-            elseif ($eId === 3) $badgeClass = 'badge-listos';
-            elseif ($eId === 4) $badgeClass = 'badge-cerrada';
-            elseif ($eId === 5) $badgeClass = 'badge-cancelada';
-
-            $ordId = (int)($ord['id'] ?? 0);
-            $folio = htmlspecialchars($ord['folio'] ?? '', ENT_QUOTES, 'UTF-8');
-            // P-LAESH-FOLIO-EXTRAIDO-01 (2026-09-24): folio del equipo/software de
-            // laboratorio (PxLab), extraído del PDF más reciente subido — a la
-            // derecha del icono de documento, solo cuando existe.
-            $folioExtraidoHtml = '';
-            if (!empty($ord['folio_extraido'])) {
-                $folioExtraidoHtml = ' <span class="folio-extraido-chip" title="Folio del equipo/software de laboratorio">'
-                                    . htmlspecialchars($ord['folio_extraido'], ENT_QUOTES, 'UTF-8') . '</span>';
-            }
-            $paciente = htmlspecialchars($ord['paciente_nombre'] ?? '', ENT_QUOTES, 'UTF-8');
-            $medicoStr = htmlspecialchars($ord['medico_nombre'] ?? 'Médico General', ENT_QUOTES, 'UTF-8');
-            if (!empty($ord['medico_especialidad']) && $ord['medico_especialidad'] !== 'Medicina General') {
-                $medicoStr .= ' <span style="color:#64748b; font-size:0.82rem;">(' . htmlspecialchars($ord['medico_especialidad'], ENT_QUOTES, 'UTF-8') . ')</span>';
-            }
-
-            // Corrección 2026-09-22: Diagnóstico ahora tiene su propia columna —
-            // Observaciones conserva solo el motivo de cancelación y el enlace
-            // al PDF de resultado ("otros estudios" ya no se muestra aquí).
-            $diagRaw = trim($ord['diagnostico'] ?? '');
-            if ($diagRaw === 'Estudios de Laboratorio' || $diagRaw === '') {
-                $diagDescr = '<span style="color:#94a3b8; font-style:italic;">—</span>';
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L379-429)</summary>
-
-**Path:** `Unknown file`
-
-```
-                ? '<td class="td-pxlab" style="white-space:nowrap; font-size:0.82rem; color:#0369a1; font-weight:600;">' . htmlspecialchars($ord['folio_extraido'], ENT_QUOTES, 'UTF-8') . '</td>'
-                : '<td class="td-pxlab" style="color:#94a3b8; font-size:0.82rem;">—</td>';
-            $html .= '<tr id="orden-row' . $sufijoId . '-' . $ordId . '" data-orden-id="' . $ordId . '" tabindex="-1">'
-                   . $tdNum
-                   . '<td class="td-folio-hist"><a href="#" class="lnk-folio lnk-folio-id" data-action="ver-solicitud" data-id="' . $folio . '" data-diagnostico="' . htmlspecialchars($ord['diagnostico'] ?? '', ENT_QUOTES, 'UTF-8') . '" data-estudios="' . htmlspecialchars($ord['estudios'] ?? '[]', ENT_QUOTES, 'UTF-8') . '" data-celular="' . htmlspecialchars($ord['telefono'] ?? '', ENT_QUOTES, 'UTF-8') . '" data-edad="' . htmlspecialchars((string)($ord['edad_al_emitir'] ?? ''), ENT_QUOTES, 'UTF-8') . '" data-sexo="' . htmlspecialchars($ord['paciente_sexo'] ?? '', ENT_QUOTES, 'UTF-8') . '">' . $folio . ' <svg class="icon-folio-link" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></a></td>'
-                   . $pxLabTd
-                   . '<td>' . $paciente . '</td>'
-                   . '<td class="td-medico">' . $medicoStr . '</td>'
-                   . '<td class="td-diagnostico-rc">' . $diagDescr . '</td>'
-                   . '<td>' . $fEmis . '</td>'
-                   . '<td class="td-fecha-resultado">' . $fRes . '</td>'
-                   . '<td class="td-estado-rc"><span class="badge ' . $badgeClass . '">' . $estadoHtml . '</span></td>'
-                   . '<td class="td-accion-rc">' . $btnAccion . '</td>'
-                   . '<td class="td-observaciones-rc">' . $observacionesDescr . '</td>'
-                   . '</tr>';
-        }
-    } else {
-        // 2026-10-01: si el término parece folio (número, con o sin #) y no hay resultados en
-        // el período visible, lo más probable es que la orden exista pero esté fuera de rango
-        // (el período SIEMPRE acota, incluso con folio exacto — ver BusquedaOrdenes::construirWhereBusqueda).
-        // Se agrega el atajo explícito a la lupita, que sí busca sin límite de fecha.
-        $esFolioBusqueda = (bool)preg_match('/^#?\d+$/', trim($qBusqueda));
-        if ($sufijoId === '-ant' && $esFolioBusqueda) {
-            $msgVacio = 'No se encontró ese folio dentro del período seleccionado. Amplía el período, o usa la búsqueda rápida (lupita, arriba) que busca en todo el historial sin límite de fecha.';
-        } elseif ($sufijoId === '-ant') {
-            $msgVacio = 'No se encontraron solicitudes en el período seleccionado. Amplía el período para buscar en fechas anteriores.';
-        } else {
-            $msgVacio = 'No se encontraron solicitudes que coincidan con la búsqueda.';
-        }
-        $html .= '<tr><td colspan="' . ($withRowNum ? 11 : 10) . '" class="text-center txt-muted pa-4">' . $msgVacio . '</td></tr>';
-    }
-    $html .= '</tbody>';
-    return $html;
-}
-
-/**
- * Helper SSOT: Renderiza el <thead> de la grilla de Auditoría (Reportes y Estadísticas → 2. Auditoría).
- * BUG-AUDITORIA-AGRUPADO-01 (2026-09-28): la grilla agrupa por folio (ver
- * obtenerHistorialAuditoria) — los dos encabezados ordenables controlan cada
- * dimensión de esa agrupación, no un orden plano: "Folio" voltea qué grupo
- * (solicitud) aparece primero según su actividad más reciente; "Fecha/Hora"
- * voltea el orden cronológico DENTRO de cada grupo.
- */
-function rcRenderAuditoriaTablaHeader(string $sort = 'folio', string $dir = 'desc'): string {
-    $nextDirFolio   = ($sort === 'folio' && strtolower($dir) === 'desc') ? 'asc' : 'desc';
-    $iconFolio      = ($sort === 'folio') ? (strtolower($dir) === 'asc' ? ' ▲' : ' ▼') : '';
-
-    $nextDirPxLab   = ($sort === 'pxlab' && strtolower($dir) === 'desc') ? 'asc' : 'desc';
-    $iconPxLab      = ($sort === 'pxlab') ? (strtolower($dir) === 'asc' ? ' ▲' : ' ▼') : '';
-
-    $nextDirPaciente = ($sort === 'paciente' && strtolower($dir) === 'desc') ? 'asc' : 'desc';
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-The click action triggers a specific handler based on the `data-kpi-estado` attribute of the selected card in the Reception view. Observed seven distinct card types, each corresponding to a different state of the request, potentially affecting the subsequent data retrieval and display. Considering the potential impact of `data-kpi-parciales="1"` in the context of `data-kpi-estado="0"`, this might signify an additional, specific conditional behavior related to partial PDFs.
-
-
-Observed conditional behavior based on the selected time period ("Hoy" or not) and user role (Reception or Doctor). "Hoy" triggers tab navigation and an AJAX filter call with `estado_id` and `solo_parciales` parameters to retrieve data. Other periods lead to a different "Solicitudes An" tab, and I'll need to figure out what happens there. The "solo_parciales" parameter's usage is consistent.
-
-
-Determining the tab to switch to and constructing the date range filter are key to accessing past orders, with role-specific tab selection. I will need to resolve date variables based on the user-selected period. The UI's date range inputs must be populated, and a filter applied to the relevant table.
-
-
-The frontend logic to filter the "Solicitudes Anteriores" table requires storing filter parameters and updating the table content with AJAX. Successfully implemented updating hidden inputs for pagination/search and adding a filter chip. The "Quitar filtro" button resets the filter.
-
-Backend changes necessitate modifications to the `obtenerOrdenesRecientes` and `contarOrdenesRecientes` methods. The conditional WHERE clause must filter for partial results based on an observation string in the `historial_estados_orden` table, ensuring proper filtering.
-
-
-Checked that the functions already support parameters for state and partial orders. The controller now reads the `solo_parciales` GET parameter, passing it to the relevant data retrieval methods and constructing proper paginator links. Active filter indicators are rendered based on state or partial order filtering. Updated the data access object methods to accept and apply the filters for state and partial orders.
-
-
-
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `Flight::route('GET /tabla-ordenes'`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 4.178256116s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:27 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L394-439)</summary>
-
-**Path:** `Unknown file`
-
-```
-// ── GET /tabla-ordenes — Partial HTMX de Órdenes Hoy (orden/búsqueda/paginación) ─────
-Flight::route('GET /tabla-ordenes', function () {
-    header('Content-Type: text/html; charset=utf-8');
-    $userId = (int)Flight::auth()->getUserId();
-    $csrfToken = $_SESSION['csrf_token'] ?? '';
-
-    $q       = trim($_GET['q'] ?? '');
-    $sort    = trim($_GET['sort'] ?? 'fecha');
-    $dir     = trim($_GET['dir'] ?? 'desc');
-    $page    = max(1, (int)($_GET['page'] ?? 1));
-    $perPage = max(5, min(100, (int)($_GET['per_page'] ?? 25)));
-    $offset  = ($page - 1) * $perPage;
-
-    $ordenesPropias = \MD\Negocio\Ordenes::obtenerOrdenesPropias($userId, $perPage, $offset, $q, $sort, $dir);
-    $totalReg        = \MD\Negocio\Ordenes::contarOrdenesPropias($userId, $q);
-    $totalPages      = max(1, (int)ceil($totalReg / $perPage));
-
-    echo '<table class="table" id="tabla-medico" hx-get="/laesh/md/tabla-ordenes" hx-target="#tabla-medico" hx-swap="outerHTML" hx-sync="this:replace" hx-trigger="refresh, ordenCreada from:body, ordenActualizada from:body" style="margin-bottom: 0; width: 100%; min-width: ' . mdOrdenesTablaMinWidth() . 'px; table-layout: fixed; border-collapse: collapse;">'
-       . mdRenderOrdenesColgroup()
-       . '<thead>'
-       . mdRenderOrdenesTablaHeader($sort, $dir, $q, '/laesh/md/tabla-ordenes', '#tabla-medico', '#input-buscar-orden-hoy-md')
-       . '</thead>'
-       . mdRenderOrdenesTablaBody($ordenesPropias, $csrfToken, '')
-       . '</table>';
-
-    $qParam = !empty($q) ? '&q=' . urlencode($q) : '';
-    echo '<div id="ordenes-hoy-md-pagination-wrap" hx-swap-oob="outerHTML" style="display: flex; align-items: center; gap: 0.5rem;">'
-       . '<span id="ordenes-hoy-md-total-records" style="font-size: 0.88rem; color: var(--text-muted); font-weight: 600;">Total: ' . $totalReg . '</span>'
-       . '<span style="color: #cbd5e1; display: inline;">|</span>'
-       . '<div style="display: flex; gap: 0.25rem; align-items: center;">';
-    if ($page > 1) {
-        $prevPage = $page - 1;
-        echo '<button type="button" class="btn btn-secondary btn-sm" style="padding: 2px 8px; font-size: 0.8rem;" hx-get="/laesh/md/tabla-ordenes?page=' . $prevPage . $qParam . '&sort=' . $sort . '&dir=' . $dir . '&per_page=' . $perPage . '" hx-target="#tabla-medico" hx-swap="outerHTML" hx-include="#input-buscar-orden-hoy-md">‹ <span class="pag-label-text">Ant.</span></button>';
-    } else {
-        echo '<button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;">‹ <span class="pag-label-text">Ant.</span></button>';
-    }
-    echo '<span style="font-size:0.82rem; font-weight:600; color:var(--text-muted); padding: 0 4px;">' . $page . ' / ' . $totalPages . '</span>';
-    if ($page < $totalPages) {
-        $nextPage = $page + 1;
-        echo '<button type="button" class="btn btn-secondary btn-sm" style="padding: 2px 8px; font-size: 0.8rem;" hx-get="/laesh/md/tabla-ordenes?page=' . $nextPage . $qParam . '&sort=' . $sort . '&dir=' . $dir . '&per_page=' . $perPage . '" hx-target="#tabla-medico" hx-swap="outerHTML" hx-include="#input-buscar-orden-hoy-md"><span class="pag-label-text">Sig.</span> ›</button>';
-    } else {
-        echo '<button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;"><span class="pag-label-text">Sig.</span> ›</button>';
-    }
-    echo '</div></div>';
-});
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L269-339)</summary>
-
-**Path:** `Unknown file`
-
-```
-                $motivoRaw = !empty($ord['motivo_cancelacion']) ? trim($ord['motivo_cancelacion']) : 'Solicitud cancelada';
-                $origen = 'Laesh';
-                $motivoLimpio = $motivoRaw;
-
-                if (preg_match('/^(Médico|Medico):\s*(.*)$/iu', $motivoRaw, $mMatches)) {
-                    $origen = 'Médico';
-                    $motivoLimpio = trim($mMatches[2]);
-                } elseif (preg_match('/^(Laesh):\s*(.*)$/iu', $motivoRaw, $mMatches)) {
-                    $origen = 'Laesh';
-                    $motivoLimpio = trim($mMatches[2]);
-                }
-
-                $motivoTexto = ($motivoLimpio !== '') ? $motivoLimpio : 'Sin motivo especificado';
-                $motivoHtml = '<span style="color:#991b1b; font-weight:700;">Cancelación (' . htmlspecialchars($origen, ENT_QUOTES, 'UTF-8') . '):</span> '
-                            . htmlspecialchars($motivoTexto, ENT_QUOTES, 'UTF-8');
-                $observacionesDescr = '<div class="motivo-cancelacion-box" style="color:#b91c1c; font-size:0.85rem; font-weight:600; line-height:1.35;">'
-                                    . $motivoHtml
-                                    . '</div>';
-            } else {
-                // Corrección 2026-09-22: "otros estudios" ya no se muestra en
-                // Observaciones (esa columna es solo para motivo de cancelación).
-                if ($eId === 2 && !empty($ord['parciales_fechas'])) {
-                    // 2026-09-24: antes se mostraba con solo estado_id=2, sin
-                    // importar si ya se había subido algún parcial — el médico
-                    // veía "resultados parciales incrementales" desde el instante
-                    // en que Recepción recibía al paciente, antes de que existiera
-                    // ningún parcial real. Ahora exige al menos 1 fila en
-                    // resultados_pdf (mismo condicional que ya usan los chips).
-                    $observacionesDescr = '<span style="color:#64748b;">Solicitud con resultados parciales incrementales.</span>';
-                } elseif ($eId !== 2 && !empty($ord['parciales_fechas'])) {
-                    // Tras "Completado" (o Cerrada) los chips de la columna Estado
-                    // desaparecen — se conserva la traza de las entregas parciales
-                    // como texto plano (sin link al PDF) aquí en Observaciones.
-                    $trazaHtml = '';
-                    foreach (explode('|', $ord['parciales_fechas']) as $idxTraza => $fParcialTraza) {
-                        $fFmtTraza = htmlspecialchars(date('d/m H:i', strtotime($fParcialTraza)), ENT_QUOTES, 'UTF-8');
-                        $trazaHtml .= '<div class="traza-parcial-item" style="color:#7c3aed; font-size:0.82rem; font-weight:600;">▪ Parcial #' . ($idxTraza + 1) . ' · ' . $fFmtTraza . '</div>';
-                    }
-                    $observacionesDescr = $trazaHtml;
-                } else {
-                    $observacionesDescr = '<span style="color:#94a3b8; font-style:italic;">—</span>';
-                }
-            }
-            // 2026-09-24: dos versiones de cada fecha — completa (desktop) y
-            // corta sin año (móvil, vía CSS en portal.css) — el año casi
-            // nunca aporta nada a un vistazo rápido en pantalla angosta y la
-            // hora (lo que sí importa) es lo que el ellipsis/scroll recortaría
-            // primero si solo hubiera un formato largo.
-            $fEmisFull = htmlspecialchars(date('d/m/Y H:i', strtotime($ord['creado_en'] ?? 'now')), ENT_QUOTES, 'UTF-8');
-            $fEmisShort = htmlspecialchars(date('d/m H:i', strtotime($ord['creado_en'] ?? 'now')), ENT_QUOTES, 'UTF-8');
-            $fEmis = '<span class="fecha-full">' . $fEmisFull . '</span><span class="fecha-corta">' . $fEmisShort . '</span>';
-            $fResShort = '';
-            if (!empty($ord['fecha_resultado'])) {
-                $fResFull = htmlspecialchars(date('d/m/Y H:i', strtotime($ord['fecha_resultado'])), ENT_QUOTES, 'UTF-8');
-                $fResShort = htmlspecialchars(date('d/m H:i', strtotime($ord['fecha_resultado'])), ENT_QUOTES, 'UTF-8');
-                $fRes = '<span class="fecha-full">' . $fResFull . '</span><span class="fecha-corta">' . $fResShort . '</span>';
-            } else {
-                $fRes = '—';
-            }
-            $estado = ($eId === 5) ? 'Cancelada' : htmlspecialchars($ord['estado_nombre'] ?? 'Emitida', ENT_QUOTES, 'UTF-8');
-            // 2026-09-30: "Resultados Listos" a 2 renglones para reducir el ancho de columna a 118px
-            $estadoHtml = ($eId === 3 || $estado === 'Resultados Listos') ? 'Resultados<br>Listos' : $estado;
-
-            // P-LAESH-RESULTADOS-PARCIALES-01 (2026-09-23 / 2026-09-30): chips de parciales
-            // homologados con Recepción — se muestran en la columna Acción / PDF bajo
-            // "En Proceso" y ya no bajo el badge de Estado. Solo mientras la orden está "En Atención" (2).
-            $parcialesChips = '';
-            if ($eId === 2 && !empty($ord['parciales_fechas'])) {
-                $chipsHtml = '';
-                foreach (explode('|', $ord['parciales_fechas']) as $idx => $fParcial) {
-                    $fFmt = htmlspecialchars(date('d/m H:i', strtotime($fParcial)), ENT_QUOTES, 'UTF-8');
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `medicos.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L319-374)</summary>
-
-**Path:** `Unknown file`
-
-```
-                                            <div class="otros-estudios-header" style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.5rem;">
-                                                <h3 class="orden-estudios-label" id="label-otros-estudios" style="margin: 0; display: inline-flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
-                                                    <span>Otros Estudios adicionales — no incluidos en el catálogo <span style="font-size: 0.82em; font-weight: normal; color: var(--text-muted);">(Escríbelos separados por comas)</span></span>
-                                                    <button type="button" id="btn-agregar-otros-estudios" class="btn btn-secondary btn-icon-add-otros" title="Confirmar Otros Estudios" aria-label="Confirmar Otros Estudios" style="padding: 0.25rem 0.6rem; display: inline-flex; align-items: center; justify-content: center; background: var(--state-remitido-bg, #e0f2fe); color: var(--primary, #0052B7); border: 1px solid #93c5fd; border-radius: 6px; cursor: pointer; vertical-align: middle;">
-                                                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-                                                    </button>
-                                                </h3>
-                                            </div>
-                                            <input type="text" id="otros-estudios" name="otros_estudios" class="form-input"
-                                                   placeholder="Escribe estudios adicionales y presiona Enter o (+)..." aria-labelledby="label-otros-estudios">
-                                        </div><!-- /otros-estudios-wrapper -->
-                                    </div><!-- /estudios-col-left -->
-
-                                    <!-- Columna Derecha: Chips de estudios seleccionados -->
-                                    <div class="estudios-col-right">
-                                        <div class="contenedor-dinamico-card">
-                                            <div class="contenedor-dinamico-hdr">
-                                                <span class="contenedor-dinamico-title">
-                                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-                                                    Estudios Seleccionados
-                                                </span>
-                                                <span id="cnt-estudios-chips-num" class="cnt-chips-badge">0 seleccionados</span>
-                                            </div>
-                                            <div id="contenedor-estudios-dinamico" class="contenedor-dinamico-body">
-                                                <div id="estudios-chips-empty" class="chips-empty-msg">
-                                                    No se han seleccionado estudios aún. Elige de la izquierda o busca arriba.
-                                                </div>
-                                                <div id="estudios-chips-list" class="chips-flex-wrap"></div>
-                                            </div>
-                                        </div>
-                                    </div><!-- /estudios-col-right -->
-                                </div><!-- /estudios-split-container -->
-                            </div><!-- /form-group estudios -->
-
-                        </form>
-                    </div><!-- /subtab-generar -->
-
-                    <!-- ── Sub-tab 2: Mis Órdenes de Hoy ── -->
-                    <!-- GAP-MD-02/03 (2026-09-22): se homologa el control de búsqueda/total/
-                         paginación con Recepción / Órdenes Hoy; la grilla y sus columnas
-                         propias del médico se conservan sin cambio. Hoy y Anteriores usan
-                         ahora las mismas mdRenderOrdenesTablaHeader/Body (ver md/index.php)
-                         — garantiza que ambas listas ofrezcan exactamente lo mismo. -->
-                    <div id="subtab-ordenes-hoy" class="portal-tab-panel" role="tabpanel" aria-labelledby="tab-ordenes-hoy">
-                        <div class="cms-panel-header" id="ordenes-hoy-md-header" style="margin-bottom: 1rem; display: flex; justify-content: flex-end; align-items: center; flex-wrap: wrap; gap: 1rem;">
-                            <div id="ordenes-hoy-md-pagination-wrap" style="display: flex; align-items: center; gap: 0.5rem;">
-                                <span id="ordenes-hoy-md-total-records" style="font-size: 0.88rem; color: var(--text-muted); font-weight: 600;">Total: <?= (int)($totalOrdenesPropias ?? 0) ?></span>
-                                <span style="color: #cbd5e1; display: inline;">|</span>
-                                <div style="display: flex; gap: 0.25rem; align-items: center;">
-                                    <?php $totPgsHoyMd = max(1, (int)ceil(($totalOrdenesPropias ?? 0) / 25)); ?>
-                                    <button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;">‹ <span class="pag-label-text">Ant.</span></button>
-                                    <span style="font-size:0.82rem; font-weight:600; color:var(--text-muted); padding: 0 4px;">1 / <?= $totPgsHoyMd ?></span>
-                                    <?php if ($totPgsHoyMd > 1): ?>
-                                        <button type="button" class="btn btn-secondary btn-sm" style="padding: 2px 8px; font-size: 0.8rem;" hx-get="/laesh/md/tabla-ordenes?page=2" hx-target="#tabla-medico" hx-swap="outerHTML" hx-include="#input-buscar-orden-hoy-md"><span class="pag-label-text">Sig.</span> ›</button>
-                                    <?php else: ?>
-                                        <button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;"><span class="pag-label-text">Sig.</span> ›</button>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `medicos.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L429-479)</summary>
-
-**Path:** `Unknown file`
-
-```
-                            <button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;">‹ <span class="pag-label-text">Ant.</span></button>
-                            <span style="font-size:0.82rem; font-weight:600; color:var(--text-muted); padding: 0 4px;">1 / <?= $totPgsAntMd ?></span>
-                            <?php if ($totPgsAntMd > 1): ?>
-                                <button type="button" class="btn btn-secondary btn-sm" style="padding: 2px 8px; font-size: 0.8rem;" hx-get="/laesh/md/tabla-ordenes-anteriores?page=2&periodo=30d" hx-target="#tabla-historial-completo" hx-swap="outerHTML" hx-include="#input-buscar-orden-anteriores-md, #select-periodo-anteriores-md, #fecha-inicio-anteriores-md, #fecha-fin-anteriores-md"><span class="pag-label-text">Sig.</span> ›</button>
-                            <?php else: ?>
-                                <button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;"><span class="pag-label-text">Sig.</span> ›</button>
-                            <?php endif; ?>
-                        </div>
-                    </div>
-
-                    <!-- A la derecha: Filtros y Búsqueda con Separadores y Agrupado Tenue -->
-                    <div class="toolbar-md-right-controls" style="display: flex; align-items: center; gap: 0.85rem; flex-wrap: wrap;">
-                        <!-- Combo List de Período y Rango de Fechas con Agrupado Tenue -->
-                        <div id="ordenes-anteriores-md-periodo-container" class="periodo-container">
-                            <div class="periodo-select-group">
-                                <label for="select-periodo-anteriores-md" class="periodo-select-label">Período</label>
-                                <select id="select-periodo-anteriores-md" name="periodo" class="form-select select-sm" style="padding: 4px 10px; font-size: 0.82rem; border-radius: 6px; border: 1px solid var(--border); background: #ffffff; color: var(--text-dark); cursor: pointer;"
-                                        hx-get="/laesh/md/tabla-ordenes-anteriores"
-                                        hx-target="#tabla-historial-completo"
-                                        hx-swap="outerHTML"
-                                        hx-include="#input-buscar-orden-anteriores-md, #select-periodo-anteriores-md, #fecha-inicio-anteriores-md, #fecha-fin-anteriores-md"
-                                        hx-trigger="change">
-                                    <option value="30d" selected>30 d</option>
-                                    <option value="15d">15 d</option>
-                                    <option value="fecha">Fechas</option>
-                                </select>
-                            </div>
-                            <span id="rango-fechas-anteriores-md" class="rango-fechas-group d-none" style="display: none;">
-                                <div class="fecha-field-wrap">
-                                    <label for="fecha-inicio-anteriores-md" class="fecha-field-label">Inicial</label>
-                                    <input type="date" id="fecha-inicio-anteriores-md" name="fecha_inicio" class="select-sm form-input" style="padding: 3px 6px; font-size: 0.8rem; border-radius: 6px; border: 1px solid var(--border); width: 130px; background: #ffffff;" max="<?= date('Y-m-d', strtotime('-1 day')) ?>" title="Fecha inicial" aria-label="Fecha inicial">
-                                </div>
-                                <div class="fecha-field-wrap">
-                                    <label for="fecha-fin-anteriores-md" class="fecha-field-label">Final</label>
-                                    <input type="date" id="fecha-fin-anteriores-md" name="fecha_fin" class="select-sm form-input" style="padding: 3px 6px; font-size: 0.8rem; border-radius: 6px; border: 1px solid var(--border); width: 130px; background: #ffffff;" max="<?= date('Y-m-d', strtotime('-1 day')) ?>" title="Fecha final" aria-label="Fecha final">
-                                </div>
-                                <button type="button" id="btn-buscar-fechas-anteriores-md" class="btn-fechas-search-icon" title="Iniciar búsqueda por rango de fechas" aria-label="Iniciar búsqueda por rango de fechas"
-                                        hx-get="/laesh/md/tabla-ordenes-anteriores"
-                                        hx-target="#tabla-historial-completo"
-                                        hx-swap="outerHTML"
-                                        hx-include="#input-buscar-orden-anteriores-md, #select-periodo-anteriores-md, #fecha-inicio-anteriores-md, #fecha-fin-anteriores-md">
-                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                        <circle cx="11" cy="11" r="8"></circle>
-                                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                                    </svg>
-                                </button>
-                            </span>
-                        </div>
-
-                        <!-- Separador Vertical -->
-                        <div class="toolbar-separator" aria-hidden="true"></div>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-The first task centers on reactively filtering and navigating reports. Modification of the order retrieval functions within the business logic is needed. Specifically, the functions retrieving and counting recent orders must be updated to accept a boolean parameter indicating whether to filter only partial orders.
-
-
-Now focusing on implementing the filtering logic and UI elements. The PHP endpoints will need to receive and propagate filter parameters for partial orders and states, incorporating them into both data retrieval and pagination links. Additional hidden inputs will be added to the views, and associated `hx-include` attributes updated to ensure these filter values are consistently submitted with relevant requests.
-
-Further, the date calculation logic for the period filter requires a correction to prevent future dates, specifically when calculating the end date for named periods like "yesterday," "week," etc. Ensuring the date calculations produce valid date ranges is essential for consistent filtering. The KPI detail opening function needs an update to incorporate these new filter values when filtering data for "today."
-
-
-Now implementing the reactive UI updates. The initial view's tab navigation triggers AJAX calls to retrieve filtered order data, conditionally setting filter inputs for historical data. The KPI card interaction will be made robust, ensuring proper state reading and adding a global filter clearing function.
-
-Modifying the business logic, the relevant order retrieval methods now accept state and partial order filters, with associated controller endpoints updated to pass these parameters. Pagination links are updated to propagate filter parameters, and the UI displays a filter chip on filtered results. The physician's view requires adding filter inputs for its historical order panel.
-
-
-Added hidden input fields for state and partial order filters within the "today" subtab and updated relevant `hx-include` attributes to ensure filter values are sent with requests. Modified the date resolution logic to cap the end date at "yesterday" when generating historical reports.
-
-The KPI detail opening function was updated to switch views, set filter inputs based on the "today" flag, and trigger appropriate AJAX requests to retrieve filtered order data, either for today or historical periods. A global filter clearing function has been added.
-
-Styling adjustments ensure KPI cards are clickable and their content doesn't interfere with click events.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `Ordenes.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 2.285291375s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L129-164)</summary>
-
-**Path:** `Unknown file`
-
-```
-                // PxLab (folio del PDF del laboratorio): sin PxLab siempre al final;
-                // LENGTH primero para que el orden sea numérico aunque varíe la longitud.
-                'pxlab'           => 'pdf.folio_extraido IS NULL ASC, LENGTH(pdf.folio_extraido) {DIR}, pdf.folio_extraido',
-                'id'              => 'o.orden_id'
-            ];
-            $dir = strtoupper($orderDir) === 'ASC' ? 'ASC' : 'DESC';
-            $sortCol = str_replace('{DIR}', $dir, $allowedSorts[$orderBy] ?? 'o.orden_id');
-
-            $whereSql = "WHERE DATE(o.hora_captura) = CURDATE()";
-            $params = [];
-            if ($estadoId > 0) {
-                $whereSql .= " AND o.estado_id = :estado_id_rec";
-                $params[':estado_id_rec'] = $estadoId;
-            }
-            $search = trim(mb_strtolower($search, 'UTF-8'));
-
-            if ($search !== '') {
-                $whereSql .= ' AND ' . \Common\BusquedaOrdenes::construirWhereBusqueda(
-                    $search, $params, 'o.', '', [], [], self::BUSQ_TEXT_COLS_RC, false
-                );
-            }
-
-            $limInt = max(1, $limit);
-            $offInt = max(0, $offset);
-
-            $sql = "
-                SELECT o.orden_id as id, o.folio_unico as folio, o.hora_captura as creado_en, o.fecha_resultado,
-                       o.diagnostico, o.otros_estudios, o.estudios_json as estudios, o.edad_al_emitir,
-                       o.paciente_nombre, o.paciente_sexo, o.paciente_telefono as telefono,
-                       COALESCE(o.medico_nombre_completo, 'Médico General') AS medico_nombre,
-                       COALESCE(o.medico_especialidad, 'Medicina General') AS medico_especialidad,
-                       COALESCE(o.medico_cedula, 'CED-N/A') AS medico_cedula,
-                       o.estado_id, o.estado_valor AS estado_nombre, o.estado_color AS color_badge,
-                       o.motivo_cancelacion,
-                       pdf.nombre_archivo AS pdf_nombre,
-                       pdf.folio_extraido,
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `Ordenes.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L119-144)</summary>
-
-**Path:** `Unknown file`
-
-```
-        try {
-            $db = DB::connect();
-
-            $allowedSorts = [
-                'folio'           => 'CAST(o.folio_unico AS UNSIGNED)',
-                'paciente'        => 'o.paciente_nombre',
-                'medico'          => 'COALESCE(o.medico_nombre_completo, \'Médico General\')',
-                'fecha'           => 'o.hora_captura',
-                'fecha_resultado' => 'o.fecha_resultado',
-                'estado'          => 'o.estado_id',
-                // PxLab (folio del PDF del laboratorio): sin PxLab siempre al final;
-                // LENGTH primero para que el orden sea numérico aunque varíe la longitud.
-                'pxlab'           => 'pdf.folio_extraido IS NULL ASC, LENGTH(pdf.folio_extraido) {DIR}, pdf.folio_extraido',
-                'id'              => 'o.orden_id'
-            ];
-            $dir = strtoupper($orderDir) === 'ASC' ? 'ASC' : 'DESC';
-            $sortCol = str_replace('{DIR}', $dir, $allowedSorts[$orderBy] ?? 'o.orden_id');
-
-            $whereSql = "WHERE DATE(o.hora_captura) = CURDATE()";
-            $params = [];
-            if ($estadoId > 0) {
-                $whereSql .= " AND o.estado_id = :estado_id_rec";
-                $params[':estado_id_rec'] = $estadoId;
-            }
-            $search = trim(mb_strtolower($search, 'UTF-8'));
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `Ordenes.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L109-124)</summary>
-
-**Path:** `Unknown file`
-
-```
-    public static function esConflictoSerializacion(Throwable $e): bool {
-        if (!$e instanceof \PDOException) return false;
-        $code = (string)($e->errorInfo[1] ?? '');
-        return $code === '1020' || $code === '1213';
-    }
-
-    /**
-     * Obtiene las órdenes del día natural de HOY registradas o emitidas en Recepción con paginación, búsqueda y ordenamiento
-     */
-    public static function obtenerOrdenesRecientes(int $limit = 25, int $offset = 0, string $search = '', string $orderBy = 'fecha', string $orderDir = 'DESC', int $estadoId = 0): array {
-        try {
-            $db = DB::connect();
-
-            $allowedSorts = [
-                'folio'           => 'CAST(o.folio_unico AS UNSIGNED)',
-                'paciente'        => 'o.paciente_nombre',
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `Ordenes.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L199-229)</summary>
-
-**Path:** `Unknown file`
-
-```
-    /**
-     * Cuenta el total de órdenes de HOY según filtro de búsqueda
-     */
-    public static function contarOrdenesRecientes(string $search = '', int $estadoId = 0): int {
-        try {
-            $db = DB::connect();
-            $whereSql = "WHERE DATE(hora_captura) = CURDATE()";
-            $params = [];
-            $search = trim(mb_strtolower($search, 'UTF-8'));
-
-            if ($estadoId > 0) {
-                $whereSql .= " AND estado_id = :estado_id_cnt_rec";
-                $params[':estado_id_cnt_rec'] = $estadoId;
-            }
-            if ($search !== '') {
-                $whereSql .= ' AND ' . \Common\BusquedaOrdenes::construirWhereBusqueda(
-                    $search, $params, '', '', [], [], self::BUSQ_TEXT_COLS_RC, false
-                );
-            }
-
-            $stmt = $db->prepare("SELECT COUNT(*) FROM vw_ordenes_completas {$whereSql}");
-            $stmt->execute($params);
-            return (int)$stmt->fetchColumn();
-        } catch (Throwable $e) {
-            DB::logFallback('ERROR', 'Fallo en RC\Negocio\Ordenes::contarOrdenesRecientes', $e->getMessage());
-            return 0;
-        }
-    }
-
-    /**
-     * Obtiene las órdenes de DÍAS ANTERIORES para la vista de Historial en Recepción con paginación, búsqueda y ordenamiento
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** CORTEX_STEP_STATUS_ERROR
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:28 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:28 pm
-
----
-
-## Agent Response
-
-### Thinking
-
-A Python script is the most reliable way to perform these file modifications. The script will target several PHP and JavaScript files across two distinct codebases. Verification is critical; each change will require careful confirmation before committing.
-
-
-Adding a new parameter and conditional logic to two PHP functions appears necessary. This involves modifying SQL queries to filter based on the new parameter's value. The changes target a `WHERE` clause with a `LIKE` condition within a subquery.
-
-
-
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 2.181635955s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:28 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:28 pm
-
----
-
-## Agent Response
-
-### Thinking
-
-The code snippet extracts filter parameters from the request, including order status and a flag for partial orders. These parameters are then used in a function call to retrieve recent orders. The goal is to understand how these filters are applied when fetching order data.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.040185179s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L699-794)</summary>
-
-**Path:** `Unknown file`
-
-```
-    $sort         = trim($_GET['sort'] ?? 'fecha');
-    $dir          = trim($_GET['dir'] ?? 'desc');
-    $page         = max(1, (int)($_GET['page'] ?? 1));
-    $perPage      = max(5, min(100, (int)($_GET['per_page'] ?? 25)));
-    $offset       = ($page - 1) * $perPage;
-    $estadoFiltro = max(0, (int)($_GET['estado_id'] ?? 0));
-
-    $ordenesRecientes = \RC\Negocio\Ordenes::obtenerOrdenesRecientes($perPage, $offset, $q, $sort, $dir, $estadoFiltro);
-    $totalReg         = \RC\Negocio\Ordenes::contarOrdenesRecientes($q, $estadoFiltro);
-    $totalPages       = max(1, (int)ceil($totalReg / $perPage));
-
-    echo '<table class="table" id="tabla-recepcion" hx-get="/laesh/rc/tabla-ordenes" hx-target="#tabla-recepcion" hx-swap="outerHTML" hx-sync="this:replace" hx-trigger="refresh, ordenCreada from:body, ordenActualizada from:body" style="margin-bottom: 0; width: 100%; min-width: ' . rcOrdenesTablaMinWidth(false) . 'px; table-layout: fixed; border-collapse: collapse;">'
-       . rcRenderOrdenesColgroup(false)
-       . '<thead>'
-       . rcRenderOrdenesTablaHeader($sort, $dir, $q, '/laesh/rc/tabla-ordenes', '#tabla-recepcion', '#input-buscar-orden-rc')
-       . '</thead>'
-       . rcRenderOrdenesTablaBody($ordenesRecientes, $csrfToken, '')
-       . '</table>';
-
-    // OOB Swap para paginador y total de órdenes hoy
-    $qParam = !empty($q) ? '&q=' . urlencode($q) : '';
-    echo '<div id="ordenes-pagination-wrap" hx-swap-oob="outerHTML" style="display: flex; align-items: center; gap: 0.5rem;">'
-       . '<span id="ordenes-total-records" style="font-size: 0.88rem; color: var(--text-muted); font-weight: 600;">Total: ' . $totalReg . '</span>'
-       . '<span style="color: #cbd5e1; display: inline;">|</span>'
-       . '<div id="ordenes-pagination" style="display: flex; gap: 0.25rem; align-items: center;">';
-    if ($page > 1) {
-        $prevPage = $page - 1;
-        echo '<button type="button" class="btn btn-secondary btn-sm" style="padding: 2px 8px; font-size: 0.8rem;" hx-get="/laesh/rc/tabla-ordenes?page=' . $prevPage . $qParam . '&sort=' . $sort . '&dir=' . $dir . '&per_page=' . $perPage . '" hx-target="#tabla-recepcion" hx-swap="outerHTML" hx-include="#input-buscar-orden-rc">‹ Ant.</button>';
-    } else {
-        echo '<button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;">‹ Ant.</button>';
-    }
-    echo '<span style="font-size:0.82rem; font-weight:600; color:var(--text-muted); padding: 0 4px;">' . $page . ' / ' . $totalPages . '</span>';
-    if ($page < $totalPages) {
-        $nextPage = $page + 1;
-        echo '<button type="button" class="btn btn-secondary btn-sm" style="padding: 2px 8px; font-size: 0.8rem;" hx-get="/laesh/rc/tabla-ordenes?page=' . $nextPage . $qParam . '&sort=' . $sort . '&dir=' . $dir . '&per_page=' . $perPage . '" hx-target="#tabla-recepcion" hx-swap="outerHTML" hx-include="#input-buscar-orden-rc">Sig. ›</button>';
-    } else {
-        echo '<button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;">Sig. ›</button>';
-    }
-    echo '</div></div>';
-});
-
-// ── GET /tabla-ordenes-anteriores — Partial HTMX ultraligero de órdenes anteriores (Recepción) ─
-Flight::route('GET /tabla-ordenes-anteriores', function () {
-    header('Content-Type: text/html; charset=utf-8');
-    $csrfToken = $_SESSION['csrf_token'] ?? '';
-
-    $q             = trim($_GET['q'] ?? '');
-    $periodo       = trim($_GET['periodo'] ?? '30d');
-    $fechaInicio   = trim($_GET['fecha_inicio'] ?? '');
-    $fechaFin      = trim($_GET['fecha_fin'] ?? '');
-    $sort          = trim($_GET['sort'] ?? 'fecha');
-    $dir           = trim($_GET['dir'] ?? 'desc');
-    $page          = max(1, (int)($_GET['page'] ?? 1));
-    $perPage       = max(5, min(100, (int)($_GET['per_page'] ?? 25)));
-    $offset        = ($page - 1) * $perPage;
-    $estadoFiltro  = max(0, (int)($_GET['estado_id'] ?? 0));
-    $soloParciales = (($_GET['solo_parciales'] ?? '0') === '1');
-
-    $ordenesAnteriores = \RC\Negocio\Ordenes::obtenerOrdenesAnteriores($perPage, $offset, $q, $sort, $dir, $periodo, $fechaInicio, $fechaFin, $estadoFiltro, $soloParciales);
-    $totalReg          = \RC\Negocio\Ordenes::contarOrdenesAnteriores($q, $periodo, $fechaInicio, $fechaFin, $estadoFiltro, $soloParciales);
-    $totalPages        = max(1, (int)ceil($totalReg / $perPage));
-
-    $includeAnt = '#input-buscar-orden-anteriores-rc, #select-periodo-anteriores-rc, #fecha-inicio-anteriores-rc, #fecha-fin-anteriores-rc';
-
-    echo '<table class="table" id="tabla-recepcion-anteriores" hx-get="/laesh/rc/tabla-ordenes-anteriores" hx-target="#tabla-recepcion-anteriores" hx-swap="outerHTML" hx-include="' . $includeAnt . '" hx-sync="this:replace" hx-trigger="refresh, ordenActualizada from:body" style="margin-bottom: 0; width: 100%; min-width: ' . rcOrdenesTablaMinWidth(true) . 'px; table-layout: fixed; border-collapse: collapse;">'
-       . rcRenderOrdenesColgroup(true)
-       . '<thead>'
-       . rcRenderOrdenesTablaHeader($sort, $dir, $q, '/laesh/rc/tabla-ordenes-anteriores', '#tabla-recepcion-anteriores', $includeAnt, true)
-       . '</thead>'
-       . rcRenderOrdenesTablaBody($ordenesAnteriores, $csrfToken, '-ant', true, $offset, $q)
-       . '</table>';
-
-    $qParam = !empty($q) ? '&q=' . urlencode($q) : '';
-    $pParam = '&periodo=' . urlencode($periodo);
-    if ($periodo === 'fecha') {
-        if (!empty($fechaInicio)) $pParam .= '&fecha_inicio=' . urlencode($fechaInicio);
-        if (!empty($fechaFin)) $pParam .= '&fecha_fin=' . urlencode($fechaFin);
-    }
-    echo '<div id="ordenes-anteriores-pagination-wrap" class="toolbar-pagination-capsule" hx-swap-oob="outerHTML">'
-       . '<span id="ordenes-anteriores-total-records" style="font-size: 0.88rem; color: var(--text-muted); font-weight: 600;">Total: ' . $totalReg . '</span>'
-       . '<span style="color: #cbd5e1; display: inline;">|</span>'
-       . '<div id="ordenes-anteriores-pagination" style="display: flex; gap: 0.25rem; align-items: center;">';
-    if ($page > 1) {
-        $prevPage = $page - 1;
-        echo '<button type="button" class="btn btn-secondary btn-sm" style="padding: 2px 8px; font-size: 0.8rem;" hx-get="/laesh/rc/tabla-ordenes-anteriores?page=' . $prevPage . $qParam . $pParam . '&sort=' . $sort . '&dir=' . $dir . '&per_page=' . $perPage . '" hx-target="#tabla-recepcion-anteriores" hx-swap="outerHTML" hx-include="' . $includeAnt . '">‹ Ant.</button>';
-    } else {
-        echo '<button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;">‹ Ant.</button>';
-    }
-    echo '<span style="font-size:0.82rem; font-weight:600; color:var(--text-muted); padding: 0 4px;">' . $page . ' / ' . $totalPages . '</span>';
-    if ($page < $totalPages) {
-        $nextPage = $page + 1;
-        echo '<button type="button" class="btn btn-secondary btn-sm" style="padding: 2px 8px; font-size: 0.8rem;" hx-get="/laesh/rc/tabla-ordenes-anteriores?page=' . $nextPage . $qParam . $pParam . '&sort=' . $sort . '&dir=' . $dir . '&per_page=' . $perPage . '" hx-target="#tabla-recepcion-anteriores" hx-swap="outerHTML" hx-include="' . $includeAnt . '">Sig. ›</button>';
-    } else {
-        echo '<button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;">Sig. ›</button>';
-    }
-    echo '</div></div>';
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-The goal is to implement an active filter chip for two endpoints. The structure for displaying this filter depends on specific conditions related to a filter state and partial results. Based on the conditional logic, the display will reflect filter options.
-
-
-
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.129581609s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:29 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:29 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Oct 2026, 6:30 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `labadmin.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L184-214)</summary>
-
-**Path:** `Unknown file`
-
-```
-                                    <span style="font-size:0.82rem; font-weight:600; color:var(--text-muted); padding: 0 4px;">1 / <?= $totPgsOrd ?></span>
-                                    <?php if ($totPgsOrd > 1): ?>
-                                        <button type="button" class="btn btn-secondary btn-sm" style="padding: 2px 8px; font-size: 0.8rem;" hx-get="/laesh/rc/tabla-ordenes?page=2" hx-target="#tabla-recepcion" hx-swap="outerHTML" hx-include="#input-buscar-orden-rc">Sig. ›</button>
-                                    <?php else: ?>
-                                        <button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;">Sig. ›</button>
-                                    <?php endif; ?>
-                                </div>
-                            </div>
-
-                            <!-- Buscador en tiempo real unificado -->
-                            <div id="ordenes-hoy-rc-search-wrap" class="search-bar-unified" style="position:relative; z-index: 100;">
-                                <input type="text" id="input-buscar-orden-rc" name="q" class="form-input form-input--bg search-bar-input" autocomplete="off" spellcheck="false" placeholder="🔍 Nombre, folio o tel..." hx-get="/laesh/rc/tabla-ordenes" hx-target="#tabla-recepcion" hx-swap="outerHTML" hx-trigger="keyup changed delay:300ms, search" hx-sync="this:replace">
-                                <button type="button" class="btn-search-clear" data-target="#input-buscar-orden-rc" title="Limpiar búsqueda" aria-label="Limpiar búsqueda">
-                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                        <path d="m7 21-4.3-4.3c-1-1-1-2.5 0-3.4l9.6-9.6c1-1 2.5-1 3.4 0l5.6 5.6c1 1 1 2.5 0 3.4L13 21"></path>
-                                        <path d="M22 21H7"></path>
-                                        <path d="m5 11 9 9"></path>
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card" aria-live="polite" aria-relevant="additions text" aria-atomic="false" style="padding: 0; overflow: hidden; border: 1px solid var(--border); border-radius: 8px;">
-                        <div class="table-responsive" style="max-height: calc(100vh - 250px); overflow-y: auto; overflow-x: auto; -webkit-overflow-scrolling: touch; width: 100%;">
-                            <table class="table" id="tabla-recepcion" hx-get="/laesh/rc/tabla-ordenes" hx-target="#tabla-recepcion" hx-swap="outerHTML" hx-sync="this:replace" hx-trigger="refresh, ordenCreada from:body, ordenActualizada from:body" style="margin-bottom: 0; width: 100%; min-width: <?= rcOrdenesTablaMinWidth(false) ?>px; table-layout: fixed; border-collapse: collapse;">
-                                <?= rcRenderOrdenesColgroup(false) ?>
-                                <thead>
-                                    <?= rcRenderOrdenesTablaHeader('fecha', 'desc', '', '/laesh/rc/tabla-ordenes', '#tabla-recepcion', '#input-buscar-orden-rc') ?>
-                                </thead>
-                                <?= rcRenderOrdenesTablaBody($ordenesRecientes ?? [], $csrfToken ?? '', '') ?>
-```
-
-</details>
 
 ---
 
@@ -38038,6 +31830,7318 @@ Examining the existing documentation directory, confirming the presence of HTML 
 
 **Status:** Completed
 **Created:** 4 Oct 2026, 9:12 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+Identified three anchors within the manual's URL: perfiles de usuario, flujos operativos, and busquedas-navegacion. These likely represent key sections or chapters within the user manual. The anchors provide a structured overview of the manual's organization, hinting at the topics covered in each section.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.101314931s
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Oct 2026, 9:12 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `actividades-previas-jacob.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Actividades Previas de Jacob — Guía Operativa UAT | LAESH</title>
+<meta name="description" content="Guía ejecutiva de actividades previas que debe realizar el Administrador Jacob antes de iniciar los flujos de prueba UAT Médico - Recepción.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Source+Sans+3:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #0052B7;
+    --primary-dark: #003e8c;
+    --primary-light: #e8f0fc;
+    --accent: #16a34a;
+    --accent-light: #eafaf1;
+    --bg: #f8fafc;
+    --surface: #ffffff;
+    --surface-2: #f1f5f9;
+    --border: #dde4f0;
+    --text-main: #1b2535;
+    --text-muted: #475569;
+    --text-faint: #64748b;
+    --code-bg: #eef2f9;
+    --shadow: 0 1px 3px rgba(20, 35, 70, 0.06), 0 8px 24px rgba(20, 35, 70, 0.05);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text-main);
+    font-family: 'Source Sans 3', system-ui, -apple-system, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    padding: 24px 16px;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 36px 32px;
+    box-shadow: var(--shadow);
+  }
+
+  header.header {
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 20px;
+    margin-bottom: 28px;
+  }
+
+  .badge-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--primary);
+    background: var(--primary-light);
+    padding: 4px 12px;
+    border-radius: 999px;
+    margin-bottom: 10px;
+  }
+
+  h1 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.3rem);
+    color: var(--text-main);
+    margin: 0 0 10px;
+    line-height: 1.25;
+  }
+
+  p.intro {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  /* Diagrama de Secuencia */
+  .flow-diagram {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin: 24px 0 32px;
+    text-align: center;
+  }
+  .flow-diagram h3 {
+    margin: 0 0 12px;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-faint);
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 700;
+  }
+  .flow-tree {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.88rem;
+    color: var(--primary-dark);
+    font-weight: 600;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    display: inline-block;
+    text-align: left;
+  }
+
+  /* Tarjetas de Pasos */
+  .step-card {
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--primary);
+    border-radius: 10px;
+    padding: 20px 22px;
+    margin-bottom: 20px;
+    background: #ffffff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+  }
+  .step-card.dependencia {
+    border-left-color: #f59e0b;
+    background: #fffdfa;
+  }
+  .step-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .step-title {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 1.25rem;
+    color: var(--primary-dark);
+    margin: 0;
+  }
+  .step-card.dependencia .step-title {
+    color: #92400e;
+  }
+
+  .manual-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--primary);
+    background: var(--primary-light);
+    border: 1px solid color-mix(in srgb, var(--primary) 25%, transparent);
+    padding: 3px 9px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: all 0.15s ease;
+  }
+  .manual-link:hover {
+    background: var(--primary);
+    color: #ffffff;
+    border-color: var(--primary);
+  }
+
+  ul.step-list {
+    margin: 0;
+    padding-left: 1.2em;
+  }
+  ul.step-list li {
+    margin-bottom: 8px;
+    color: var(--text-main);
+  }
+  ul.step-list li:last-child {
+    margin-bottom: 0;
+  }
+  ul.step-list strong {
+    color: #0f172a;
+  }
+
+  .sub-flujos {
+    margin-top: 10px;
+    padding-left: 1.1em;
+    list-style-type: circle;
+  }
+  .sub-flujos li {
+    margin-bottom: 6px;
+    font-size: 0.94rem;
+  }
+
+  code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.88em;
+    background: var(--code-bg);
+    color: var(--primary-dark);
+    padding: 0.15em 0.4em;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+  }
+
+  footer.footer {
+    margin-top: 36px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
+    font-size: 0.84rem;
+    color: var(--text-faint);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  footer.footer a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  footer.footer a:hover {
+    text-decoration: underline;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <header class="header">
+    <div class="badge-tag">Protocolo de Despliegue UAT</div>
+    <h1>Actividades Previas de Jacob</h1>
+    <p class="intro">
+      Guía ejecutiva de actividades preliminares que el Administrador Jacob debe realizar en orden tras la purga del sistema antes de iniciar los flujos operativos entre Médicos y Recepción.
+    </p>
+  </header>
+
+  <div class="flow-diagram">
+    <h3>🗺️ Secuencia de Configuración Pre-UAT</h3>
+    <div class="flow-tree">[1. Login Admin Jacob] 
+       ↓
+[2. Alta de Personal de Recepción]
+       ↓
+[3. Alta Obligatoria de Universidades y Centros de Trabajo]  ◄── (Dependencia previa: tabla truncada)
+       ↓
+[4. Alta de Médicos Evaluadores]
+       ↓
+[5. Entrega de Credenciales e Inicio de los 7 Flujos UAT]</div>
+  </div>
+
+  <!-- Paso 1 -->
+  <div class="step-card">
+    <div class="step-header">
+      <h2 class="step-title">1. Login Admin Jacob</h2>
+      <a class="manual-link" href="https://laesh.mx/manual-usuario.html#perfiles-roles" target="_blank" rel="noopener">
+        📖 Manual §1: Perfiles y Roles ↗
+      </a>
+    </div>
+    <ul class="step-list">
+      <li><strong>Acceso:</strong> Ingresar desde la <strong>píldora de acceso en el sitio web público</strong> (<code>https://laesh.mx</code>).</li>
+      <li><strong>Credenciales:</strong> Iniciar sesión con su celular de Administrador: <code>9531747410</code> y contraseña asignada.</li>
+      <li><strong>Referencia:</strong> Ver matriz de facultades del Administrador en el <a class="manual-link" href="https://laesh.mx/manual-usuario.html#anexo-diagramas" target="_blank" rel="noopener">Anexo A (Diagrama 1)</a>.</li>
+    </ul>
+  </div>
+
+  <!-- Paso 2 -->
+  <div class="step-card">
+    <div class="step-header">
+      <h2 class="step-title">2. Alta de Personal de Recepción</h2>
+      <a class="manual-link" href="https://laesh.mx/manual-usuario.html#guion-uat" target="_blank" rel="noopener">
+        📖 Manual §5.1: Cuentas y Personal ↗
+      </a>
+    </div>
+    <ul class="step-list">
+      <li><strong>Ubicación:</strong> Menú lateral izquierdo <strong>«El Personal»</strong> (<em>Personal de Recepción y Administradores</em>) → Botón <strong>«+ Añadir Personal»</strong>.</li>
+      <li><strong>Campos obligatorios:</strong> Nombre, apellidos, teléfono celular de 10 dígitos (ej. <code>9990000002</code>), correo y contraseña inicial de exactamente 10 caracteres.</li>
+      <li><strong>Rol asignado:</strong> El sistema asigna automáticamente el rol <strong>Recepcionista</strong> por defecto.</li>
+      <li><strong>Prueba opcional de roles:</strong> Permite probar la asignación del rol <strong>SitioWeb</strong> o promover a un segundo Administrador, validando la protección que impide dejar al laboratorio sin ningún administrador activo (ver <a class="manual-link" href="https://laesh.mx/manual-usuario.html#perfiles-roles" target="_blank" rel="noopener">Manual §1: Detalle Administrador</a>).</li>
+    </ul>
+  </div>
+
+  <!-- Paso 3 -->
+  <div class="step-card dependencia">
+    <div class="step-header">
+      <h2 class="step-title">3. Alta Obligatoria de Universidades y Centros de Trabajo</h2>
+      <a class="manual-link" href="https://laesh.mx/manual-usuario.html#guion-uat" target="_blank" rel="noopener">
+        📖 Manual §5.1: Dependencia Catálogos ↗
+      </a>
+    </div>
+    <ul class="step-list">
+      <li><strong>Estado del sistema tras la purga:</strong> El script <code>limpiar_pruebas_uat.sh</code> trunca por completo la tabla <code>catalogos_ui</code> dejándola en 0 registros para garantizar un ambiente prístino.</li>
+      <li><strong>Dependencia obligatoria previa:</strong> En el formulario de alta de médicos, los selectores de <strong>Universidad</strong> y <strong>Lugar donde labora</strong> son obligatorios (<code>required</code>).</li>
+      <li><strong>Acción requerida de Jacob:</strong> Debe registrar previamente en el sistema al menos <strong>1 Universidad</strong> (ej. <em>UNAM, UABJO o BUAP</em>) y <strong>1 Centro de Trabajo</strong> (ej. <em>Consultorio particular, Hospital General o Clínica privada</em>) antes de pasar al alta de médicos.</li>
+    </ul>
+  </div>
+
+  <!-- Paso 4 -->
+  <div class="step-card">
+    <div class="step-header">
+      <h2 class="step-title">4. Alta de Médicos Evaluadores</h2>
+      <a class="manual-link" href="https://laesh.mx/manual-usuario.html#guion-uat" target="_blank" rel="noopener">
+        📖 Manual §5.3: Módulo Médico ↗
+      </a>
+    </div>
+    <ul class="step-list">
+      <li><strong>Ubicación:</strong> Menú lateral izquierdo <strong>«Médicos»</strong> → Botón <strong>«+ Nuevo Médico»</strong>.</li>
+      <li><strong>Campos obligatorios:</strong> Nombre completo del médico, teléfono celular de 10 dígitos (ej. <code>9990000001</code>, será su usuario de acceso al Portal Médico), cédula profesional, especialidad, consultorio y contraseña inicial de 10 caracteres.</li>
+      <li><strong>Vinculación de catálogos:</strong> Seleccionar obligatoriamente la <strong>Universidad</strong> y el <strong>Lugar donde labora</strong> registrados en el Paso 3.</li>
+      <li><strong>Estado:</strong> Confirmar que el registro quede con estado <strong>Activo</strong>.</li>
+    </ul>
+  </div>
+
+  <!-- Paso 5 -->
+  <div class="step-card">
+    <div class="step-header">
+      <h2 class="step-title">5. Entrega de Credenciales e Inicio de los 7 Flujos UAT</h2>
+      <a class="manual-link" href="https://laesh.mx/manual-usuario.html#guion-uat" target="_blank" rel="noopener">
+        📖 Manual §5: Guión General UAT ↗
+      </a>
+    </div>
+    <ul class="step-list">
+      <li><strong>Distribución de accesos:</strong> Indicar a Médicos y Recepción que ingresen desde la <strong>píldora de acceso en el sitio web público</strong> con su número celular de 10 dígitos y su contraseña inicial de 10 caracteres.</li>
+      <li><strong>Regla técnica en misma PC:</strong> Abrir el segundo rol en <strong>Ventana de Incógnito</strong> para aislar sesiones (ver <a class="manual-link" href="https://laesh.mx/manual-usuario.html#requisitos-tecnicos" target="_blank" rel="noopener">Manual §6: Aislamiento de Sesiones</a>).</li>
+      <li><strong>7 Flujos Operativos a validar paso a paso:</strong>
+        <ul class="sub-flujos">
+          <li><strong>Flujo 1 — Emisión de Solicitud (Médico):</strong> Captura ágil con botones <strong>Top 20</strong>, sugerencias y campo libre «Otros Estudios» → Generación de folio correlativo <code>#1</code> y descarga de PDF clínico (ver <a class="manual-link" href="https://laesh.mx/manual-usuario.html#flujos-operativos" target="_blank" rel="noopener">Manual §2: Ciclo de Vida</a>).</li>
+          <li><strong>Flujo 2 — Recepción en Vivo y Avance Parcial (Recepción):</strong> Notificación instantánea sonora (silbato) y campanita → Pase a «En Atención» → Carga de PDF marcado como <strong>parcial</strong> (ver <a class="manual-link" href="https://laesh.mx/manual-usuario.html#notificaciones-sistema" target="_blank" rel="noopener">Manual §4: Notificaciones</a>).</li>
+          <li><strong>Flujo 3 — Carga Definitiva y Cierre (Recepción):</strong> Carga de PDF marcado como <strong>completo</strong> → Transición a «Resultados Listos» (aviso al médico) → Entrega física y pase a «Cerrada» (ver <a class="manual-link" href="https://laesh.mx/manual-usuario.html#flujos-operativos" target="_blank" rel="noopener">Manual §2</a>).</li>
+          <li><strong>Flujo 4 — Cancelación con Motivo:</strong> Cancelación por Médico o Recepción exclusivamente mientras la solicitud se encuentre en estado «Remitido» (ver <a class="manual-link" href="https://laesh.mx/manual-usuario.html#flujos-operativos" target="_blank" rel="noopener">Manual §2: Regla de Cancelación</a>).</li>
+          <li><strong>Flujo 5 — Búsqueda y Navegación Dual:</strong> Búsqueda rápida por <strong>Lupita</strong> con <code>#folio</code> (apertura de todo el historial con salto y resaltado visual) y búsqueda en tabla con filtros de fecha (ver <a class="manual-link" href="https://laesh.mx/manual-usuario.html#busquedas-navegacion" target="_blank" rel="noopener">Manual §3: Búsquedas</a>).</li>
+          <li><strong>Flujo 6 — Reportes Interactivos y Perfil:</strong> Navegación reactiva desde tarjetas KPI de Reportes a las grillas; y prueba del <strong>cambio directo de contraseña</strong> en «Mi Perfil» por el médico (ver <a class="manual-link" href="https://laesh.mx/manual-usuario.html#guion-uat" target="_blank" rel="noopener">Manual §5.3</a>).</li>
+          <li><strong>Flujo 7 — Resguardo Local y Movilidad (Médico):</strong> Captura en smartphone probando recarga por deslizamiento (<em>pull-to-refresh</em>) y retorno desde el sitio web sin pérdida de datos ni cierre de sesión (ver <a class="manual-link" href="https://laesh.mx/manual-usuario.html#requisitos-tecnicos" target="_blank" rel="noopener">Manual §6</a> y <a class="manual-link" href="https://laesh.mx/manual-usuario.html#anexo-diagramas" target="_blank" rel="noopener">Anexo A: Diagrama 3</a>).</li>
+        </ul>
+      </li>
+      <li><strong>Registro de Hallazgos:</strong> Documentar cualquier observación en la <a class="manual-link" href="https://laesh.mx/manual-usuario.html#guion-uat" target="_blank" rel="noopener">Hoja de Registro de Incidencias (Manual §5.5)</a>.</li>
+    </ul>
+  </div>
+
+  <footer class="footer">
+    <div>Laboratorio de Especialidades Hematológicas · <strong>LAESH</strong></div>
+    <div>Documentación oficial: <a href="https://laesh.mx/manual-usuario.html" target="_blank" rel="noopener">Manual de Usuario Completo ↗</a></div>
+  </footer>
+</div>
+
+</body>
+</html>
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+## User Request
+
+actividades-previas-jacob.html
+. renombrar a resumenPruebasBD.html
+. cambiar: Actividades Previas de Jacob por: Resumen
+. cambiar: Login Admin Jacob por Login Administrador
+.  quitar blouqe: 🗺️ Secuencia de Configuración Pre-UAT
+.  complementar esto: "y contraseña asignada" con "y contraseña  0987654321" y añadir: -- La cual puede cambiarla despues de crear otro usuario admin.
+.  cambiar: ej. 9990000002, 9990000001  por ej.  9531156870 , 9511156870
+. quita:  (required).
+. remplazar UAT por puebas de aceptación de usuario.
+. quita Protocolo de Despliegue UAT
+. cambia: Guía ejecutiva de actividades preliminares que el Administrador Jacob debe realizar en orden tras la purga del sistema antes de iniciar los flujos operativos entre Médicos y Recepción. por:
+Guía resumida de actividades para  Administrador Laesh por realizar en orden antes de iniciar los flujos operativos entre Médicos y Recepción.
+
+---
+
+## Agent Response
+
+### Thinking
+
+File renaming is the first step. The user requires changing the filename, including potentially deleting the old file. Text and title modifications will follow the renaming.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.064715376s
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Oct 2026, 9:39 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `resumenPruebasBD.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resumen — Guía Operativa de Pruebas de Aceptación de Usuario | LAESH</title>
+<meta name="description" content="Guía resumida de actividades para Administrador Laesh por realizar en orden antes de iniciar los flujos operativos entre Médicos y Recepción.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Source+Sans+3:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #0052B7;
+    --primary-dark: #003e8c;
+    --primary-light: #e8f0fc;
+    --accent: #16a34a;
+    --accent-light: #eafaf1;
+    --bg: #f8fafc;
+    --surface: #ffffff;
+    --surface-2: #f1f5f9;
+    --border: #dde4f0;
+    --text-main: #1b2535;
+    --text-muted: #475569;
+    --text-faint: #64748b;
+    --code-bg: #eef2f9;
+    --shadow: 0 1px 3px rgba(20, 35, 70, 0.06), 0 8px 24px rgba(20, 35, 70, 0.05);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text-main);
+    font-family: 'Source Sans 3', system-ui, -apple-system, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    padding: 24px 16px;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 36px 32px;
+    box-shadow: var(--shadow);
+  }
+
+  header.header {
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 20px;
+    margin-bottom: 28px;
+  }
+
+  h1 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.3rem);
+    color: var(--text-main);
+    margin: 0 0 10px;
+    line-height: 1.25;
+  }
+
+  p.intro {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  /* Tarjetas de Pasos */
+  .step-card {
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--primary);
+    border-radius: 10px;
+    padding: 20px 22px;
+    margin-bottom: 20px;
+    background: #ffffff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+  }
+  .step-card.dependencia {
+    border-left-color: #f59e0b;
+    background: #fffdfa;
+  }
+  .step-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .step-title {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 1.25rem;
+    color: var(--primary-dark);
+    margin: 0;
+  }
+  .step-card.dependencia .step-title {
+    color: #92400e;
+  }
+
+  .manual-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--primary);
+    background: var(--primary-light);
+    border: 1px solid color-mix(in srgb, var(--primary) 25%, transparent);
+    padding: 3px 9px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: all 0.15s ease;
+  }
+  .manual-link:hover {
+    background: var(--primary);
+    color: #ffffff;
+    border-color: var(--primary);
+  }
+
+  ul.step-list {
+    margin: 0;
+    padding-left: 1.2em;
+  }
+  ul.step-list li {
+    margin-bottom: 8px;
+    color: var(--text-main);
+  }
+  ul.step-list li:last-child {
+    margin-bottom: 0;
+  }
+  ul.step-list strong {
+    color: #0f172a;
+  }
+
+  .sub-flujos {
+    margin-top: 10px;
+    padding-left: 1.1em;
+    list-style-type: circle;
+  }
+  .sub-flujos li {
+    margin-bottom: 6px;
+    font-size: 0.94rem;
+  }
+
+  code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.88em;
+    background: var(--code-bg);
+    color: var(--primary-dark);
+    padding: 0.15em 0.4em;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+  }
+
+  footer.footer {
+    margin-top: 36px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
+    font-size: 0.84rem;
+    color: var(--text-faint);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  footer.footer a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  footer.footer a:hover {
+    text-decoration: underline;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <header class="header">
+    <h1>Resumen</h1>
+    <p class="intro">
+      Guía resumida de actividades para Administrador Laesh por realizar en orden antes de iniciar los flujos operativos entre Médicos y Recepción.
+    </p>
+  </header>
+
+  <!-- Paso 1 -->
+  <div class="step-card">
+    <div class="step-header">
+      <h2 class="step-title">1. Login Administrador</h2>
+      <a class="manual-link" href="https://laesh.mx/manual-usuario.html#perfiles-roles" target="_blank" rel="noopener">
+        📖 Manual §1: Perfiles y Roles ↗
+      </a>
+    </div>
+    <ul class="step-list">
+      <li><strong>Acceso:</strong> Ingresar desde la <strong>píldora de acceso en el sitio web público</strong> (<code>https://laesh.mx</code>).</li>
+      <li><strong>Credenciales:</strong> Iniciar sesión con su celular de Administrador: <code>9531747410</code> y contraseña <code>0987654321</code> -- La cual puede cambiarla despues de crear otro usuario admin.</li>
+      <li><strong>Referencia:</strong> Ver matriz de facultades del Administrador en el <a class="manual-link" href="https://laesh.mx/manual-usuario.html#anexo-diagramas" target="_blank" rel="noopener">Anexo A (Diagrama 1)</a>.</li>
+    </ul>
+  </div>
+
+  <!-- Paso 2 -->
+  <div class="step-card">
+    <div class="step-header">
+      <h2 class="step-title">2. Alta de Personal de Recepción</h2>
+      <a class="manual-link" href="https://laesh.mx/manual-usuario.html#guion-uat" target="_blank" rel="noopener">
+        📖 Manual §5.1: Cuentas y Personal ↗
+      </a>
+    </div>
+    <ul class="step-list">
+      <li><strong>Ubicación:</strong> Menú lateral izquierdo <strong>«El Personal»</strong> (<em>Personal de Recepción y Administradores</em>) → Botón <strong>«+ Añadir Personal»</strong>.</li>
+      <li><strong>Campos obligatorios:</strong> Nombre, apellidos, teléfono celular de 10 dígitos (ej. <code>9531156870</code>), correo y contraseña inicial de exactamente 10 caracteres.</li>
+      <li><strong>Rol asignado:</strong> El sistema asigna automáticamente el rol <strong>Recepcionista</strong> por defecto.</li>
+      <li><strong>Prueba opcional de roles:</strong> Permite probar la asignación del rol <strong>SitioWeb</strong> o promover a un segundo Administrador, validando la protección que impide dejar al laboratorio sin ningún administrador activo (ver <a class="manual-link" href="https://laesh.mx/manual-usuario.html#perfiles-roles" target="_blank" rel="noopener">Manual §1: Detalle Administrador</a>).</li>
+    </ul>
+  </div>
+
+  <!-- Paso 3 -->
+  <div class="step-card dependencia">
+    <div class="step-header">
+      <h2 class="step-title">3. Alta Obligatoria de Universidades y Centros de Trabajo</h2>
+      <a class="manual-link" href="https://laesh.mx/manual-usuario.html#guion-uat" target="_blank" rel="noopener">
+        📖 Manual §5.1: Dependencia Catálogos ↗
+      </a>
+    </div>
+    <ul class="step-list">
+      <li><strong>Estado del sistema tras la purga:</strong> El script <code>limpiar_pruebas_uat.sh</code> trunca por completo la tabla <code>catalogos_ui</code> dejándola en 0 registros para garantizar un ambiente prístino.</li>
+      <li><strong>Dependencia obligatoria previa:</strong> En el formulario de alta de médicos, los selectores de <strong>Universidad</strong> y <strong>Lugar donde labora</strong> son obligatorios.</li>
+      <li><strong>Acción requerida:</strong> Debe registrar previamente en el sistema al menos <strong>1 Universidad</strong> (ej. <em>UNAM, UABJO o BUAP</em>) y <strong>1 Centro de Trabajo</strong> (ej. <em>Consultorio particular, Hospital General o Clínica privada</em>) antes de pasar al alta de médicos.</li>
+    </ul>
+  </div>
+
+  <!-- Paso 4 -->
+  <div class="step-card">
+    <div class="step-header">
+      <h2 class="step-title">4. Alta de Médicos Evaluadores</h2>
+      <a class="manual-link" href="https://laesh.mx/manual-usuario.html#guion-uat" target="_blank" rel="noopener">
+        📖 Manual §5.3: Módulo Médico ↗
+      </a>
+    </div>
+    <ul class="step-list">
+      <li><strong>Ubicación:</strong> Menú lateral izquierdo <strong>«Médicos»</strong> → Botón <strong>«+ Nuevo Médico»</strong>.</li>
+      <li><strong>Campos obligatorios:</strong> Nombre completo del médico, teléfono celular de 10 dígitos (ej. <code>9511156870</code>, será su usuario de acceso al Portal Médico), cédula profesional, especialidad, consultorio y contraseña inicial de 10 caracteres.</li>
+      <li><strong>Vinculación de catálogos:</strong> Seleccionar obligatoriamente la <strong>Universidad</strong> y el <strong>Lugar donde labora</strong> registrados en el Paso 3.</li>
+      <li><strong>Estado:</strong> Confirmar que el registro quede con estado <strong>Activo</strong>.</li>
+    </ul>
+  </div>
+
+  <!-- Paso 5 -->
+  <div class="step-card">
+    <div class="step-header">
+      <h2 class="step-title">5. Entrega de Credenciales e Inicio de los 7 Flujos de Pruebas de Aceptación de Usuario</h2>
+      <a class="manual-link" href="https://laesh.mx/manual-usuario.html#guion-uat" target="_blank" rel="noopener">
+        📖 Manual §5: Guión General de Pruebas de Aceptación ↗
+      </a>
+    </div>
+    <ul class="step-list">
+      <li><strong>Distribución de accesos:</strong> Indicar a Médicos y Recepción que ingresen desde la <strong>píldora de acceso en el sitio web público</strong> con su número celular de 10 dígitos y su contraseña inicial de 10 caracteres.</li>
+      <li><strong>Regla técnica en misma PC:</strong> Abrir el segundo rol en <strong>Ventana de Incógnito</strong> para aislar sesiones (ver <a class="manual-link" href="https://laesh.mx/manual-usuario.html#requisitos-tecnicos" target="_blank" rel="noopener">Manual §6: Aislamiento de Sesiones</a>).</li>
+      <li><strong>7 Flujos Operativos a validar paso a paso:</strong>
+        <ul class="sub-flujos">
+          <li><strong>Flujo 1 — Emisión de Solicitud (Médico):</strong> Captura ágil con botones <strong>Top 20</strong>, sugerencias y campo libre «Otros Estudios» → Generación de folio correlativo <code>#1</code> y descarga de PDF clínico (ver <a class="manual-link" href="https://laesh.mx/manual-usuario.html#flujos-operativos" target="_blank" rel="noopener">Manual §2: Ciclo de Vida</a>).</li>
+          <li><strong>Flujo 2 — Recepción en Vivo y Avance Parcial (Recepción):</strong> Notificación instantánea sonora (silbato) y campanita → Pase a «En Atención» → Carga de PDF marcado como <strong>parcial</strong> (ver <a class="manual-link" href="https://laesh.mx/manual-usuario.html#notificaciones-sistema" target="_blank" rel="noopener">Manual §4: Notificaciones</a>).</li>
+          <li><strong>Flujo 3 — Carga Definitiva y Cierre (Recepción):</strong> Carga de PDF marcado como <strong>completo</strong> → Transición a «Resultados Listos» (aviso al médico) → Entrega física y pase a «Cerrada» (ver <a class="manual-link" href="https://laesh.mx/manual-usuario.html#flujos-operativos" target="_blank" rel="noopener">Manual §2</a>).</li>
+          <li><strong>Flujo 4 — Cancelación con Motivo:</strong> Cancelación por Médico o Recepción exclusivamente mientras la solicitud se encuentre en estado «Remitido» (ver <a class="manual-link" href="https://laesh.mx/manual-usuario.html#flujos-operativos" target="_blank" rel="noopener">Manual §2: Regla de Cancelación</a>).</li>
+          <li><strong>Flujo 5 — Búsqueda y Navegación Dual:</strong> Búsqueda rápida por <strong>Lupita</strong> con <code>#folio</code> (apertura de todo el historial con salto y resaltado visual) y búsqueda en tabla con filtros de fecha (ver <a class="manual-link" href="https://laesh.mx/manual-usuario.html#busquedas-navegacion" target="_blank" rel="noopener">Manual §3: Búsquedas</a>).</li>
+          <li><strong>Flujo 6 — Reportes Interactivos y Perfil:</strong> Navegación reactiva desde tarjetas KPI de Reportes a las grillas; y prueba del <strong>cambio directo de contraseña</strong> en «Mi Perfil» por el médico (ver <a class="manual-link" href="https://laesh.mx/manual-usuario.html#guion-uat" target="_blank" rel="noopener">Manual §5.3</a>).</li>
+          <li><strong>Flujo 7 — Resguardo Local y Movilidad (Médico):</strong> Captura en smartphone probando recarga por deslizamiento (<em>pull-to-refresh</em>) y retorno desde el sitio web sin pérdida de datos ni cierre de sesión (ver <a class="manual-link" href="https://laesh.mx/manual-usuario.html#requisitos-tecnicos" target="_blank" rel="noopener">Manual §6</a> y <a class="manual-link" href="https://laesh.mx/manual-usuario.html#anexo-diagramas" target="_blank" rel="noopener">Anexo A: Diagrama 3</a>).</li>
+        </ul>
+      </li>
+      <li><strong>Registro de Hallazgos:</strong> Documentar cualquier observación en la <a class="manual-link" href="https://laesh.mx/manual-usuario.html#guion-uat" target="_blank" rel="noopener">Hoja de Registro de Incidencias (Manual §5.5)</a>.</li>
+    </ul>
+  </div>
+
+  <footer class="footer">
+    <div>Laboratorio de Especialidades Hematológicas · <strong>LAESH</strong></div>
+    <div>Documentación oficial: <a href="https://laesh.mx/manual-usuario.html" target="_blank" rel="noopener">Manual de Usuario Completo ↗</a></div>
+  </footer>
+</div>
+
+</body>
+</html>
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+## User Request
+
+/home/carlos/GitHub/caelitandem_home/portafolio-dev-2026/blocklabgd/v1.2/docUsuario/resumenpruebasBlockDigitalv100.html
+. añadele, ala introducción fecha de Lunes 5 Octubre 2026, version 1.0.0 rc
+. al url https://laesh.mx  ponle link real
+. este link [📖 Manual §5.1: Cuentas y Personal ↗](https://laesh.mx/manual-usuario.html#guion-uat)   no esta apuntando a donde corresponde de lo que exista de "Cuentas y Personal de acesso".
+. elimina: "Estado del sistema tras la purga: El script limpiar_pruebas_uat.sh trunca por completo la tabla catalogos_ui dejándola en 0 registros para garantizar un ambiente prístino."
+. revisa:"7 Flujos Operativos a validar paso a paso:" , no esta vinculando bien ninguno de las refs tipo [anual §2: Ciclo de Vida](https://laesh.mx/manual-usuario.html#flujos-operativos)).
+
+
+---
+
+## Agent Response
+
+### Thinking
+
+The specified file name, including the full path, is crucial; it's essential to determine if the intention is a rename operation or a copy with a new name. It's safe to assume a new file will be saved with the provided name.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `Personal`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.063667254s
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 4 Oct 2026, 9:49 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+Analyzing `manual-usuario.html`, the structure appears to be: section one describes user profiles and their associated actions (e.g., doctor, receptionist). Section two outlines operational workflows and request states (e.g., submitted, in-progress, results ready). Finally, section three covers search functionality and navigation. This breakdown informs how to extract and categorize the relevant information.
+
+
+The provided link does not directly target the section detailing accounts and access permissions within the manual. Two alternative anchor points are identified: one in Chapter 1 (`#perfiles-roles`), and another, also relevant, within the UAT script section (`#guion-uat`). Chapter 1, specifically, provides an accurate description of user profiles and associated access. The suggestion is to update the link to point to the correct section within Chapter 1.
+
+
+Verifying the links within the "Flujos Operativos" section reveals several discrepancies. Some links point to incorrect sections within the manual, specifically concerning the "Ciclo de Vida" references. The first four links are verified and point to the correct sections. Link 5 is referencing the search function. Link 6 points to reports and profile. Link 7 is not fully provided to evaluate it.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 9.241390820s
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Oct 2026, 9:50 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `resumenpruebasBlockDigitalv100.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resumen — Guía Operativa de Pruebas de Aceptación de Usuario | LAESH</title>
+<meta name="description" content="Guía resumida de actividades para Administrador Laesh por realizar en orden antes de iniciar los flujos operativos entre Médicos y Recepción. Versión 1.0.0 rc — Lunes 5 Octubre 2026.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Source+Sans+3:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #0052B7;
+    --primary-dark: #003e8c;
+    --primary-light: #e8f0fc;
+    --accent: #16a34a;
+    --accent-light: #eafaf1;
+    --bg: #f8fafc;
+    --surface: #ffffff;
+    --surface-2: #f1f5f9;
+    --border: #dde4f0;
+    --text-main: #1b2535;
+    --text-muted: #475569;
+    --text-faint: #64748b;
+    --code-bg: #eef2f9;
+    --shadow: 0 1px 3px rgba(20, 35, 70, 0.06), 0 8px 24px rgba(20, 35, 70, 0.05);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text-main);
+    font-family: 'Source Sans 3', system-ui, -apple-system, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    padding: 24px 16px;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 36px 32px;
+    box-shadow: var(--shadow);
+  }
+
+  header.header {
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 20px;
+    margin-bottom: 28px;
+  }
+
+  .header-meta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--primary);
+    background: var(--primary-light);
+    padding: 4px 12px;
+    border-radius: 999px;
+    margin-bottom: 12px;
+  }
+
+  h1 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.3rem);
+    color: var(--text-main);
+    margin: 0 0 10px;
+    line-height: 1.25;
+  }
+
+  p.intro {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  /* Tarjetas de Pasos */
+  .step-card {
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--primary);
+    border-radius: 10px;
+    padding: 20px 22px;
+    margin-bottom: 20px;
+    background: #ffffff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+  }
+  .step-card.dependencia {
+    border-left-color: #f59e0b;
+    background: #fffdfa;
+  }
+  .step-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .step-title {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 1.25rem;
+    color: var(--primary-dark);
+    margin: 0;
+  }
+  .step-card.dependencia .step-title {
+    color: #92400e;
+  }
+
+  .manual-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--primary);
+    background: var(--primary-light);
+    border: 1px solid color-mix(in srgb, var(--primary) 25%, transparent);
+    padding: 3px 9px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: all 0.15s ease;
+  }
+  .manual-link:hover {
+    background: var(--primary);
+    color: #ffffff;
+    border-color: var(--primary);
+  }
+
+  ul.step-list {
+    margin: 0;
+    padding-left: 1.2em;
+  }
+  ul.step-list li {
+    margin-bottom: 8px;
+    color: var(--text-main);
+  }
+  ul.step-list li:last-child {
+    margin-bottom: 0;
+  }
+  ul.step-list strong {
+    color: #0f172a;
+  }
+
+  .sub-flujos {
+    margin-top: 10px;
+    padding-left: 1.1em;
+    list-style-type: circle;
+  }
+  .sub-flujos li {
+    margin-bottom: 10px;
+    font-size: 0.94rem;
+    line-height: 1.55;
+  }
+
+  code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.88em;
+    background: var(--code-bg);
+    color: var(--primary-dark);
+    padding: 0.15em 0.4em;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+  }
+
+  a.web-link {
+    color: var(--primary);
+    text-decoration: underline;
+    font-weight: 600;
+  }
+  a.web-link:hover {
+    color: var(--primary-dark);
+  }
+
+  footer.footer {
+    margin-top: 36px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
+    font-size: 0.84rem;
+    color: var(--text-faint);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  footer.footer a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  footer.footer a:hover {
+    text-decoration: underline;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <header class="header">
+    <div class="header-meta">📅 Lunes 5 Octubre 2026 &nbsp;·&nbsp; Versión 1.0.0 rc</div>
+    <h1>Resumen</h1>
+    <p class="intro">
+      Guía resumida de actividades para Administrador Laesh por realizar en orden antes de iniciar los flujos operativos entre Médicos y Recepción.
+    </p>
+  </header>
+
+  <!-- Paso 1 -->
+  <div class="step-card">
+    <div class="step-header">
+      <h2 class="step-title">1. Login Administrador</h2>
+      <a class="manual-link" href="https://laesh.mx/manual-usuario.html#perfiles-roles" target="_blank" rel="noopener">
+        📖 Manual §1: Perfiles y Roles ↗
+      </a>
+    </div>
+    <ul class="step-list">
+      <li><strong>Acceso:</strong> Ingresar desde la <strong>píldora de acceso en el sitio web público</strong> (<a class="web-link" href="https://laesh.mx" target="_blank" rel="noopener">https://laesh.mx</a>).</li>
+      <li><strong>Credenciales:</strong> Iniciar sesión con su celular de Administrador: <code>9531747410</code> y contraseña <code>0987654321</code> -- La cual puede cambiarla despues de crear otro usuario admin.</li>
+      <li><strong>Referencia:</strong> Ver matriz de facultades del Administrador en el <a class="manual-link" href="https://laesh.mx/manual-usuario.html#anexo-diagramas" target="_blank" rel="noopener">Anexo A (Diagrama 1)</a>.</li>
+    </ul>
+  </div>
+
+  <!-- Paso 2 -->
+  <div class="step-card">
+    <div class="step-header">
+      <h2 class="step-title">2. Alta de Personal de Recepción</h2>
+      <a class="manual-link" href="https://laesh.mx/manual-usuario.html#perfiles-roles" target="_blank" rel="noopener">
+        📖 Manual §1: Cuentas y Personal de Acceso ↗
+      </a>
+    </div>
+    <ul class="step-list">
+      <li><strong>Ubicación:</strong> Menú lateral izquierdo <strong>«El Personal»</strong> (<em>Personal de Recepción y Administradores</em>) → Botón <strong>«+ Añadir Personal»</strong>.</li>
+      <li><strong>Campos obligatorios:</strong> Nombre, apellidos, teléfono celular de 10 dígitos (ej. <code>9531156870</code>), correo y contraseña inicial de exactamente 10 caracteres.</li>
+      <li><strong>Rol asignado:</strong> El sistema asigna automáticamente el rol <strong>Recepcionista</strong> por defecto.</li>
+      <li><strong>Prueba opcional de roles:</strong> Permite probar la asignación del rol <strong>SitioWeb</strong> o promover a un segundo Administrador, validando la protección que impide dejar al laboratorio sin ningún administrador activo (ver <a class="manual-link" href="https://laesh.mx/manual-usuario.html#perfiles-roles" target="_blank" rel="noopener">Manual §1: Detalle Administrador</a>).</li>
+    </ul>
+  </div>
+
+  <!-- Paso 3 -->
+  <div class="step-card dependencia">
+    <div class="step-header">
+      <h2 class="step-title">3. Alta Obligatoria de Universidades y Centros de Trabajo</h2>
+      <a class="manual-link" href="https://laesh.mx/manual-usuario.html#guion-uat" target="_blank" rel="noopener">
+        📖 Manual §5.1: Dependencia Catálogos ↗
+      </a>
+    </div>
+    <ul class="step-list">
+      <li><strong>Dependencia obligatoria previa:</strong> En el formulario de alta de médicos, los selectores de <strong>Universidad</strong> y <strong>Lugar donde labora</strong> son obligatorios.</li>
+      <li><strong>Acción requerida:</strong> Debe registrar previamente en el sistema al menos <strong>1 Universidad</strong> (ej. <em>UNAM, UABJO o BUAP</em>) y <strong>1 Centro de Trabajo</strong> (ej. <em>Consultorio particular, Hospital General o Clínica privada</em>) antes de pasar al alta de médicos.</li>
+    </ul>
+  </div>
+
+  <!-- Paso 4 -->
+  <div class="step-card">
+    <div class="step-header">
+      <h2 class="step-title">4. Alta de Médicos Evaluadores</h2>
+      <a class="manual-link" href="https://laesh.mx/manual-usuario.html#guion-uat" target="_blank" rel="noopener">
+        📖 Manual §5.3: Módulo Médico ↗
+      </a>
+    </div>
+    <ul class="step-list">
+      <li><strong>Ubicación:</strong> Menú lateral izquierdo <strong>«Médicos»</strong> → Botón <strong>«+ Nuevo Médico»</strong>.</li>
+      <li><strong>Campos obligatorios:</strong> Nombre completo del médico, teléfono celular de 10 dígitos (ej. <code>9511156870</code>, será su usuario de acceso al Portal Médico), cédula profesional, especialidad, consultorio y contraseña inicial de 10 caracteres.</li>
+      <li><strong>Vinculación de catálogos:</strong> Seleccionar obligatoriamente la <strong>Universidad</strong> y el <strong>Lugar donde labora</strong> registrados en el Paso 3.</li>
+      <li><strong>Estado:</strong> Confirmar que el registro quede con estado <strong>Activo</strong>.</li>
+    </ul>
+  </div>
+
+  <!-- Paso 5 -->
+  <div class="step-card">
+    <div class="step-header">
+      <h2 class="step-title">5. Entrega de Credenciales e Inicio de los 7 Flujos de Pruebas de Aceptación de Usuario</h2>
+      <a class="manual-link" href="https://laesh.mx/manual-usuario.html#guion-uat" target="_blank" rel="noopener">
+        📖 Manual §5: Guión General de Pruebas ↗
+      </a>
+    </div>
+    <ul class="step-list">
+      <li><strong>Distribución de accesos:</strong> Indicar a Médicos y Recepción que ingresen desde la <strong>píldora de acceso en el sitio web público</strong> (<a class="web-link" href="https://laesh.mx" target="_blank" rel="noopener">https://laesh.mx</a>) con su número celular de 10 dígitos y su contraseña inicial de 10 caracteres.</li>
+      <li><strong>Regla técnica en misma PC:</strong> Abrir el segundo rol en <strong>Ventana de Incógnito</strong> para aislar sesiones (ver <a class="manual-link" href="https://laesh.mx/manual-usuario.html#requisitos-tecnicos" target="_blank" rel="noopener">Manual §6: Aislamiento de Sesiones</a>).</li>
+      <li><strong>7 Flujos Operativos a validar paso a paso:</strong>
+        <ul class="sub-flujos">
+          <li><strong>Flujo 1 — Emisión de Solicitud (Médico):</strong> Captura ágil con botones <strong>Top 20</strong>, sugerencias y campo libre «Otros Estudios» → Generación de folio correlativo <code>#1</code> y descarga de PDF clínico (ver <a class="manual-link" href="https://laesh.mx/manual-usuario.html#flujos-operativos" target="_blank" rel="noopener">Manual §2: Ciclo de Solicitud</a>).</li>
+          <li><strong>Flujo 2 — Recepción en Vivo y Avance Parcial (Recepción):</strong> Notificación instantánea sonora (silbato) y campanita → Pase a «En Atención» → Carga de PDF marcado como <strong>parcial</strong> (ver <a class="manual-link" href="https://laesh.mx/manual-usuario.html#notificaciones-sistema" target="_blank" rel="noopener">Manual §4: Notificaciones</a>).</li>
+          <li><strong>Flujo 3 — Carga Definitiva y Cierre (Recepción):</strong> Carga de PDF marcado como <strong>completo</strong> → Transición a «Resultados Listos» (aviso al médico) → Entrega física y pase a «Cerrada» (ver <a class="manual-link" href="https://laesh.mx/manual-usuario.html#flujos-operativos" target="_blank" rel="noopener">Manual §2: Estados de Solicitud</a>).</li>
+          <li><strong>Flujo 4 — Cancelación con Motivo:</strong> Cancelación por Médico o Recepción exclusivamente mientras la solicitud se encuentre en estado «Remitido» (ver <a class="manual-link" href="https://laesh.mx/manual-usuario.html#flujos-operativos" target="_blank" rel="noopener">Manual §2: Regla de Cancelación</a>).</li>
+          <li><strong>Flujo 5 — Búsqueda y Navegación Dual:</strong> Búsqueda rápida por <strong>Lupita</strong> con <code>#folio</code> (apertura de todo el historial con salto y resaltado visual) y búsqueda en tabla con filtros de fecha (ver <a class="manual-link" href="https://laesh.mx/manual-usuario.html#busquedas-navegacion" target="_blank" rel="noopener">Manual §3: Búsquedas y Lupita</a>).</li>
+          <li><strong>Flujo 6 — Reportes Interactivos y Perfil:</strong> Navegación reactiva desde tarjetas KPI de Reportes a las grillas; y prueba del <strong>cambio directo de contraseña</strong> en «Mi Perfil» por el médico (ver <a class="manual-link" href="https://laesh.mx/manual-usuario.html#guion-uat" target="_blank" rel="noopener">Manual §5.3: Módulo Médico</a>).</li>
+          <li><strong>Flujo 7 — Resguardo Local y Movilidad (Médico):</strong> Captura en smartphone probando recarga por deslizamiento (<em>pull-to-refresh</em>) y retorno desde el sitio web sin pérdida de datos ni cierre de sesión (ver <a class="manual-link" href="https://laesh.mx/manual-usuario.html#requisitos-tecnicos" target="_blank" rel="noopener">Manual §6: Requisitos Técnicos</a> y <a class="manual-link" href="https://laesh.mx/manual-usuario.html#anexo-diagramas" target="_blank" rel="noopener">Anexo A: Diagrama 3</a>).</li>
+        </ul>
+      </li>
+      <li><strong>Registro de Hallazgos:</strong> Documentar cualquier observación en la <a class="manual-link" href="https://laesh.mx/manual-usuario.html#guion-uat" target="_blank" rel="noopener">Hoja de Registro de Incidencias (Manual §5.5)</a>.</li>
+    </ul>
+  </div>
+
+  <footer class="footer">
+    <div>Laboratorio de Especialidades Hematológicas · <strong>LAESH</strong></div>
+    <div>Documentación oficial: <a href="https://laesh.mx/manual-usuario.html" target="_blank" rel="noopener">Manual de Usuario Completo ↗</a></div>
+  </footer>
+</div>
+
+</body>
+</html>
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+## User Request
+
+sobre: /home/carlos/GitHub/caelitandem_home/portafolio-dev-2026/blocklabgd/v1.2/docUsuario/manual-usuario.html
+complementa dond corresponda para se mencione  Universidades y Centros de Trabajo pues en resumenpruebasBlockDigitalv100 se referencia y no hya seccion
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `5.1`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 4 Oct 2026, 9:55 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `manual-usuario.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1299-1339)</summary>
+
+**Path:** `Unknown file`
+
+```
+      </p>
+
+      <h3>4. Localizar una solicitud</h3>
+      <p class="muted">Ya descrito a detalle en <a href="#busquedas-navegacion">"Búsquedas y navegación"</a> — en resumen:</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Vía</th><th>Pasos</th></tr></thead>
+          <tbody>
+            <tr><td>Lupita</td><td>1. Escribir folio, nombre, teléfono o diagnóstico → 2. Elegir de la lista → 3. El sistema salta directo a la fila, sin importar el período.</td></tr>
+            <tr><td>Buscador de la tabla</td><td>1. Escribir en "Hoy" o "Anteriores" → 2. La tabla se filtra de forma instantánea → 3. (en Anteriores) ajustar el período si no aparece.</td></tr>
+            <tr><td>Notificación</td><td>1. Clic en un aviso de la campanita → 2. El sistema salta directo a la solicitud correspondiente.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>5. Gestión de personal (Administrador y Recepción)</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Flujo</th><th>Pasos</th><th>Quién puede</th></tr></thead>
+          <tbody>
+            <tr><td>Alta de un médico</td><td>1. En el módulo "Médicos", presionar "Añadir registro" → 2. Completar el formulario a dos columnas con datos profesionales, celular (10 dígitos) y Contraseña Inicial / NIP (10 caracteres) → 3. Guardar perfil; el médico ya puede acceder de inmediato a su portal.</td><td><span class="chip rc">Recepción</span> / Admin</td></tr>
+            <tr><td>Pausar / reactivar médico</td><td>1. Localizar al médico en la lista → 2. Presionar el icono de pausa/reactivación → 3. Pierde o recupera el acceso al portal de inmediato.</td><td><span class="chip rc">Recepción</span> / Admin</td></tr>
+            <tr><td>Restablecer contraseña / NIP</td><td>1. Localizar a la persona en la lista → 2. Presionar el icono de llave y asignar la nueva contraseña de 10 caracteres → 3. Sus sesiones activas se revocan de inmediato y debe ingresar con la nueva clave.</td><td>Recepción (solo médicos) / Admin (cualquiera)</td></tr>
+            <tr><td>Gestión de colaboradores ("El Personal")</td><td>1. En el menú "El Personal", dar de alta a un colaborador con su NIP inicial de 10 caracteres (ingresa por defecto como Recepcionista) o presionar su número (#) para editar datos y rol → 2. Alternar entre roles (Recepcionista, Administrador o SitioWeb) y pausar/reactivar colaboradores → 3. Los permisos se actualizan de inmediato asegurando la continuidad de administradores activos.</td><td>Solo Admin</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>6. Gestión del catálogo de estudios y del Sitio Web</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Flujo</th><th>Pasos</th><th>Quién puede</th></tr></thead>
+          <tbody>
+            <tr><td>Actualizar el catálogo de estudios</td><td>1. Editar un estudio, precio o categoría → 2. Guardar → 3. El cambio queda disponible de inmediato para todo el personal, sin reiniciar nada.</td><td>Solo Admin</td></tr>
+            <tr><td>Actualizar el Sitio Web</td><td>1. Entrar al módulo "Contenidos del Sitio Web" → 2. Editar la sección deseada (imágenes de portada, ubicación, promociones, etc.) → 3. Publicar — el público ve el cambio de inmediato.</td><td>Admin / Rol SitioWeb</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="chapter" id="busquedas-navegacion">
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `manual-usuario.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1764-1824)</summary>
+
+**Path:** `Unknown file`
+
+```
+      </div>
+
+      <h3>5.1 Catálogo de Cuentas y Gestión de Perfiles de Prueba</h3>
+      <p>
+        Se recomienda que el propio equipo evaluador se encargue de administrar, configurar y alternar
+        las cuentas de prueba directamente en el sistema:
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Rol a Validar</th>
+              <th>Pantalla de Creación y Gestión</th>
+              <th>Acciones Clave que Debe Realizar el Evaluador</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="chip md">Médico</span></td>
+              <td>Portal de Recepción (Menú <em>Médicos</em>)</td>
+              <td>
+                • Dar de alta médicos de prueba con un número celular de 10 dígitos (ej. <code>9990000001</code>).<br>
+                • Asignar una contraseña/NIP inicial de exactamente 10 caracteres.<br>
+                • Iniciar sesión en el Portal Médico y probar el <strong>cambio de contraseña por el propio médico</strong> desde "Mi Perfil" (función exclusiva para médicos).
+              </td>
+            </tr>
+            <tr>
+              <td><span class="chip rc">Recepcionista</span></td>
+              <td>Portal Administrador (Menú <em>El Personal</em>)</td>
+              <td>
+                • Dar de alta colaboradores (el sistema les asigna automáticamente el rol <strong>Recepcionista</strong> por defecto).<br>
+                • Validar que la cuenta carece de opción de cambio directo de contraseña en su perfil y que el restablecimiento se realiza exitosamente desde el panel de Personal del Administrador.
+              </td>
+            </tr>
+            <tr>
+              <td><span class="chip sitioweb">Sitio Web</span></td>
+              <td>Portal Administrador (Menú <em>El Personal</em>)</td>
+              <td>
+                • En el cuadro de diálogo de edición de personal, cambiar la lista de opciones de rol a <strong>SitioWeb</strong>.<br>
+                • Verificar que al iniciar sesión solo puede acceder a la gestión de contenidos públicos del sitio web, sin acceso a expedientes clínicos ni solicitudes de pacientes.
+              </td>
+            </tr>
+            <tr>
+              <td><span class="chip admin">Administrador</span></td>
+              <td>Portal Administrador (Menú <em>El Personal</em>)</td>
+              <td>
+                • <strong>Promover usuario:</strong> Cambiar el rol de un colaborador de Recepción a Administrador.<br>
+                • <strong>Reasignar rol:</strong> Cambiar el rol de un Administrador a Recepcionista o SitioWeb cuando existan otros administradores activos.<br>
+                • <strong>Regla de protección de seguridad:</strong> Intentar quitar los permisos al único Administrador activo del laboratorio y confirmar que el sistema bloquea la acción para impedir que el laboratorio se quede sin ningún Administrador asignado.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>5.2 Datos de Prueba Sugeridos (Pacientes, Diagnósticos y Estudios)</h3>
+      <p>
+        Los evaluadores deben encargarse de crear y usar nombres ficticios de pacientes y diagnósticos clínicos
+        representativos, combinando libremente los tres mecanismos de selección de estudios disponibles en la solicitud digital:
+      </p>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The user manual appears to require an update. There are several potential locations for adding the new content: Chapter 1, Chapter 2, or Chapter 5.1. The content will either be a sub-item in "Gestión de personal" within Chapter 1 or 2, or added as a new section in Chapter 5.1. The addition requires an appropriate heading.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `manual-usuario.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.134334939s
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1799-1834)</summary>
+
+**Path:** `Unknown file`
+
+```
+            <tr>
+              <td><span class="chip sitioweb">Sitio Web</span></td>
+              <td>Portal Administrador (Menú <em>El Personal</em>)</td>
+              <td>
+                • En el cuadro de diálogo de edición de personal, cambiar la lista de opciones de rol a <strong>SitioWeb</strong>.<br>
+                • Verificar que al iniciar sesión solo puede acceder a la gestión de contenidos públicos del sitio web, sin acceso a expedientes clínicos ni solicitudes de pacientes.
+              </td>
+            </tr>
+            <tr>
+              <td><span class="chip admin">Administrador</span></td>
+              <td>Portal Administrador (Menú <em>El Personal</em>)</td>
+              <td>
+                • <strong>Promover usuario:</strong> Cambiar el rol de un colaborador de Recepción a Administrador.<br>
+                • <strong>Reasignar rol:</strong> Cambiar el rol de un Administrador a Recepcionista o SitioWeb cuando existan otros administradores activos.<br>
+                • <strong>Regla de protección de seguridad:</strong> Intentar quitar los permisos al único Administrador activo del laboratorio y confirmar que el sistema bloquea la acción para impedir que el laboratorio se quede sin ningún Administrador asignado.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>5.2 Datos de Prueba Sugeridos (Pacientes, Diagnósticos y Estudios)</h3>
+      <p>
+        Los evaluadores deben encargarse de crear y usar nombres ficticios de pacientes y diagnósticos clínicos
+        representativos, combinando libremente los tres mecanismos de selección de estudios disponibles en la solicitud digital:
+      </p>
+
+      <ul>
+        <li><strong>Botones de acceso rápido "Top 20 Estudios":</strong> Selección ágil con un solo clic de los estudios más recurrentes (ej. <em>Biometría Hemática</em>, <em>Glucosa</em>, <em>Examen General de Orina</em>).</li>
+        <li><strong>Buscador del catálogo con sugerencias:</strong> Búsqueda instantánea por nombre clínico o clave de catálogo.</li>
+        <li><strong>Campo libre "Otros Estudios":</strong> Captura de análisis especiales o complementarios no digitalizados en el catálogo, confirmando que viajen íntegros en la solicitud digital y su PDF emitido.</li>
+      </ul>
+
+      <p>Se recomienda diseñar y provocar intencionalmente los cuatro escenarios operativos principales:</p>
+      <div class="table-wrap">
+        <table>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Analyzing `manual-usuario.html`, specifically section 5 "Gestión de personal". Examining lines 1315-1326 to understand the "Alta de un médico" process. This will help understand what the administrator and receptionist can do in this regard.
+
+
+The "Alta de un médico" process involves form completion with professional details, a 10-digit cell phone number, selection from university and work center catalogs, and an initial 10-character password. Saving the profile grants immediate access to the portal. Management of universities and work centers includes adding entries to catalogs, which are immediately available for physician registration. Pausing/reactivating a doctor involves locating them in the list and toggling the pause/reactivate icon, instantly affecting portal access. Password/NIP resets require finding the person, assigning a new 10-character password, and revoking active sessions.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `manual-usuario.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.899718513s
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L269-339)</summary>
+
+**Path:** `Unknown file`
+
+```
+    text-transform: uppercase;
+    color: var(--text-faint);
+    margin: 18px 0 6px 0;
+    text-align: left;
+  }
+  .toc-group-title:first-of-type { margin-top: 10px; }
+  .toc-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    text-align: left;
+  }
+  .toc-list li {
+    margin: 0;
+    text-align: left;
+  }
+  .toc-list a {
+    display: flex;
+    align-items: baseline;
+    gap: 7px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-align: left;
+    transition: background 0.12s ease, color 0.12s ease;
+  }
+  .toc-list a:hover {
+    background: var(--surface-2);
+    color: var(--text-main);
+  }
+  .toc-list a.current {
+    background: var(--primary-light);
+    color: var(--primary-dark);
+    font-weight: 600;
+  }
+  .toc-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--primary);
+    min-width: 1.5em;
+    flex-shrink: 0;
+    text-align: left;
+  }
+  .toc-text {
+    flex: 1;
+    text-align: left;
+  }
+  .toc-pending-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    text-align: left;
+  }
+  .toc-pending-item {
+    padding: 5px 10px;
+    font-size: 0.82rem;
+    color: var(--text-faint);
+    font-style: italic;
+    text-align: left;
+  }
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `manual-usuario.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L849-919)</summary>
+
+**Path:** `Unknown file`
+
+```
+<div class="shell">
+
+  <nav class="toc-col" id="indice" aria-label="Índice del manual">
+    <div class="toc-header-wrap">
+      <p class="toc-label">Índice del Manual</p>
+      <p class="toc-subtitle">Guía de navegación clínica</p>
+    </div>
+
+    <p class="toc-group-title">Módulo I — Fundamentos</p>
+    <ul class="toc-list">
+      <li>
+        <a href="#inicio">
+          <span class="toc-num">0.</span>
+          <span class="toc-text">Introducción</span>
+        </a>
+      </li>
+      <li>
+        <a href="#perfiles-roles">
+          <span class="toc-num">1.</span>
+          <span class="toc-text">Perfiles y Permisos</span>
+        </a>
+      </li>
+    </ul>
+
+    <p class="toc-group-title">Módulo II — Operación</p>
+    <ul class="toc-list">
+      <li>
+        <a href="#flujos-operativos">
+          <span class="toc-num">2.</span>
+          <span class="toc-text">Flujos Operativos Paso a Paso</span>
+        </a>
+      </li>
+      <li>
+        <a href="#busquedas-navegacion">
+          <span class="toc-num">3.</span>
+          <span class="toc-text">Búsquedas y Navegación</span>
+        </a>
+      </li>
+      <li>
+        <a href="#notificaciones-sistema">
+          <span class="toc-num">4.</span>
+          <span class="toc-text">Notificaciones del Sistema</span>
+        </a>
+      </li>
+      <li>
+        <a href="#guion-uat">
+          <span class="toc-num">5.</span>
+          <span class="toc-text">Guión General de Pruebas de Aceptación</span>
+        </a>
+      </li>
+      <li>
+        <a href="#requisitos-tecnicos">
+          <span class="toc-num">6.</span>
+          <span class="toc-text">Requisitos Técnicos</span>
+        </a>
+      </li>
+      <li>
+        <a href="#anexo-diagramas">
+          <span class="toc-num">A.</span>
+          <span class="toc-text">Anexo A: Diagramas Explicativos</span>
+        </a>
+      </li>
+      <li>
+        <a href="#anexo-parametros">
+          <span class="toc-num">B.</span>
+          <span class="toc-text">Anexo B: Parámetros Operativos</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Documentation for Universidades and Centros de Trabajo requires incorporation into `manual-usuario.html`. This involves adding content within Chapter 2, specifically section §5 (Gestión de personal), and Chapter 5.1 using the `id="catalogos-universidades-centros"`.
+
+Additionally, the link within `resumenpruebasBlockDigitalv100.html` in Paso 3 requires an update to directly target the documentation section at `https://laesh.mx/manual-usuario.html#catalogos-universidades-centros`. The specified lines of code need review as well.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.020547342s
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** CORTEX_STEP_STATUS_ERROR
+**Created:** 4 Oct 2026, 9:55 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Oct 2026, 9:55 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Oct 2026, 9:56 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Oct 2026, 9:56 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `manual-usuario.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1809-1849)</summary>
+
+**Path:** `Unknown file`
+
+```
+              <td><span class="chip admin">Administrador</span></td>
+              <td>Portal Administrador (Menú <em>El Personal</em>)</td>
+              <td>
+                • <strong>Promover usuario:</strong> Cambiar el rol de un colaborador de Recepción a Administrador.<br>
+                • <strong>Reasignar rol:</strong> Cambiar el rol de un Administrador a Recepcionista o SitioWeb cuando existan otros administradores activos.<br>
+                • <strong>Regla de protección de seguridad:</strong> Intentar quitar los permisos al único Administrador activo del laboratorio y confirmar que el sistema bloquea la acción para impedir que el laboratorio se quede sin ningún Administrador asignado.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4 id="catalogos-universidades-centros">Catálogos de Apoyo: Universidades y Centros de Trabajo (catalogos_ui)</h4>
+      <p>
+        Para garantizar la integridad y homologación de los perfiles médicos, el formulario de alta de médicos no utiliza texto libre en los campos institucionales, sino selectores vinculados a los catálogos de <strong>Universidades</strong> y <strong>Lugares de Trabajo (Centros de Trabajo)</strong>.
+      </p>
+
+      <div class="callout rule">
+        <span class="callout-icon">📌</span>
+        <p>
+          <strong>Dependencia Previa para el Registro de Médicos:</strong><br>
+          Toda institución educativa de egreso (ej. <em>UNAM, UABJO, BUAP, IPN, UAM, UAG, Universidad Veracruzana</em>) o centro de trabajo clínico (ej. <em>Consultorio particular, Hospital General de Huajuapan, IMSS, ISSSTE, Clínica privada, Hospital Regional</em>) debe existir en el catálogo del sistema para poder ser seleccionada al registrar a un médico. En caso de que un médico evaluador pertenezca a una institución particular no listada, el Administrador o Recepción debe darla de alta previamente desde la gestión de catálogos.
+        </p>
+      </div>
+
+      <h3>5.2 Datos de Prueba Sugeridos (Pacientes, Diagnósticos y Estudios)</h3>
+      <p>
+        Los evaluadores deben encargarse de crear y usar nombres ficticios de pacientes y diagnósticos clínicos
+        representativos, combinando libremente los tres mecanismos de selección de estudios disponibles en la solicitud digital:
+      </p>
+
+      <ul>
+        <li><strong>Botones de acceso rápido "Top 20 Estudios":</strong> Selección ágil con un solo clic de los estudios más recurrentes (ej. <em>Biometría Hemática</em>, <em>Glucosa</em>, <em>Examen General de Orina</em>).</li>
+        <li><strong>Buscador del catálogo con sugerencias:</strong> Búsqueda instantánea por nombre clínico o clave de catálogo.</li>
+        <li><strong>Campo libre "Otros Estudios":</strong> Captura de análisis especiales o complementarios no digitalizados en el catálogo, confirmando que viajen íntegros en la solicitud digital y su PDF emitido.</li>
+      </ul>
+
+      <p>Se recomienda diseñar y provocar intencionalmente los cuatro escenarios operativos principales:</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `resumenpruebasBlockDigitalv100.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L239-259)</summary>
+
+**Path:** `Unknown file`
+
+```
+      <li><strong>Prueba opcional de roles:</strong> Permite probar la asignación del rol <strong>SitioWeb</strong> o promover a un segundo Administrador, validando la protección que impide dejar al laboratorio sin ningún administrador activo (ver <a class="manual-link" href="https://laesh.mx/manual-usuario.html#perfiles-roles" target="_blank" rel="noopener">Manual §1: Detalle Administrador</a>).</li>
+    </ul>
+  </div>
+
+  <!-- Paso 3 -->
+  <div class="step-card dependencia">
+    <div class="step-header">
+      <h2 class="step-title">3. Alta Obligatoria de Universidades y Centros de Trabajo</h2>
+      <a class="manual-link" href="https://laesh.mx/manual-usuario.html#guion-uat" target="_blank" rel="noopener">
+        📖 Manual §5.1: Dependencia Catálogos ↗
+      </a>
+    </div>
+    <ul class="step-list">
+      <li><strong>Dependencia obligatoria previa:</strong> En el formulario de alta de médicos, los selectores de <strong>Universidad</strong> y <strong>Lugar donde labora</strong> son obligatorios.</li>
+      <li><strong>Acción requerida:</strong> Debe registrar previamente en el sistema al menos <strong>1 Universidad</strong> (ej. <em>UNAM, UABJO o BUAP</em>) y <strong>1 Centro de Trabajo</strong> (ej. <em>Consultorio particular, Hospital General o Clínica privada</em>) antes de pasar al alta de médicos.</li>
+    </ul>
+  </div>
+
+  <!-- Paso 4 -->
+  <div class="step-card">
+    <div class="step-header">
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Oct 2026, 9:57 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+## User Request
+
+Analiza e identifica que otros temas estan rotos entre resumenpruebasBlockDigitalv100.html , y manual-usuario.html  y complementa para esten sincronizados. Ya no aumentar mas contenido en resumenpruebasBlockDigitalv100
+
+---
+
+## Agent Response
+
+### Thinking
+
+Initiating a comprehensive comparison between `resumenpruebasBlockDigitalv100.html` and `manual-usuario.html`, focusing on identifying discrepancies in links and anchors. The goal is to ensure consistency and synchronization between these two documents. Content updates will be limited to `manual-usuario.html`, while `resumenpruebasBlockDigitalv100.html` should remain unchanged.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.119186179s
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Oct 2026, 10:00 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+All expected anchors exist in the user manual. However, it's crucial to verify if the manual's structure includes section-specific IDs or deeper anchors to ensure links target the precise content section rather than the chapter's beginning. Currently, reviewing links in a separate document to evaluate this, starting with a specific link that requires deeper navigation.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `9531747410`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.066124489s
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 4 Oct 2026, 10:00 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `manual-usuario.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1764-1819)</summary>
+
+**Path:** `Unknown file`
+
+```
+        </p>
+      </div>
+
+      <h3>5.1 Catálogo de Cuentas y Gestión de Perfiles de Prueba</h3>
+      <p>
+        Se recomienda que el propio equipo evaluador se encargue de administrar, configurar y alternar
+        las cuentas de prueba directamente en el sistema:
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Rol a Validar</th>
+              <th>Pantalla de Creación y Gestión</th>
+              <th>Acciones Clave que Debe Realizar el Evaluador</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="chip md">Médico</span></td>
+              <td>Portal de Recepción (Menú <em>Médicos</em>)</td>
+              <td>
+                • Dar de alta médicos de prueba con un número celular de 10 dígitos (ej. <code>9990000001</code>).<br>
+                • Asignar una contraseña/NIP inicial de exactamente 10 caracteres.<br>
+                • Iniciar sesión en el Portal Médico y probar el <strong>cambio de contraseña por el propio médico</strong> desde "Mi Perfil" (función exclusiva para médicos).
+              </td>
+            </tr>
+            <tr>
+              <td><span class="chip rc">Recepcionista</span></td>
+              <td>Portal Administrador (Menú <em>El Personal</em>)</td>
+              <td>
+                • Dar de alta colaboradores (el sistema les asigna automáticamente el rol <strong>Recepcionista</strong> por defecto).<br>
+                • Validar que la cuenta carece de opción de cambio directo de contraseña en su perfil y que el restablecimiento se realiza exitosamente desde el panel de Personal del Administrador.
+              </td>
+            </tr>
+            <tr>
+              <td><span class="chip sitioweb">Sitio Web</span></td>
+              <td>Portal Administrador (Menú <em>El Personal</em>)</td>
+              <td>
+                • En el cuadro de diálogo de edición de personal, cambiar la lista de opciones de rol a <strong>SitioWeb</strong>.<br>
+                • Verificar que al iniciar sesión solo puede acceder a la gestión de contenidos públicos del sitio web, sin acceso a expedientes clínicos ni solicitudes de pacientes.
+              </td>
+            </tr>
+            <tr>
+              <td><span class="chip admin">Administrador</span></td>
+              <td>Portal Administrador (Menú <em>El Personal</em>)</td>
+              <td>
+                • <strong>Promover usuario:</strong> Cambiar el rol de un colaborador de Recepción a Administrador.<br>
+                • <strong>Reasignar rol:</strong> Cambiar el rol de un Administrador a Recepcionista o SitioWeb cuando existan otros administradores activos.<br>
+                • <strong>Regla de protección de seguridad:</strong> Intentar quitar los permisos al único Administrador activo del laboratorio y confirmar que el sistema bloquea la acción para impedir que el laboratorio se quede sin ningún Administrador asignado.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+```
+
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Completed
+**Created:** 4 Oct 2026, 10:01 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+The goal is to identify discrepancies between `resumenpruebasBlockDigitalv100.html` and `manual-usuario.html` and synchronize them, specifically ensuring no further content is added to `resumenpruebasBlockDigitalv100.html`. This task requires a detailed comparison of the two files to pinpoint any missing, outdated, or misaligned topics and then implement corrections in `manual-usuario.html`. It's crucial to adhere to the instruction of maintaining the integrity of `resumenpruebasBlockDigitalv100.html`.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.021543626s
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Oct 2026, 10:01 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+Focusing on potential inconsistencies between `resumenpruebasBlockDigitalv100.html` and `manual-usuario.html`. Specifically, comparing test phone numbers and credentials used in the summaries.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.036528580s
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Oct 2026, 10:01 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Oct 2026, 10:01 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Oct 2026, 10:01 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Oct 2026, 10:02 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Oct 2026, 10:02 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+Comparing references from `resumenpruebasBlockDigitalv100.html` against `manual-usuario.html` is the next step. Examining the links within `resumenpruebasBlockDigitalv100.html` to establish their destinations in the user manual will clarify the relationship between test summaries and user documentation.
+
+
+Mapping the steps in the test summary to the user manual reveals corresponding sections. Specifically, I've identified the manual sections referenced for each step, noting the anticipated anchor points. There's a discrepancy in step 4, where the manual section reference doesn't align with the linked anchor; it will require verification that an appropriate anchor exists.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.561850738s
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Oct 2026, 10:02 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Oct 2026, 10:02 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Oct 2026, 10:02 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Oct 2026, 10:02 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Oct 2026, 10:02 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Oct 2026, 10:02 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Oct 2026, 10:03 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Oct 2026, 10:03 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Oct 2026, 10:03 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+Beginning a detailed comparison of `resumenpruebasBlockDigitalv100.html` against `manual-usuario.html` to identify discrepancies and missing information. Focusing first on the "Login Administrador Inicial" step outlined in the summary. The summary specifies the initial administrator login credentials, including the phone number and password. The next step is to confirm the login method described in the manual.
+
+
+The manual's section on account profiles lacks the initial test credentials for the Administrator role, specifically the phone number and password used for login via the specified URL. Explicitly adding these credentials within the administrator row or a note in §5.1 would greatly aid new users. Also the example phone number for the receptionist is missing in the manual, which can be updated.
+
+
+Adding example phone numbers for Médico (`9511156870`) and adding an example phone number for Recepcionista (`9531156870`) is important. The manual must include a sub-section `5.1.1` with the id `#catalogos-universidades-centros` related to the mandatory University and Work Place fields. Also, it is necessary to check if this topic is present in Chapter 2. Section `#guion-uat` in the manual, referenced for the "Alta de Médicos Evaluadores" step, should be verified. The linked heading is missing the id "modulo-medico", requiring either its addition or verification of the manual's heading referencing conventions.
+
+
+Investigating the structure of the user manual to confirm and improve internal linking. Identified several missing or incorrect anchor links within the document that require correction. Determining the optimal IDs for new anchors, focusing on `h3` or `div` elements, to ensure correct navigation for sub-sections.
+
+Analyzing existing links to key sections, cross-referencing flow descriptions in the manual with their respective IDs and related sections. Considering adding specific IDs for elements like `#modulo-medico` and `#hoja-incidencias` to improve navigation and user experience. The current implementation defaults to the beginning of the section, which needs an update.
+
+
+Reviewing the operational flows described in the summary against the manual's Chapters 2 and 5 to identify any inconsistencies. Conducting a detailed analysis of the seven workflows to ensure complete alignment with the manual's specifications.
+
+Flujo 1, 2, and 3 appear to align with manual sections §2 and §5. Analyzing Flujo 4: "Cancelación con Motivo", specifically checking the manual's §2 regarding who can cancel and in what states this is permitted.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 3.677505904s
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Oct 2026, 10:03 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Oct 2026, 10:03 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Oct 2026, 10:03 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+Examining `manual-usuario.html` and `resumenpruebasBlockDigitalv100.html` to cross-reference phone numbers and examples. The focus is now on extracting phone number and password format specifics within `resumenpruebasBlockDigitalv100.html` to establish baseline expectations. Preliminary observations from the latter file include: initial Admin celular `9531747410` with password `0987654321`; Reception staff with 10-digit celular numbers and 10-character initial passwords; and Doctors with 10-digit celular numbers (example `95111...`).
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.001839227s
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Oct 2026, 10:04 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+Observed that the value `9990000001` uniquely exists within `manual-usuario.html`. Now, investigate the internal links (IDs/anchors) within this document. The file `resumenpruebasBlockDigitalv100.html` contains references to sections of the manual. Examining those links in `resumenpruebasBlockDigitalv100.html` is critical.
+
+
+Analyzing internal links within `manual-usuario.html` and cross-referencing them with the test document reveals potential discrepancies in anchor targets. Suspect that some references might point to the wrong sections, particularly for the "Módulo Médico" and "Guión General de Pruebas" sections. It's important to verify if section IDs in the manual's HTML match the linked anchors to ensure correct navigation.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.742969098s
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Oct 2026, 10:04 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Oct 2026, 10:04 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Oct 2026, 10:04 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+Examining section 5 of the user manual, specifically the Acceptance Testing General Script, to identify and adjust discrepancies in field values and text to achieve synchronization. Beginning with section 5.1, the test profiles table within `manual-usuario.html`, specifically the "Doctor" profile. The current description is "Register test doctors with a 10-digit cell phone number (e.g. 9990000001)." This requires modification.
+
+
+The "Doctor" profile description requires updating to specify a 10-digit cell phone number example and explicitly mention the mandatory association with pre-registered University and Work Center entries. The "Receptionist" profile needs modification to include a 10-digit cell phone number and a 10-character initial password/NIP. Furthermore, an initial test Administrator account, its credentials, and access method via the public website must be explicitly documented.
+
+The user manual's section on support catalogs requires clarification that the script's purge empties the catalogs, necessitating registration of at least one University and one Work Center prior to doctor registration.  Finally, anchor IDs need to be added to various manual sections for improved navigation: specifically, "modulo-medico" to the Medical Portal section and "modulo-recepcion" to the Reception module.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.695177712s
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Oct 2026, 10:04 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Oct 2026, 10:04 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Oct 2026, 10:04 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+The `resumenpruebasBlockDigitalv100.html` file contains both general section links (e.g., `#perfiles-roles`) and references to specific sections like §5.3 Módulo Médico. Focusing on `#guion-uat` is key since the text seems to provide overall structure and links to more detailed information. This suggests a hierarchical organization with general overviews and specific content sections.
+
+
+Focusing on the synchronization of `manual-usuario.html` with `resumenpruebasBlockDigitalv100.html`, the initial administrator credentials need explicit inclusion in section 5.1.  This includes the phone number, initial password, and access method. Further, the "Médico" and "Recepcionista" profiles require specific phone number examples and instructions to select pre-registered university and work center data, respectively.
+
+
+The `catalogos_ui` database requires clarification in the UAT text; it will be empty after the data purge, thus, the administrator must add at least one university and one work center to enable the physician registration feature. Section 5.3 ("Portal Médico") needs the `id` attribute added to the heading and a verification that the listed steps include all summary-mentioned functionalities, especially regarding the draft editing and cancellation. Section 5.4 ("Portal Recepción") also requires the `id` attribute in its heading and subsequent step review.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.573811055s
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Oct 2026, 10:04 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+Discrepancy found: `resumenpruebasBlockDigitalv100.html` references section 6 of `manual-usuario.html` for session isolation using incognito mode. However, `manual-usuario.html`'s section 6 does not contain the specified information on session isolation or incognito mode when testing with multiple profiles on a single computer. This suggests a documentation inconsistency or a missing section in the user manual.
+
+
+A new section needs to be added to the user manual, specifically section 6, detailing session isolation when using multiple roles concurrently on the same computer. This section should explicitly explain the use of incognito windows or separate browsers to prevent session cookie overwrites. Further, it is necessary to identify and correct missing anchor IDs within the user manual to ensure cross-document references function as expected. These include IDs for key sections and flows outlined in the test documentation.
+
+
+Reviewing the document, the administrator, receptionist, and doctor roles require initial setup and specific account details for testing purposes. Doctor's contact information needs updating within the documentation. Steps outlined for the physician and receptionist workflows in sections 5.3 and 5.4 require confirmation of specific features and functionalities.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 2.698282649s
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Oct 2026, 10:05 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Oct 2026, 10:05 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+Focus is on updating the user manual, specifically section 5.1 related to the account catalog and test profile management. The immediate task is to add the active test account details, including the phone number and initial password, with a link to access via a specific resource.
+
+
+Revised the user manual to update the test account details for doctors and receptionists with new phone numbers and specific instructions for mandatory university and work center linkage. Also, a note was added to section 5.1.1 about test environment setup after a purge and the need to register sample university and work center data before creating test doctors. The relevant ID attributes were added to the module headings as well.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.985464066s
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Oct 2026, 10:05 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Oct 2026, 10:05 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+The test scenarios and operational flows align conceptually. A Python script to update `manual-usuario.html` requires replacing a phone number in the Medical staff section with a new number and referencing linked support catalogs. Additionally, an example cell phone number for the Receptionist and data for the Administrator needs to be incorporated.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.035484216s
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Oct 2026, 10:06 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Oct 2026, 10:07 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+Successfully applied the 13 replacements. Now, the focus shifts to a thorough validation of both files. This validation encompasses HTML syntax correctness in both files, ensuring every anchor and ID referenced in the first file exists in the second, and that the specified test numbers match across both documents. The validation will ensure the complete integrity of the changes.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.067082580s
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Oct 2026, 10:07 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+## User Request
+
+sube resumenpruebasBlockDigitalv100.html y  manual-usuario.html a kvm2, para manual-usuario.html actualiza pdf y subelo
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `manual-usuario`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 4 Oct 2026, 10:10 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Oct 2026, 10:10 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Oct 2026, 10:10 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `build_pdf.py`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+#!/usr/bin/env python3
+"""
+build_pdf.py
+Pipeline: Markdown → HTML → PDF (via Google Chrome headless)
+
+Documentos:
+  resumen  → Resumen_Oferta_Servicios.pdf      (letter portrait, multi-página)
+  tabla    → Cuadro_Comparativo.pdf             (oficio landscape, 1 hoja)
+  carta    → Carta_Presentacion.pdf             (letter portrait, 1 hoja)
+  guia     → Guia_Exposicion_Diagramas.pdf      (letter portrait)
+  anexo    → Anexo_Visual_Flujos_Operativos.pdf (legal landscape, desde HTML existente)
+
+Uso:
+  python3 build_pdf.py              # todos
+  python3 build_pdf.py carta resumen
+"""
+
+import markdown
+import os
+import re
+import subprocess
+import sys
+
+BASE = os.path.dirname(os.path.abspath(__file__)) + "/"
+TMP_BUILD = "/tmp/laesh_build/"
+os.makedirs(TMP_BUILD, exist_ok=True)
+
+SCRIPT_DIR = "/home/carlos/tools/pdf-renderer"
+PDF_RENDERER = f"{SCRIPT_DIR}/pdf_render.js"
+
+
+# ─────────────────────────────────────────────
+# Utilidades
+# ─────────────────────────────────────────────
+
+def read_md(path):
+    with open(path, "r", encoding="utf-8") as f:
+        return f.read()
+
+def write_html(path, content):
+    with open(path, "w", encoding="utf-8") as f:
+        f.write(content)
+    print(f"  HTML → {path}")
+
+def html_to_pdf(html_path, pdf_path, width_pts=None, height_pts=None):
+    """
+    Convierte HTML → PDF usando puppeteer (Node.js).
+    displayHeaderFooter: false — sin header/footer del navegador.
+    preferCSSPageSize: true — respeta @page del CSS.
+    """
+    cmd = ["node", PDF_RENDERER, html_path, pdf_path]
+    if width_pts and height_pts:
+        cmd += [str(width_pts), str(height_pts)]
+
+    r = subprocess.run(cmd, capture_output=True, text=True, timeout=90,
+                       cwd=SCRIPT_DIR)
+    ok = r.returncode == 0
+    print(f"  PDF  → {pdf_path} {'✅' if ok else '❌'}")
+    if not ok:
+        print(f"  stderr: {r.stderr[:400]}")
+        print(f"  stdout: {r.stdout[:200]}")
+    return ok
+
+
+def make_html(title, css_block, body_html):
+    return f"""<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{title}</title>
+    {css_block}
+</head>
+<body>
+{body_html}
+</body>
+</html>"""
+
+
+# ─────────────────────────────────────────────
+# CSS por tipo de documento
+# ─────────────────────────────────────────────
+
+def css_base(page_size, page_margin, font_size="10.5pt", line_height="1.5", text_align="left", extra=""):
+    """CSS base con @page al NIVEL RAÍZ (nunca dentro de @media)."""
+    return f"""<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+    /* @page SIEMPRE al nivel raíz */
+    @page {{
+        size: {page_size};
+        margin: {page_margin};
+    }}
+
+    * {{ box-sizing: border-box; }}
+
+    body {{
+        font-family: 'Inter', Arial, sans-serif;
+        color: #1A202C;
+        font-size: {font_size};
+        line-height: {line_height};
+        margin: 0;
+        padding: 0;
+        background: #fff;
+    }}
+
+    h1 {{
+        font-size: 1.5em;
+        text-align: center;
+        border-bottom: 2px solid #0d9488;
+        padding-bottom: 5px;
+        margin-top: 0.6em;
+        margin-bottom: 0.7em;
+        color: #0f766e;
+    }}
+    h2 {{
+        font-size: 1.2em;
+        color: #0f766e;
+        border-bottom: 1px solid #ccfbf1;
+        padding-bottom: 3px;
+        margin-top: 1.2em;
+        margin-bottom: 0.5em;
+        page-break-after: avoid;
+    }}
+    h3 {{
+        font-size: 1.05em;
+        color: #115e59;
+        margin-top: 1em;
+        margin-bottom: 0.4em;
+        page-break-after: avoid;
+    }}
+
+    p {{
+        margin: 0 0 0.85em 0;
+        text-align: {text_align};
+    }}
+
+    ul, ol {{ margin: 0 0 1em 0; padding-left: 1.5em; }}
+    li {{ margin-bottom: 0.4em; text-align: {text_align}; }}
+
+    hr {{ border: none; border-top: 1px solid #E2E8F0; margin: 0.8em 0; }}
+
+    em {{ color: #4A5568; }}
+    strong {{ color: #1A202C; font-weight: 700; }}
+
+    blockquote {{
+        margin: 0.8em 0;
+        padding: 0.6em 1em;
+        background: #f0fdfa;
+        border-left: 4px solid #0d9488;
+        border-radius: 0 4px 4px 0;
+        font-size: 0.93em;
+    }}
+    blockquote p {{ margin: 0; text-align: left; }}
+
+    table {{
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.87em;
+        margin: 0.8em 0;
+    }}
+    th, td {{
+        border: 1px solid #E2E8F0;
+        padding: 7px 9px;
+        vertical-align: top;
+        text-align: left;
+    }}
+    th {{
+        background: #ccfbf1;
+        font-weight: 600;
+        color: #115e59;
+    }}
+    tr:nth-child(even) {{ background: #f9fafb; }}
+
+    a {{ color: #0d9488; text-decoration: none; }}
+
+    @media print {{
+        body {{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }}
+        h2, h3 {{ page-break-after: avoid; }}
+        tr {{ page-break-inside: avoid; }}
+    }}
+
+    {extra}
+</style>"""
+
+
+# ─────────────────────────────────────────────
+# Carta de Presentación — 1 sola hoja carta
+# ─────────────────────────────────────────────
+def build_carta():
+    md_path   = BASE + "Carta_Presentacion.md"
+    html_path = TMP_BUILD + "Carta_Presentacion.html"
+    pdf_path  = BASE + "Carta_Presentacion.pdf"
+
+    body = markdown.markdown(read_md(md_path), extensions=["tables"])
+
+    # CSS ajustado para caber en 1 hoja letter con mejor distribución vertical
+    css = css_base(
+        page_size="letter portrait",
+        page_margin="18mm 22mm",
+        font_size="10.5pt",
+        line_height="1.39",
+        extra="""
+        /* Carta: optimizaciones de distribución */
+        h3 { font-size: 1.1em; margin-top: 1em; margin-bottom: 0.4em; }
+        p   { margin-bottom: 0.7em; }
+        li  { margin-bottom: 0.25em; }
+        table { font-size: 0.9em; margin: 0.8em 0; }
+        th, td { padding: 6px 8px; }
+        blockquote { padding: 0.5em 0.8em; margin: 0.6em 0; }
+        hr { margin: 0.8em 0; }
+        """
+    )
+
+    write_html(html_path, make_html("Carta de Presentación - LAESH", css, body))
+    return html_to_pdf(html_path, pdf_path)
+
+
+# ─────────────────────────────────────────────
+# Resumen de Oferta — sin la tabla comparativa
+# ─────────────────────────────────────────────
+def build_resumen():
+    md_path   = BASE + "Resumen_Oferta_Servicios.md"
+    html_path = TMP_BUILD + "Resumen_Oferta_Servicios.html"
+    pdf_path  = BASE + "Resumen_Oferta_Servicios.pdf"
+
+    body = markdown.markdown(read_md(md_path), extensions=["tables"])
+
+    # Identificar y ELIMINAR la tabla comparativa del resumen principal
+    def strip_comparativo(m):
+        tbl = m.group(1)
+        if ("Proyecto 1" in tbl or "Opción 1" in tbl) and ("Proyecto 2" in tbl or "Opción 4" in tbl):
+            return '<p class="cuadro-notice" style="margin-bottom: 2em; margin-top: 1em; font-size: 1.05em; color: #2B6CB0;"><em>📊 Ver documento adjunto: <strong>Cuadro_Comparativo.pdf</strong></em></p>'
+        return tbl
+
+    body = re.sub(r'(<table>.*?</table>)', strip_comparativo, body, flags=re.DOTALL)
+
+    # Inyectar saltos de página explícitos mínimos para evitar cortes feos y títulos huérfanos
+    breaks = [
+        (r'(<h2[^>]*>.*?Resumen de Funcionalidades)', r'<div style="page-break-before: always; break-before: page;"></div>\1'),
+        (r'(<h2[^>]*>.*?Condiciones y Requisitos Generales)', r'<div style="page-break-before: always; break-before: page;"></div>\1'),
+        (r'(<h2[^>]*>.*?Servicios Post-Salida)', r'<div style="page-break-before: always; break-before: page;"></div>\1'),
+        (r'(<h2[^>]*>.*?Riesgos y Mitigaciones Operativas)', r'<div style="page-break-before: always; break-before: page;"></div>\1'),
+        (r'(<h2[^>]*>.*?Consideraciones Fiscales)', r'<div style="page-break-before: always; break-before: page;"></div>\1'),
+    ]
+    for pattern, replacement in breaks:
+        body = re.sub(pattern, replacement, body, flags=re.DOTALL)
+
+    css = css_base(
+        page_size="letter portrait",
+        page_margin="16mm 16mm",
+        font_size="11.3pt",
+        line_height="1.5",
+        extra="""
+        h1 { font-size: 1.55em; margin-top: 0.35em; margin-bottom: 0.25em; color: #0f766e; border-bottom: 2px solid #0d9488; padding-bottom: 3px; }
+        h2 { font-size: 1.35em; margin-top: 1.2em; margin-bottom: 0.4em; color: #0f766e; border-bottom: 1px solid #ccfbf1; padding-bottom: 2px; page-break-after: avoid; }
+        h3 { font-size: 1.22em; margin-top: 1.0em; margin-bottom: 0.3em; color: #115e59; page-break-after: avoid; }
+        p  { margin-bottom: 0.85em; text-align: left; }
+        ul, ol { margin-bottom: 0.85em; padding-left: 1.5em; }
+        li { margin-bottom: 0.4em; }
+        blockquote { margin: 1.2em 0; padding: 0.5em 0.8em; font-size: 0.95em; background: #f0fdfa; border-left: 4px solid #0d9488; }
+        blockquote p { margin-bottom: 1em; }
+        blockquote p:last-child { margin-bottom: 0; }
+        table { margin: 1em 0; font-size: 0.95em; width: 100%; border-collapse: collapse; }
+        th, td { padding: 7px 9px; border: 1px solid #E2E8F0; text-align: left; }
+        th { background-color: #ccfbf1; color: #115e59; font-weight: bold; }
+        """
+    )
+
+    write_html(html_path, make_html("Resumen de Oferta de Servicios - LAESH", css, body))
+    return html_to_pdf(html_path, pdf_path)
+
+
+# ─────────────────────────────────────────────
+# Cuadro Comparativo — oficio horizontal, PDF separado
+# ─────────────────────────────────────────────
+def build_tabla():
+    md_path   = BASE + "Resumen_Oferta_Servicios.md"
+    html_path = TMP_BUILD + "Cuadro_Comparativo.html"
+    pdf_path  = BASE + "Cuadro_Comparativo.pdf"
+
+    body = markdown.markdown(read_md(md_path), extensions=["tables"])
+
+    # Extraer SOLO el título h2 + párrafo intro + tabla comparativa
+    # 1. Buscar el bloque desde el h2 "Cuadro Comparativo"
+    h2_match = re.search(r'<h2[^>]*>.*?Resumen de Funcionalidades.*?</h2>', body, re.DOTALL)
+    table_match = re.search(r'<table>.*?</table>', body, re.DOTALL)
+
+    if not h2_match or not table_match:
+        print("  ❌ No se encontró la tabla comparativa en el MD")
+        return False
+
+    # Párrafo entre h2 y table
+    between = body[h2_match.end():table_match.start()].strip()
+
+    extracted_body = f"""
+{h2_match.group(0)}
+{between}
+<br>
+{table_match.group(0)}
+"""
+
+    # Fusionar celdas de encabezado de grupo (colspan=4) para estética ejecutiva sin tragar las filas intermedias
+    extracted_body = re.sub(
+        r'<tr>(?:(?!</tr>).)*?<strong>\s*---\s*(.*?)\s*---\s*</strong>(?:(?!</tr>).)*?</tr>',
+        r'<tr><td colspan="5" style="text-align: center; background-color: #f0fdfa; color: #0f766e; font-weight: bold; padding: 8px; border-bottom: 2px solid #ccfbf1;">\1</td></tr>',
+        extracted_body,
+        flags=re.DOTALL
+    )
+
+    # Inyectar color verde tipo LAESH con texto blanco en el renglón de la Sección 3
+    extracted_body = extracted_body.replace(
+        'background-color: #f0fdfa; color: #0f766e; font-weight: bold; padding: 8px; border-bottom: 2px solid #ccfbf1;">3. FLUJO OPERATIVO: ORDEN DIGITAL (Funcionalidades)</td>',
+        'background-color: #0d9488; color: white; font-weight: bold; padding: 8px; border-bottom: 2px solid #0f766e;">3. FLUJO OPERATIVO: ORDEN DIGITAL (Funcionalidades)</td>'
+    )
+
+    # Forzar que la sección 2 inicie siempre en una nueva hoja para evitar desfase de título
+    extracted_body = extracted_body.replace(
+        '<tr><td colspan="5" style="text-align: center; background-color: #f0fdfa; color: #0f766e; font-weight: bold; padding: 8px; border-bottom: 2px solid #ccfbf1;">2. PORTALES Y PRESENCIA WEB</td></tr>',
+        '<tr style="page-break-before: always; break-before: page;"><td colspan="5" style="text-align: center; background-color: #f0fdfa; color: #0f766e; font-weight: bold; padding: 8px; border-bottom: 2px solid #ccfbf1;">2. PORTALES Y PRESENCIA WEB</td></tr>'
+    )
+
+    # Nota: Permitimos que el contenido de la tabla horizontal fluya y ocupe las hojas al completo.
+
+    css = css_base(
+        page_size="legal landscape",
+        page_margin="10mm 12mm",
+        font_size="11.5pt",
+        line_height="1.32",
+        extra="""
+        h2 { font-size: 1.25em; margin-top: 0.25em; margin-bottom: 0.4em; color: #0f766e; }
+        p  { margin-bottom: 0.35em; font-size: 0.98em; }
+        table { font-size: 11pt; margin: 0.35em 0; width: 100%; border-collapse: collapse; }
+        th { background: #ccfbf1; color: #115e59; font-weight: 700; border: 1px solid #cbd5e0; }
+        th, td { padding: 6px 8px; font-size: 11pt; line-height: 1.32; border: 1px solid #cbd5e0; }
+        tr { page-break-inside: avoid; break-inside: avoid; }
+        """
+    )
+
+    write_html(html_path, make_html("Cuadro Comparativo - LAESH", css, extracted_body))
+    return html_to_pdf(html_path, pdf_path)
+
+
+# ─────────────────────────────────────────────
+# Guía de Exposición de Diagramas
+# ─────────────────────────────────────────────
+def build_guia():
+    md_path   = BASE + "Guia_Exposicion_Diagramas.md"
+    html_path = TMP_BUILD + "Guia_Exposicion_Diagramas.html"
+    pdf_path  = BASE + "Guia_Exposicion_Diagramas.pdf"
+
+    body = markdown.markdown(read_md(md_path), extensions=["tables"])
+    css = css_base(
+        page_size="letter portrait",
+        page_margin="16mm 20mm",
+        font_size="10pt",
+        line_height="1.4",
+    )
+
+    write_html(html_path, make_html("Guía de Exposición de Diagramas - LAESH", css, body))
+    return html_to_pdf(html_path, pdf_path)
+
+
+# ─────────────────────────────────────────────
+# Anexo Visual (HTML existente, legal landscape)
+# ─────────────────────────────────────────────
+def build_anexo():
+    md_path   = BASE + "Anexo_Visual_Flujos_Operativos.md"
+    html_path = TMP_BUILD + "Anexo_Visual_Flujos_Operativos.html"
+    pdf_path  = BASE + "Anexo_Visual_Flujos_Operativos.pdf"
+
+    content = read_md(md_path)
+    # Reemplazar rutas relativas de imágenes por absolutas con protocolo file:// para que Chrome Headless las renderice
+    content = content.replace('src="./diagramas/', f'src="file://{BASE}diagramas/')
+
+    full_html = f"""<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anexo Visual - LAESH</title>
+</head>
+<body>
+{content}
+</body>
+</html>"""
+    write_html(html_path, full_html)
+    return html_to_pdf(html_path, pdf_path)
+# ─────────────────────────────────────────────
+# Activos Requeridos del Cliente
+# ─────────────────────────────────────────────
+def build_assets():
+    md_path   = BASE + "insumos-laesh/assets_requeridos_cliente.md"
+    html_path = TMP_BUILD + "assets_requeridos_cliente.html"
+    pdf_path  = BASE + "insumos-laesh/assets_requeridos_cliente.pdf"
+
+    md_content = read_md(md_path)
+
+    # Truncate content starting from the 'Otros Alcances' section
+    if "### 5. Otros Alcances" in md_content:
+        md_content = md_content.split("### 5. Otros Alcances")[0].strip()
+
+    body = markdown.markdown(md_content, extensions=["tables"])
+    
+    # Replace relative image paths for headless Chrome rendering
+    body = body.replace('src="./', f'src="file://{BASE}insumos-laesh/')
+    body = body.replace('src="ejemplo_', f'src="file://{BASE}insumos-laesh/ejemplo_')
+    body = body.replace('href="ejemplo_', f'href="file://{BASE}insumos-laesh/ejemplo_')
+
+    css = css_base(
+        page_size="letter portrait",
+        page_margin="12mm 12mm",
+        font_size="11pt",
+        line_height="1.35",
+        extra="""
+        h1 { font-size: 1.4em; margin-top: 0.25em; margin-bottom: 0.25em; color: #0f766e; border-bottom: 2px solid #0d9488; padding-bottom: 2px; }
+        h2 { font-size: 1.25em; margin-top: 0.9em; margin-bottom: 0.3em; color: #0f766e; border-bottom: 1px solid #ccfbf1; padding-bottom: 2px; page-break-after: avoid; }
+        h3 { font-size: 1.1em; margin-top: 0.7em; margin-bottom: 0.25em; color: #115e59; page-break-after: avoid; }
+        p  { margin-bottom: 0.6em; text-align: left; }
+        ul, ol { margin-bottom: 0.6em; padding-left: 1.4em; }
+        li { margin-bottom: 0.25em; }
+        img { max-width: 100%; max-height: 180px; object-fit: contain; border: 1px solid #E2E8F0; border-radius: 6px; margin: 0.5em 0; display: block; }
+        """
+    )
+
+    write_html(html_path, make_html("Listado de Activos Requeridos - LAESH", css, body))
+    return html_to_pdf(html_path, pdf_path)
+
+
+# ─────────────────────────────────────────────
+# Runner
+# ─────────────────────────────────────────────
+DOCS = {
+    "carta":   ("Carta de Presentación (1 hoja)",       build_carta),
+    "resumen": ("Resumen de Oferta de Servicios",        build_resumen),
+    "tabla":   ("Cuadro Comparativo (oficio landscape)", build_tabla),
+    "guia":    ("Guía de Exposición de Diagramas",       build_guia),
+    "anexo":   ("Anexo Visual de Flujos",                build_anexo),
+    "assets":  ("Activos Requeridos del Cliente",       build_assets),
+}
+
+targets = sys.argv[1:] if len(sys.argv) > 1 else list(DOCS.keys())
+
+for key in targets:
+    if key not in DOCS:
+        print(f"⚠ '{key}' desconocido. Opciones: {list(DOCS.keys())}")
+        continue
+    name, fn = DOCS[key]
+    print(f"\n▶ {name}")
+    fn()
+
+print("\n✅ Pipeline completado.")
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `pdf_render.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+/**
+ * pdf_render.js
+ * Recibe: html_path pdf_path width_pts height_pts
+ * Genera un PDF sin header/footer usando puppeteer + Chrome real.
+ * width y height en puntos CSS (1pt = 1/96 pulgada en puppeteer).
+ *
+ * Uso desde Python: node pdf_render.js /abs/path/file.html /abs/path/out.pdf 612 792
+ */
+
+const puppeteer = require('puppeteer');
+const path = require('path');
+
+const [,, htmlPath, pdfPath, widthPts, heightPts] = process.argv;
+
+if (!htmlPath || !pdfPath) {
+    console.error('Uso: node pdf_render.js <html_path> <pdf_path> [width_pts] [height_pts]');
+    process.exit(1);
+}
+
+(async () => {
+    // Dimensiones en pulgadas (puppeteer usa pulgadas para width/height)
+    // 1pt = 1/72 pulgada
+    const w = widthPts  ? (parseFloat(widthPts)  / 72).toFixed(4) : null;
+    const h = heightPts ? (parseFloat(heightPts) / 72).toFixed(4) : null;
+
+    const browser = await puppeteer.launch({
+        headless: true,
+        args: [
+            '--no-sandbox',
+            '--disable-setuid-sandbox',
+            '--disable-dev-shm-usage',
+        ],
+    });
+
+    try {
+        const page = await browser.newPage();
+        await page.setViewport({
+            width: 816,
+            height: 1056,
+            deviceScaleFactor: 1
+        });
+
+        await page.goto(`file://${htmlPath}`, {
+            waitUntil: 'networkidle0',
+            timeout: 30000,
+        });
+
+        const printOptions = {
+            path: pdfPath,
+            displayHeaderFooter: false,   // ← SIN header ni footer
+            printBackground: true,
+            preferCSSPageSize: true,       // respeta @page del CSS
+            margin: {
+                top: '0',
+                right: '0',
+                bottom: '0',
+                left: '0'
+            }
+        };
+
+        // Si se pasan dimensiones explícitas, las usamos (override @page)
+        if (w && h) {
+            printOptions.width  = `${w}in`;
+            printOptions.height = `${h}in`;
+        }
+
+        await page.pdf(printOptions);
+        console.log(`OK: ${pdfPath}`);
+    } finally {
+        await browser.close();
+    }
+})().catch(err => {
+    console.error('ERROR:', err.message);
+    process.exit(1);
+});
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Oct 2026, 10:10 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Oct 2026, 10:10 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `kvm2`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 4 Oct 2026, 10:10 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Oct 2026, 10:10 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Oct 2026, 10:10 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Oct 2026, 10:11 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Oct 2026, 10:11 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+Edited files are located in the local directory structure. The relevant paths are identified to understand the scope of recent modifications. This helps to pinpoint the areas of change for the next steps.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.049400879s
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Oct 2026, 10:11 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Oct 2026, 10:11 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Oct 2026, 10:11 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Oct 2026, 10:11 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Oct 2026, 10:11 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Oct 2026, 10:12 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+## User Request
+
+corrige las fallas  de /home/carlos/GitHub/caelitandem_home/restaurantb/setup/bds/laesh/migrations/limpiar_pruebas_uat.sh
+debio depurar especialidades, y pero creo no hay catalogo esta en duro, valida e informa.
+Tengo este msg de error en pantalla con boton de añadir medico:
+ No se guardó ningún médico: Dr. Pruebas Block DIgital: Error al registrar médico: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`laesh_db`.`perfiles_medicos`, CONSTRAINT `fk_pm_universidad` FOREIGN KEY (`universidad_id`) REFERENCES `catalogos_ui` (`id`)) — 05/10/2026 08:21
+Diagnostica
+
+---
+
+### CORTEX_STEP_TYPE_SYSTEM_MESSAGE
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 8:25 am
+
+---
+
+## Agent Response
+
+### Thinking
+
+The user requests fixing a script, validating and reporting on specialties possibly hardcoded without a catalog, and resolving an error related to adding a doctor. Addressing each of these issues requires separate investigation and potential fixes.
+
+The first step will be to examine the script and determine the specific failures. Then, the specialty issue requires code review to check for hardcoded values. Finally, the SQL error suggests a database issue needs troubleshooting within the doctor registration process.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `limpiar_pruebas_uat.sh`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.094758216s
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+#!/usr/bin/env bash
+# ==============================================================================
+# LAESH — limpiar_pruebas_uat.sh   (uso MANUAL en KVM2, base laesh_db)
+#
+# Deja los portales de Bloc Digital sin datos operativos de pruebas:
+#   Solicitudes (Hoy/Anteriores), indicadores, pacientes, notificaciones,
+#   PDFs de resultados, folios, contadores de médicos, sesiones y logs.
+# Personal de Recepción, Médicos y Administradores: se ELIMINAN todas las
+#   cuentas operativas de prueba para que los portales queden completamente
+#   limpios y no aparezcan listados en el portal de Recepción.
+#   Únicamente permanece activo el Admin Jacob (ADMIN_ID, por defecto 9531747410).
+#
+# NO TOCA: catálogo de estudios y promociones (cat_*, rel_*, catalogo_promociones),
+#          CMS (web_contenidos), configuraciones del sistema, permisos base.
+# PURGA: catalogos_ui (universidades y lugares de trabajo) para registro manual en UAT.
+#
+# Uso:
+#   bash limpiar_pruebas_uat.sh            # pide confirmación escrita
+#   bash limpiar_pruebas_uat.sh --yes      # sin confirmación
+#   ADMIN_ID=9531747410 bash limpiar_pruebas_uat.sh
+# Requiere sudo. Hace backup (backup_db.sh, el mismo del cron) ANTES de borrar
+# y se aborta si el backup falla.
+# ==============================================================================
+set -euo pipefail
+
+DB="laesh_db"
+MCNF="/opt/laesh/configs/.mariadb-root.cnf"
+BACKUP_SCRIPT="/opt/laesh/scripts/backup_db.sh"
+ADMIN_ID="${ADMIN_ID:-9531747410}"   # username/email/id del único admin que queda activo
+ASSUME_YES=false
+[[ "${1:-}" == "--yes" ]] && ASSUME_YES=true
+
+SQL() { sudo mariadb --defaults-extra-file="$MCNF" "$DB" "$@"; }
+
+echo "=========================================================="
+echo "🧹 [LAESH] Limpieza Integral para Pruebas UAT  (BD: $DB)"
+echo "=========================================================="
+
+# ── 0. Resolver el Admin que se conserva (debe ser EXACTAMENTE 1) ─────────────
+ADMIN_SQL=$(printf '%s' "$ADMIN_ID" | sed "s/'/''/g")
+KEEP_UID=$(SQL -N -B -e "
+  SELECT u.id FROM users u
+  WHERE (u.username = '$ADMIN_SQL' OR u.email = '$ADMIN_SQL' OR u.id = '$ADMIN_SQL'
+         OR u.email LIKE '$ADMIN_SQL@%')
+    AND EXISTS (SELECT 1 FROM empleados e WHERE e.user_id = u.id AND e.rol = 'ADMIN');")
+if [ "$(printf '%s\n' "$KEEP_UID" | grep -c .)" -ne 1 ]; then
+    echo "❌ No se encontró exactamente 1 usuario ADMIN para '$ADMIN_ID' (hallados: '${KEEP_UID//$'\n'/,}')."
+    echo "   Nada fue modificado. Revisa con:  SELECT id,username,email FROM users;"
+    exit 1
+fi
+echo "✓ Admin que permanecerá activo → users.id=$KEEP_UID ($ADMIN_ID)"
+
+echo ""
+echo "Antes de limpiar:"
+SQL -e "
+SELECT 'ordenes' entidad, COUNT(*) total FROM ordenes
+UNION ALL SELECT 'pacientes', COUNT(*) FROM pacientes
+UNION ALL SELECT 'perfiles_medicos', COUNT(*) FROM perfiles_medicos
+UNION ALL SELECT 'empleados (todos los roles)', COUNT(*) FROM empleados
+UNION ALL SELECT 'users (cuentas totales)', COUNT(*) FROM users
+UNION ALL SELECT 'catalogos_ui', COUNT(*) FROM catalogos_ui
+UNION ALL SELECT 'notificaciones', COUNT(*) FROM notificaciones;"
+
+if ! $ASSUME_YES; then
+    read -r -p "⚠️  Se borrarán datos operativos y cuentas de prueba. Escribe LIMPIAR para continuar: " CONF
+    [ "$CONF" = "LIMPIAR" ] || { echo "Cancelado. Nada modificado."; exit 1; }
+fi
+
+# ── 1. BACKUP PREVIO (mismo script del cron laesh-backup) ─────────────────────
+echo "💾 Respaldo previo con $BACKUP_SCRIPT ..."
+sudo bash "$BACKUP_SCRIPT"
+BK=$(sudo ls -1t /opt/laesh/backups/db/laesh_db_2*.sql.gz 2>/dev/null | head -1)
+[ -n "$BK" ] || { echo "❌ No se localizó el backup; abortando sin tocar la BD."; exit 1; }
+echo "✓ Backup: $BK ($(sudo du -h "$BK" | cut -f1))"
+echo "  Restauración: gunzip -c $BK | sudo mariadb --defaults-extra-file=$MCNF $DB"
+
+# ── 2. SQL: datos operativos, sesiones, logs, médicos, personal y catálogos ────
+SQL <<SQL_CLEANUP
+SET FOREIGN_KEY_CHECKS = 0;
+
+-- 2.1 Ciclo de solicitudes y pacientes (resetea AUTO_INCREMENT a 1)
+TRUNCATE TABLE \`historial_estados_orden\`;
+TRUNCATE TABLE \`resultados_pdf\`;
+TRUNCATE TABLE \`ordenes\`;
+TRUNCATE TABLE \`pacientes\`;
+
+-- 2.2 Compatibilidad retroactiva: detalle_ordenes solo si existe
+SET @t = (SELECT COUNT(*) FROM information_schema.tables
+          WHERE table_schema = DATABASE() AND table_name = 'detalle_ordenes');
+SET @s = IF(@t > 0, 'TRUNCATE TABLE detalle_ordenes', 'DO 0');
+PREPARE st FROM @s; EXECUTE st; DEALLOCATE PREPARE st;
+
+-- 2.3 Notificaciones (purga total para inicio limpio de pruebas)
+TRUNCATE TABLE \`notificaciones\`;
+
+-- 2.4 Cuentas y perfiles de médicos: purga total para que no aparezcan en recepción
+TRUNCATE TABLE \`perfiles_medicos\`;
+
+-- 2.5 Folio correlativo (la próxima solicitud será folio 1)
+INSERT INTO \`folios_control\` (\`tipo_documento\`, \`ultimo_folio\`)
+VALUES ('orden_laboratorio', 0)
+ON DUPLICATE KEY UPDATE \`ultimo_folio\` = 0;
+
+-- 2.6 Catálogos UI (universidades y lugares de trabajo): purga total para alta manual previa en UAT
+TRUNCATE TABLE \`catalogos_ui\`;
+
+-- 2.7 Logs operativos, auditoría y de tiempo real (trazas E2E)
+TRUNCATE TABLE \`sys_logs\`;
+TRUNCATE TABLE \`fallback_log\`;
+TRUNCATE TABLE \`ws_conexiones_log\`;
+TRUNCATE TABLE \`ws_rechazos_log\`;
+TRUNCATE TABLE \`users_audit_log\`;
+
+-- 2.8 Candados Delight-Auth, tokens de recuperación y confirmaciones
+TRUNCATE TABLE \`users_throttling\`;
+TRUNCATE TABLE \`users_resets\`;
+TRUNCATE TABLE \`users_confirmations\`;
+
+-- 2.9 Personal y Cuentas: eliminar todos excepto el Admin conservado
+DELETE FROM \`empleados\` WHERE \`user_id\` <> ${KEEP_UID};
+UPDATE \`empleados\` SET \`activo\` = 1 WHERE \`user_id\` = ${KEEP_UID};
+
+-- 2.10 Delight-Auth y RBAC: eliminar sesiones, tokens y permisos de los eliminados
+DELETE FROM \`users_remembered\` WHERE \`user\` <> ${KEEP_UID};
+DELETE FROM \`jwt_jti_registry\` WHERE \`user_id\` <> ${KEEP_UID};
+DELETE FROM \`rbac_permisos_usuarios\` WHERE \`user_id\` <> ${KEEP_UID};
+
+SET @t2fa = (SELECT COUNT(*) FROM information_schema.tables
+             WHERE table_schema = DATABASE() AND table_name = 'users_2fa');
+SET @s2fa = IF(@t2fa > 0, 'DELETE FROM users_2fa WHERE user_id <> ${KEEP_UID}', 'DO 0');
+PREPARE st2fa FROM @s2fa; EXECUTE st2fa; DEALLOCATE PREPARE st2fa;
+
+-- 2.11 Eliminar cuentas de usuarios en Delight-Auth (excepto Admin conservado)
+DELETE FROM \`users\` WHERE \`id\` <> ${KEEP_UID};
+UPDATE \`users\` SET \`status\` = 0 WHERE \`id\` = ${KEEP_UID};
+
+SET FOREIGN_KEY_CHECKS = 1;
+SQL_CLEANUP
+echo "✓ Base de datos saneada."
+
+# ── 3. Archivos físicos ───────────────────────────────────────────────────────
+echo "📁 Purgando PDFs de resultados y temporales de prueba..."
+if [ -d "/opt/laesh/uploads/pdfs" ]; then
+    sudo find /opt/laesh/uploads/pdfs/ -type f \( -name "*.pdf" -o -name "*.tmp*" \) -delete 2>/dev/null || true
+    echo "✓ /opt/laesh/uploads/pdfs/ limpio."
+fi
+if [ -f "/opt/laesh/logs/app.log" ]; then
+    sudo truncate -s 0 /opt/laesh/logs/app.log && echo "✓ app.log truncado."
+fi
+if [ -f "/opt/laesh/logs/swoole.log" ]; then
+    sudo truncate -s 0 /opt/laesh/logs/swoole.log && echo "✓ swoole.log truncado."
+fi
+if [ -f "/opt/laesh/logs/ws_audit.log" ]; then
+    sudo truncate -s 0 /opt/laesh/logs/ws_audit.log && echo "✓ ws_audit.log truncado."
+fi
+if [ -d "/opt/laesh/cache" ]; then
+    sudo rm -f /opt/laesh/cache/laesh_cache_*_JTI_*.php /opt/laesh/cache/*.tmp 2>/dev/null || true
+    echo "✓ Caché de tokens JTI purgado."
+fi
+
+# ── 4. Verificación ───────────────────────────────────────────────────────────
+echo ""
+echo "=========================================================="
+echo "📊 VERIFICACIÓN POST-LIMPIEZA (todo debe dar 0, salvo lo indicado)"
+echo "=========================================================="
+SQL -e "
+SELECT 'ordenes' entidad, COUNT(*) total FROM ordenes
+UNION ALL SELECT 'pacientes', COUNT(*) FROM pacientes
+UNION ALL SELECT 'resultados_pdf', COUNT(*) FROM resultados_pdf
+UNION ALL SELECT 'historial_estados_orden', COUNT(*) FROM historial_estados_orden
+UNION ALL SELECT 'notificaciones (total)', COUNT(*) FROM notificaciones
+UNION ALL SELECT 'perfiles_medicos (debe ser 0)', COUNT(*) FROM perfiles_medicos
+UNION ALL SELECT 'empleados (debe ser 1: Admin Jacob)', COUNT(*) FROM empleados
+UNION ALL SELECT 'users (debe ser 1: Admin Jacob)', COUNT(*) FROM users
+UNION ALL SELECT 'catalogos_ui (debe ser 0: limpio para alta manual)', COUNT(*) FROM catalogos_ui
+UNION ALL SELECT 'sys_logs', COUNT(*) FROM sys_logs
+UNION ALL SELECT 'users_audit_log', COUNT(*) FROM users_audit_log
+UNION ALL SELECT 'fallback_log', COUNT(*) FROM fallback_log
+UNION ALL SELECT 'users_throttling', COUNT(*) FROM users_throttling;
+
+SELECT e.user_id, u.username, u.email, e.rol, e.activo, u.status 
+FROM empleados e 
+JOIN users u ON u.id = e.user_id;
+
+SELECT tipo_documento, ultimo_folio FROM folios_control WHERE tipo_documento='orden_laboratorio';"
+echo "PDFs residuales en disco: $(sudo find /opt/laesh/uploads/pdfs/ -type f 2>/dev/null | wc -l)"
+echo "=========================================================="
+echo "✨ Listo para el ciclo UAT. Backup previo: $BK"
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The user reports a potential issue with the specializations catalog and a specific error when adding a doctor, indicating a foreign key constraint violation. This suggests a data integrity problem, likely stemming from missing or invalid specialization data when attempting to create a new doctor entry. It is possible the specialization catalog is not populated or the specialization ID is invalid.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `universidad_id`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.109095148s
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 8:26 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `catalogos_ui`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 8:26 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 8:26 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 8:26 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 8:26 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `perfiles_medicos`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 8:26 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `especialidad`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 8:26 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 8:27 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** CORTEX_STEP_STATUS_RUNNING
+**Created:** 5 Oct 2026, 8:27 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `07_seed_catalogs.sql`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+-- Deshabilitar modo estricto para este seed (MariaDB 11.8 rechaza truncaciones
+-- que versiones anteriores solo advertían). Se restaura al final de la sesión.
+SET SESSION sql_mode = '';
+
+-- =============================================================================
+-- LAESH Bloc Digital — Script 07: Datos Semilla de Catálogos
+-- Fuentes: medicos.html (estudios checkboxes), labadmin.html (select#estudio-categoria)
+--          gestion-web.html (valores de nombre/texto de paneles)
+-- Idempotente: INSERT IGNORE (no duplica si ya existe).
+--
+-- SSOT Refactor (2026-08-22):
+--   • estudios = fuente de verdad de todo dato clínico (nombre, ayuno, tiempo, clave, muestra)
+--   • configuraciones = singletons institucionales (dirección, teléfono, email, horarios, responsable, Schema)
+--   • web_contenidos = solo contenido editorial que NO se puede derivar de entidades
+--   Principio: si un dato aparece en más de una sección, vive en configuraciones o estudios, NO en web_contenidos.
+-- =============================================================================
+
+USE `laesh_db`;
+
+-- ---------------------------------------------------------------------------
+-- CAT_ESTADOS_MEDICO — Semilla
+-- ---------------------------------------------------------------------------
+INSERT IGNORE INTO `cat_estados_medico` (`id`, `nombre`, `descripcion`) VALUES
+    (1, 'Activo',  'El médico puede crear y consultar órdenes'),
+    (2, 'Pausado', 'El médico no puede crear órdenes; su historial se conserva');
+
+-- ---------------------------------------------------------------------------
+-- CATALOGO_ESTADOS — Semilla (estados de orden)
+-- Redesign v2: campo 'valor' (era 'nombre'); 4 estados alineados con medicos.js y ET
+-- ---------------------------------------------------------------------------
+INSERT IGNORE INTO `catalogo_estados` (`id`, `valor`, `descripcion`, `color_hex`) VALUES
+    (1, 'Remitido',          'Orden creada por el médico, en espera de atención en recepción', '#F59E0B'),
+    (2, 'En Atención',       'Paciente recibido en recepción, muestras en proceso',            '#3B82F6'),
+    (3, 'Resultados Listos', 'PDF de resultados cargado, disponible para el médico',           '#10B981'),
+    (4, 'Cerrada',           'Orden finalizada y entregada',                                   '#6B7280'),
+    (5, 'Cancelada',         'Orden cancelada — solo posible desde Remitido o En Atención',     '#EF4444');
+
+-- ---------------------------------------------------------------------------
+-- FOLIOS_CONTROL — Serie inicial LAESH (orden_laboratorio)
+-- ---------------------------------------------------------------------------
+INSERT IGNORE INTO `folios_control` (`tipo_documento`, `ultimo_folio`) VALUES
+    ('orden_laboratorio', 0);
+
+-- ---------------------------------------------------------------------------
+-- RBAC_PERMISOS — Permisos del sistema
+-- ---------------------------------------------------------------------------
+INSERT IGNORE INTO `rbac_permisos` (`nombre`, `descripcion`) VALUES
+    ('ver_ordenes_propias',  'Médico: consultar y crear sus propias órdenes'),
+    ('ver_solicitud_digital','Médico: ver PDF de solicitud digital'),
+    ('gestionar_ordenes',    'Recepción: procesar órdenes, cambiar estados, subir PDFs'),
+    ('gestionar_medicos',    'Recepción/Admin: alta, edición y pausa de médicos'),
+    ('gestionar_cms',        'Admin: editar contenidos del sitio web (CMS)'),
+    ('gestionar_estudios',   'Admin: alta y edición del catálogo de estudios'),
+    ('ver_reportes',         'Admin/Recepción: acceso a reportes de actividad');
+
+-- ---------------------------------------------------------------------------
+-- CONFIGURACIONES — Singletons globales de instancia (clave → valor)
+-- SSOT: datos que aparecen en >1 sección del sitio viven AQUÍ.
+-- Panel CMS: Ubicación y Contacto es el editor master de estas claves.
+-- ---------------------------------------------------------------------------
+INSERT IGNORE INTO `configuraciones` (`clave`, `valor`, `descripcion`) VALUES
+    -- Identidad institucional
+    ('nombre_laboratorio',      'Laboratorio de Especialidades Hematológicas',
+                                 'Nombre oficial del laboratorio'),
+    ('nombre_corto',            'LAESH',
+                                 'Nombre corto / marca'),
+    -- Contacto y ubicación
+    ('direccion_calle',         'Azucenas #8, Fraccionamiento Jardines del Sur',
+                                 'Calle y colonia de la dirección física'),
+    ('ciudad',                  'Huajuapan de León',
+                                 'Ciudad / Municipio — reutilizado en Ubicación, SEO y Schema.org'),
+    ('estado',                  'Oaxaca',
+                                 'Estado federativo'),
+    ('cp',                      '69007',
+                                 'Código postal — Schema.org postalCode'),
+    ('telefono',                '953 688 7694',
+                                 'Teléfono directo — reutilizado en Ubicación, Footer y Schema.org'),
+    ('email_contacto',          'lab_laesh@hotmail.com',
+                                 'Correo de contacto público — reutilizado en Ubicación y Footer'),
+    ('whatsapp_numero',         '953 119 0074',
+                                 'Número WhatsApp formato display (sin código de país) — Footer, Ubicación'),
+    -- Horarios
+    ('horario_semana',          'Lunes a sábado: 7:00 a.m. – 9:00 p.m.',
+                                 'Horario días hábiles — Footer, Ubicación, Schema.org'),
+    ('horario_domingo',         'Domingo: 7:00 a.m. – 3:00 p.m.',
+                                 'Horario domingo — Footer, Ubicación, Schema.org'),
+    ('hrs_open',                '07:00',
+                                 'Apertura Lun–Sáb HH:MM 24h — Schema.org openingHoursSpecification'),
+    ('hrs_close',               '21:00',
+                                 'Cierre Lun–Sáb HH:MM 24h — Schema.org openingHoursSpecification'),
+    ('dom_open',                '07:00',
+                                 'Apertura domingo HH:MM 24h — Schema.org openingHoursSpecification'),
+    ('dom_close',               '15:00',
+                                 'Cierre domingo HH:MM 24h — Schema.org openingHoursSpecification'),
+    -- Responsable sanitario (campos individuales — para Footer, SEO y Quiénes Somos)
+    ('responsable_nombre',      'Q.F.B. y E.H.D.L. Jacob Santiago Blanco',
+                                 'Nombre completo con grado del responsable sanitario'),
+    ('responsable_cedula_prof', '3609293',
+                                 'Cédula profesional del responsable sanitario'),
+    ('responsable_cedula_esp',  '8935780',
+                                 'Cédula de especialidad del responsable sanitario'),
+    -- Redes sociales y mapas
+    ('facebook_url',            'https://www.facebook.com/profile.php?id=100072263716098',
+                                 'URL de la página oficial de Facebook del laboratorio'),
+    ('maps_url',                'https://www.google.com/maps/dir/?api=1&destination=Laboratorio+de+Especialidades+Hematol%C3%B3gicas+S.C.,+Calle+Azucenas+%238,+Jardines+del+Sur,+69007+Heroica+Cdad.+de+Huajuapan+de+Le%C3%B3n,+Oax.',
+                                 'URL directa a la ubicación en Google Maps (Cómo llegar)'),
+    ('wa_texto_agendar',        'Hola LAESH, me interesa agendar el estudio de {estudio}',
+                                 'Texto pre-llenado de WhatsApp al agendar en Promociones'),
+    ('wa_texto_info',           'Hola LAESH, necesito información',
+                                 'Texto pre-llenado de WhatsApp para consultas generales'),
+    -- Operaciones internas y P2 Bloc Digital
+    ('tiempo_depuracion_pdf_meses', '12',
+                                 'Meses de retención de archivos PDF generados antes de la depuración automática'),
+    ('ruta_almacenamiento_pdf', '/var/www/html/laesh-bloc-assets/pdf/',
+                                 'Ruta física de almacenamiento seguro de PDFs de recibos'),
+    -- Sesión PHP
+    ('session_lifetime',        '518400',
+                                 'Duración de sesión PHP en segundos. 86400=24h · 518400=6 días. Se aplica en commons.php al iniciar sesión. Requiere recargar la página para que el nuevo valor tenga efecto.'),
+    -- Sesiones diferenciadas por rol y hora fija de corte (Proyecto 2)
+    ('session_expiration_time', '04:30',
+                                 'Hora fija del día en formato 24h (HH:MM) en que vencerán las sesiones al cumplirse sus días de vigencia. Aplica a los 3 roles (Médicos, Recepción, Admin). Recomendado: 04:30 (madrugada, antes del cron de las 05:00 AM).'),
+    ('session_lifetime_medico_dias', '90',
+                                 'Días consecutivos de sesión activa para Médicos sin solicitar contraseña (1 a 90 días). Cuenta con Auto-Refresh Server-Side cada 29 días mientras haya actividad clínica.'),
+    ('session_lifetime_recepcion_dias', '30',
+                                 'Días de sesión activa para Recepción en terminal compartida de mostrador (1 a 90 días). Vence a la hora global configurada para forzar inicio limpio en nuevo turno. Recomendado 1 día por seguridad en equipos compartidos.'),
+    ('session_lifetime_admin_dias', '8',
+                                 'Días de sesión activa para Administrador del Sistema (1 a 90 días). Vence a la hora global. Protección perimetral para superusuario con acceso a infraestructura.'),
+    -- PEN-LAESH-01/02/03/04 (2026-10-01) — parametrizaciones pendientes en admrc/sistema
+    ('notif_polling_http_interval_sec', '120',
+                                 'Segundos entre cada sondeo HTTP de respaldo cuando el WebSocket no está disponible (1 a 600 segundos). PEN-LAESH-01.'),
+    ('auto_cierre_resultados_dias', '90',
+                                 'Días que una orden puede permanecer en "Resultados Listos" sin ser entregada antes de que el sistema la cierre automáticamente (1 a 90 días). PEN-LAESH-02.'),
+    ('draft_order_ttl_horas',    '12',
+                                 'Horas de vigencia del borrador local de una solicitud médica en redacción antes de descartarse por antigüedad (1 a 72 horas). PEN-LAESH-03.'),
+    ('notif_retencion_dias',    '60',
+                                 'Días de antigüedad a partir de los cuales se purgan físicamente las notificaciones ya leídas (7 a 365 días). Las no leídas nunca se purgan. PEN-LAESH-04.'),
+    -- Autodiagnóstico post-PEN-LAESH (2026-10-01) — panel de notificaciones y WS
+    ('notif_panel_ventana_dias', '30',
+                                 'Días hacia atrás que el panel de notificaciones "Anteriores" muestra (7 a 90 días). Independiente de notif_retencion_dias (purga física) — si se fija mayor que la retención, no mostrará más de lo que exista en BD.'),
+    ('notif_panel_limit_anteriores', '30',
+                                 'Máximo de notificaciones "Anteriores" mostradas por carga/poll del panel (5 a 50). El abanico "Hoy" tiene su propio cupo fijo de 30, sin relación con este valor.'),
+    ('ws_reconnect_interval_sec', '3',
+                                 'Segundos de espera entre reintentos de reconexión del WebSocket (1 a 300s / 5 min, hasta 3 reintentos). Solo afecta al cliente, no requiere reiniciar el servidor. El polling de respaldo sigue entregando notificaciones mientras tanto.')
+ON DUPLICATE KEY UPDATE `valor` = VALUES(`valor`), `descripcion` = VALUES(`descripcion`);
+
+-- ---------------------------------------------------------------------------
+-- CATALOGOS_UI — Universidades y Lugares de Trabajo
+-- ---------------------------------------------------------------------------
+-- Universidades (tipo=universidad)
+INSERT IGNORE INTO `catalogos_ui` (`tipo`, `valor`, `orden`, `activo`) VALUES
+    ('universidad', 'Universidad Nacional Autónoma de México (UNAM)',    1, 1),
+    ('universidad', 'Universidad Autónoma Benito Juárez de Oaxaca',      2, 1),
+    ('universidad', 'Universidad Autónoma Metropolitana (UAM)',           3, 1),
+    ('universidad', 'Instituto Politécnico Nacional (IPN)',               4, 1),
+    ('universidad', 'Universidad Autónoma de Guadalajara',               5, 1),
+    ('universidad', 'Universidad Autónoma de Puebla (BUAP)',             6, 1),
+    ('universidad', 'Universidad Veracruzana',                           7, 1),
+    ('universidad', 'Universidad Autónoma del Estado de México',         8, 1),
+    ('universidad', 'Otra universidad',                                  99, 1);
+
+-- Lugares de trabajo (tipo=lugar_trabajo)
+INSERT IGNORE INTO `catalogos_ui` (`tipo`, `valor`, `orden`, `activo`) VALUES
+    ('lugar_trabajo', 'Consultorio particular',                          1, 1),
+    ('lugar_trabajo', 'Hospital General de Huajuapan',                   2, 1),
+    ('lugar_trabajo', 'IMSS — Delegación Oaxaca',                        3, 1),
+    ('lugar_trabajo', 'ISSSTE — Unidad Huajuapan',                       4, 1),
+    ('lugar_trabajo', 'Clínica privada',                                  5, 1),
+    ('lugar_trabajo', 'Hospital Regional de la Mixteca',                  6, 1),
+    ('lugar_trabajo', 'Otro',                                            99, 1);
+
+-- ---------------------------------------------------------------------------
+-- CATALOGOS RELACIONALES — Datos exportados de BD local (SSOT: LISTA 2026 PAGINA BUENAS.xlsx)
+-- Última exportación: 2026-09-17
+-- ---------------------------------------------------------------------------
+LOCK TABLES `cat_categorias` WRITE;
+INSERT IGNORE INTO `cat_categorias` (`id`, `nombre`, `orden`) VALUES
+(1,'Referencia orthin',1),
+(2,'Referencia LCP',2),
+(3,'Serología',3),
+(4,'Química Sanguínea',4),
+(5,'Referencia QUEST',5),
+(6,'Inmunología/Placa',6),
+(7,'Inmunología',7),
+(8,'referencia arh',8),
+(9,'Referencia Galindo',9),
+(10,'Urianálisis',10),
+(11,'Microbiología',11),
+(12,'PATOLOGIA',12),
+(13,'Referencia asesores',13),
+(14,'Parasitología',14),
+(15,'Hematología',15),
+(16,'LAESH',16),
+(17,'DIVERSOS',17),
+(18,'LAESH',18),
+(19,'LAESH/ORTHIN',19),
+(20,'Coagulación',20),
+(21,'LCP/ORTM',21),
+(22,'COAGULACION',22),
+(23,'LAESH/ARH',23),
+(24,'MATERIAL',24);
+UNLOCK TABLES;
+
+LOCK TABLES `cat_estudios` WRITE;
+INSERT IGNORE INTO `cat_estudios` (`id`, `categoria_id`, `clave`, `nombre`, `tiempo`, `muestra`, `contenedor`, `preparacion`, `pruebas_incluidas`, `descripcion_breve`, `activo`) VALUES
+(1,1,'1','17 ALFA HIDROXIPROGESTERONA BASAL','4','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(2,2,'1153','17 CETOESTEROIDES EN SUERO','2','Suero 2 ml','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(3,1,'228','17 HIDROXICORTICOESTEROIDES EN ORINA','8','Orina de 24 hrs. 20 ml','Frasco ambar 24 horas',NULL,NULL,NULL,1),
+(4,1,'4103','AC ANTI CARDIOLIPINA IGA','13','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(5,1,'2022','AC ANTI CARDIOLIPINA IGG,IGM','4','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(6,1,'1897','AC ANTI CHLAMYDIA TRACHOMATIS IgM','3','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(7,1,'2026','AC ANTI RICKETTSIA TYPHI (IgG, IgM)','20','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(8,2,'4679','AC CITOSOL HEPATICO (ALC-1)','0',NULL,NULL,NULL,NULL,NULL,1),
+(9,2,'4330','AC CONTRA AG ASOCIADO A ESCLEROSIS','7','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(10,2,'2817','AC CONTRA AG ASOCIADOS A MIOSITIS','7','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(11,2,'2385','AC.  ANTI GLIADINA (IgG, IgA)','9',NULL,NULL,NULL,NULL,NULL,1),
+(12,2,'2113','Ac.  ANTI VARICELA/ZOSTER (IgG, IgM)','13','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(13,2,'2617','AC. ADDISON','5','Suero 2 ml','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(14,2,'2587','AC. ADRENALES','5',NULL,NULL,NULL,NULL,NULL,1),
+(15,1,'578','AC. ANTI   JO 1','5','Sangre total heparina',NULL,NULL,NULL,NULL,1),
+(16,3,'122','AC. ANTI  HEPATITIS " A " IgG','0','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(17,4,'123','AC. ANTI  HEPATITIS A IgM','0','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(18,1,'2796','AC. ANTI  MUSCULO LISO (ASMA)','5','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(19,2,'1184','Ac. ANTI  MYCOBACTERIUM TB (IgG, IgM)','5',NULL,NULL,NULL,NULL,NULL,1),
+(20,2,'502','AC. ANTI  RNA','5',NULL,NULL,NULL,NULL,NULL,1),
+(21,1,'300','AC. ANTI  SCL-70','5','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(22,2,'585','Ac. ANTI  SSA (Ro)','5','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(23,2,'595','AC. ANTI  SSB (La)','5',NULL,NULL,NULL,NULL,NULL,1),
+(24,1,'4398','Ac. Anti 21 Hidroxilasa (Adrenal 21 hidroxilasa)','24',NULL,NULL,NULL,NULL,NULL,1),
+(25,2,'185','AC. ANTI AMIBA (SERAMEBA)','3',NULL,NULL,NULL,NULL,NULL,1),
+(26,5,'4304','AC. ANTI ANEXINA V','15','Suero 2 ml congelado','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(27,1,'4680','AC. ANTI ANTIGENO HEPATICO SOLUBLE (SLA)','0',NULL,NULL,NULL,NULL,NULL,1),
+(28,2,'2109','Ac. ANTI ASPERGILLUS FUMIGATUS IgE','11',NULL,NULL,NULL,NULL,NULL,1),
+(29,1,'2800','AC. ANTI BARTONELLA HENSESLAE','12',NULL,NULL,NULL,NULL,NULL,1),
+(30,1,'2104','AC. ANTI BETA 2 GLICOPROTEINA IgA, IgG, IgM','4',NULL,NULL,NULL,NULL,NULL,1),
+(31,1,'2123','Ac. Anti Beta 2 glucoproteina IgA','4','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(32,2,'2121','Ac. Anti Beta 2 glucoproteina IgG','4','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(33,2,'2122','Ac. Anti Beta 2 glucoproteina IgM','4','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(34,2,'1159','AC. ANTI BORDETELLA PERTUSSIS (TOSFERINA)','9',NULL,NULL,NULL,NULL,NULL,1),
+(35,2,'554','AC. ANTI BORRELIA BURGDORFERI (Lyme)','9',NULL,NULL,NULL,NULL,NULL,1),
+(36,2,'2111','Ac. ANTI BRUCELLA  IgM','8',NULL,NULL,NULL,NULL,NULL,1),
+(37,2,'2110','Ac. ANTI BRUCELLA IgG','8',NULL,NULL,NULL,NULL,NULL,1),
+(38,1,'2023','Ac. Anti Cardiolipina IgG','4','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(39,1,'2024','Ac. Anti Cardiolipina IgM','4','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(40,2,'1936','AC. ANTI CENTROMERO (Cenp-B)','5','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(41,1,'2802','AC. ANTI CHIKUNGUNYA IgM, IgG','5','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(42,2,'413','AC. ANTI CHLAMYDIA PNEUMONIAE IgG, IgA','8',NULL,NULL,NULL,NULL,NULL,1),
+(43,1,'2984','AC. ANTI CHLAMYDIA TRACHOMATIS IgA','3','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(44,1,'217','AC. ANTI CHLAMYDIA TRACHOMATIS IgG','3','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(45,1,'37','Ac. ANTI CHLAMYDIA TRACHOMATIS IgM, IgG','4','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(46,2,'242','AC. ANTI CISTICERCO EN LCR','7','LCR','Tubo tapa rosca esteril',NULL,NULL,NULL,1),
+(47,1,'252','AC. ANTI CISTICERCO EN SUERO','7',NULL,NULL,NULL,NULL,NULL,1),
+(48,1,'263','AC. ANTI CITOMEGALOVIRUS IgG','4','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(49,2,'4230','AC. ANTI CITOMEGALOVIRUS IgG/IgM','4',NULL,NULL,NULL,NULL,NULL,1),
+(50,1,'274','AC. ANTI CITOMEGALOVIRUS IgM','4','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(51,2,'571','AC. ANTI CITOPLASMA DE NEUTROFILOS (ANCA P y C)','5','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(52,1,'1162','AC. ANTI COCCIDIOIDES IMMITIS IgM','12',NULL,NULL,NULL,NULL,NULL,1),
+(53,2,'2384','AC. ANTI CORE VBH (TOTAL)','4',NULL,NULL,NULL,NULL,NULL,1),
+(54,1,'2774','AC. ANTI COXIELLA BURNETTI (IgG, IgM)','20',NULL,NULL,NULL,NULL,NULL,1),
+(55,1,'3017','Ac. Anti Coxsackie A virus (A2,4,7,9,10,16)','25',NULL,NULL,NULL,NULL,NULL,1),
+(56,1,'3018','Ac. Anti Coxsackie B virus (B1, 2, 3, 4, 5, 6)','20',NULL,NULL,NULL,NULL,NULL,1),
+(57,1,'1166','AC. ANTI CRYPTOCOCCUS NEOFORMANS EN SUERO','20',NULL,NULL,NULL,NULL,NULL,1),
+(58,6,'330','AC. ANTI DENGUE (NS1, IgM, IgG)','0','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(59,1,'297','Ac. anti DNA DOBLE CADENA (dsDNA)','5','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(60,2,'287','Ac. ANTI DNA UNA CADENA (ssDNA)','5','Suero 2 ml','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(61,1,'4877','AC. ANTI DNASA B ( ADN-B )','18','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(62,1,'1168','AC. ANTI ECHINOCOCCUS GRANULOSUS IgG','25',NULL,NULL,NULL,NULL,NULL,1),
+(63,1,'307','AC. ANTI ENA (SM Y RNP)','5','Sangre total heparina',NULL,NULL,NULL,NULL,1),
+(64,2,'2133','Ac. ANTI ENDOMISIO (Anti-EMA)','5','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(65,1,'483','AC. ANTI EPSTEIN BARR Ag CAPSIDE  IgG','6',NULL,NULL,NULL,NULL,NULL,1),
+(66,1,'486','AC. ANTI EPSTEIN BARR Ag CAPSIDE IgM','6',NULL,NULL,NULL,NULL,NULL,1),
+(67,1,'490','AC. ANTI EPSTEIN BARR Ag NUCLEAR IgG','6',NULL,NULL,NULL,NULL,NULL,1),
+(68,1,'1172','AC. ANTI EPSTEIN BARR IgG ANTIGENO TEMPRANO','6',NULL,NULL,NULL,NULL,NULL,1),
+(69,2,'258','AC. ANTI ESPERMA (INDIRECTOS)','3',NULL,NULL,NULL,NULL,NULL,1),
+(70,2,'329','AC. ANTI ESPERMATOZOIDES','3',NULL,NULL,NULL,NULL,NULL,1),
+(71,2,'1158','AC. ANTI FACTOR INTRINSECO','5','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(72,1,'339','AC. ANTI FOSFOLIPIDOS (IgG, IgM)','5',NULL,NULL,NULL,NULL,NULL,1),
+(73,1,'805','Ac. Anti Fosfolípidos IgG','4','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(74,1,'806','Ac. Anti Fosfolípidos IgM','4','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(75,2,'2130','AC. ANTI GAD (Ácido Glutámico Descarboxilasa)','8','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(76,2,'2590','AC. ANTI GNATHOSTOMA','12','Suero 1 ml','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(77,1,'350','Ac. ANTI HELICOBACTER PYLORI  IgG','4','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(78,1,'482','Ac. ANTI HELICOBACTER PYLORI IgA','4','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(79,1,'1183','Ac. ANTI HELICOBACTER PYLORI IgM','4','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(80,4,'131','Ac. ANTI HEPATITIS C','0','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(81,7,'2928','Ac. ANTI HEPATITIS C (CLIA)','0','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(82,2,'1261','AC. ANTI HEPATITIS D','7','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(83,1,'372','AC. ANTI HERPES  1  IgM','4','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(84,1,'361','AC. ANTI HERPES 1  IgG','4','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(85,1,'383','AC. ANTI HERPES 2  IgG','4','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(86,1,'394','AC. ANTI HERPES 2  IgM','4','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(87,1,'405','AC. ANTI HISTONAS','5','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(88,2,'299','AC. ANTI HISTOPLASMA CAPSULATUM IgM','12',NULL,NULL,NULL,NULL,NULL,1),
+(89,4,'416','Ac. ANTI HIV 1/ HIV 2','0','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(90,2,'4323','Ac. ANTI HIV 1/ HIV 2 (CLIA/ELISA)','2','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(91,2,'528','AC. ANTI INSULINA','8','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(92,1,'543','AC. ANTI ISLOTES DE LANGERHANS','15','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(93,2,'2114','Ac. ANTI LEISHMANIA DONOVANI IgG e IgM','10',NULL,NULL,NULL,NULL,NULL,1),
+(94,2,'2450','AC. ANTI LEPTOSPIRA IgG e IgM','8','Suero','Tubo amarillo',NULL,NULL,NULL,1),
+(95,1,'2115','Ac. ANTI LKM (Microsomales de Higado y Riñon)','8','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(96,2,'4513','Ac. ANTI LRP4  (LDL receptor related protein 4)','40','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(97,2,'550','AC. ANTI M. TUBERCULOSIS IGG, IGM','5',NULL,NULL,NULL,NULL,NULL,1),
+(98,2,'2501','AC. ANTI MELANOCITOS','8',NULL,NULL,NULL,NULL,NULL,1),
+(99,1,'2116','Ac. ANTI MEMBRANA BASAL GLOMERULAR','15',NULL,NULL,NULL,NULL,NULL,1),
+(100,1,'436','AC. ANTI MITOCONDRIA','5','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(101,2,'2795','AC. ANTI MUSCULO ESTRIADO','5',NULL,NULL,NULL,NULL,NULL,1),
+(102,2,'4514','Ac. Anti MusK (tirosina quinasa muscular)','15','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(103,2,'2473','AC. ANTI MYCOBACTERIUM TUBERCULOSIS IgM','4','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(104,2,'481','AC. ANTI MYCOPLASMA PNEUMONIAE  IgM','7',NULL,NULL,NULL,NULL,NULL,1),
+(105,2,'480','AC. ANTI MYCOPLASMA PNEUMONIAE IgG','8',NULL,NULL,NULL,NULL,NULL,1),
+(106,1,'467','AC. ANTI MYCOPLASMA PNEUMONIAE IgG e IgM','8',NULL,NULL,NULL,NULL,NULL,1),
+(107,1,'498','AC. ANTI NUCLEARES (ANAS CUANTITATIVO)','5','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(108,8,'4731','AC. ANTI NUCLEARES DIFERENCIADO','5','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(109,2,'2119','Ac. ANTI NUCLEOSOMAS','5',NULL,NULL,NULL,NULL,NULL,1),
+(110,2,'504','AC. ANTI PAROTIDITIS  (PARAMIXOVIRUS)','8',NULL,NULL,NULL,NULL,NULL,1),
+(111,2,'2865','AC. ANTI PAROTIDITIS IgG','8',NULL,NULL,NULL,NULL,NULL,1),
+(112,2,'2603','AC. ANTI PAROTIDITIS IgM','8','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(113,2,'1076','AC. ANTI PARVOVIRUS B19 (IgG, IgM)','10',NULL,NULL,NULL,NULL,NULL,1),
+(114,6,'2035','AC. ANTI PEPTIDO CICLICO CITRULINADO (CCP)','0','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(115,6,'425','Ac. ANTI PEROXIDASA TIROIDEA (TPOAb)','0','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(116,2,'582','AC. ANTI PLAQUETARIOS','2',NULL,NULL,NULL,NULL,NULL,1),
+(117,6,'2569','AC. ANTI RECEPTOR DE TSH (TRAb)','0','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(118,9,'2850','AC. ANTI RNA POLIMERASA III','20','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(119,1,'531','AC. ANTI RUBEOLA IgG','4','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(120,1,'542','AC. ANTI RUBEOLA IgM','4','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(121,2,'553','Ac. Anti SARAMPION (IgG, IgM)','8',NULL,NULL,NULL,NULL,NULL,1),
+(122,2,'1063','AC. ANTI SARAMPION IgG','8','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(123,2,'1064','AC. ANTI SARAMPION IgM','8','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(124,1,'574','Ac. ANTI SMITH (SM)','5','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(125,6,'599','Ac. ANTI TIROGLOBULINA (TgAb)','0','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(126,6,'2052','AC. ANTI TIROIDEOS (Tiroglobulina y Peroxidasa)','0','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(127,6,'3005','AC. ANTI TIROIDEOS II (TgAb, TPOAb, TRAb)','0','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(128,2,'2851','AC. ANTI TOPOISOMERASA (scl-70)','25','Suero 2 ml','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(129,1,'603','AC. ANTI TOXOPLASMA GONDII  IgG','4','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(130,1,'604','AC. ANTI TOXOPLASMA GONDII  IgM','4','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(131,1,'2829','AC. ANTI TRYPANOSOMA CRUZI IgG','5','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(132,2,'4676','Ac. ANTI TRYPANOSOMA CRUZI IgM','18','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(133,2,'606','AC. ANTI VARICELA IgG, IgM','7',NULL,NULL,NULL,NULL,NULL,1),
+(134,6,'2838','Ac. ANTI VIH-1/VIH-2  y/o  Ag. VIH','4','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(135,1,'2841','AC. ANTI ZIKA IgG, IgM','5','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(136,2,'607','AC. AVIARIOS','8',NULL,NULL,NULL,NULL,NULL,1),
+(137,2,'2591','AC. CELULAS PARIETALES','5','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(138,1,'1253','AC. CORE IgG VIRUS B DE HEPATITIS','6','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(139,2,'1476','AC. CORE IgM VIRUS B DE HEPATITIS','8','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(140,2,'125','AC. e VIRUS B DE HEPATITIS','2',NULL,NULL,NULL,NULL,NULL,1),
+(141,1,'2970','Ac. FLUORESCENTES TREPONEMA  (FTA-Abs)','6','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(142,2,'2717','AC. GOODPASTURE','5','Suero 1 ml','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(143,2,'2595','AC. GRANULOCITOS','2',NULL,NULL,NULL,NULL,NULL,1),
+(144,1,'2596','AC. HERPES 1 y 2  (IgG, IgM)','4',NULL,NULL,NULL,NULL,NULL,1),
+(145,1,'608','AC. HETEROFILOS','4','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(146,2,'2598','AC. HTLV 1+2','5',NULL,NULL,NULL,NULL,NULL,1),
+(147,2,'4870','Ac. IgG  anti receptor de fosfolipasa A2','19',NULL,NULL,NULL,NULL,NULL,1),
+(148,2,'2599','AC. IgG ADAMTS-13','8',NULL,NULL,NULL,NULL,NULL,1),
+(149,1,'304','AC. IgG ANTI BRUCELLA (2 MERCAPTOETANOL)','7',NULL,NULL,NULL,NULL,NULL,1),
+(150,1,'4340','Ac. IgG Neuromielitis óptica (Aquaporina-4)','26',NULL,NULL,NULL,NULL,NULL,1),
+(151,2,'2600','AC. LISTERIA (IgE)','20',NULL,NULL,NULL,NULL,NULL,1),
+(152,2,'1180','AC. MIELINA','7',NULL,NULL,NULL,NULL,NULL,1),
+(153,2,'2586','AC. PROTEINA P-RIBOSOMAL','5','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(154,2,'1848','AC. REC. ACETILCOLINA (anti-AChR)','13','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(155,1,'2604','AC. RUBEOLA (IgG, IgM)','4',NULL,NULL,NULL,NULL,NULL,1),
+(156,2,'1255','AC. s  VIRUS B DE HEPATITIS','5','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(157,2,'2605','AC. SACCHAROMYCES CEREVISIAE IgA','8',NULL,NULL,NULL,NULL,NULL,1),
+(158,2,'2606','AC. SACCHAROMYCES CEREVISIAE IgG','8',NULL,NULL,NULL,NULL,NULL,1),
+(159,2,'602','AC. TOXOCARA CANIS','8',NULL,NULL,NULL,NULL,NULL,1),
+(160,1,'2607','AC. TOXOPLASMA GONDII (IgG, IgM)','4',NULL,NULL,NULL,NULL,NULL,1),
+(161,2,'2112','AC. VIRUS EPSTEIN-BARR','5','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(162,6,'302','AC. vs  BRUCELLA (ROSA DE BENGALA)','0','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(163,8,'1187','ACETAMINOFEN','8',NULL,NULL,NULL,NULL,NULL,1),
+(164,1,'2792','ACETONA EN ORINA','8',NULL,NULL,NULL,NULL,NULL,1),
+(165,1,'2791','ACETONA EN SANGRE','8',NULL,NULL,NULL,NULL,NULL,1),
+(166,2,'2269','Ácido ascórbico (Vitamina C)','12','Plasma heparina','Tubo verde',NULL,NULL,NULL,1),
+(167,2,'2609','ACIDO CITRICO EN SEMEN','2','Semen','Frasco esteril',NULL,NULL,NULL,1),
+(168,2,'338','ACIDO DELTA AMINO LEVULINICO','6',NULL,NULL,NULL,NULL,NULL,1),
+(169,2,'2611','ACIDO FENIL MERCAPTOPURICO','20',NULL,NULL,NULL,NULL,NULL,1),
+(170,1,'424','ACIDO FOLICO (FOLATOS)','0','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(171,2,'1190','ACIDO FOLICO INTRAERITROCITARIO','7','Sangre total EDTA','Tubo lila',NULL,NULL,NULL,1),
+(172,1,'2612','Ácido hipúrico en orina (Tolueno)','9','Orina','F',NULL,NULL,NULL,1),
+(173,5,'2877','ACIDO HOMOVANILICO (ORINA 24 HORAS)','15','Orina de 24 hrs.','Frasco ambar 24 horas',NULL,NULL,NULL,1),
+(174,1,'2616','Ácido metil hipúrico (Xileno)','14','Orina','Frasco esteril',NULL,NULL,NULL,1),
+(175,1,'4307','ACIDO METILMALONICO','12',NULL,NULL,NULL,NULL,NULL,1),
+(176,2,'2125','ACIDO MICOFENOLICO','25',NULL,NULL,NULL,NULL,NULL,1),
+(177,2,'2577','ACIDO PERYODICO DE SCHIFF','1','Frotis','Laminilla',NULL,NULL,NULL,1),
+(178,4,'2567','ACIDO URICO EN ORINA AL AZAR','0','Orina','Frasco esteril',NULL,NULL,NULL,1),
+(179,4,'1703','ACIDO URICO EN ORINA DE 24 HORAS','0','Orina de 24 h','Frasco ambar 24 horas',NULL,NULL,NULL,1),
+(180,10,'1652','Acido úrico en orina de 24 horas','0','Orina','Frasco esteril',NULL,NULL,NULL,1),
+(181,4,'516','ACIDO URICO SERICO','0','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(182,1,'621','ACIDO VALPROICO (VALPROATO)','3','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(183,2,'610','ACIDO VANILLINMANDELICO','5',NULL,NULL,NULL,NULL,NULL,1),
+(184,1,'2960','ACIDOS BILIARES TOTALES Y FRACCIONADOS','15','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(185,1,'1193','ACIDOS GRASOS LIBRES EN SUERO','8',NULL,NULL,NULL,NULL,NULL,1),
+(186,2,'2614','ACTIVIDAD ADAMTS-13','8',NULL,NULL,NULL,NULL,NULL,1),
+(187,2,'2694','ACTIVIDAD DEL FIBRINOGENO','5',NULL,NULL,NULL,NULL,NULL,1),
+(188,11,'568','ACTIVIDAD TRIPTICA','0','Heces 1 muestra','Frasco para heces',NULL,NULL,NULL,1),
+(189,12,'1982','ADENOIDES','8','Pieza quirúrgica','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(190,1,'2542','ADENOSIN DEAMINASA (ADA)','4','Líquido biológico','Frasco esteril',NULL,NULL,NULL,1),
+(191,6,'4764','ADENOVIRUS.','0','Exudado nasofaríngeo','Kit especial',NULL,NULL,NULL,1),
+(192,2,'2425','ADRENALINA EN ORINA','7','Orina de 24 h','Frasco ambar 24 horas',NULL,NULL,NULL,1),
+(193,2,'2915','Ag. CYFRA-21','5',NULL,NULL,NULL,NULL,NULL,1),
+(194,4,'130','Ag. DE SUPERF. HEPATITIS B (Ag. Australia)','0','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(195,2,'2621','AG. e VIRUS B DE HEPATITIS','5','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(196,2,'2622','AG. HLA DQ','18','Sangre total EDTA','Tubo lila',NULL,NULL,NULL,1),
+(197,2,'2623','AG. HLA DR','18','Sangre total EDTA','Tubo lila',NULL,NULL,NULL,1),
+(198,2,'2624','AG. HLA-A y B','9','Sangre total EDTA','Tubo lila',NULL,NULL,NULL,1),
+(199,2,'143','AG. HLA-B27','2','Sangre total EDTA','Tubo lila',NULL,NULL,NULL,1),
+(200,13,'2331','AGUA PREPARADA NOM-093-SSA1-1994','7','AGUA','Frasco especial esteril',NULL,NULL,NULL,1),
+(201,13,'2332','AGUA Y HIELO POTABLE QUE SE EXPENDEN EN ESTABLECIMIENTOS PUBLICOS NOM-093-SSA1-1994','7','AGUA','Frasco especial esteril',NULL,NULL,NULL,1),
+(202,4,'278','ALANINA AMINO TRANSFERASA (TGP/ALT)','0','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(203,4,'24','ALBUMINA SERICA','0','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(204,2,'46','ALCOHOL ETILICO EN ORINA','4',NULL,NULL,NULL,NULL,NULL,1),
+(205,13,'59','ALCOHOL ETILICO EN SANGRE','2','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(206,1,'70','ALDOLASA','17','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(207,1,'81','ALDOSTERONA','7','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(208,2,'479','ALDOSTERONA EN ORINA','7',NULL,NULL,NULL,NULL,NULL,1),
+(209,2,'1006','ALFA 1 ANTITRIPSINA','6',NULL,NULL,NULL,NULL,NULL,1),
+(210,2,'2630','ALFA 2 ANTIPLASMINA','3',NULL,NULL,NULL,NULL,NULL,1),
+(211,2,'2631','ALFA 2 MACROGLOBULINA','2',NULL,NULL,NULL,NULL,NULL,1),
+(212,6,'105','ALFAFETOPROTEINA (AFP)','0','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(213,13,'2333','ALIMENTO COCIDO NOM-093-SSA1-1994','7','ALIMENTO','Conrtenedor para aliementos',NULL,NULL,NULL,1),
+(214,13,'2334','ALIMENTO CRUDO NOM-093-SSA1-1994','7','ALIMENTO','Conrtenedor para aliementos',NULL,NULL,NULL,1),
+(215,13,'2335','ALIMENTO MAYONESAS Y ADEREZOS NOM-093-SSA1-1994','7','ALIMENTO','Conrtenedor para aliementos',NULL,NULL,NULL,1),
+(216,13,'2633','ALIMENTO MIXTO','5','ALIMENTO','Conrtenedor para aliementos',NULL,NULL,NULL,1),
+(217,13,'2336','ALIMENTO POSTRE LACTEO NOM-093-SSA1-1994','7','ALIMENTO','Conrtenedor para aliementos',NULL,NULL,NULL,1),
+(218,13,'2338','ALIMENTO POSTRE LACTEO NOM-093-SSA1-1994','7','ALIMENTO','Conrtenedor para aliementos',NULL,NULL,NULL,1),
+(219,13,'2339','ALIMENTO PRODUCTOS CARNICOS, TROCEADOS, CURADOS Y MADUROS NOM-122-SSA1-1995','7','ALIMENTO','Conrtenedor para aliementos',NULL,NULL,NULL,1),
+(220,13,'2340','ALIMENTO PRODUCTOS CARNICOS, TROCEADOS, CURADOS Y MADUROS NOM-145-SSA1-1995','7','ALIMENTO','Conrtenedor para aliementos',NULL,NULL,NULL,1),
+(221,13,'2341','ALIMENTO QUESOS FRESCOS, MADUROS, Y PROCESADOS NOM-121-SSA1-1994','7','ALIMENTO','Conrtenedor para aliementos',NULL,NULL,NULL,1),
+(222,13,'2343','ALIMENTOS CRUSTACEOS FRESCOS, REFRIGERADOS Y CONGELADOS NOM-029-SSA1-1993','7','ALIMENTO','Conrtenedor para aliementos',NULL,NULL,NULL,1),
+(223,13,'2342','ALIMENTOS HELADOS NOM-093-SSA1-1994','7','ALIMENTO','Conrtenedor para aliementos',NULL,NULL,NULL,1),
+(224,13,'2344','ALIMENTOS PESCADOS FRESCOS, REFRIGERADOS Y CONGELADOS NOM- 027-SSA1-1993','7','ALIMENTO','Conrtenedor para aliementos',NULL,NULL,NULL,1),
+(225,13,'2346','ALIMENTOS PRODUCTOS CARNICOS CRUDOS NOM-194-SSA1-2004','7','ALIMENTO','Conrtenedor para aliementos',NULL,NULL,NULL,1),
+(226,2,'1199','ALUMINIO EN ORINA','17',NULL,NULL,NULL,NULL,NULL,1),
+(227,2,'1198','ALUMINIO EN SUERO','17',NULL,NULL,NULL,NULL,NULL,1),
+(228,14,'118','AMIBA EN FRESCO (BAF)','0','Heces 1 muestra','Frasco para heces',NULL,NULL,NULL,1),
+(229,12,'2868','AMIGDALAS','8','Pieza quirúrgica','Frasco patologia',NULL,NULL,NULL,1),
+(230,4,'2878','AMILASA EN LIQUIDOS ORGANICOS','0',NULL,NULL,NULL,NULL,NULL,1),
+(231,4,'140','AMILASA EN ORINA','2',NULL,NULL,NULL,NULL,NULL,1),
+(232,4,'129','AMILASA EN SUERO','0','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(233,13,'475','ANALISIS FISICO-QUIMICO DE AGUA POTABLE (SALES DISUELTAS)','5','agua','Frasco especial esteril',NULL,NULL,NULL,1),
+(234,13,'2330','ANALISIS MICROBIOLOGICO DE AGUA','6','agua','Frasco especial esteril',NULL,NULL,NULL,1),
+(235,1,'163','ANDROSTENEDIONA','4','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(236,12,'4300','ANEXO (BIOSIA)',NULL,'Biopsia','Frasco especial patologia',NULL,NULL,NULL,1),
+(237,10,'174','ANFETAMINAS (AMP)','0','Orina','Frasco esteril',NULL,NULL,NULL,1),
+(238,2,'1204','ANGIOTESINA','7','Plasma EDTA','Tubo lila',NULL,NULL,NULL,1),
+(239,12,'2849','ANO','8','Biopsia','Frasco especial patologia',NULL,NULL,NULL,1),
+(240,11,'2357','ANTIBIOGRAMA','2','DIVERSOS','Diverso',NULL,NULL,NULL,1),
+(241,11,'341','ANTIBIOGRAMA MIC','5','DIVERSOS','Diverso',NULL,NULL,NULL,1),
+(242,2,'4856','ANTIBIOGRAMA TB (Mycobacterium tuberculosis)',NULL,'Medio especial','Cepa',NULL,NULL,NULL,1),
+(243,1,'298','ANTICOAGULANTE LUPICO (CIRCULANTES)','4','Plasma/Citrato','Toma directa',NULL,NULL,NULL,1),
+(244,1,'4878','Anticuerpo inmunohistoquimico HER2/cebB2','15',NULL,NULL,NULL,NULL,NULL,1),
+(245,1,'4879','Anticuerpo Inmunohistoquímico Ki67','15',NULL,NULL,NULL,NULL,NULL,1),
+(246,1,'4881','Anticuerpo receptor de estrógenos','15',NULL,NULL,NULL,NULL,NULL,1),
+(247,1,'4880','Anticuerpo receptor de progesterona','15',NULL,NULL,NULL,NULL,NULL,1),
+(248,2,'4652','Anticuerpos anti Plasmodium falciparum','0',NULL,NULL,NULL,NULL,NULL,1),
+(249,5,'2419','ANTICUERPOS ANTI PM/SCL-100','5',NULL,NULL,NULL,NULL,NULL,1),
+(250,2,'4631','ANTICUERPOS ANTI -RECEPTOR NMDA','0',NULL,NULL,NULL,NULL,NULL,1),
+(251,2,'2543','ANTICUERPOS ANTI SSA/Ro y SSB/La','5','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(252,2,'4681','Anticuerpos contra antígenos hígado-páncreas(M2, LKM1, LC1, SLA, Sp100/PML, gp210)','16','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(253,6,'4193','ANTICUERPOS SARS-CoV-2 (IgM/IgG)','0','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(254,6,'4607','Anticuerpos Totales contra T. pallidum','0','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(255,6,'609','ANTIESTREPTOLISINAS (AEL/ASTO)','0','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(256,6,'633','ANTIGENO  CA 19-9','0','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(257,2,'564','ANTIGENO  CA 27-29','10','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(258,6,'631','ANTIGENO CA 125 (OVARIO)','0','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(259,6,'632','ANTIGENO CA 15-3 (MAMA)','0','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(260,2,'1205','ANTIGENO CA 72-4','8','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(261,2,'4614','ANTIGENO CA-50','16','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(262,6,'611','ANTIGENO CARCINOEMBRIONARIO (CEA)','0','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(263,1,'1165','ANTIGENO CRYPTOCOCCUS NEOFORMANS EN LCR','8','LCR','Tubo tapa rosca esteril',NULL,NULL,NULL,1),
+(264,11,'155','ANTIGENO DE CHLAMYDIA TRACHOMATIS','0','Líquido biológico','Frasco esteril',NULL,NULL,NULL,1),
+(265,2,'3003','ANTIGENO DE GIARDIA EN HECES','3','Heces 1 muestra','Frasco para heces',NULL,NULL,NULL,1),
+(266,14,'577','ANTIGENO DE H. PYLORI EN HECES','0','Heces','Frasco para heces',NULL,NULL,NULL,1),
+(267,2,'1132','ANTIGENO DE VON WILLEBRAND','8',NULL,NULL,NULL,NULL,NULL,1),
+(268,1,'4349','ANTIGENO HE4','5','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(269,4,'2138','ANTIGENO P24 DE HIV 1','0','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(270,6,'612','ANTIGENO PROSTATICO ESPECIFICO (PSA)','0','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(271,6,'311','ANTIGENO PROSTATICO LIBRE (PSA LIBRE)','0','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(272,1,'478','ANTIGENO RNP','4','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(273,2,'613','ANTITROMBINA III','8',NULL,NULL,NULL,NULL,NULL,1),
+(274,12,'16','APENDICE CECAL','8','Pieza quirúrgica','Frasco patologia',NULL,NULL,NULL,1),
+(275,4,'614','APOLIPOPROTEINA A1','0','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(276,4,'702','APOLIPOPROTEINA B','2','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(277,4,'703','APOLIPOPROTEINAS A1 y B','0','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(278,2,'615','ARSENICO EN ORINA','14',NULL,NULL,NULL,NULL,NULL,1),
+(279,2,'2140','ARSENICO EN SUERO','16',NULL,NULL,NULL,NULL,NULL,1),
+(280,4,'277','ASPARTATO AMINO TRANSFERASA(TGO/AST)','0','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(281,5,'4297','AVIDEZ DE ANTICUERPOS IgG ANTI CITOMEGALOVIRUS','10','Suero 1 ml','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(282,14,'1884','AZUCARES REDUCTORES','0','Heces 1 muestra','Frasco para heces',NULL,NULL,NULL,1),
+(283,10,'4887','AZUCARES REDUCTORES EN ORINA','0','Orina','Frasco esteril',NULL,NULL,NULL,1),
+(284,12,'2657','BAAF DE MAMA (LAMINILLAS)','8','Tejido','Laminillas',NULL,NULL,NULL,1),
+(285,12,'4238','BAAF DE TRACTO RESPIRATORIO','8','Biopsia','Frasco especial patologia',NULL,NULL,NULL,1),
+(286,12,'445','BAAF TIROIDES','8','Biopsia','Frasco especial patologia',NULL,NULL,NULL,1),
+(287,11,'618','BACILOSCOPIA 1 MUESTRA (BAAR)','1',NULL,NULL,NULL,NULL,NULL,1),
+(288,11,'617','BACILOSCOPIA 10 MUESTRAS (BAAR)','12','Espectoración 1 mta.','Frasco esteril',NULL,NULL,NULL,1),
+(289,11,'4116','BACILOSCOPIA 12 MUESTRAS (BAAR)','13','DIVERSOS','Diverso',NULL,NULL,NULL,1),
+(290,11,'619','BACILOSCOPIA 2M (BAAR)','3',NULL,NULL,NULL,NULL,NULL,1),
+(291,11,'620','BACILOSCOPIA 3M (BAAR)','4',NULL,NULL,NULL,NULL,NULL,1),
+(292,11,'2575','BACILOSCOPIA 4 MUESTRAS (BAAR)','5','DIVERSOS','Diverso',NULL,NULL,NULL,1),
+(293,11,'622','BACILOSCOPIA 5M (BAAR)','6',NULL,NULL,NULL,NULL,NULL,1),
+(294,2,'1208','BANDAS OLIGOCLONALES LCR','25','LCR','Tubo tapa rosca esteril',NULL,NULL,NULL,1),
+(295,11,'301','BARBITURICOS (ORINA)','0',NULL,NULL,NULL,NULL,NULL,1),
+(296,12,'2660','BAZO','0','Pieza quirúrgica','Frasco patologia',NULL,NULL,NULL,1),
+(297,2,'54','BETA 2 MICROGLOBULINA (orina)','2',NULL,NULL,NULL,NULL,NULL,1),
+(298,2,'624','BETA 2 MICROGLOBULINA EN SUERO','4','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(299,5,'4147','BETA 2 TRANSFERRINA','6','DIVERSOS','Diverso',NULL,NULL,NULL,1),
+(300,5,'2961','BETA D-GLUCANO','10','Suero 2 ml','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(301,1,'4886','Beta hidroxibutirato','18','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(302,2,'430','BICARBONATO EN ORINA AL AZAR','3',NULL,NULL,NULL,NULL,NULL,1),
+(303,4,'4772','Bicarbonato y CO2','0','Plasma heparina','Tubo verde',NULL,NULL,NULL,1),
+(304,4,'625','BILIRRUBINA TOTAL','0','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(305,4,'2120','Bilirrubina Total','2','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(306,12,'1963','BIOPSIA CHICA','7','Pieza quirúrgica','Frasco patologia',NULL,NULL,NULL,1),
+(307,12,'4237','BIOPSIA DE CAVIDAD ORAL','8','Biopsia','Frasco especial patologia',NULL,NULL,NULL,1),
+(308,12,'4249','BIOPSIA DE CEREBRO','8','Biopsia','Frasco especial patologia',NULL,NULL,NULL,1),
+(309,12,'2666','BIOPSIA DE ENDOMETRIO (LUI)','8','Biopsia de tejido','Frasco esteril',NULL,NULL,NULL,1),
+(310,12,'2659','BIOPSIA DE MAMA (menora 2 cm)','0','Tejido','Frasco patologia',NULL,NULL,NULL,1),
+(311,12,'2656','BIOPSIA DE OIDO','8','Tejido','Frasco patologia',NULL,NULL,NULL,1),
+(312,12,'4248','BIOPSIA DE OJO','8','Biopsia','Frasco especial patologia',NULL,NULL,NULL,1),
+(313,12,'4241','BIOPSIA DE PANCREAS','8','Biopsia','Frasco especial patologia',NULL,NULL,NULL,1),
+(314,12,'4299','BIOPSIA DE PIEL','8','Biopsia','Frasco especial patologia',NULL,NULL,NULL,1),
+(315,12,'1979','BIOPSIA DE PROSTATA TRANSRECTAL','8','Pieza quirúrgica','Frasco patologia',NULL,NULL,NULL,1),
+(316,12,'4234','BIOPSIA DE RIÑON','8','Pieza quirúrgica','Frasco patologia',NULL,NULL,NULL,1),
+(317,12,'4199','BIOPSIA DE TEJIDO OSEO','10','Pieza quirúrgica','Frasco patologia',NULL,NULL,NULL,1),
+(318,12,'4247','BIOPSIA DE TEJIDOS BLANDOS','8','Biopsia','Frasco especial patologia',NULL,NULL,NULL,1),
+(319,12,'451','BIOPSIA DE TIROIDES','8','Biopsia','Frasco especial patologia',NULL,NULL,NULL,1),
+(320,12,'4243','BIOPSIA DE TRACTO RESPIRATORIO','8','Biopsia','Frasco especial patologia',NULL,NULL,NULL,1),
+(321,12,'4175','BIOPSIA GLANDULA SALIVAL','8','Pieza quirúrgica','Frasco patologia',NULL,NULL,NULL,1),
+(322,1,'4768','BIOPSIA PIEZAS ESPECIALES','14',NULL,NULL,NULL,NULL,NULL,1),
+(323,12,'4250','BIOPSIA VULVAR','8','Biopsia','Frasco especial patologia',NULL,NULL,NULL,1),
+(324,2,'4710','Bordetella (B.pertussis, B.parapertussis) DNA, exudado','15',NULL,NULL,NULL,NULL,NULL,1),
+(325,15,'4636','Búsqueda de Precipitados de Hemoglobina H','0','Sangre total EDTA','Tubo lila',NULL,NULL,NULL,1),
+(326,14,'2049','BUSQUEDA DE TRYPANOSOMA CRUZI','0','Sangre total EDTA','Tubo lila',NULL,NULL,NULL,1),
+(327,14,'2818','BUSQUEDA DE: Sarcoptes scabiei (Sarna)','0','Frotis','Toma especial',NULL,NULL,NULL,1),
+(328,14,'412','BUSQUEDA: AMIBAS DE VIDA LIBRE','0',NULL,NULL,NULL,NULL,NULL,1),
+(329,1,'306','Ca++ (Calcio ionizado)','4',NULL,NULL,NULL,NULL,NULL,1),
+(330,2,'1212','CADENAS KAPPA y LAMBDA LIBRES EN ORINA','4','Orina','Frasco esteril',NULL,NULL,NULL,1),
+(331,2,'1893','CADENAS LIGERAS KAPPA/LAMBDA LIBRES EN SUERO','6','Suero','Tubo amarillo o Tubo rojo',NULL,NULL,NULL,1),
+(332,2,'2658','CADMIO EN SANGRE','18','Sangre total EDTA','Tubo lila',NULL,NULL,NULL,1),
+(333,4,'2153','CALCIO EN ORINA AL AZAR','0',NULL,NULL,NULL,NULL,NULL,1),
+(334,4,'635','CALCIO EN ORINA DE 24 HORA
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `02_core_schema.sql`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+-- =============================================================================
+-- LAESH Bloc Digital — Script 02: Core Schema
+-- Tablas: CONFIGURACIONES, WEB_CONTENIDOS, CATALOGOS_UI, CAT_ESTADOS_MEDICO, ESTUDIOS
+-- Idempotente: CREATE TABLE IF NOT EXISTS + INSERT IGNORE.
+-- =============================================================================
+
+USE `laesh_db`;
+
+-- ---------------------------------------------------------------------------
+-- CONFIGURACIONES — Parámetros globales de instancia (clave → valor)
+-- D-04: Links sociales aquí, NO en WEB_CONTENIDOS.
+-- ---------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `configuraciones` (
+    `id`           INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `clave`        VARCHAR(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+    `valor`        TEXT COLLATE utf8mb4_unicode_ci,
+    `descripcion`  VARCHAR(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+    `actualizado_en` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `uq_clave` (`clave`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+  COMMENT='Parámetros globales de la instancia LAESH (singleton por clave)';
+
+-- ---------------------------------------------------------------------------
+-- WEB_CONTENIDOS — Contenido CMS editable por sección del sitio público
+-- D-07: Valores canónicos de seccion = data-section de gestion-web.html
+-- Secciones: hero|quienes-somos|especialidades|promociones|calidad|ubicacion|privacidad|footer|seo
+-- Subsecciones promociones: banner|lunes|martes|miercoles|jueves|viernes|sabado|domingo
+-- Subsecciones footer: logo|info|contacto|horarios
+-- Subsecciones seo: meta|og|schema
+-- ---------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `web_contenidos` (
+    `id`          INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `seccion`     VARCHAR(50) COLLATE utf8mb4_unicode_ci NOT NULL
+                    COMMENT 'hero|quienes-somos|especialidades|promociones|calidad|ubicacion|privacidad|footer|seo',
+    `subseccion`  VARCHAR(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+                    COMMENT 'slide1..5|ficha1..4|banner|lunes..domingo|logo|info|contacto|meta|og|schema',
+    `clave`       VARCHAR(100) COLLATE utf8mb4_unicode_ci NOT NULL
+                    COMMENT 'titulo|descripcion|texto|imagen_url|etiqueta',
+    `valor`       MEDIUMTEXT COLLATE utf8mb4_unicode_ci,
+    `tipo`        ENUM('texto','imagen_url','html','json') NOT NULL DEFAULT 'texto',
+    `actualizado_por` INT UNSIGNED DEFAULT NULL COMMENT 'FK users.id',
+    `actualizado_en` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `uq_sec_subsec_clave` (`seccion`, `subseccion`, `clave`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+  COMMENT='Contenido editable del sitio web LAESH por sección CMS';
+
+-- ---------------------------------------------------------------------------
+-- CATALOGOS_UI — Catálogos polimórficos para selects dinámicos
+-- D-03: universidad_id y lugar_trabajo_id son FK → aquí, no VARCHAR libre.
+-- ---------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `catalogos_ui` (
+    `id`     INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `tipo`   VARCHAR(50) COLLATE utf8mb4_unicode_ci NOT NULL
+               COMMENT 'universidad|lugar_trabajo — discriminador de tipo',
+    `valor`  VARCHAR(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+    `orden`  TINYINT UNSIGNED NOT NULL DEFAULT 0,
+    `activo` TINYINT(1) NOT NULL DEFAULT 1,
+    PRIMARY KEY (`id`),
+    KEY `idx_tipo_activo` (`tipo`, `activo`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+  COMMENT='Catálogos polimórficos para selects dinámicos de UI (universidad, lugar_trabajo)';
+
+-- ---------------------------------------------------------------------------
+-- CAT_ESTADOS_MEDICO — Estado operativo del médico (Activo / Pausado)
+-- D-05: No reemplaza empleados.activo TINYINT para personal no-médico.
+-- ---------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `cat_estados_medico` (
+    `id`          TINYINT UNSIGNED NOT NULL,
+    `nombre`      VARCHAR(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+    `descripcion` VARCHAR(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+  COMMENT='Catálogo de estados del médico: 1=Activo, 2=Pausado';
+
+-- ---------------------------------------------------------------------------
+-- CATALOGOS RELACIONALES — Estructura normalizada de Catálogos y Promociones
+-- ---------------------------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS `cat_gabinetes` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `nombre` VARCHAR(255) NOT NULL,
+  `orden` INT DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS `cat_estudios` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `clave` VARCHAR(50) DEFAULT NULL,
+  `nombre` VARCHAR(255) NOT NULL,
+  `muestra` VARCHAR(150) DEFAULT NULL,
+  `contenedor` VARCHAR(150) DEFAULT NULL,
+  `tiempo` VARCHAR(100) DEFAULT NULL,
+  `preparacion` TEXT DEFAULT NULL,
+  `pruebas_incluidas` TEXT DEFAULT NULL,
+  `top20_orden` INT DEFAULT NULL COMMENT '1-20 si pertenece al Top 20 Est.Med',
+  `activo` TINYINT(1) DEFAULT 1,
+  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS `cat_subgabinetes` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `gabinete_id` INT NOT NULL,
+  `nombre` VARCHAR(150) NOT NULL,
+  `orden` INT DEFAULT 0,
+  FOREIGN KEY (`gabinete_id`) REFERENCES `cat_gabinetes`(`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS `cat_igabinetes` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `nombre` VARCHAR(150) NOT NULL,
+  `orden` INT DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS `rel_estudio_gabinete` (
+  `estudio_id` INT NOT NULL,
+  `gabinete_id` INT NULL,
+  `subgabinete_id` INT NULL,
+  `orden` INT UNSIGNED NOT NULL DEFAULT 999,
+  PRIMARY KEY (`estudio_id`),
+  FOREIGN KEY (`estudio_id`) REFERENCES `cat_estudios`(`id`) ON DELETE CASCADE,
+  FOREIGN KEY (`gabinete_id`) REFERENCES `cat_gabinetes`(`id`) ON DELETE CASCADE,
+  FOREIGN KEY (`subgabinete_id`) REFERENCES `cat_subgabinetes`(`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS `rel_igabinete_vinculos` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `igabinete_id` INT NOT NULL,
+  `gabinete_id` INT NULL,
+  `subgabinete_id` INT NULL,
+  `subgabinete_uid` INT AS (IFNULL(`subgabinete_id`, 0)) VIRTUAL,
+  UNIQUE KEY `uq_vinculo_unico` (`igabinete_id`, `gabinete_id`, `subgabinete_uid`),
+  FOREIGN KEY (`igabinete_id`) REFERENCES `cat_igabinetes`(`id`) ON DELETE CASCADE,
+  FOREIGN KEY (`gabinete_id`) REFERENCES `cat_gabinetes`(`id`) ON DELETE CASCADE,
+  FOREIGN KEY (`subgabinete_id`) REFERENCES `cat_subgabinetes`(`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS `catalogo_promociones` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `dia_semana` VARCHAR(255) NOT NULL,
+  `imagen_fondo` VARCHAR(255) DEFAULT NULL,
+  `activo` TINYINT(1) DEFAULT 1,
+  `orden` INT DEFAULT 0,
+  `creado_en` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `actualizado_en` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ---------------------------------------------------------------------------
+-- Migraciones idempotentes — instalaciones ya corriendo (el CREATE TABLE de
+-- arriba solo aplica a instalaciones nuevas).
+-- ---------------------------------------------------------------------------
+
+-- Orden de estudio dentro de un gabinete/subgabinete (2026-09-23): antes solo
+-- se guardaba el vínculo, sin registrar el orden elegido por el usuario en el
+-- editor de catálogo (SyncJerarquiaGabinete, ver 08_stored_procedures.sql).
+ALTER TABLE `rel_estudio_gabinete`
+  ADD COLUMN IF NOT EXISTS `orden` INT UNSIGNED NOT NULL DEFAULT 999
+    COMMENT 'Orden del estudio dentro del gabinete/subgabinete, elegido en el editor de catálogo';
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `04_auth_extensions.sql`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+-- =============================================================================
+-- LAESH Bloc Digital — Script 04: Extensiones de Auth y RBAC
+-- Tablas: EMPLEADOS, PERFILES_MEDICOS, RBAC_PERMISOS, RBAC_PERMISOS_USUARIOS
+-- Depende de: 01_auth_schema.sql (tabla users debe existir).
+-- Idempotente: CREATE TABLE IF NOT EXISTS.
+--
+-- Redesign v2 — alineado con Tecnica_Modelo_Datos.html:
+--   • perfiles_medicos: user_id como PK/FK directa a users.id (era empleado_id FK empleados.id)
+--   • perfiles_medicos: + celular, telefono_consultorio, direccion_consultorio
+-- =============================================================================
+
+USE `laesh_db`;
+
+-- ---------------------------------------------------------------------------
+-- EMPLEADOS — Extensión del perfil operativo para personal LAESH
+-- Roles: MEDICO | RECEPCION | ADMIN | SITIOWEB (solo Contenidos del Sitio Web, 2026-09-30)
+-- empleados.activo TINYINT permanece para personal no-médico (ver D-05).
+-- ---------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `empleados` (
+    `id`        INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `user_id`   INT UNSIGNED NOT NULL COMMENT 'FK users.id (Delight-Auth)',
+    `nombre`    VARCHAR(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+    `apellidos` VARCHAR(200) COLLATE utf8mb4_unicode_ci NOT NULL,
+    `rol`       ENUM('MEDICO','RECEPCION','ADMIN','SITIOWEB') NOT NULL,
+    `activo`    TINYINT(1) NOT NULL DEFAULT 1 COMMENT 'Boolean simple para recepción/admin (D-05)',
+    `creado_en` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `uq_user_id` (`user_id`),
+    KEY `idx_rol` (`rol`),
+    CONSTRAINT `fk_emp_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+  COMMENT='Extensión de users para personal LAESH — rol operativo y estado activo';
+
+-- ---------------------------------------------------------------------------
+-- PERFILES_MEDICOS — Perfil extendido exclusivo para médicos
+-- D-03: universidad_id y lugar_trabajo_id son FK → catalogos_ui (no VARCHAR).
+-- D-05: estado_id FK → cat_estados_medico (Activo/Pausado).
+-- D-redesign: user_id como PK y FK directa a users.id (simplifica joins).
+--             Agregados: celular, telefono_consultorio, direccion_consultorio.
+-- ---------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `perfiles_medicos` (
+    `user_id`                INT UNSIGNED NOT NULL
+                               COMMENT 'PK y FK users.id — un perfil por médico',
+    `nombre_completo`        VARCHAR(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+                               COMMENT 'Nombre completo del médico (autogenerado/migrado)',
+    `especialidad`           VARCHAR(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+    `cedula_profesional`     VARCHAR(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+    `cedula_especialidad`    VARCHAR(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+    `celular`                VARCHAR(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+                               COMMENT 'Teléfono celular del médico (10 dígitos)',
+    `telefono_consultorio`   VARCHAR(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+                               COMMENT 'Teléfono fijo del consultorio',
+    `direccion_consultorio`  VARCHAR(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+                               COMMENT 'Dirección del consultorio (mostrada en solicitud digital)',
+    `universidad_id`         INT UNSIGNED DEFAULT NULL
+                               COMMENT 'FK catalogos_ui.id (tipo=universidad)',
+    `lugar_trabajo_id`       INT UNSIGNED DEFAULT NULL
+                               COMMENT 'FK catalogos_ui.id (tipo=lugar_trabajo)',
+    `estado_id`              TINYINT UNSIGNED NOT NULL DEFAULT 1
+                               COMMENT 'FK cat_estados_medico.id (1=Activo, 2=Pausado)',
+    `total_ordenes`          INT UNSIGNED NOT NULL DEFAULT 0
+                               COMMENT 'Contador estadístico de órdenes emitidas',
+    `creado_en`              TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `actualizado_en`         TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (`user_id`),
+    KEY `idx_universidad`   (`universidad_id`),
+    KEY `idx_lugar_trabajo` (`lugar_trabajo_id`),
+    CONSTRAINT `fk_pm_user`        FOREIGN KEY (`user_id`)          REFERENCES `users` (`id`),
+    CONSTRAINT `fk_pm_universidad` FOREIGN KEY (`universidad_id`)   REFERENCES `catalogos_ui` (`id`),
+    CONSTRAINT `fk_pm_lugar`       FOREIGN KEY (`lugar_trabajo_id`) REFERENCES `catalogos_ui` (`id`),
+    CONSTRAINT `fk_pm_estado`      FOREIGN KEY (`estado_id`)        REFERENCES `cat_estados_medico` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+  COMMENT='Perfil extendido de médicos — user_id PK/FK directa, especialidad, cédula, contacto consultorio';
+
+-- ---------------------------------------------------------------------------
+-- RBAC_PERMISOS — Catálogo de permisos granulares del sistema
+-- ---------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `rbac_permisos` (
+    `id`          INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `nombre`      VARCHAR(100) COLLATE utf8mb4_unicode_ci NOT NULL
+                    COMMENT 'ej: ver_ordenes_propias, gestionar_cms',
+    `descripcion` VARCHAR(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `uq_nombre` (`nombre`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+  COMMENT='Catálogo de permisos granulares RBAC';
+
+-- ---------------------------------------------------------------------------
+-- RBAC_PERMISOS_USUARIOS — Asignación user↔permiso (fix G-BD-06: tabla faltante)
+-- ---------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `rbac_permisos_usuarios` (
+    `user_id`      INT UNSIGNED NOT NULL COMMENT 'FK users.id (Delight Auth)',
+    `permiso_id`   INT UNSIGNED NOT NULL COMMENT 'FK rbac_permisos.id',
+    `otorgado_en`  DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (`user_id`, `permiso_id`),
+    CONSTRAINT `fk_rpu_user`    FOREIGN KEY (`user_id`)    REFERENCES `users`(`id`)           ON DELETE CASCADE,
+    CONSTRAINT `fk_rpu_permiso` FOREIGN KEY (`permiso_id`) REFERENCES `rbac_permisos`(`id`)   ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+  COMMENT='Asignación de permisos granulares RBAC a usuarios';
+
+-- ---------------------------------------------------------------------------
+-- JWT_JTI_REGISTRY — Registro criptográfico de tokens y revocación atómica JTI
+-- ---------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `jwt_jti_registry` (
+    `jti`            VARCHAR(36) NOT NULL COMMENT 'UUIDv4 id criptográfico de token',
+    `user_id`        INT UNSIGNED NOT NULL COMMENT 'FK users.id (Delight Auth)',
+    `role`           VARCHAR(20) NOT NULL COMMENT 'Rol del usuario (MEDICO, RECEPCION, ADMIN)',
+    `user_agent`     VARCHAR(255) DEFAULT NULL COMMENT 'User-Agent del navegador cliente',
+    `ip_address`     VARCHAR(45) DEFAULT NULL COMMENT 'Dirección IP de emisión',
+    `issued_at`      BIGINT UNSIGNED NOT NULL COMMENT 'Timestamp epoch de emisión',
+    `expires_at`     BIGINT UNSIGNED NOT NULL COMMENT 'Timestamp epoch de expiración',
+    `is_revoked`     TINYINT(1) NOT NULL DEFAULT 0 COMMENT '0=Activo, 1=Revocado',
+    `revoked_at`     BIGINT UNSIGNED DEFAULT NULL COMMENT 'Timestamp epoch de revocación',
+    `revoked_reason` VARCHAR(100) DEFAULT NULL COMMENT 'Razón de revocación (logout, admin, etc)',
+    PRIMARY KEY (`jti`),
+    KEY `idx_user_revoked` (`user_id`, `is_revoked`),
+    KEY `idx_expires_at` (`expires_at`),
+    CONSTRAINT `fk_jti_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+  COMMENT='Registro criptográfico de JWT ID (JTI) y revocación atómica multi-dispositivo';
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The `perfiles_medicos` table stores medical profile information. The `especialidad` field, storing the specialization, is a text field, not a foreign key. The question arises about where the controlled vocabulary or lookup for these specializations is maintained.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `universidad`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.325913045s
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 8:27 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Catalogos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+declare(strict_types=1);
+
+namespace RC\Negocio;
+
+use Common\DB;
+use Common\Logger;
+use PDO;
+use Throwable;
+
+/**
+ * Catalogos.php — Capa de Negocio para administración de Catálogos UI
+ * Gestiona Universidades y Centros de Trabajo (catalogos_ui).
+ */
+class Catalogos {
+
+    /**
+     * Obtiene el listado completo de Universidades con el total de médicos asignados.
+     */
+    public static function obtenerUniversidades(bool $soloActivas = false): array {
+        try {
+            $db = DB::connect();
+            $sql = "
+                SELECT 
+                    c.id, 
+                    c.tipo, 
+                    c.valor AS nombre, 
+                    c.orden, 
+                    c.activo, 
+                    COUNT(p.user_id) AS total_medicos
+                FROM catalogos_ui c
+                LEFT JOIN perfiles_medicos p ON c.id = p.universidad_id
+                WHERE c.tipo = 'universidad'
+            ";
+            if ($soloActivas) {
+                $sql .= " AND c.activo = 1";
+            }
+            $sql .= " GROUP BY c.id, c.tipo, c.valor, c.orden, c.activo ORDER BY c.orden ASC, c.valor ASC";
+
+            $stmt = $db->query($sql);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC) ?: [];
+        } catch (Throwable $e) {
+            DB::logFallback('ERROR', 'Fallo en RC\Negocio\Catalogos::obtenerUniversidades', $e->getMessage());
+            return [];
+        }
+    }
+
+    /**
+     * Guarda o actualiza una Universidad.
+     */
+    public static function guardarUniversidad(array $data, int $adminUserId): array {
+        $id = !empty($data['id']) ? (int)$data['id'] : null;
+        $nombre = trim($data['nombre'] ?? $data['valor'] ?? '');
+        $orden = isset($data['orden']) ? (int)$data['orden'] : 0;
+        $activo = isset($data['activo']) ? ((int)$data['activo'] ? 1 : 0) : 1;
+
+        if ($nombre === '') {
+            return ['success' => false, 'error' => 'El nombre de la universidad es obligatorio.'];
+        }
+
+        $db = DB::connect();
+        $db->beginTransaction();
+
+        try {
+            if ($id && $id > 0) {
+                // Actualizar existente
+                $stmt = $db->prepare("
+                    UPDATE catalogos_ui 
+                    SET valor = :nombre, orden = :orden, activo = :activo 
+                    WHERE id = :id AND tipo = 'universidad'
+                ");
+                $stmt->execute([
+                    ':nombre' => $nombre,
+                    ':orden'  => $orden,
+                    ':activo' => $activo,
+                    ':id'     => $id
+                ]);
+
+                Logger::logAlways('INFO', "Universidad ID {$id} actualizada: '{$nombre}' (Orden: {$orden}, Activo: {$activo})", $adminUserId);
+                $db->commit();
+                return ['success' => true, 'id' => $id, 'mensaje' => '✓ Universidad actualizada con éxito.'];
+            } else {
+                // Insertar nueva
+                $stmt = $db->prepare("
+                    INSERT INTO catalogos_ui (tipo, valor, orden, activo) 
+                    VALUES ('universidad', :nombre, :orden, :activo)
+                ");
+                $stmt->execute([
+                    ':nombre' => $nombre,
+                    ':orden'  => $orden,
+                    ':activo' => $activo
+                ]);
+                $newId = (int)$db->lastInsertId();
+
+                Logger::logAlways('INFO', "Nueva Universidad registrada ID {$newId}: '{$nombre}'", $adminUserId);
+                $db->commit();
+                return ['success' => true, 'id' => $newId, 'mensaje' => '✓ Universidad registrada con éxito.'];
+            }
+        } catch (Throwable $e) {
+            $db->rollBack();
+            DB::logFallback('ERROR', 'Fallo en RC\Negocio\Catalogos::guardarUniversidad', $e->getMessage());
+            return ['success' => false, 'error' => 'Error en base de datos: ' . $e->getMessage()];
+        }
+    }
+
+    /**
+     * Obtiene el listado completo de Centros de Trabajo con el total de médicos asignados.
+     */
+    public static function obtenerCentrosTrabajo(bool $soloActivos = false): array {
+        try {
+            $db = DB::connect();
+            $sql = "
+                SELECT 
+                    c.id, 
+                    c.tipo, 
+                    c.valor AS nombre, 
+                    c.orden, 
+                    c.activo, 
+                    COUNT(p.user_id) AS total_medicos
+                FROM catalogos_ui c
+                LEFT JOIN perfiles_medicos p ON c.id = p.lugar_trabajo_id
+                WHERE c.tipo = 'lugar_trabajo'
+            ";
+            if ($soloActivos) {
+                $sql .= " AND c.activo = 1";
+            }
+            $sql .= " GROUP BY c.id, c.tipo, c.valor, c.orden, c.activo ORDER BY c.orden ASC, c.valor ASC";
+
+            $stmt = $db->query($sql);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC) ?: [];
+        } catch (Throwable $e) {
+            DB::logFallback('ERROR', 'Fallo en RC\Negocio\Catalogos::obtenerCentrosTrabajo', $e->getMessage());
+            return [];
+        }
+    }
+
+    /**
+     * Guarda o actualiza un Centro de Trabajo.
+     */
+    public static function guardarCentroTrabajo(array $data, int $adminUserId): array {
+        $id = !empty($data['id']) ? (int)$data['id'] : null;
+        $nombre = trim($data['nombre'] ?? $data['valor'] ?? '');
+        $orden = isset($data['orden']) ? (int)$data['orden'] : 0;
+        $activo = isset($data['activo']) ? ((int)$data['activo'] ? 1 : 0) : 1;
+
+        if ($nombre === '') {
+            return ['success' => false, 'error' => 'El nombre del centro de trabajo es obligatorio.'];
+        }
+
+        $db = DB::connect();
+        $db->beginTransaction();
+
+        try {
+            if ($id && $id > 0) {
+                // Actualizar existente
+                $stmt = $db->prepare("
+                    UPDATE catalogos_ui 
+                    SET valor = :nombre, orden = :orden, activo = :activo 
+                    WHERE id = :id AND tipo = 'lugar_trabajo'
+                ");
+                $stmt->execute([
+                    ':nombre' => $nombre,
+                    ':orden'  => $orden,
+                    ':activo' => $activo,
+                    ':id'     => $id
+                ]);
+
+                Logger::logAlways('INFO', "Centro de trabajo ID {$id} actualizado: '{$nombre}' (Orden: {$orden}, Activo: {$activo})", $adminUserId);
+                $db->commit();
+                return ['success' => true, 'id' => $id, 'mensaje' => '✓ Centro de trabajo actualizado con éxito.'];
+            } else {
+                // Insertar nuevo
+                $stmt = $db->prepare("
+                    INSERT INTO catalogos_ui (tipo, valor, orden, activo) 
+                    VALUES ('lugar_trabajo', :nombre, :orden, :activo)
+                ");
+                $stmt->execute([
+                    ':nombre' => $nombre,
+                    ':orden'  => $orden,
+                    ':activo' => $activo
+                ]);
+                $newId = (int)$db->lastInsertId();
+
+                Logger::logAlways('INFO', "Nuevo Centro de trabajo registrado ID {$newId}: '{$nombre}'", $adminUserId);
+                $db->commit();
+                return ['success' => true, 'id' => $newId, 'mensaje' => '✓ Centro de trabajo registrado con éxito.'];
+            }
+        } catch (Throwable $e) {
+            $db->rollBack();
+            DB::logFallback('ERROR', 'Fallo en RC\Negocio\Catalogos::guardarCentroTrabajo', $e->getMessage());
+            return ['success' => false, 'error' => 'Error en base de datos: ' . $e->getMessage()];
+        }
+    }
+}
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `guardar_medico`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 8:27 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `Error al registrar médico`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 8:27 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Ordenes.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L399-599)</summary>
+
+**Path:** `Unknown file`
+
+```
+        return match ($tipoEvento) {
+            'creacion'      => "{$colAnterior} IS NULL",
+            'cambio'        => "{$colAnterior} IS NOT NULL AND {$colAnterior} != {$colNuevo}",
+            'actualizacion' => "{$colAnterior} IS NOT NULL AND {$colAnterior} = {$colNuevo}",
+            default         => '1=1',
+        };
+    }
+
+    /**
+     * BUG-AUDITORIA-UI-01 (2026-09-28): historial_estados_orden.cambiado_por_user_id
+     * ya se guardaba correctamente en cada transición (CambiarEstadoOrden SP +
+     * guardarResultadoPDF), pero no existía ninguna pantalla para consultarlo —
+     * el dato quedaba invisible para Recepción/Admin. Este método alimenta la
+     * pestaña "2. Trazabilidad" de Reportes y Estadísticas.
+     *
+     * BUG-AUDITORIA-AGRUPADO-01 (2026-09-28): la grilla mostraba los eventos en
+     * una lista plana por h.id DESC — los distintos eventos de UNA MISMA
+     * solicitud (creación, recepción, resultados, cierre...) quedaban
+     * entremezclados con los de otras solicitudes, sin poder seguir la
+     * trazabilidad completa de un folio de un vistazo. Se agrupa por folio
+     * (orden_id) usando una función de ventana: el grupo completo se ordena
+     * por su actividad más reciente (MAX(creado_en) del grupo), y DENTRO de
+     * cada grupo los eventos van en orden cronológico — así la secuencia de
+     * una solicitud se lee de arriba hacia abajo en el orden real en que
+     * ocurrió. $orderBy controla CUÁL de las dos dimensiones responde al
+     * clic en el encabezado: 'folio' voltea el orden de los GRUPOS (última
+     * actividad más reciente/antigua primero); 'fecha' voltea el orden
+     * DENTRO de cada grupo (cronológico ascendente/descendente).
+     *
+     * GAP-TRAZABILIDAD-01..07 (2026-09-28): agrega filtro por estado ACTUAL de
+     * la orden ($estadoId) y por tipo de evento ($tipoEvento — ver
+     * condicionTipoEventoAuditoria), más 2 columnas calculadas para el "panorama
+     * operativo" (duracion_min y grupo_total_eventos). Ambas se calculan con
+     * funciones de ventana sobre el historial COMPLETO (sin acotar por los
+     * filtros de esta consulta) en la subconsulta interna — igual criterio ya
+     * usado en obtenerEstadisticasRango() para el SLA: si se acota antes,
+     * buscar/filtrar por un solo evento le "roba" el contexto de duración real
+     * al resto del grupo. Los filtros (periodo/búsqueda/estado/tipo) se aplican
+     * DESPUÉS, en la consulta externa, sobre filas ya con su duración correcta.
+     */
+    public static function obtenerHistorialAuditoria(int $limit = 25, int $offset = 0, string $search = '', string $periodo = 'mes', string $fechaInicio = '', string $fechaFin = '', string $orderBy = 'folio', string $orderDir = 'DESC', ?int $estadoId = null, string $tipoEvento = ''): array {
+        try {
+            $db = DB::connect();
+            $params = [];
+            $search = trim(mb_strtolower($search, 'UTF-8'));
+
+            $condiciones = [self::construirWhereRangoColumna('t.creado_en', $periodo, $fechaInicio, $fechaFin, $params, 'aud')];
+            if ($search !== '') {
+                $condiciones[] = "(LOWER(t.folio) LIKE :q1 OR LOWER(t.paciente) LIKE :q2 OR LOWER(CONCAT(t.actor_nombre, ' ', t.actor_apellidos)) LIKE :q3 OR LOWER(COALESCE(t.folio_extraido, '')) LIKE :q4)";
+                $qVal = '%' . $search . '%';
+                $params[':q1'] = $qVal;
+                $params[':q2'] = $qVal;
+                $params[':q3'] = $qVal;
+                $params[':q4'] = $qVal;
+            }
+            if ($estadoId !== null) {
+                $condiciones[] = "t.orden_estado_actual_id = :estado_id_aud";
+                $params[':estado_id_aud'] = $estadoId;
+            }
+            if ($tipoEvento !== '') {
+                $condiciones[] = self::condicionTipoEventoAuditoria($tipoEvento, 't.estado_anterior_id', 't.estado_nuevo_id');
+            }
+            $whereSql = 'WHERE ' . implode(' AND ', $condiciones);
+
+            $limInt = max(1, $limit);
+            $offInt = max(0, $offset);
+
+            // El agrupamiento visual por folio (rcRenderAuditoriaTablaBody) siempre
+            // se mantiene — lo único que cambia por columna es (a) qué determina el
+            // orden ENTRE grupos y (b) qué determina el orden DENTRO de cada grupo.
+            // 'paciente' es constante dentro de un grupo (mismo folio = mismo
+            // paciente), así que ordena grupos igual que 'folio'. 'actor' varía
+            // fila a fila dentro del grupo, así que ordena DENTRO del grupo igual
+            // que 'fecha'.
+            $dir = strtoupper($orderDir) === 'ASC' ? 'ASC' : 'DESC';
+            switch ($orderBy) {
+                case 'pxlab':
+                    // Nulos al fondo, luego alfabético por folio_extraido; grupos por última actividad
+                    $orderBySql = "(folio_extraido IS NULL OR folio_extraido = '') ASC, folio_extraido {$dir}, grupo_ultima_actividad DESC, orden_id DESC, creado_en ASC";
+                    break;
+                case 'paciente':
+                    $orderBySql = "paciente {$dir}, orden_id {$dir}, creado_en ASC";
+                    break;
+                case 'actor':
+                    $orderBySql = "grupo_ultima_actividad DESC, orden_id DESC, actor_nombre {$dir}, creado_en ASC";
+                    break;
+                case 'fecha':
+                    $orderBySql = "grupo_ultima_actividad DESC, orden_id DESC, creado_en {$dir}";
+                    break;
+                case 'folio':
+                default:
+                    $orderBySql = "grupo_ultima_actividad {$dir}, orden_id {$dir}, creado_en ASC";
+                    break;
+            }
+
+            $sql = "
+                SELECT * FROM (
+                    SELECT
+                        h.id, h.orden_id, h.estado_anterior_id, h.estado_nuevo_id, h.observacion, h.creado_en,
+                        ea.valor AS estado_anterior_nombre, en.valor AS estado_nuevo_nombre,
+                        o.folio_unico AS folio, o.paciente_nombre AS paciente,
+                        o.estado_id AS orden_estado_actual_id, oe.valor AS orden_estado_actual_nombre,
+                        emp.nombre AS actor_nombre, emp.apellidos AS actor_apellidos, emp.rol AS actor_rol,
+                        pdf.folio_extraido,
+                        MIN(h.creado_en) OVER (PARTITION BY h.orden_id) AS grupo_primera_actividad,
+                        MAX(h.creado_en) OVER (PARTITION BY h.orden_id) AS grupo_ultima_actividad,
+                        COUNT(*) OVER (PARTITION BY h.orden_id) AS grupo_total_eventos,
+                        TIMESTAMPDIFF(MINUTE, LAG(h.creado_en) OVER (PARTITION BY h.orden_id ORDER BY h.creado_en, h.id), h.creado_en) AS duracion_min
+                    FROM historial_estados_orden h
+                    JOIN vw_ordenes_completas o ON o.orden_id = h.orden_id
+                    LEFT JOIN catalogo_estados ea ON ea.id = h.estado_anterior_id
+                    LEFT JOIN catalogo_estados en ON en.id = h.estado_nuevo_id
+                    LEFT JOIN catalogo_estados oe ON oe.id = o.estado_id
+                    LEFT JOIN empleados emp ON emp.user_id = h.cambiado_por_user_id
+                    LEFT JOIN (
+                        SELECT p1.orden_id, p1.folio_extraido
+                        FROM resultados_pdf p1
+                        WHERE p1.id = (SELECT MAX(p2.id) FROM resultados_pdf p2 WHERE p2.orden_id = p1.orden_id)
+                    ) pdf ON pdf.orden_id = h.orden_id
+                ) t
+                {$whereSql}
+                ORDER BY {$orderBySql}
+                LIMIT {$limInt} OFFSET {$offInt}
+            ";
+            $stmt = $db->prepare($sql);
+            $stmt->execute($params);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (Throwable $e) {
+            DB::logFallback('ERROR', 'Fallo en RC\Negocio\Ordenes::obtenerHistorialAuditoria', $e->getMessage());
+            return [];
+        }
+    }
+
+    public static function contarHistorialAuditoria(string $search = '', string $periodo = 'mes', string $fechaInicio = '', string $fechaFin = '', ?int $estadoId = null, string $tipoEvento = ''): int {
+        try {
+            $db = DB::connect();
+            $params = [];
+            $search = trim(mb_strtolower($search, 'UTF-8'));
+
+            $condiciones = [self::construirWhereRangoColumna('h.creado_en', $periodo, $fechaInicio, $fechaFin, $params, 'audcnt')];
+            if ($search !== '') {
+                $condiciones[] = "(LOWER(o.folio_unico) LIKE :q1 OR LOWER(o.paciente_nombre) LIKE :q2 OR LOWER(CONCAT(emp.nombre, ' ', emp.apellidos)) LIKE :q3 OR LOWER(COALESCE(pdf.folio_extraido, '')) LIKE :q4)";
+                $qVal = '%' . $search . '%';
+                $params[':q1'] = $qVal;
+                $params[':q2'] = $qVal;
+                $params[':q3'] = $qVal;
+                $params[':q4'] = $qVal;
+            }
+            if ($estadoId !== null) {
+                $condiciones[] = "o.estado_id = :estado_id_audcnt";
+                $params[':estado_id_audcnt'] = $estadoId;
+            }
+            if ($tipoEvento !== '') {
+                $condiciones[] = self::condicionTipoEventoAuditoria($tipoEvento, 'h.estado_anterior_id', 'h.estado_nuevo_id');
+            }
+            $whereSql = 'WHERE ' . implode(' AND ', $condiciones);
+
+            $stmt = $db->prepare("
+                SELECT COUNT(*)
+                FROM historial_estados_orden h
+                JOIN vw_ordenes_completas o ON o.orden_id = h.orden_id
+                LEFT JOIN empleados emp ON emp.user_id = h.cambiado_por_user_id
+                LEFT JOIN (
+                    SELECT p1.orden_id, p1.folio_extraido
+                    FROM resultados_pdf p1
+                    WHERE p1.id = (SELECT MAX(p2.id) FROM resultados_pdf p2 WHERE p2.orden_id = p1.orden_id)
+                ) pdf ON pdf.orden_id = h.orden_id
+                {$whereSql}
+            ");
+            $stmt->execute($params);
+            return (int)$stmt->fetchColumn();
+        } catch (Throwable $e) {
+            DB::logFallback('ERROR', 'Fallo en RC\Negocio\Ordenes::contarHistorialAuditoria', $e->getMessage());
+            return 0;
+        }
+    }
+
+    /**
+     * Cambia el estado de una orden en MariaDB e inserta la auditoría en historial_estados_orden
+     *
+     * H1/H7 (auditoría 2026-09-20): $estadoEsperado es opcional — si se pasa (el
+     * estado que el caller vio al renderizar el botón), CambiarEstadoOrden lo usa
+     * como optimistic lock: si alguien más ya movió la orden mientras tanto, la
+     * transición se rechaza con 'conflicto'=true en vez de aplicarse a ciegas
+     * sobre datos obsoletos. La máquina de estados (transición inválida, ej.
+     * saltar de Remitido a Cerrada) se valida siempre dentro del SP.
+     */
+    public static function cambiarEstado(int $ordenId, int $nuevoEstadoId, ?int $userId, string $observacion = '', ?int $estadoEsperado = null): array {
+        try {
+            $db = DB::connect();
+
+            // H8: motivo de cancelación obligatorio (precisión del usuario) — se
+            // valida aquí, antes de tocar el SP, para un mensaje de error claro.
+            if ($nuevoEstadoId === 5 && trim($observacion) === '') {
+                return ['success' => false, 'error' => 'Debe indicar el motivo de la cancelación.'];
+            }
+
+            $db->query("SET @p_prev = 0, @p_folio = '', @p_conf = 0, @p_inv = 0");
+            $stmt = $db->prepare("CALL CambiarEstadoOrden(?, ?, ?, ?, ?, @p_prev, @p_folio, @p_conf, @p_inv)");
+            $stmt->execute([$ordenId, $nuevoEstadoId, $userId, $observacion, $estadoEsperado]);
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `registrarMedico`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 8:28 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Ordenes.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1249-1449)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+            if (!$alreadyInTx && $pdo->inTransaction()) {
+                $pdo->commit();
+            }
+
+            Logger::logAlways('INFO', "Médico {$nombre} registrado exitosamente con user_id={$newUserId} por creator_id={$creatorUserId}", $creatorUserId);
+
+            return [
+                'success'       => true,
+                'user_id'       => $newUserId,
+                'telefono_user' => $telefonoLogin,
+                'mensaje'       => "✓ Médico {$nombre} registrado exitosamente en el sistema."
+            ];
+
+        } catch (\Delight\Auth\TooManyRequestsException $e) {
+            if (!$alreadyInTx && $pdo->inTransaction()) {
+                $pdo->rollBack();
+            }
+            return ['success' => false, 'error' => 'Demasiadas solicitudes de registro seguidas. Por favor intente de nuevo en unos segundos.'];
+        } catch (\Delight\Auth\UserAlreadyExistsException $e) {
+            if (!$alreadyInTx && $pdo->inTransaction()) {
+                $pdo->rollBack();
+            }
+            return ['success' => false, 'error' => 'El teléfono de usuario ya está registrado en el sistema.'];
+        } catch (\Delight\Auth\DuplicateUsernameException $e) {
+            if (!$alreadyInTx && $pdo->inTransaction()) {
+                $pdo->rollBack();
+            }
+            // BUG-MEDICO-LOGIN-TELEFONO-01 (fix 2026-09-30): el username de login ahora
+            // es el celular real, no un sintético aleatorio — un choque real (celular
+            // duplicado entre dos médicos) es plausible. El mensaje identifica nombre +
+            // celular para que quien registra sepa exactamente qué corregir, en vez de
+            // un "ya existe" genérico sin pista de cuál fila del lote falló.
+            return ['success' => false, 'error' => "El médico \"{$nombre}\" no se pudo registrar: el celular {$telefonoLogin} ya está en uso como usuario de acceso por otro médico."];
+        } catch (\Delight\Auth\InvalidPasswordException $e) {
+            if (!$alreadyInTx && $pdo->inTransaction()) {
+                $pdo->rollBack();
+            }
+            return ['success' => false, 'error' => 'La contraseña/NIP del médico debe tener exactamente 10 caracteres.'];
+        } catch (\Delight\Auth\AuthException $e) {
+            if (!$alreadyInTx && $pdo->inTransaction()) {
+                $pdo->rollBack();
+            }
+            return ['success' => false, 'error' => 'Error de autenticación al registrar médico.'];
+        } catch (Throwable $e) {
+            if (!$alreadyInTx && $pdo->inTransaction()) {
+                $pdo->rollBack();
+            }
+            DB::logFallback('ERROR', 'Fallo en RC\Negocio\Ordenes::registrarMedico', $e->getMessage());
+            return ['success' => false, 'error' => 'Error al registrar médico: ' . ($e->getMessage() ?: get_class($e))];
+        }
+    }
+
+    /**
+     * Restablece la contraseña de un médico a un nuevo NIP utilizando Delight Auth Admin
+     * y revoca cualquier sesión activa previa para forzar la reautenticación inmediata.
+     */
+    public static function restablecerPasswordMedico(int $targetUserId, string $newPassword, int $adminUserId): array {
+        $pdo = DB::connect();
+        try {
+            if ($targetUserId <= 0) {
+                return ['success' => false, 'ack' => false, 'error' => 'ID de médico inválido.'];
+            }
+
+            if (strlen($newPassword) !== 10) {
+                return ['success' => false, 'ack' => false, 'error' => 'La nueva contraseña/NIP debe contener exactamente 10 caracteres.'];
+            }
+
+            $auth = \Flight::auth();
+            $auth->admin()->changePasswordForUserById($targetUserId, $newPassword);
+
+            // 1. Limpieza de tokens y forzado de logout de sesiones anteriores
+            $stmtForce = $pdo->prepare("UPDATE users SET force_logout = force_logout + 1 WHERE id = ?");
+            $stmtForce->execute([$targetUserId]);
+
+            $stmtRem = $pdo->prepare("DELETE FROM users_remembered WHERE user = ?");
+            $stmtRem->execute([$targetUserId]);
+
+            $stmtResets = $pdo->prepare("DELETE FROM users_resets WHERE user = ?");
+            $stmtResets->execute([$targetUserId]);
+
+            // Limpieza de throttling para permitir login inmediato
+            $stmtEmail = $pdo->prepare("SELECT email FROM users WHERE id = ? LIMIT 1");
+            $stmtEmail->execute([$targetUserId]);
+            $userEmail = $stmtEmail->fetchColumn();
+            if ($userEmail) {
+                $stmtThrottling = $pdo->prepare("DELETE FROM users_throttling WHERE bucket LIKE ?");
+                $stmtThrottling->execute(['%' . $userEmail . '%']);
+            }
+
+            // Revocar tokens JWT activos de este usuario (y sockets WS asociados)
+            if (class_exists('\Flight') && \Flight::has('jwt')) {
+                \Flight::jwt()->revokeAllUserTokens($targetUserId, 'password_reset_by_admin');
+            }
+
+            Logger::logAlways(
+                'INFO',
+                "Auditoría: Admin user_id={$adminUserId} asignó/restableció contraseña al médico user_id={$targetUserId} e invalidó sesiones activas.",
+                $adminUserId
+            );
+
+            return [
+                'success'        => true,
+                'ack'            => true,
+                'target_user_id' => $targetUserId,
+                'mensaje'        => "✓ Contraseña actualizada correctamente para el médico ID {$targetUserId}. Sesiones previas revocadas."
+            ];
+        } catch (\Delight\Auth\UnknownIdException $e) {
+            DB::logFallback('WARN', "Intento de restablecer password a ID inexistente: {$targetUserId}", $e->getMessage());
+            return ['success' => false, 'ack' => false, 'error' => 'Médico no encontrado en el sistema de autenticación.'];
+        } catch (\Delight\Auth\InvalidPasswordException $e) {
+            return ['success' => false, 'ack' => false, 'error' => 'La nueva contraseña/NIP no cumple con los requisitos de seguridad (exactamente 10 caracteres).'];
+        } catch (Throwable $e) {
+            DB::logFallback('ERROR', 'Fallo en RC\Negocio\Ordenes::restablecerPasswordMedico (user_id=' . $targetUserId . ')', $e->getMessage());
+            return ['success' => false, 'ack' => false, 'error' => 'No se pudo restablecer la contraseña: ' . $e->getMessage()];
+        }
+    }
+
+    /**
+     * Cambia el estado de un médico en perfiles_medicos (1 = Activo, 2 = Pausado/Inactivo)
+     * sincronizando empleados, users (Delight Auth) y revocando sesiones si se pausa.
+     */
+    public static function cambiarEstadoMedico(int $targetUserId, int $nuevoEstadoId, int $adminUserId): array {
+        $pdo = DB::connect();
+        try {
+            if ($targetUserId <= 0) {
+                return ['success' => false, 'ack' => false, 'error' => 'ID de médico inválido.'];
+            }
+
+            $nuevoEstadoId = ($nuevoEstadoId === 2) ? 2 : 1;
+            $esPausado     = ($nuevoEstadoId === 2);
+
+            // 1. Invocación al Stored Procedure CambiarEstadoMedico (Sincronización perfiles_medicos + empleados)
+            $stmtSP = $pdo->prepare("CALL CambiarEstadoMedico(?, ?)");
+            $stmtSP->execute([$targetUserId, $nuevoEstadoId]);
+
+            if ($esPausado) {
+                // 2. PAUSAR: Bloquear en users, forzar logout, eliminar sesiones persistentes y revocar JWT/WS
+                $stmtUser = $pdo->prepare("UPDATE users SET status = 2, force_logout = force_logout + 1 WHERE id = ?");
+                $stmtUser->execute([$targetUserId]);
+
+                $stmtRem = $pdo->prepare("DELETE FROM users_remembered WHERE user = ?");
+                $stmtRem->execute([$targetUserId]);
+
+                $stmtResets = $pdo->prepare("DELETE FROM users_resets WHERE user = ?");
+                $stmtResets->execute([$targetUserId]);
+
+                if (class_exists('\Flight') && \Flight::has('jwt')) {
+                    \Flight::jwt()->revokeAllUserTokens($targetUserId, 'medico_pausado_por_admin');
+                }
+
+                $labelEstado = 'Pausado';
+                $mensajeAck  = "✓ La cuenta del médico (ID {$targetUserId}) fue pausada. Acceso al portal revocado inmediatamente.";
+            } else {
+                // 3. REACTIVAR: Desbloquear en users y limpiar posibles throttling de intentos
+                $stmtUser = $pdo->prepare("UPDATE users SET status = 0 WHERE id = ?");
+                $stmtUser->execute([$targetUserId]);
+
+                $stmtEmail = $pdo->prepare("SELECT email FROM users WHERE id = ? LIMIT 1");
+                $stmtEmail->execute([$targetUserId]);
+                $userEmail = $stmtEmail->fetchColumn();
+                if ($userEmail) {
+                    $stmtThrottling = $pdo->prepare("DELETE FROM users_throttling WHERE bucket LIKE ?");
+                    $stmtThrottling->execute(['%' . $userEmail . '%']);
+                }
+
+                $labelEstado = 'Reactivado';
+                $mensajeAck  = "✓ La cuenta del médico (ID {$targetUserId}) fue reactivada exitosamente. Ya puede acceder al portal.";
+            }
+
+            Logger::logAlways(
+                'INFO',
+                "Auditoría: Admin user_id={$adminUserId} cambió el estado del médico user_id={$targetUserId} a '{$labelEstado}'",
+                $adminUserId
+            );
+
+            return [
+                'success'        => true,
+                'ack'            => true,
+                'target_user_id' => $targetUserId,
+                'nuevo_estado_id'=> $nuevoEstadoId,
+                'mensaje'        => $mensajeAck
+            ];
+        } catch (Throwable $e) {
+            DB::logFallback('ERROR', 'Fallo en RC\Negocio\Ordenes::cambiarEstadoMedico (user_id=' . $targetUserId . ', estado=' . $nuevoEstadoId . ')', $e->getMessage());
+            return ['success' => false, 'ack' => false, 'error' => 'No se pudo cambiar el estado del médico: ' . $e->getMessage()];
+        }
+    }
+
+    /**
+     * Sincroniza múltiples médicos desde la grilla JS (SPA).
+     *
+     * 2026-09-30 (guardado parcial, reemplaza transacción única de lote): cada
+     * médico se procesa en su PROPIA transacción independiente — si uno falla
+     * (p.ej. celular duplicado, BUG-MEDICO-LOGIN-TELEFONO-01), los demás del
+     * mismo lote SÍ quedan guardados. Antes, un solo error revertía el lote
+     * completo (incluyendo médicos válidos), obligando a repetir todo.
+     */
+    public static function sincronizarMedicos(array $payload, int $adminUserId): array {
+        $db = DB::connect();
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Ordenes.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1149-1249)</summary>
+
+**Path:** `Unknown file`
+
+```
+                    $res['universidades'][] = $r;
+                } elseif ($r['tipo'] === 'lugar_trabajo') {
+                    $res['lugares_trabajo'][] = $r;
+                }
+            }
+            if (empty($res['universidades'])) {
+                $res['universidades'] = [
+                    ['id' => 1, 'valor' => 'Universidad Nacional Autónoma de México (UNAM)'],
+                    ['id' => 2, 'valor' => 'Universidad Autónoma Benito Juárez de Oaxaca (UABJO)'],
+                    ['id' => 3, 'valor' => 'Instituto Politécnico Nacional (IPN)'],
+                    ['id' => 4, 'valor' => 'Universidad Autónoma Metropolitana (UAM)'],
+                    ['id' => 5, 'valor' => 'Benemérita Universidad Autónoma de Puebla (BUAP)'],
+                    ['id' => 6, 'valor' => 'Universidad Veracruzana'],
+                    ['id' => 99, 'valor' => 'Otra universidad']
+                ];
+            }
+            if (empty($res['lugares_trabajo'])) {
+                $res['lugares_trabajo'] = [
+                    ['id' => 1, 'valor' => 'Consultorio particular'],
+                    ['id' => 2, 'valor' => 'IMSS — Delegación Oaxaca'],
+                    ['id' => 3, 'valor' => 'ISSSTE'],
+                    ['id' => 4, 'valor' => 'SSA — Secretaría de Salud'],
+                    ['id' => 5, 'valor' => 'Clínica privada / Hospital'],
+                    ['id' => 99, 'valor' => 'Otro']
+                ];
+            }
+            return $res;
+        } catch (Throwable $e) {
+            DB::logFallback('ERROR', 'Fallo en RC\Negocio\Ordenes::obtenerCatalogosUI', $e->getMessage());
+            return [
+                'universidades' => [
+                    ['id' => 1, 'valor' => 'Universidad Nacional Autónoma de México (UNAM)'],
+                    ['id' => 2, 'valor' => 'Universidad Autónoma Benito Juárez de Oaxaca (UABJO)'],
+                    ['id' => 3, 'valor' => 'Instituto Politécnico Nacional (IPN)'],
+                    ['id' => 4, 'valor' => 'Universidad Autónoma Metropolitana (UAM)'],
+                    ['id' => 5, 'valor' => 'Benemérita Universidad Autónoma de Puebla (BUAP)'],
+                    ['id' => 6, 'valor' => 'Universidad Veracruzana'],
+                    ['id' => 99, 'valor' => 'Otra universidad']
+                ],
+                'lugares_trabajo' => [
+                    ['id' => 1, 'valor' => 'Consultorio particular'],
+                    ['id' => 2, 'valor' => 'IMSS — Delegación Oaxaca'],
+                    ['id' => 3, 'valor' => 'ISSSTE'],
+                    ['id' => 4, 'valor' => 'SSA — Secretaría de Salud'],
+                    ['id' => 5, 'valor' => 'Clínica privada / Hospital'],
+                    ['id' => 99, 'valor' => 'Otro']
+                ]
+            ];
+        }
+    }
+
+    /**
+     * Registra un nuevo médico completo en MariaDB (Delight Auth + Empleados + RBAC + Perfil Médico)
+     */
+    public static function registrarMedico(array $datos, int $creatorUserId): array {
+        $pdo = DB::connect();
+        $alreadyInTx = $pdo->inTransaction();
+        if (!$alreadyInTx) {
+            $pdo->beginTransaction();
+        }
+        try {
+            $auth = \Flight::auth();
+
+            $nombre = trim($datos['nombre'] ?? '');
+            $especialidad = trim($datos['especialidad'] ?? 'Medicina General');
+            $cedulaProf = trim($datos['cedula_profesional'] ?? $datos['cedulas'] ?? '');
+            $cedulaEsp = trim($datos['cedula_especialidad'] ?? '');
+            $celular = trim($datos['celular'] ?? '9990000000');
+            $univId = !empty($datos['universidad_id']) ? (int)$datos['universidad_id'] : null;
+            $lugarId = !empty($datos['lugar_trabajo_id']) ? (int)$datos['lugar_trabajo_id'] : null;
+
+            if (empty($nombre)) {
+                return ['success' => false, 'error' => 'El nombre del médico es obligatorio.'];
+            }
+
+            // Login: usar 'telefono' si viene explícito, si no el celular real del perfil,
+            // y solo si ninguno viene, generar un sintético (evita el mismatch reportado en
+            // BUG-MEDICO-LOGIN-TELEFONO-01: sincronizarMedicos() solo envía 'celular', nunca
+            // 'telefono', por lo que este fallback siempre se disparaba antes de este fix).
+            $telefonoLogin = !empty($datos['telefono'])
+                ? trim($datos['telefono'])
+                : (!empty($datos['celular']) ? trim($datos['celular']) : '999' . str_pad((string)rand(100000, 999999), 7, '0', STR_PAD_LEFT));
+            $emailFake = $telefonoLogin . '@laesh.local';
+            $nipPass = !empty($datos['password']) ? trim($datos['password']) : '04041974'; // NIP homologado
+
+            // 1. Crear usuario en Delight Auth
+            $newUserId = $auth->registerWithUniqueUsername($emailFake, $nipPass, $telefonoLogin);
+
+            // 2. Invocación al Stored Procedure RegistrarPerfilMedico (Empleado + RBAC + Perfil Médico)
+            $stmtSP = $pdo->prepare("CALL RegistrarPerfilMedico(?, ?, ?, ?, ?, ?, ?, ?)");
+            $stmtSP->execute([
+                $newUserId,
+                $nombre,
+                $especialidad,
+                $cedulaProf,
+                $cedulaEsp,
+                $celular,
+                $univId,
+                $lugarId
+            ]);
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The core issue appears to stem from `obtenerCatalogosUI()` in `Ordenes.php`. Specifically, when the `catalogos_ui` table is empty, this function returns a hardcoded list of fictitious IDs instead of fetching data from the database. This behavior is triggered by a `TRUNCATE TABLE` operation likely performed by a cleanup script. This explains the inconsistency.
+
+
+The `catalogos_ui` table's data is wiped by the cleanup script. This truncation leads to a foreign key violation because the `perfiles_medicos` table references IDs that no longer exist in `catalogos_ui`. The UI's hardcoded university IDs (1, 2, etc.) are thus invalid after the cleanup.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `especialidad`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.535682703s
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 8:28 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `labadmin.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L149-249)</summary>
+
+**Path:** `Unknown file`
+
+```
+                    Sistema &amp; Logs
+                </a>
+                <?php endif; ?>
+
+                <!-- ⑤ Mini-panel de usuario (visible al abrir hamburger en móvil) -->
+                <div class="sidebar-mobile-only">
+                    <!-- Chip iniciales — clase mob-user-chip exclusiva móvil (style.css ≤767px) -->
+                    <div class="mob-user-chip">
+                        <span class="mob-user-chip__avatar mob-user-chip__avatar--admin"><?= htmlspecialchars(strtoupper(substr($nombreUsuario ?? 'CAR', 0, 3)), ENT_QUOTES, 'UTF-8') ?></span>
+                        <span class="mob-user-chip__label txt-pgd"><?= htmlspecialchars($rolUsuario ?? 'Recepción', ENT_QUOTES, 'UTF-8') ?></span>
+                    </div>
+                    <a href="/laesh/login/logout.php" class="mob-logout-btn">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                        Cerrar Sesión
+                    </a>
+                </div>
+            </aside>
+
+            <main class="main-content" id="main-content">
+                <!-- Panel 1: Órdenes (Default) -->
+                <div id="panel-ordenes" class="tab-panel">
+                    <!-- Fila: Título de Sección y Controles (Total, Paginación, Buscador) alineados con el estándar cms-panel-header -->
+                    <div class="cms-panel-header" style="margin-top: 1rem; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                        <h3 class="cms-h3" style="margin: 0; font-size: 1.35rem; font-weight: 800; color: #0052B7;">Solicitudes Hoy</h3>
+                        
+                        <div style="display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; justify-content: flex-end;">
+                            <!-- Paginador y Total -->
+                            <div id="ordenes-pagination-wrap" style="display: flex; align-items: center; gap: 0.5rem;">
+                                <span id="ordenes-total-records" style="font-size: 0.88rem; color: var(--text-muted); font-weight: 600;">Total: <?= (int)($totalOrdenesRecientes ?? 0) ?></span>
+                                <span style="color: #cbd5e1; display: inline;">|</span>
+                                <div id="ordenes-pagination" style="display: flex; gap: 0.25rem; align-items: center;">
+                                    <?php 
+                                        $totPgsOrd = max(1, (int)ceil(($totalOrdenesRecientes ?? 0) / 25));
+                                    ?>
+                                    <button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;">‹ Ant.</button>
+                                    <span style="font-size:0.82rem; font-weight:600; color:var(--text-muted); padding: 0 4px;">1 / <?= $totPgsOrd ?></span>
+                                    <?php if ($totPgsOrd > 1): ?>
+                                        <button type="button" class="btn btn-secondary btn-sm" style="padding: 2px 8px; font-size: 0.8rem;" hx-get="/laesh/rc/tabla-ordenes?page=2" hx-target="#tabla-recepcion" hx-swap="outerHTML" hx-include="#input-buscar-orden-rc, #filtro-estado-rc, #filtro-parciales-rc">Sig. ›</button>
+                                    <?php else: ?>
+                                        <button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;">Sig. ›</button>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+
+                            <!-- Buscador en tiempo real unificado -->
+                            <div id="ordenes-hoy-rc-search-wrap" class="search-bar-unified" style="position:relative; z-index: 100;">
+                                <input type="hidden" id="filtro-estado-rc" name="estado_id" value="0">
+                                <input type="hidden" id="filtro-parciales-rc" name="solo_parciales" value="0">
+                                <input type="text" id="input-buscar-orden-rc" name="q" class="form-input form-input--bg search-bar-input" autocomplete="off" spellcheck="false" placeholder="🔍 Nombre, folio o tel..." hx-get="/laesh/rc/tabla-ordenes" hx-target="#tabla-recepcion" hx-swap="outerHTML" hx-include="#filtro-estado-rc, #filtro-parciales-rc" hx-trigger="keyup changed delay:300ms, search" hx-sync="this:replace">
+                                <button type="button" class="btn-search-clear" data-target="#input-buscar-orden-rc" title="Limpiar búsqueda" aria-label="Limpiar búsqueda">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <path d="m7 21-4.3-4.3c-1-1-1-2.5 0-3.4l9.6-9.6c1-1 2.5-1 3.4 0l5.6 5.6c1 1 1 2.5 0 3.4L13 21"></path>
+                                        <path d="M22 21H7"></path>
+                                        <path d="m5 11 9 9"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card" aria-live="polite" aria-relevant="additions text" aria-atomic="false" style="padding: 0; overflow: hidden; border: 1px solid var(--border); border-radius: 8px;">
+                        <div class="table-responsive" style="max-height: calc(100vh - 250px); overflow-y: auto; overflow-x: auto; -webkit-overflow-scrolling: touch; width: 100%;">
+                            <table class="table" id="tabla-recepcion" hx-get="/laesh/rc/tabla-ordenes" hx-target="#tabla-recepcion" hx-swap="outerHTML" hx-include="#input-buscar-orden-rc, #filtro-estado-rc, #filtro-parciales-rc" hx-sync="this:replace" hx-trigger="refresh, ordenCreada from:body, ordenActualizada from:body" style="margin-bottom: 0; width: 100%; min-width: <?= rcOrdenesTablaMinWidth(false) ?>px; table-layout: fixed; border-collapse: collapse;">
+                                <?= rcRenderOrdenesColgroup(false) ?>
+                                <thead>
+                                    <?= rcRenderOrdenesTablaHeader('fecha', 'desc', '', '/laesh/rc/tabla-ordenes', '#tabla-recepcion', '#input-buscar-orden-rc, #filtro-estado-rc, #filtro-parciales-rc') ?>
+                                </thead>
+                                <?= rcRenderOrdenesTablaBody($ordenesRecientes ?? [], $csrfToken ?? '', '') ?>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Panel 1.5: Solicitudes Anteriores -->
+                <div id="panel-ordenes-anteriores" class="tab-panel d-none">
+                    <!-- Fila: Título de Sección y Controles (Total, Paginación, Buscador) alineados con el estándar cms-panel-header -->
+                    <div id="ordenes-anteriores-rc-header" class="cms-panel-header ordenes-anteriores-toolbar-rc" style="margin-top: 1rem; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                        <div>
+                            <h3 class="cms-h3" style="margin: 0; font-size: 1.35rem; font-weight: 800; color: #0052B7;">Solicitudes Anteriores</h3>
+                            <p class="txt-muted-4" style="margin: 0.2rem 0 0 0; font-size: 0.85rem;">Histórico de solicitudes registradas en días anteriores.</p>
+                        </div>
+                        
+                        <div class="toolbar-anteriores-wrap" style="display: flex; align-items: center; gap: 0.85rem; flex-wrap: wrap;">
+                            <!-- Paginador y Total en Cápsula Suave -->
+                            <div id="ordenes-anteriores-pagination-wrap" class="toolbar-pagination-capsule">
+                                <span id="ordenes-anteriores-total-records" style="font-size: 0.88rem; color: var(--text-muted); font-weight: 600;">Total: <?= (int)($totalOrdenesAnteriores ?? 0) ?></span>
+                                <span style="color: #cbd5e1; display: inline;">|</span>
+                                <div id="ordenes-anteriores-pagination" style="display: flex; gap: 0.25rem; align-items: center;">
+                                    <?php 
+                                        $totPgsAnt = max(1, (int)ceil(($totalOrdenesAnteriores ?? 0) / 25));
+                                    ?>
+                                    <button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;">‹ Ant.</button>
+                                    <span style="font-size:0.82rem; font-weight:600; color:var(--text-muted); padding: 0 4px;">1 / <?= $totPgsAnt ?></span>
+                                    <?php if ($totPgsAnt > 1): ?>
+                                        <button type="button" class="btn btn-secondary btn-sm" style="padding: 2px 8px; font-size: 0.8rem;" hx-get="/laesh/rc/tabla-ordenes-anteriores?page=2&periodo=30d" hx-target="#tabla-recepcion-anteriores" hx-swap="outerHTML" hx-include="#input-buscar-orden-anteriores-rc, #select-periodo-anteriores-rc, #fecha-inicio-anteriores-rc, #fecha-fin-anteriores-rc, #filtro-estado-anteriores-rc, #filtro-parciales-anteriores-rc">Sig. ›</button>
+                                    <?php else: ?>
+                                        <button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;">Sig. ›</button>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `panel-medicos`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 8:28 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `labadmin.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L619-749)</summary>
+
+**Path:** `Unknown file`
+
+```
+                        <div class="card mb-0 ta-center kpi-card" role="button" tabindex="0" data-kpi-estado="0" data-kpi-parciales="1" style="padding: 1.25rem 1rem; border-top: 3.5px solid #8B5CF6; border-radius: 10px; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.03); border-left: 1px solid #e2e8f0; border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; cursor: pointer; transition: box-shadow .15s, border-color .15s;">
+                            <div class="txt-muted-xs-upper" style="letter-spacing: 0.03em; font-size: 0.76rem; min-height: 2.2em; display: flex; align-items: center; justify-content: center;">PDFs Parciales Adjuntados</div>
+                            <div id="stat-parciales-admin" class="stat-num" style="font-size: 2.15rem; font-weight: 800; line-height: 1.1; margin-top: 0.35rem; color: #8B5CF6;">-</div>
+                            <div class="kpi-periodo-badge txt-muted-xs" style="font-size: 0.7rem; margin-top: 0.4rem; color: #94a3b8;">-</div>
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 1.15rem;">
+                        <!-- Top 5 Médicos con más Solicitudes Remitidas -->
+                        <div class="card mb-0" style="padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 2px 6px rgba(0,0,0,0.03); background: #fff;">
+                            <div style="margin-bottom: 1.25rem;">
+                                <h3 class="txt-pgd-lg" style="margin: 0; font-size: 1.15rem; font-weight: 700; color: #0052B7;">
+                                    Top 5 Médicos con más Solicitudes Remitidas
+                                </h3>
+                            </div>
+                            <div class="col-group" id="container-medicos-stats">
+                                <div class="text-center txt-muted" style="padding:2rem;">Cargando médicos...</div>
+                            </div>
+                        </div>
+
+                        <!-- Volumen de acciones por recepcionista -->
+                        <div class="card mb-0" style="padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 2px 6px rgba(0,0,0,0.03); background: #fff;">
+                            <h3 class="txt-pgd-lg" style="margin: 0 0 1.1rem; font-size: 1.05rem; font-weight: 700; color: #0052B7;">
+                                Volumen de Acciones por Recepcionista
+                            </h3>
+                            <div id="container-volumen-actor-stats">
+                                <div class="text-center txt-muted" style="padding:2rem;">Cargando...</div>
+                            </div>
+                        </div>
+                    </div>
+                    </div><!-- /view-reportes-indicadores -->
+
+                    <!-- ── Vista 2: Auditoría — historial de quién hizo qué y cuándo ──
+                         Fuente: historial_estados_orden.cambiado_por_user_id (ya se
+                         guardaba en cada transición, pero no existía pantalla para
+                         verlo). Mismo formato/controles que "Solicitudes Anteriores". -->
+                    <div id="view-reportes-auditoria" class="d-none">
+                        <div class="modal-sect-hd">
+                            <h2 class="txt-pgd mb-0">Trazabilidad de Solicitudes</h2>
+                            <div class="d-inline-flex-ac flex-wrap" style="gap: 0.5rem;">
+                                <label for="select-periodo-auditoria-rc" class="txt-muted-sm">Periodo:</label>
+                                <select id="select-periodo-auditoria-rc" name="periodo" class="select-sm select-sm--bg"
+                                        hx-get="/laesh/rc/tabla-auditoria"
+                                        hx-target="#tabla-auditoria-rc"
+                                        hx-swap="outerHTML"
+                                        hx-include="#input-buscar-auditoria-rc, #select-periodo-auditoria-rc, #fecha-inicio-auditoria-rc, #fecha-fin-auditoria-rc, #filtro-estado-auditoria-rc, #filtro-tipo-evento-auditoria-rc"
+                                        hx-trigger="change">
+                                    <option value="dia">Hoy</option>
+                                    <option value="ayer">Ayer</option>
+                                    <option value="semana">Esta Semana</option>
+                                    <option value="mes" selected>Este Mes</option>
+                                    <option value="anio">Este Año</option>
+                                    <option value="fecha">Rango de Fechas</option>
+                                </select>
+                                <span id="rango-fechas-auditoria-rc" class="d-none flex-ic-8" style="flex-wrap: wrap;">
+                                    <span style="position: relative; display: inline-flex; align-items: center;">
+                                        <input type="date" id="fecha-inicio-auditoria-rc" name="fecha_inicio" class="select-sm" max="<?= date('Y-m-d') ?>" title="Fecha inicial (dd/mm/aaaa)" aria-label="Fecha inicial">
+                                        <button type="button" id="btn-calendario-inicio-auditoria-rc" class="btn-icon-fecha" aria-label="Abrir calendario de fecha inicial" title="Abrir calendario">
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                                        </button>
+                                    </span>
+                                    <span class="txt-muted-sm">al</span>
+                                    <span style="position: relative; display: inline-flex; align-items: center; gap: 2px;">
+                                        <input type="date" id="fecha-fin-auditoria-rc" name="fecha_fin" class="select-sm" max="<?= date('Y-m-d') ?>" title="Fecha final (dd/mm/aaaa)" aria-label="Fecha final">
+                                        <button type="button" id="btn-calendario-fin-auditoria-rc" class="btn-icon-fecha" aria-label="Abrir calendario de fecha final" title="Abrir calendario">
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                                        </button>
+                                        <button type="button" id="btn-buscar-auditoria-rc" class="btn-icon-fecha" aria-label="Buscar con este rango de fechas" title="Buscar"
+                                                hx-get="/laesh/rc/tabla-auditoria"
+                                                hx-target="#tabla-auditoria-rc"
+                                                hx-swap="outerHTML"
+                                                hx-include="#input-buscar-auditoria-rc, #select-periodo-auditoria-rc, #fecha-inicio-auditoria-rc, #fecha-fin-auditoria-rc, #filtro-estado-auditoria-rc, #filtro-tipo-evento-auditoria-rc">
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                                        </button>
+                                    </span>
+                                </span>
+                                <label for="filtro-estado-auditoria-rc" class="txt-muted-sm">Estado:</label>
+                                <select id="filtro-estado-auditoria-rc" name="estado" class="select-sm select-sm--bg"
+                                        hx-get="/laesh/rc/tabla-auditoria"
+                                        hx-target="#tabla-auditoria-rc"
+                                        hx-swap="outerHTML"
+                                        hx-include="#input-buscar-auditoria-rc, #select-periodo-auditoria-rc, #fecha-inicio-auditoria-rc, #fecha-fin-auditoria-rc, #filtro-estado-auditoria-rc, #filtro-tipo-evento-auditoria-rc"
+                                        hx-trigger="change">
+                                    <option value="">Todos</option>
+                                    <option value="1">Remitido</option>
+                                    <option value="2">En Atención</option>
+                                    <option value="3">Resultados Listos</option>
+                                    <option value="4">Cerrada</option>
+                                    <option value="5">Cancelada</option>
+                                </select>
+                                <label for="filtro-tipo-evento-auditoria-rc" class="txt-muted-sm">Tipo de evento:</label>
+                                <select id="filtro-tipo-evento-auditoria-rc" name="tipo_evento" class="select-sm select-sm--bg"
+                                        hx-get="/laesh/rc/tabla-auditoria"
+                                        hx-target="#tabla-auditoria-rc"
+                                        hx-swap="outerHTML"
+                                        hx-include="#input-buscar-auditoria-rc, #select-periodo-auditoria-rc, #fecha-inicio-auditoria-rc, #fecha-fin-auditoria-rc, #filtro-estado-auditoria-rc, #filtro-tipo-evento-auditoria-rc"
+                                        hx-trigger="change">
+                                    <option value="">Todos</option>
+                                    <option value="creacion">Creación</option>
+                                    <option value="cambio">Cambio de estado</option>
+                                    <option value="actualizacion">Actualización (parcial/re-subida)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="d-inline-flex-ac flex-wrap" style="gap: 0.75rem; justify-content: space-between; width: 100%; margin-bottom: 0.75rem;">
+                            <div style="display: flex; gap: 0.4rem; align-items: center;">
+                                <button type="button" class="btn-search-clear" data-target="#input-buscar-auditoria-rc" title="Limpiar búsqueda" aria-label="Limpiar búsqueda">
+                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <path d="m7 21-4.3-4.3c-1-1-1-2.5 0-3.4l9.6-9.6c1-1 2.5-1 3.4 0l5.6 5.6c1 1 1 2.5 0 3.4L13 21"></path>
+                                        <path d="M22 21H7"></path>
+                                        <path d="m5 11 9 9"></path>
+                                    </svg>
+                                </button>
+                                <input type="text" id="input-buscar-auditoria-rc" name="q" class="form-input form-input--bg search-input-anteriores" autocomplete="off" spellcheck="false" placeholder="🔍 Buscar por folio, paciente o realizado por..." hx-get="/laesh/rc/tabla-auditoria" hx-target="#tabla-auditoria-rc" hx-swap="outerHTML" hx-include="#input-buscar-auditoria-rc, #select-periodo-auditoria-rc, #fecha-inicio-auditoria-rc, #fecha-fin-auditoria-rc, #filtro-estado-auditoria-rc, #filtro-tipo-evento-auditoria-rc" hx-trigger="keyup changed delay:300ms, search" hx-sync="this:replace">
+                            </div>
+                            <div id="auditoria-pagination-wrap" class="toolbar-pagination-capsule">
+                                <span id="auditoria-total-records" style="font-size: 0.88rem; color: var(--text-muted); font-weight: 600;">Total: <?= (int)($totalAuditoria ?? 0) ?></span>
+                                <span style="color: #cbd5e1; display: inline;">|</span>
+                                <div id="auditoria-pagination" style="display: flex; gap: 0.25rem; align-items: center;"></div>
+                            </div>
+                        </div>
+
+                        <div class="card" aria-live="polite" style="padding: 0; overflow: hidden; border: 1px solid var(--border); border-radius: 8px;">
+                            <div class="table-responsive" style="max-height: calc(100vh - 300px); overflow-y: auto; overflow-x: auto; -webkit-overflow-scrolling: touch; width: 100%;">
+                                <table class="table" id="tabla-auditoria-rc" hx-get="/laesh/rc/tabla-auditoria" hx-target="#tabla-auditoria-rc" hx-swap="outerHTML" hx-include="#input-buscar-auditoria-rc, #select-periodo-auditoria-rc, #fecha-inicio-auditoria-rc, #fecha-fin-auditoria-rc, #filtro-estado-auditoria-rc, #filtro-tipo-evento-auditoria-rc" style="margin-bottom: 0; width: 100%; min-width: 1420px; table-layout: fixed; border-collapse: collapse;">
+                                    <colgroup>
+                                        <col style="width: 44px;">
+                                        <col style="width: 110px;">
+                                        <col style="width: 100px;">
+                                        <col style="width: 200px;">
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `labadmin.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L749-949)</summary>
+
+**Path:** `Unknown file`
+
+```
+                                        <col style="width: 200px;">
+                                        <col style="width: 220px;">
+                                        <col style="width: 110px;">
+                                        <col style="width: 200px;">
+                                        <col style="width: 150px;">
+                                        <col style="width: 250px;">
+                                    </colgroup>
+                                    <thead>
+                                        <?= rcRenderAuditoriaTablaHeader() ?>
+                                    </thead>
+                                    <?= rcRenderAuditoriaTablaBody($auditoriaRegistros ?? [], 0) ?>
+                                </table>
+                            </div>
+                        </div>
+                    </div><!-- /view-reportes-auditoria -->
+                </div>
+
+                <!-- Panel 5: Catálogos (Scope 14) -->
+                <div id="panel-catalogos" class="tab-panel d-none">
+                    <!-- Fila 1: Pestañas superiores (100% Idénticas a gestion_web.php) -->
+                    <div class="cms-tabs" id="toggle-catalog-view" role="tablist" aria-label="Secciones de Catálogos de Análisis">
+                        <button type="button" class="cms-tab active" data-view="table" id="btn-view-table">1. Tabla</button>
+                        <button type="button" class="cms-tab" id="menu-gabinetes">2. Areas</button>
+                        <button type="button" class="cms-tab" id="menu-igabinetes">3. I.Areas</button>
+                        <button type="button" class="cms-tab" id="menu-20estmed">4. 20 Est.Med</button>
+                    </div>
+
+                    <!-- Fila 2: Título de Sección y Controles (Total, Buscador, + Añadir) en un solo renglón -->
+                    <div class="cms-panel-header" style="margin-top: 1rem; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                        <h3 class="cms-h3" style="margin: 0; font-size: 1.35rem; font-weight: 800; color: #0052B7;">Catálogos de Análisis</h3>
+                        
+                        <div style="display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; justify-content: flex-end;">
+                            <!-- Paginador y Total -->
+                            <div id="flat-pagination-wrap" style="display: flex; align-items: center; gap: 0.5rem;">
+                                <span id="flat-total-records" style="font-size: 0.88rem; color: var(--text-muted); font-weight: 600;">Total: 0</span>
+                                <span id="flat-separator" style="color: #cbd5e1; display: inline;">|</span>
+                                <div id="flat-pagination" style="display: flex; gap: 0.25rem; align-items: center;"></div>
+                            </div>
+
+                            <!-- Buscador -->
+                            <div id="flat-search-container" style="display: flex; gap: 0.5rem; align-items: center; position:relative; z-index: 100;">
+                                <input type="text" id="flat-search-nombre" class="form-input form-input--bg" autocomplete="new-password" spellcheck="false" autocorrect="off" autocapitalize="none" placeholder="🔍 Buscar por nombre..." style="width: 220px;">
+                                <div id="flat-autocomplete-results" style="position:absolute; top:100%; left:0; right:0; background:#ffffff; border:1px solid var(--border); max-height:200px; overflow-y:auto; z-index:1000; display:none; border-radius:4px; box-shadow:0 8px 16px rgba(0,0,0,0.3);"></div>
+                            </div>
+
+                            <!-- Botón + Añadir Renglón -->
+                            <div id="flat-table-actions" style="display: flex; align-items: center; gap: 0.5rem;">
+                                <button type="button" class="btn btn-primary fnt-cursor" id="btn-add-flat-row" style="padding: 6px 14px; font-size: 0.88rem; font-weight: 500;">+ Añadir Renglón</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- VISTA TABLA PLANA -->
+                    <div id="view-catalog-table" class="d-none" style="margin-top: 0.5rem; margin-bottom: 2.5rem;">
+                        <div class="table-responsive" style="max-height: calc(100vh - 240px); overflow-y: auto; overflow-x: auto; border: 1px solid var(--border); border-radius: 4px;">
+                            <table class="table" id="flat-catalog-table" style="margin-bottom: 0; min-width: 1500px; white-space: nowrap;">
+                                <thead>
+                                    <tr>
+                                        <th style="position: sticky; top: 0; background: #e0f2fe; color: var(--primary-dark); z-index: 10;">#</th>
+                                        <th style="position: sticky; top: 0; background: #e0f2fe; color: var(--primary-dark); z-index: 10; cursor: pointer; white-space: nowrap;" id="flat-sort-clave" data-order="asc">Clave <span class="sort-icon"></span></th>
+                                        <th style="position: sticky; top: 0; background: #e0f2fe; color: var(--primary-dark); z-index: 10; cursor: pointer;" id="flat-sort-nombre" data-order="asc">Nombre <span class="sort-icon"></span></th>
+                                        <th style="position: sticky; top: 0; background: #e0f2fe; color: var(--primary-dark); z-index: 10;">TipoMuestra</th>
+                                        <th style="position: sticky; top: 0; background: #e0f2fe; color: var(--primary-dark); z-index: 10;">Contenedor</th>
+                                        <th style="position: sticky; top: 0; background: #e0f2fe; color: var(--primary-dark); z-index: 10;">Tiempo/Días</th>
+                                        <th style="position: sticky; top: 0; background: #e0f2fe; color: var(--primary-dark); z-index: 10; cursor: pointer;" id="flat-sort-grupo" data-order="none">Grupo o area de proceso <span class="sort-icon"></span></th>
+                                        <th style="position: sticky; top: 0; background: #e0f2fe; color: var(--primary-dark); z-index: 10;">Indicaciones o preparacion</th>
+                                        <th style="position: sticky; top: 0; background: #e0f2fe; color: var(--primary-dark); z-index: 10;">Pruebas incluidas en el perfil</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Dinámico -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- VISTA CONFIGURACIONES -->
+                    <div id="view-catalog-settings" class="d-none" style="margin-top: 1rem; background: var(--bg-card); border-radius: 8px; border: 1px solid var(--border); padding: 1.5rem;">
+                        
+                        <style>
+                            .action-icon {
+                                display: inline-flex; align-items: center; justify-content: center;
+                                width: 28px; height: 28px; border-radius: 4px;
+                                transition: all 0.2s ease;
+                            }
+                            .action-icon:hover {
+                                background: #f1f5f9;
+                            }
+                            .action-icon.active {
+                                background: #cbd5e1;
+                                box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+                                transform: scale(0.95);
+                            }
+                            #list-gabinetes, #list-subgabinetes {
+                                position: relative;
+                            }
+                            #list-gabinetes::after, #list-subgabinetes::after {
+                                content: '';
+                                position: absolute;
+                                top: 10px;
+                                bottom: 10px;
+                                left: 50%;
+                                width: 1px;
+                                background-color: var(--border, #e2e8f0);
+                                transform: translateX(-50%);
+                                pointer-events: none;
+                            }
+                            .row-item {
+                                display: flex; justify-content: space-between; align-items: center; 
+                                padding: 8px; border-bottom: 1px solid #e2e8f0; border: 1px solid transparent;
+                                border-radius: 4px; margin-bottom: 2px;
+                                transition: all 0.2s;
+                            }
+                            .row-item.row-active {
+                                border: 1px solid #10b981;
+                                background-color: #ecfdf5;
+                            }
+                            .dnd-slot {
+                                border: 2px dashed #cbd5e1;
+                                border-radius: 6px;
+                                min-height: 40px;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                background: #f8fafc;
+                                transition: all 0.2s;
+                                padding: 4px;
+                            }
+                            .dnd-slot.drag-over {
+                                border-color: #10b981;
+                                background: #ecfdf5;
+                                transform: scale(1.02);
+                            }
+                            .dnd-slot:empty::before {
+                                content: attr(data-index);
+                                color: #94a3b8;
+                                font-weight: bold;
+                                font-size: 1.2rem;
+                                opacity: 0.3;
+                            }
+                            .badge-estudio.dragging {
+                                opacity: 0.5;
+                                transform: scale(0.95);
+                            }
+                            .badge-estudio.dnd-dragover-left {
+                                border-left: 3px solid #10b981 !important;
+                                transform: translateX(2px);
+                            }
+                            .badge-estudio.dnd-dragover-right {
+                                border-right: 3px solid #10b981 !important;
+                                transform: translateX(-2px);
+                            }
+                        </style>
+
+                        <!-- VISTA: 20 Est.Med -->
+                        <div id="settings-20estmed-view" style="display: none; flex-direction: column; gap: 1.5rem;">
+                            <!-- PANEL A: Buscador -->
+                            <div id="panel-20estmed-a" style="border: 1px solid var(--border); border-radius: 6px; background: #ffffff; padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem; position: relative;">
+                                <h4 style="margin: 0; color: var(--primary-dark);">Vincular Estudios (20 Mejores)</h4>
+                                <div>
+                                    <input type="text" id="settings-20estmed-search" class="form-input form-input--bg" placeholder="🔍 Buscar por nombre de estudio..." style="width:100%; padding: 8px 12px; margin-bottom: 10px;">
+                                </div>
+                                <div id="settings-20estmed-results" style="position: absolute; top: 100px; left: 1.5rem; right: 1.5rem; background: #fff; border: 1px solid #e2e8f0; border-radius: 6px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); display: none; max-height: 200px; overflow-y: auto; z-index: 10;">
+                                </div>
+                            </div>
+                            
+                            <!-- PANEL B: Listado Vinculado -->
+                            <div id="panel-20estmed-b" style="border: 1px solid var(--border); border-radius: 6px; background: #ffffff; padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem;">
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <h4 style="margin: 0; color: var(--primary-dark);">Estudios Vinculados</h4>
+                                    <span style="font-size: 0.85rem; color: #64748b; background: #f1f5f9; padding: 4px 10px; border-radius: 12px;">Arrastra para ordenar</span>
+                                </div>
+                                <div id="settings-20estmed-tags" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; min-height: 100px;">
+                                    <!-- Los 20 slots se generarán vía JS -->
+                                </div>
+                                
+                                <div style="display: flex; justify-content: flex-end; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid #e2e8f0;">
+                                    <button type="button" id="btn-save-20estmed" class="btn" style="display: inline-flex; align-items: center; gap: 0.5rem; background: #e2e8f0; color: #94a3b8; cursor: not-allowed; transition: all 0.2s; border: none; padding: 8px 16px; border-radius: 6px; font-weight: 500;" disabled>
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+                                        Guardar Top 20
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- VISTA: Areas -->
+                        <div id="settings-gabinetes-view" style="display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: 1.5rem;">
+                            
+                            <!-- PANEL A: Areas -->
+                            <div id="panel-gabinetes-a" style="border: 1px solid var(--border); border-radius: 6px; background: #ffffff; display: flex; flex-direction: column;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: #f8fafc; border-bottom: 1px solid var(--border); border-radius: 6px 6px 0 0;">
+                                    <h4 style="margin: 0; color: var(--primary-dark);">Areas</h4>
+                                    <button type="button" class="btn btn-primary btn-add-row" data-target="list-gabinetes" style="padding: 2px 8px; font-size: 1.2rem; line-height: 1;">+</button>
+                                </div>
+                                <div id="list-gabinetes" style="padding: 10px; flex-grow: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; align-items: start; align-content: start;">
+                                    <!-- Dinámico vía JS (SSOT MariaDB) -->
+                                </div>
+                            </div>
+
+                            <!-- PANEL B: Perfil/Especialidades -->
+                            <div id="panel-gabinetes-b" style="border: 1px solid var(--border); border-radius: 6px; background: #ffffff; display: none; flex-direction: column;">
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `labadmin.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L949-1149)</summary>
+
+**Path:** `Unknown file`
+
+```
+                            <div id="panel-gabinetes-b" style="border: 1px solid var(--border); border-radius: 6px; background: #ffffff; display: none; flex-direction: column;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: #f8fafc; border-bottom: 1px solid var(--border); border-radius: 6px 6px 0 0;">
+                                    <h4 style="margin: 0; color: var(--primary-dark);">Perfil/Especialidades</h4>
+                                    <button type="button" class="btn btn-primary btn-add-row" data-target="list-subgabinetes" style="padding: 2px 8px; font-size: 1.2rem; line-height: 1;">+</button>
+                                </div>
+                                <div id="list-subgabinetes" style="padding: 10px; flex-grow: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; align-items: start; align-content: start;">
+                                    <!-- Dinámico vía JS (SSOT MariaDB) -->
+                                </div>
+                            </div>
+
+                            <!-- CONTENEDOR AGRUPADO C y D -->
+                            <div id="panel-cd-container" style="grid-column: 1 / -1; border: 1px solid var(--border); border-radius: 6px; background: #f8fafc; padding: 1.5rem; display: none; transition: border-color 0.2s;">
+                                <h3 id="panel-cd-title" style="margin-top: 0; margin-bottom: 1rem; color: #10b981; text-align: center; border-bottom: 1px solid #10b981; padding-bottom: 10px; transition: all 0.2s;">Vinculando a...</h3>
+                                
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                                    <!-- PANEL C: Buscador -->
+                                    <div id="panel-gabinetes-c" style="border: 1px solid var(--border); border-radius: 6px; background: #ffffff; padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem; position: relative;">
+                                        <h4 style="margin: 0; color: var(--primary-dark);">Vincular Estudios</h4>
+                                        <div>
+                                            <input type="text" id="settings-search-nombre" class="form-input form-input--bg" placeholder="🔍 Buscar por nombre de estudio..." style="width:100%; padding: 8px 12px;">
+                                        </div>
+                                        <div id="settings-autocomplete-results" style="position: absolute; top: 130px; left: 1.5rem; right: 1.5rem; background: #fff; border: 1px solid #e2e8f0; border-radius: 6px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); display: none; max-height: 200px; overflow-y: auto; z-index: 10;">
+                                            <!-- Results via JS -->
+                                        </div>
+                                    </div>
+
+                                    <!-- PANEL D: Listado Vinculado -->
+                                    <div id="panel-gabinetes-d" style="border: 1px solid var(--border); border-radius: 6px; background: #ffffff; padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem;">
+                                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                                            <h4 style="margin: 0; color: var(--primary-dark);">Estudios Vinculados</h4>
+                                            <span style="font-size: 0.85rem; color: #64748b; background: #f1f5f9; padding: 4px 10px; border-radius: 12px;">Arrastra para ordenar</span>
+                                        </div>
+                                        <div id="settings-selected-tags" style="display: flex; flex-wrap: wrap; gap: 0.5rem; min-height: 50px; align-content: flex-start;">
+                                            <!-- Tags via JS -->
+                                            <span id="settings-tags-empty" style="color: #94a3b8; font-style: italic; font-size: 0.9rem; margin-top: 10px;">No hay estudios vinculados aún. Usa el buscador para agregar.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- BARRA GUARDAR CAMBIOS PANEL D -->
+                                <div style="display: flex; justify-content: flex-end; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid #e2e8f0;">
+                                    <button type="button" id="btn-save-vinculaciones" class="btn" style="display: inline-flex; align-items: center; gap: 0.5rem; background: #e2e8f0; color: #94a3b8; cursor: not-allowed; transition: all 0.2s; border: none; padding: 8px 16px; border-radius: 6px; font-weight: 500;" disabled>
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+                                        Guardar Vinculaciones
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- VISTA I.AREAS -->
+                        <div id="settings-igabinetes-view" style="display: none; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: 1.5rem;">
+                            
+                            <!-- PANEL A: I.Areas -->
+                            <div id="panel-igabinetes-a" style="border: 1px solid var(--border); border-radius: 6px; background: #ffffff; display: flex; flex-direction: column; grid-column: 1 / -1;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: #f8fafc; border-bottom: 1px solid var(--border); border-radius: 6px 6px 0 0;">
+                                    <h4 style="margin: 0; color: var(--primary-dark);">I.Areas</h4>
+                                    <button type="button" class="btn btn-primary btn-add-row" data-target="list-igabinetes" style="padding: 2px 8px; font-size: 1.2rem; line-height: 1;">+</button>
+                                </div>
+                                <div id="list-igabinetes" style="padding: 10px; flex-grow: 1;">
+                                    <!-- Dynamic rows via JS -->
+                                </div>
+                            </div>
+
+                            <!-- CONTENEDOR AGRUPADO C y D para I.Areas -->
+                            <div id="panel-igabinetes-cd-container" style="grid-column: 1 / -1; border: 1px solid var(--border); border-radius: 6px; background: #f8fafc; padding: 1.5rem; display: none; transition: border-color 0.2s;">
+                                <h3 id="panel-igabinetes-cd-title" style="margin-top: 0; margin-bottom: 1rem; color: #10b981; text-align: center; border-bottom: 1px solid #10b981; padding-bottom: 10px; transition: all 0.2s;">Vinculando a...</h3>
+                                
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                                    <!-- PANEL C: Buscador -->
+                                    <div id="panel-igabinetes-c" style="border: 1px solid var(--border); border-radius: 6px; background: #ffffff; padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem; position: relative;">
+                                        <h4 style="margin: 0; color: var(--primary-dark);">Vincular Areas o Perfil/Especialidades</h4>
+                                        <div>
+                                            <input type="text" id="settings-isearch-input" class="form-input form-input--bg" placeholder="🔍 Buscar Area o Perfil/Especialidad..." style="width:100%; padding: 8px 12px; margin-bottom: 10px;">
+                                        </div>
+                                        <div id="settings-iautocomplete-results" style="position: absolute; top: 130px; left: 1.5rem; right: 1.5rem; background: #fff; border: 1px solid #e2e8f0; border-radius: 6px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); display: none; max-height: 200px; overflow-y: auto; z-index: 10;">
+                                            <!-- Results via JS -->
+                                        </div>
+                                    </div>
+
+                                    <!-- PANEL D: Listado Vinculado -->
+                                    <div id="panel-igabinetes-d" style="border: 1px solid var(--border); border-radius: 6px; background: #ffffff; padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem;">
+                                        <h4 style="margin: 0; color: var(--primary-dark);">Areas Vinculadas</h4>
+                                        <div id="settings-iselected-tags" style="display: flex; flex-wrap: wrap; gap: 0.5rem; min-height: 50px; align-content: flex-start;">
+                                            <!-- Tags via JS -->
+                                            <span id="settings-itags-empty" style="color: #94a3b8; font-style: italic; font-size: 0.9rem; margin-top: 10px;">No hay vinculaciones aún. Usa el buscador para agregar.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- BARRA GUARDAR CAMBIOS PANEL D -->
+                                <div style="display: flex; justify-content: flex-end; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid #e2e8f0;">
+                                    <button type="button" id="btn-save-ivinculaciones" class="btn" style="display: inline-flex; align-items: center; gap: 0.5rem; background: #e2e8f0; color: #94a3b8; cursor: not-allowed; transition: all 0.2s; border: none; padding: 8px 16px; border-radius: 6px; font-weight: 500;" disabled>
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+                                        Guardar Vinculaciones
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <?php if (!empty($isAdmin)): ?>
+                <!-- Panel 7: Personal de Recepción (Exclusivo Admin) -->
+                <div id="panel-recepcionistas" class="tab-panel d-none">
+                    <div class="cms-panel-header" style="margin-top: 1rem; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                        <h3 class="cms-h3" style="margin: 0; font-size: 1.35rem; font-weight: 800; color: #0052B7;">Personal de Recepción y Administradores</h3>
+                        
+                        <div style="display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; justify-content: flex-end;">
+                            <!-- Paginador y Total -->
+                            <div id="flat-recepcionistas-pagination-wrap" style="display: flex; align-items: center; gap: 0.5rem;">
+                                <span id="flat-recepcionistas-total-records" style="font-size: 0.88rem; color: var(--text-muted); font-weight: 600;">Total: 0</span>
+                                <span style="color: #cbd5e1; display: inline;">|</span>
+                                <div id="flat-recepcionistas-pagination" style="display: flex; gap: 0.25rem; align-items: center;"></div>
+                            </div>
+
+                            <!-- Buscador -->
+                            <div id="flat-search-recepcionistas-container" style="display: flex; gap: 0.5rem; align-items: center; position:relative; z-index: 100;">
+                                <input type="text" id="flat-search-recepcionistas-input" class="form-input form-input--bg" autocomplete="new-password" spellcheck="false" autocorrect="off" autocapitalize="none" placeholder="🔍 Buscar recepcionista..." style="width: 220px;">
+                            </div>
+
+                            <!-- Botón Acción -->
+                            <div id="flat-recepcionistas-actions" style="display: flex; align-items: center; gap: 0.5rem;">
+                                <button type="button" class="btn btn-primary fnt-cursor" id="btn-add-recepcionista-row" style="padding: 6px 14px; font-size: 0.88rem; font-weight: 500;">+ Añadir Recepcionista</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TABLA PLANA RECEPCIONISTAS -->
+                    <div class="table-responsive" style="max-height: calc(100vh - 240px); overflow-y: auto; overflow-x: auto; border: 1px solid var(--border); border-radius: 4px;">
+                        <table class="table" id="flat-recepcionistas-table" style="margin-bottom: 0; min-width: 1100px; white-space: nowrap;">
+                            <thead>
+                                <tr>
+                                    <th style="position: sticky; top: 0; background: #e0f2fe; color: var(--primary-dark); z-index: 10; width: 60px; text-align: center; cursor: pointer;" id="flat-recepcionistas-sort-id" data-col="id" data-order="none"># <span class="sort-icon"></span></th>
+                                    <th style="position: sticky; top: 0; background: #e0f2fe; color: var(--primary-dark); z-index: 10; cursor: pointer; width: 280px;" id="flat-recepcionistas-sort-nombre" data-col="nombre_completo" data-order="asc">Nombre del Personal <span class="sort-icon">▲</span></th>
+                                    <th style="position: sticky; top: 0; background: #e0f2fe; color: var(--primary-dark); z-index: 10; width: 110px; text-align: center; cursor: pointer;" id="flat-recepcionistas-sort-rol" data-col="rol" data-order="none">Rol <span class="sort-icon"></span></th>
+                                    <th style="position: sticky; top: 0; background: #e0f2fe; color: var(--primary-dark); z-index: 10; width: 160px; cursor: pointer;" id="flat-recepcionistas-sort-celular" data-col="celular" data-order="none">Celular / Usuario <span class="sort-icon"></span></th>
+                                    <th style="position: sticky; top: 0; background: #e0f2fe; color: var(--primary-dark); z-index: 10; width: 140px; text-align: center; cursor: pointer;" id="flat-recepcionistas-sort-estado" data-col="estado_id" data-order="none">Estado <span class="sort-icon"></span></th>
+                                    <th style="position: sticky; top: 0; background: #e0f2fe; color: var(--primary-dark); z-index: 10; width: 160px; text-align: center; cursor: pointer;" id="flat-recepcionistas-sort-fecha" data-col="fecha_registro" data-order="none">Fecha Registro <span class="sort-icon"></span></th>
+                                    <th style="position: sticky; top: 0; background: #e0f2fe; color: var(--primary-dark); z-index: 10; width: 160px; text-align: center;">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Dinámico JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <?php endif; ?>
+            </main>
+
+            <!-- Región Lateral Derecha: Notificaciones (Scope 30) -->
+            <aside class="sidebar-right" id="sidebar-right">
+                <div class="sidebar-right-toggle-row">
+                    <!-- Campana siempre visible + badge de conteo + título separado -->
+                    <div class="sidebar-right-toggle-left">
+                        <div class="bell-wrap" id="bell-wrap-notif" title="Notificaciones">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                            <span class="bell-badge" id="badge-recepcion" aria-label="Notificaciones pendientes">0</span>
+                        </div>
+                        <span class="sidebar-right-toggle-title">Notificaciones</span>
+                    </div>
+                    <button type="button" class="sidebar-right-toggle" id="sidebar-right-toggle" title="Expandir / Colapsar notificaciones">
+                        <svg id="right-rail-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                    </button>
+                </div>
+                <div class="sidebar-right-content">
+                    <div class="sidebar-right-header">
+                        <h3 class="txt-main fw-600 font-mosquito">Notificaciones</h3>
+                    </div>
+                    <div class="sidebar-right-body">
+                        <!-- Contenido de notificaciones para ser utilizado posteriormente -->
+                        <p class="txt-muted">No hay nuevas notificaciones</p>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+
+    <!-- Modal de Resultados -->
+    <!-- ── Modal: Registro de Perfil Médico ────────────────────────── -->
+    <div id="modal-medico" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-medico-title">
+        <div class="modal-content" style="max-width: 680px; width: 92%;">
+
+            <!-- Cabecera LAESH homologada (arrastrable via app.js initModalDrag) -->
+            <div class="modal-header">
+                <h3 id="modal-medico-title">Registro de Perfil Médico</h3>
+                <button type="button" class="close-modal" id="btn-cerrar-medico" aria-label="Cerrar">&times;</button>
+            </div>
+            <div class="modal-body">
+
+            <!-- Formulario a 2 columnas -->
+            <form id="form-perfil-medico" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem;">
+                <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrfToken ?? '', ENT_QUOTES, 'UTF-8') ?>">
+                <input type="hidden" id="pm-user-id" name="user_id" value="">
+
+                <!-- Nombre completo (ocupa 2 columnas si hay espacio) -->
+                <div class="form-group mb-0" style="grid-column: 1 / -1;">
+                    <label for="pm-nombre" class="form-label">
+                        Nombre completo <span class="req">*</span>
+                    </label>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `labadmin.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1149-1249)</summary>
+
+**Path:** `Unknown file`
+
+```
+                    </label>
+                    <input type="text" id="pm-nombre" name="nombre"
+                           placeholder="Ej. Dr. Hedilberto Reyes Venegas" required
+                           class="form-input form-input--bg">
+                </div>
+
+                <!-- Especialidad -->
+                <div class="form-group mb-0">
+                    <label for="pm-especialidad" class="form-label">
+                        Especialidad <span class="req">*</span>
+                    </label>
+                    <div class="form-field">
+                        <select id="pm-especialidad" name="especialidad" required
+                                class="form-input form-input--bg form-select">
+                            <option value="" disabled selected>Seleccione una especialidad</option>
+                            <option value="Medicina Interna">Medicina Interna</option>
+                            <option value="Ginecología y Obstetricia">Ginecología y Obstetricia</option>
+                            <option value="Pediatría y Patología">Pediatría y Patología</option>
+                            <option value="Hematología Especializada">Hematología Especializada</option>
+                            <option value="Medicina General">Medicina General</option>
+                            <option value="Cardiología">Cardiología</option>
+                            <option value="Cirugía General">Cirugía General</option>
+                        </select>
+                        <span class="select-arrow"></span>
+                    </div>
+                </div>
+
+                <!-- Teléfono Celular -->
+                <div class="form-group mb-0">
+                    <label for="pm-celular" class="form-label">
+                        Teléfono Celular <span class="req">*</span>
+                    </label>
+                    <input type="tel" id="pm-celular" name="celular" maxlength="10"
+                           placeholder="Ej. 9531234567" required inputmode="tel"
+                           class="form-input form-input--bg">
+                </div>
+
+                <!-- Cédula Profesional -->
+                <div class="form-group mb-0">
+                    <label for="pm-cedula-profesional" class="form-label">
+                        Cédula Profesional <span class="req">*</span>
+                    </label>
+                    <input type="text" id="pm-cedula-profesional" name="cedula_profesional"
+                           placeholder="Ej. 6605518" required
+                           class="form-input form-input--bg">
+                </div>
+
+                <!-- Cédula Especialidad -->
+                <div class="form-group mb-0">
+                    <label for="pm-cedula-especialidad" class="form-label">
+                        Cédula Especialidad
+                    </label>
+                    <input type="text" id="pm-cedula-especialidad" name="cedula_especialidad"
+                           placeholder="Ej. 9456189"
+                           class="form-input form-input--bg">
+                </div>
+
+                <!-- Universidad (MariaDB catalogos_ui) -->
+                <div class="form-group mb-0">
+                    <label for="pm-universidad" class="form-label">
+                        Universidad <span class="req">*</span>
+                    </label>
+                    <div class="form-field">
+                        <select id="pm-universidad" name="universidad_id" required
+                                class="form-input form-input--bg form-select">
+                            <option value="" disabled selected>Seleccione una universidad</option>
+                            <?php if (!empty($catalogosUI['universidades'])): ?>
+                                <?php foreach ($catalogosUI['universidades'] as $u): ?>
+                                    <option value="<?= (int)$u['id'] ?>"><?= htmlspecialchars($u['valor'], ENT_QUOTES, 'UTF-8') ?></option>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
+                        </select>
+                        <span class="select-arrow"></span>
+                    </div>
+                </div>
+
+                <!-- Lugar donde labora (MariaDB catalogos_ui) -->
+                <div class="form-group mb-0">
+                    <label for="pm-lugar" class="form-label">
+                        Lugar donde labora <span class="req">*</span>
+                    </label>
+                    <div class="form-field">
+                        <select id="pm-lugar" name="lugar_trabajo_id" required
+                                class="form-input form-input--bg form-select">
+                            <option value="" disabled selected>Seleccione un lugar de trabajo</option>
+                            <?php if (!empty($catalogosUI['lugares_trabajo'])): ?>
+                                <?php foreach ($catalogosUI['lugares_trabajo'] as $lt): ?>
+                                    <option value="<?= (int)$lt['id'] ?>"><?= htmlspecialchars($lt['valor'], ENT_QUOTES, 'UTF-8') ?></option>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
+                        </select>
+                        <span class="select-arrow"></span>
+                    </div>
+                </div>
+
+                <!-- Contraseña Inicial / NIP (Solo requerida en alta) -->
+                <div class="form-group mb-0" id="pm-password-group" style="grid-column: 1 / -1;">
+                    <label for="pm-password" class="form-label">
+                        Contraseña Inicial / NIP (Exactamente 10 caracteres) <span class="req" id="pm-password-req">*</span>
+                    </label>
+                    <div class="pw-input-wrap">
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Analyzing the HTML (`labadmin.php`) reveals the structure of the "especialidad" (specialty) dropdown menu within the interface, specifically line 1162. The code provides a basic selection with options, including "Medicina Interna". Further investigation into backend logic is necessary to fully understand data handling.
+
+
+The specialties are directly embedded within the HTML of `labadmin.php` as hardcoded strings; the database column `perfiles_medicos.especialidad` is a free-text VARCHAR, not linked to a dedicated catalog. Consequently, purging `perfiles_medicos` effectively removes all associated specialty data.
+
+The `TRUNCATE TABLE catalogos_ui;` command emptied the `catalogos_ui` table, triggering a fallback in `Ordenes.php` which provides a static array of IDs, allowing the `<select name="universidad_id">` to render with default options like "UNAM" even when the table is empty.
+
+
+The "UNAM" selection and subsequent form submission sent `universidad_id = 1` to the backend. The database's `catalogos_ui` table being empty caused a foreign key violation because `universidad_id` (requiring existence in `catalogos_ui.id`) was not found.
+
+The UAT environment's purpose for the seed catalogs within `catalogos_ui` is crucial for registering medical profiles; the script `limpiar_pruebas_uat.sh` must either re-seed the catalogs after truncation, maintain existing seeds, or handle catalog insertion depending on user needs. The hardcoded fallback IDs in `Ordenes.php` present a risk, guaranteeing foreign key errors if the database is empty; it should be revised.
+
+
+The script `limpiar_pruebas_uat.sh` truncates `catalogos_ui`, which holds seed data essential for the UI's functionality, specifically medical profile creation. Examining the script, the truncation is the issue that can cause a foreign key violation. The database needs these seed records.
+
+The UAT environment's reset script requires a re-seeding operation for the `catalogos_ui` table to ensure that the application functions correctly. A possible resolution involves running the seed SQL script after the `TRUNCATE` command within `limpiar_pruebas_uat.sh` or a separate re-seeding step.
+
+
+The provided SQL inserts seed data into `catalogos_ui` for universities and workplaces, setting specific IDs.  Truncating and re-inserting this data with a reset `AUTO_INCREMENT` will ensure the expected ID mappings.  This operation is essential for the UAT environment's functionality, and it appears the script is designed to handle this.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 4.633846266s
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 8:29 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `DB.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+// DB.php - Clase para conexión PDO e interacción transaccional con la base de datos
+
+namespace Common;
+
+use PDO;
+use PDOException;
+
+class DB {
+    private static ?PDO $instance = null;
+
+    /**
+     * Establece la conexión PDO singleton
+     */
+    public static function connect(): PDO {
+        if (self::$instance === null) {
+            $config = require __DIR__ . '/config.php';
+            $dbConf = $config['db'];
+
+            $dsn = sprintf(
+                "mysql:host=%s;port=%d;dbname=%s;charset=%s",
+                $dbConf['host'],
+                $dbConf['port'],
+                $dbConf['name'],
+                $dbConf['charset']
+            );
+
+            try {
+                self::$instance = new PDO($dsn, $dbConf['user'], $dbConf['pass'], [
+                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                    PDO::ATTR_EMULATE_PREPARES => false,
+                    PDO::ATTR_PERSISTENT => true, // Conexión persistente (Pool a nivel PHP-FPM)
+                ]);
+                
+                // Configuración de compatibilidad e internacionalización (Español MX)
+                self::$instance->exec("SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci");
+                self::$instance->exec("SET time_zone = '-06:00'");
+                self::$instance->exec("SET lc_time_names = 'es_MX'");
+                self::$instance->exec("SET SESSION sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
+            } catch (PDOException $e) {
+                // Registrar error en el log local de emergencia
+                self::logEmergency("Error de conexión PDO: " . $e->getMessage());
+                throw $e;
+            }
+        }
+        return self::$instance;
+    }
+
+    /**
+     * Registra una traza de fallo de consulta SQL en la tabla fallback_log
+     * Adaptado del estándar Conexion.php (cbm 2026)
+     *
+     * @param string $nivel Nivel del log ('ERROR', 'FALLBACK', 'WARN')
+     * @param string $query Sentencia SQL ejecutada
+     * @param string|null $errorMsg Mensaje de error retornado por PDO
+     */
+    public static function logFallback(string $nivel, string $query, ?string $errorMsg = null): void {
+        try {
+            $pdo = self::connect();
+            
+            // Determinar tipo de query (SELECT, INSERT, UPDATE, etc.)
+            $qTrim = ltrim($query);
+            $firstWord = strtoupper(strtok($qTrim, " \t\n\r"));
+            $typeMap = ['SELECT'=>'SELECT','INSERT'=>'INSERT','UPDATE'=>'UPDATE','DELETE'=>'DELETE','CALL'=>'CALL'];
+            $queryType = $typeMap[$firstWord] ?? 'OTHER';
+
+            // Hash CRC32 para agrupar repeticiones en auditorías
+            $queryHash = substr(dechex(crc32($query)), 0, 8);
+
+            // Obtener origen real (archivo y línea del caller) omitiendo frames internos de DB
+            $origen = 'unknown';
+            $funcion = null;
+            $backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 5);
+            foreach ($backtrace as $frame) {
+                $file = $frame['file'] ?? '';
+                if ($file !== '' && strpos($file, 'DB.php') === false) {
+                    // Remover path absoluto del host para legibilidad
+                    $short = str_replace($_SERVER['DOCUMENT_ROOT'] ?? '', '', $file);
+                    $line = $frame['line'] ?? '';
+                    $origen = ltrim($short, '/') . ($line ? ":$line" : '');
+                    if (isset($frame['function'])) {
+                        $funcion = ($frame['class'] ?? '') . '::' . $frame['function'];
+                    }
+                    break;
+                }
+            }
+
+            // Inserción directa segura
+            $stmt = $pdo->prepare("
+                INSERT INTO `fallback_log` 
+                (`nivel`, `origen`, `funcion`, `query_type`, `query_hash`, `query_text`, `error_msg`, `fecha`) 
+                VALUES (:nivel, :origen, :funcion, :query_type, :query_hash, :query_text, :error_msg, NOW())
+            ");
+            $stmt->execute([
+                ':nivel' => $nivel,
+                ':origen' => substr($origen, 0, 120),
+                ':funcion' => $funcion ? substr($funcion, 0, 80) : null,
+                ':query_type' => $queryType,
+                ':query_hash' => $queryHash,
+                ':query_text' => $query,
+                ':error_msg' => $errorMsg ? substr($errorMsg, 0, 300) : null,
+            ]);
+        } catch (PDOException $e) {
+            // Si la persistencia en DB falla, registrar en el archivo de emergencia local
+            self::logEmergency("Fallo en logFallback: " . $e->getMessage() . " | Query: " . $query);
+        }
+    }
+
+    /**
+     * Escribe un mensaje de emergencia directamente al archivo plano local
+     */
+    private static function logEmergency(string $message): void {
+        $config = require __DIR__ . '/config.php';
+        $logPath = $config['app']['log_path'];
+        $logDir = dirname($logPath);
+        if (!is_dir($logDir)) {
+            @mkdir($logDir, 0755, true);
+        }
+        $logLine = sprintf("[%s] [EMERGENCY_DB] %s\n", date('Y-m-d H:i:s'), $message);
+        @file_put_contents($logPath, $logLine, FILE_APPEND | LOCK_EX);
+    }
+}
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `config.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+// config.php — Configuración del ecosistema LAESH (Bloc Digital)
+//
+// Credenciales leídas desde variables de entorno (mínimo privilegio):
+//   LAESH_DB_USER / LAESH_DB_PASS / LAESH_DB_HOST / LAESH_DB_PORT / LAESH_DB_NAME
+//
+// Fallbacks por ambiente (env var siempre tiene prioridad):
+//   Docker local  (/.dockerenv existe) → host=db,        port=3306
+//   KVM2 Hostinger / OCI / nativo      → host=127.0.0.1, port=3306
+//   (En todos los entornos nativo las env vars se inyectan vía PHP-FPM pool
+//    y cache_renew.cron — el fallback no-Docker solo aplica si la inyección falla)
+// Nota: ya NO se usa root. Usuario dedicado laesh_app con privilegios mínimos en laesh_db.
+
+$inDocker = file_exists('/.dockerenv');
+
+// ── JWT Secret: falla explícita en producción si no se inyectó vía entorno ──
+// Hallazgo 2026-09-18: el secreto vivía hardcodeado como fallback silencioso,
+// visible en el código fuente — invalidaba la garantía de firma HMAC para los
+// 3 portales (md/rc/admrc). Producción NUNCA debe operar con un secreto conocido.
+$appEnv = getenv('APP_ENV') ?: 'development';
+$jwtSecret = getenv('LAESH_JWT_SECRET') ?: '';
+if ($jwtSecret === '') {
+    if ($appEnv === 'production') {
+        throw new \RuntimeException(
+            'LAESH_JWT_SECRET no está definida en el entorno. ' .
+            'Producción no puede operar con un secreto JWT hardcodeado/conocido. ' .
+            'Verificar env[LAESH_JWT_SECRET] en php-fpm-laesh.conf / EnvironmentFile de swoole-laesh.service.'
+        );
+    }
+    // Solo desarrollo local: valor fijo y claramente marcado como no apto para producción.
+    $jwtSecret = 'DEV_ONLY_INSECURE_SECRET_never_use_in_prod_2026';
+}
+
+return [
+    'db' => [
+        'host'    => getenv('LAESH_DB_HOST') ?: ($inDocker ? 'db'   : '127.0.0.1'),
+        'port'    => (int)(getenv('LAESH_DB_PORT') ?: 3306),   // 3306 en todos los entornos nativo (KVM2/OCI)
+        'user'    => getenv('LAESH_DB_USER') ?: 'laesh_app',
+        'pass'    => getenv('LAESH_DB_PASS') ?: 'laesh_2026_dev',
+        'name'    => getenv('LAESH_DB_NAME') ?: 'laesh_db',
+        'charset' => 'utf8mb4'
+    ],
+    'app' => [
+        'env'      => getenv('APP_ENV') ?: 'development',
+        // Ruta absoluta al dir de logs del stack (fuera del webroot).
+        // __DIR__ = commons/ dentro de laesh-swbldi/ — usar ruta absoluta para evitar
+        // que un deploy en subdirectorio diferente cambie la ubicación del log.
+        'log_path' => '/opt/laesh/logs/app.log'
+    ],
+    'swoole' => [
+        // FIX 2026-09-08 (G-SWOOLE-01): En KVM2/nativo Swoole escucha en 127.0.0.1 (loopback).
+        // UFW ya bloquea el puerto 9502 externo, pero si UFW se deshabilita accidentalmente,
+        // el binding a 0.0.0.0 expondría el bridge HTTP internamente.
+        // 127.0.0.1 elimina esa dependencia — Nginx /ws → proxy_pass http://127.0.0.1:9502 funciona igual.
+        // En Docker: 0.0.0.0 sigue siendo necesario para que el contenedor nginx resuelva al contenedor swoole.
+        'host' => getenv('LAESH_WS_HOST') ?: ($inDocker ? '0.0.0.0' : '127.0.0.1'),
+        'port' => (int)(getenv('LAESH_WS_PORT') ?: 9502),
+        // 2026-10-01: base del bridge HTTP PHP→Swoole (/publish, /revoke). Antes se decidía
+        // en cada envío con gethostbyname('swoole') — una consulta DNS en el camino crítico.
+        // Ahora es explícita: LAESH_WS_BRIDGE_URL, o el contenedor 'swoole' en Docker, o
+        // loopback en nativo (KVM2/OCI), mismo criterio $inDocker que el resto del archivo.
+        'bridge_url' => rtrim(getenv('LAESH_WS_BRIDGE_URL')
+            ?: ($inDocker ? 'http://swoole:' : 'http://127.0.0.1:') . (int)(getenv('LAESH_WS_PORT') ?: 9502), '/'),
+    ],
+    'jwt' => [
+        'secret'      => $jwtSecret,
+        'algo'        => 'HS256',
+        'issuer'      => 'laesh.local',
+        'ttl_seconds' => 86400, // 24 horas
+        'cookie_name' => 'laesh_jwt_token',
+    ]
+];
+
+```
+
+</details>
 
 ---
 
