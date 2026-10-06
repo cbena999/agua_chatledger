@@ -7,9 +7,9 @@
 | **Trajectory ID** | `04f20c84-5a3b-4e4e-b5de-8302f1d3fcb9` |
 | **Cascade ID** | `6bb73e25-727a-4589-849d-9fcae1a1d750` |
 | **Type** | Agent Conversation |
-| **Total Steps** | 7170 |
+| **Total Steps** | 7197 |
 | **Started** | 18 Sept 2026, 12:20 pm |
-| **Completed** | 21 Sept 2026, 10:17 am |
+| **Completed** | 5 Oct 2026, 7:26 pm |
 
 ---
 
@@ -21668,6 +21668,637 @@ Se ha añadido la URL a una cola de rastreo prioritaria. El hecho de enviar una 
 <details>
 <summary>Metadata</summary>
 
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+Investiga y Analiza si es viable integrar y utilizar shiny/json-logic-php para estrcuturar todas las reglas de negocio que tiene portal medico y portal recepción, informa de la viabilidad, gaps, isssues. No hagas cambios ahun.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `gestion_web.php`
+**Language:** php
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_SYSTEM_MESSAGE
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 7:17 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+Analyzing the request, the core task is a feasibility study for integrating `shiny/json-logic-php` to manage business rules in "portal medico" and "portal recepción." This involves assessing the package's suitability, identifying potential gaps, and pinpointing any implementation issues. The focus is on a high-level viability assessment, no code changes.
+
+
+Initial assessment suggests several potential JsonLogic implementations in PHP; investigating these libraries to understand feature sets and maintenance status is the priority. The code's business rules seem complex, encompassing authentication, state management, access control, and data validation; this complexity requires careful evaluation of JsonLogic's capabilities.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `composer.json`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.159866229s
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 7:17 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>Directory: `laesh-swbldi` (10 items)</summary>
+
+**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi`
+
+| Name | Type | Size |
+|------|------|------|
+| `admrc` | Directory | - |
+| `commons` | Directory | - |
+| `crons` | Directory | - |
+| `libs` | Directory | - |
+| `logs` | Directory | - |
+| `md` | Directory | - |
+| `rc` | Directory | - |
+| `tests` | Directory | - |
+| `uploads` | Directory | - |
+| `website` | Directory | - |
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/commons`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>Directory: `commons` (18 items)</summary>
+
+**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/commons`
+
+| Name | Type | Size |
+|------|------|------|
+| `BusquedaOrdenes.php` | File | 10671 bytes |
+| `Cache.php` | File | 11418 bytes |
+| `CatalogBuilder.php` | File | 12366 bytes |
+| `ConfigBuilder.php` | File | 1931 bytes |
+| `CsrfGuard.php` | File | 6916 bytes |
+| `DB.php` | File | 5264 bytes |
+| `JwtManager.php` | File | 18493 bytes |
+| `Logger.php` | File | 10011 bytes |
+| `PortalMap.php` | File | 1116 bytes |
+| `RbacManager.php` | File | 6168 bytes |
+| `Response.php` | File | 4522 bytes |
+| `autoload.php` | File | 1504 bytes |
+| `commons.php` | File | 5868 bytes |
+| `config.php` | File | 3957 bytes |
+| `notifier.php` | File | 27300 bytes |
+| `seed_first_users.php` | File | 14660 bytes |
+| `swoole_server.php` | File | 28687 bytes |
+| `ws_audit_receiver.php` | File | 3761 bytes |
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/libs`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>Directory: `libs` (3 items)</summary>
+
+**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/libs`
+
+| Name | Type | Size |
+|------|------|------|
+| `auth` | Directory | - |
+| `flight` | Directory | - |
+| `plates` | Directory | - |
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/rc`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>Directory: `rc` (3 items)</summary>
+
+**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/rc`
+
+| Name | Type | Size |
+|------|------|------|
+| `index.php` | File | 136453 bytes |
+| `negocio` | Directory | - |
+| `views` | Directory | - |
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/rc/negocio`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>Directory: `negocio` (2 items)</summary>
+
+**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/rc/negocio`
+
+| Name | Type | Size |
+|------|------|------|
+| `Catalogos.php` | File | 11793 bytes |
+| `Ordenes.php` | File | 121444 bytes |
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Ordenes.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+/**
+ * rc/negocio/Ordenes.php — Capa de Negocio para Órdenes y Pacientes (Recepción)
+ *
+ * Maneja la lógica de dominio, persistencia PDO, ejecución de Stored Procedures
+ * (laesh_db.CrearOrdenLaboratorio), secuencias (folios_control), auditoría y logs.
+ */
+
+namespace RC\Negocio;
+
+use Common\DB;
+use Common\Logger;
+use PDO;
+use Throwable;
+
+class Ordenes {
+
+    const BUSQ_TEXT_COLS_RC = ['paciente_nombre', 'medico_nombre_completo', 'paciente_telefono', 'diagnostico', 'otros_estudios', 'estudios_json', 'folio_extraido'];
+
+    /**
+     * Busca un paciente existente por teléfono o nombre, o crea uno nuevo en laesh_db.pacientes
+     */
+    public static function buscarOCrearPaciente(array $datos): int {
+        $db = DB::connect();
+        
+        $nombreCompleto = trim($datos['paciente_nombre'] ?? $datos['paciente'] ?? '');
+        $apellidoPaterno = trim($datos['apellido_paterno'] ?? '');
+        if (!empty($apellidoPaterno) && strpos($nombreCompleto, $apellidoPaterno) === false) {
+            $nombreCompleto .= ' ' . $apellidoPaterno;
+        }
+        $telefono = trim($datos['celular'] ?? $datos['telefono'] ?? '');
+        $sexo = ($datos['sexo'] ?? 'H') === 'M' ? 'M' : 'H';
+
+        if (empty($nombreCompleto)) {
+            $nombreCompleto = 'Paciente Sin Nombre';
+        }
+
+        // M3 (auditoría 2026-09-20): sin UNIQUE en telefono/nombre_completo (a
+        // propósito — dos pacientes reales distintos pueden compartir teléfono de
+        // hogar) ni SELECT ... FOR UPDATE (la fila que buscamos aún no existe), dos
+        // creaciones casi simultáneas para el MISMO paciente nuevo podían ambas
+        // fallar en encontrar coincidencia y ambas insertar, duplicando el
+        // paciente. GET_LOCK() serializa el check-then-act SOLO para la misma
+        // combinación teléfono+nombre — no impone una restricción de unicidad
+        // permanente en la tabla, solo cierra la ventana de carrera de esta
+        // función. Timeout de 5s: si algo más ya tiene el lock, mejor fallar
+        // rápido con un error claro que colgar el request indefinidamente.
+        $lockKey = 'paciente_' . md5($telefono . '|' . $nombreCompleto);
+        $lockStmt = $db->prepare('SELECT GET_LOCK(?, 5)');
+        $lockStmt->execute([$lockKey]);
+        if ((int)$lockStmt->fetchColumn() !== 1) {
+            throw new \RuntimeException('No se pudo obtener bloqueo para registrar el paciente — intente de nuevo.');
+        }
+
+        try {
+            // 2026-09-24 (reporte en vivo: orden capturada con nombre "Karla ..."
+            // se guardó/mostró con el nombre de un paciente distinto, "Juan Manuel"/
+            // "José"): esta búsqueda emparejaba SOLO por teléfono, ignorando el
+            // nombre recién capturado — el comentario de más arriba (GET_LOCK) ya
+            // reconoce que "dos pacientes reales distintos pueden compartir
+            // teléfono de hogar", pero el SELECT nunca aplicó esa misma regla: el
+            // primer paciente registrado con ese teléfono se reutilizaba sin
+            // importar que el nombre no coincidiera, contaminando la orden nueva
+            // con la identidad de otro paciente. La clave del candado (línea de
+            // arriba) YA combina teléfono+nombre — se replica esa misma pareja
+            // aquí, que siempre fue la intención real de "es el mismo paciente".
+            if (!empty($telefono)) {
+                $stmt = $db->prepare("SELECT id FROM pacientes WHERE telefono = ? AND nombre_completo = ? LIMIT 1");
+                $stmt->execute([$telefono, $nombreCompleto]);
+                $existente = $stmt->fetchColumn();
+                if ($existente) {
+                    return (int)$existente;
+                }
+            }
+
+            // Buscar por nombre_completo solo (paciente ya conocido pero sin
+            // teléfono capturado esta vez, o teléfono nuevo/distinto para el
+            // mismo nombre) — evita duplicar al mismo paciente.
+            $stmt = $db->prepare("SELECT id FROM pacientes WHERE nombre_completo = ? LIMIT 1");
+            $stmt->execute([$nombreCompleto]);
+            $existente = $stmt->fetchColumn();
+            if ($existente) {
+                return (int)$existente;
+            }
+
+            // Crear nuevo paciente
+            $stmtInsert = $db->prepare("
+                INSERT INTO pacientes (nombre_completo, sexo, telefono)
+                VALUES (?, ?, ?)
+            ");
+            $stmtInsert->execute([
+                $nombreCompleto,
+                $sexo,
+                $telefono
+            ]);
+
+            return (int)$db->lastInsertId();
+        } finally {
+            $db->prepare('SELECT RELEASE_LOCK(?)')->execute([$lockKey]);
+        }
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>Directory: `md` (3 items)</summary>
+
+**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/md`
+
+| Name | Type | Size |
+|------|------|------|
+| `index.php` | File | 70452 bytes |
+| `negocio` | Directory | - |
+| `views` | Directory | - |
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/md/negocio`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>Directory: `negocio` (1 items)</summary>
+
+**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/md/negocio`
+
+| Name | Type | Size |
+|------|------|------|
+| `Ordenes.php` | File | 51183 bytes |
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Ordenes.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+/**
+ * md/negocio/Ordenes.php — Capa de Negocio para Solicitudes Médicas Digitales (Médicos)
+ *
+ * Maneja la emisión de solicitudes digitales, persistencia PDO, Stored Procedures
+ * (laesh_db.CrearOrdenLaboratorio), trazabilidad y auditoría.
+ */
+
+namespace MD\Negocio;
+
+use Common\DB;
+use Common\Logger;
+use PDO;
+use Throwable;
+
+class Ordenes {
+
+    const BUSQ_TEXT_COLS_MD = ['paciente_nombre', 'paciente_telefono', 'diagnostico', 'otros_estudios', 'estudios_json'];
+
+    /**
+     * Emite una solicitud médica digital desde el portal de médicos
+     *
+     * Único punto de creación de órdenes (2026-10-01: se retiró la ruta RC
+     * POST /orden/crear, que no tenía pantalla).
+     *
+     * H3/H4/H6 (auditoría 2026-09-20): todo el flujo corre en UNA transacción. El
+     * UPDATE de folios_control dentro del SP mantiene su row-lock hasta el commit,
+     * así una creación concurrente espera y no hay ventana de carrera del folio; si
+     * algo falla, todo se revierte. La notificación 'nueva_orden' se persiste
+     * (outbox) dentro de la misma transacción y se empuja por WS tras el commit.
+     * Con 20 creaciones concurrentes reales: 0 folios duplicados, pero ~30% chocó
+     * con MariaDB 1020 (conflicto de serialización transitorio) → se reintenta la
+     * transacción completa (ver catch).
+     */
+    public static function crearSolicitudDigital(array $datos, int $userId, int $intento = 1): array {
+        $db = DB::connect();
+        $db->beginTransaction();
+
+        try {
+            // 1. Buscar o crear el paciente en pacientes
+            $pacienteId = \RC\Negocio\Ordenes::buscarOCrearPaciente($datos);
+
+            // 2. El id del médico (medico_id) corresponde a su user_id según el esquema
+            $medicoId = $userId;
+
+            $edad          = intval($datos['edad'] ?? 0);
+            $diagnostico   = trim($datos['diagnostico'] ?? '');
+            $otrosEstudios = trim($datos['otros_estudios'] ?? '');
+            $estudiosArray = $datos['estudios'] ?? [];
+            $estudiosJson  = is_array($estudiosArray) ? json_encode($estudiosArray, JSON_UNESCAPED_UNICODE) : $estudiosArray;
+
+            // Validar edad obligatoria (1-120 años) ANTES de tocar el SP/FK
+            if ($edad <= 0 || $edad > 120) {
+                throw new \InvalidArgumentException("La edad es obligatoria y debe estar entre 1 y 120 años.");
+            }
+            if (is_array($estudiosArray) && !empty($estudiosArray)) {
+                $idsNumericos = array_values(array_filter($estudiosArray, 'is_numeric'));
+                if (!empty($idsNumericos)) {
+                    $placeholders = implode(',', array_fill(0, count($idsNumericos), '?'));
+                    $stmtCheck = $db->prepare("SELECT id FROM cat_estudios WHERE id IN ({$placeholders})");
+                    $stmtCheck->execute($idsNumericos);
+                    $idsExistentes = array_map('intval', $stmtCheck->fetchAll(PDO::FETCH_COLUMN));
+                    $idsFaltantes = array_diff(array_map('intval', $idsNumericos), $idsExistentes);
+                    if (!empty($idsFaltantes)) {
+                        throw new \InvalidArgumentException('Uno o más estudios seleccionados ya no existen en el catálogo (id: ' . implode(', ', $idsFaltantes) . '). Recargue la página e intente de nuevo.');
+                    }
+                }
+            }
+
+            // 3. Ejecutar Stored Procedure CrearOrdenLaboratorio
+            // Auditoría E2E (2026-09-20): sin prefijo 'laesh_db.' en el CALL — con el
+            // nombre calificado, MariaDB resuelve las tablas sin calificar del SP contra
+            // ese esquema y no contra la BD de la conexión (rompía al probar contra una
+            // BD con otro nombre).
+            $stmtProc = $db->prepare("
+                CALL CrearOrdenLaboratorio(
+                    :paciente_id,
+                    :medico_id,
+                    :recepcion_id,
+                    :edad_al_emitir,
+                    :diagnostico,
+                    :otros_estudios,
+                    :estudios_json,
+                    @p_folio
+                )
+            ");
+
+            $stmtProc->execute([
+                'paciente_id'    => $pacienteId,
+                'medico_id'      => $medicoId,
+                'recepcion_id'   => null, // Emitida por médico digitalmente
+                'edad_al_emitir' => $edad,
+                'diagnostico'    => $diagnostico,
+                'otros_estudios' => $otrosEstudios,
+                'estudios_json'  => $estudiosJson
+            ]);
+
+            // Obtener el folio generado por el Stored Procedure
+            $folioRow = $db->query("SELECT @p_folio AS folio")->fetch(PDO::FETCH_ASSOC);
+            $folio = $folioRow['folio'] ?? '1';
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+JsonLogic appears to be a format for representing and sharing business logic using JSON. Specifically, it seems to act as an abstract syntax tree, allowing rules to be defined and stored in a standardized JSON format. `jwadhams/json-logic-php` or `shiny/json-logic-php` are the PHP implementations of this JsonLogic.
+
+
+The PHP implementation likely facilitates evaluating JSON-defined rules against data, enabling dynamic, configurable logic for use cases such as discounts or validation. This portability also implies a consistent rule definition that can be executed on both the frontend and backend. Additionally, there are business rules implemented with transaction flows involving stored procedures, cryptography, file handling, real-time communication, and conditional logic.
+
+
+Analyzing the feasibility of integrating JsonLogic reveals a critical distinction: it's unsuitable for entire business rule sets encompassing I/O and stateful operations. Attempting to force all business logic into JSON would violate fundamental programming principles. However, JsonLogic is viable for a subset of rules involving validation, UI conditions, and configurable parameters. This includes form field validation, eligibility criteria, and dynamic priority assignments that can be administered via a database.
+
+
+Debuggability with JsonLogic is severely hampered by cryptic error messages compared to native PHP. The project's frugal architecture prioritizes minimal dependencies; introducing JSON rule syntax adds cognitive overhead without a rule builder UI. Performance overhead exists because JsonLogic involves parsing and recursive array traversal, potentially introducing latency in high-volume scenarios. Custom operators pose a security risk, as poorly implemented ones might lead to injection or DoS vulnerabilities.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 3.782767794s
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+seria mejora refactorizar el presente codigo para aplicarle "Patrón de Especificación / Clases de Política (Policy / Specification Pattern)" , eso multiplicaria tener mas phps ?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `gestion_web.php`
+**Language:** php
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Considering whether the Policy/Specification Pattern improves the code or adds complexity is crucial; the core of the question revolves around weighing those factors. Applying this pattern could indeed increase the number of PHP files, as each specification/policy would likely reside in a separate class, introducing more individual files. The fundamental question becomes whether the benefits of improved maintainability and testability outweigh the increased file count.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.095907630s
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+que otros framework o librearia de business rules, seria correcta utilizar para block digital ?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `gestion_web.php`
+**Language:** php
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Considering the question, it's essential to identify different PHP business rule engine types. I'll need to explore rule-based systems, decision tables, and potentially even event-driven architectures adaptable to business logic. The focus will be on assessing their suitability for Bloc Digital, considering factors like complexity, maintainability, and integration ease.
+
+I need to analyze open-source options, commercial alternatives, and their respective strengths and weaknesses to provide a comprehensive evaluation. This includes evaluating how these solutions handle complex rule sets and data integration, critical aspects for a digital platform.
+
+
+Analyzing various PHP rule engine types: JSON-based AST, expression languages, Ruler DSL, and object-oriented rule engines will be explored.  Order lifecycle management in a medical lab system likely benefits from a state machine approach, making workflow engines a key consideration.
+Validation engines and authorization rule frameworks will also be evaluated for handling input constraints and domain policies, respectively.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.413385397s
 - **Model:** Gemini 3.7 Flash (Medium)
 </details>
 
