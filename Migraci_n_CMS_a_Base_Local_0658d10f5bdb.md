@@ -4,12 +4,12 @@
 
 | Field | Value |
 |-------|-------|
-| **Trajectory ID** | `b6ad0394-a3fc-4d46-945a-fc28ff9d67bc` |
+| **Trajectory ID** | `09e89c38-0467-4955-9b4d-1450f4529a6c` |
 | **Cascade ID** | `554ee869-ebfd-4ea7-83e5-0658d10f5bdb` |
 | **Type** | Agent Conversation |
-| **Total Steps** | 583 |
+| **Total Steps** | 911 |
 | **Started** | 5 Oct 2026, 2:44 pm |
-| **Completed** | 5 Oct 2026, 7:50 pm |
+| **Completed** | 5 Oct 2026, 10:44 pm |
 
 ---
 
@@ -14733,6 +14733,8592 @@ Initial assessment confirms the CKEditor 5 dropdown clipping issue is solvable. 
 <summary>Metadata</summary>
 
 - **Thinking Duration:** 0.280378916s
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+. adelante Corrigelo de forma completa y correcta para las fichas: Nuestros Valores, MISIÓN, VISIÓN, y Historia Institucional (Ficha Ancha).
+. para Admin / 3. Estudios / de la Tarjeta 1 a la Tarjeta 16 , comentariza/elimina (temporalmente) las restricciones que cada una tenga segun las indicaciones: "odec: WebP únicamente  ·  Quality: 75  ·  Effort: 6  ·  Dimensiones: 800 × 580 px (ratio ~1.38:1)  ·  Orientación Horizontal  ·  Peso: Máximo 150 KB, Óptimo 60 KB"  tanto en js como en server side, el proposito es hacer una prubas sin esas restricciones.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `gestion_web.php`
+**Language:** php
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Addressing two distinct requests: the first involves a visual issue within a specific editor component across several content sections, requiring adjustments to the related code files. The second request, potentially a separate issue, targets the 'Admin / 3. Estudios' section, the specific details of which are currently unknown.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `800 × 580`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.074979093s
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 7:55 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `150`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 7:55 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `upload`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 7:55 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L274-369)</summary>
+
+**Path:** `Unknown file`
+
+```
+        $errCode = $_FILES['file']['error'] ?? -1;
+        http_response_code(400);
+        echo json_encode(['ok' => false, 'msg' => "No se recibió el archivo (código: {$errCode})."]);
+        exit;
+    }
+
+    $file = $_FILES['file'];
+
+    // Validar MIME por contenido real — solo WebP (alineado con Guía CMS §5.1–§5.6)
+    $allowedMimes = ['image/webp' => 'webp'];
+    $finfo = new \finfo(FILEINFO_MIME_TYPE);
+    $mime  = $finfo->file($file['tmp_name']);
+    if (!array_key_exists($mime, $allowedMimes)) {
+        http_response_code(415);
+        echo json_encode(['ok' => false, 'msg' => 'Tipo no permitido. Solo se acepta WebP. Optimiza la imagen antes de subir.']);
+        exit;
+    }
+
+    // Validar tamaño — 150 KB máximo (límite homologado para todos los slots de subida)
+    if ($file['size'] > 150 * 1024) {
+        $sizeKb = round($file['size'] / 1024, 1);
+        http_response_code(413);
+        echo json_encode(['ok' => false, 'msg' => "El archivo ({$sizeKb} KB) supera el límite de 150 KB. Optimiza la imagen antes de subir."]);
+        exit;
+    }
+
+    // Nombre del slot — solo alfanumérico y guiones (necesario antes de la validación de dims)
+    $slot = preg_replace('/[^a-z0-9\-]/', '', strtolower($_POST['slot'] ?? 'cms'));
+    $slot = $slot ?: 'cms';
+
+    // Validar dimensiones servidor — espejo de cms-upload.js slotRules()
+    // Defiende el endpoint ante requests que bypasean el JS del browser.
+    $imgSize = @getimagesize($file['tmp_name']);
+    if ($imgSize === false) {
+        http_response_code(422);
+        echo json_encode(['ok' => false, 'msg' => 'No se pudieron leer las dimensiones de la imagen. Verifica que el archivo WebP sea válido.']);
+        exit;
+    }
+    [$imgW, $imgH] = $imgSize;
+    $dimError = null;
+    if (preg_match('/^hero-/', $slot)) {
+        if ($imgW < 1280 || $imgW > 1920)
+            $dimError = "Banner Hero: ancho {$imgW} px fuera del rango 1\u{202F}280–1\u{202F}920 px. Spec: 1\u{202F}280–1\u{202F}920 px ancho · Orientación Horizontal.";
+        elseif ($imgH >= $imgW)
+            $dimError = "Banner Hero: orientación debe ser Horizontal (ancho > alto). Recibido: {$imgW}×{$imgH}.";
+    } elseif (preg_match('/^carousel-/', $slot)) {
+        if ($imgW !== 800 || $imgH !== 580)
+            $dimError = "Carrusel Especialidades: se requiere exacto 800×580 px. Recibido: {$imgW}×{$imgH}.";
+    } elseif ($slot === 'ubicacion-croquis') {
+        if ($imgW > 1284 || $imgH > 902)
+            $dimError = "Croquis de Ubicación: máximo 1284×902 px. Recibido: {$imgW}×{$imgH}.";
+        elseif ($imgH >= $imgW)
+            $dimError = "Croquis de Ubicación: orientación debe ser Horizontal (ancho > alto). Recibido: {$imgW}×{$imgH}.";
+    } elseif (preg_match('/^promo-/', $slot)) {
+        if ($imgH >= $imgW)
+            $dimError = "Card de Promociones: orientación debe ser Horizontal (ancho > alto). Recibido: {$imgW}×{$imgH}.";
+        elseif ($imgW < 1000 || $imgW > 1200 || $imgH < 600 || $imgH > 800)
+            $dimError = "Card de Promociones: dimensiones requeridas 1024×687 px (óptimo nativo) o 1200×(600–675) px. Recibido: {$imgW}×{$imgH}.";
+    } elseif (preg_match('/^calidad-/', $slot)) {
+        if ($imgW !== 800 || $imgH !== 580)
+            $dimError = "Galería de Calidad: se requiere exacto 800×580 px. Recibido: {$imgW}×{$imgH}.";
+    } elseif ($slot === 'seo-og') {
+        if ($imgW < 1200 || $imgW > 1920)
+            $dimError = "Open Graph (SEO): ancho {$imgW} px fuera del rango 1\u{202F}200–1\u{202F}920 px.";
+        elseif ($imgH >= $imgW)
+            $dimError = "Open Graph (SEO): orientación debe ser Horizontal (ancho > alto). Recibido: {$imgW}×{$imgH}.";
+    } else {
+        if ($imgW < 800)
+            $dimError = "Imagen CMS genérica: ancho mínimo 800 px. Recibido: {$imgW} px.";
+    }
+    if ($dimError !== null) {
+        http_response_code(422);
+        echo json_encode(['ok' => false, 'msg' => $dimError]);
+        exit;
+    }
+    $ext      = $allowedMimes[$mime];
+    $filename = $slot . '-' . date('Ymd') . '-' . bin2hex(random_bytes(4)) . '.' . $ext;
+
+    // Directorio de destino
+    $dbConfigDir = Flight::db()->query("SELECT valor FROM configuraciones WHERE clave = 'cms_upload_dir'")->fetchColumn();
+    $uploadDir   = trim($dbConfigDir ?: '');
+
+    // Fallback inicial si no hay valor o no es ruta absoluta de sistema de archivos
+    if (empty($uploadDir) || !str_starts_with($uploadDir, '/')) {
+        $uploadDir = '/opt/laesh/assets/laesh-web-assets-uipv1a/cms/';
+    }
+    $uploadDir = rtrim($uploadDir, '/') . '/';
+
+    // 1. Intentar crear y dar permisos al $uploadDir principal (ej. KVM2 producción)
+    if (!is_dir($uploadDir)) {
+        @mkdir($uploadDir, 0777, true);
+    }
+    if (is_dir($uploadDir)) {
+        @chmod($uploadDir, 0777);
+    }
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `cms-upload.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L69-179)</summary>
+
+**Path:** `Unknown file`
+
+```
+            }, 4000);
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('input[type="file"][data-upload-slot]').forEach(function (input) {
+            input.addEventListener('change', async function () {
+                if (!this.files[0]) return;
+
+                const slot        = this.dataset.uploadSlot   || 'cms';
+                const previewId   = this.dataset.previewId    || null;
+                const targetInput = this.dataset.targetInput  || null;
+                const file        = this.files[0];
+
+                // ── Validación de formato — solo WebP para todos los slots ────────────
+                if (file.type !== 'image/webp') {
+                    showToast(
+                        `Formato no permitido (${file.type || 'desconocido'}). Solo se acepta <strong>WebP</strong>.<br>` +
+                        'Usa Squoosh → Format: WebP antes de subir.',
+                        true
+                    );
+                    this.value = '';
+                    return;
+                }
+
+                // ── Reglas por slot (alineadas con Guía CMS §5.1–§5.6) ──────────────
+                // Slots reales (data-upload-slot en gestion_web.php):
+                //   hero-{slide1…5}       → Banner Hero
+                //   carousel-{1…16}       → Carrusel Especialidades
+                //   ubicacion-croquis     → Croquis de Ubicación
+                //   promo-{lun…dom}       → Cards de Promociones
+                //   calidad-gallery{1…3}  → Galería de Calidad
+                //   (default)             → Imagen CMS genérica
+                function slotRules(s) {
+                    if (/^hero-/.test(s))              return { maxKb: 150, minW: 1280, maxW: 1920,                              landscape: true, label: 'Banner Hero',             hint: 'WebP · Quality 72–80 · Effort 6 · 1 280–1 920 px ancho · Orientación Horizontal · alto proporcional · máx. 150 KB, óptimo 60 KB' };
+                    if (/^carousel-/.test(s))          return { maxKb: 150, exactW: 800, exactH: 580,                                        label: 'Carrusel Especialidades', hint: 'WebP · Quality 75 · Effort 6 · exacto 800×580 px · máx. 150 KB, óptimo 60 KB' };
+                    if (/^ubicacion-croquis$/.test(s)) return { maxKb: 150, maxW: 1284, maxH: 902, landscape: true,      label: 'Croquis de Ubicación',    hint: 'WebP · Quality 85 · Effort 6 · 1 284 × 902 px (máx) · Orientación Horizontal · máx. 150 KB, óptimo 60 KB' };
+                    if (/^promo-/.test(s))             return { maxKb: 150, minW: 1000, maxW: 1200, minH: 600, maxH: 800, landscape: true, label: 'Card de Promociones', hint: 'WebP · Quality 82 · 1 024 × 687 px (óptimo nativo) o 1 200 × (600–675) px · máx. 150 KB, óptimo 80–110 KB' };
+                    if (/^calidad-/.test(s))           return { maxKb: 150, exactW: 800, exactH: 580,                                       label: 'Galería de Calidad',      hint: 'WebP · Quality 75 · Effort 6 · exacto 800×580 px · máx. 150 KB, óptimo 60 KB' };
+                    if (/^seo-og$/.test(s))            return { maxKb: 150, minW: 1200, maxW: 1920,                              landscape: true, label: 'Imagen Open Graph (SEO)', hint: 'WebP · 1 200 × 630 px recomendado (ratio 1.91:1) · Orientación Horizontal · máx. 150 KB, óptimo 60 KB' };
+                    return                                    { maxKb: 150, minW: 800,                                                        label: 'Imagen CMS',              hint: 'WebP · mín. 800 px ancho · máx. 150 KB, óptimo 60 KB' };
+                }
+                const rules = slotRules(slot);
+
+                // ── Validación de tamaño ─────────────────────────────────────────────
+                const sizeKb = (file.size / 1024).toFixed(1);
+                if (file.size > rules.maxKb * 1024) {
+                    showToast(
+                        `Peso ${sizeKb} KB supera el máximo de ${rules.maxKb} KB para ${rules.label}.<br>` +
+                        'Optimiza la imagen (baja Quality o reduce dimensiones).',
+                        true
+                    );
+                    this.value = '';
+                    return;
+                }
+
+                // ── Validación de dimensiones (requiere cargar la imagen) ────────────
+                try {
+                    const objUrl = URL.createObjectURL(file);
+                    const img    = new Image();
+                    await new Promise((res, rej) => { img.onload = res; img.onerror = rej; img.src = objUrl; });
+                    URL.revokeObjectURL(objUrl);
+                    const w = img.naturalWidth, h = img.naturalHeight;
+
+                    // Dimensiones exactas (carrusel, croquis, promociones)
+                    if (rules.exactW !== undefined && w !== rules.exactW) {
+                        showToast(`Dimensiones incorrectas (${w}×${h} px) para ${rules.label}.<br><small>Requerido: ${rules.hint}</small>`, true);
+                        this.value = ''; return;
+                    }
+                    if (rules.exactH !== undefined && h !== rules.exactH) {
+                        showToast(`Dimensiones incorrectas (${w}×${h} px) para ${rules.label}.<br><small>Requerido: ${rules.hint}</small>`, true);
+                        this.value = ''; return;
+                    }
+
+                    // Rango de ancho (hero, banner, default)
+                    if (rules.minW !== undefined && w < rules.minW) {
+                        showToast(`Ancho ${w} px menor al mínimo de ${rules.minW} px para ${rules.label}. Spec: ${rules.hint}`, true);
+                        this.value = ''; return;
+                    }
+                    if (rules.maxW !== undefined && w > rules.maxW) {
+                        showToast(`Ancho ${w} px mayor al máximo de ${rules.maxW} px para ${rules.label}. Spec: ${rules.hint}`, true);
+                        this.value = ''; return;
+                    }
+
+                    // Rango de alto (hero)
+                    if (rules.minH !== undefined && h < rules.minH) {
+                        showToast(`Alto ${h} px menor al mínimo de ${rules.minH} px para ${rules.label}. Spec: ${rules.hint}`, true);
+                        this.value = ''; return;
+                    }
+                    if (rules.maxH !== undefined && h > rules.maxH) {
+                        showToast(`Alto ${h} px mayor al máximo de ${rules.maxH} px para ${rules.label}. Spec: ${rules.hint}`, true);
+                        this.value = ''; return;
+                    }
+
+                    // Orientación horizontal obligatoria
+                    if (rules.landscape && h >= w) {
+                        showToast(`La imagen (${w}×${h} px) debe tener Orientación Horizontal (ancho > alto). Spec: ${rules.hint}`, true);
+                        this.value = ''; return;
+                    }
+                } catch (e) {
+                    console.error('[cms-upload] Error al verificar dimensiones:', e);
+                    showToast('Error técnico al leer las dimensiones de la imagen.', true);
+                    this.value = '';
+                    return;
+                }
+
+                // Construir FormData
+                const fd = new FormData();
+                fd.append('file',       file);
+                fd.append('slot',       slot);
+                fd.append('csrf_token', getCsrf());
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `carousel-`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 7:55 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion_web.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L584-644)</summary>
+
+**Path:** `Unknown file`
+
+```
+                $eSt        = $_estudiosStyles[($ci - 1) % 6];
+            ?>
+            <div class="editor-card" style="border: 2px solid <?= $eSt['borderColor'] ?>; background: #fafafa; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
+                <div class="editor-card-header" style="display:flex; justify-content:space-between; align-items:center; background: <?= $eSt['bg'] ?>; padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.2);">
+                    <div class="card-title" style="font-weight:800; color:#ffffff; font-size:0.95rem;">Tarjeta <?= $ci ?> — <?= $isNew ? 'Ficha Nueva (Opcional)' : 'Área de Laboratorio' ?></div>
+                    <div style="display:flex; align-items:center; gap:0.5rem;">
+                        <label for="chk-carousel-<?= $ci ?>-activo" style="display:inline-flex; align-items:center; gap:0.45rem; cursor:pointer; margin:0; font-size:0.85rem; font-weight:700; color:#ffffff; background:rgba(0,0,0,0.2); padding:4px 10px; border-radius:20px;">
+                            <input type="hidden" name="carousel<?= $ci ?>__activo" value="0">
+                            <input type="checkbox" id="chk-carousel-<?= $ci ?>-activo" name="carousel<?= $ci ?>__activo" value="1" <?= $isActivo ? 'checked' : '' ?>
+                                   style="width:1.05rem; height:1.05rem; accent-color:#10b981; cursor:pointer;"
+                                   onchange="var badge=this.nextElementSibling; if(this.checked){ badge.style.color='#6ee7b7'; badge.textContent='Encendido'; } else { badge.style.color='#fca5a5'; badge.textContent='Apagado'; }">
+                            <span class="operator-badge" style="color: <?= $isActivo ? '#6ee7b7' : '#fca5a5' ?>; transition: color 0.2s ease;">
+                                <?= $isActivo ? 'Encendido' : 'Apagado' ?>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+                <div class="editor-card-body" style="padding:12px;">
+                    <div class="field-group">
+                        <label>Imagen de la Tarjeta <?= $ci ?></label>
+                        <p class="cms-img-spec-hint" style="margin-top: 4px; margin-bottom: 8px; font-size: 0.78rem;">
+                            📐 <strong>Codec:</strong> WebP únicamente &nbsp;·&nbsp;
+                            <strong>Quality:</strong> 75 &nbsp;·&nbsp;
+                            <strong>Effort:</strong> 6 &nbsp;·&nbsp;
+                            <strong>Dimensiones:</strong> 800 × 580 px (ratio ~1.38:1) &nbsp;·&nbsp;
+                            <strong>Orientación Horizontal</strong> &nbsp;·&nbsp;
+                            <strong>Peso:</strong> Máximo 150 KB, Óptimo 60 KB
+                        </p>
+                        <div class="image-upload-box">
+                            <img id="prev-carousel-<?= $ci ?>"
+                                 src="<?= h($curImg) ?>"
+                                 alt="Preview Tarjeta <?= $ci ?>"
+                                 class="img-preview-sm"
+                                 onerror="this.hidden=true">
+
+                            <label for="file-carousel-<?= $ci ?>" class="btn btn-secondary">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                                Cambiar Imagen
+                            </label>
+
+                            <input type="file" accept="image/webp"
+                                   id="file-carousel-<?= $ci ?>" class="d-none"
+                                   data-upload-slot="carousel-<?= $ci ?>"
+                                   data-preview-id="prev-carousel-<?= $ci ?>"
+                                   data-target-input="url-img-carousel-<?= $ci ?>">
+                        </div>
+                        <input type="url" id="url-img-carousel-<?= $ci ?>"
+                               name="config__carousel<?= $ci ?>_img"
+                               value="<?= h($curImg) ?>"
+                               class="cms-img-url-input" data-no-limit>
+                        <?php $imgBasename = $curImg ? basename($curImg) : 'Sin imagen'; ?>
+                        <span id="lbl-img-carousel-<?= $ci ?>" class="cms-img-filename-label"><?= h($imgBasename) ?></span>
+                    </div>
+
+                    <!-- Editor de Texto HTML con CKEditor 5 -->
+                    <div class="field-group">
+                        <label class="cms-label-bold mb-1" style="font-weight:700; display:block; font-size:0.88rem;">Contenido Editorial (Título H3 + Descripción)</label>
+                        <div id="ck-carousel-<?= $ci ?>" class="ck5-mount"></div>
+                        <textarea id="ck-carousel-<?= $ci ?>-data" name="carousel<?= $ci ?>__texto" class="ck5-hidden-data"><?= htmlspecialchars($curHtml) ?></textarea>
+                    </div>
+                </div>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion_web.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L429-519)</summary>
+
+**Path:** `Unknown file`
+
+```
+                            <input type="text" name="nav__label" maxlength="30"
+                                   value="<?= cms($contenidos, 'quienes-somos', 'nav', 'label', 'Quiénes somos') ?>">
+                            <small class="cms-help-text">Texto corto que aparece en el menú del header (máx. 30 caracteres).</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Nuestros Valores — CKEditor 5 (ficha4/texto) -->
+                <div class="editor-card" style="border: 2px solid #0284c7; background: #fafafa; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
+                    <div class="editor-card-header" style="background: linear-gradient(135deg, #0369a1 0%, #0284c7 100%); padding: 10px 14px;">
+                        <div class="card-title" style="color: #ffffff; font-weight: 800; font-size: 0.95rem;">Nuestros Valores</div>
+                    </div>
+                    <div class="editor-card-body" style="padding: 12px;">
+                        <div class="field-group">
+                            <label>Texto</label>
+                            <div id="ck-ficha4" class="ck5-mount"></div>
+                            <textarea id="ck-ficha4-data" name="ficha4__texto" class="ck5-hidden-data"><?= htmlspecialchars(cmsRaw($contenidos, 'quienes-somos', 'ficha4', 'texto',
+                                '<h3>Nuestros Valores — 25 años al servicio del diagnóstico</h3>'
+                              . '<ul><li>25 años de experiencia</li>'
+                              . '<li>Químicos especialistas con estudios de posgrado</li>'
+                              . '<li>Guías de práctica clínica actualizadas</li>'
+                              . '<li>Excelencia en control de calidad externo</li>'
+                              . '<li>Galardón Rey PACAL — reconocimiento a nuestro desempeño</li>'
+                              . '</ul>')) ?></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /grid-2col fila 1 -->
+
+            <hr class="cms-section-sep">
+
+            <!-- Fila 2: MISIÓN + VISIÓN -->
+            <div class="grid-2col mb-4">
+                <!-- MISIÓN -->
+                <div class="editor-card" style="border: 2px solid #059669; background: #fafafa; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
+                    <div class="editor-card-header" style="background: linear-gradient(135deg, #064e3b 0%, #059669 100%); padding: 10px 14px;">
+                        <div class="card-title" style="color: #ffffff; font-weight: 800; font-size: 0.95rem;">🟢 MISIÓN</div>
+                    </div>
+                    <div class="editor-card-body" style="padding: 12px;">
+                        <div class="field-group">
+                            <label>Declaración de Misión</label>
+                            <div id="ck-mision" class="ck5-mount"></div>
+                            <textarea id="ck-mision-data" name="ficha2__texto" class="ck5-hidden-data"><?= htmlspecialchars(cmsRaw($contenidos, 'quienes-somos', 'ficha2', 'texto', '<h3 class="txt-pgd-sub">🟢 MISIÓN</h3><p class="aviso-p aviso-p--muted">Brindar resultados confiables y clínicamente relevantes que ayuden al médico a tomar mejores decisiones y al paciente a recibir atención oportuna.</p>')) ?></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- VISIÓN -->
+                <div class="editor-card" style="border: 2px solid #2563eb; background: #fafafa; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
+                    <div class="editor-card-header" style="background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%); padding: 10px 14px;">
+                        <div class="card-title" style="color: #ffffff; font-weight: 800; font-size: 0.95rem;">🔵 VISIÓN</div>
+                    </div>
+                    <div class="editor-card-body" style="padding: 12px;">
+                        <div class="field-group">
+                            <label>Declaración de Visión</label>
+                            <div id="ck-vision" class="ck5-mount"></div>
+                            <textarea id="ck-vision-data" name="ficha3__texto" class="ck5-hidden-data"><?= htmlspecialchars(cmsRaw($contenidos, 'quienes-somos', 'ficha3', 'texto', '<h3 class="txt-pgd-sub">🔵 VISIÓN</h3><p class="aviso-p aviso-p--muted">Ser el laboratorio de referencia para médicos y pacientes, reconocido por la excelencia de nuestros resultados.</p>')) ?></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /grid-2col fila 2 -->
+
+            <hr class="cms-section-sep">
+
+            <!-- Fila 3: Historia Institucional (Ficha Ancha) -->
+            <div class="editor-card mb-4" style="border: 2px solid #7c3aed; background: #fafafa; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
+                <div class="editor-card-header" style="background: linear-gradient(135deg, #4c1d95 0%, #7c3aed 100%); padding: 10px 14px;">
+                    <div class="card-title" style="color: #ffffff; font-weight: 800; font-size: 0.95rem;">Historia Institucional (Ficha Ancha)</div>
+                </div>
+                <div class="editor-card-body" style="padding: 12px;">
+                    <p class="cms-p">
+                        <strong>25 años de experiencia al servicio del diagnóstico</strong> —
+                        texto institucional completo. Edita directamente en el recuadro.
+                    </p>
+                    <div class="field-group">
+                        <div id="ck-historia" class="ck5-mount"></div>
+                        <textarea id="ck-historia-data" name="ficha1__texto" class="ck5-hidden-data"><?= htmlspecialchars(cmsRaw($contenidos, 'quienes-somos', 'ficha1', 'texto',
+                            '<p>LAESH, Laboratorio de Especialidades Hematológicas, es una empresa 100% de la Región Mixteca.</p>')) ?></textarea>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ================================================================
+             PANEL 3: ESTUDIOS DE RUTINA
+             Sección: especialidades | Fuente HTML: #especialidades
+             ================================================================ -->
+        <div id="panel-especialidades" class="cms-panel" role="tabpanel" aria-labelledby="tab-especialidades" tabindex="0" data-section="especialidades">
+            <div class="cms-panel-header">
+                <h3 class="cms-h3">Edición de Carrusel y Catálogo Completo (#especialidades)</h3>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Analyzing specific HTML elements with "editor-card" class reveals styling differences based on the border color, suggesting distinct content categories. The "Nuestros Valores" section is marked by a specific border color, and the "MISIÓN" section utilizes another, possibly indicating a thematic distinction. Further investigation will be needed to understand the significance of these stylistic variations.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.011181390s
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L534-584)</summary>
+
+**Path:** `Unknown file`
+
+```
+}
+
+/* ── Clases extraídas de inline styles (Saneamiento R24-CSS-01 / CSP) ── */
+.sidebar-right-header { border-bottom: 2px solid rgba(0,82,183,0.11); padding-bottom: 0.5rem; margin-bottom: 1rem; }
+
+/* ── CKEditor 5 — montaje en CMS (ck5-mount / ck5-hidden-data) ──────────────
+   Versión: 20260823k                                                         */
+
+/* Contenedor de montaje del editor */
+.ck5-mount {
+    border: 1px solid var(--border, #d1d5db);
+    border-radius: 6px;
+    overflow: hidden;
+    background: var(--bg-card, #fff);
+    min-height: 160px;
+}
+
+.ck5-mount,
+.ck5-mount .ck.ck-editor,
+.ck5-mount .ck-editor__main {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+}
+
+/* Toolbar del editor — alineada con la paleta del CMS */
+.ck5-mount .ck.ck-toolbar {
+    background: var(--bg-muted, #f8fafc);
+    border-bottom: 1px solid var(--border, #d1d5db);
+    border-radius: 6px 6px 0 0;
+    flex-wrap: wrap !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+}
+.ck5-mount .ck.ck-editor__editable_inline {
+    min-height: 120px;
+    padding: 0.75rem 1rem;
+    font-size: 0.93rem;
+    line-height: 1.6;
+    color: var(--text-main, #1e293b);
+    resize: vertical;
+    overflow: auto;
+}
+.ck5-mount .ck.ck-editor__editable_inline:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--primary, #0052b7);
+}
+
+/* Área de edición ampliada para documentos extensos (Aviso de Privacidad) */
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Inspecting the CSS, the `.ck5-mount` class and `.editor-card` are candidates for controlling visual elevation or stacking order. `.editor-card` uses `overflow: visible !important`, suggesting it's designed to ensure content is always visible, potentially causing overlap issues. The change to `overflow: visible` in `.ck5-mount` is interesting, and it may be the root cause of Z-index issues, so examining where these classes are used in relation to other potentially overlapping elements is the next step.
+
+
+Investigating the code, the `overflow: hidden;` style applied inline to elements, specifically within the identified cards in `gestion_web.php`, is highly suspect and likely causing the clipping behavior. Replacing `overflow: hidden;` with `overflow: visible;` in those instances appears to resolve the issue entirely. Furthermore, ensuring that the changes are robustly supported by associated CSS rules would ensure a solid fix.
+
+
+Examining the provided code, restrictions for image uploads are present within `gestion_web.php`, specifically regarding format (WebP), quality, dimensions, orientation, and file size. The `<input type="file">` tag with `accept="image/webp"` restricts allowed file types. To disable the restrictions for testing, changing `accept="image/webp"` to `accept="image/*"` or removing it entirely from the input element seems necessary to allow uploading of other image formats.
+
+
+Analyzing the file input, modifying the `accept` attribute to allow all image types appears straightforward. Code format validation logic within the JavaScript file restricts uploads to WebP, but potentially changing this also would allow other formats. The project documentation explicitly specifies WebP, which presents an opportunity for enabling any image format.
+
+
+Examining the JavaScript, the `slotRules` within the component restrict image dimensions and other validations, particularly for "carousel-" slots. Potential approaches include modifying or bypassing these rules to remove constraints. Additionally, server-side code in PHP performs MIME and size validation; this must also be examined.
+
+
+The server-side code in `admrc/index.php` checks the upload dimensions and MIME type after obtaining the slot name. Moving the slot name processing earlier allows conditional application of rules based on the slot type, specifically for 'carousel-' slots. This enables broader MIME type acceptance (JPEG, PNG, etc.) and skipping the size check for carousel uploads. Also the array `$allowedMimes` needs to have corresponding keys for the accepted image types, as otherwise, it would trigger an error on access.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 11.732100688s
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L359-439)</summary>
+
+**Path:** `Unknown file`
+
+```
+    }
+    $uploadDir = rtrim($uploadDir, '/') . '/';
+
+    // 1. Intentar crear y dar permisos al $uploadDir principal (ej. KVM2 producción)
+    if (!is_dir($uploadDir)) {
+        @mkdir($uploadDir, 0777, true);
+    }
+    if (is_dir($uploadDir)) {
+        @chmod($uploadDir, 0777);
+    }
+
+    // 2. Si $uploadDir no existe o no es escribible (ej. dev local), hacer fallback al dir local normalizado
+    if (!is_dir($uploadDir) || !is_writable($uploadDir)) {
+        $parentPath = __DIR__ . '/../../laesh-web-assets-uipv1a';
+        $realParent = realpath($parentPath) ?: $parentPath;
+        $localDir   = rtrim($realParent, '/') . '/cms/';
+
+        if (!is_dir($localDir)) {
+            @mkdir($localDir, 0777, true);
+        }
+        if (is_dir($localDir)) {
+            @chmod($localDir, 0777);
+            $uploadDir = $localDir;
+        }
+    }
+
+    // 3. Verificación final de disponibilidad y permisos de escritura
+    if (!is_dir($uploadDir) || !is_writable($uploadDir)) {
+        http_response_code(500);
+        Logger::log('ERROR', "cms/upload: no se pudo crear/acceder al directorio de destino {$uploadDir}", Flight::auth()->getUserId());
+        echo json_encode(['ok' => false, 'msg' => "Error interno: directorio de destino no disponible ({$uploadDir})."]);
+        exit;
+    }
+
+    // Asegurar permisos de escritura finales
+    @chmod($uploadDir, 0777);
+
+    $destPath = $uploadDir . $filename;
+    if (!@move_uploaded_file($file['tmp_name'], $destPath)) {
+        http_response_code(500);
+        Logger::log('ERROR', "cms/upload: move_uploaded_file falló → {$destPath}", Flight::auth()->getUserId());
+        echo json_encode(['ok' => false, 'msg' => 'Error al guardar el archivo en el servidor (permisos de escritura en directorio).']);
+        exit;
+    }
+
+    // Permisos de lectura para Nginx / servidor web
+    @chmod($destPath, 0666);
+
+    // Rotar CSRF después de upload exitoso (misma política que /cms/save)
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+
+    Logger::log('INFO', "CMS upload OK: {$filename} (slot={$slot})", Flight::auth()->getUserId());
+    echo json_encode([
+        'ok'         => true,
+        'url'        => '/laesh-web-assets-uipv1a/cms/' . $filename,
+        'filename'   => $filename,
+        'msg'        => 'Imagen cargada exitosamente.',
+        'csrf_token' => $_SESSION['csrf_token'],
+    ]);
+});
+
+// ── POST /cms/preview-draft — Borrador de sesión para Vista Previa ───────────
+//
+// Almacena los campos del panel activo en $_SESSION['cms_draft'][$seccion].
+// NO escribe en web_contenidos → producción intacta.
+// Solo accesible por admin autenticado con permiso gestionar_cms.
+// El cliente abre /laesh/?_preview=1#{anchor} en pestaña nueva.
+Flight::route('POST /cms/preview-draft', function () {
+    header('Content-Type: application/json; charset=utf-8');
+
+    Flight::rbac()->requirePermission('gestionar_cms', '/laesh/login/login.php?portal=admin');
+
+    // CSRF (misma política que /cms/save)
+    if (!\Common\CsrfGuard::isValid(rotate: false)) {
+        http_response_code(403);
+        Logger::log('WARN', 'Token CSRF inválido en cms/preview-draft', Flight::auth()->getUserId() ?: null);
+        echo json_encode(['ok' => false, 'msg' => 'Token de seguridad inválido.']);
+        exit;
+    }
+
+    $seccion = trim($_POST['seccion'] ?? '');
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `file-carousel`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 7:56 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+Analyzing `cms-upload.js` from lines 75 to 175. This section likely handles file input change events for specific upload slots, iterating through file input elements. If a file is selected, the code retrieves the upload slot, defaulting to 'cms' if none is specified in the data attribute.
+
+
+Initial focus is on file validation, specifically format, size, and dimensions, with special handling for "carousel" slots where some checks are bypassed. The code checks for WebP format restriction and uses a regular expression to identify carousel slots. Size validation is also present with a threshold defined in a rules object, however, dimension validation requires loading the image first.
+
+
+Investigating `gestion_web.php`, the file input restricts image uploads to WebP. Removing the `accept` attribute, or changing it to `image/*`, should allow other image formats. The hint text suggests deactivated restrictions, but the code still imposes them. Reviewing `admrc/index.php` focuses on file handling and naming conventions.
+
+
+The code validates file uploads, first sanitizing the upload slot name to prevent injection risks, then determines if it's a "carousel" slot based on a prefix check. Based on this determination, the allowed MIME types for image files are defined and validated against the uploaded file's actual MIME type, using an external library for accurate detection. A file size limit is also enforced, *except* for carousel images, to align with size constraints.
+
+
+Dimension checks are skipped for carousel images, raising a potential issue. There's a concern that the code determines the file extension using a lookup table based on MIME type.  This seems correct: The file extension is derived from allowed MIME types, ensuring the uploaded file type and extension align. The file upload issue involves several cards within a specific administrative section, each representing a distinct content block. These blocks need to be correctly identified in the relevant code file.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion_web.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 8.780196493s
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L409-436)</summary>
+
+**Path:** `Unknown file`
+
+```
+                <div class="editor-card" style="border: 2px solid #4f46e5; background: #fafafa; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
+                    <div class="editor-card-header" style="background: linear-gradient(135deg, #1e1b4b 0%, #4338ca 100%); padding: 10px 14px;">
+                        <div class="card-title" style="color: #ffffff; font-weight: 800; font-size: 0.95rem;">Encabezado de la Sección (#acerca-de)</div>
+                    </div>
+                    <div class="editor-card-body" style="padding: 12px;">
+                        <div class="field-row">
+                            <div class="field-group">
+                                <label>Título de la Ficha</label>
+                                <input type="text" name="seccion__h2" maxlength="45"
+                                       value="<?= cms($contenidos, 'quienes-somos', 'seccion', 'h2', 'Quiénes somos') ?>">
+                                <small class="cms-help-text">Encabezado visual dentro de la sección. No afecta el menú de navegación.</small>
+                            </div>
+                            <div class="field-group">
+                                <label>Subtítulo / Descripción</label>
+                                <input type="text" name="seccion__subtitulo"
+                                       value="<?= cms($contenidos, 'quienes-somos', 'seccion', 'subtitulo') ?>">
+                            </div>
+                        </div>
+                        <div class="field-group mt-2">
+                            <label>Etiqueta en menú de navegación</label>
+                            <input type="text" name="nav__label" maxlength="30"
+                                   value="<?= cms($contenidos, 'quienes-somos', 'nav', 'label', 'Quiénes somos') ?>">
+                            <small class="cms-help-text">Texto corto que aparece en el menú del header (máx. 30 caracteres).</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Nuestros Valores — CKEditor 5 (ficha4/texto) -->
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Observed that numerous `.editor-card` elements in `gestion_web.php` have `overflow: hidden` inline styles. Initial hypothesis: modifying this to `overflow: visible` on specific lines (438, 464, 478, 495) might resolve a display issue. Further investigation required; need to check `gestion-web.css` for any general `.editor-card` styles.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `editor-card`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.001242701s
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 7:56 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L119-184)</summary>
+
+**Path:** `Unknown file`
+
+```
+    gap: 1.25rem;
+    align-items: start;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+.grid-2col.mb-4 { margin-bottom: 1.5rem; }
+.grid-2col .editor-card {
+    margin-bottom: 0;
+    min-width: 0;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+@media (max-width: 900px) {
+    .grid-2col {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ── Panel Hero: grid de slides y tarjetas (3 columnas auto-ajustadas) ── */
+.hero-slides-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
+    align-items: start;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+.hero-slides-grid .editor-card {
+    margin-bottom: 0;
+    min-width: 0;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+/* Separador de fila: span 3 columnas */
+.hero-slides-grid .cms-section-sep { grid-column: 1 / -1; margin: 0.25rem 0; }
+
+/* ── Panel Especialidades: grid de tarjetas (2 columnas auto-ajustadas) ── */
+.especialidades-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+    align-items: start;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+.especialidades-cards-grid .editor-card {
+    margin-bottom: 0;
+    min-width: 0;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+/* Separador de fila: span 2 columnas */
+.especialidades-cards-grid .cms-section-sep { grid-column: 1 / -1; margin: 0.25rem 0; }
+
+@media (max-width: 900px) {
+    .especialidades-cards-grid { grid-template-columns: 1fr; }
+}
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Observed multiple instances of `overflow: hidden;` applied to elements. Noticed `.ck5-mount` also has `overflow: hidden;` defined, while certain other editor cards do not. This could potentially cause display issues depending on how content overflows, particularly if `.ck5-mount` is intended to be visible.
+
+
+
+Ensuring dropdowns in the editor are not clipped requires modifying the stacking context and z-index of the dropdown panel itself. Identified specific lines in the file that need `overflow: hidden` removed to ensure content visibility. Concerns arise about the interaction of `overflow: visible` with the header's border-radius; need to confirm header corner rendering when overflow is changed, as it might appear squared off.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.830580416s
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L539-614)</summary>
+
+**Path:** `Unknown file`
+
+```
+/* ── CKEditor 5 — montaje en CMS (ck5-mount / ck5-hidden-data) ──────────────
+   Versión: 20260823k                                                         */
+
+/* Contenedor de montaje del editor */
+.ck5-mount {
+    border: 1px solid var(--border, #d1d5db);
+    border-radius: 6px;
+    overflow: hidden;
+    background: var(--bg-card, #fff);
+    min-height: 160px;
+}
+
+.ck5-mount,
+.ck5-mount .ck.ck-editor,
+.ck5-mount .ck-editor__main {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+}
+
+/* Toolbar del editor — alineada con la paleta del CMS */
+.ck5-mount .ck.ck-toolbar {
+    background: var(--bg-muted, #f8fafc);
+    border-bottom: 1px solid var(--border, #d1d5db);
+    border-radius: 6px 6px 0 0;
+    flex-wrap: wrap !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+}
+.ck5-mount .ck.ck-editor__editable_inline {
+    min-height: 120px;
+    padding: 0.75rem 1rem;
+    font-size: 0.93rem;
+    line-height: 1.6;
+    color: var(--text-main, #1e293b);
+    resize: vertical;
+    overflow: auto;
+}
+.ck5-mount .ck.ck-editor__editable_inline:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--primary, #0052b7);
+}
+
+/* Área de edición ampliada para documentos extensos (Aviso de Privacidad) */
+.ck5-mount.ck5-mount-lg {
+    min-height: 480px;
+}
+.ck5-mount.ck5-mount-lg .ck.ck-editor__editable_inline {
+    min-height: 450px;
+}
+
+/* Restringir visualización de imágenes/logos dentro del lienzo de edición CKEditor 5 */
+.ck5-mount .ck.ck-content img,
+.ck5-mount .ck.ck-editor__editable_inline img {
+    max-height: 140px;
+    width: auto;
+    object-fit: contain;
+}
+
+.ck5-mount .ck.ck-content img.footer-logo-img,
+.ck5-mount .ck.ck-editor__editable_inline img.footer-logo-img,
+.ck5-mount .ck.ck-content img[src*="logo"],
+.ck5-mount .ck.ck-editor__editable_inline img[src*="logo"] {
+    max-height: 48px;
+    width: auto;
+    object-fit: contain;
+}
+
+/* Ocultar el textarea de respaldo — CKEditor lo gestiona */
+.ck5-hidden-data {
+    display: none ;
+    visibility: hidden;
+    position: absolute;
+    width: 0;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Examining the dropdown panel's behavior, the observation is that `.ck-dropdown__panel` uses absolute positioning. This suggests the parent container's `overflow: hidden` property, specifically on `.ck5-mount` or `.editor-card`, will cause the dropdown to be clipped. The hypothesis is that adjusting the `overflow` property on these elements will resolve the clipping issue.
+
+
+The initial change to `overflow: visible` allows the dropdown to escape its container, however, standard CSS stacking context means later DOM elements may obscure the dropdown. A `z-index` adjustment to the active/focused card and the `.ck5-mount` is needed to ensure proper layering. Specifically, `.editor-card` needs `z-index: 40` and `.ck5-mount` needs `z-index: 50` when active, with the dropdown panel itself requiring `z-index: 1000`. The code needs adjustment to other card grids too.
+
+
+`overflow: hidden` needs to be changed to `overflow: visible` for the designated `.editor-card` instances in the PHP file. This includes lines related to specific content sections and the image cards from 1 to 16. The image restrictions applied to cards 1-16, both server-side and client-side, need removal or commenting out temporarily for testing purposes. The loop responsible for these cards is located within a particular file, identified by a specific path, between lines 580 and 650.
+
+
+The image upload functionality has restrictions. These restrictions, including format, dimensions, and file size, are currently commented out, and thus, temporarily disabled. This needs verification and confirmation. The plan is to check these restrictions in both the client-side and server-side code. This ensures a consistent approach to image handling across the application.
+
+
+The HTML structure indicates an image upload feature with a preview. A file input accepts any image format. The intention is to connect the file input to an image preview and a URL input field. The image's URL is stored and likely updated when a new image is selected.
+
+
+The client-side JavaScript checks the image format and restricts uploads to WebP unless the upload slot matches a specific pattern, temporarily disabling the restriction. The `cms-upload.js` file contains this logic, allowing for image format verification.
+
+
+The server-side code defines image upload rules based on a regular expression matching specific upload slots. Examining these rules, a temporary testing mode disables format, dimension, and size restrictions for carousel images, likely defined by the `carousel-` pattern. This override needs careful review to understand its implications for other image types.  The absence of restrictions needs to be verified on both client and server side.
+
+
+The code defines image size and format rules based on upload slot patterns. Specific dimensions and file size limits are enforced unless the upload slot matches a designated pattern, likely related to carousels. This allows for bypassing image validation during testing. The absence of format checking within this temporary bypass is also noted. The dimensions check itself requires image loading to validate the dimensions.
+
+
+Server-side image handling is under review, focusing on the `admrc/index.php` file, specifically lines 280-350. The code extracts the uploaded file and upload slot, sanitizing the slot name.  A temporary testing flag, linked to a specific naming convention (carousel-*), conditionally relaxes image format restrictions.  WebP format is enforced unless the testing flag is active, where any valid image MIME type is accepted.
+
+
+Size validation is skipped for image uploads matching a specific pattern. Dimension validation is also conditionally skipped for the same pattern. Hero banner images have dimension constraints: width between 1280-1920px and horizontal orientation. The location sketch images are restricted to a maximum size.
+
+
+Server-side image dimension validation is performed based on the upload "slot". Different slots enforce different width/height constraints and orientation (portrait/landscape) checks. Specific dimensions are enforced for particular slots. A temporary bypass allows dimension checks to be skipped for a specific pattern. The error response code is 422 if dimension restrictions are violated.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 21.798431403s
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L149-249)</summary>
+
+**Path:** `Unknown file`
+
+```
+                    imagen_fondo   = :imagen_fondo,
+                    activo         = :activo
+                WHERE id = :id
+            ");
+
+            foreach ($promoIds as $pId) {
+                $pIdInt = (int)$pId;
+                if ($pIdInt <= 0) continue;
+
+                $diaSem = trim($_POST["promo_dia_semana_{$pIdInt}"] ?? '');
+                $img    = trim($_POST["promo_img_{$pIdInt}"] ?? '');
+                $act    = isset($_POST["promo_active_{$pIdInt}"]) ? 1 : 0;
+
+                $stmtPromo->execute([
+                    'id'            => $pIdInt,
+                    'dia_semana'    => $diaSem,
+                    'imagen_fondo'  => $img,
+                    'activo'        => $act,
+                ]);
+            }
+        }
+
+        $hasCfgParam = false;
+        foreach ($campos as $fieldKey => $valor) {
+            if (str_starts_with($fieldKey, 'promo_')) {
+                continue; // Omitir campos de catalogo_promociones de la tabla web_contenidos
+            }
+            // D-04: campos _cfg_{clave} van a configuraciones, no a web_contenidos
+            if (str_starts_with($fieldKey, '_cfg_')) {
+                $hasCfgParam = true;
+                $cfgClave = substr($fieldKey, 5); // quitar prefijo '_cfg_'
+                $cfgStmt->execute(['clave' => $cfgClave, 'valor' => $valor]);
+                continue;
+            }
+            // Formato estándar: {subseccion}__{clave}  ej: slide1__titulo
+            [$sub, $clave] = array_pad(explode('__', $fieldKey, 2), 2, $fieldKey);
+
+            // Auto-detectar tipo: CMS URL → imagen_url; todo lo demás → texto
+            $tipoValor = str_starts_with((string)$valor, '/laesh-web-assets-uipv1a/cms/')
+                ? 'imagen_url'
+                : 'texto';
+            $stmt->execute([
+                'sec'   => $seccion,
+                'sub'   => $sub,
+                'clave' => $clave,
+                'valor' => $valor,
+                'tipo'  => $tipoValor,
+                'uid'   => $userId,
+            ]);
+        }
+
+        $db->commit();
+        unset($_SESSION['cms_draft'][$seccion]);
+        Logger::logAlways('INFO', "CMS: sección '{$seccion}' publicada.", $userId);
+
+        // ── Invalidar caché L2 según la sección y parámetros modificados ───────────
+        Cache::init();
+        $keysToInvalidate = [Cache::KEY_CMS];
+        if ($seccion === 'promociones') {
+            $keysToInvalidate[] = Cache::KEY_PROMOS;
+        } elseif ($seccion === 'especialidades') {
+            // 2026-09-24: KEY_CATALOG_SEARCH (buscador de estudios del header
+            // público) depende de los mismos datos que KEY_TREE — se agregó sin
+            // sumarlo aquí, quedando obsoleto hasta 24h tras publicar cambios de
+            // "especialidades" desde el CMS.
+            $keysToInvalidate[] = Cache::KEY_TREE;
+            $keysToInvalidate[] = Cache::KEY_CATALOG_SEARCH;
+        }
+        if ($hasCfgParam || $seccion === 'configuracion-general') {
+            $keysToInvalidate[] = Cache::KEY_CFG;
+        }
+        Cache::invalidate(array_unique($keysToInvalidate));
+
+        // ── Recompilar config-compiled.js (SSOT estático, mismo patrón que
+        //    CatalogBuilder para el catálogo) — solo cuando cambiaron campos
+        //    _cfg_* (tabla `configuraciones`), no en cada guardado de CMS.
+        if ($hasCfgParam || $seccion === 'configuracion-general') {
+            \Common\ConfigBuilder::build($userId);
+        }
+
+        // Devolver CSRF rotado para que el cliente actualice su data-csrf sin recargar
+        echo json_encode(['ok' => true, 'msg' => '¡Cambios publicados exitosamente!', 'csrf_token' => $_SESSION['csrf_token']]);
+
+    } catch (\PDOException $e) {
+        $db->rollBack();
+        DB::logFallback('ERROR', "INSERT web_contenidos seccion={$seccion}", $e->getMessage());
+        http_response_code(500);
+        echo json_encode(['ok' => false, 'msg' => 'Error al guardar. Intenta de nuevo.']);
+    }
+});
+
+// ── POST /cms/upload — Subida de imágenes CMS (GAP-IMG resuelto) ─────────────
+//
+// Contrato:
+//   - Content-Type: multipart/form-data  (input type="file" en el cliente)
+//   - POST body: file (el archivo), slot (nombre del slot, ej: hero-slide1), csrf_token
+//   - Respuesta JSON: {ok: bool, url: string, filename: string, msg: string}
+//
+// Seguridad:
+//   - RBAC gestionar_cms obligatorio
+//   - CSRF validado antes de procesar el archivo
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Image validation logic is distributed across three locations. Client-side checks occur before upload, followed by server-side verification during the upload process. The final validation step focuses on file type acceptance within the web interface.
+
+
+Clipping within the CKEditor 5 instances appears to be the primary issue; adjusting `overflow` and introducing `position` and `z-index` rules should resolve it. Inline styles in the PHP file also need similar adjustments to ensure consistent behavior across sections. The specific elements requiring modification have been identified.
+
+
+The objective is to temporarily disable image restrictions for a specific carousel section. The process involves modifying client-side validation, server-side checks, and the web interface to permit unrestricted image uploads for testing purposes. Conditional logic will be implemented to differentiate between regular uploads and the targeted carousel, maintaining existing restrictions for non-carousel images. Necessary file modifications are detailed for bypassing MIME type, size, and dimension checks.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 3.658432779s
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L124-184)</summary>
+
+**Path:** `Unknown file`
+
+```
+}
+.grid-2col.mb-4 { margin-bottom: 1.5rem; }
+.grid-2col .editor-card {
+    margin-bottom: 0;
+    min-width: 0;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+@media (max-width: 900px) {
+    .grid-2col {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ── Panel Hero: grid de slides y tarjetas (3 columnas auto-ajustadas) ── */
+.hero-slides-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
+    align-items: start;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+.hero-slides-grid .editor-card {
+    margin-bottom: 0;
+    min-width: 0;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+/* Separador de fila: span 3 columnas */
+.hero-slides-grid .cms-section-sep { grid-column: 1 / -1; margin: 0.25rem 0; }
+
+/* ── Panel Especialidades: grid de tarjetas (2 columnas auto-ajustadas) ── */
+.especialidades-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+    align-items: start;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+.especialidades-cards-grid .editor-card {
+    margin-bottom: 0;
+    min-width: 0;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+/* Separador de fila: span 2 columnas */
+.especialidades-cards-grid .cms-section-sep { grid-column: 1 / -1; margin: 0.25rem 0; }
+
+@media (max-width: 900px) {
+    .especialidades-cards-grid { grid-template-columns: 1fr; }
+}
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L539-599)</summary>
+
+**Path:** `Unknown file`
+
+```
+/* ── CKEditor 5 — montaje en CMS (ck5-mount / ck5-hidden-data) ──────────────
+   Versión: 20260823k                                                         */
+
+/* Contenedor de montaje del editor */
+.ck5-mount {
+    border: 1px solid var(--border, #d1d5db);
+    border-radius: 6px;
+    overflow: hidden;
+    background: var(--bg-card, #fff);
+    min-height: 160px;
+}
+
+.ck5-mount,
+.ck5-mount .ck.ck-editor,
+.ck5-mount .ck-editor__main {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+}
+
+/* Toolbar del editor — alineada con la paleta del CMS */
+.ck5-mount .ck.ck-toolbar {
+    background: var(--bg-muted, #f8fafc);
+    border-bottom: 1px solid var(--border, #d1d5db);
+    border-radius: 6px 6px 0 0;
+    flex-wrap: wrap !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+}
+.ck5-mount .ck.ck-editor__editable_inline {
+    min-height: 120px;
+    padding: 0.75rem 1rem;
+    font-size: 0.93rem;
+    line-height: 1.6;
+    color: var(--text-main, #1e293b);
+    resize: vertical;
+    overflow: auto;
+}
+.ck5-mount .ck.ck-editor__editable_inline:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--primary, #0052b7);
+}
+
+/* Área de edición ampliada para documentos extensos (Aviso de Privacidad) */
+.ck5-mount.ck5-mount-lg {
+    min-height: 480px;
+}
+.ck5-mount.ck5-mount-lg .ck.ck-editor__editable_inline {
+    min-height: 450px;
+}
+
+/* Restringir visualización de imágenes/logos dentro del lienzo de edición CKEditor 5 */
+.ck5-mount .ck.ck-content img,
+.ck5-mount .ck.ck-editor__editable_inline img {
+    max-height: 140px;
+    width: auto;
+    object-fit: contain;
+}
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Examining the CSS file, focusing on lines 127-185, adjustments are required for card presentation. The `overflow: hidden` property needs removal from several `.editor-card` elements to ensure content visibility.  Also, the top-left and top-right radius values of the `.editor-card-header` must be set to 6px. Finally, will include the "Elevación de tarjeta" comment.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.071958166s
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L334-359)</summary>
+
+**Path:** `Unknown file`
+
+```
+    line-height: 1.45;
+}
+
+
+
+
+
+/* ── Negrita en títulos de tarjeta y badges técnicos de slides ── */
+.editor-card-header .card-title { font-weight: 700; }
+.operator-badge                  { font-weight: 700; }
+
+
+
+/* ── Contador de caracteres en la esquina superior derecha del label ── */
+.field-group label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.char-counter {
+    font-size: 0.76rem;
+    font-weight: 700;
+    color: #475569;
+    background: #f1f5f9;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 7:57 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L549-579)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+/* ── Clases extraídas de inline styles (Saneamiento R24-CSS-01 / CSP) ── */
+.sidebar-right-header { border-bottom: 2px solid rgba(0,82,183,0.11); padding-bottom: 0.5rem; margin-bottom: 1rem; }
+
+/* ── CKEditor 5 — montaje en CMS (ck5-mount / ck5-hidden-data) ──────────────
+   Versión: 20260823k                                                         */
+
+/* Contenedor de montaje del editor */
+.ck5-mount {
+    border: 1px solid var(--border, #d1d5db);
+    border-radius: 6px;
+    overflow: hidden;
+    background: var(--bg-card, #fff);
+    min-height: 160px;
+}
+
+.ck5-mount,
+.ck5-mount .ck.ck-editor,
+.ck5-mount .ck-editor__main {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+}
+
+/* Toolbar del editor — alineada con la paleta del CMS */
+.ck5-mount .ck.ck-toolbar {
+    background: var(--bg-muted, #f8fafc);
+    border-bottom: 1px solid var(--border, #d1d5db);
+    border-radius: 6px 6px 0 0;
+    flex-wrap: wrap !important;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 7:58 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion_web.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L407-514)</summary>
+
+**Path:** `Unknown file`
+
+```
+            <div class="grid-2col mb-4">
+                <!-- Encabezado de la Sección — solo Subtítulo -->
+                <div class="editor-card" style="border: 2px solid #4f46e5; background: #fafafa; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
+                    <div class="editor-card-header" style="background: linear-gradient(135deg, #1e1b4b 0%, #4338ca 100%); padding: 10px 14px;">
+                        <div class="card-title" style="color: #ffffff; font-weight: 800; font-size: 0.95rem;">Encabezado de la Sección (#acerca-de)</div>
+                    </div>
+                    <div class="editor-card-body" style="padding: 12px;">
+                        <div class="field-row">
+                            <div class="field-group">
+                                <label>Título de la Ficha</label>
+                                <input type="text" name="seccion__h2" maxlength="45"
+                                       value="<?= cms($contenidos, 'quienes-somos', 'seccion', 'h2', 'Quiénes somos') ?>">
+                                <small class="cms-help-text">Encabezado visual dentro de la sección. No afecta el menú de navegación.</small>
+                            </div>
+                            <div class="field-group">
+                                <label>Subtítulo / Descripción</label>
+                                <input type="text" name="seccion__subtitulo"
+                                       value="<?= cms($contenidos, 'quienes-somos', 'seccion', 'subtitulo') ?>">
+                            </div>
+                        </div>
+                        <div class="field-group mt-2">
+                            <label>Etiqueta en menú de navegación</label>
+                            <input type="text" name="nav__label" maxlength="30"
+                                   value="<?= cms($contenidos, 'quienes-somos', 'nav', 'label', 'Quiénes somos') ?>">
+                            <small class="cms-help-text">Texto corto que aparece en el menú del header (máx. 30 caracteres).</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Nuestros Valores — CKEditor 5 (ficha4/texto) -->
+                <div class="editor-card" style="border: 2px solid #0284c7; background: #fafafa; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
+                    <div class="editor-card-header" style="background: linear-gradient(135deg, #0369a1 0%, #0284c7 100%); padding: 10px 14px;">
+                        <div class="card-title" style="color: #ffffff; font-weight: 800; font-size: 0.95rem;">Nuestros Valores</div>
+                    </div>
+                    <div class="editor-card-body" style="padding: 12px;">
+                        <div class="field-group">
+                            <label>Texto</label>
+                            <div id="ck-ficha4" class="ck5-mount"></div>
+                            <textarea id="ck-ficha4-data" name="ficha4__texto" class="ck5-hidden-data"><?= htmlspecialchars(cmsRaw($contenidos, 'quienes-somos', 'ficha4', 'texto',
+                                '<h3>Nuestros Valores — 25 años al servicio del diagnóstico</h3>'
+                              . '<ul><li>25 años de experiencia</li>'
+                              . '<li>Químicos especialistas con estudios de posgrado</li>'
+                              . '<li>Guías de práctica clínica actualizadas</li>'
+                              . '<li>Excelencia en control de calidad externo</li>'
+                              . '<li>Galardón Rey PACAL — reconocimiento a nuestro desempeño</li>'
+                              . '</ul>')) ?></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /grid-2col fila 1 -->
+
+            <hr class="cms-section-sep">
+
+            <!-- Fila 2: MISIÓN + VISIÓN -->
+            <div class="grid-2col mb-4">
+                <!-- MISIÓN -->
+                <div class="editor-card" style="border: 2px solid #059669; background: #fafafa; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
+                    <div class="editor-card-header" style="background: linear-gradient(135deg, #064e3b 0%, #059669 100%); padding: 10px 14px;">
+                        <div class="card-title" style="color: #ffffff; font-weight: 800; font-size: 0.95rem;">🟢 MISIÓN</div>
+                    </div>
+                    <div class="editor-card-body" style="padding: 12px;">
+                        <div class="field-group">
+                            <label>Declaración de Misión</label>
+                            <div id="ck-mision" class="ck5-mount"></div>
+                            <textarea id="ck-mision-data" name="ficha2__texto" class="ck5-hidden-data"><?= htmlspecialchars(cmsRaw($contenidos, 'quienes-somos', 'ficha2', 'texto', '<h3 class="txt-pgd-sub">🟢 MISIÓN</h3><p class="aviso-p aviso-p--muted">Brindar resultados confiables y clínicamente relevantes que ayuden al médico a tomar mejores decisiones y al paciente a recibir atención oportuna.</p>')) ?></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- VISIÓN -->
+                <div class="editor-card" style="border: 2px solid #2563eb; background: #fafafa; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
+                    <div class="editor-card-header" style="background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%); padding: 10px 14px;">
+                        <div class="card-title" style="color: #ffffff; font-weight: 800; font-size: 0.95rem;">🔵 VISIÓN</div>
+                    </div>
+                    <div class="editor-card-body" style="padding: 12px;">
+                        <div class="field-group">
+                            <label>Declaración de Visión</label>
+                            <div id="ck-vision" class="ck5-mount"></div>
+                            <textarea id="ck-vision-data" name="ficha3__texto" class="ck5-hidden-data"><?= htmlspecialchars(cmsRaw($contenidos, 'quienes-somos', 'ficha3', 'texto', '<h3 class="txt-pgd-sub">🔵 VISIÓN</h3><p class="aviso-p aviso-p--muted">Ser el laboratorio de referencia para médicos y pacientes, reconocido por la excelencia de nuestros resultados.</p>')) ?></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /grid-2col fila 2 -->
+
+            <hr class="cms-section-sep">
+
+            <!-- Fila 3: Historia Institucional (Ficha Ancha) -->
+            <div class="editor-card mb-4" style="border: 2px solid #7c3aed; background: #fafafa; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
+                <div class="editor-card-header" style="background: linear-gradient(135deg, #4c1d95 0%, #7c3aed 100%); padding: 10px 14px;">
+                    <div class="card-title" style="color: #ffffff; font-weight: 800; font-size: 0.95rem;">Historia Institucional (Ficha Ancha)</div>
+                </div>
+                <div class="editor-card-body" style="padding: 12px;">
+                    <p class="cms-p">
+                        <strong>25 años de experiencia al servicio del diagnóstico</strong> —
+                        texto institucional completo. Edita directamente en el recuadro.
+                    </p>
+                    <div class="field-group">
+                        <div id="ck-historia" class="ck5-mount"></div>
+                        <textarea id="ck-historia-data" name="ficha1__texto" class="ck5-hidden-data"><?= htmlspecialchars(cmsRaw($contenidos, 'quienes-somos', 'ficha1', 'texto',
+                            '<p>LAESH, Laboratorio de Especialidades Hematológicas, es una empresa 100% de la Región Mixteca.</p>')) ?></textarea>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ================================================================
+             PANEL 3: ESTUDIOS DE RUTINA
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion_web.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L579-634)</summary>
+
+**Path:** `Unknown file`
+
+```
+                $curHtml    = cmsRaw($contenidos, 'especialidades', "carousel{$ci}", 'texto');
+                $defaultAct = ($ci <= 12 || trim($curHtml) !== '') ? '1' : '0';
+                $curActivo  = cms($contenidos, 'especialidades', "carousel{$ci}", 'activo', $defaultAct);
+                $isActivo   = ($curActivo !== '0');
+                $isNew      = $ci > 12;
+                $eSt        = $_estudiosStyles[($ci - 1) % 6];
+            ?>
+            <div class="editor-card" style="border: 2px solid <?= $eSt['borderColor'] ?>; background: #fafafa; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
+                <div class="editor-card-header" style="display:flex; justify-content:space-between; align-items:center; background: <?= $eSt['bg'] ?>; padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.2);">
+                    <div class="card-title" style="font-weight:800; color:#ffffff; font-size:0.95rem;">Tarjeta <?= $ci ?> — <?= $isNew ? 'Ficha Nueva (Opcional)' : 'Área de Laboratorio' ?></div>
+                    <div style="display:flex; align-items:center; gap:0.5rem;">
+                        <label for="chk-carousel-<?= $ci ?>-activo" style="display:inline-flex; align-items:center; gap:0.45rem; cursor:pointer; margin:0; font-size:0.85rem; font-weight:700; color:#ffffff; background:rgba(0,0,0,0.2); padding:4px 10px; border-radius:20px;">
+                            <input type="hidden" name="carousel<?= $ci ?>__activo" value="0">
+                            <input type="checkbox" id="chk-carousel-<?= $ci ?>-activo" name="carousel<?= $ci ?>__activo" value="1" <?= $isActivo ? 'checked' : '' ?>
+                                   style="width:1.05rem; height:1.05rem; accent-color:#10b981; cursor:pointer;"
+                                   onchange="var badge=this.nextElementSibling; if(this.checked){ badge.style.color='#6ee7b7'; badge.textContent='Encendido'; } else { badge.style.color='#fca5a5'; badge.textContent='Apagado'; }">
+                            <span class="operator-badge" style="color: <?= $isActivo ? '#6ee7b7' : '#fca5a5' ?>; transition: color 0.2s ease;">
+                                <?= $isActivo ? 'Encendido' : 'Apagado' ?>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+                <div class="editor-card-body" style="padding:12px;">
+                    <div class="field-group">
+                        <label>Imagen de la Tarjeta <?= $ci ?></label>
+                        <p class="cms-img-spec-hint" style="margin-top: 4px; margin-bottom: 8px; font-size: 0.78rem;">
+                            📐 <strong>Codec:</strong> WebP únicamente &nbsp;·&nbsp;
+                            <strong>Quality:</strong> 75 &nbsp;·&nbsp;
+                            <strong>Effort:</strong> 6 &nbsp;·&nbsp;
+                            <strong>Dimensiones:</strong> 800 × 580 px (ratio ~1.38:1) &nbsp;·&nbsp;
+                            <strong>Orientación Horizontal</strong> &nbsp;·&nbsp;
+                            <strong>Peso:</strong> Máximo 150 KB, Óptimo 60 KB
+                        </p>
+                        <div class="image-upload-box">
+                            <img id="prev-carousel-<?= $ci ?>"
+                                 src="<?= h($curImg) ?>"
+                                 alt="Preview Tarjeta <?= $ci ?>"
+                                 class="img-preview-sm"
+                                 onerror="this.hidden=true">
+
+                            <label for="file-carousel-<?= $ci ?>" class="btn btn-secondary">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                                Cambiar Imagen
+                            </label>
+
+                            <input type="file" accept="image/webp"
+                                   id="file-carousel-<?= $ci ?>" class="d-none"
+                                   data-upload-slot="carousel-<?= $ci ?>"
+                                   data-preview-id="prev-carousel-<?= $ci ?>"
+                                   data-target-input="url-img-carousel-<?= $ci ?>">
+                        </div>
+                        <input type="url" id="url-img-carousel-<?= $ci ?>"
+                               name="config__carousel<?= $ci ?>_img"
+                               value="<?= h($curImg) ?>"
+                               class="cms-img-url-input" data-no-limit>
+                        <?php $imgBasename = $curImg ? basename($curImg) : 'Sin imagen'; ?>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The task involves modifying a specific PHP file. The initial step requires altering the `overflow` property from `hidden` to `visible` in several locations within the file's "Quiénes somos" and "Estudios de rutina" sections. Specifically, the "Estudios de rutina" section also needs its specification requirements temporarily commented out, including a notification about this test-related change.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.042490010s
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 7:58 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion_web.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L579-639)</summary>
+
+**Path:** `Unknown file`
+
+```
+                $curHtml    = cmsRaw($contenidos, 'especialidades', "carousel{$ci}", 'texto');
+                $defaultAct = ($ci <= 12 || trim($curHtml) !== '') ? '1' : '0';
+                $curActivo  = cms($contenidos, 'especialidades', "carousel{$ci}", 'activo', $defaultAct);
+                $isActivo   = ($curActivo !== '0');
+                $isNew      = $ci > 12;
+                $eSt        = $_estudiosStyles[($ci - 1) % 6];
+            ?>
+            <div class="editor-card" style="border: 2px solid <?= $eSt['borderColor'] ?>; background: #fafafa; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
+                <div class="editor-card-header" style="display:flex; justify-content:space-between; align-items:center; background: <?= $eSt['bg'] ?>; padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.2);">
+                    <div class="card-title" style="font-weight:800; color:#ffffff; font-size:0.95rem;">Tarjeta <?= $ci ?> — <?= $isNew ? 'Ficha Nueva (Opcional)' : 'Área de Laboratorio' ?></div>
+                    <div style="display:flex; align-items:center; gap:0.5rem;">
+                        <label for="chk-carousel-<?= $ci ?>-activo" style="display:inline-flex; align-items:center; gap:0.45rem; cursor:pointer; margin:0; font-size:0.85rem; font-weight:700; color:#ffffff; background:rgba(0,0,0,0.2); padding:4px 10px; border-radius:20px;">
+                            <input type="hidden" name="carousel<?= $ci ?>__activo" value="0">
+                            <input type="checkbox" id="chk-carousel-<?= $ci ?>-activo" name="carousel<?= $ci ?>__activo" value="1" <?= $isActivo ? 'checked' : '' ?>
+                                   style="width:1.05rem; height:1.05rem; accent-color:#10b981; cursor:pointer;"
+                                   onchange="var badge=this.nextElementSibling; if(this.checked){ badge.style.color='#6ee7b7'; badge.textContent='Encendido'; } else { badge.style.color='#fca5a5'; badge.textContent='Apagado'; }">
+                            <span class="operator-badge" style="color: <?= $isActivo ? '#6ee7b7' : '#fca5a5' ?>; transition: color 0.2s ease;">
+                                <?= $isActivo ? 'Encendido' : 'Apagado' ?>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+                <div class="editor-card-body" style="padding:12px;">
+                    <div class="field-group">
+                        <label>Imagen de la Tarjeta <?= $ci ?></label>
+                        <p class="cms-img-spec-hint" style="margin-top: 4px; margin-bottom: 8px; font-size: 0.78rem;">
+                            📐 <strong>Codec:</strong> WebP únicamente &nbsp;·&nbsp;
+                            <strong>Quality:</strong> 75 &nbsp;·&nbsp;
+                            <strong>Effort:</strong> 6 &nbsp;·&nbsp;
+                            <strong>Dimensiones:</strong> 800 × 580 px (ratio ~1.38:1) &nbsp;·&nbsp;
+                            <strong>Orientación Horizontal</strong> &nbsp;·&nbsp;
+                            <strong>Peso:</strong> Máximo 150 KB, Óptimo 60 KB
+                        </p>
+                        <div class="image-upload-box">
+                            <img id="prev-carousel-<?= $ci ?>"
+                                 src="<?= h($curImg) ?>"
+                                 alt="Preview Tarjeta <?= $ci ?>"
+                                 class="img-preview-sm"
+                                 onerror="this.hidden=true">
+
+                            <label for="file-carousel-<?= $ci ?>" class="btn btn-secondary">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                                Cambiar Imagen
+                            </label>
+
+                            <input type="file" accept="image/webp"
+                                   id="file-carousel-<?= $ci ?>" class="d-none"
+                                   data-upload-slot="carousel-<?= $ci ?>"
+                                   data-preview-id="prev-carousel-<?= $ci ?>"
+                                   data-target-input="url-img-carousel-<?= $ci ?>">
+                        </div>
+                        <input type="url" id="url-img-carousel-<?= $ci ?>"
+                               name="config__carousel<?= $ci ?>_img"
+                               value="<?= h($curImg) ?>"
+                               class="cms-img-url-input" data-no-limit>
+                        <?php $imgBasename = $curImg ? basename($curImg) : 'Sin imagen'; ?>
+                        <span id="lbl-img-carousel-<?= $ci ?>" class="cms-img-filename-label"><?= h($imgBasename) ?></span>
+                    </div>
+
+                    <!-- Editor de Texto HTML con CKEditor 5 -->
+                    <div class="field-group">
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 7:59 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `cms-upload.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L79-179)</summary>
+
+**Path:** `Unknown file`
+
+```
+                const previewId   = this.dataset.previewId    || null;
+                const targetInput = this.dataset.targetInput  || null;
+                const file        = this.files[0];
+
+                // ── Validación de formato — solo WebP para todos los slots ────────────
+                if (file.type !== 'image/webp') {
+                    showToast(
+                        `Formato no permitido (${file.type || 'desconocido'}). Solo se acepta <strong>WebP</strong>.<br>` +
+                        'Usa Squoosh → Format: WebP antes de subir.',
+                        true
+                    );
+                    this.value = '';
+                    return;
+                }
+
+                // ── Reglas por slot (alineadas con Guía CMS §5.1–§5.6) ──────────────
+                // Slots reales (data-upload-slot en gestion_web.php):
+                //   hero-{slide1…5}       → Banner Hero
+                //   carousel-{1…16}       → Carrusel Especialidades
+                //   ubicacion-croquis     → Croquis de Ubicación
+                //   promo-{lun…dom}       → Cards de Promociones
+                //   calidad-gallery{1…3}  → Galería de Calidad
+                //   (default)             → Imagen CMS genérica
+                function slotRules(s) {
+                    if (/^hero-/.test(s))              return { maxKb: 150, minW: 1280, maxW: 1920,                              landscape: true, label: 'Banner Hero',             hint: 'WebP · Quality 72–80 · Effort 6 · 1 280–1 920 px ancho · Orientación Horizontal · alto proporcional · máx. 150 KB, óptimo 60 KB' };
+                    if (/^carousel-/.test(s))          return { maxKb: 150, exactW: 800, exactH: 580,                                        label: 'Carrusel Especialidades', hint: 'WebP · Quality 75 · Effort 6 · exacto 800×580 px · máx. 150 KB, óptimo 60 KB' };
+                    if (/^ubicacion-croquis$/.test(s)) return { maxKb: 150, maxW: 1284, maxH: 902, landscape: true,      label: 'Croquis de Ubicación',    hint: 'WebP · Quality 85 · Effort 6 · 1 284 × 902 px (máx) · Orientación Horizontal · máx. 150 KB, óptimo 60 KB' };
+                    if (/^promo-/.test(s))             return { maxKb: 150, minW: 1000, maxW: 1200, minH: 600, maxH: 800, landscape: true, label: 'Card de Promociones', hint: 'WebP · Quality 82 · 1 024 × 687 px (óptimo nativo) o 1 200 × (600–675) px · máx. 150 KB, óptimo 80–110 KB' };
+                    if (/^calidad-/.test(s))           return { maxKb: 150, exactW: 800, exactH: 580,                                       label: 'Galería de Calidad',      hint: 'WebP · Quality 75 · Effort 6 · exacto 800×580 px · máx. 150 KB, óptimo 60 KB' };
+                    if (/^seo-og$/.test(s))            return { maxKb: 150, minW: 1200, maxW: 1920,                              landscape: true, label: 'Imagen Open Graph (SEO)', hint: 'WebP · 1 200 × 630 px recomendado (ratio 1.91:1) · Orientación Horizontal · máx. 150 KB, óptimo 60 KB' };
+                    return                                    { maxKb: 150, minW: 800,                                                        label: 'Imagen CMS',              hint: 'WebP · mín. 800 px ancho · máx. 150 KB, óptimo 60 KB' };
+                }
+                const rules = slotRules(slot);
+
+                // ── Validación de tamaño ─────────────────────────────────────────────
+                const sizeKb = (file.size / 1024).toFixed(1);
+                if (file.size > rules.maxKb * 1024) {
+                    showToast(
+                        `Peso ${sizeKb} KB supera el máximo de ${rules.maxKb} KB para ${rules.label}.<br>` +
+                        'Optimiza la imagen (baja Quality o reduce dimensiones).',
+                        true
+                    );
+                    this.value = '';
+                    return;
+                }
+
+                // ── Validación de dimensiones (requiere cargar la imagen) ────────────
+                try {
+                    const objUrl = URL.createObjectURL(file);
+                    const img    = new Image();
+                    await new Promise((res, rej) => { img.onload = res; img.onerror = rej; img.src = objUrl; });
+                    URL.revokeObjectURL(objUrl);
+                    const w = img.naturalWidth, h = img.naturalHeight;
+
+                    // Dimensiones exactas (carrusel, croquis, promociones)
+                    if (rules.exactW !== undefined && w !== rules.exactW) {
+                        showToast(`Dimensiones incorrectas (${w}×${h} px) para ${rules.label}.<br><small>Requerido: ${rules.hint}</small>`, true);
+                        this.value = ''; return;
+                    }
+                    if (rules.exactH !== undefined && h !== rules.exactH) {
+                        showToast(`Dimensiones incorrectas (${w}×${h} px) para ${rules.label}.<br><small>Requerido: ${rules.hint}</small>`, true);
+                        this.value = ''; return;
+                    }
+
+                    // Rango de ancho (hero, banner, default)
+                    if (rules.minW !== undefined && w < rules.minW) {
+                        showToast(`Ancho ${w} px menor al mínimo de ${rules.minW} px para ${rules.label}. Spec: ${rules.hint}`, true);
+                        this.value = ''; return;
+                    }
+                    if (rules.maxW !== undefined && w > rules.maxW) {
+                        showToast(`Ancho ${w} px mayor al máximo de ${rules.maxW} px para ${rules.label}. Spec: ${rules.hint}`, true);
+                        this.value = ''; return;
+                    }
+
+                    // Rango de alto (hero)
+                    if (rules.minH !== undefined && h < rules.minH) {
+                        showToast(`Alto ${h} px menor al mínimo de ${rules.minH} px para ${rules.label}. Spec: ${rules.hint}`, true);
+                        this.value = ''; return;
+                    }
+                    if (rules.maxH !== undefined && h > rules.maxH) {
+                        showToast(`Alto ${h} px mayor al máximo de ${rules.maxH} px para ${rules.label}. Spec: ${rules.hint}`, true);
+                        this.value = ''; return;
+                    }
+
+                    // Orientación horizontal obligatoria
+                    if (rules.landscape && h >= w) {
+                        showToast(`La imagen (${w}×${h} px) debe tener Orientación Horizontal (ancho > alto). Spec: ${rules.hint}`, true);
+                        this.value = ''; return;
+                    }
+                } catch (e) {
+                    console.error('[cms-upload] Error al verificar dimensiones:', e);
+                    showToast('Error técnico al leer las dimensiones de la imagen.', true);
+                    this.value = '';
+                    return;
+                }
+
+                // Construir FormData
+                const fd = new FormData();
+                fd.append('file',       file);
+                fd.append('slot',       slot);
+                fd.append('csrf_token', getCsrf());
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Inspecting the `cms-upload.js` file, variables are being initialized to handle file uploads. Considering the comment, there's a conditional check related to "Tarjetas 1 a 16 de Estudios" suggesting a specific scenario where restrictions might be omitted. The `isCarouselSlot` variable likely determines whether the current upload falls into this exempted category. This indicates potential variations in upload behavior based on the designated "slot".
+
+
+The code enforces a WebP format requirement for all uploads, *except* those designated as carousel slots, which currently bypass these checks.  This exemption suggests a temporary testing mode or a specific requirement for carousel uploads where stricter format and dimension validation is temporarily disabled.
+
+
+The code performs size validation, showing an error if a non-carousel image exceeds the maximum allowed kilobytes. Further, dimension validation is conditionally executed, excluding carousel slots marked for testing, suggesting temporary bypassing of strict image size limits. The dimensions are calculated after the image is loaded into memory to check if they match expected exact dimensions.
+
+
+The code validates image dimensions against specified rules, displaying an error message if the image doesn't comply. It checks for exact width and height matches as well as width and height ranges. These rules are applied to images depending on their "label" and "hint" values. If any dimension fails, an error message is triggered, preventing the upload.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 22.818301395s
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 7:59 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L279-354)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+    $file = $_FILES['file'];
+
+    // Validar MIME por contenido real — solo WebP (alineado con Guía CMS §5.1–§5.6)
+    $allowedMimes = ['image/webp' => 'webp'];
+    $finfo = new \finfo(FILEINFO_MIME_TYPE);
+    $mime  = $finfo->file($file['tmp_name']);
+    if (!array_key_exists($mime, $allowedMimes)) {
+        http_response_code(415);
+        echo json_encode(['ok' => false, 'msg' => 'Tipo no permitido. Solo se acepta WebP. Optimiza la imagen antes de subir.']);
+        exit;
+    }
+
+    // Validar tamaño — 150 KB máximo (límite homologado para todos los slots de subida)
+    if ($file['size'] > 150 * 1024) {
+        $sizeKb = round($file['size'] / 1024, 1);
+        http_response_code(413);
+        echo json_encode(['ok' => false, 'msg' => "El archivo ({$sizeKb} KB) supera el límite de 150 KB. Optimiza la imagen antes de subir."]);
+        exit;
+    }
+
+    // Nombre del slot — solo alfanumérico y guiones (necesario antes de la validación de dims)
+    $slot = preg_replace('/[^a-z0-9\-]/', '', strtolower($_POST['slot'] ?? 'cms'));
+    $slot = $slot ?: 'cms';
+
+    // Validar dimensiones servidor — espejo de cms-upload.js slotRules()
+    // Defiende el endpoint ante requests que bypasean el JS del browser.
+    $imgSize = @getimagesize($file['tmp_name']);
+    if ($imgSize === false) {
+        http_response_code(422);
+        echo json_encode(['ok' => false, 'msg' => 'No se pudieron leer las dimensiones de la imagen. Verifica que el archivo WebP sea válido.']);
+        exit;
+    }
+    [$imgW, $imgH] = $imgSize;
+    $dimError = null;
+    if (preg_match('/^hero-/', $slot)) {
+        if ($imgW < 1280 || $imgW > 1920)
+            $dimError = "Banner Hero: ancho {$imgW} px fuera del rango 1\u{202F}280–1\u{202F}920 px. Spec: 1\u{202F}280–1\u{202F}920 px ancho · Orientación Horizontal.";
+        elseif ($imgH >= $imgW)
+            $dimError = "Banner Hero: orientación debe ser Horizontal (ancho > alto). Recibido: {$imgW}×{$imgH}.";
+    } elseif (preg_match('/^carousel-/', $slot)) {
+        if ($imgW !== 800 || $imgH !== 580)
+            $dimError = "Carrusel Especialidades: se requiere exacto 800×580 px. Recibido: {$imgW}×{$imgH}.";
+    } elseif ($slot === 'ubicacion-croquis') {
+        if ($imgW > 1284 || $imgH > 902)
+            $dimError = "Croquis de Ubicación: máximo 1284×902 px. Recibido: {$imgW}×{$imgH}.";
+        elseif ($imgH >= $imgW)
+            $dimError = "Croquis de Ubicación: orientación debe ser Horizontal (ancho > alto). Recibido: {$imgW}×{$imgH}.";
+    } elseif (preg_match('/^promo-/', $slot)) {
+        if ($imgH >= $imgW)
+            $dimError = "Card de Promociones: orientación debe ser Horizontal (ancho > alto). Recibido: {$imgW}×{$imgH}.";
+        elseif ($imgW < 1000 || $imgW > 1200 || $imgH < 600 || $imgH > 800)
+            $dimError = "Card de Promociones: dimensiones requeridas 1024×687 px (óptimo nativo) o 1200×(600–675) px. Recibido: {$imgW}×{$imgH}.";
+    } elseif (preg_match('/^calidad-/', $slot)) {
+        if ($imgW !== 800 || $imgH !== 580)
+            $dimError = "Galería de Calidad: se requiere exacto 800×580 px. Recibido: {$imgW}×{$imgH}.";
+    } elseif ($slot === 'seo-og') {
+        if ($imgW < 1200 || $imgW > 1920)
+            $dimError = "Open Graph (SEO): ancho {$imgW} px fuera del rango 1\u{202F}200–1\u{202F}920 px.";
+        elseif ($imgH >= $imgW)
+            $dimError = "Open Graph (SEO): orientación debe ser Horizontal (ancho > alto). Recibido: {$imgW}×{$imgH}.";
+    } else {
+        if ($imgW < 800)
+            $dimError = "Imagen CMS genérica: ancho mínimo 800 px. Recibido: {$imgW} px.";
+    }
+    if ($dimError !== null) {
+        http_response_code(422);
+        echo json_encode(['ok' => false, 'msg' => $dimError]);
+        exit;
+    }
+    $ext      = $allowedMimes[$mime];
+    $filename = $slot . '-' . date('Ymd') . '-' . bin2hex(random_bytes(4)) . '.' . $ext;
+
+    // Directorio de destino
+    $dbConfigDir = Flight::db()->query("SELECT valor FROM configuraciones WHERE clave = 'cms_upload_dir'")->fetchColumn();
+    $uploadDir   = trim($dbConfigDir ?: '');
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Initial focus is on updating the PHP file `index.php`. The code snippet shows extraction and sanitization of a `$slot` variable from POST data. It appears `$slot` determines if a carousel-related operation is executed via `$isCarousel`. Further, the code validates uploaded file formats.
+
+
+The code now performs MIME type validation based on whether the operation targets a carousel or not; non-carousel uploads strictly enforce WebP, while carousels accept a predefined set of image formats. Size validation is enforced for non-carousel uploads, with a 150KB limit. Dimension extraction and validation are also present, but for non-carousel uploads only. It appears dimensions are being checked for a specific `$slot` prefix.
+
+
+Dimension validation logic appears to be dependent on the `$slot` variable, with different rules applied based on its value. Specific width, height, and orientation constraints are being checked for "Banner Hero," "ubicacion-croquis," promo- prefixed slots, "calidad-" prefixed slots, and "seo-og". Errors are constructed to explain the dimension violations.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 18.102944980s
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 8:00 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 8:00 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 8:02 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 8:02 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 8:02 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<!DOCTYPE html>
+<?php
+/**
+ * admrc/views/gestion_web.php — Plates template (merge de gestion-web.html)
+ *
+ * Fuente HTML: portafolio-dev-2026/blocklabgd/v1.2/mockup1.0/uipv1/gestion-web.html  ← NUNCA BORRAR (R15.1)
+ * Merge iterativo: cuando gestion-web.html reciba cambios del cliente,
+ * propagar estructura/textos aquí y mantener lógica PHP.
+ *
+ * Variables disponibles (desde admrc/index.php):
+ *   $nombreAdmin  string  — Nombre del administrador logueado
+ *   $csrfToken    string  — Token CSRF para formularios POST (R14.12)
+ *   $contenidos   array   — [seccion][subseccion][clave] => valor (desde web_contenidos)
+ *   $lastPub      string  — Timestamp de última publicación
+ *
+ * Merge v2 — 2026-08-22:
+ *   + Slides 2-5 del carrusel hero
+ *   + Tagline navbar (hero/navbar)
+ *   + Quiénes Somos: resp. sanitario + filosofía
+ *   + Promociones: 6 días (lunes–sábado) + domingo alt
+ *   + Calidad: título y subtítulo de sección
+ *   + Ubicación: WhatsApp + embed de mapa
+ *   + Panel 7: Pie de Página (footer)
+ *   + Panel 8: SEO y Metadatos
+ *
+ * SSOT Refactor — 2026-08-22 (ver 07_seed_catalogs.sql):
+ *   • D-04 RESUELTO: WhatsApp, teléfono, email, horarios, dirección, CP,
+ *     responsable sanitario → configuraciones (singleton). Ya NO en web_contenidos.
+ *   • Panel 6 (Ubicación) = editor master de todos los singletons institucionales.
+ *   • Paneles 7 (Footer) y 8 (SEO): los datos de configuraciones son read-only en CMS.
+ *   • Promociones: titulo/precio/ayuno/tiempo eliminados del CMS; se usa estudio_clave
+ *     → JOIN estudios para obtener datos clínicos (SSOT desde tabla estudios).
+ *   • especialidades/catalogo/lista y /titulo eliminados (redundantes con tabla estudios).
+```
+
+</details>
+
+---
+
+## User Request
+
+En la ficha Historia Institucional (Ficha Ancha), necesito editar/presentar este contenido abajo, que modificaciones requiere el rte y como le hago para colocar yo ese contenido usando el editor.
+-- dispongo de la imagen como archivo jpeg/webp
+Diagnostica informa, no modiqiues ahun. 
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `gestion_web.php`
+**Language:** php
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Analyzing the image, it seems to be a checklist or a series of completed tasks, indicated by the checkmarks. The user wants to incorporate this content into a section named "Historia Institucional (Ficha Ancha)". The immediate goal is to understand the necessary modifications for the "rte" (likely a content management system or editor) and the process of content placement. Determining the nature of the bullet points and their intended context within "Historia Institucional" is crucial before proceeding.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `ficha1`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.148089263s
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 8:57 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `acerca-de.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L29-50)</summary>
+
+**Path:** `Unknown file`
+
+```
+                </div>
+
+                <!-- Ficha 3: Visión — desde web_contenidos (quienes-somos/ficha3/texto) -->
+                <div class="card-premium animate-on-scroll delay-300 info-col">
+                    <div class="acerca-flex ck5-output">
+                        <?= safeHtml($qsVision) ?>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ficha ancha: Historia — desde CKEditor (43vh desktop / 100% responsive en móvil) -->
+            <div class="grid-single-history">
+                <div class="card-premium animate-on-scroll delay-100 info-col--stretch">
+                    <div class="modal-scroll-body">
+                        <!-- Historia — HTML enriquecido desde CKEditor 5 (ficha1/texto) -->
+                        <!-- El heading del card va incluido en el HTML exportado por CKEditor -->
+                        <div class="faq-p--sm2 ck5-output"><?= safeHtml($qsHistoriaHtml) ?></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `function safeHtml`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 8:57 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L49-94)</summary>
+
+**Path:** `Unknown file`
+
+```
+ * Renderiza HTML de confianza generado por el RTE del CMS (admins LAESH).
+ * Permite tags ricos de CKEditor 5.
+ * Bloquea: <script>, atributos on*, href con javascript:
+ */
+function safeHtml(mixed $v): string {
+    $html = strip_tags((string)($v ?? ''), ['strong','em','b','i','br','p','ul','ol','li','a','span','table','tbody','tr','td','th','thead','hr','figure','iframe','h1','h2','h3','h4','h5','h6','u','s','blockquote','oembed','div','img','mark']);
+    $html = preg_replace('/\s+on\w+\s*=\s*(?:"[^"]*"|\'[^\']*\'|[^\s>]*)/i', '', $html);
+    $html = preg_replace('/href\s*=\s*["\']?\s*javascript:/i', 'href="#" data-blocked=', $html);
+
+    // Convertir <oembed url="..."> a <iframe> para YouTube, Spotify, Vimeo si vienen etiquetas oembed crudas
+    $html = preg_replace_callback('/<oembed\s+url=["\']([^"\']+)["\']\s*>\s*<\/oembed>/i', function($matches) {
+        $url = $matches[1];
+        if (preg_match('/(?:youtube\.com\/(?:watch\?v=|embed\/|v\/)|youtu\.be\/)([\w-]+)/i', $url, $m)) {
+            $yId = $m[1];
+            return '<div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;box-shadow:0 4px 16px rgba(0,0,0,0.12);">' .
+                   '<iframe src="https://www.youtube.com/embed/' . $yId . '" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;border-radius:12px;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' .
+                   '</div>';
+        }
+        if (preg_match('/vimeo\.com\/(?:video\/)?(\d+)/i', $url, $m)) {
+            $vId = $m[1];
+            return '<div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;">' .
+                   '<iframe src="https://player.vimeo.com/video/' . $vId . '" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" allowfullscreen></iframe>' .
+                   '</div>';
+        }
+        return '<a href="' . htmlspecialchars($url, ENT_QUOTES, 'UTF-8') . '" target="_blank" rel="noopener">' . htmlspecialchars($url, ENT_QUOTES, 'UTF-8') . '</a>';
+    }, $html);
+
+    // Limpiar párrafos vacíos redundantes al inicio y final (<p>&nbsp;</p>, <p></p>) que dejan espacios verticales masivos
+    $html = preg_replace('/^(?:\s*<p>(?:&nbsp;|\s)*<\/p>)+/i', '', $html);
+    $html = preg_replace('/(?:\s*<p>(?:&nbsp;|\s)*<\/p>)+\s*$/i', '', trim($html));
+
+    return $html;
+}
+
+// ── Conexión DB ─────────────────────────────────────────────────────────────
+$db = Flight::db();
+
+// ── Caché L2: OPcache PHP File Store (Estrategia A — Sprint Cache 2026-09) ──
+// Inicializar una sola vez por request. Env: 'dev' en local, 'prod' en OCI/Hostinger.
+\Common\Cache::init('', defined('APP_ENV') ? APP_ENV : 'prod');
+
+if (!empty($_GET['reset_cache'])) {
+    if (function_exists('opcache_reset')) { @opcache_reset(); }
+    \Common\Cache::clear();
+}
+$_bypassCache = (!empty($_SESSION['auth_logged_in']) && !empty($_GET['_preview']) && !empty($_SESSION['cms_draft'])) || !empty($_GET['nocache']) || !empty($_GET['reset_cache']);
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `ClassicEditor`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 8:57 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `ckeditor-init.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+/**
+ * CKEditor 5 — Inicialización segura con MutationObserver
+ *
+ * Se remueve el parcheo frágil de `showPanel` para evitar condiciones de carrera
+ * con gestion-web.js. Se utiliza MutationObserver para detectar de manera 100% fiable
+ * cuando el panel "Quiénes somos" (panel-quienes-somos) obtiene la clase .active.
+ * Esto evita el error de cálculo de dimensiones de CKEditor en elementos display:none.
+ */
+(function () {
+    'use strict';
+
+    var _ckState = {};  // 'pending' | editor instance | null
+
+    function _createEditor(mountId, dataId, globalKey) {
+        if (_ckState[globalKey]) return;
+        _ckState[globalKey] = 'pending';
+
+        var mountEl = document.getElementById(mountId);
+        var dataEl  = document.getElementById(dataId);
+
+        if (!mountEl || !dataEl || typeof CKEDITOR === 'undefined') {
+            _ckState[globalKey] = null;
+            return;
+        }
+
+        var CK = CKEDITOR;
+        
+        var laeshColors = [
+            { color: '#0052B7', label: 'Azul LAESH Principal' },
+            { color: '#71CA11', label: 'Verde LAESH Principal' },
+            { color: '#A3C912', label: 'Verde Acento' },
+            { color: '#CCE7F5', label: 'Azul Claro (Fondo)' },
+            { color: '#0f172a', label: 'Texto Oscuro' },
+            { color: '#64748b', label: 'Texto Secundario' },
+            { color: '#ffffff', label: 'Blanco' },
+            { color: '#000000', label: 'Negro' }
+        ];
+
+        // El plugin List puede requerir el uso de ClassicEditor sin destructuración en algunos builds, 
+        // pero la instanciación es segura con los exports directos del UMD.
+        var editorConfig = {
+            licenseKey: 'GPL',
+            fontColor: { 
+                colors: laeshColors,
+                documentColors: 0 
+            },
+            fontBackgroundColor: { 
+                colors: laeshColors,
+                documentColors: 0 
+            },
+            fontFamily: {
+                options: [
+                    'default',
+                    'Arial, Helvetica, sans-serif',
+                    'Cabin, sans-serif',
+                    'Courier New, Courier, monospace',
+                    'Georgia, serif',
+                    'Gill Sans, sans-serif',
+                    'Mosquito Std Black, sans-serif',
+                    'Tahoma, Geneva, sans-serif',
+                    'Times New Roman, Times, serif',
+                    'Trebuchet MS, Helvetica, sans-serif',
+                    'Verdana, Geneva, sans-serif'
+                ],
+                supportAllValues: true
+            },
+            fontSize: {
+                options: [
+                    'default',
+                    9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 22, 24, 28, 32, 36
+                ],
+                supportAllValues: true
+            },
+            style: {
+                definitions: [
+                    { name: 'Subtítulo Institucional (Azul)', element: 'h3', classes: ['acerca-h3b'] },
+                    { name: 'Texto Destacado', element: 'p', classes: ['faq-p--primary'] },
+                    { name: 'Texto Secundario', element: 'p', classes: ['faq-p--tail'] },
+                    { name: 'Texto Muted', element: 'p', classes: ['aviso-p--muted'] },
+                    { name: 'Firma / Highlight', element: 'strong', classes: ['txt-main'] }
+                ]
+            },
+            htmlSupport: {
+                allow: [
+                    {
+                        name: /.*/,
+                        attributes: true,
+                        classes: true,
+                        styles: true
+                    }
+                ]
+            },
+            mediaEmbed: {
+                previewsInData: true
+            },
+            plugins: [
+                CK.Essentials, CK.Paragraph, CK.Heading,
+                CK.Bold, CK.Italic, CK.Underline, CK.Strikethrough,
+                CK.Font, CK.Highlight, CK.Alignment,
+                CK.List, CK.TodoList,
+                CK.Indent, CK.IndentBlock,
+                CK.Link, CK.Table, CK.MediaEmbed, CK.HorizontalLine,
+                CK.SourceEditing, CK.GeneralHtmlSupport, CK.Style
+            ],
+            toolbar: {
+                items: [
+                    'sourceEditing', '|',
+                    'heading', 'style', '|',
+                    'bold', 'italic', 'underline', 'strikethrough', 'highlight', '|',
+                    'fontFamily', 'fontSize', 'fontColor', 'fontBackgroundColor', '|',
+                    'alignment', '|',
+                    'bulletedList', 'numberedList', 'todoList', '|',
+                    'outdent', 'indent', '|',
+                    'link', 'insertTable', 'mediaEmbed', 'horizontalLine', '|',
+                    'undo', 'redo'
+                ]
+            },
+            initialData: dataEl.value
+        };
+
+        CK.ClassicEditor.create(mountEl, editorConfig)
+            .then(function (editor) {
+                _ckState[globalKey] = editor;
+                window[globalKey]   = editor;
+
+                // Sincronizar con el textarea oculto para que onFieldChange() del CMS capte los cambios
+                editor.model.document.on('change:data', function () {
+                    dataEl.value = editor.getData();
+                    dataEl.dispatchEvent(new Event('input', { bubbles: true }));
+                });
+            })
+            .catch(function (err) {
+                console.error('[LAESH CMS] Falló CKEditor en ' + mountId + ':', err);
+                _ckState[globalKey] = null;
+                // Si falla, limpiar el montaje y mostrar el textarea crudo
+                mountEl.style.display = 'none';
+                dataEl.classList.remove('ck5-hidden-data');
+                dataEl.style.display  = 'block';
+            });
+    }
+
+    function _initQsEditors() {
+        setTimeout(function () {
+            _createEditorNoMedia('ck-ficha4',   'ck-ficha4-data',   '_ckFicha4', false);
+            _createEditorNoMedia('ck-historia', 'ck-historia-data', '_ckHistoria', false);
+            _createEditorNoMedia('ck-mision',   'ck-mision-data',   '_ckMision', false);
+            _createEditorNoMedia('ck-vision',   'ck-vision-data',   '_ckVision', false);
+        }, 150);
+    }
+
+    function _initEspecialidadesEditors() {
+        setTimeout(function () {
+            for (var i = 1; i <= 16; i++) {
+                var mId = 'ck-carousel-' + i;
+                var dId = 'ck-carousel-' + i + '-data';
+                if (document.getElementById(mId) && document.getElementById(dId)) {
+                    _createEditorNoMedia(mId, dId, '_ckCarousel' + i, false);
+                }
+            }
+        }, 150);
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `ckeditor-init.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L159-339)</summary>
+
+**Path:** `Unknown file`
+
+```
+        }, 150);
+    }
+
+    function _initAvisoPrivacidadEditor() {
+        setTimeout(function () {
+            if (document.getElementById('ck-aviso-privacidad') && document.getElementById('ck-aviso-privacidad-data')) {
+                _createEditorNoMedia('ck-aviso-privacidad', 'ck-aviso-privacidad-data', '_ckAvisoPrivacidad', false);
+            }
+        }, 150);
+    }
+
+    function _initVideoPromoEditor() {
+        setTimeout(function () {
+            if (document.getElementById('ck-video-promo') && document.getElementById('ck-video-promo-data')) {
+                _createEditor('ck-video-promo', 'ck-video-promo-data', '_ckVideoPromo');
+            }
+        }, 150);
+    }
+
+    function _initFooterEditor() {
+        setTimeout(function () {
+            if (document.getElementById('ck-footer') && document.getElementById('ck-footer-data')) {
+                _createEditorNoMedia('ck-footer', 'ck-footer-data', '_ckFooter', false);
+            }
+        }, 150);
+    }
+
+    function _lockTextContent(editor) {
+        var viewDoc = editor.editing.view.document;
+        viewDoc.on('keydown', function(evt, data) {
+            var keyCode = data.keyCode;
+            var domEvt  = data.domEvent;
+
+            // Permitir combinaciones de navegación con Ctrl/Cmd/Alt excepto V (pegar) y X (cortar)
+            if (domEvt.ctrlKey || domEvt.metaKey || domEvt.altKey) {
+                var keyChar = String.fromCharCode(keyCode).toLowerCase();
+                if (keyChar === 'v' || keyChar === 'x') {
+                    data.preventDefault();
+                    evt.stop();
+                }
+                return;
+            }
+
+            // Permitir teclas de selección y navegación (Flechas, Shift, Tab, Home, End, PageUp/Down, CapsLock)
+            var allowedKeys = [9, 16, 17, 18, 20, 33, 34, 35, 36, 37, 38, 39, 40];
+            if (allowedKeys.indexOf(keyCode) !== -1) {
+                return;
+            }
+
+            // Bloquear edición de caracteres, borrado (Backspace/Delete) y saltos de línea (Enter)
+            data.preventDefault();
+            evt.stop();
+        }, { priority: 'highest' });
+
+        editor.editing.view.document.on('clipboardInput', function(evt) {
+            evt.stop();
+        }, { priority: 'highest' });
+
+        editor.editing.view.document.on('drop', function(evt) {
+            evt.stop();
+        }, { priority: 'highest' });
+    }
+
+    function _createEditorNoMedia(mountId, dataId, globalKey, isLocked) {
+        if (_ckState[globalKey]) return;
+        _ckState[globalKey] = 'pending';
+
+        var mountEl = document.getElementById(mountId);
+        var dataEl  = document.getElementById(dataId);
+
+        if (!mountEl || !dataEl || typeof CKEDITOR === 'undefined') {
+            _ckState[globalKey] = null;
+            return;
+        }
+
+        var CK = CKEDITOR;
+        
+        var laeshColors = [
+            { color: '#0052B7', label: 'Azul LAESH Principal' },
+            { color: '#71CA11', label: 'Verde LAESH Principal' },
+            { color: '#A3C912', label: 'Verde Acento' },
+            { color: '#CCE7F5', label: 'Azul Claro (Fondo)' },
+            { color: '#0f172a', label: 'Texto Oscuro' },
+            { color: '#64748b', label: 'Texto Secundario' },
+            { color: '#ffffff', label: 'Blanco' },
+            { color: '#000000', label: 'Negro' }
+        ];
+
+        var editorConfig = {
+            licenseKey: 'GPL',
+            fontColor: { 
+                colors: laeshColors,
+                documentColors: 0 
+            },
+            fontBackgroundColor: { 
+                colors: laeshColors,
+                documentColors: 0 
+            },
+            fontFamily: {
+                options: [
+                    'default',
+                    'Arial, Helvetica, sans-serif',
+                    'Cabin, sans-serif',
+                    'Courier New, Courier, monospace',
+                    'Georgia, serif',
+                    'Gill Sans, sans-serif',
+                    'Mosquito Std Black, sans-serif',
+                    'Tahoma, Geneva, sans-serif',
+                    'Times New Roman, Times, serif',
+                    'Trebuchet MS, Helvetica, sans-serif',
+                    'Verdana, Geneva, sans-serif'
+                ],
+                supportAllValues: true
+            },
+            fontSize: {
+                options: [
+                    'default',
+                    9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 22, 24, 28, 32, 36
+                ],
+                supportAllValues: true
+            },
+            style: {
+                definitions: [
+                    { name: 'Subtítulo (Azul)', element: 'h3', classes: ['acerca-h3b'] },
+                    { name: 'Texto Destacado', element: 'p', classes: ['faq-p--primary'] },
+                    { name: 'Texto Secundario', element: 'p', classes: ['faq-p--tail'] },
+                    { name: 'Texto Muted', element: 'p', classes: ['aviso-p--muted'] },
+                    { name: 'Firma / Highlight', element: 'strong', classes: ['txt-main'] }
+                ]
+            },
+            htmlSupport: {
+                allow: [
+                    {
+                        name: /.*/,
+                        attributes: true,
+                        classes: true,
+                        styles: true
+                    }
+                ]
+            },
+            plugins: [
+                CK.Essentials, CK.Paragraph, CK.Heading,
+                CK.Bold, CK.Italic, CK.Underline, CK.Strikethrough,
+                CK.Font, CK.Highlight, CK.Alignment,
+                CK.List, CK.TodoList,
+                CK.Indent, CK.IndentBlock,
+                CK.Table, CK.HorizontalLine,
+                CK.SourceEditing, CK.GeneralHtmlSupport, CK.Style
+            ],
+            toolbar: {
+                items: [
+                    'sourceEditing', '|',
+                    'heading', 'style', '|',
+                    'bold', 'italic', 'underline', 'strikethrough', 'highlight', '|',
+                    'fontFamily', 'fontSize', 'fontColor', 'fontBackgroundColor', '|',
+                    'alignment', '|',
+                    'bulletedList', 'numberedList', 'todoList', '|',
+                    'outdent', 'indent', '|',
+                    'insertTable', 'horizontalLine', '|',
+                    'undo', 'redo'
+                ]
+            },
+            initialData: dataEl.value
+        };
+
+        CK.ClassicEditor.create(mountEl, editorConfig)
+            .then(function (editor) {
+                _ckState[globalKey] = editor;
+                window[globalKey]   = editor;
+
+                if (isLocked) {
+                    _lockTextContent(editor);
+                }
+
+                editor.model.document.on('change:data', function () {
+                    dataEl.value = editor.getData();
+                    dataEl.dispatchEvent(new Event('input', { bubbles: true }));
+                });
+            })
+            .catch(function (err) {
+                console.error('[LAESH CMS] Falló CKEditor en ' + mountId + ':', err);
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The initialization process calls a function to create an editor instance, specifically for a "historia" context. This instance excludes media features and utilizes a predefined set of plugins. The plugins include basic text formatting tools, lists, indentation controls, table support, and a source code view.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `exports.Image`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.109353724s
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 8:58 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+Examined the CKEditor 5 UMD bundle and confirmed the presence of all image-related plugins, alongside the `sourceEditing` feature. The CSS file `gestion-web.css` was then reviewed, specifically lines 594-608, which are intended to restrict the display of images or logos within the CKEditor 5 editing canvas. This suggests there might be specific styling or constraints applied to image elements within the editor.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `grid-single-history`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.411651221s
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 8:58 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1939-2034)</summary>
+
+**Path:** `Unknown file`
+
+```
+    box-sizing: border-box;
+}
+
+.grid-single-history {
+    display: block;
+    width: 100%;
+    max-width: 1380px;
+    margin: 0.35rem auto 1rem auto;
+    box-sizing: border-box;
+}
+
+#acerca-de .card-premium,
+.grid-acerca-cards .card-premium,
+.grid-single-history .card-premium {
+    resize: none;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.grid-single-history .card-premium {
+    overflow: auto;
+    height: 43vh; /* Alto vertical inicial de 43vh en desktop */
+    min-height: 270px;
+}
+
+/* Medida fija centrada para el contenedor del video en Desktop/Laptop (+15% adicional horizontal = 1173px) */
+#video .grid-single-history {
+    max-width: 1173px !important;
+    margin: 0.35rem auto 1rem auto !important;
+}
+
+#video .grid-single-history .card-premium,
+#video .card-premium {
+    height: auto !important;
+    max-height: none !important;
+    min-height: unset !important;
+    overflow: hidden !important;
+    padding: 0.75rem 1.25rem !important;
+}
+
+.grid-single-history .card-premium .modal-scroll-body {
+    max-height: none;
+    min-height: 150px;
+    overflow: visible !important;
+}
+
+#video .modal-scroll-body {
+    max-height: none !important;
+    overflow: visible !important;
+    padding: 0 !important;
+}
+
+#video .ck5-output {
+    padding: 0.75rem 0 !important;
+}
+
+/* R-MOB: Quiénes Somos → tablet/iPad (≤1024px) — layout, padding y card widths
+   grid-template-columns no necesita !important aquí: la base ya es 2 cols y el selector
+   #acerca-de (1,1,0) supera en especificidad a .grid-layout.grid-1-1-auto (0,2,0) de style.css.
+   El resto sí usa !important porque otros stylesheets ganan esas propiedades sin él. */
+@media (max-width: 1024px) {
+    #acerca-de {
+        padding-left: 1.25rem !important;
+        padding-right: 1.25rem !important;
+        box-sizing: border-box !important;
+        width: 100% !important;
+    }
+    #acerca-de .grid-acerca-cards,
+    .grid-acerca-cards {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin-bottom: 1rem !important;
+        box-sizing: border-box !important;
+    }
+    .grid-single-history {
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 0 1rem 0 !important;
+        padding: 0 !important;
+        box-sizing: border-box !important;
+    }
+    #acerca-de .card-premium,
+    .grid-acerca-cards .card-premium,
+    .grid-single-history .card-premium {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        min-height: 200px;
+        box-sizing: border-box !important;
+        border-radius: 16px !important;
+        margin: 0 !important;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The content of `quienes-somos/ficha1/texto` needs to be retrieved. Initial approach is to query the database directly, but a direct file check might also work. There are database queries, or a quick command using scripting to investigate `web_contenidos` for the requested section and sub-section.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.097427244s
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 8:58 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `web_contenidos`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 8:58 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+/**
+ * admrc/index.php — Router Flight PHP para el Portal Admin CMS
+ *
+ * Ubicación: laesh-swbldi/admrc/index.php
+ * URL:       /laesh/adrc/          (Alias en restaurantb.conf)
+ *
+ * Fuente HTML: portafolio-dev-2026/blocklabgd/v1.2/mockup1.0/uipv1/gestion-web.html  ← NUNCA BORRAR (R15.1)
+ * Merge iterativo: cambios en gestion-web.html → propagar en views/gestion_web.php
+ *
+ * Rutas:
+ *   GET  /          → vista principal CMS (requiere permiso gestionar_cms)
+ *   POST /cms/save  → guardar sección en web_contenidos (HTMX)
+ */
+
+declare(strict_types=1);
+
+// commons/ está 1 nivel arriba de admrc/
+require_once __DIR__ . '/../commons/commons.php';
+
+use Common\Logger;
+use Common\DB;
+use Common\Cache;
+
+// ── Guard RBAC: solo ADMIN puede acceder ────────────────────────────────────
+Flight::rbac()->requirePermission(
+    'gestionar_cms',
+    '/laesh/login/login.php?portal=admin'  // Nginx location /laesh/ → laesh-swbldi/website/
+);
+
+// ── GET / — Panel principal CMS ──────────────────────────────────────────────
+Flight::route('GET /', function () {
+    $auth = Flight::auth();
+    $db   = Flight::db();
+
+    // Nombre del admin desde empleados
+    $stmt = $db->prepare("SELECT nombre, apellidos FROM empleados WHERE user_id = ? LIMIT 1");
+    $stmt->execute([$auth->getUserId()]);
+    $emp = $stmt->fetch(\PDO::FETCH_ASSOC);
+    $nombreAdmin = $emp ? trim($emp['nombre'] . ' ' . $emp['apellidos']) : 'Administrador';
+
+    // CSRF token (R14.12)
+    if (empty($_SESSION['csrf_token'])) {
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+    }
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 8:58 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion_web.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L493-511)</summary>
+
+**Path:** `Unknown file`
+
+```
+            <!-- Fila 3: Historia Institucional (Ficha Ancha) -->
+            <div class="editor-card mb-4" style="border: 2px solid #7c3aed; background: #fafafa; border-radius: 8px; overflow: visible; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
+                <div class="editor-card-header" style="background: linear-gradient(135deg, #4c1d95 0%, #7c3aed 100%); padding: 10px 14px;">
+                    <div class="card-title" style="color: #ffffff; font-weight: 800; font-size: 0.95rem;">Historia Institucional (Ficha Ancha)</div>
+                </div>
+                <div class="editor-card-body" style="padding: 12px;">
+                    <p class="cms-p">
+                        <strong>25 años de experiencia al servicio del diagnóstico</strong> —
+                        texto institucional completo. Edita directamente en el recuadro.
+                    </p>
+                    <div class="field-group">
+                        <div id="ck-historia" class="ck5-mount"></div>
+                        <textarea id="ck-historia-data" name="ficha1__texto" class="ck5-hidden-data"><?= htmlspecialchars(cmsRaw($contenidos, 'quienes-somos', 'ficha1', 'texto',
+                            '<p>LAESH, Laboratorio de Especialidades Hematológicas, es una empresa 100% de la Región Mixteca.</p>')) ?></textarea>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The image presents two distinct columns, likely representing related concepts. The left column lists qualities or attributes using checkmarks, suggesting a value proposition or features. The right column displays a medical card, potentially indicating a healthcare or pharmaceutical context related to the attributes in the left column.
+
+
+The RTE's modifications depend on the desired presentation of the provided text and image; understanding the current editor configuration is essential. The user intends to insert the content, including an image, into a specific section of the institutional history. The user possesses the image file and seeks guidance on incorporating it within the editor.
+
+
+The current editor configuration lacks image insertion functionality; the "no media" designation confirms this. This omission necessitates using source editing for image inclusion or enabling image-related tools within the rich text editor. The user must provide a method for image upload or hosting.
+
+
+Several image insertion approaches exist since a dedicated upload slot is absent. These include CMS-integrated upload buttons, using an existing CMS asset slot with URL insertion, or direct HTML/source editing with asset storage. CSS restrictions within the editor could unintentionally scale large images down to a maximum height, requiring careful consideration for medical or infographic content.
+
+
+Considering a two-column layout for the content, the Rich Text Editor (RTE) either requires a transparent, two-column table or CSS flexbox implementation via source editing. The approach using CSS classes is potentially preferable for its responsiveness; however, it needs proper implementation and might depend on CMS-level CSS. Ensuring the image renders correctly within the RTE and the public-facing webpage demands careful assessment to prevent size constraints and maintain the visual integrity of the data.
+
+
+The server-side sanitization allows a broad set of HTML tags, including image and table elements, along with style, class, src, and alt attributes, which is good.  The RTE's configuration is limited; image insertion functionality is absent because specific plugins are not enabled, and the editor is created without media tools.  A CSS rule restricts image heights, a constraint that requires consideration during image insertion. I'll need to account for this image constraint.
+
+The content consists of a checklist with specific formatting on the left, including blue checkmarks, bold titles, and italic subtitles, and a medical card on the right.  This information will need to be arranged in a clear format to maintain visual integrity within the constraints of the RTE and considering the potential size limitations.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 13.029604196s
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+Dale con Opción B, de manera quirurgica sin pisar, sin colisiones y sin regresiones.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `gestion_web.php`
+**Language:** php
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Focus is on enabling image functionalities within the rich text editor for a specific content type. Identified several key plugins that need activation, covering image insertion, resizing, styling and captioning, also plan to include the image button in the editor's toolbar for the specified content. Also note a potential CSS restriction needing review for impacts.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `ckeditor-init.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.100118824s
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L94-144)</summary>
+
+**Path:** `Unknown file`
+
+```
+            },
+            plugins: [
+                CK.Essentials, CK.Paragraph, CK.Heading,
+                CK.Bold, CK.Italic, CK.Underline, CK.Strikethrough,
+                CK.Font, CK.Highlight, CK.Alignment,
+                CK.List, CK.TodoList,
+                CK.Indent, CK.IndentBlock,
+                CK.Link, CK.Table, CK.MediaEmbed, CK.HorizontalLine,
+                CK.SourceEditing, CK.GeneralHtmlSupport, CK.Style
+            ],
+            toolbar: {
+                items: [
+                    'sourceEditing', '|',
+                    'heading', 'style', '|',
+                    'bold', 'italic', 'underline', 'strikethrough', 'highlight', '|',
+                    'fontFamily', 'fontSize', 'fontColor', 'fontBackgroundColor', '|',
+                    'alignment', '|',
+                    'bulletedList', 'numberedList', 'todoList', '|',
+                    'outdent', 'indent', '|',
+                    'link', 'insertTable', 'mediaEmbed', 'horizontalLine', '|',
+                    'undo', 'redo'
+                ]
+            },
+            initialData: dataEl.value
+        };
+
+        CK.ClassicEditor.create(mountEl, editorConfig)
+            .then(function (editor) {
+                _ckState[globalKey] = editor;
+                window[globalKey]   = editor;
+
+                // Sincronizar con el textarea oculto para que onFieldChange() del CMS capte los cambios
+                editor.model.document.on('change:data', function () {
+                    dataEl.value = editor.getData();
+                    dataEl.dispatchEvent(new Event('input', { bubbles: true }));
+                });
+            })
+            .catch(function (err) {
+                console.error('[LAESH CMS] Falló CKEditor en ' + mountId + ':', err);
+                _ckState[globalKey] = null;
+                // Si falla, limpiar el montaje y mostrar el textarea crudo
+                mountEl.style.display = 'none';
+                dataEl.classList.remove('ck5-hidden-data');
+                dataEl.style.display  = 'block';
+            });
+    }
+
+    function _initQsEditors() {
+        setTimeout(function () {
+            _createEditorNoMedia('ck-ficha4',   'ck-ficha4-data',   '_ckFicha4', false);
+            _createEditorNoMedia('ck-historia', 'ck-historia-data', '_ckHistoria', false);
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The previous search reveals a series of image-related exports within the specified file. These exports likely represent distinct components or functionalities related to image handling within the CKEDITOR library, including editing, display, and insertion capabilities. Identifying these specific exports is crucial for understanding how the image features are structured and potentially integrated.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `insertImage`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.072082884s
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 9:04 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `componentFactory.add(`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 9:04 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `imageInsert`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 9:04 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `ET=`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 9:04 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `ckeditor5.umd.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L169-204)</summary>
+
+**Path:** `Unknown file`
+
+```
+	exports.HtmlPageDataProcessor = xE;
+	exports.IconView = Cf;
+	exports.IframeView = Rw;
+	exports.Image = nT;
+	exports.ImageBlock = eT;
+	exports.ImageBlockEditing = QE;
+	exports.ImageCaption = lT;
+	exports.ImageCaptionEditing = rT;
+	exports.ImageCaptionUI = aT;
+	exports.ImageCaptionUtils = sT;
+	exports.ImageCustomResizeUI = zT;
+	exports.ImageEditing = GE;
+	exports.ImageInline = iT;
+	exports.ImageInsert = ET;
+	exports.ImageInsertUI = XE;
+	exports.ImageInsertViaUrl = AT;
+	exports.ImageResize = HT;
+	exports.ImageResizeButtons = PT;
+	exports.ImageResizeEditing = ST;
+	exports.ImageResizeHandles = MT;
+	exports.ImageSizeAttributes = KE;
+	exports.ImageStyle = eS;
+	exports.ImageStyleEditing = ZT;
+	exports.ImageStyleUI = JT;
+	exports.ImageTextAlternative = HE;
+	exports.ImageTextAlternativeEditing = FE;
+	exports.ImageTextAlternativeUI = zE;
+	exports.ImageToolbar = tS;
+	exports.ImageUpload = kT;
+	exports.ImageUploadEditing = vT;
+	exports.ImageUploadProgress = mT;
+	exports.ImageUploadUI = uT;
+	exports.ImageUtils = RE;
+	exports.Indent = oS;
+	exports.IndentBlock = dS;
+	exports.IndentEditing = nS;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `pluginName = "Image`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 9:04 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `pluginName="Image`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 9:04 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 9:04 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `"insertImage"`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 9:07 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `componentFactory`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 9:07 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `ImageInsert`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 9:07 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `exports.ImageInsert`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 9:07 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 9:07 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 9:08 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 9:08 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 9:08 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+The `Image` component's dependencies include `ImageBlock` and `ImageInline`. Various exports define related functionalities: a toolbar, style management, resizing, captions, and image insertion via URL or other methods. Initiating a test to load these components, with associated configurations, appears to be the next logical step.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `exports.SimpleUploadAdapter`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.409247129s
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 9:09 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+Examining the codebase, `SimpleUploadAdapter` is present, enabling file uploads to a specified URL. The configuration uses `/laesh/adrc/cms/upload`. However, a mismatch exists; `SimpleUploadAdapter`'s setup might not align with the expected request parameters of the target upload endpoint. The expected request parameters are `slot`, `csrf_token`, and `file`, with a JSON response expected in the format `{ ok: }`.
+
+
+The upload endpoint now appears compatible, as its response includes a standard `'url'` field matching the adapter's expected format. Also, the CKEditor configuration likely supports image insertion both via URL and upload, as the necessary components seem to be loaded. It's crucial to confirm if the editors are configured to handle media uploads.
+
+
+The phrase "quirúrgica sin pisar, sin colisiones y sin regresiones" implies a very careful implementation: no modification of other components, adding image support only to the specified area, and a precise CSS adjustment. Implementing the requested image functionality for the "ck-historia" component will involve adding the specified plugins and toolbar options to the CKEditor instance. Then, ensuring the CSS adjustments are targeted to only the new "ck-historia" component, preventing side effects to existing image rendering.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `.ck5-output img`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 4.636871071s
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 9:09 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `.ck5-output`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 9:09 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L2049-2079)</summary>
+
+**Path:** `Unknown file`
+
+```
+    padding-top: 0.25rem;
+}
+
+#especialidades .section-header {
+    margin-top: 0.25rem;
+}
+
+/* Fix for CKEditor media embeds covering their own resize handles.
+   Nota: inline style="resize:both" tiene prioridad máxima; !important requerido aquí (no-R8 excepción: inline-style override) */
+.ck5-output div[style*="resize: both"] {
+    box-sizing: border-box !important;
+    padding: 0 16px 16px 0 !important;
+    background-color: #f8fafc;
+}
+
+/* Fix C4 — Móvil (≤767px): transición animate-on-scroll más rápida.
+   Desktop usa 1s (efecto premium en pantalla grande + CPU rápida).
+   Móvil: 0.45s + delays comprimidos — percepción de respuesta inmediata
+   sin sacrificar el efecto visual. DRY: solo se sobreescribe la transición. */
+@media (max-width: 767px) {
+    .animate-on-scroll {
+        transition: opacity 0.45s ease-out, transform 0.45s ease-out;
+    }
+    .delay-100 { transition-delay: 0.05s; }
+    .delay-200 { transition-delay: 0.1s;  }
+    .delay-300 { transition-delay: 0.15s; }
+    #especialidades .carousel-arrow-btn {
+        display: none;
+    }
+    #especialidades .specialties-carousel-track .carousel-card {
+        flex: 0 0 calc(100% - 1rem);
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Default browser styling should handle responsive images within the `.ck5-output` class, but explicitly setting `max-width: 100%; height: auto;` in `landing.css` is a failsafe to ensure images rendered via CKEditor, including those in the Historia card, always fit their containers. This guarantees smooth scaling across various screen sizes. Testing will now begin regarding CKEditor 5's image initialization.
+
+
+Investigating the initialization process of the editor, specifically examining the configuration options. Checking the `ckeditor-init.js` file, focusing on lines 220-330, to identify required plugins or dependencies for the image and Historia editors. This should reveal the features utilized and how the editor is configured.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `exports.PictureEditing`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.396357264s
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 9:09 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `exports.LinkImage`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 9:09 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+Investigating the inclusion of specific plugins, considering potential outcomes. Thought about creating a node test utilizing a headless browser or examining plugin dependency resolution. Recalled the utility of a real browser verification approach.
+
+Further considered using `curl`, in-browser testing, or Python to inspect how dependencies are resolved in CKEditor 5.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.080340853s
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 9:09 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+Analyzing component dependencies, it appears that several image-related features depend on specific configurations. Passing plugins for core image functionalities, alongside UI components, is likely necessary. This necessitates careful consideration of the required plugin combinations to ensure all features function correctly.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.002219112s
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 9:10 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+Considering the provided configurations for image features and toolbar elements. The current setup seems intended to enable image insertion via URL and customize the image toolbar with specific style options and caption controls. Need to verify that the configuration is complete and there are no conflicts or omissions preventing the desired image functionalities. Further investigation is needed if the toolbar's expected behavior is not observed.
+
+
+The user's local image file upload requires understanding the server-side file handling. The server-side code checks for either `$_FILES['file']` or `$_FILES['upload']`, addressing a potential discrepancy. Configuring the uploader with the correct upload URL and CSRF token is essential for correct file submission.
+
+
+The image upload from the editor appears to be designed to work seamlessly due to the server's acceptance of the file using either POST `file` or `upload`. The server response includes the expected URL. A potential issue may arise if the upload context does not specify the correct "slot" value expected by the server-side script. The server code sanitizes the POST data `slot`, but its default value is set to 'cms'; however, if uploading from the editor, a different slot name is expected.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 3.221660734s
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L284-354)</summary>
+
+**Path:** `Unknown file`
+
+```
+    $slot = $slot ?: 'cms';
+
+    // [TEMPORAL - PRUEBAS] Flag para Tarjetas 1 a 16 de Estudios (carousel-*)
+    $isCarousel = (bool) preg_match('/^carousel-/', $slot);
+
+    // Validar MIME por contenido real — solo WebP por defecto (alineado con Guía CMS §5.1–§5.6)
+    // Para slots carousel-* (Tarjeta 1 a 16 de Estudios), temporalmente se aceptan formatos de imagen adicionales
+    $allowedMimes = [
+        'image/webp' => 'webp',
+        'image/jpeg' => 'jpg',
+        'image/png'  => 'png',
+        'image/gif'  => 'gif',
+        'image/avif' => 'avif',
+    ];
+    $finfo = new \finfo(FILEINFO_MIME_TYPE);
+    $mime  = $finfo->file($file['tmp_name']);
+
+    if (!$isCarousel) {
+        if ($mime !== 'image/webp') {
+            http_response_code(415);
+            echo json_encode(['ok' => false, 'msg' => 'Tipo no permitido. Solo se acepta WebP. Optimiza la imagen antes de subir.']);
+            exit;
+        }
+    } else {
+        if (!array_key_exists($mime, $allowedMimes)) {
+            http_response_code(415);
+            echo json_encode(['ok' => false, 'msg' => 'Tipo no permitido. Sube un archivo de imagen válido.']);
+            exit;
+        }
+    }
+
+    // Validar tamaño — 150 KB máximo (límite homologado, omitido temporalmente para carousel-* en pruebas)
+    if (!$isCarousel && $file['size'] > 150 * 1024) {
+        $sizeKb = round($file['size'] / 1024, 1);
+        http_response_code(413);
+        echo json_encode(['ok' => false, 'msg' => "El archivo ({$sizeKb} KB) supera el límite de 150 KB. Optimiza la imagen antes de subir."]);
+        exit;
+    }
+
+    // Validar dimensiones servidor — espejo de cms-upload.js slotRules()
+    $imgSize = @getimagesize($file['tmp_name']);
+    if ($imgSize === false && !$isCarousel) {
+        http_response_code(422);
+        echo json_encode(['ok' => false, 'msg' => 'No se pudieron leer las dimensiones de la imagen. Verifica que el archivo WebP sea válido.']);
+        exit;
+    }
+    [$imgW, $imgH] = $imgSize ?: [0, 0];
+    $dimError = null;
+
+    if (!$isCarousel) {
+        if (preg_match('/^hero-/', $slot)) {
+            if ($imgW < 1280 || $imgW > 1920)
+                $dimError = "Banner Hero: ancho {$imgW} px fuera del rango 1\u{202F}280–1\u{202F}920 px. Spec: 1\u{202F}280–1\u{202F}920 px ancho · Orientación Horizontal.";
+            elseif ($imgH >= $imgW)
+                $dimError = "Banner Hero: orientación debe ser Horizontal (ancho > alto). Recibido: {$imgW}×{$imgH}.";
+        } elseif ($slot === 'ubicacion-croquis') {
+            if ($imgW > 1284 || $imgH > 902)
+                $dimError = "Croquis de Ubicación: máximo 1284×902 px. Recibido: {$imgW}×{$imgH}.";
+            elseif ($imgH >= $imgW)
+                $dimError = "Croquis de Ubicación: orientación debe ser Horizontal (ancho > alto). Recibido: {$imgW}×{$imgH}.";
+        } elseif (preg_match('/^promo-/', $slot)) {
+            if ($imgH >= $imgW)
+                $dimError = "Card de Promociones: orientación debe ser Horizontal (ancho > alto). Recibido: {$imgW}×{$imgH}.";
+            elseif ($imgW < 1000 || $imgW > 1200 || $imgH < 600 || $imgH > 800)
+                $dimError = "Card de Promociones: dimensiones requeridas 1024×687 px (óptimo nativo) o 1200×(600–675) px. Recibido: {$imgW}×{$imgH}.";
+        } elseif (preg_match('/^calidad-/', $slot)) {
+            if ($imgW !== 800 || $imgH !== 580)
+                $dimError = "Galería de Calidad: se requiere exacto 800×580 px. Recibido: {$imgW}×{$imgH}.";
+        } elseif ($slot === 'seo-og') {
+            if ($imgW < 1200 || $imgW > 1920)
+                $dimError = "Open Graph (SEO): ancho {$imgW} px fuera del rango 1\u{202F}200–1\u{202F}920 px.";
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The code checks for a minimum image width, potentially triggering an error if the image is too narrow, which is 800px. This check is performed unless a specific 'historia' slot is involved. The user providing a JPEG image implies potential conflicts with image format checks if the slot is not 'historia' or doesn't start with it.
+
+
+The code needs modification to support JPEG and WebP uploads, specifically for the 'historia' slot. The PHP script must be updated to accept both `$_FILES['file']` and `$_FILES['upload']`. The CKEditor configuration might require an upload adapter to correctly handle image insertion, checking for the correct plugin dependencies.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `exports.FileRepository`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.688434096s
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 9:10 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+The `FileRepository` is confirmed to be present, and `ImageUpload` relies on it. Defining `createUploadAdapter` on the `FileRepository` enables image insertion via toolbar button. This allows for file selection, drag-and-drop, clipboard pasting, and URL-based image insertion.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `cms-upload.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.013720141s
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L14-39)</summary>
+
+**Path:** `Unknown file`
+
+```
+    /** Actualiza el CSRF token tras cada rotación en el servidor (global para CMS y upload). */
+    function refreshCsrf(newToken) {
+        if (!newToken) return;
+        const meta = document.querySelector('meta[name="csrf-token"]');
+        if (meta) meta.content = newToken;
+        const btn = document.getElementById('btn-cms-save-action');
+        if (btn) {
+            btn.dataset.csrf = newToken;
+            btn.setAttribute('data-csrf', newToken);
+        }
+        document.querySelectorAll('input[name="csrf_token"]').forEach(el => el.value = newToken);
+    }
+    window.refreshCsrf = refreshCsrf;
+
+    let toastTimer = null;
+
+    /** Muestra el toast CMS. Los errores (isError=true) NUNCA se cierran solos; requieren clic en la '✖'. */
+    function showToast(msg, isError) {
+        const toast = document.getElementById('toast');
+        if (!toast) return;
+
+        if (toastTimer) { clearTimeout(toastTimer); toastTimer = null; }
+
+        const iconSvg = isError
+            ? '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="flex-shrink:0"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>'
+            : '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="flex-shrink:0"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `cms-upload.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L39-64)</summary>
+
+**Path:** `Unknown file`
+
+```
+            : '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="flex-shrink:0"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+
+        // 2026-10-03: fecha y hora en formato corto al final de todo mensaje de ack
+        const now = new Date();
+        const pad = n => String(n).padStart(2, '0');
+        const fechaHoraCorta = `${pad(now.getDate())}/${pad(now.getMonth() + 1)}/${now.getFullYear()} ${pad(now.getHours())}:${pad(now.getMinutes())}`;
+        const timeHtml = (!/\d{1,2}\/\d{1,2}(?:\/\d{2,4})?\s+\d{1,2}:\d{2}/.test(msg))
+            ? `<span style="font-size:0.82em;opacity:0.88;margin-left:4px;white-space:nowrap;"> — ${fechaHoraCorta}</span>`
+            : '';
+
+        toast.innerHTML = `<div style="display:flex;align-items:center;gap:8px;flex:1">${iconSvg}<span>${msg}${timeHtml}</span></div>
+            <button type="button" class="cms-toast-close" id="btn-toast-close" title="Cerrar notificación">✖</button>`;
+
+        toast.classList.toggle('toast--error', !!isError);
+        toast.classList.add('visible');
+
+        // Botón de cierre manual
+        const closeBtn = document.getElementById('btn-toast-close');
+        if (closeBtn) {
+            closeBtn.onclick = function (e) {
+                e.stopPropagation();
+                if (toastTimer) { clearTimeout(toastTimer); toastTimer = null; }
+                toast.classList.remove('visible');
+            };
+        }
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `cms-upload.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L59-74)</summary>
+
+**Path:** `Unknown file`
+
+```
+                e.stopPropagation();
+                if (toastTimer) { clearTimeout(toastTimer); toastTimer = null; }
+                toast.classList.remove('visible');
+            };
+        }
+
+        // Si NO es error, auto-ocultar tras 4 segundos. Si ES ERROR, PERMANECE ABIERTO INDEFINIDAMENTE.
+        if (!isError) {
+            toastTimer = setTimeout(() => {
+                toast.classList.remove('visible');
+            }, 4000);
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('input[type="file"][data-upload-slot]').forEach(function (input) {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `function getCsrf`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 9:10 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `cms-upload.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L6-15)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+    /** Devuelve el CSRF token vigente (<meta> o data-csrf del botón). */
+    function getCsrf() {
+        const meta = document.querySelector('meta[name="csrf-token"]');
+        if (meta && meta.content) return meta.content;
+        return document.getElementById('btn-cms-save-action')?.dataset?.csrf ?? '';
+    }
+
+    /** Actualiza el CSRF token tras cada rotación en el servidor (global para CMS y upload). */
+    function refreshCsrf(newToken) {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Examining the code, a function likely responsible for retrieving a CSRF token is present. Initially, it attempts to obtain the token from a meta tag or an input field. If those fail, it defaults to retrieving the token from a specific element's data attribute.
+
+
+The code defines an upload adapter, `LaeshUploadAdapter`, for CKEditor 5. It constructs a `FormData` object containing the file, a 'historia' slot identifier, and a CSRF token. The adapter then sends a POST request to an upload endpoint, handling the response, and potentially refreshing the CSRF token.
+
+
+The `extraPlugins` configuration requires a function that alters the editor's upload adapter, so `FileRepository` is necessary. The other plugins listed in the provided code define the editor's features and toolbar items. The complete list of plugins needs to be included in the `plugins` field of the `editorConfig` object.
+
+
+The code sanitizes the `slot` parameter, allowing only alphanumeric characters and hyphens, and defaults to 'cms' if empty. The `$isCarousel` variable checks if the slot starts with "carousel-". The allowed MIME types are defined, and checks for `image/webp` are performed if `$isCarousel` is false. If the slot is `historia`, the conditional check might be bypassed. A potential vulnerability exists if a JPEG image is uploaded to a 'historia' slot due to the logic bypass.
+
+
+The system is designed to handle WebP, JPEG, and PNG images without size restrictions in the 'historia' slot. The file upload field name is flexible, accepting both standard uploads and those from CKEditor, ensuring compatibility. Investigating other code locations, such as `admrc/index.php` and CSS files, is necessary to confirm no conflicting image handling logic exists. CSS rules in `gestion-web.css` and `landing.css` focus on responsive image display within specific components, and lines 40-50 of `acerca-de.php` include the responsive display of CKEditor content.
+
+
+Examining CSS rules, the `.card-premium` element, used for displaying content, has a fixed height and `overflow: auto`, ensuring content fits or becomes scrollable. The `.modal-scroll-body` element also has specified height and `overflow` properties.  A two-column layout with this configuration will likely fit side-by-side on desktop displays. Providing a ready-to-paste HTML snippet within CKEditor appears feasible. This snippet could include a responsive two-column structure with formatted text and an image placeholder.
+
+
+The `admrc/index.php` file needs modification to accept both file upload methods and correctly exempt 'historia' slots from format restrictions. The `ckeditor-init.js` file requires creation of a dedicated editor configuration, `_createEditorHistoria`, tailored for the 'historia' slot with necessary image plugins and a custom upload adapter. CSS changes in `gestion-web.css` will style the images within the '#ck-historia' editor, overriding default styles.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 13.318802924s
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L269-329)</summary>
+
+**Path:** `Unknown file`
+
+```
+        exit;
+    }
+
+    // Verificar que llegó un archivo sin errores
+    if (empty($_FILES['file']) || $_FILES['file']['error'] !== UPLOAD_ERR_OK) {
+        $errCode = $_FILES['file']['error'] ?? -1;
+        http_response_code(400);
+        echo json_encode(['ok' => false, 'msg' => "No se recibió el archivo (código: {$errCode})."]);
+        exit;
+    }
+
+    $file = $_FILES['file'];
+
+    // Nombre del slot — solo alfanumérico y guiones (necesario antes de la validación de dims)
+    $slot = preg_replace('/[^a-z0-9\-]/', '', strtolower($_POST['slot'] ?? 'cms'));
+    $slot = $slot ?: 'cms';
+
+    // [TEMPORAL - PRUEBAS] Flag para Tarjetas 1 a 16 de Estudios (carousel-*)
+    $isCarousel = (bool) preg_match('/^carousel-/', $slot);
+
+    // Validar MIME por contenido real — solo WebP por defecto (alineado con Guía CMS §5.1–§5.6)
+    // Para slots carousel-* (Tarjeta 1 a 16 de Estudios), temporalmente se aceptan formatos de imagen adicionales
+    $allowedMimes = [
+        'image/webp' => 'webp',
+        'image/jpeg' => 'jpg',
+        'image/png'  => 'png',
+        'image/gif'  => 'gif',
+        'image/avif' => 'avif',
+    ];
+    $finfo = new \finfo(FILEINFO_MIME_TYPE);
+    $mime  = $finfo->file($file['tmp_name']);
+
+    if (!$isCarousel) {
+        if ($mime !== 'image/webp') {
+            http_response_code(415);
+            echo json_encode(['ok' => false, 'msg' => 'Tipo no permitido. Solo se acepta WebP. Optimiza la imagen antes de subir.']);
+            exit;
+        }
+    } else {
+        if (!array_key_exists($mime, $allowedMimes)) {
+            http_response_code(415);
+            echo json_encode(['ok' => false, 'msg' => 'Tipo no permitido. Sube un archivo de imagen válido.']);
+            exit;
+        }
+    }
+
+    // Validar tamaño — 150 KB máximo (límite homologado, omitido temporalmente para carousel-* en pruebas)
+    if (!$isCarousel && $file['size'] > 150 * 1024) {
+        $sizeKb = round($file['size'] / 1024, 1);
+        http_response_code(413);
+        echo json_encode(['ok' => false, 'msg' => "El archivo ({$sizeKb} KB) supera el límite de 150 KB. Optimiza la imagen antes de subir."]);
+        exit;
+    }
+
+    // Validar dimensiones servidor — espejo de cms-upload.js slotRules()
+    $imgSize = @getimagesize($file['tmp_name']);
+    if ($imgSize === false && !$isCarousel) {
+        http_response_code(422);
+        echo json_encode(['ok' => false, 'msg' => 'No se pudieron leer las dimensiones de la imagen. Verifica que el archivo WebP sea válido.']);
+        exit;
+    }
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Checking the file upload handling logic. The code appears to validate if a file was uploaded without errors, supporting both standard file inputs and CKEditor uploads. The code then sets an error code if the file upload is missing or has errors. A HTTP 400 status is returned with a JSON error message.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.131453518s
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 9:11 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L329-354)</summary>
+
+**Path:** `Unknown file`
+
+```
+        exit;
+    }
+    [$imgW, $imgH] = $imgSize ?: [0, 0];
+    $dimError = null;
+
+    if (!$isCarousel) {
+        if (preg_match('/^hero-/', $slot)) {
+            if ($imgW < 1280 || $imgW > 1920)
+                $dimError = "Banner Hero: ancho {$imgW} px fuera del rango 1\u{202F}280–1\u{202F}920 px. Spec: 1\u{202F}280–1\u{202F}920 px ancho · Orientación Horizontal.";
+            elseif ($imgH >= $imgW)
+                $dimError = "Banner Hero: orientación debe ser Horizontal (ancho > alto). Recibido: {$imgW}×{$imgH}.";
+        } elseif ($slot === 'ubicacion-croquis') {
+            if ($imgW > 1284 || $imgH > 902)
+                $dimError = "Croquis de Ubicación: máximo 1284×902 px. Recibido: {$imgW}×{$imgH}.";
+            elseif ($imgH >= $imgW)
+                $dimError = "Croquis de Ubicación: orientación debe ser Horizontal (ancho > alto). Recibido: {$imgW}×{$imgH}.";
+        } elseif (preg_match('/^promo-/', $slot)) {
+            if ($imgH >= $imgW)
+                $dimError = "Card de Promociones: orientación debe ser Horizontal (ancho > alto). Recibido: {$imgW}×{$imgH}.";
+            elseif ($imgW < 1000 || $imgW > 1200 || $imgH < 600 || $imgH > 800)
+                $dimError = "Card de Promociones: dimensiones requeridas 1024×687 px (óptimo nativo) o 1200×(600–675) px. Recibido: {$imgW}×{$imgH}.";
+        } elseif (preg_match('/^calidad-/', $slot)) {
+            if ($imgW !== 800 || $imgH !== 580)
+                $dimError = "Galería de Calidad: se requiere exacto 800×580 px. Recibido: {$imgW}×{$imgH}.";
+        } elseif ($slot === 'seo-og') {
+            if ($imgW < 1200 || $imgW > 1920)
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 9:11 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `ckeditor-init.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L219-344)</summary>
+
+**Path:** `Unknown file`
+
+```
+        }, { priority: 'highest' });
+    }
+
+    function _createEditorNoMedia(mountId, dataId, globalKey, isLocked) {
+        if (_ckState[globalKey]) return;
+        _ckState[globalKey] = 'pending';
+
+        var mountEl = document.getElementById(mountId);
+        var dataEl  = document.getElementById(dataId);
+
+        if (!mountEl || !dataEl || typeof CKEDITOR === 'undefined') {
+            _ckState[globalKey] = null;
+            return;
+        }
+
+        var CK = CKEDITOR;
+        
+        var laeshColors = [
+            { color: '#0052B7', label: 'Azul LAESH Principal' },
+            { color: '#71CA11', label: 'Verde LAESH Principal' },
+            { color: '#A3C912', label: 'Verde Acento' },
+            { color: '#CCE7F5', label: 'Azul Claro (Fondo)' },
+            { color: '#0f172a', label: 'Texto Oscuro' },
+            { color: '#64748b', label: 'Texto Secundario' },
+            { color: '#ffffff', label: 'Blanco' },
+            { color: '#000000', label: 'Negro' }
+        ];
+
+        var editorConfig = {
+            licenseKey: 'GPL',
+            fontColor: { 
+                colors: laeshColors,
+                documentColors: 0 
+            },
+            fontBackgroundColor: { 
+                colors: laeshColors,
+                documentColors: 0 
+            },
+            fontFamily: {
+                options: [
+                    'default',
+                    'Arial, Helvetica, sans-serif',
+                    'Cabin, sans-serif',
+                    'Courier New, Courier, monospace',
+                    'Georgia, serif',
+                    'Gill Sans, sans-serif',
+                    'Mosquito Std Black, sans-serif',
+                    'Tahoma, Geneva, sans-serif',
+                    'Times New Roman, Times, serif',
+                    'Trebuchet MS, Helvetica, sans-serif',
+                    'Verdana, Geneva, sans-serif'
+                ],
+                supportAllValues: true
+            },
+            fontSize: {
+                options: [
+                    'default',
+                    9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 22, 24, 28, 32, 36
+                ],
+                supportAllValues: true
+            },
+            style: {
+                definitions: [
+                    { name: 'Subtítulo (Azul)', element: 'h3', classes: ['acerca-h3b'] },
+                    { name: 'Texto Destacado', element: 'p', classes: ['faq-p--primary'] },
+                    { name: 'Texto Secundario', element: 'p', classes: ['faq-p--tail'] },
+                    { name: 'Texto Muted', element: 'p', classes: ['aviso-p--muted'] },
+                    { name: 'Firma / Highlight', element: 'strong', classes: ['txt-main'] }
+                ]
+            },
+            htmlSupport: {
+                allow: [
+                    {
+                        name: /.*/,
+                        attributes: true,
+                        classes: true,
+                        styles: true
+                    }
+                ]
+            },
+            plugins: [
+                CK.Essentials, CK.Paragraph, CK.Heading,
+                CK.Bold, CK.Italic, CK.Underline, CK.Strikethrough,
+                CK.Font, CK.Highlight, CK.Alignment,
+                CK.List, CK.TodoList,
+                CK.Indent, CK.IndentBlock,
+                CK.Table, CK.HorizontalLine,
+                CK.SourceEditing, CK.GeneralHtmlSupport, CK.Style
+            ],
+            toolbar: {
+                items: [
+                    'sourceEditing', '|',
+                    'heading', 'style', '|',
+                    'bold', 'italic', 'underline', 'strikethrough', 'highlight', '|',
+                    'fontFamily', 'fontSize', 'fontColor', 'fontBackgroundColor', '|',
+                    'alignment', '|',
+                    'bulletedList', 'numberedList', 'todoList', '|',
+                    'outdent', 'indent', '|',
+                    'insertTable', 'horizontalLine', '|',
+                    'undo', 'redo'
+                ]
+            },
+            initialData: dataEl.value
+        };
+
+        CK.ClassicEditor.create(mountEl, editorConfig)
+            .then(function (editor) {
+                _ckState[globalKey] = editor;
+                window[globalKey]   = editor;
+
+                if (isLocked) {
+                    _lockTextContent(editor);
+                }
+
+                editor.model.document.on('change:data', function () {
+                    dataEl.value = editor.getData();
+                    dataEl.dispatchEvent(new Event('input', { bubbles: true }));
+                });
+            })
+            .catch(function (err) {
+                console.error('[LAESH CMS] Falló CKEditor en ' + mountId + ':', err);
+                _ckState[globalKey] = null;
+                mountEl.style.display = 'none';
+                dataEl.classList.remove('ck5-hidden-data');
+                dataEl.style.display  = 'block';
+            });
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+A CKEditor 5 upload adapter seems necessary. The code should handle image uploads to a specific endpoint, associating them with a story slot. It needs to create a `FormData` object to encapsulate the file and handle the asynchronous file upload using a promise.
+
+
+Constructing the `FormData` object is essential, appending the file, story slot identifier, and CSRF token. The CSRF token retrieval attempts to locate it first in a meta tag, then an input field, and finally within a button's data attribute, to ensure proper security. The fetch request targets the upload endpoint with a POST method, sending the `FormData`.
+
+
+The `_createEditorHistoria` function aims to initialize a rich text editor. It begins by checking for an existing editor instance to avoid redundant initialization. If the editor isn't already present and all necessary elements are available, it proceeds with editor setup.
+
+It defines a color palette for the editor, likely specific to the application's branding, and configures the editor with this palette, and other settings. The configuration includes the license key, font color, background color, and font family options.
+
+
+The rich text editor configuration will allow specific font families, font sizes, and custom styles tailored to the application's design.  These style definitions likely map semantic elements (like subtitles or highlighted text) to specific HTML tags and CSS classes. The `htmlSupport` setting suggests comprehensive control over the allowed HTML elements, attributes, classes, and styles.
+
+
+The editor's image configuration is now clear. The toolbar settings encompass various image styles, captioning, alternative text, and resizing capabilities. Image insertion is configured to allow both direct file uploads and external URLs.
+
+The plugin setup seems robust, including essential text formatting, list management, table creation, and image handling tools. Importantly, it includes a custom upload adapter for images, likely tailored to the application's backend.
+
+
+The code initializes a rich text editor instance, configuring its features. The configuration incorporates a defined set of plugins, likely for formatting, lists, tables, and images. An upload adapter is included, likely to handle image uploads. Error handling is present to address potential initialization failures.
+
+The `_initQsEditors` function orchestrates the setup of multiple editors, including ones with and without media capabilities.  The function calls another to initialize multiple editor instances.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `ckeditor-init.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 7.829496998s
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L139-154)</summary>
+
+**Path:** `Unknown file`
+
+```
+    }
+
+    function _initQsEditors() {
+        setTimeout(function () {
+            _createEditorNoMedia('ck-ficha4',   'ck-ficha4-data',   '_ckFicha4', false);
+            _createEditorNoMedia('ck-historia', 'ck-historia-data', '_ckHistoria', false);
+            _createEditorNoMedia('ck-mision',   'ck-mision-data',   '_ckMision', false);
+            _createEditorNoMedia('ck-vision',   'ck-vision-data',   '_ckVision', false);
+        }, 150);
+    }
+
+    function _initEspecialidadesEditors() {
+        setTimeout(function () {
+            for (var i = 1; i <= 16; i++) {
+                var mId = 'ck-carousel-' + i;
+                var dId = 'ck-carousel-' + i + '-data';
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `ckeditor-init.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L134-154)</summary>
+
+**Path:** `Unknown file`
+
+```
+                // Si falla, limpiar el montaje y mostrar el textarea crudo
+                mountEl.style.display = 'none';
+                dataEl.classList.remove('ck5-hidden-data');
+                dataEl.style.display  = 'block';
+            });
+    }
+
+    function _initQsEditors() {
+        setTimeout(function () {
+            _createEditorNoMedia('ck-ficha4',   'ck-ficha4-data',   '_ckFicha4', false);
+            _createEditorNoMedia('ck-historia', 'ck-historia-data', '_ckHistoria', false);
+            _createEditorNoMedia('ck-mision',   'ck-mision-data',   '_ckMision', false);
+            _createEditorNoMedia('ck-vision',   'ck-vision-data',   '_ckVision', false);
+        }, 150);
+    }
+
+    function _initEspecialidadesEditors() {
+        setTimeout(function () {
+            for (var i = 1; i <= 16; i++) {
+                var mId = 'ck-carousel-' + i;
+                var dId = 'ck-carousel-' + i + '-data';
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 9:12 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L589-619)</summary>
+
+**Path:** `Unknown file`
+
+```
+}
+
+/* Toolbar del editor — alineada con la paleta del CMS */
+.ck5-mount .ck.ck-toolbar {
+    background: var(--bg-muted, #f8fafc);
+    border-bottom: 1px solid var(--border, #d1d5db);
+    border-radius: 6px 6px 0 0;
+    flex-wrap: wrap !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+}
+.ck5-mount .ck.ck-editor__editable_inline {
+    min-height: 120px;
+    padding: 0.75rem 1rem;
+    font-size: 0.93rem;
+    line-height: 1.6;
+    color: var(--text-main, #1e293b);
+    resize: vertical;
+    overflow: auto;
+}
+.ck5-mount .ck.ck-editor__editable_inline:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--primary, #0052b7);
+}
+
+/* Área de edición ampliada para documentos extensos (Aviso de Privacidad) */
+.ck5-mount.ck5-mount-lg {
+    min-height: 480px;
+}
+.ck5-mount.ck5-mount-lg .ck.ck-editor__editable_inline {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L619-644)</summary>
+
+**Path:** `Unknown file`
+
+```
+.ck5-mount.ck5-mount-lg .ck.ck-editor__editable_inline {
+    min-height: 450px;
+}
+
+/* Restringir visualización de imágenes/logos dentro del lienzo de edición CKEditor 5 */
+.ck5-mount .ck.ck-content img,
+.ck5-mount .ck.ck-editor__editable_inline img {
+    max-height: 140px;
+    width: auto;
+    object-fit: contain;
+}
+
+.ck5-mount .ck.ck-content img.footer-logo-img,
+.ck5-mount .ck.ck-editor__editable_inline img.footer-logo-img,
+.ck5-mount .ck.ck-content img[src*="logo"],
+.ck5-mount .ck.ck-editor__editable_inline img[src*="logo"] {
+    max-height: 48px;
+    width: auto;
+    object-fit: contain;
+}
+
+/* Ocultar el textarea de respaldo — CKEditor lo gestiona */
+.ck5-hidden-data {
+    display: none ;
+    visibility: hidden;
+    position: absolute;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+A specific CSS exception for `#ck-historia` is needed. This exception, inserted after line 630 within the designated CSS file, addresses responsive image scaling within that section. It's designed to override default maximum height constraints, allowing flexible image dimensions.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.153983439s
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 9:13 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1979-2009)</summary>
+
+**Path:** `Unknown file`
+
+```
+.grid-single-history .card-premium .modal-scroll-body {
+    max-height: none;
+    min-height: 150px;
+    overflow: visible !important;
+}
+
+#video .modal-scroll-body {
+    max-height: none !important;
+    overflow: visible !important;
+    padding: 0 !important;
+}
+
+#video .ck5-output {
+    padding: 0.75rem 0 !important;
+}
+
+/* R-MOB: Quiénes Somos → tablet/iPad (≤1024px) — layout, padding y card widths
+   grid-template-columns no necesita !important aquí: la base ya es 2 cols y el selector
+   #acerca-de (1,1,0) supera en especificidad a .grid-layout.grid-1-1-auto (0,2,0) de style.css.
+   El resto sí usa !important porque otros stylesheets ganan esas propiedades sin él. */
+@media (max-width: 1024px) {
+    #acerca-de {
+        padding-left: 1.25rem !important;
+        padding-right: 1.25rem !important;
+        box-sizing: border-box !important;
+        width: 100% !important;
+    }
+    #acerca-de .grid-acerca-cards,
+    .grid-acerca-cards {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The objective is to implement responsive image handling within a specific CSS class. Specifically targeting images within a particular history grid to ensure they scale correctly. The plan is to insert CSS rules to control maximum width and height adjustments for these images, preventing overflow issues.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.091100782s
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 9:13 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 9:13 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 9:13 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+A new image file appeared in the CMS directory, likely from a test or upload. Examining the `git status` output confirms only clean modifications in several specific files across different asset directories. Preparing a concise instruction for handling this situation, emphasizing a clean and easy solution.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.102870634s
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+/**
+ * CKEditor 5 — Inicialización segura con MutationObserver
+ *
+ * Se remueve el parcheo frágil de `showPanel` para evitar condiciones de carrera
+ * con gestion-web.js. Se utiliza MutationObserver para detectar de manera 100% fiable
+ * cuando el panel "Quiénes somos" (panel-quienes-somos) obtiene la clase .active.
+ * Esto evita el error de cálculo de dimensiones de CKEditor en elementos display:none.
+ */
+(function () {
+    'use strict';
+
+    var _ckState = {};  // 'pending' | editor instance | null
+
+    function _createEditor(mountId, dataId, globalKey) {
+        if (_ckState[globalKey]) return;
+        _ckState[globalKey] = 'pending';
+
+        var mountEl = document.getElementById(mountId);
+        var dataEl  = document.getElementById(dataId);
+
+        if (!mountEl || !dataEl || typeof CKEDITOR === 'undefined') {
+            _ckState[globalKey] = null;
+            return;
+        }
+
+        var CK = CKEDITOR;
+        
+        var laeshColors = [
+            { color: '#0052B7', label: 'Azul LAESH Principal' },
+            { color: '#71CA11', label: 'Verde LAESH Principal' },
+            { color: '#A3C912', label: 'Verde Acento' },
+            { color: '#CCE7F5', label: 'Azul Claro (Fondo)' },
+            { color: '#0f172a', label: 'Texto Oscuro' },
+```
+
+</details>
+
+---
+
+## User Request
+
+cambios:
+-QUe haya un upload para subir la targeta.
+- Dame el html para ponerlo en el rte con base  a la image anexa. 
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `ckeditor-init.js`
+**Language:** javascript
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The request involves adding an image upload functionality to a specific card within the CMS, mirroring existing upload implementations for consistency. The target file is likely where the relevant view code resides, given the path provided in the request. The goal is to implement a mechanism for image replacement similar to existing implementations.
+
+
+Analyzing existing upload UI implementations within the target file is crucial for replicating the required functionality. Examining the provided image reveals a specific layout: a two-column text block on the left with a medical card image on the right. Further detailed analysis focuses on the precise arrangement of text elements within the left block. The goal is to reproduce this layout for the image upload.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion_web.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.062486030s
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L489-519)</summary>
+
+**Path:** `Unknown file`
+
+```
+            </div><!-- /grid-2col fila 2 -->
+
+            <hr class="cms-section-sep">
+
+            <!-- Fila 3: Historia Institucional (Ficha Ancha) -->
+            <div class="editor-card mb-4" style="border: 2px solid #7c3aed; background: #fafafa; border-radius: 8px; overflow: visible; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
+                <div class="editor-card-header" style="background: linear-gradient(135deg, #4c1d95 0%, #7c3aed 100%); padding: 10px 14px;">
+                    <div class="card-title" style="color: #ffffff; font-weight: 800; font-size: 0.95rem;">Historia Institucional (Ficha Ancha)</div>
+                </div>
+                <div class="editor-card-body" style="padding: 12px;">
+                    <p class="cms-p">
+                        <strong>25 años de experiencia al servicio del diagnóstico</strong> —
+                        texto institucional completo. Edita directamente en el recuadro.
+                    </p>
+                    <div class="field-group">
+                        <div id="ck-historia" class="ck5-mount"></div>
+                        <textarea id="ck-historia-data" name="ficha1__texto" class="ck5-hidden-data"><?= htmlspecialchars(cmsRaw($contenidos, 'quienes-somos', 'ficha1', 'texto',
+                            '<p>LAESH, Laboratorio de Especialidades Hematológicas, es una empresa 100% de la Región Mixteca.</p>')) ?></textarea>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ================================================================
+             PANEL 3: ESTUDIOS DE RUTINA
+             Sección: especialidades | Fuente HTML: #especialidades
+             ================================================================ -->
+        <div id="panel-especialidades" class="cms-panel" role="tabpanel" aria-labelledby="tab-especialidades" tabindex="0" data-section="especialidades">
+            <div class="cms-panel-header">
+                <h3 class="cms-h3">Edición de Carrusel y Catálogo Completo (#especialidades)</h3>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Examining the structure of image upload boxes in `gestion_web.php` to understand their consistent implementation across different card instances. Specifically, investigating lines 613-637 to analyze the image preview element and its attributes.
+
+
+`data-upload-slot` likely identifies the area to insert the image preview, while `data-preview-id` targets the specific HTML element for display. The `data-target-input` attribute probably specifies the hidden input field to store the image URL. The JavaScript file should handle image uploading and update these elements accordingly.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `cms-upload.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.122428374s
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L179-234)</summary>
+
+**Path:** `Unknown file`
+
+```
+                        return;
+                    }
+                }
+
+                // Construir FormData
+                const fd = new FormData();
+                fd.append('file',       file);
+                fd.append('slot',       slot);
+                fd.append('csrf_token', getCsrf());
+
+                // Indicador visual
+                const box = this.closest('.image-upload-box');
+                if (box) box.style.opacity = '0.5';
+
+                try {
+                    const res = await fetch(UPLOAD_ENDPOINT, { method: 'POST', body: fd });
+                    const resText = await res.text();
+                    let data;
+                    try {
+                        data = JSON.parse(resText);
+                    } catch (pErr) {
+                        console.error('[cms-upload] Server returned non-JSON response:', res.status, resText);
+                        showToast(`Error del servidor (${res.status}): ${resText.substring(0, 160) || res.statusText}`, true);
+                        this.value = '';
+                        return;
+                    }
+
+                    if (res.ok && data.ok) {
+                        // Actualizar preview
+                        if (previewId) {
+                            const img = document.getElementById(previewId);
+                            if (img) {
+                                img.src = data.url + '?t=' + Date.now();
+                                img.style.display = '';
+                            }
+                        }
+                        // Poblar campo de texto con la URL subida
+                        if (targetInput) {
+                            const inp = document.getElementById(targetInput);
+                            if (inp) {
+                                inp.value = data.url;
+                                var lblId = 'lbl-img-' + inp.id.replace('url-img-', '');
+                                var lbl = document.getElementById(lblId);
+                                if (lbl) lbl.textContent = data.url.split('/').pop();
+                                inp.dispatchEvent(new Event('change', { bubbles: true }));
+                            }
+                        }
+                        // Rotar CSRF
+                        refreshCsrf(data.csrf_token);
+                        showToast(data.msg || '¡Imagen cargada exitosamente!', false);
+                    } else {
+                        console.error('[cms-upload] Server rejected upload:', res.status, data);
+                        showToast(data.msg || `Error (${res.status}) al subir la imagen al servidor.`, true);
+                        this.value = '';
+                    }
+                } catch (err) {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `cms-upload.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L97-124)</summary>
+
+**Path:** `Unknown file`
+
+```
+                // ── Reglas por slot (alineadas con Guía CMS §5.1–§5.6) ──────────────
+                // Slots reales (data-upload-slot en gestion_web.php):
+                //   hero-{slide1…5}       → Banner Hero
+                //   carousel-{1…16}       → Carrusel Especialidades
+                //   ubicacion-croquis     → Croquis de Ubicación
+                //   promo-{lun…dom}       → Cards de Promociones
+                //   calidad-gallery{1…3}  → Galería de Calidad
+                //   (default)             → Imagen CMS genérica
+                function slotRules(s) {
+                    if (/^hero-/.test(s))              return { maxKb: 150, minW: 1280, maxW: 1920,                              landscape: true, label: 'Banner Hero',             hint: 'WebP · Quality 72–80 · Effort 6 · 1 280–1 920 px ancho · Orientación Horizontal · alto proporcional · máx. 150 KB, óptimo 60 KB' };
+                    // [TEMPORAL - PRUEBAS] Restricción 800x580 y 150 KB comentada para pruebas
+                    // if (/^carousel-/.test(s))          return { maxKb: 150, exactW: 800, exactH: 580,                                        label: 'Carrusel Especialidades', hint: 'WebP · Quality 75 · Effort 6 · exacto 800×580 px · máx. 150 KB, óptimo 60 KB' };
+                    if (/^carousel-/.test(s))          return { maxKb: 999999, label: 'Carrusel Especialidades (Modo Pruebas)', hint: '[Pruebas] Sin restricciones de formato, dimensiones ni peso' };
+                    if (/^ubicacion-croquis$/.test(s)) return { maxKb: 150, maxW: 1284, maxH: 902, landscape: true,      label: 'Croquis de Ubicación',    hint: 'WebP · Quality 85 · Effort 6 · 1 284 × 902 px (máx) · Orientación Horizontal · máx. 150 KB, óptimo 60 KB' };
+                    if (/^promo-/.test(s))             return { maxKb: 150, minW: 1000, maxW: 1200, minH: 600, maxH: 800, landscape: true, label: 'Card de Promociones', hint: 'WebP · Quality 82 · 1 024 × 687 px (óptimo nativo) o 1 200 × (600–675) px · máx. 150 KB, óptimo 80–110 KB' };
+                    if (/^calidad-/.test(s))           return { maxKb: 150, exactW: 800, exactH: 580,                                       label: 'Galería de Calidad',      hint: 'WebP · Quality 75 · Effort 6 · exacto 800×580 px · máx. 150 KB, óptimo 60 KB' };
+                    if (/^seo-og$/.test(s))            return { maxKb: 150, minW: 1200, maxW: 1920,                              landscape: true, label: 'Imagen Open Graph (SEO)', hint: 'WebP · 1 200 × 630 px recomendado (ratio 1.91:1) · Orientación Horizontal · máx. 150 KB, óptimo 60 KB' };
+                    return                                    { maxKb: 150, minW: 800,                                                        label: 'Imagen CMS',              hint: 'WebP · mín. 800 px ancho · máx. 150 KB, óptimo 60 KB' };
+                }
+                const rules = slotRules(slot);
+
+                // ── Validación de tamaño ─────────────────────────────────────────────
+                const sizeKb = (file.size / 1024).toFixed(1);
+                if (!isCarouselSlot && file.size > rules.maxKb * 1024) {
+                    showToast(
+                        `Peso ${sizeKb} KB supera el máximo de ${rules.maxKb} KB para ${rules.label}.<br>` +
+                        'Optimiza la imagen (baja Quality o reduce dimensiones).',
+                        true
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Initial assumption: slots beginning with "carousel-" are exempt from format, size, and dimension checks. The exemption criteria needs refinement to include "historia".
+
+Now evaluating how the logic is implemented to ensure the exemption applies correctly based on the new criteria. The "historia" exemption appears to be independent of the others, requiring separate checks to ensure it is handled as intended.
+
+
+The code reveals the upload button is within the "Historia Institucional (Ficha Ancha)" card, specifically labeled for "Tarjeta Gráfica / Responsable Sanitario". The assumption is the "historia-credencial" upload logic is intended for this card.
+
+Now verifying if the upload functionality aligns with the "historia" exemption and intended location.
+
+
+The code suggests the image upload functionality uses a file input and preview elements. The process involves generating a server link for the image to be used in the editor. Now confirming how the system handles the uploaded file and its associated URL within the intended context.
+
+
+The image upload functionality uses `cms-upload.js` to handle file uploads to a designated directory. After upload, the system generates a URL for the image, updates a specific input field with the generated URL, and updates a label displaying the filename. This URL is then also automatically saved in a data structure.
+
+
+The system automatically generates an image URL and presents it, facilitating immediate use. Now, focusing on generating the HTML based on the provided image, the image layout reveals a structured presentation with checkmark-bulleted text elements and a medical card image. The bullet points are organized in a two-column grid. The medical card includes a doctor image, logo, badge, and text details.
+
+
+The HTML structure needs a responsive container with a two-column grid for the text elements. The grid will handle the checkmark-bulleted text, the doctor's details and the medical card image. The HTML structure provided defines the container and the text grid layout with responsive flexbox and grid properties, including gap and alignment settings.
+
+
+The HTML structure defines a two-column layout for the card content. One column contains checkmark-bulleted text, the other contains the image. `cms-upload.js` likely handles uploading and updating the image URL in the `src` attribute.
+
+Verifying how the image upload process integrates with the editor and HTML structure for the "historia" card. Checking how the uploaded image URL is set as the `src` of the image element within the editor.
+
+The question is, does `cms-upload.js` automatically update the `src` attribute upon upload, or does the user manually input the URL? The functionality must be verified to ensure proper integration.
+
+
+The plan is to enhance the image upload flow by adding a "Copiar URL" button. This will simplify incorporating uploaded images into the HTML by allowing easy URL copying. The existing JavaScript code and server-side scripts will be reviewed to ensure the new button integrates seamlessly, particularly focusing on how the "historia" exemption is implemented.
+
+Next step, update the JavaScript file to exempt "historia" and "carousel" slots from validation checks. This includes modifications to the code which should set the rules for file format, size, and dimensions, based on slot type. The file format is validated using regex pattern matching. The slot will be considered exempt if the slot name matches the regex for history and carousel.
+
+Also, confirmed that the backend already correctly handles the "historia" exemption. Now, verifying the implementation in the front-end file.
+
+
+The front-end code is now being reviewed to identify the mechanism for updating the image `src`. If the image URL is not automatically inserted into the HTML, manual input or an additional button will be required. The next step involves evaluating the JavaScript file to understand how the file validation occurs and to incorporate the "historia" exemption. The implementation in `cms-upload.js` needs to be updated to account for "historia" and "carousel" slots during the validation process.
+
+
+The JavaScript file's image upload process is being analyzed to determine how it integrates with the "historia" exemption and the HTML structure. Identifying whether the system automatically populates the `src` attribute upon upload is crucial. The JavaScript file's code is being assessed to understand the existing file validation and implement the exemptions for "historia" and "carousel" slots during validation.
+
+
+The HTML reveals a read-only input field for the image URL and a "Copiar URL" button. This confirms the system does not automatically insert the URL. The button's purpose is to allow users to easily copy the generated URL to the clipboard, simplifying its insertion into the editor.
+
+Now, confirming whether the JavaScript validation is correctly implemented and exempts the designated slots, as the back-end already does. The code must be checked to implement the exemptions and ensure that the button functions correctly within the image upload process.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `cms-upload.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 27.242081451s
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L79-129)</summary>
+
+**Path:** `Unknown file`
+
+```
+                const previewId   = this.dataset.previewId    || null;
+                const targetInput = this.dataset.targetInput  || null;
+                const file        = this.files[0];
+
+                // [TEMPORAL - PRUEBAS] Para Tarjetas 1 a 16 de Estudios (carousel-1...16) se omiten restricciones
+                const isCarouselSlot = /^carousel-/.test(slot);
+
+                // ── Validación de formato — solo WebP para todos los slots (omitido para carousel-* en pruebas) ────────────
+                if (!isCarouselSlot && file.type !== 'image/webp') {
+                    showToast(
+                        `Formato no permitido (${file.type || 'desconocido'}). Solo se acepta <strong>WebP</strong>.<br>` +
+                        'Usa Squoosh → Format: WebP antes de subir.',
+                        true
+                    );
+                    this.value = '';
+                    return;
+                }
+
+                // ── Reglas por slot (alineadas con Guía CMS §5.1–§5.6) ──────────────
+                // Slots reales (data-upload-slot en gestion_web.php):
+                //   hero-{slide1…5}       → Banner Hero
+                //   carousel-{1…16}       → Carrusel Especialidades
+                //   ubicacion-croquis     → Croquis de Ubicación
+                //   promo-{lun…dom}       → Cards de Promociones
+                //   calidad-gallery{1…3}  → Galería de Calidad
+                //   (default)             → Imagen CMS genérica
+                function slotRules(s) {
+                    if (/^hero-/.test(s))              return { maxKb: 150, minW: 1280, maxW: 1920,                              landscape: true, label: 'Banner Hero',             hint: 'WebP · Quality 72–80 · Effort 6 · 1 280–1 920 px ancho · Orientación Horizontal · alto proporcional · máx. 150 KB, óptimo 60 KB' };
+                    // [TEMPORAL - PRUEBAS] Restricción 800x580 y 150 KB comentada para pruebas
+                    // if (/^carousel-/.test(s))          return { maxKb: 150, exactW: 800, exactH: 580,                                        label: 'Carrusel Especialidades', hint: 'WebP · Quality 75 · Effort 6 · exacto 800×580 px · máx. 150 KB, óptimo 60 KB' };
+                    if (/^carousel-/.test(s))          return { maxKb: 999999, label: 'Carrusel Especialidades (Modo Pruebas)', hint: '[Pruebas] Sin restricciones de formato, dimensiones ni peso' };
+                    if (/^ubicacion-croquis$/.test(s)) return { maxKb: 150, maxW: 1284, maxH: 902, landscape: true,      label: 'Croquis de Ubicación',    hint: 'WebP · Quality 85 · Effort 6 · 1 284 × 902 px (máx) · Orientación Horizontal · máx. 150 KB, óptimo 60 KB' };
+                    if (/^promo-/.test(s))             return { maxKb: 150, minW: 1000, maxW: 1200, minH: 600, maxH: 800, landscape: true, label: 'Card de Promociones', hint: 'WebP · Quality 82 · 1 024 × 687 px (óptimo nativo) o 1 200 × (600–675) px · máx. 150 KB, óptimo 80–110 KB' };
+                    if (/^calidad-/.test(s))           return { maxKb: 150, exactW: 800, exactH: 580,                                       label: 'Galería de Calidad',      hint: 'WebP · Quality 75 · Effort 6 · exacto 800×580 px · máx. 150 KB, óptimo 60 KB' };
+                    if (/^seo-og$/.test(s))            return { maxKb: 150, minW: 1200, maxW: 1920,                              landscape: true, label: 'Imagen Open Graph (SEO)', hint: 'WebP · 1 200 × 630 px recomendado (ratio 1.91:1) · Orientación Horizontal · máx. 150 KB, óptimo 60 KB' };
+                    return                                    { maxKb: 150, minW: 800,                                                        label: 'Imagen CMS',              hint: 'WebP · mín. 800 px ancho · máx. 150 KB, óptimo 60 KB' };
+                }
+                const rules = slotRules(slot);
+
+                // ── Validación de tamaño ─────────────────────────────────────────────
+                const sizeKb = (file.size / 1024).toFixed(1);
+                if (!isCarouselSlot && file.size > rules.maxKb * 1024) {
+                    showToast(
+                        `Peso ${sizeKb} KB supera el máximo de ${rules.maxKb} KB para ${rules.label}.<br>` +
+                        'Optimiza la imagen (baja Quality o reduce dimensiones).',
+                        true
+                    );
+                    this.value = '';
+                    return;
+                }
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `cms-upload.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L119-139)</summary>
+
+**Path:** `Unknown file`
+
+```
+                const sizeKb = (file.size / 1024).toFixed(1);
+                if (!isCarouselSlot && file.size > rules.maxKb * 1024) {
+                    showToast(
+                        `Peso ${sizeKb} KB supera el máximo de ${rules.maxKb} KB para ${rules.label}.<br>` +
+                        'Optimiza la imagen (baja Quality o reduce dimensiones).',
+                        true
+                    );
+                    this.value = '';
+                    return;
+                }
+
+                // ── Validación de dimensiones (requiere cargar la imagen) ────────────
+                // [TEMPORAL - PRUEBAS] Omitida para carousel-*
+                if (!isCarouselSlot) {
+                    try {
+                        const objUrl = URL.createObjectURL(file);
+                        const img    = new Image();
+                        await new Promise((res, rej) => { img.onload = res; img.onerror = rej; img.src = objUrl; });
+                        URL.revokeObjectURL(objUrl);
+                        const w = img.naturalWidth, h = img.naturalHeight;
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The goal is to exempt certain slots from upload restrictions; defining `isExemptSlot` appears necessary to encompass both carousel and "historia" slots. Subsequently, the "historia" slot rules within `slotRules(s)` need modification to indicate unrestricted upload limits. Finally, the upload check will be updated to leverage the newly defined `isExemptSlot` instead of the old `isCarouselSlot`.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.013955642s
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 9:49 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion_web.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L489-514)</summary>
+
+**Path:** `Unknown file`
+
+```
+            </div><!-- /grid-2col fila 2 -->
+
+            <hr class="cms-section-sep">
+
+            <!-- Fila 3: Historia Institucional (Ficha Ancha) -->
+            <div class="editor-card mb-4" style="border: 2px solid #7c3aed; background: #fafafa; border-radius: 8px; overflow: visible; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
+                <div class="editor-card-header" style="background: linear-gradient(135deg, #4c1d95 0%, #7c3aed 100%); padding: 10px 14px;">
+                    <div class="card-title" style="color: #ffffff; font-weight: 800; font-size: 0.95rem;">Historia Institucional (Ficha Ancha)</div>
+                </div>
+                <div class="editor-card-body" style="padding: 12px;">
+                    <p class="cms-p">
+                        <strong>25 años de experiencia al servicio del diagnóstico</strong> —
+                        texto institucional completo. Edita directamente en el recuadro.
+                    </p>
+                    <div class="field-group">
+                        <div id="ck-historia" class="ck5-mount"></div>
+                        <textarea id="ck-historia-data" name="ficha1__texto" class="ck5-hidden-data"><?= htmlspecialchars(cmsRaw($contenidos, 'quienes-somos', 'ficha1', 'texto',
+                            '<p>LAESH, Laboratorio de Especialidades Hematológicas, es una empresa 100% de la Región Mixteca.</p>')) ?></textarea>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ================================================================
+             PANEL 3: ESTUDIOS DE RUTINA
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Examining the target file, the intention is to insert an image upload module within the specified PHP file. This should place the upload block directly before the CKEditor field group. The code snippet reveals a pre-existing structure suitable for the insertion, including a `field-group` div, providing a logical insertion point.
+
+
+The code block provides a clear area for image upload integration. Utilizing this structure will create the image upload module. It appears a preview image element is already in place; this simplifies integration.
+
+
+This structure strongly suggests an image upload feature is already intended. The elements point toward a file input with associated preview and a read-only URL field for the uploaded image path. Now will verify that this module includes the necessary file handling and URL generation for image uploads.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 8.371241018s
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 9:49 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 9:49 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+Initial HTML structure identification: Two columns with two rows each. Each row contains two items. The text styling includes bold, italic, specific colors, and font sizes that must be represented in the HTML. The first column of each row appears to have identical layout.
+
+HTML is generated to represent the structure with the corresponding text and styles derived from the visual details. The snippet prioritizes semantic HTML for accessibility, adding spans for bold and italic, and inline styles for color and font size.
+
+
+HTML structure is extended to include the second row's data: the checkmark with "Calidad" and its description, and a placeholder for the image on the right.  CSS Flexbox is being used for the overall layout. The inner grid structure for benefits will be used for aligning the text elements.
+
+
+The HTML structure is updated to include the benefits descriptions, formatting each with the checkmark icon and corresponding text.  A new benefit item for "Personal especializado" and one for "Calidad" is added, and their associated details are incorporated into the HTML. The right column for image placeholder is being formatted with `flex` properties.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 5.123433510s
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+correcion al html 25 años y Personal especializado en el mismo renglon, y Calidad debajo de ellos; luego la imagen a lado derecho cerca de ellos.
+
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `cms-upload.js`
+**Language:** javascript
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Examining the image, it appears the user wants to adjust the layout of text elements and an accompanying image. The user wants "25 años" and "Personal especializado" on the same line, with "Calidad" positioned below them. The image should be placed to the right, adjacent to this block of text. This suggests a re-ordering and re-alignment of these visual components within the HTML structure.
+
+
+The image's placement issues likely stem from the original layout's `justify-content` and the potential for content wrapping within the container. Adjusting `justify-content` to `flex-start` with a specific `gap` will ensure proximity. Employing either a flexbox row structure or a CSS grid with explicit columns will arrange the text elements into the correct horizontal and vertical order.
+
+
+Applying `display: flex` and `align-items: flex-start` to the first row will ensure the desired horizontal alignment of the text elements. The second row containing "Calidad" will be aligned beneath. A flexbox container with a specified `gap` will maintain spacing between text elements and the image. Considering responsiveness, a media query or `flex-wrap` will address potential clipping on mobile screens.
+
+
+Calculations indicate the left text block's width will be approximately 460px with a 30px gap, fitting comfortably beside a 480px image, totaling about 970px. Flexbox styling with `flex-wrap`, `align-items`, and `justify-content` set to `flex-start` will properly arrange the content. Column-based flex containers will achieve the required text layout.
+
+
+Examining the specific content structure reveals a nested flexbox layout. The first flex row combines the "Personal especializado" details. The second row houses the "Calidad" information. Ensuring correct vertical alignment involves setting `align-items: flex-start` on both rows within a parent container. A flexible image container must be placed alongside this content for side-by-side display.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 9.718757350s
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+1) que las labels y la imagen queden centradas, o se puede justificar en el rte aparecen desactivados lo de incementar identacion, anexo imagen.
+2) que no aparezca scroll vertical en el contenedor que creo esta en la index.php 
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `cms-upload.js`
+**Language:** javascript
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The user wants the labels and image block horizontally centered. The image explicitly shows a visual cue of a red arrow indicating the desired centering from the left margin to the right, confirming the request. It seems the user also mentions something about indentation being deactivated in the RTE, possibly connected to this centering issue.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.173203120s
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1949-1984)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+#acerca-de .card-premium,
+.grid-acerca-cards .card-premium,
+.grid-single-history .card-premium {
+    resize: none;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.grid-single-history .card-premium {
+    overflow: auto;
+    height: 43vh; /* Alto vertical inicial de 43vh en desktop */
+    min-height: 270px;
+}
+
+/* Medida fija centrada para el contenedor del video en Desktop/Laptop (+15% adicional horizontal = 1173px) */
+#video .grid-single-history {
+    max-width: 1173px !important;
+    margin: 0.35rem auto 1rem auto !important;
+}
+
+#video .grid-single-history .card-premium,
+#video .card-premium {
+    height: auto !important;
+    max-height: none !important;
+    min-height: unset !important;
+    overflow: hidden !important;
+    padding: 0.75rem 1.25rem !important;
+}
+
+.grid-single-history .card-premium .modal-scroll-body {
+    max-height: none;
+    min-height: 150px;
+    overflow: visible !important;
+}
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The CSS sets a `height` of `43vh` for the history card on desktop, with a `min-height` of `270px`. The PHP file includes a corresponding HTML `div` with the class `grid-single-history`, intended to contain the historical content, which will likely be populated from the CKEditor and responsive on mobile, maintaining the intended height across screen sizes. The `<!-- Ficha ancha: Historia — desde CKEditor (43vh desktop / 100% responsive en móvil) -->` comment in the php code provides further context.
+
+
+The desktop CSS, using `height: 43vh` and `overflow: auto`, causes unwanted scrollbars when content exceeds the card's height. Modifying to `height: auto` and `overflow: visible` eliminates the scrollbar. Mobile already uses `height: auto`, so this change is desktop-specific. The next step is to examine the centering of labels and the image, likely involving adjustments to layout and alignment properties.
+
+
+The indentation buttons are likely disabled in the rich text editor due to the use of `<div>` with `display: flex`, as indentation typically applies to block-level elements. To center the content, `margin: 1.5rem auto;` and `justify-content: center;` (or `max-width: fit-content; margin: 1.5rem auto;`) applied to the container, should center the labels and image within the card. Testing `max-width: fit-content; margin: 1.5rem auto; justify-content: center;` is the immediate approach.
+
+
+Considering layout options for the text and image elements, the goal is to center them within the card and ensure a pleasing visual arrangement. The approach involves exploring centering with flexbox and adjusting `margin` and `max-width` to achieve the desired centered and justified look. The ideal layout needs to center content within the container, and maintain proper spacing, with a responsive behavior. Testing layouts within the card is the next immediate step.
+
+
+The content for the history card is likely sourced from the database via the specified PHP file and the `web_contenidos` array. The CSS rule `overflow: auto` in combination with a fixed height (`43vh`) on desktop is the cause of the unwanted scrollbar when content exceeds the card's dimensions.
+
+
+The `overflow: auto` and fixed height on the history card cause the scrollbar. The card’s content, roughly 380px tall, exceeds the typical desktop viewport height defined by `43vh`, triggering the scrollbar. Changing `overflow` to `visible` and `height` to `auto` should fix the scrollbar issue, but `min-height` might be necessary. It also appears the `.modal-scroll-body` is already configured with `overflow: visible` which may be impacting the overall layout.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `grid-single-history`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 11.696532408s
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 10:15 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1949-1969)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+#acerca-de .card-premium,
+.grid-acerca-cards .card-premium,
+.grid-single-history .card-premium {
+    resize: none;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.grid-single-history .card-premium {
+    overflow: auto;
+    height: 43vh; /* Alto vertical inicial de 43vh en desktop */
+    min-height: 270px;
+}
+
+/* Medida fija centrada para el contenedor del video en Desktop/Laptop (+15% adicional horizontal = 1173px) */
+#video .grid-single-history {
+    max-width: 1173px !important;
+    margin: 0.35rem auto 1rem auto !important;
+}
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 10:15 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 10:15 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+The disabled indent buttons in the RTE likely relate to the content structure. The identified RTE's indent/outdent functionality operates specifically on paragraph or list elements, but not on more complex container tags such as div. The observed behavior aligns with the RTE's inherent limitations regarding indenting non-paragraph or list elements.
+
+
+Hypothesizing that a flexbox container with `justify-content: center` will horizontally center the block (labels and image). The container will also have `width: 100%` and `margin: 1.5rem auto;` to ensure the centered content occupies the entire width of the card. This configuration would effectively move the content from the left edge to the center.
+
+
+Considering that the user might want the entire card content, including the title and description, complete HTML including the centered block will be provided. This will enable a direct replacement within the rich text editor's source editing mode. Additionally, the centered block snippet will be offered separately to handle partial content replacement. The full HTML structure will facilitate seamless alignment and centering without introducing scrollbars.
+
+
+The provided text emphasizes the laboratory's experience and commitment to quality, accuracy, and updated technology in providing clinical studies. The core message focuses on combining experience, specialized personnel, and technology. This ultimately leads to reliable clinical studies that are important for patients and doctors.
+
+
+Considering how to best represent the provided bullet point list within the HTML structure. Thinking that a simple `div` container with flexbox properties can manage the layout. Each list item will be encapsulated within a `div` containing an icon and descriptive text.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 9.456580395s
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 10:16 pm
+
+---
+
+<details>
+<summary>Conversation History</summary>
+
+# Conversation History
+Here are the conversation IDs, titles, and summaries of your most recent 2 conversations, in reverse chronological order:
+
+<conversation_summaries>
+## Conversation 6bb73e25-727a-4589-849d-9fcae1a1d750: Optimización Diseño Portal Médico
+- Created: 2026-09-18T18:04:07Z
+- Last modified: 2026-10-06T01:26:26Z
+
+## Conversation 7e9d2ff0-deb9-465a-9e04-fdb13823ced4: Consultar Estados Solicitudes Digitales
+- Created: 2026-09-24T15:13:22Z
+- Last modified: 2026-09-30T20:32:52Z
+
+</conversation_summaries>
+
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 10:16 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+The user requests centering labels and an image, or a justification for disabled indentation increment, with an image provided for context. Also, the user wants to remove the vertical scroll from a container, suspected to be in `index.php`. The image reveals the "Historia Institucional" card on the landing page, "Experiencia que" text is visible on top.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `grid-single-history`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.091256611s
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 10:16 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1939-2044)</summary>
+
+**Path:** `Unknown file`
+
+```
+    box-sizing: border-box;
+}
+
+.grid-single-history {
+    display: block;
+    width: 100%;
+    max-width: 1380px;
+    margin: 0.35rem auto 1rem auto;
+    box-sizing: border-box;
+}
+
+#acerca-de .card-premium,
+.grid-acerca-cards .card-premium,
+.grid-single-history .card-premium {
+    resize: none;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.grid-single-history .card-premium {
+    overflow: visible;
+    height: auto;
+    min-height: 270px;
+}
+
+/* Medida fija centrada para el contenedor del video en Desktop/Laptop (+15% adicional horizontal = 1173px) */
+#video .grid-single-history {
+    max-width: 1173px !important;
+    margin: 0.35rem auto 1rem auto !important;
+}
+
+#video .grid-single-history .card-premium,
+#video .card-premium {
+    height: auto !important;
+    max-height: none !important;
+    min-height: unset !important;
+    overflow: hidden !important;
+    padding: 0.75rem 1.25rem !important;
+}
+
+.grid-single-history .card-premium .modal-scroll-body {
+    max-height: none;
+    min-height: 150px;
+    overflow: visible !important;
+}
+
+.grid-single-history .ck5-output img {
+    max-width: 100%;
+    height: auto;
+    display: inline-block;
+    border-radius: 8px;
+}
+
+#video .modal-scroll-body {
+    max-height: none !important;
+    overflow: visible !important;
+    padding: 0 !important;
+}
+
+#video .ck5-output {
+    padding: 0.75rem 0 !important;
+}
+
+/* R-MOB: Quiénes Somos → tablet/iPad (≤1024px) — layout, padding y card widths
+   grid-template-columns no necesita !important aquí: la base ya es 2 cols y el selector
+   #acerca-de (1,1,0) supera en especificidad a .grid-layout.grid-1-1-auto (0,2,0) de style.css.
+   El resto sí usa !important porque otros stylesheets ganan esas propiedades sin él. */
+@media (max-width: 1024px) {
+    #acerca-de {
+        padding-left: 1.25rem !important;
+        padding-right: 1.25rem !important;
+        box-sizing: border-box !important;
+        width: 100% !important;
+    }
+    #acerca-de .grid-acerca-cards,
+    .grid-acerca-cards {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin-bottom: 1rem !important;
+        box-sizing: border-box !important;
+    }
+    .grid-single-history {
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 0 1rem 0 !important;
+        padding: 0 !important;
+        box-sizing: border-box !important;
+    }
+    #acerca-de .card-premium,
+    .grid-acerca-cards .card-premium,
+    .grid-single-history .card-premium {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        min-height: 200px;
+        box-sizing: border-box !important;
+        border-radius: 16px !important;
+        margin: 0 !important;
+    }
+    .sec-pad-1-5 {
+        padding: 0.5rem 1.25rem !important;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `acerca-de.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L29-50)</summary>
+
+**Path:** `Unknown file`
+
+```
+                </div>
+
+                <!-- Ficha 3: Visión — desde web_contenidos (quienes-somos/ficha3/texto) -->
+                <div class="card-premium animate-on-scroll delay-300 info-col">
+                    <div class="acerca-flex ck5-output">
+                        <?= safeHtml($qsVision) ?>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ficha ancha: Historia — desde CKEditor (43vh desktop / 100% responsive en móvil) -->
+            <div class="grid-single-history">
+                <div class="card-premium animate-on-scroll delay-100 info-col--stretch">
+                    <div class="modal-scroll-body">
+                        <!-- Historia — HTML enriquecido desde CKEditor 5 (ficha1/texto) -->
+                        <!-- El heading del card va incluido en el HTML exportado por CKEditor -->
+                        <div class="faq-p--sm2 ck5-output"><?= safeHtml($qsHistoriaHtml) ?></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `modal-scroll-body`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 10:16 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `tablet-samsung-tabs10ultra.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L119-179)</summary>
+
+**Path:** `Unknown file`
+
+```
+        gap: 1.25rem;
+    }
+
+    /* Modales — Control de desbordamiento */
+    .modal-scroll-body {
+        max-height: 75vh;
+        overflow-y: auto;
+    }
+}
+
+
+/* ─────────────────────────────────────────────────────────────────
+   § 3. ORIENTACIÓN VERTICAL / PORTRAIT (Viewport 768px a 1024px)
+   Samsung Galaxy Tab S10 Ultra Vertical (~924px × 1480px)
+   ───────────────────────────────────────────────────────────────── */
+@media (min-width: 768px) and (max-width: 1024px) {
+
+    /* Hero Section — Proporción vertical optimizada */
+    .hero-slider-wrap {
+        min-height: 480px;
+        max-height: 620px;
+    }
+
+    .hero-slide-content h1 {
+        font-size: clamp(1.75rem, 3.8vw, 2.4rem);
+        line-height: 1.25;
+    }
+
+    .hero-slide-content p {
+        font-size: 1rem;
+        max-width: 100%;
+    }
+
+    /* Carrusel de Especialidades — 2 tarjetas por vista */
+    .specialties-carousel-track .carousel-card {
+        flex: 0 0 calc(50% - 0.75rem);
+        max-width: calc(50% - 0.75rem);
+    }
+
+    /* Catálogo de Promociones — 2 columnas en portrait */
+    .catalog-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    /* Ubicación & Contacto — 2 columnas balanceadas */
+    .contact-grid-horizontal {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+
+    /* Modales en Tableta Vertical — 1480px de alto disponible */
+
+    .modal-scroll-body {
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+}
+
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `tablet-samsung-tabs10ultra.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L99-129)</summary>
+
+**Path:** `Unknown file`
+
+```
+    .hero-slide-content p {
+        font-size: 1.1rem;
+        max-width: 680px;
+    }
+
+    /* Carrusel de Especialidades — 3 tarjetas por vista */
+    .specialties-carousel-track .carousel-card {
+        flex: 0 0 calc(33.333% - 1rem);
+        max-width: calc(33.333% - 1rem);
+    }
+
+    /* Catálogo de Promociones — 3 columnas cuadradas uniformes */
+    .catalog-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.25rem;
+    }
+
+    /* Ubicación & Contacto — Ficha horizontal */
+    .contact-grid-horizontal {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.25rem;
+    }
+
+    /* Modales — Control de desbordamiento */
+    .modal-scroll-body {
+        max-height: 75vh;
+        overflow-y: auto;
+    }
+}
+
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+/**
+ * index.php — Sitio Web Público LAESH (Phase J — Estabilización)
+ *
+ * Fuente HTML: portafolio-dev-2026/blocklabgd/v1.2/mockup1.0/uipv1/index.html  ← NUNCA BORRAR (R15.1)
+ * Merge iterativo: cambios en uipv1/index.html → propagar aquí.
+ *
+ * Todo el contenido editorial se lee desde la BD:
+ *   · configuraciones   → contacto, horarios, responsable, ubicación geográfica,
+ *                          WhatsApp, Facebook, Schema.org, años de experiencia
+ *   · web_contenidos    → hero (slides + navbar tagline), quienes-somos (fichas,
+ *                          resp, filosofía), especialidades (accordion fichas),
+ *                          promociones (banner), calidad (encabezado),
+ *                          ubicacion (maps_embed), footer, seo
+ *   · estudios (JOIN)   → SSOT para tarjetas de promociones diarias
+ *
+ * Claves configuraciones usadas:
+ *   telefono · email_contacto · whatsapp_numero · facebook_url
+ *   direccion · direccion_calle · ciudad · estado · cp
+ *   horario_semana · horario_domingo · hrs_open · hrs_close · dom_open · dom_close
+ *   responsable_nombre · responsable_cedula_prof · responsable_cedula_esp
+ *   nombre_laboratorio · nombre_corto
+ */
+declare(strict_types=1);
+require_once __DIR__ . '/../commons/commons.php';
+
+// ── HTTP Caching & Performance Optimization Headers ───────────────────────────
+// Permite revalidación rápida y caché eficiente del navegador sin afectar sesiones
+if (empty($_SESSION['auth_logged_in'])) {
+    header('Cache-Control: public, max-age=300, must-revalidate');
+} else {
+    header('Cache-Control: no-cache, must-revalidate');
+}
+
+// ── CSRF para modal de login ────────────────────────────────────────────────
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+
+// ── Helpers ─────────────────────────────────────────────────────────────────
+/** Escapa para salida HTML (texto y atributos). */
+function h(mixed $v): string {
+    return htmlspecialchars((string)($v ?? ''), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+}
+/** Devuelve solo dígitos de un número de teléfono. */
+function waNum(string $raw): string {
+    return preg_replace('/\D/', '', $raw);
+}
+/**
+ * Renderiza HTML de confianza generado por el RTE del CMS (admins LAESH).
+ * Permite tags ricos de CKEditor 5.
+ * Bloquea: <script>, atributos on*, href con javascript:
+ */
+function safeHtml(mixed $v): string {
+    $html = strip_tags((string)($v ?? ''), ['strong','em','b','i','br','p','ul','ol','li','a','span','table','tbody','tr','td','th','thead','hr','figure','iframe','h1','h2','h3','h4','h5','h6','u','s','blockquote','oembed','div','img','mark']);
+    $html = preg_replace('/\s+on\w+\s*=\s*(?:"[^"]*"|\'[^\']*\'|[^\s>]*)/i', '', $html);
+    $html = preg_replace('/href\s*=\s*["\']?\s*javascript:/i', 'href="#" data-blocked=', $html);
+
+    // Convertir <oembed url="..."> a <iframe> para YouTube, Spotify, Vimeo si vienen etiquetas oembed crudas
+    $html = preg_replace_callback('/<oembed\s+url=["\']([^"\']+)["\']\s*>\s*<\/oembed>/i', function($matches) {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L199-259)</summary>
+
+**Path:** `Unknown file`
+
+```
+// ── 1c. Árbol de estudios clínicos → $cg ─────────────────────────────────────
+$cg = $_bypassCache ? null : \Common\Cache::get(\Common\Cache::KEY_TREE);
+if ($cg === null) {
+    $cg = [];
+    $treeStmt = $db->query("
+        SELECT 
+            grupo_id, 
+            grupo_titulo,
+            cat_id, 
+            cat_nombre,
+            clave_interna, 
+            estudio_nombre, 
+            tiempo_procesamiento, 
+            muestra_requerida, 
+            preparacion, 
+            contenedor, 
+            pruebas_incluidas
+        FROM vw_website_arbol_estudios
+        ORDER BY grupo_orden ASC, grupo_id ASC, cat_orden ASC, estudio_orden ASC, estudio_nombre ASC
+    ");
+    $treeRows = $treeStmt ? $treeStmt->fetchAll(\PDO::FETCH_ASSOC) : [];
+
+    $gMap = [];
+    $gIdxMap = [];
+    $currGIdx = 0;
+    foreach ($treeRows as $r) {
+        $gid = (int)$r['grupo_id'];
+        if (!isset($gIdxMap[$gid])) {
+            $currGIdx++;
+            $gIdxMap[$gid] = $currGIdx;
+            $cg[$currGIdx] = ['titulo' => $r['grupo_titulo'], 'fichas' => []];
+        }
+        $gi    = $gIdxMap[$gid];
+        $catId = (string)$r['cat_id'];
+        if (!isset($gMap[$gid][$catId])) {
+            $gMap[$gid][$catId] = count($cg[$gi]['fichas']);
+            $cg[$gi]['fichas'][] = ['cat' => $r['cat_nombre'], 'items' => []];
+        }
+        $cPos = $gMap[$gid][$catId];
+        $cg[$gi]['fichas'][$cPos]['items'][] = [
+            'clave_interna'        => $r['clave_interna'],
+            'nombre'               => $r['estudio_nombre'],
+            'tiempo_procesamiento' => $r['tiempo_procesamiento'],
+            'muestra_requerida'    => $r['muestra_requerida'],
+            'preparacion'          => $r['preparacion'],
+            'contenedor'           => $r['contenedor'],
+            'pruebas_incluidas'    => $r['pruebas_incluidas'],
+        ];
+    }
+    if (!$_bypassCache) \Common\Cache::set(\Common\Cache::KEY_TREE, $cg);
+}
+
+// ── 1d. Índice de búsqueda de estudios para autocompletado en memoria (OPcache) ──
+$estudiosSearchData = $_bypassCache ? null : \Common\Cache::get(\Common\Cache::KEY_CATALOG_SEARCH);
+if ($estudiosSearchData === null) {
+    $searchStmt = $db->query("
+        SELECT 
+            e.clave, 
+            e.nombre, 
+            e.muestra, 
+            e.preparacion, 
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `rel="stylesheet"`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 10:17 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+Observing the CSS includes in `index.php`, `tablet-samsung-tabs10ultra.css` loads after `landing.css`. Examining `tablet-samsung-tabs10ultra.css`, a media query targets a specific screen size range, modifying `.modal-scroll-body`'s `max-height` and `overflow-y` properties. This suggests a potential style override affecting modal content display on specific tablets.
+
+
+Analyzing potential conflicts between CSS rules, specifically related to `.modal-scroll-body`, across different stylesheets and screen sizes. A specific rule with `overflow: visible !important` in `landing.css` overrides other declarations for overflow, but `max-height` might still be affected by the cascade. The purpose of using `.modal-scroll-body` within the "history" section is unclear, and the relevant HTML is being checked.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `info-col--stretch`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.949214206s
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 10:17 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L564-619)</summary>
+
+**Path:** `Unknown file`
+
+```
+        .icon-22 { width: 22px; height: 22px; margin-top: 2px; flex-shrink: 0; opacity: 0.75; }
+        .icon-24 { width: 24px; height: 24px; }
+
+
+/* UX-2: noscript map fallback — sin inline style */
+.map-bar          { position: relative; width: 100%; display: flex; align-items: center;
+                    max-width: 1380px; margin: 0 auto; padding: 0 1rem; }
+.modal-scroll-body{ overflow-y: auto; max-height: 320px; padding-right: 8px; }
+.modal-lg         { max-width: 680px; width: 95%; }
+.modal-sm         { max-width: 600px; }
+.modal-login-box  { max-width: 375px; } /* cascade wins: landing.css carga después de style.css */
+.hero-full-img    { width: 100%; height: 100%; object-fit: cover;
+                    object-position: center; display: block; }
+.hero-logo        { height: 60px; width: auto; object-fit: contain; }
+/* width:auto ignora el atributo HTML width="2634" y calcula el ancho por aspect-ratio (≈277px).
+   Sin esta regla el browser usa 2634px de layout-width empujando nav-links fuera del viewport. */
+.section-catalog  { margin-top: 1rem; padding: 0 1rem; max-width: 1380px;
+                    margin-left: auto; margin-right: auto; text-align: center; }
+.section-catalog__note {
+    text-align: center;
+    font-size: 1.12rem;
+    font-weight: 700;
+    color: var(--primary);
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    display: block;
+    margin: 1rem auto 1.5rem auto;
+    letter-spacing: 0.01em;
+    box-shadow: none;
+}
+.highlight-block      { border-left: 3px solid var(--primary-green);
+                         background: rgba(113,202,17,0.06);
+                         padding: 0.85rem 1rem; border-radius: 0 6px 6px 0;
+                         margin-top: 0.5rem; }
+.txt-base-lh      { font-size: 0.92rem; line-height: 1.55; color: var(--text-main); }
+.faq-p--sm2       { color: var(--text-muted); font-size: 0.87rem; line-height: 1.7; margin-bottom: 0.9rem; }
+.faq-p--muted     { margin: 0; font-size: 0.88rem; line-height: 1.5; color: var(--text-muted); }
+.info-col         { padding: 1rem; display: flex; flex-direction: column;
+                    justify-content: flex-start; align-self: start; }
+.info-col--stretch{ padding: 1rem; display: flex; flex-direction: column;
+                    justify-content: flex-start; align-items: stretch; }
+.txt-pgd-sub      { color: var(--primary); margin-bottom: 0.6rem; font-size: 1rem; }
+.txt-primary-c    { color: var(--primary); }
+.fb-bg            { background-color: #1877F2; box-shadow: 0 8px 24px rgba(24,119,242,0.4); }
+.pt-xs            { padding-top: 0.35rem; padding-bottom: 0.35rem; }
+
+/* ── P-LAESH-01 Phase3 — index.html final cleanup ── */
+.carousel-arrow-btn--left  { position: absolute; left: -10px; }
+.carousel-arrow-btn--right { position: absolute; right: -10px; }
+
+/* ── Ubicación: Datos de Contacto estrecho / Mapa ancho ─────
+   Selector con ID para ganar en especificidad sobre cualquier
+/* ── Ubicación y Contacto — Stack Horizontal ── */
+.location-stack-layout {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Inspecting `landing.css` reveals two potentially conflicting styles for `.modal-scroll-body`: one with `overflow-y: auto` and a fixed `max-height`, the other with `overflow: visible !important` and a flexible height. The image in question necessitates careful visual inspection. Identifying the active CSS rules and their application is crucial to understand the scrollbar's appearance.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `acerca-de`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.087723846s
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 10:17 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1834-1944)</summary>
+
+**Path:** `Unknown file`
+
+```
+    }
+}
+
+/* Quiénes Somos — Fichas superiores (Por qué confiar, Misión, Visión):
+   En Laptop/Desktop (≥1025px) conviven en un MISMO RENGLÓN de 3 columnas
+   ocupando la longitud horizontal total de 1380px, alineado exactamente con la Ficha Historia de abajo. */
+#acerca-de .grid-acerca-cards,
+.grid-acerca-cards {
+    display: grid;
+    gap: 1.25rem;
+    width: 100%;
+    max-width: 1380px;
+    padding: 0;
+    margin: 0 auto 1.25rem auto;
+    box-sizing: border-box;
+}
+
+/* Desktop / Laptop ≥1025px → Renglones de 3 columnas homologados a 1380px de extremo a extremo */
+@media (min-width: 1025px) {
+    #acerca-de .grid-acerca-cards,
+    .grid-acerca-cards {
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+        width: 100% !important;
+        max-width: 1380px !important;
+        padding: 0 !important;
+        margin: 0 auto 1.25rem auto !important;
+        box-sizing: border-box !important;
+    }
+    .section-catalog {
+        padding: 0;
+        max-width: 1380px;
+    }
+    .location-stack-layout {
+        padding: 0;
+        max-width: 1380px;
+    }
+
+    /* Calidad e Instalaciones — Renglón de 3 columnas homologado a 1380px */
+    #calidad .map-bar {
+        padding: 0;
+        max-width: 1380px;
+        width: 100%;
+        margin: 0 auto;
+        box-sizing: border-box;
+    }
+    #calidad .specialties-carousel-viewport {
+        padding: 0;
+        width: 100%;
+    }
+    .calidad-cards-grid {
+        gap: 1.25rem;
+        padding: 0.5rem 0 2rem 0;
+        max-width: 1380px;
+        width: 100%;
+        margin: 0 auto;
+        box-sizing: border-box;
+    }
+    .calidad-cards-grid .carousel-card {
+        flex: 0 0 calc((100% - 2.5rem) / 3);
+        width: calc((100% - 2.5rem) / 3);
+        box-sizing: border-box;
+    }
+
+    /* Carrusel de Instalaciones y Tecnología — Renglón de 1380px (3 tarjetas visibles por vista) */
+    #especialidades .map-bar {
+        padding: 0;
+        max-width: 1380px;
+        width: 100%;
+        margin: 0 auto;
+        position: relative;
+        box-sizing: border-box;
+    }
+    #especialidades .specialties-carousel-viewport {
+        padding: 0;
+        width: 100%;
+        overflow: hidden;
+    }
+    #especialidades .specialties-carousel-track {
+        gap: 1.25rem;
+        padding: 0.5rem 0 1rem 0;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    #especialidades .specialties-carousel-track .carousel-card {
+        flex: 0 0 calc((100% - 2.5rem) / 3);
+        width: calc((100% - 2.5rem) / 3);
+        box-sizing: border-box;
+    }
+    #especialidades .carousel-arrow-btn--left {
+        left: -22px;
+    }
+    #especialidades .carousel-arrow-btn--right {
+        right: -22px;
+    }
+    .carousel-progress-wrap {
+        max-width: 1380px;
+        margin: 0 auto 0.5rem auto;
+        padding: 0;
+    }
+}
+
+#acerca-de .grid-acerca-cards .card-premium {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.grid-single-history {
+    display: block;
+    width: 100%;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L2044-2099)</summary>
+
+**Path:** `Unknown file`
+
+```
+        padding: 0.5rem 1.25rem !important;
+        box-sizing: border-box !important;
+    }
+}
+
+/* Ajuste de proximidad estrecha entre Quiénes Somos y Estudios (móvil ↔ desktop) */
+/* R8: #id spec (1,0,0) supera section (0,0,1) — sin !important */
+#acerca-de {
+    padding-bottom: 0.25rem;
+}
+
+#especialidades {
+    padding-top: 0.25rem;
+}
+
+#especialidades .section-header {
+    margin-top: 0.25rem;
+}
+
+/* Fix for CKEditor media embeds covering their own resize handles.
+   Nota: inline style="resize:both" tiene prioridad máxima; !important requerido aquí (no-R8 excepción: inline-style override) */
+.ck5-output div[style*="resize: both"] {
+    box-sizing: border-box !important;
+    padding: 0 16px 16px 0 !important;
+    background-color: #f8fafc;
+}
+
+/* Fix C4 — Móvil (≤767px): transición animate-on-scroll más rápida.
+   Desktop usa 1s (efecto premium en pantalla grande + CPU rápida).
+   Móvil: 0.45s + delays comprimidos — percepción de respuesta inmediata
+   sin sacrificar el efecto visual. DRY: solo se sobreescribe la transición. */
+@media (max-width: 767px) {
+    .animate-on-scroll {
+        transition: opacity 0.45s ease-out, transform 0.45s ease-out;
+    }
+    .delay-100 { transition-delay: 0.05s; }
+    .delay-200 { transition-delay: 0.1s;  }
+    .delay-300 { transition-delay: 0.15s; }
+    #especialidades .carousel-arrow-btn {
+        display: none;
+    }
+    #especialidades .specialties-carousel-track .carousel-card {
+        flex: 0 0 calc(100% - 1rem);
+        width: calc(100% - 1rem);
+        box-sizing: border-box;
+    }
+}
+
+/* Tablet (768px–1024px) — Carrusel de especialidades: 2 tarjetas por vista */
+@media (min-width: 768px) and (max-width: 1024px) {
+    #especialidades .specialties-carousel-track .carousel-card {
+        flex: 0 0 calc((100% - 1rem) / 2);
+        width: calc((100% - 1rem) / 2);
+        box-sizing: border-box;
+    }
+}
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Inspecting the CSS, the `.card-premium` element uses `overflow: visible` and `height: auto`, with a minimum height set, while a child element `.modal-scroll-body` has `max-height: none` and `overflow: visible !important`. The HTML file suggests a section intended to display history content dynamically. It seems the issue stems from the interaction between these properties in the context of dynamically generated content within the `card-premium`.
+
+
+The CSS file path is confirmed, so the problem likely lies elsewhere. Now investigating if content from the rich text editor (RTE) includes inline styles that are overriding the intended layout, specifically a `max-height` attribute potentially causing the scrollbar.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 2.161737969s
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 10:17 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `commons.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+// commons.php - Inicialización global de servicios, manejo de errores y dependencias para LAESH
+
+date_default_timezone_set('America/Mexico_City');
+
+// Cabeceras de seguridad
+header('X-Content-Type-Options: nosniff');
+header('X-Frame-Options: SAMEORIGIN');
+header('X-XSS-Protection: 1; mode=block');
+
+// 1. Iniciar sesión PHP con banderas de seguridad y duración dinámica desde BD
+if (session_status() === PHP_SESSION_NONE) {
+    ini_set('session.cookie_httponly', 1);
+    ini_set('session.use_only_cookies', 1);
+
+    // session_lifetime: default 90 días (7,776,000s) — overrideable via var de entorno SESSION_LIFETIME
+    $sessionLifetime = (int)(getenv('SESSION_LIFETIME') ?: 7776000);
+
+    ini_set('session.gc_maxlifetime', $sessionLifetime);
+    ini_set('session.cookie_lifetime', $sessionLifetime);
+    if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') {
+        ini_set('session.cookie_secure', 1);
+    }
+    session_start();
+}
+
+// 2. Cargar el cargador manual de librerías compartidas
+require_once __DIR__ . '/autoload.php';
+require_once __DIR__ . '/notifier.php';
+
+use Common\DB;
+use Common\Logger;
+use Delight\Auth\Auth;
+
+// 3. Manejo de Errores Globales (PSR-3)
+set_error_handler(function ($errno, $errstr, $errfile, $errline) {
+    if (!(error_reporting() & $errno)) {
+        return false;
+    }
+    $message = sprintf("Error [%d]: %s en %s:%d", $errno, $errstr, $errfile, $errline);
+    Logger::log("ERROR", $message);
+    return true;
+});
+
+set_exception_handler(function ($exception) {
+    $config  = require __DIR__ . '/config.php';
+    $isDev   = ($config['app']['env'] ?? 'production') === 'development';
+
+    // ── Error 1969: max_statement_time excedido (MariaDB KILL automático) ──
+    // Ocurre cuando una query supera max_statement_time = 10s en mariadb.cnf.
+    // El motor devuelve SQLSTATE HY000 errno 1969 como PDOException.
+    // → Respuesta 503: el usuario ve mensaje claro; admin ve traza en log.
+    if ($exception instanceof \PDOException) {
+        $nativeCode = (int)($exception->errorInfo[1] ?? 0);
+        if ($nativeCode === 1969) {
+            http_response_code(503);
+            Logger::log(
+                'TIMEOUT',
+                sprintf('[1969] max_statement_time excedido — %s en %s:%d | Trace: %s',
+                    $exception->getMessage(),
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 10:18 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `class DB`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 10:18 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `DB.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+// DB.php - Clase para conexión PDO e interacción transaccional con la base de datos
+
+namespace Common;
+
+use PDO;
+use PDOException;
+
+class DB {
+    private static ?PDO $instance = null;
+
+    /**
+     * Establece la conexión PDO singleton
+     */
+    public static function connect(): PDO {
+        if (self::$instance === null) {
+            $config = require __DIR__ . '/config.php';
+            $dbConf = $config['db'];
+
+            $dsn = sprintf(
+                "mysql:host=%s;port=%d;dbname=%s;charset=%s",
+                $dbConf['host'],
+                $dbConf['port'],
+                $dbConf['name'],
+                $dbConf['charset']
+            );
+
+            try {
+                self::$instance = new PDO($dsn, $dbConf['user'], $dbConf['pass'], [
+                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 10:18 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+User's concerns are centered on two main points, so direct database interaction via CLI is not immediately relevant. First, labels and an image need centering, or justification if indentation control is disabled within the Rich Text Editor (RTE). Second, the user requests to remove vertical scrolling from a container in `index.php`. Focusing now on the RTE and centering/justification issue.
+
+
+The indentation buttons are likely disabled because the rich text editor's indentation functionality primarily supports simple block-level elements and not generic container elements like `<div>`. Indentation is not the appropriate method for centering content.  CSS Flexbox is the suggested approach for achieving professional and responsive centering of the labels and the image within the container.
+
+
+Focusing on the HTML snippet, it presents experience and quality indicators, suggesting a potential website component. The structure uses flexbox for layout, with two rows of elements, each row containing two visual items. The first row showcases "25 years of experience" and "Personal especializado" (specialized personnel), and the second is not shown.
+
+
+The layout issue likely stems from the parent container's width exceeding a reasonable maximum, coupled with `justify-content: space-between` and `flex: 1 1 380px` applied to the text block. The image's placement to the right exacerbates the problem if the parent isn't centered or has a balanced gap, causing the content to shift left. The visual in the screenshot points to this displacement.  The layout's responsiveness depends critically on the parent container's width.
+
+
+The image and text layout requires centering within a parent container. The `margin: 0 auto` and `justify-content: center` properties on the parent are the correct approach, with the flexbox layout inside this centered container to manage the text and image positioning.
+
+The scroll bar issue is located in `website/sections/acerca-de.php`. The relevant code snippet's `modal-scroll-body` class is likely the culprit; it may be forcing the scroll bar.
+
+
+The `modal-scroll-body` class in `landing.css` includes `overflow-y: auto` and `max-height: 320px`, which could be the source of the scrollbar. An override in `landing.css` attempts to address this, but a persistent scrollbar suggests the class is incorrectly applied in `website/sections/acerca-de.php`.  The use of `modal-scroll-body` in a non-modal context is incorrect, and the conflicting styles are likely the cause.  Renaming the class in the HTML to something like `.history-card-body` or removing it altogether from the HTML is a suggested remedy.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `modal-scroll-body`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 13.502331099s
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** CORTEX_STEP_STATUS_ERROR
+**Created:** 5 Oct 2026, 10:19 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `grid-single-history`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 10:19 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+The technical specification confirms that specific cards (`grid-acerca-cards` and `grid-single-history`) are designed to auto-adjust to 100% of the viewport width. The project's `landing.css` file includes CSS rules that explicitly set `width: 100%` and `max-width` for `.grid-single-history`, reinforcing the intended responsive behavior.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `card-premium`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.082887497s
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 10:19 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L859-889)</summary>
+
+**Path:** `Unknown file`
+
+```
+/* --- MEDIA QUERIES ABSORBIDAS DESDE RESPONSIVE.CSS --- */
+/* --- REGLAS GENERALES RESPONSIVAS --- */
+@supports (padding: env(safe-area-inset-bottom)) {
+    .sidebar { padding-bottom: env(safe-area-inset-bottom); }
+    .modal-content { padding-bottom: calc(1.75rem + env(safe-area-inset-bottom)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .animate-on-scroll,
+        .hero-slide,
+        .hero-glass-card,
+        .whatsapp-float::before,
+        .globito.pulse,
+        .btn,
+        .card-premium,
+        .carousel-card,
+        .carousel-progress-fill {
+            transition: none;
+            animation: none;
+        }
+    .hero-glass-card   { opacity: 1; transform: none; }
+}
+
+@media (min-width: 1920px) {
+    body { padding: env(safe-area-inset-top, 3rem) env(safe-area-inset-right, 2rem) env(safe-area-inset-bottom, 3rem) env(safe-area-inset-left, 2rem); font-size: 1.05rem; }
+    .navbar-sticky { padding: 1.25rem calc(max(2rem, (100vw - (725px + 50vw)) / 2 + 2rem)) 1.25rem calc(max(2rem, (100vw - (725px + 50vw)) / 2 + 2rem)); }
+    .navbar-sticky .nav-links { gap: 2.5rem; }
+    .navbar-sticky .nav-links a { font-size: 1.0rem; }
+    /* hero-premium: max-height:800px ya aplicado por el bloque ≥1025px — sin override adicional */
+    /* hero-glass-card h1/h2/p: base aplica en todos los viewports — sin override en ≥1920px */
+    .grid-layout {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L339-359)</summary>
+
+**Path:** `Unknown file`
+
+```
+            content: ''; position: absolute; bottom: 0; left: 25%; width: 50%;
+            height: 3px; background: var(--primary-green); border-radius: 2px;
+        }
+        .section-header p { color: var(--text-muted); font-size: 1.2rem; max-width: 600px; margin: 0 auto; }
+
+        /* ── Tarjetas ── */
+        .card-premium {
+            background: var(--bg-surface); border-radius: 16px; padding: 2.25rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+            border: 1px solid rgba(226,232,240,0.8);
+            transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+            text-align: left; position: relative; overflow: hidden;
+            display: flex; flex-direction: column; justify-content: space-between; height: 100%;
+        }@media (hover: hover) and (pointer: fine) {
+    .card-premium:hover {
+        transform: translateY(-8px) scale(1.02); box-shadow: 0 25px 35px -5px rgba(113,202,17,0.1); border-color: rgba(113,202,17,0.3);
+    }
+}
+
+        /* ── Grid ── */
+        .grid-layout {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Investigating the CSS file `landing.css`, line 572 shows a `max-height` of `320px` for `.modal-scroll-body`. The HTML file `website/sections/acerca-de.php` also needs review, specifically the section with the comment "Ficha ancha: Historia — desde CKEditor". The height and responsiveness need to be checked in relation to the modal's defined `max-height`.
+
+
+The `modal-scroll-body` class is likely causing the vertical scrollbar due to its `max-height` and `overflow-y: auto` properties, although it shouldn't be used for a history card. The HTML in `website/sections/acerca-de.php` should be updated to use a more appropriate class like `history-card-body` or `history-card-content`. Additionally, the CSS in `landing.css` needs adjustments to ensure consistent styling for `.grid-single-history .card-premium`, `.grid-single-history .modal-scroll-body`, and `.grid-single-history .history-card-body`.
+
+
+The `filemtime` function in `index.php` automatically updates the CSS file version in the link when `landing.css` is edited. The user wants to center a block containing labels and an image within a section. Centering within the RTE is desired, but indent controls are disabled because the content uses `div` elements, not standard paragraph or list elements, which are what the indentation tools apply to. The layout suggests a need for adjustments in the CSS to achieve the requested centering.
+
+
+CKEditor's indentation is disabled because it risks corrupting the design structure; indenting isn't suitable for centering. A centered flex container will achieve the layout's centering requirements effectively, accommodating responsiveness on different devices. Specifically, a flex container with `display: flex; justify-content: center; align-items: center; margin: 1.5rem auto 0 auto; gap: 2.5rem; max-width: 1050px;` is the key. The HTML needs to be constructed with a flex layout for labels and an image, ensuring proper arrangement and horizontal centering within the containing element.
+
+
+A CSS flex container with specific properties is the most effective approach for centering the block elements. I need to implement this flex layout within the HTML structure. This approach avoids using undesirable indentation for layout purposes. The visual presentation of the provided block of information has a design that should be translated with HTML into a proper flex structure.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `acerca-de.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 9.879333399s
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L34-50)</summary>
+
+**Path:** `Unknown file`
+
+```
+                        <?= safeHtml($qsVision) ?>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ficha ancha: Historia — desde CKEditor (43vh desktop / 100% responsive en móvil) -->
+            <div class="grid-single-history">
+                <div class="card-premium animate-on-scroll delay-100 info-col--stretch">
+                    <div class="modal-scroll-body">
+                        <!-- Historia — HTML enriquecido desde CKEditor 5 (ficha1/texto) -->
+                        <!-- El heading del card va incluido en el HTML exportado por CKEditor -->
+                        <div class="faq-p--sm2 ck5-output"><?= safeHtml($qsHistoriaHtml) ?></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The `modal-scroll-body` class, defined in the CSS for dialog modals, is present within a premium card section. This raises a question about its purpose and potential unintended styling effects. The class's properties (`overflow-y: auto`, `max-height`, `padding-right`) designed for modal content might not be suitable for this context. A potential conflict or unintended scroll behavior could arise by applying this styling to a standard content area.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.104537895s
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1949-1994)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+#acerca-de .card-premium,
+.grid-acerca-cards .card-premium,
+.grid-single-history .card-premium {
+    resize: none;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.grid-single-history .card-premium {
+    overflow: visible;
+    height: auto;
+    min-height: 270px;
+}
+
+/* Medida fija centrada para el contenedor del video en Desktop/Laptop (+15% adicional horizontal = 1173px) */
+#video .grid-single-history {
+    max-width: 1173px !important;
+    margin: 0.35rem auto 1rem auto !important;
+}
+
+#video .grid-single-history .card-premium,
+#video .card-premium {
+    height: auto !important;
+    max-height: none !important;
+    min-height: unset !important;
+    overflow: hidden !important;
+    padding: 0.75rem 1.25rem !important;
+}
+
+.grid-single-history .card-premium .modal-scroll-body {
+    max-height: none;
+    min-height: 150px;
+    overflow: visible !important;
+}
+
+.grid-single-history .ck5-output img {
+    max-width: 100%;
+    height: auto;
+    display: inline-block;
+    border-radius: 8px;
+}
+
+#video .modal-scroll-body {
+    max-height: none !important;
+    overflow: visible !important;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Inspecting the CSS reveals adjustments to element heights and overflow properties within a specific grid layout. This targets a premium card component, indicating possible overrides to default behavior related to content display. The use of `!important` suggests these rules are designed to ensure specific visual behaviors take precedence.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.065296182s
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 10:20 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 10:20 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 10:20 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 10:20 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+The `indent` and `outdent` commands in the rich text editor operate on plain text formatting components like paragraphs, block quotes, and lists. These commands are ineffective within structured blocks containing specific HTML tags. The issue stems from the commands' inherent functionality within the text formatting subsystem.
+
+
+Horizontal centering of the labels and the image requires Flexbox for semantic and responsive behavior, not indentation which would break responsiveness. The HTML was updated to correctly implement this centering using `display: flex;` and related properties.
+
+A vertical scroll issue on the landing page was found to originate from a CSS class intended for modal windows being incorrectly applied to the history section's internal container. The problematic class was replaced to remove the unintended max-height and overflow restrictions.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.263034267s
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+/**
+ * sections/acerca-de.php — Partial: Quiénes somos
+ * Incluido desde website/index.php; hereda su scope completo.
+ * Variables esperadas: $qsH2, $qsSub, $qsConfianzaHtml, $qsMision, $qsVision, $qsHistoriaHtml
+ */
+?>
+        <!-- ══════════════════════════════════════ QUIÉNES SOMOS ══ -->
+        <section id="acerca-de" class="sec-pad-1-5 scroll-sm-top">
+            <div class="section-header animate-on-scroll">
+                <!-- h2 y subtitulo desde web_contenidos (quienes-somos/seccion) -->
+                <h2><?= h($qsH2) ?></h2>
+                <p><?= $qsSub /* puede contener <strong> — generado en PHP con h() en la variable */ ?></p>
+            </div>
+
+            <div class="grid-acerca-cards">
+                <!-- Ficha 1: 25 años — HTML enriquecido desde CKEditor 5 (ficha4/texto) -->
+                <!-- El heading del card va incluido en el HTML exportado por CKEditor -->
+                <div class="card-premium animate-on-scroll delay-100 info-col">
+                    <div class="acerca-flex ck5-output">
+                        <?= safeHtml($qsConfianzaHtml) ?>
+                    </div>
+                </div>
+
+                <!-- Ficha 2: Misión — desde web_contenidos (quienes-somos/ficha2/texto) -->
+                <div class="card-premium animate-on-scroll delay-200 info-col">
+                    <div class="acerca-flex ck5-output">
+                        <?= safeHtml($qsMision) ?>
+                    </div>
+                </div>
+
+                <!-- Ficha 3: Visión — desde web_contenidos (quienes-somos/ficha3/texto) -->
+                <div class="card-premium animate-on-scroll delay-300 info-col">
+```
+
+</details>
+
+---
+
+## User Request
+
+iguala, osea que se use el mismo estilo de letra y de color, etc que usa el contenido de la ficha Visión, lo use este html para los texto, claro los colores azules que aparecen:
+<div style="align-items:center;box-sizing:border-box;display:flex;flex-wrap:wrap;gap:2.5rem;justify-content:flex-start;padding:0.5rem 0;width:100%;">
+    <div style="display:flex;flex-direction:column;flex:0 1 auto;gap:2rem;">
+        <div style="align-items:flex-start;display:flex;flex-wrap:wrap;gap:2.5rem;">
+            <div style="align-items:flex-start;display:flex;gap:0.75rem;">
+                <p style="text-align:justify;">
+                    <span style="color:#0052b7;font-family:Arial, Helvetica, sans-serif;font-size:1.8rem;"><span style="line-height:1;user-select:none;"><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ✔</strong></span></span>
+                </p>
+                <div>
+                    <div style="color:#0052b7;font-size:1.45rem;line-height:1.2;text-align:justify;white-space:nowrap;">
+                        <span style="font-family:Arial, Helvetica, sans-serif;">25 años</span>
+                    </div>
+                    <div style="color:#1e293b;font-size:1.05rem;margin-top:3px;text-align:justify;white-space:nowrap;">
+                        <span style="font-family:Arial, Helvetica, sans-serif;">de experiencia</span>
+                    </div>
+                </div>
+            </div>
+            <div style="align-items:flex-start;display:flex;gap:0.75rem;">
+                <p style="text-align:justify;">
+                    <span style="color:#0052b7;font-family:Arial, Helvetica, sans-serif;font-size:1.8rem;"><span style="line-height:1;user-select:none;">&nbsp; &nbsp; &nbsp; &nbsp;✔</span></span>
+                </p>
+                <div>
+                    <div style="color:#0052b7;font-size:1.45rem;line-height:1.2;text-align:justify;white-space:nowrap;">
+                        <span style="font-family:Arial, Helvetica, sans-serif;">Personal especializado</span>
+                    </div>
+                    <div style="color:#1e293b;font-size:1.05rem;margin-top:3px;text-align:justify;white-space:nowrap;">
+                        <span style="font-family:Arial, Helvetica, sans-serif;">Químicos con estudios de posgrado</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="align-items:flex-start;display:flex;gap:0.75rem;">
+            <p style="text-align:justify;">
+                <span style="color:#0052b7;font-family:Arial, Helvetica, sans-serif;font-size:1.8rem;"><span style="line-height:1;user-select:none;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ✔</span></span>
+            </p>
+            <div>
+                <div style="color:#0052b7;font-size:1.45rem;line-height:1.2;text-align:justify;white-space:nowrap;">
+                    <span style="font-family:Arial, Helvetica, sans-serif;">Calidad</span>
+                </div>
+                <div style="color:#1e293b;font-size:1.05rem;margin-top:3px;text-align:justify;white-space:nowrap;">
+                    <span style="font-family:Arial, Helvetica, sans-serif;">Evaluados con Excelencia por PACAL</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <figure class="image image-style-side image_resized" style="width:45%;">
+        <img style="aspect-ratio:1600/1066;border-radius:12px;box-shadow:0 4px 16px rgba(0,0,0,0.08);display:block;" src="/laesh-web-assets-uipv1a/cms/historia-card-20261005-962daee8.jpg" alt="Responsable Sanitario Q.F.B. Jacob Santiago Blanco" width="1600" height="1066" id="img-tarjeta-historia">
+    </figure>
+</div>
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `acerca-de.php`
+**Language:** php
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The user wants the provided HTML to adopt the same text style, color, etc., as the "Visión" section. This suggests a need to analyze the existing HTML and identify the relevant CSS styles used in "Visión". The goal is to replicate these styles within the provided HTML. I'll need to examine the HTML for the current styles and compare them to the intended "Visión" section's styling.
+
+
+Examining the target HTML reveals the use of inline styles.  I must extract these style attributes. The "Visión" section's styles need to be identified next; likely, they are also inline, though they could be within a style tag or a linked stylesheet.
+
+
+Extracted the inline styles from both the provided HTML and the "Visión" section's HTML. Now, comparing the extracted styles from the target and the reference sections. The goal is to identify any differences that need to be addressed. The current focus is on matching font families, sizes, and colors.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `acerca-flex`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 4.837581279s
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 10:42 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `tokens.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+/* ─────────────────────────────────────────────────────────────────
+   LAESH Design Tokens (tokens.css) — Sistema de Diseño Unificado
+   Define variables globales de color, tipografía, estados y elevación.
+   ───────────────────────────────────────────────────────────────── */
+:root {
+    color-scheme: light; /* CSS-3: fijar modo claro; evita que dark-OS aplique temas a inputs/selects/scrollbars */
+
+    /* ── Paleta Institucional LAESH ── */
+    --primary: #0052B7;            /* Azul LAESH Principal */
+    --primary-green: #71CA11;      /* Verde Principal LAESH */
+    --primary-green-light: #A3C912;/* Verde Claro LAESH */
+    --secondary-green: #CCE7F5;    /* Azul Claro / Fondo Suave */
+    --accent: #A3C912;             /* Verde de Acento */
+
+    /* ── Colores de Texto y Superficies ── */
+    --text-main: #0f172a;          /* Slate 900 — Texto Principal */
+    --text-muted: #64748b;         /* Slate 500 — Texto Secundario */
+    --bg-page: #f8fafc;            /* Slate 50 — Fondo de Página */
+    --bg-surface: #ffffff;         /* Blanco — Tarjetas y Superficies */
+    --border: #DADAD9;             /* Gris LAESH para Bordes */
+
+    /* ── Colores de Estado (Órdenes y Diagnósticos) ── */
+    --state-remitido-bg: #e0f2fe;  /* Azul Claro */
+    --state-remitido-text: #0284c7;
+    --state-atencion-bg: #fef3c7;  /* Amarillo Claro */
+    --state-atencion-text: #d97706;
+    --state-listos-bg: #d1fae5;    /* Verde Claro */
+    --state-listos-text: #16a34a;
+    --state-cerrada-bg: #f1f5f9;   /* Gris Claro */
+    --state-cerrada-text: #475569;
+    --state-cancelada-bg: #fee2e2; /* Rojo Claro */
+    --state-cancelada-text: #dc2626;
+
+    /* ── Colores de Feedback (Toast / Alertas / Validaciones) ── */
+    --color-success-bg: #d1fae5;    /* Verde Claro — Operación exitosa */
+    --color-success-text: #047857;  /* Verde Oscuro */
+    --color-error-bg: #fee2e2;      /* Rojo Claro — Error / Alerta */
+    --color-error-text: #b91c1c;    /* Rojo Oscuro */
+    --color-warning-bg: #fef3c7;    /* Amarillo Claro — Advertencia */
+    --color-warning-text: #b45309;  /* Ámbar Oscuro */
+    --white: #ffffff;
+    --primary-dark: #003f8c;        /* Azul LAESH Oscuro — hover */
+}
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `fonts.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+/* ═══════════════════════════════════════════════════════════════
+   LAESH — Fuentes locales (offline-safe)
+   Generado automáticamente el 2026-08-14.
+   Origen: Google Fonts v35 (Cabin) / v15 (Outfit)
+   Archivos en: /laesh-web-assets-uipv1a/fonts/
+═══════════════════════════════════════════════════════════════ */
+
+/* Cabin — italic, w400 */
+@font-face {
+    font-family: 'Cabin';
+    font-style: italic;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/laesh-web-assets-uipv1a/fonts/cabin-vietnamese-italic-w400.woff2') format('woff2');
+    unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+
+/* Cabin — italic, w400 */
+@font-face {
+    font-family: 'Cabin';
+    font-style: italic;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/laesh-web-assets-uipv1a/fonts/cabin-latin-ext-italic-w400.woff2') format('woff2');
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* Cabin — italic, w400 */
+@font-face {
+    font-family: 'Cabin';
+    font-style: italic;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/laesh-web-assets-uipv1a/fonts/cabin-latin-italic-w400.woff2') format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* Cabin — italic, w500 */
+@font-face {
+    font-family: 'Cabin';
+    font-style: italic;
+    font-weight: 500;
+    font-display: swap;
+    src: url('/laesh-web-assets-uipv1a/fonts/cabin-vietnamese-italic-w400.woff2') format('woff2');
+    unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+
+/* Cabin — italic, w500 */
+@font-face {
+    font-family: 'Cabin';
+    font-style: italic;
+    font-weight: 500;
+    font-display: swap;
+    src: url('/laesh-web-assets-uipv1a/fonts/cabin-latin-ext-italic-w400.woff2') format('woff2');
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* Cabin — italic, w500 */
+@font-face {
+    font-family: 'Cabin';
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `fonts.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L299-346)</summary>
+
+**Path:** `Unknown file`
+
+```
+    font-family: 'Outfit';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('/laesh-web-assets-uipv1a/fonts/outfit-latin-normal-w300.woff2') format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* Outfit — normal, w600 */
+@font-face {
+    font-family: 'Outfit';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url('/laesh-web-assets-uipv1a/fonts/outfit-latin-ext-normal-w300.woff2') format('woff2');
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* Outfit — normal, w600 */
+@font-face {
+    font-family: 'Outfit';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url('/laesh-web-assets-uipv1a/fonts/outfit-latin-normal-w300.woff2') format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* Outfit — normal, w700 */
+@font-face {
+    font-family: 'Outfit';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('/laesh-web-assets-uipv1a/fonts/outfit-latin-ext-normal-w300.woff2') format('woff2');
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* Outfit — normal, w700 */
+@font-face {
+    font-family: 'Outfit';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('/laesh-web-assets-uipv1a/fonts/outfit-latin-normal-w300.woff2') format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `font-family`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 10:43 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `quienes-somos/ficha3/texto`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 10:43 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `quienes-somos/ficha3/texto`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 10:43 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `Visión`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 10:43 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+Inspecting line 486 of `gestion_web.php` reveals the "VISION" section's HTML structure. Considering how this is displayed, cross-referencing this with the original mockup and the `acerca-de.php` file, which is likely another part of the website, provides context. The goal is to determine the source and implementation details of this section.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `txt-pgd-sub`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.089568386s
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 10:43 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `aviso-p`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Oct 2026, 10:43 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `ckeditor-content.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L169-195)</summary>
+
+**Path:** `Unknown file`
+
+```
+p.faq-p--primary {
+    color: var(--primary, #0052B7);
+    font-weight: 600;
+    margin-bottom: 0.5em;
+}
+
+/* "Texto Secundario" — p.faq-p--tail */
+p.faq-p--tail {
+    color: var(--text-secondary, #475569);
+    font-size: 0.9em;
+    margin-bottom: 0.4em;
+}
+
+/* "Texto Muted" — p.aviso-p--muted */
+p.aviso-p--muted {
+    color: var(--text-muted, #64748b);
+    font-size: 0.85em;
+    line-height: 1.5;
+    margin-bottom: 0.4em;
+}
+
+/* "Firma / Highlight" — strong.txt-main */
+strong.txt-main {
+    color: var(--brand-green, #71CA11);
+    font-weight: 700;
+}
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Inspecting the "Visión" section's typography. The relevant container identified. Now, analyze the HTML structure within the "Visión" card to understand how the text is styled. Specifically, noting the classes applied to the heading and paragraph elements.
+
+
+Examining the source for the "Visión" section reveals font families and color variables defined in the stylesheet, and contrasting inline styles applied in the user-provided HTML. The goal is to harmonize the user's HTML with the style of the "Visión" section. Comparing title and text styles between the two reveals discrepancies in both font and color.
+
+
+The user's attempt to "push" elements with non-breaking spaces (`&nbsp;`) indicates a workaround for missing indentation controls. The "Visión" section inherits its font, resolving to a specific set of fonts, and explicitly defines the title's blue color and font weight, and the secondary text's color, size, and line height. The icon uses the same primary color and a bold style for perfect vertical alignment and replaces the spaces.
+
+
+The current layout justification causes the content to align left; centering necessitates modifying `justify-content` and applying `margin: 0 auto;` along with `max-width`. The user's image is present and should retain its original source path and ID.
+
+Inspecting the "Visión" section reveals distinct styling for the title and paragraph text. The title uses a primary color, bold font weight, and inherited font. The paragraph uses a muted color, size, and line height.
+
+
+The primary goal is to ensure the user's provided HTML content visually aligns with the "Visión" section's styling. This involves inheriting the font family and applying the specified blue color, font weight, and size to titles. The secondary text requires the muted color, a suitable font size, line height, and a subtle highlight for the word "Excelencia". Finally, the HTML needs cleanup of the artificial non-breaking spaces.
+
+
+Removing artificial spaces and integrating the checkmark icon, ensuring proper alignment with the text, requires a distinct flex container for the checkmark. To center the content, `justify-content` needs modification to align with `margin: 0 auto;` and a maximum width restriction. The image's original attributes, including the source and ID, should be maintained. The goal is to construct semantic HTML that replicates the visual styling of the "Visión" section, specifically its centering and label layout.
+
+
+Analyzing the provided HTML snippet, identifying the use of flexbox for aligning the checkmark icon and text. Correcting for the specified visual design, I'll need to wrap the icon and text in their own flex container to control their alignment. Next, I need to incorporate the appropriate styling to reflect a bold title with a specific primary color, followed by a smaller, muted secondary text. This requires creating a layout that mimics the "Visión" section.
+
+
+The provided HTML's flex container structure will be adjusted to center the content horizontally. Inline styles must be overwritten, incorporating the appropriate styling for titles, text, and icons within each container. The image attributes should be preserved in the layout, keeping the source and the original ID. The existing layout needs modification to accommodate centered text and the provided content, while maintaining the intended visual design.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 22.815692891s
 - **Model:** Gemini 3.8 Flash (Medium)
 </details>
 
