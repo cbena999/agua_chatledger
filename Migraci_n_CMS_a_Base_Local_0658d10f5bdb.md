@@ -7,8 +7,9 @@
 | **Trajectory ID** | `26f407a6-31e3-4b77-91c3-f1ef3b73245f` |
 | **Cascade ID** | `554ee869-ebfd-4ea7-83e5-0658d10f5bdb` |
 | **Type** | Agent Conversation |
-| **Total Steps** | 3815 |
+| **Total Steps** | 4076 |
 | **Started** | 5 Oct 2026, 2:44 pm |
+| **Completed** | 8 Oct 2026, 3:38 pm |
 
 ---
 
@@ -4886,6745 +4887,617 @@
 
 ### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 5:47 pm
-
----
-
-## Agent Response
-
-### Thinking
-
-The initial modifications to enable the footer slot in the administrative interface and the CKEditor configuration are complete and saved. Now, the focus shifts to editing the remaining asset.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion-web.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.129200103s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L659-684)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-/* Excepción quirúrgica para Historia Institucional: permite desplegar imágenes de infografía/tarjeta con escala responsiva */
-#ck-historia .ck.ck-content img,
-#ck-historia .ck.ck-editor__editable_inline img {
-    max-height: none !important;
-    max-width: 100% !important;
-    height: auto !important;
-    object-fit: contain;
-}
-
-.ck5-mount .ck.ck-content img.footer-logo-img,
-.ck5-mount .ck.ck-editor__editable_inline img.footer-logo-img,
-.ck5-mount .ck.ck-content img[src*="logo"],
-.ck5-mount .ck.ck-editor__editable_inline img[src*="logo"] {
-    max-height: 48px;
-    width: auto;
-    object-fit: contain;
-}
-
-/* Ocultar el textarea de respaldo — CKEditor lo gestiona */
-.ck5-hidden-data {
-    display: none ;
-    visibility: hidden;
-    position: absolute;
-    width: 0;
-    height: 0;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion-web.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L634-659)</summary>
-
-**Path:** `Unknown file`
-
-```
-    line-height: 1.6;
-    color: var(--text-main, #1e293b);
-    resize: vertical;
-    overflow: auto;
-}
-.ck5-mount .ck.ck-editor__editable_inline:focus {
-    outline: none;
-    box-shadow: 0 0 0 2px var(--primary, #0052b7);
-}
-
-/* Área de edición ampliada para documentos extensos (Aviso de Privacidad) */
-.ck5-mount.ck5-mount-lg {
-    min-height: 480px;
-}
-.ck5-mount.ck5-mount-lg .ck.ck-editor__editable_inline {
-    min-height: 450px;
-}
-
-/* Restringir visualización de imágenes/logos dentro del lienzo de edición CKEditor 5 */
-.ck5-mount .ck.ck-content img,
-.ck5-mount .ck.ck-editor__editable_inline img {
-    max-height: 140px;
-    width: auto;
-    object-fit: contain;
-}
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Analyzing CSS rules targeting images within CKEditor 5. The rules specifically address images with the class `footer-logo-img` and those containing "logo" in their `src` attribute. This suggests a focus on controlling the appearance of logos, potentially within a footer or inline context, by setting a maximum height and auto width with a contain object-fit. Recognizing that CKEditor 5 image plugins often wrap images in `<figure>` or `<span>` elements, understanding how these rules interact with those wrappers is critical.
-
-
-
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `footer-logo`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.094846764s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 5:47 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L784-814)</summary>
-
-**Path:** `Unknown file`
-
-```
-.footer-info {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 0.4rem 1.5rem 0.25rem !important;
-    text-align: center;
-}
-
-.footer-logo-img {
-    height: 36px;
-    display: block;
-    margin: 0 auto 0.25rem;
-    opacity: 0.95;
-    filter: brightness(0) invert(1);
-}
-
-.footer-text {
-    font-size: 0.78rem;
-    color: rgba(255, 255, 255, 0.9);
-    line-height: 1.35;
-    margin: 0.1rem 0;
-}
-.footer-text a          { color: #fff; font-weight: 700; text-decoration: none; }@media (hover: hover) and (pointer: fine) {
-    .footer-text a:hover {
-        text-decoration: underline;
-    }
-}
-
-/* ── Responsive móvil footer ── */
-
-
-/* ── §8 COMPONENTES STANDALONE ──────────────────────────────────────────────── */
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-The `landing.css` defines the footer logo height as 36px, which is confirmed by the public frontend. The CMS editor loads HTML from the database. It is necessary to query the database to retrieve the exact HTML content for the 'footer' section in the `web_contenidos` table to understand what the editor is loading.
-
-
-
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.096103115s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 5:47 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 5:48 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 5:48 pm
 
 ---
 
-## Agent Response
+### Local File Search
 
-### Thinking
-
-Examining the database reveals the footer logo element with `class="footer-logo-img"` and inline styles for maximum height and automatic width. The inconsistency between this and the CMS Admin display suggests the issue lies within CKEditor 5's rendering or handling of these styles. Next, the focus will be on investigating the CKEditor 5 configuration and how it interacts with the image styles.
-
-
-CKEditor 5's default CSS and potentially conflicting rules, along with the wrapper structure and image rendering, might be the source of the size discrepancy. The concern is that either a `max-width: 100%` or an internal CSS rule like the `max-height: 140px` in `gestion-web.css` is overriding the intended inline styles for the footer logo. If the image with dimensions 2634x571 has `max-height: 140px` applied, the width calculation will yield a far too large output (around 645px), which is inconsistent with intended display. The specificity of the CSS rules and the presence of `!important` declarations will need further inspection.
-
-
-The lack of `!important` in the footer logo CSS rules, coupled with CKEditor's higher specificity, causes the unintended size.  The CKEditor 5 configuration from "Admin 2. Quiénes somos," using the `_createEditorHistoria` function, will be analyzed to determine if the same image handling functionality is applicable to resolve this issue with Admin 7's footer logo. This setup includes an `insertImage` button, image plugins, and image upload capabilities.
-
-
-The `_createEditorHistoria` function within the code suggests a potential setup for the CKEditor instance used in the footer. Analyzing the associated PHP code, it seems designed to exempt footer images from banner dimension constraints. The `gestion-web.css` file is crucial for styling both the `#ck-footer` element and the editor.
-
-The goal is to ensure the footer logo displays correctly with a reasonable default size, while allowing resizing without layout disruption. Existing CSS rules for `#ck-historia` offer a model, specifically the responsive image handling with `max-width` and `height` properties, which will be adapted for the footer. A specific selector for footer logos (by class or `src` attribute) will enable custom styling to control the initial display.
-
-
-CSS rules for the footer logo, including specific selectors for images matching the logo source or class, and general image styles within the footer will be defined. It's crucial to ensure that the logo's inline styles are not overridden and to allow for resizing of other inserted images. The CKEditor 5 behavior of writing inline styles during resizing needs to be addressed to avoid conflicts. It will be determined whether the default image handling can be selectively applied to footer images without hindering resizing. The goal is to balance a reasonable default size with the ability to adjust image dimensions via manual resizing.
-
-
-A default size for the footer logo will be implemented, specifically if it has `src*="logo"` or `class*="footer-logo"`.  If there are no existing inline styles, it will apply `max-height: 42px; width: auto; max-width: 240px;`. This should also address the CKEditor 5 behavior of expanding to `width: 100%`.
-
-To prevent CKEditor from forcing the image to 100% width, a specific CSS rule for  `.ck-content .image > img` that uses `max-width` will be introduced.  This prevents the image within `<figure>` from expanding if its parent does not have a constrained width.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion-web.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 13.676186893s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L664-699)</summary>
-
-**Path:** `Unknown file`
-
-```
-    max-width: 100% !important;
-    height: auto !important;
-    object-fit: contain;
-}
-
-.ck5-mount .ck.ck-content img.footer-logo-img,
-.ck5-mount .ck.ck-editor__editable_inline img.footer-logo-img,
-.ck5-mount .ck.ck-content img[src*="logo"],
-.ck5-mount .ck.ck-editor__editable_inline img[src*="logo"] {
-    max-height: 48px;
-    width: auto;
-    object-fit: contain;
-}
-
-/* Ocultar el textarea de respaldo — CKEditor lo gestiona */
-.ck5-hidden-data {
-    display: none ;
-    visibility: hidden;
-    position: absolute;
-    width: 0;
-    height: 0;
-    overflow: hidden;
-}
-
-/* Fix for CKEditor media embeds covering their own resize handles */
-.ck5-mount div[style*="resize: both"] {
-    box-sizing: border-box ;
-    padding: 0 16px 16px 0 ;
-    background-color: #f8fafc;
-}
-
-/* ── Botón Vista Previa ── */
-#btn-preview-tabbar {
-    background-color: var(--primary);
-    color: #ffd859;
-    border: none;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `footer-info img`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
+**Status:** Reset
+**Created:** 7 Oct 2026, 5:49 pm
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 5:49 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `footer-info`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 7 Oct 2026, 5:49 pm
-
----
-
-## Agent Response
-
-### Thinking
-
-The CSS targets the `.footer-logo-img` class, applying specific styles like height, display, margin, opacity, and a brightness/invert filter. Considering CKEditor's image output, a dynamically inserted image in the footer might not inherit these styles, especially if it uses a generic image tag without the specified class and resides within `.footer-info`. This suggests a potential styling discrepancy for images added through the editor versus the intended footer logo.
-
-
-Ensuring images in the footer don't overflow requires setting `max-width: 100%` and `height: auto` in `landing.css` for both `img` and `figure.image` elements. This is essential to prevent user-inserted or customized images from breaking the layout, especially with the new editor. Also, the CSS in `gestion-web.css` is being modified to limit image size and figure elements within the footer specifically to address potential size issues from the CKEditor.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 5.509752153s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 5:49 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L789-804)</summary>
-
-**Path:** `Unknown file`
-
-```
-}
-
-.footer-logo-img {
-    height: 36px;
-    display: block;
-    margin: 0 auto 0.25rem;
-    opacity: 0.95;
-    filter: brightness(0) invert(1);
-}
-
-.footer-text {
-    font-size: 0.78rem;
-    color: rgba(255, 255, 255, 0.9);
-    line-height: 1.35;
-    margin: 0.1rem 0;
-}
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 5:50 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 5:50 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 5:50 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 5:50 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 5:50 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 5:50 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 5:50 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 5:50 pm
-
----
-
-## Agent Response
-
-### Thinking
-
-Strict adherence to user rules is confirmed; automatic synchronization, commit, and push operations are disabled. The system awaits explicit user instructions for these actions. The reason is under analysis.
-
-
-
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.203682808s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L568-599)</summary>
-
-**Path:** `Unknown file`
-
-```
-            .catch(function (err) {
-                console.error('[LAESH CMS] Falló CKEditor en ' + mountId + ':', err);
-                _ckState[globalKey] = null;
-                mountEl.style.display = 'none';
-                dataEl.classList.remove('ck5-hidden-data');
-                dataEl.style.display  = 'block';
-            });
-    }
-
-    function _initPromocionesEditors() {
-        setTimeout(function () {
-            for (var i = 1; i <= 7; i++) {
-                // Título / Etiqueta Superior de la Ficha: Editable en contenido + estilo RTE
-                var mDay = 'ck-promo-day-' + i;
-                var dDay = 'ck-promo-day-' + i + '-data';
-                if (document.getElementById(mDay) && document.getElementById(dDay)) {
-                    _createEditorNoMedia(mDay, dDay, '_ckPromoDay' + i, false);
-                }
-            }
-        }, 150);
-    }
-
-    function _initCalidadEditors() {
-        setTimeout(function () {
-            for (var i = 1; i <= 3; i++) {
-                var mId = 'ck-calidad-gallery' + i;
-                var dId = 'ck-calidad-gallery' + i + '-data';
-                if (document.getElementById(mId) && document.getElementById(dId)) {
-                    _createEditorNoMedia(mId, dId, '_ckCalidadGallery' + i, false);
-                }
-            }
-        }, 150);
-```
-
-</details>
-
----
-
-## User Request
-
-revisa que hace falta en index sitio web  cms de 7. Pie de Página, pues la imagen del logo la puse a 60%  y para mobiles se ve  bien pero para laptop/desktop se muestra distorsionado.
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `ckeditor-init.js`
-**Language:** javascript
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 6:12 pm
 
 ---
 
-## Agent Response
+### Local File Search
 
-### Thinking
-
-Inspecting the stored value reveals the image's inline style definition, including `aspect-ratio`, `max-height`, and `width` specifications. Simultaneously, `landing.css` defines the `.footer-logo-img` class, specifying `height` and `display` properties. This suggests a potential conflict or redundant styling in the image's presentation.
-
-
-The image's distorted appearance likely stems from conflicting width and height declarations.  The inline style sets a width percentage, while CSS sets a fixed height, overriding the inherent aspect ratio. Specifically, the width percentage applied to a constrained container combined with a fixed height leads to a disproportionately wide image. The problem is worse on larger screens where the percentage translates to a significantly greater width.
-
-
-The fixed height coupled with a width percentage creates distortion as the aspect ratio is compromised. The user's intent when setting the 60% width was likely for visual appearance rather than a strict percentage; the CMS's resizing tools suggest this. To correct the distortion, the best approach would be to constrain the maximum width or allow height to adjust automatically.
-
-
-Mobile displays the logo well because 60% of the screen width results in a reasonable size. However, at desktop sizes, 60% translates to an excessively wide image due to the fixed height.  If `width: 60%` and `height: auto` were used without any `max-width`, this would result in a huge logo on desktop (60% of the container, which is ~768px wide). The fixed height combined with a percentage width is the root of the problem. A `max-width` constraint is likely needed, or allowing the height to scale automatically via `height: auto`.
-
-
-With `.footer-logo-img { max-width: min(60%, 220px); }`, the image is well-sized on mobile (smaller screens).  On larger screens, the `max-width` constrains the image. However, the existing `height:36px` is still problematic.
-
-The distortion arises from `width: 60%` applied with a fixed `height`. The `max-width` in the CSS class helps, but the fixed `height` from CSS or inline styles remains the critical source of distortion; either fixed height combined with a percentage width will cause a problem. Using `object-fit: contain` is a possible but not ideal solution, it centers the image within a distorted box.
-
-The original HTML used `<img class="footer-logo-img">` and inherited the size from the CSS.  A fixed `height` in CSS caused problems if any inline `width` was present.  The intent might have been to avoid overflow with the `max-width` on mobile.
-
-
-The inline style's `width: 60%` overrides the CSS's `width: auto`, but it doesn't override the `height` specification. Thus, the browser has conflicting `height: 36px` and `width: 60%`.  The user's 60% width setting was likely intended to keep the logo at a reasonable size on mobile.
-
-The aspect ratio becomes distorted because the fixed height doesn't scale proportionally with the 60% width, particularly evident on larger screens. On a mobile (360px) screen the 60% translates to ~216px, where with an image ratio of 2634/571 this would produce an height of 46px and looks well-proportioned. On a desktop screen (1280px), 60% is 768px, causing distortion because it's fixed height is small relative to the width.
-
-
-On mobile, the `width: 60%` combined with `max-width: 220px` results in the intended 60% width, because the calculated width is less than the maximum. With `height: auto`, the aspect ratio is maintained, and the height is constrained by `max-height: 48px`.
-
-On tablet, the same rules will be applied: the width will be constrained by the `max-width`. With `height: auto` the image should not be distorted as on larger screens. The image ratio should stay correct.
-
-For desktop, with 60% is not very useful because the aspect ratio is damaged, using a `max-width` should make the image be in the desired size and aspect ratio, with a calculated height.
-
-
-If a `max-width: 220px !important` is applied, the width is constrained to 220px, maintaining the correct aspect ratio and preventing distortion. Height is calculated proportionally based on the native aspect ratio. On larger screens, this constraint ensures the image remains within a reasonable size, preventing stretching. When height is set to `auto !important` the image will never distort regardless of the screen size.
-
-
-The conflicting styles resulted in image distortion because a fixed height was combined with a dynamic width. CMS-provided inline styling (e.g., `width: 60%`) was not compatible with the `landing.css` rule setting `height: 36px`. Correct display requires consistent handling of either height or width to maintain aspect ratio.
-
-
-
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `footer-logo-img`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 28.220191632s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
+**Status:** Reset
+**Created:** 7 Oct 2026, 6:13 pm
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 6:13 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L779-819)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-
-
-
-/* ── Franja de información inferior ── */
-.footer-info {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 0.4rem 1.5rem 0.25rem !important;
-    text-align: center;
-}
-
-.footer-logo-img {
-    height: 36px;
-    display: block;
-    margin: 0 auto 0.25rem;
-    opacity: 0.95;
-    filter: brightness(0) invert(1);
-}
-
-.footer-info img {
-    max-width: 100%;
-    height: auto;
-}
-
-.footer-info figure.image {
-    display: inline-block;
-    max-width: 100%;
-    margin: 0.25rem auto;
-}
-
-.footer-text {
-    font-size: 0.78rem;
-    color: rgba(255, 255, 255, 0.9);
-    line-height: 1.35;
-    margin: 0.1rem 0;
-}
-.footer-text a          { color: #fff; font-weight: 700; text-decoration: none; }@media (hover: hover) and (pointer: fine) {
-    .footer-text a:hover {
-        text-decoration: underline;
-    }
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Inspecting the CSS, the element `.footer-logo-img` has a fixed `height` of 36px.  A later rule, `.footer-info img`, sets `height: auto;`. The fixed height on `.footer-logo-img` likely overrides the auto height because of class specificity or the order of declaration. The goal is to understand which rule takes precedence.
-
-
-The inline style's `width: 60%` takes precedence, overriding external CSS except those using `!important`. The `height: 36px` from `landing.css` is applied because the inline style doesn't define height. The `max-height: 40px` from the inline style then doesn't affect the final rendered result because the calculated height is smaller.
-
-Analyzing the new CSS rule: on mobile, `width: 60%` will set the width.  The `max-width: 230px !important` will limit the width. With `height: auto !important`, the height is calculated proportionally to the image's aspect ratio. This ensures no distortion, and it should apply correctly because `!important` makes these rules override the inline styles.
-
-
-
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `footer-info`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 2.967474398s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 6:13 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `web_contenidos`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 7 Oct 2026, 6:13 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L794-834)</summary>
-
-**Path:** `Unknown file`
-
-```
-                <button type="button" class="close-modal" id="btn-cerrar-login" aria-label="Cerrar">&times;</button>
-            </div>
-            <div class="modal-body">
-                <form id="form-login-portal" class="form-col-1rem" novalidate autocomplete="off">
-                    <input type="hidden" id="login-redirect-target" value="medico">
-                    <input type="hidden" id="login-csrf-token" name="csrf_token"
-                           value="<?= h($_SESSION['csrf_token']) ?>">
-                    <input type="hidden" id="login-portal-name" name="portal" value="medico">
-                    <div>
-                        <label class="form-label" for="login-phone">Usuario <span class="req">*</span></label>
-                        <input type="text" inputmode="numeric" id="login-phone" name="telefono" required
-                               class="form-input" maxlength="10"
-                               placeholder="Número de teléfono (10 dígitos)"
-                               autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
-                    </div>
-                    <div>
-                        <label class="form-label" for="login-pass">Contraseña <span class="req">*</span></label>
-                        <div class="pw-input-wrap">
-                            <input type="password" id="login-pass" name="password" required
-                                   class="form-input" maxlength="10"
-                                   placeholder="••••••••••"
-                                   autocomplete="off" autocorrect="off" autocapitalize="none"
-                                   spellcheck="false">
-                            <button type="button" id="btn-toggle-login-pass" class="btn-pw-eye" aria-label="Mostrar contraseña" tabindex="-1">
-                                <svg id="eye-login-pass-open" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                                <svg id="eye-login-pass-off" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:none;"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
-                            </button>
-                        </div>
-                    </div>
-                    <div id="login-error-msg" class="login-error-box"></div>
-                    <button type="submit" id="btn-login-submit" class="btn btn-primary">Ingresar</button>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- ── Modal: Vista de Imagen Completa (Promociones) ───────────────────────── -->
-    <div id="modal-img-promo" class="modal modal-promo-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-img-promo-title">
-        <div class="modal-content modal-img-promo-content">
-            <div class="modal-header modal-img-promo-header">
-                <div id="modal-img-promo-title" class="modal-img-promo-title ck-content">Promoción — Imagen Completa</div>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L749-794)</summary>
-
-**Path:** `Unknown file`
-
-```
-        <!-- ══════════════════════════════════════════════ FOOTER ══ -->
-        <footer class="footer-main" style="background: <?= h($footerBgColor) ?> !important;" role="contentinfo">
-            <?= $footerHtml ?>
-        </footer>
-    </main>
-
-    <!-- Botón WhatsApp flotante — número desde configuraciones -->
-    <a href="<?= h($waInfoUrl) ?>" class="whatsapp-float"
-       target="_blank" rel="noopener noreferrer"
-       title="Contáctanos por WhatsApp" aria-label="Contáctanos por WhatsApp">
-        <svg width="32" height="32" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984a9.96 9.96 0 0 0 1.335 4.975L2 22l5.195-1.364A9.936 9.936 0 0 0 12.006 22c5.507 0 9.991-4.479 9.992-9.986.002-2.668-1.036-5.18-2.924-7.069C17.186 3.057 14.675 2.002 12.012 2zm5.72 14.15c-.314.88-1.543 1.62-2.13 1.7-.587.08-1.173.28-4.08-.93-3.72-1.54-6.12-5.32-6.3-5.57-.18-.25-1.47-1.95-1.47-3.72 0-1.78.93-2.65 1.26-3 .33-.35.72-.44.96-.44h.69c.22 0 .52-.08.82.64.3.72 1.02 2.48 1.11 2.66.09.18.15.39.03.63-.12.24-.18.39-.36.6-.18.21-.38.47-.54.63-.18.18-.37.38-.16.73.21.35.93 1.54 2 2.49 1.38 1.23 2.54 1.61 2.9 1.79.36.18.57.15.78-.09.21-.24.9-1.05 1.14-1.41.24-.36.48-.3.8-.18.33.12 2.07 1.02 2.43 1.2.36.18.6.27.69.42.09.15.09.87-.22 1.75z"/>
-        </svg>
-    </a>
-
-    <!-- Botón Facebook flotante — URL desde configuraciones -->
-    <?php if ($cfgFB): ?>
-    <a class="social-float fb-bg" href="<?= h($cfgFB) ?>"
-       target="_blank" rel="noopener noreferrer"
-       title="Visita nuestro Facebook" aria-label="Visita nuestro Facebook">
-        <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/>
-        </svg>
-    </a>
-    <?php endif; ?>
-
-    <!-- ── Modal: Aviso de Privacidad ──────────────────────────────────────── -->
-    <div id="modal-privacidad" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-privacidad-title">
-        <div class="modal-content modal-lg">
-            <div class="modal-header">
-                <h3 id="modal-privacidad-title">Aviso de Privacidad — <?= h($cfgNombreC) ?></h3>
-                <button type="button" class="close-modal" aria-label="Cerrar">&times;</button>
-            </div>
-            <div class="modal-body modal-scroll-h">
-                <!-- aviso-privacidad/contenido/cuerpo_html — dinámico desde RTE del CMS -->
-                <?= $avisoHtml ?>
-            </div>
-        </div>
-    </div>
-
-    <!-- ── Modal: Acceso Portal (Login) ────────────────────────────────────── -->
-    <div id="modal-login" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-login-title">
-        <div class="modal-content modal-login-box">
-            <div class="modal-header">
-                <h3 id="modal-login-title">Acceso Médico</h3>
-                <button type="button" class="close-modal" id="btn-cerrar-login" aria-label="Cerrar">&times;</button>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Analyzing line 752 of the HTML, the footer's background style is dynamically set using `$footerBgColor`, while the footer content (`$footerHtml`) is retrieved from `web_contenidos` with the key `'cuerpo_html'`. The database stores HTML content, which includes a `div` with a centered image. The `$footerHtml` variable will be populated with the HTML stored in the database.
-
-
-The inline style sets the image width to 60%, and the CSS sets a fixed height, causing distortion on larger screens where the aspect ratio is incorrect. Examining the computed styles reveals the conflict between the inline `width` and the CSS `height`. The fixed `height` in CSS overrides the intended aspect ratio scaling. To prevent distortion, either the `height` needs to be `auto` to respect the inline `width` and preserve the aspect ratio, or the `width` should be `auto` to respect the `height` while keeping the original dimensions.
-
-
-The primary issue is the conflict between the inline `width` of 60% and the fixed `height` causing distortion. To correct, the `height` of the logo image will be set to `auto` with `!important` to override the inline style, allowing the aspect ratio to be preserved. Desktop scaling will be controlled via a `max-width` of 230px, ensuring the logo does not become excessively large.  `max-height` of 46px and `object-fit: contain` will ensure the image scales proportionally and fits the container.
-
-
-With the CSS rules, the logo's aspect ratio will be preserved regardless of whether the inline `max-height` attribute in the database is used or ignored. Desktop view will constrain the width to 230px, while calculating the correct height based on the aspect ratio. On mobile, the width is 60% of the screen. The image should scale proportionally in both views because of the `height: auto !important` property.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 7.346762938s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L789-819)</summary>
-
-**Path:** `Unknown file`
-
-```
-}
-
-.footer-logo-img {
-    height: 36px;
-    display: block;
-    margin: 0 auto 0.25rem;
-    opacity: 0.95;
-    filter: brightness(0) invert(1);
-}
-
-.footer-info img {
-    max-width: 100%;
-    height: auto;
-}
-
-.footer-info figure.image {
-    display: inline-block;
-    max-width: 100%;
-    margin: 0.25rem auto;
-}
-
-.footer-text {
-    font-size: 0.78rem;
-    color: rgba(255, 255, 255, 0.9);
-    line-height: 1.35;
-    margin: 0.1rem 0;
-}
-.footer-text a          { color: #fff; font-weight: 700; text-decoration: none; }@media (hover: hover) and (pointer: fine) {
-    .footer-text a:hover {
-        text-decoration: underline;
-    }
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Examining `gestion-web.css` for similar image handling or existing solutions within the CMS admin context is necessary. Reviewing the CSS rules within `gestion-web.css` reveals specific support and containment for images within the footer, particularly those inserted via the CKEditor 5. This includes rules for both class-based and source-based image selection.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.104153530s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 6:14 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 6:14 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 6:14 pm
-
----
-
-## Agent Response
-
-### Thinking
-
-The HTML includes a `footer-logo-img` element with inline styles for aspect ratio, max-height, and width. The CSS rules target the same class, `footer-logo-img`, possibly providing further styling. The next step is to examine the relationship between the HTML attributes and the CSS rules to understand how the logo is rendered.
-
-
-
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.109632142s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 6:15 pm
 
 ---
 
-## Agent Response
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-## User Request
-
-Para mobiles unicamente (de orientacion vertical en telefonos):
-. Para el slider de imagenes de Infraestructura y Tecnología que las flechas del slider ( < >)  no tengan el contorno circular de fondo blanco; resaltarlas mas.
-
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `landing.css`
-**Language:** css
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-"Infraestructura y Tecnología" likely refers to the carousel displaying specialities, technology, or installations. The code for the slider arrows within this section needs identification. Now begin searching the codebase for the slider's arrow elements.
-
-
-
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `Tecnología`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.194591539s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 6:19 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `carousel`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 6:19 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `especialidades.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-<?php
-/**
- * sections/especialidades.php — Partial: Estudios / Catálogo
- * Incluido desde website/index.php; hereda su scope completo.
- * Variables esperadas: $catalogH2, $catalogSub, $carouselCards, $catalogNota, $cg, GRUPO_SVGS
- */
-?>
-        <!-- ═══════════════════════════════════════════════ ESTUDIOS ══ -->
-        <section id="especialidades" class="sec-pad-1-5 scroll-sm-top">
-            <div class="section-header animate-on-scroll">
-                <!-- h2 y subtitulo desde web_contenidos (especialidades/seccion) -->
-                <h2><?= h($catalogH2) ?></h2>
-                <p><?= h($catalogSub) ?></p>
-            </div>
-
-            <!-- Carrusel de áreas fotográficas — imágenes fijas del laboratorio (R15.1) -->
-            <div class="map-bar">
-                <button type="button" class="carousel-arrow-btn carousel-arrow-btn--left"
-                        id="btn-carousel-prev" aria-label="Anterior">
-                    <img src="/laesh-web-assets-uipv1a/icons/chevron-left.svg" alt="" class="icon-24" loading="lazy" decoding="async">
-                </button>
-                <div class="specialties-carousel-viewport">
-                    <div id="specialties-track" class="specialties-carousel-track">
-                        <?php $ccIdx = 0; foreach ($carouselCards as $cc): $ccIdx++; ?>
-                        <div class="carousel-card">
-                            <img src="<?= h($cc['img']) ?>" alt="Área de Laboratorio LAESH"
-                                 width="800" height="580"
-                                 loading="<?= $ccIdx <= 2 ? 'eager' : 'lazy' ?>"
-                                 decoding="<?= $ccIdx <= 2 ? 'sync' : 'async' ?>">
-                            <div class="carousel-card__body ck5-output">
-                                <?= safeHtml($cc['texto']) ?>
-                            </div>
-                        </div>
-                        <?php endforeach; ?>
-                    </div>
-                </div>
-                <button type="button" class="carousel-arrow-btn carousel-arrow-btn--right"
-                        id="btn-carousel-next" aria-label="Siguiente">
-                    <img src="/laesh-web-assets-uipv1a/icons/chevron-right.svg" alt="" class="icon-24" loading="lazy" decoding="async">
-                </button>
-            </div>
-            <div id="specialties-dots" class="hero-dots specialties-dots"
-                 aria-label="Navegación de especialidades" role="region"></div>
-
-            <!-- ── Catálogo de Estudios — abanicos (I.Gabinetes) desde el catálogo SSOT ── -->
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-The code snippet focuses on a carousel arrow button within the `especialidades.php` file, specifically examining the left arrow. This likely involves reviewing the button's attributes, such as its class, ID, and aria-label, to understand its function and ensure it's correctly implemented. Further investigation into adjacent code is needed to understand the broader context.
-
-
-
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `carousel-arrow-btn`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.380080252s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 6:19 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L2219-2269)</summary>
-
-**Path:** `Unknown file`
-
-```
-   sin sacrificar el efecto visual. DRY: solo se sobreescribe la transición. */
-@media (max-width: 767px) {
-    .animate-on-scroll {
-        transition: opacity 0.45s ease-out, transform 0.45s ease-out;
-    }
-    .delay-100 { transition-delay: 0.05s; }
-    .delay-200 { transition-delay: 0.1s;  }
-    #especialidades .carousel-arrow-btn {
-        display: flex !important;
-        position: absolute;
-        top: 38%;
-        transform: translateY(-50%);
-        width: 38px;
-        height: 38px;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.92);
-        backdrop-filter: blur(6px);
-        -webkit-backdrop-filter: blur(6px);
-        border: 1px solid rgba(0, 82, 183, 0.18);
-        box-shadow: 0 4px 12px rgba(0, 40, 120, 0.2);
-        z-index: 15;
-        align-items: center;
-        justify-content: center;
-        padding: 0;
-        cursor: pointer;
-        transition: transform 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
-    }
-    #especialidades .carousel-arrow-btn:active {
-        transform: translateY(-50%) scale(0.92);
-        background: #ffffff;
-        box-shadow: 0 2px 6px rgba(0, 40, 120, 0.25);
-    }
-    #especialidades .carousel-arrow-btn--left {
-        left: 4px;
-    }
-    #especialidades .carousel-arrow-btn--right {
-        right: 4px;
-    }
-    #especialidades .carousel-arrow-btn img {
-        width: 20px;
-        height: 20px;
-    }
-    #especialidades .specialties-carousel-track .carousel-card {
-        flex: 0 0 calc(100% - 1rem);
-        width: calc(100% - 1rem);
-        box-sizing: border-box;
-    }
-    #especialidades .specialties-dots {
-        margin-top: 0.35rem;
-        margin-bottom: 0.6rem;
-        gap: 0.38rem;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Focusing on mobile-specific changes, the task requires modifying the image slider's arrow design within a vertically oriented phone display. The aim is to eliminate the white circular background around the arrows, increasing their prominence.
-
-
-
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `orientation: portrait`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.002563628s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 6:19 pm
 
 ---
 
-## Agent Response
-
-### Thinking
-
-Examining `landing.css` reveals media queries targeting mobile devices: `@media (max-width: 767px)` and `@media (max-width: 480px)`. Considering how to specifically target mobile portrait orientation, the query `@media (max-width: 767px) and (orientation: portrait)` would apply exclusively to mobile phones in vertical orientation. This more precise conditional query fulfills the specified requirement.
-
-
-Analyzing existing CSS, the target is to modify the carousel arrow button appearance. The current styling uses a circular white background with a blur effect. Suspecting that removing or adjusting the `background` property will achieve the desired prominence, considering that the HTML uses an SVG image for the arrow itself.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `chevron-left.svg`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.444922527s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0f766e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Examining the SVG, the stroke color and width are noted. The `<button>` element is characterized by a circular border radius, white background, a border, and a shadow, matching the description. This button is identified as the circular white background element requested.
-
-
-The user wants the slider arrows to be more prominent without the white background. Increasing the image size of the arrows and adjusting their color and contrast are potential solutions.  Applying a drop shadow with a high-contrast color, such as white or dark blue, will improve visibility against various image backgrounds.
-
-
-
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `hero-arrow`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.228873770s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 6:20 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L404-439)</summary>
-
-**Path:** `Unknown file`
-
-```
-            transition: transform 0.2s ease, box-shadow 0.2s ease; margin-bottom: 2px;
-        }@media (hover: hover) and (pointer: fine) {
-    .carousel-card:hover {
-        transform: translateY(-4px); box-shadow: 0 12px 20px rgba(0,0,0,0.08); border-color: var(--primary-green);
-    }
-}
-        .carousel-arrow-btn {
-            background: rgba(255,255,255,0.9); border: 1px solid var(--border);
-            border-radius: 50%; width: 44px; height: 44px;
-            display: flex; align-items: center; justify-content: center;
-            cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-            transition: all 0.2s ease; z-index: 10;
-        }@media (hover: hover) and (pointer: fine) {
-    .carousel-arrow-btn:hover {
-        background: var(--secondary-green); border-color: var(--primary-green);
-    }
-}
-
-
-
-        
-/* ── §5 MAPA, FLOTANTES & PRECIOS ───────────────────────────────────────────── */
-
-/* ── WhatsApp & Social flotantes ── */
-        .whatsapp-float {
-            position: fixed; bottom: 110px; right: 30px;
-            width: 60px; height: 60px; background: #25d366; color: white;
-            border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 8px 24px rgba(37,211,102,0.4); z-index: 1001;
-            text-decoration: none; transition: all 0.3s ease;
-        }@media (hover: hover) and (pointer: fine) {
-    .whatsapp-float:hover {
-        transform: scale(1.1);
-    }
-}
-        .whatsapp-float::before {
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L2059-2074)</summary>
-
-**Path:** `Unknown file`
-
-```
-    #especialidades .specialties-carousel-track .carousel-card {
-        flex: 0 0 calc((100% - 2.5rem) / 3);
-        width: calc((100% - 2.5rem) / 3);
-        box-sizing: border-box;
-    }
-    #especialidades .carousel-arrow-btn--left {
-        left: -22px;
-    }
-    #especialidades .carousel-arrow-btn--right {
-        right: -22px;
-    }
-    .carousel-progress-wrap {
-        max-width: 1380px;
-        margin: 0 auto 0.5rem auto;
-        padding: 0;
-    }
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Inspecting the CSS specifically for mobile devices (max-width 767px) reveals animation and positioning adjustments. This section defines transitions for elements with the class `animate-on-scroll`, including delay properties. The code also targets carousel arrow buttons, modifying their display and positioning.
-
-
-The provided CSS targets carousel arrow buttons specifically; identified that the style rules include background, border, and box-shadow properties. Considering the user's request to remove the white background on mobile portrait orientation, the focus shifts to overriding these styles. The media query will isolate the changes to portrait mode. The existing style's `border-radius` and `background` properties need to be modified.
-
-
-To remove the white background and highlight the slider arrows, identified properties need to be overridden using `!important` to ensure precedence. The approach involves setting `background` to `transparent`, removing `border`, `border-radius`, and `box-shadow` properties, and ensuring appropriate touch target size. The arrow's visual size and color contrast will also need adjustments; increasing the image's `width` and `height` and refining the arrow's color will create stronger visual emphasis.
-
-
-Considering arrow color contrast on various backgrounds. The original dark teal `#0f766e` might lack visibility on dark images. Initially, testing white arrows with a pronounced drop-shadow to achieve optimal contrast and modern aesthetic is hypothesized. The universal standard for photo sliders is white arrows with dark shadows for immediate contrast, a double shadow to ensure visibility over any background. The `active` state of the arrows also needs to be defined.
-
-
-Examining the arrow button's vertical positioning (`top: 38%`) revealed it's centered over the image portion of the carousel card, accounting for the image's approximate 65-70% height within the card. This positioning ensures the arrows are visually aligned with the image. Analyzing the CSS lines for the carousel arrows (`#especialidades .carousel-arrow-btn`) confirmed the previous findings, where the arrows are absolutely positioned with a specific `top` value.
-
-
-The CSS for mobile portrait orientation requires a media query to apply the changes.  The arrow button's `background`, `border`, `border-radius`, `box-shadow`, and `backdrop-filter` need to be set to `none` or `transparent`.  Also, the arrow button size will be increased for better touch interaction and visual prominence.
-
-The `:active` state of the arrows also needs to have a transparent background and box-shadow removed.  The active state's transform property should be retained for consistent visual feedback.
-
-
-The provided CSS ensures the style changes apply precisely to mobile portrait viewports with a maximum width of 767px.  If the device is in landscape mode, these rules will not be applied, and the existing styles remain. There is no need to look for any other style that is applicable. Checking the HTML, the section is labeled "Instalaciones y Tecnología". Now the code to add will be generated to do the changes.
-
-
-
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 16.742704761s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 6:20 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 6:20 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L2224-2274)</summary>
-
-**Path:** `Unknown file`
-
-```
-    .delay-100 { transition-delay: 0.05s; }
-    .delay-200 { transition-delay: 0.1s;  }
-    #especialidades .carousel-arrow-btn {
-        display: flex !important;
-        position: absolute;
-        top: 38%;
-        transform: translateY(-50%);
-        width: 38px;
-        height: 38px;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.92);
-        backdrop-filter: blur(6px);
-        -webkit-backdrop-filter: blur(6px);
-        border: 1px solid rgba(0, 82, 183, 0.18);
-        box-shadow: 0 4px 12px rgba(0, 40, 120, 0.2);
-        z-index: 15;
-        align-items: center;
-        justify-content: center;
-        padding: 0;
-        cursor: pointer;
-        transition: transform 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
-    }
-    #especialidades .carousel-arrow-btn:active {
-        transform: translateY(-50%) scale(0.92);
-        background: #ffffff;
-        box-shadow: 0 2px 6px rgba(0, 40, 120, 0.25);
-    }
-    #especialidades .carousel-arrow-btn--left {
-        left: 4px;
-    }
-    #especialidades .carousel-arrow-btn--right {
-        right: 4px;
-    }
-    #especialidades .carousel-arrow-btn img {
-        width: 20px;
-        height: 20px;
-    }
-    #especialidades .specialties-carousel-track .carousel-card {
-        flex: 0 0 calc(100% - 1rem);
-        width: calc(100% - 1rem);
-        box-sizing: border-box;
-    }
-    #especialidades .specialties-dots {
-        margin-top: 0.35rem;
-        margin-bottom: 0.6rem;
-        gap: 0.38rem;
-        padding: 0 0.5rem;
-        justify-content: center;
-        flex-wrap: nowrap;
-        max-width: 100%;
-        overflow-x: auto;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Focusing on the CSS rule for vertical mobile orientation, the goal is to style the carousel arrow buttons. The rule targets `carousel-arrow-btn` elements within the `#especialidades` container. This is achieved by setting a transparent background, removing borders, eliminating border-radius, and removing any box shadows, resulting in minimal visual prominence.
-
-
-Further styling includes defining dimensions, removing padding, and removing backdrop filters for the buttons. The active state styling sets a transparent background, removes the box shadow, and scales and translates the button. Additional positioning adjustments are made for left and right arrow buttons.
-
-
-The CSS targets vertical mobile orientation to change the carousel arrow button's appearance, completely removing the circular background, border, and shadow.  Arrow images are enlarged, increased from 20px to 36px, and styled with brightness inversion and strong double black shadows for high visibility. This specific styling is conditional; it only applies to portrait mode on smaller screens, leaving the default appearance for landscape or larger displays.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 3.992812573s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L2249-2269)</summary>
-
-**Path:** `Unknown file`
-
-```
-        box-shadow: 0 2px 6px rgba(0, 40, 120, 0.25);
-    }
-    #especialidades .carousel-arrow-btn--left {
-        left: 4px;
-    }
-    #especialidades .carousel-arrow-btn--right {
-        right: 4px;
-    }
-    #especialidades .carousel-arrow-btn img {
-        width: 20px;
-        height: 20px;
-    }
-    #especialidades .specialties-carousel-track .carousel-card {
-        flex: 0 0 calc(100% - 1rem);
-        width: calc(100% - 1rem);
-        box-sizing: border-box;
-    }
-    #especialidades .specialties-dots {
-        margin-top: 0.35rem;
-        margin-bottom: 0.6rem;
-        gap: 0.38rem;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 6:21 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L2249-2309)</summary>
-
-**Path:** `Unknown file`
-
-```
-        box-shadow: 0 2px 6px rgba(0, 40, 120, 0.25);
-    }
-    #especialidades .carousel-arrow-btn--left {
-        left: 4px;
-    }
-    #especialidades .carousel-arrow-btn--right {
-        right: 4px;
-    }
-    #especialidades .carousel-arrow-btn img {
-        width: 20px;
-        height: 20px;
-    }
-
-    /* Móviles vertical: flechas sin fondo circular blanco y con máximo realce visual */
-    @media (orientation: portrait) {
-        #especialidades .carousel-arrow-btn {
-            background: transparent !important;
-            border: none !important;
-            border-radius: 0 !important;
-            box-shadow: none !important;
-            backdrop-filter: none !important;
-            -webkit-backdrop-filter: none !important;
-            width: 44px !important;
-            height: 54px !important;
-            padding: 0 !important;
-        }
-        #especialidades .carousel-arrow-btn:active {
-            background: transparent !important;
-            box-shadow: none !important;
-            transform: translateY(-50%) scale(1.15) !important;
-        }
-        #especialidades .carousel-arrow-btn--left {
-            left: 2px !important;
-        }
-        #especialidades .carousel-arrow-btn--right {
-            right: 2px !important;
-        }
-        #especialidades .carousel-arrow-btn img {
-            width: 36px !important;
-            height: 36px !important;
-            filter: brightness(0) invert(1) drop-shadow(0 2px 5px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 8px rgba(0, 0, 0, 0.85)) !important;
-            transition: transform 0.15s ease, filter 0.15s ease;
-        }
-    }
-    #especialidades .specialties-carousel-track .carousel-card {
-        flex: 0 0 calc(100% - 1rem);
-        width: calc(100% - 1rem);
-        box-sizing: border-box;
-    }
-    #especialidades .specialties-dots {
-        margin-top: 0.35rem;
-        margin-bottom: 0.6rem;
-        gap: 0.38rem;
-        padding: 0 0.5rem;
-        justify-content: center;
-        flex-wrap: nowrap;
-        max-width: 100%;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-    }
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 6:21 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 6:22 pm
 
 ---
 
-## Agent Response
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-## User Request
-
-Para todas las pestañas del cms php donde se hace upload de imagenes, excepto la 11. Metadatos. 
-. Analiza y determina cuales son las restricciones de: dimensiones y tamaño (alto y ancho).
-. Informa melas, listalas, asi como gaps/issues de haber.
-.. Yo te confirmare para alinear y reactivar/poner dichas restricciones de js y backend, y en las partes de las secciones del cms de los uploads caso ser diferentes.
-
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `landing.css`
-**Language:** css
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Begin by identifying the image upload sections within the PHP CMS, excluding the "Metadatos" tab. Focus on determining the dimension and size restrictions applied to images for each of the identified sections.
-
-Next, a detailed report must be created, listing these restrictions, highlighting any existing inconsistencies, gaps, or potential issues discovered during the analysis. This information will serve as a foundation for refining and implementing consistent restrictions in both front-end and back-end code.
-
-
-
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `/cms/upload`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.199482322s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 6:26 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L239-369)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-// ── POST /cms/upload — Subida de imágenes CMS (GAP-IMG resuelto) ─────────────
-//
-// Contrato:
-//   - Content-Type: multipart/form-data  (input type="file" en el cliente)
-//   - POST body: file (el archivo), slot (nombre del slot, ej: hero-slide1), csrf_token
-//   - Respuesta JSON: {ok: bool, url: string, filename: string, msg: string}
-//
-// Seguridad:
-//   - RBAC gestionar_cms obligatorio
-//   - CSRF validado antes de procesar el archivo
-//   - MIME validado por contenido real del archivo (finfo, no solo extensión)
-//   - Extensión derivada del MIME, no del nombre original del cliente
-//   - Filename generado: {slot}-{fecha}-{random4bytes}.{ext}
-//
-// Almacenamiento KVM2 (Hostinger nativo):
-//   - Escritura física: /opt/laesh/assets/laesh-web-assets-uipv1a/cms/
-//   - URL pública  : /laesh-web-assets-uipv1a/cms/{filename}
-//   - Valor real leído de BD: configuraciones.clave='cms_upload_dir' (insertado por 06_deploy_app.sh).
-Flight::route('POST /cms/upload', function () {
-    header('Content-Type: application/json; charset=utf-8');
-
-    // Guard RBAC
-    Flight::rbac()->requirePermission('gestionar_cms', '/laesh/login/login.php?portal=admin');
-
-    // CSRF
-    if (!\Common\CsrfGuard::isValid(rotate: false)) {
-        http_response_code(403);
-        Logger::log('WARN', 'Token CSRF inválido en cms/upload', Flight::auth()->getUserId() ?: null);
-        echo json_encode(['ok' => false, 'msg' => 'Token de seguridad inválido.']);
-        exit;
-    }
-
-    // Verificar que llegó un archivo sin errores (soporta 'file' estándar y 'upload' de CKEditor)
-    $uploadFile = $_FILES['file'] ?? $_FILES['upload'] ?? null;
-    if (empty($uploadFile) || $uploadFile['error'] !== UPLOAD_ERR_OK) {
-        $errCode = $uploadFile['error'] ?? -1;
-        http_response_code(400);
-        echo json_encode(['ok' => false, 'msg' => "No se recibió el archivo (código: {$errCode})."]);
-        exit;
-    }
-
-    $file = $uploadFile;
-
-    // Nombre del slot — solo alfanumérico y guiones (necesario antes de la validación de dims)
-    $slot = preg_replace('/[^a-z0-9\-]/', '', strtolower($_POST['slot'] ?? 'cms'));
-    $slot = $slot ?: 'cms';
-
-    // Flag de exención de restricciones estrictas (Estudios carousel-*, Calidad calidad-*, Historia Institucional y Footer)
-    $isExempt = (bool) (preg_match('/^carousel-/', $slot) || preg_match('/^historia/', $slot) || preg_match('/^calidad-/', $slot) || preg_match('/^footer/', $slot));
-
-    // Validar MIME por contenido real — solo WebP por defecto (alineado con Guía CMS §5.1–§5.6)
-    // Para slots carousel-* e historia, se aceptan formatos de imagen adicionales (WebP, JPG, PNG, GIF)
-    $allowedMimes = [
-        'image/webp' => 'webp',
-        'image/jpeg' => 'jpg',
-        'image/png'  => 'png',
-        'image/gif'  => 'gif',
-        'image/avif' => 'avif',
-    ];
-    $finfo = new \finfo(FILEINFO_MIME_TYPE);
-    $mime  = $finfo->file($file['tmp_name']);
-
-    if (!$isExempt) {
-        if ($mime !== 'image/webp') {
-            http_response_code(415);
-            echo json_encode(['ok' => false, 'msg' => 'Tipo no permitido. Solo se acepta WebP. Optimiza la imagen antes de subir.']);
-            exit;
-        }
-    } else {
-        if (!array_key_exists($mime, $allowedMimes)) {
-            http_response_code(415);
-            echo json_encode(['ok' => false, 'msg' => 'Tipo no permitido. Sube un archivo de imagen válido.']);
-            exit;
-        }
-    }
-
-    // Validar tamaño — 150 KB máximo (límite homologado, omitido para carousel-* e historia)
-    if (!$isExempt && $file['size'] > 150 * 1024) {
-        $sizeKb = round($file['size'] / 1024, 1);
-        http_response_code(413);
-        echo json_encode(['ok' => false, 'msg' => "El archivo ({$sizeKb} KB) supera el límite de 150 KB. Optimiza la imagen antes de subir."]);
-        exit;
-    }
-
-    // Validar dimensiones servidor — espejo de cms-upload.js slotRules()
-    $imgSize = @getimagesize($file['tmp_name']);
-    if ($imgSize === false && !$isExempt) {
-        http_response_code(422);
-        echo json_encode(['ok' => false, 'msg' => 'No se pudieron leer las dimensiones de la imagen. Verifica que el archivo WebP sea válido.']);
-        exit;
-    }
-    [$imgW, $imgH] = $imgSize ?: [0, 0];
-    $dimError = null;
-
-    if (!$isExempt) {
-        if (preg_match('/^hero-/', $slot)) {
-            if ($imgW < 1280 || $imgW > 1920)
-                $dimError = "Banner Hero: ancho {$imgW} px fuera del rango 1\u{202F}280–1\u{202F}920 px. Spec: 1\u{202F}280–1\u{202F}920 px ancho · Orientación Horizontal.";
-            elseif ($imgH >= $imgW)
-                $dimError = "Banner Hero: orientación debe ser Horizontal (ancho > alto). Recibido: {$imgW}×{$imgH}.";
-        } elseif ($slot === 'ubicacion-croquis') {
-            if ($imgW > 1284 || $imgH > 902)
-                $dimError = "Croquis de Ubicación: máximo 1284×902 px. Recibido: {$imgW}×{$imgH}.";
-            elseif ($imgH >= $imgW)
-                $dimError = "Croquis de Ubicación: orientación debe ser Horizontal (ancho > alto). Recibido: {$imgW}×{$imgH}.";
-        } elseif (preg_match('/^promo-/', $slot)) {
-            if ($imgH >= $imgW)
-                $dimError = "Card de Promociones: orientación debe ser Horizontal (ancho > alto). Recibido: {$imgW}×{$imgH}.";
-            elseif ($imgW < 1000 || $imgW > 1200 || $imgH < 600 || $imgH > 800)
-                $dimError = "Card de Promociones: dimensiones requeridas 1024×687 px (óptimo nativo) o 1200×(600–675) px. Recibido: {$imgW}×{$imgH}.";
-        } elseif (preg_match('/^calidad-/', $slot)) {
-            if ($imgW !== 800 || $imgH !== 580)
-                $dimError = "Galería de Calidad: se requiere exacto 800×580 px. Recibido: {$imgW}×{$imgH}.";
-        } elseif ($slot === 'seo-og') {
-            if ($imgW < 1200 || $imgW > 1920)
-                $dimError = "Open Graph (SEO): ancho {$imgW} px fuera del rango 1\u{202F}200–1\u{202F}920 px.";
-            elseif ($imgH >= $imgW)
-                $dimError = "Open Graph (SEO): orientación debe ser Horizontal (ancho > alto). Recibido: {$imgW}×{$imgH}.";
-        } else {
-            if ($imgW < 800)
-                $dimError = "Imagen CMS genérica: ancho mínimo 800 px. Recibido: {$imgW} px.";
-        }
-    } else {
-        // [TEMPORAL - PRUEBAS] Para carousel-*, se omiten restricciones de 800x580 px y horizontal
-        // if ($imgW !== 800 || $imgH !== 580)
-        //     $dimError = "Carrusel Especialidades: se requiere exacto 800×580 px. Recibido: {$imgW}×{$imgH}.";
-    }
-
-    if ($dimError !== null) {
-        http_response_code(422);
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L369-429)</summary>
-
-**Path:** `Unknown file`
-
-```
-        http_response_code(422);
-        echo json_encode(['ok' => false, 'msg' => $dimError]);
-        exit;
-    }
-    $ext      = $allowedMimes[$mime] ?? 'webp';
-    $filename = $slot . '-' . date('Ymd') . '-' . bin2hex(random_bytes(4)) . '.' . $ext;
-
-    // Directorio de destino
-    $dbConfigDir = Flight::db()->query("SELECT valor FROM configuraciones WHERE clave = 'cms_upload_dir'")->fetchColumn();
-    $uploadDir   = trim($dbConfigDir ?: '');
-
-    // Fallback inicial si no hay valor o no es ruta absoluta de sistema de archivos
-    if (empty($uploadDir) || !str_starts_with($uploadDir, '/')) {
-        $uploadDir = '/opt/laesh/assets/laesh-web-assets-uipv1a/cms/';
-    }
-    $uploadDir = rtrim($uploadDir, '/') . '/';
-
-    // 1. Intentar crear y dar permisos al $uploadDir principal (ej. KVM2 producción)
-    if (!is_dir($uploadDir)) {
-        @mkdir($uploadDir, 0777, true);
-    }
-    if (is_dir($uploadDir)) {
-        @chmod($uploadDir, 0777);
-    }
-
-    // 2. Si $uploadDir no existe o no es escribible (ej. dev local), hacer fallback al dir local normalizado
-    if (!is_dir($uploadDir) || !is_writable($uploadDir)) {
-        $parentPath = __DIR__ . '/../../laesh-web-assets-uipv1a';
-        $realParent = realpath($parentPath) ?: $parentPath;
-        $localDir   = rtrim($realParent, '/') . '/cms/';
-
-        if (!is_dir($localDir)) {
-            @mkdir($localDir, 0777, true);
-        }
-        if (is_dir($localDir)) {
-            @chmod($localDir, 0777);
-            $uploadDir = $localDir;
-        }
-    }
-
-    // 3. Verificación final de disponibilidad y permisos de escritura
-    if (!is_dir($uploadDir) || !is_writable($uploadDir)) {
-        http_response_code(500);
-        Logger::log('ERROR', "cms/upload: no se pudo crear/acceder al directorio de destino {$uploadDir}", Flight::auth()->getUserId());
-        echo json_encode(['ok' => false, 'msg' => "Error interno: directorio de destino no disponible ({$uploadDir})."]);
-        exit;
-    }
-
-    // Asegurar permisos de escritura finales
-    @chmod($uploadDir, 0777);
-
-    $destPath = $uploadDir . $filename;
-    if (!@move_uploaded_file($file['tmp_name'], $destPath)) {
-        http_response_code(500);
-        Logger::log('ERROR', "cms/upload: move_uploaded_file falló → {$destPath}", Flight::auth()->getUserId());
-        echo json_encode(['ok' => false, 'msg' => 'Error al guardar el archivo en el servidor (permisos de escritura en directorio).']);
-        exit;
-    }
-
-    // Permisos de lectura para Nginx / servidor web
-    @chmod($destPath, 0666);
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `list_dir`
-**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-web-assets-uipv1a/js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>Directory: `js` (21 items)</summary>
-
-**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-web-assets-uipv1a/js`
-
-| Name | Type | Size |
-|------|------|------|
-| `app.js` | File | 41943 bytes |
-| `catalog-builder.js` | File | 119488 bytes |
-| `catalog-compiled.js` | File | 669812 bytes |
-| `ckeditor-init.js` | File | 27074 bytes |
-| `ckeditor5.umd.js` | File | 1431443 bytes |
-| `cms-dirty-tracker.js` | File | 21516 bytes |
-| `cms-upload.js` | File | 17810 bytes |
-| `config-compiled.js` | File | 1798 bytes |
-| `device-detect.js` | File | 3165 bytes |
-| `gestion-web.js` | File | 28027 bytes |
-| `htmx.min.js` | File | 49219 bytes |
-| `htmx.min.js.bak-20261003` | File | 49082 bytes |
-| `labadmin.js` | File | 210173 bytes |
-| `log-viewer.js` | File | 3160 bytes |
-| `medicos.js` | File | 133687 bytes |
-| `portal-footer.js` | File | 1797 bytes |
-| `reception-guard.js` | File | 9728 bytes |
-| `sidebar-rail.js` | File | 7401 bytes |
-| `solicitud-dac.js` | File | 34662 bytes |
-| `website.js` | File | 93035 bytes |
-| `ws-client.js` | File | 100381 bytes |
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `cms-upload.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-(function () {
-    'use strict';
-
-    // El endpoint de subida dinámico se pasa a través de una etiqueta <meta> para evitar bloqueos por CSP.
-    const metaUpload = document.querySelector('meta[name="cms-upload-url"]');
-    const UPLOAD_ENDPOINT = metaUpload ? metaUpload.content : '/laesh/adrc/cms/upload';
-
-    /** Devuelve el CSRF token vigente (<meta> o data-csrf del botón). */
-    function getCsrf() {
-        const meta = document.querySelector('meta[name="csrf-token"]');
-        if (meta && meta.content) return meta.content;
-        return document.getElementById('btn-cms-save-action')?.dataset?.csrf ?? '';
-    }
-
-    /** Actualiza el CSRF token tras cada rotación en el servidor (global para CMS y upload). */
-    function refreshCsrf(newToken) {
-        if (!newToken) return;
-        const meta = document.querySelector('meta[name="csrf-token"]');
-        if (meta) meta.content = newToken;
-        const btn = document.getElementById('btn-cms-save-action');
-        if (btn) {
-            btn.dataset.csrf = newToken;
-            btn.setAttribute('data-csrf', newToken);
-        }
-        document.querySelectorAll('input[name="csrf_token"]').forEach(el => el.value = newToken);
-    }
-    window.refreshCsrf = refreshCsrf;
-
-    let toastTimer = null;
-
-    /** Muestra el toast CMS. Los errores (isError=true) NUNCA se cierran solos; requieren clic en la '✖'. */
-    function showToast(msg, isError) {
-        const toast = document.getElementById('toast');
-        if (!toast) return;
-
-        if (toastTimer) { clearTimeout(toastTimer); toastTimer = null; }
-
-        const iconSvg = isError
-            ? '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="flex-shrink:0"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>'
-            : '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="flex-shrink:0"><polyline points="20 6 9 17 4 12"></polyline></svg>';
-
-        // 2026-10-03: fecha y hora en formato corto al final de todo mensaje de ack
-        const now = new Date();
-        const pad = n => String(n).padStart(2, '0');
-        const fechaHoraCorta = `${pad(now.getDate())}/${pad(now.getMonth() + 1)}/${now.getFullYear()} ${pad(now.getHours())}:${pad(now.getMinutes())}`;
-        const timeHtml = (!/\d{1,2}\/\d{1,2}(?:\/\d{2,4})?\s+\d{1,2}:\d{2}/.test(msg))
-            ? `<span style="font-size:0.82em;opacity:0.88;margin-left:4px;white-space:nowrap;"> — ${fechaHoraCorta}</span>`
-            : '';
-
-        toast.innerHTML = `<div style="display:flex;align-items:center;gap:8px;flex:1">${iconSvg}<span>${msg}${timeHtml}</span></div>
-            <button type="button" class="cms-toast-close" id="btn-toast-close" title="Cerrar notificación">✖</button>`;
-
-        toast.classList.toggle('toast--error', !!isError);
-        toast.classList.add('visible');
-
-        // Botón de cierre manual
-        const closeBtn = document.getElementById('btn-toast-close');
-        if (closeBtn) {
-            closeBtn.onclick = function (e) {
-                e.stopPropagation();
-                if (toastTimer) { clearTimeout(toastTimer); toastTimer = null; }
-                toast.classList.remove('visible');
-            };
-        }
-
-        // Si NO es error, auto-ocultar tras 4 segundos. Si ES ERROR, PERMANECE ABIERTO INDEFINIDAMENTE.
-        if (!isError) {
-            toastTimer = setTimeout(() => {
-                toast.classList.remove('visible');
-            }, 4000);
-        }
-    }
-
-    document.addEventListener('DOMContentLoaded', function () {
-        document.querySelectorAll('input[type="file"][data-upload-slot]').forEach(function (input) {
-            input.addEventListener('change', async function () {
-                if (!this.files[0]) return;
-
-                const slot        = this.dataset.uploadSlot   || 'cms';
-                const previewId   = this.dataset.previewId    || null;
-                const targetInput = this.dataset.targetInput  || null;
-                const file        = this.files[0];
-
-                // [TEMPORAL - PRUEBAS] Para Tarjetas 1 a 15 de Estudios (carousel-*), Tarjeta Historia y Galería de Calidad (calidad-*) se omiten restricciones
-                const isExemptSlot = /^carousel-/.test(slot) || /^historia/.test(slot) || /^calidad-/.test(slot);
-
-                // ── Validación de formato — solo WebP para todos los slots (omitido para carousel-*, historia y calidad-*) ────────────
-                if (!isExemptSlot && file.type !== 'image/webp') {
-                    showToast(
-                        `Formato no permitido (${file.type || 'desconocido'}). Solo se acepta <strong>WebP</strong>.<br>` +
-                        'Usa Squoosh → Format: WebP antes de subir.',
-                        true
-                    );
-                    this.value = '';
-                    return;
-                }
-
-                // ── Reglas por slot (alineadas con Guía CMS §5.1–§5.6) ──────────────
-                // Slots reales (data-upload-slot en gestion_web.php):
-                //   hero-{slide1…5}       → Banner Hero
-                //   carousel-{1…16}       → Carrusel Especialidades
-                //   historia-{card}       → Tarjeta Responsable Sanitario
-                //   ubicacion-croquis     → Croquis de Ubicación
-                //   promo-{lun…dom}       → Cards de Promociones
-                //   calidad-gallery{1…3}  → Galería de Calidad
-                //   (default)             → Imagen CMS genérica
-                function slotRules(s) {
-                    if (/^hero-/.test(s))              return { maxKb: 150, minW: 1280, maxW: 1920,                              landscape: true, label: 'Banner Hero',             hint: 'WebP · Quality 72–80 · Effort 6 · 1 280–1 920 px ancho · Orientación Horizontal · alto proporcional · máx. 150 KB, óptimo 60 KB' };
-                    // [TEMPORAL - PRUEBAS] Restricción 800x580 y 150 KB comentada para pruebas
-                    // if (/^carousel-/.test(s))          return { maxKb: 150, exactW: 800, exactH: 580,                                        label: 'Carrusel Especialidades', hint: 'WebP · Quality 75 · Effort 6 · exacto 800×580 px · máx. 150 KB, óptimo 60 KB' };
-                    if (/^carousel-/.test(s))          return { maxKb: 999999, label: 'Carrusel Especialidades (Modo Pruebas)', hint: '[Pruebas] Sin restricciones de formato, dimensiones ni peso' };
-                    if (/^historia/.test(s))           return { maxKb: 999999, label: 'Tarjeta Responsable Sanitario (Historia)', hint: '[Historia] Sin restricciones de formato ni peso' };
-                    if (/^ubicacion-croquis$/.test(s)) return { maxKb: 150, maxW: 1284, maxH: 902, landscape: true,      label: 'Croquis de Ubicación',    hint: 'WebP · Quality 85 · Effort 6 · 1 284 × 902 px (máx) · Orientación Horizontal · máx. 150 KB, óptimo 60 KB' };
-                    if (/^promo-/.test(s))             return { maxKb: 150, minW: 1000, maxW: 1200, minH: 600, maxH: 800, landscape: true, label: 'Card de Promociones', hint: 'WebP · Quality 82 · 1 024 × 687 px (óptimo nativo) o 1 200 × (600–675) px · máx. 150 KB, óptimo 80–110 KB' };
-                    // [TEMPORAL - PRUEBAS] Restricción 800x580 y 150 KB comentada para pruebas
-                    // if (/^calidad-/.test(s))           return { maxKb: 150, exactW: 800, exactH: 580,                                       label: 'Galería de Calidad',      hint: 'WebP · Quality 75 · Effort 6 · exacto 800×580 px · máx. 150 KB, óptimo 60 KB' };
-                    if (/^calidad-/.test(s))           return { maxKb: 999999, label: 'Galería de Calidad (Modo Pruebas)', hint: '[Pruebas] Sin restricciones de formato, dimensiones ni peso' };
-                    if (/^seo-og$/.test(s))            return { maxKb: 150, minW: 1200, maxW: 1920,                              landscape: true, label: 'Imagen Open Graph (SEO)', hint: 'WebP · 1 200 × 630 px recomendado (ratio 1.91:1) · Orientación Horizontal · máx. 150 KB, óptimo 60 KB' };
-                    return                                    { maxKb: 150, minW: 800,                                                        label: 'Imagen CMS',              hint: 'WebP · mín. 800 px ancho · máx. 150 KB, óptimo 60 KB' };
-                }
-                const rules = slotRules(slot);
-
-                // ── Validación de tamaño ─────────────────────────────────────────────
-                const sizeKb = (file.size / 1024).toFixed(1);
-                if (!isExemptSlot && file.size > rules.maxKb * 1024) {
-                    showToast(
-                        `Peso ${sizeKb} KB supera el máximo de ${rules.maxKb} KB para ${rules.label}.<br>` +
-                        'Optimiza la imagen (baja Quality o reduce dimensiones).',
-                        true
-                    );
-                    this.value = '';
-                    return;
-                }
-
-                // ── Validación de dimensiones (requiere cargar la imagen) ────────────
-                // [TEMPORAL - PRUEBAS] Omitida para carousel-* e historia
-                if (!isExemptSlot) {
-                    try {
-                        const objUrl = URL.createObjectURL(file);
-                        const img    = new Image();
-                        await new Promise((res, rej) => { img.onload = res; img.onerror = rej; img.src = objUrl; });
-                        URL.revokeObjectURL(objUrl);
-                        const w = img.naturalWidth, h = img.naturalHeight;
-
-                        // Dimensiones exactas (carrusel, croquis, promociones)
-                        if (rules.exactW !== undefined && w !== rules.exactW) {
-                            showToast(`Dimensiones incorrectas (${w}×${h} px) para ${rules.label}.<br><small>Requerido: ${rules.hint}</small>`, true);
-                            this.value = ''; return;
-                        }
-                        if (rules.exactH !== undefined && h !== rules.exactH) {
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `cms-upload.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L149-229)</summary>
-
-**Path:** `Unknown file`
-
-```
-                        if (rules.exactH !== undefined && h !== rules.exactH) {
-                            showToast(`Dimensiones incorrectas (${w}×${h} px) para ${rules.label}.<br><small>Requerido: ${rules.hint}</small>`, true);
-                            this.value = ''; return;
-                        }
-
-                        // Rango de ancho (hero, banner, default)
-                        if (rules.minW !== undefined && w < rules.minW) {
-                            showToast(`Ancho ${w} px menor al mínimo de ${rules.minW} px para ${rules.label}. Spec: ${rules.hint}`, true);
-                            this.value = ''; return;
-                        }
-                        if (rules.maxW !== undefined && w > rules.maxW) {
-                            showToast(`Ancho ${w} px mayor al máximo de ${rules.maxW} px para ${rules.label}. Spec: ${rules.hint}`, true);
-                            this.value = ''; return;
-                        }
-
-                        // Rango de alto (hero)
-                        if (rules.minH !== undefined && h < rules.minH) {
-                            showToast(`Alto ${h} px menor al mínimo de ${rules.minH} px para ${rules.label}. Spec: ${rules.hint}`, true);
-                            this.value = ''; return;
-                        }
-                        if (rules.maxH !== undefined && h > rules.maxH) {
-                            showToast(`Alto ${h} px mayor al máximo de ${rules.maxH} px para ${rules.label}. Spec: ${rules.hint}`, true);
-                            this.value = ''; return;
-                        }
-
-                        // Orientación horizontal obligatoria
-                        if (rules.landscape && h >= w) {
-                            showToast(`La imagen (${w}×${h} px) debe tener Orientación Horizontal (ancho > alto). Spec: ${rules.hint}`, true);
-                            this.value = ''; return;
-                        }
-                    } catch (e) {
-                        console.error('[cms-upload] Error al verificar dimensiones:', e);
-                        showToast('Error técnico al leer las dimensiones de la imagen.', true);
-                        this.value = '';
-                        return;
-                    }
-                }
-
-                // Construir FormData
-                const fd = new FormData();
-                fd.append('file',       file);
-                fd.append('slot',       slot);
-                fd.append('csrf_token', getCsrf());
-
-                // Indicador visual
-                const box = this.closest('.image-upload-box');
-                if (box) box.style.opacity = '0.5';
-
-                try {
-                    const res = await fetch(UPLOAD_ENDPOINT, { method: 'POST', body: fd });
-                    const resText = await res.text();
-                    let data;
-                    try {
-                        data = JSON.parse(resText);
-                    } catch (pErr) {
-                        console.error('[cms-upload] Server returned non-JSON response:', res.status, resText);
-                        showToast(`Error del servidor (${res.status}): ${resText.substring(0, 160) || res.statusText}`, true);
-                        this.value = '';
-                        return;
-                    }
-
-                    if (res.ok && data.ok) {
-                        // Actualizar preview
-                        if (previewId) {
-                            const img = document.getElementById(previewId);
-                            if (img) {
-                                img.onload = function () {
-                                    this.hidden = false;
-                                    this.removeAttribute('hidden');
-                                    this.style.display = 'inline-block';
-                                };
-                                img.onerror = function () {
-                                    this.hidden = true;
-                                };
-                                img.hidden = false;
-                                img.removeAttribute('hidden');
-                                img.style.display = 'inline-block';
-                                img.src = data.url + '?t=' + Date.now();
-                            }
-                        }
-                        // Poblar campo de texto con la URL subida
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `data-upload-slot`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 6:26 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `type="file"`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 6:26 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L199-284)</summary>
-
-**Path:** `Unknown file`
-
-```
-                Cerrar Sesión
-            </a>
-        </div>
-    </aside>
-
-    <!-- ====== MAIN + TABS (columna flex) ====== -->
-    <!--
-        Estructura: .cms-content-col (column flex) agrupa las tabs fijas arriba
-        y el área de paneles scrolleable abajo. Así las tabs NO quedan dentro del
-        scroll container y se "pegan" visualmente sin necesitar position:sticky.
-        Ver: gestion-web.css → .cms-content-col / .cms-panels-scroll
-    -->
-    <div class="cms-content-col">
-        <div class="cms-tabs" role="tablist" aria-label="Secciones del sitio web">
-            <div class="cms-tab active" id="tab-hero" role="tab" aria-selected="true" aria-controls="panel-hero" tabindex="0" data-section="hero">1. Banner Principal</div>
-            <div class="cms-tab" id="tab-quienes-somos" role="tab" aria-selected="false" aria-controls="panel-quienes-somos" tabindex="-1" data-section="quienes-somos">2. Quiénes somos</div>
-            <div class="cms-tab" id="tab-especialidades" role="tab" aria-selected="false" aria-controls="panel-especialidades" tabindex="-1" data-section="especialidades">3. Estudios</div>
-            <div class="cms-tab" id="tab-promociones" role="tab" aria-selected="false" aria-controls="panel-promociones" tabindex="-1" data-section="promociones">4. Promociones Vigentes</div>
-            <div class="cms-tab" id="tab-calidad" role="tab" aria-selected="false" aria-controls="panel-calidad" tabindex="-1" data-section="calidad">5. Calidad e Instalaciones</div>
-            <div class="cms-tab" id="tab-ubicacion" role="tab" aria-selected="false" aria-controls="panel-ubicacion" tabindex="-1" data-section="ubicacion">6. Ubicación y Contacto</div>
-            <div class="cms-tab" id="tab-footer" role="tab" aria-selected="false" aria-controls="panel-footer" tabindex="-1" data-section="footer">7. Pie de Página</div>
-            <div class="cms-tab" id="tab-aviso-privacidad" role="tab" aria-selected="false" aria-controls="panel-aviso-privacidad" tabindex="-1" data-section="aviso-privacidad">8. Aviso de Privacidad</div>
-            <div class="cms-tab" id="tab-video-promo" role="tab" aria-selected="false" aria-controls="panel-video-promo" tabindex="-1" data-section="video-promo">9. Video promo</div>
-            <div class="cms-tab" id="tab-configuracion-general" role="tab" aria-selected="false" aria-controls="panel-configuracion-general" tabindex="-1" data-section="configuracion-general">10. Ordenamiento</div>
-            <div class="cms-tab" id="tab-seo" role="tab" aria-selected="false" aria-controls="panel-seo" tabindex="-1" data-section="seo">11. Metadatos</div>
-            <!-- Separador visual (botón Preview movido al header nav) -->
-            <div class="cms-tabs-preview-sep" aria-hidden="true"></div>
-        </div><!-- /.cms-tabs -->
-
-        <!-- Área de paneles: esta zona scrollea; .cms-tabs queda fija arriba -->
-        <main class="cms-panels-scroll main-content--pad" id="main-content">
-
-        <!-- ================================================================
-             PANEL 1: HERO / BANNER PRINCIPAL
-             Sección: hero | Fuente HTML: #inicio
-             ================================================================ -->
-        <div id="panel-hero" class="cms-panel active" role="tabpanel" aria-labelledby="tab-hero" tabindex="0" data-section="hero">
-            <div class="cms-panel-header">
-                <h3 class="cms-h3">Edición de Banners del Carrusel Principal (#inicio)</h3>
-            </div>
-
-            <!-- ══ INDICACIÓN RÁPIDA DE IMÁGENES ══ -->
-            <p class="cms-img-hint" role="note">
-                <strong>Indicaciones de Carga de Imágenes:</strong>
-                Sobreescritura: La imagen previa se sobreescribe automáticamente al cargar una nueva.
-            </p>
-
-            <hr class="cms-section-sep">
-
-            <!-- ══ 4 columnas: Eslogan L1 | Eslogan L2 | Autoplay | Comportamiento ══ -->
-            <div class="hero-slides-grid mb-4" style="grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.25rem;">
-
-                <div class="editor-card" style="border: 2px solid #0369a1; background: #fafafa; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
-                    <div class="editor-card-header" style="background: linear-gradient(135deg, #0f172a 0%, #0369a1 100%); padding: 10px 14px;"><div class="card-title" style="color: #ffffff; font-weight: 800; font-size: 0.9rem;">Línea 1 del Eslogan</div></div>
-                    <div class="editor-card-body" style="padding: 12px;">
-                        <div class="field-group">
-                            <input type="text" name="navbar__tagline_l1"
-                                   value="<?= cms($contenidos, 'hero', 'navbar', 'tagline_l1') ?>">
-                            <small class="cms-help-text">Ej.: «Diagnósticos de»</small>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="editor-card" style="border: 2px solid #0284c7; background: #fafafa; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
-                    <div class="editor-card-header" style="background: linear-gradient(135deg, #0c4a6e 0%, #0284c7 100%); padding: 10px 14px;"><div class="card-title" style="color: #ffffff; font-weight: 800; font-size: 0.9rem;">Línea 2 del Eslogan</div></div>
-                    <div class="editor-card-body" style="padding: 12px;">
-                        <div class="field-group">
-                            <input type="text" name="navbar__tagline_l2"
-                                   value="<?= cms($contenidos, 'hero', 'navbar', 'tagline_l2') ?>">
-                            <small class="cms-help-text">Ej.: «Confianza y Calidad»</small>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="editor-card" style="border: 2px solid #2563eb; background: #fafafa; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
-                    <div class="editor-card-header" style="background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%); padding: 10px 14px;"><div class="card-title" style="color: #ffffff; font-weight: 800; font-size: 0.9rem;">Tiempo Autoplay (seg.)</div></div>
-                    <div class="editor-card-body" style="padding: 12px;">
-                        <div class="field-group">
-                            <input type="number" min="0" max="999" step="1" inputmode="numeric" pattern="[0-9]{1,3}"
-                                   name="config__transition_time" id="input-hero-transition"
-                                   required
-                                   onkeydown="if(!['0','1','2','3','4','5','6','7','8','9','Backspace','Tab','ArrowLeft','ArrowRight','Delete'].includes(event.key) && !event.ctrlKey && !event.metaKey) event.preventDefault();"
-                                   oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,3);"
-                                   onpaste="var p=(event.clipboardData||window.clipboardData).getData('text'); if(!/^\d{1,3}$/.test(p)) event.preventDefault();"
-                                   value="<?= cms($contenidos, 'hero', 'config', 'transition_time', '5') ?>">
-                            <small class="cms-help-text">0 = pausa fija · 1–90 s = autoplay.</small>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Identifying and listing the website's sections, or "tabs," seems fundamental for further processing. The structure appears to be: main banner, "about us," studies, promotions, quality & facilities, location & contact, footer, privacy notice, and promotional video. The final section label is incomplete, requiring further inspection for a full understanding.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.306814855s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1339-1459)</summary>
-
-**Path:** `Unknown file`
-
-```
-                            <label>Página de Facebook <small class="txt-muted">(URL completa)</small></label>
-                            <input type="url" name="_cfg_facebook_url"
-                                   value="<?= htmlspecialchars($config['facebook_url'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
-                                   placeholder="https://www.facebook.com/profile.php?id=100072263716098">
-                            <small class="cms-help-text">Se utiliza en el botón flotante de redes sociales.</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ================================================================
-             PANEL 7: PIE DE PÁGINA
-             Sección: footer | Fuente HTML: #footer
-             SSOT: contacto, horarios, dirección y responsable se leen desde configuraciones.
-               Solo son editables aquí: logo alt, nombre lab y textos legales.
-             ================================================================ -->
-        <div id="panel-footer" class="cms-panel" role="tabpanel" aria-labelledby="tab-footer" tabindex="0" data-section="footer">
-            <div class="cms-panel-header">
-                <h3 class="cms-h3">Pie de Página — Contenido e Identidad (#footer)</h3>
-            </div>
-
-            <hr class="cms-section-sep">
-            <!-- Estilo y Color de Fondo -->
-            <div class="editor-card mb-4" style="border: 2px solid #334155; background: #fafafa; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
-                <div class="editor-card-header" style="background: linear-gradient(135deg, #334155 0%, #1e293b 100%); padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.2);">
-                    <div class="card-title" style="color: #ffffff; font-weight: 800; font-size: 0.95rem;">Estilo y Color de Fondo del Pie de Página</div>
-                </div>
-                <div class="editor-card-body" style="padding: 12px;">
-                    <div class="field-group">
-                        <label>Color de Fondo de la Franja</label>
-                        <?php $footerBg = cms($contenidos, 'footer', 'estilo', 'bg_color', '#0f172a'); ?>
-                        <div class="d-flex align-items-center gap-3">
-                            <input type="color" id="footer-bg-picker" value="<?= h($footerBg) ?>"
-                                   class="cms-color-picker" style="width:48px; height:38px; padding:2px; cursor:pointer; border-radius:4px; border:1px solid #cbd5e1;"
-                                   onchange="var inp=document.getElementById('footer-bg-input'); inp.value=this.value; inp.dispatchEvent(new Event('input', {bubbles:true})); inp.dispatchEvent(new Event('change', {bubbles:true}));">
-                            <input type="text" id="footer-bg-input" name="estilo__bg_color" value="<?= h($footerBg) ?>"
-                                   class="cms-color-text-input" style="width:130px;"
-                                   oninput="document.getElementById('footer-bg-picker').value = this.value;">
-                            <span class="txt-muted small">Haz clic en el cuadro o elige un color institucional:</span>
-                        </div>
-                        <div class="d-flex flex-wrap gap-2 mt-2">
-                            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="var c='#0f172a'; document.getElementById('footer-bg-picker').value=c; var inp=document.getElementById('footer-bg-input'); inp.value=c; inp.dispatchEvent(new Event('input', {bubbles:true})); inp.dispatchEvent(new Event('change', {bubbles:true}));">
-                                <span style="display:inline-block; width:12px; height:12px; background:#0f172a; border-radius:50%; margin-right:4px;"></span> Oscuro
-                            </button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="var c='#0052b7'; document.getElementById('footer-bg-picker').value=c; var inp=document.getElementById('footer-bg-input'); inp.value=c; inp.dispatchEvent(new Event('input', {bubbles:true})); inp.dispatchEvent(new Event('change', {bubbles:true}));">
-                                <span style="display:inline-block; width:12px; height:12px; background:#0052b7; border-radius:50%; margin-right:4px;"></span> Azul LAESH
-                            </button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="var c='#003882'; document.getElementById('footer-bg-picker').value=c; var inp=document.getElementById('footer-bg-input'); inp.value=c; inp.dispatchEvent(new Event('input', {bubbles:true})); inp.dispatchEvent(new Event('change', {bubbles:true}));">
-                                <span style="display:inline-block; width:12px; height:12px; background:#003882; border-radius:50%; margin-right:4px;"></span> Azul Marino
-                            </button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="var c='#71ca11'; document.getElementById('footer-bg-picker').value=c; var inp=document.getElementById('footer-bg-input'); inp.value=c; inp.dispatchEvent(new Event('input', {bubbles:true})); inp.dispatchEvent(new Event('change', {bubbles:true}));">
-                                <span style="display:inline-block; width:12px; height:12px; background:#71ca11; border-radius:50%; margin-right:4px;"></span> Verde LAESH
-                            </button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="var c='#a3c912'; document.getElementById('footer-bg-picker').value=c; var inp=document.getElementById('footer-bg-input'); inp.value=c; inp.dispatchEvent(new Event('input', {bubbles:true})); inp.dispatchEvent(new Event('change', {bubbles:true}));">
-                                <span style="display:inline-block; width:12px; height:12px; background:#a3c912; border-radius:50%; margin-right:4px;"></span> Verde Acento
-                            </button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="var c='#cce7f5'; document.getElementById('footer-bg-picker').value=c; var inp=document.getElementById('footer-bg-input'); inp.value=c; inp.dispatchEvent(new Event('input', {bubbles:true})); inp.dispatchEvent(new Event('change', {bubbles:true}));">
-                                <span style="display:inline-block; width:12px; height:12px; background:#cce7f5; border:1px solid #94a3b8; border-radius:50%; margin-right:4px;"></span> Azul Claro
-                            </button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="var c='#1e293b'; document.getElementById('footer-bg-picker').value=c; var inp=document.getElementById('footer-bg-input'); inp.value=c; inp.dispatchEvent(new Event('input', {bubbles:true})); inp.dispatchEvent(new Event('change', {bubbles:true}));">
-                                <span style="display:inline-block; width:12px; height:12px; background:#1e293b; border-radius:50%; margin-right:4px;"></span> Slate Oscuro
-                            </button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="var c='#ffffff'; document.getElementById('footer-bg-picker').value=c; var inp=document.getElementById('footer-bg-input'); inp.value=c; inp.dispatchEvent(new Event('input', {bubbles:true})); inp.dispatchEvent(new Event('change', {bubbles:true}));">
-                                <span style="display:inline-block; width:12px; height:12px; background:#ffffff; border:1px solid #94a3b8; border-radius:50%; margin-right:4px;"></span> Blanco
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Contenido del Pie de Página (RTE — Solo Estilos Visuales / Integración SSOT) -->
-            <div class="editor-card mb-4" style="border: 2px solid #7c3aed; background: #fafafa; border-radius: 8px; overflow: visible; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
-                <div class="editor-card-header d-flex justify-content-between align-items-center" style="background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%); padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.2);">
-                    <div class="card-title" style="color: #ffffff; font-weight: 800; font-size: 0.95rem;">Contenido del Pie de Página <small style="color:rgba(255,255,255,0.85); font-weight:400;">(Editor RTE Completo — Texto Libre)</small></div>
-                </div>
-                <div class="editor-card-body" style="padding: 12px;">
-                    <div class="cms-info-box" style="background:#f0f9ff;border:1.5px solid #0284c7;border-radius:8px;padding:0.65rem 1rem;margin-bottom:0.75rem;font-size:0.83rem;color:#0369a1;display:flex;align-items:center;gap:0.5rem;">
-                        💡 <strong>Texto Libre:</strong> El contenido de este editor es independiente. Para conservar el funcionamiento del modal del Aviso de Privacidad, mantén <code>id="link-privacy"</code> en el enlace.
-                    </div>
-
-                    <div class="field-group">
-                        <div id="ck-footer" class="ck5-mount ck5-mount-lg"></div>
-                        <textarea id="ck-footer-data" name="contenido__cuerpo_html" class="ck5-hidden-data"><?= htmlspecialchars(cmsRaw($contenidos, 'footer', 'contenido', 'cuerpo_html')) ?></textarea>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <!-- ================================================================
-             PANEL 8: SEO Y METADATOS
-             Sección: seo | Fuente HTML: head del index.html
-             ================================================================ -->
-        <div id="panel-seo" class="cms-panel" role="tabpanel" aria-labelledby="tab-seo" tabindex="0" data-section="seo">
-            <div class="cms-panel-header">
-                <h3 class="cms-h3">Metadatos de SEO, Open Graph y Schema.org</h3>
-            </div>
-
-            <!-- Fila 1: Identidad Corporativa + Meta Tags del Sitio -->
-            <hr class="cms-section-sep">
-            <div class="grid-2col mb-4">
-                <!-- Identidad Corporativa / Organización -->
-                <div class="editor-card" style="border: 2px solid #0d9488; background: #fafafa; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
-                    <div class="editor-card-header" style="background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%); padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.2);">
-                        <div class="card-title" style="color: #ffffff; font-weight: 800; font-size: 0.95rem;">Identidad de la Organización y Marca</div>
-                    </div>
-                    <div class="editor-card-body" style="padding: 12px;">
-                        <div class="field-group">
-                            <label>Razón Social / Nombre Completo <small class="txt-muted">(_cfg_nombre_laboratorio)</small></label>
-                            <input type="text" name="_cfg_nombre_laboratorio"
-                                   value="<?= htmlspecialchars($config['nombre_laboratorio'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
-                                   placeholder="Laboratorio de Especialidades Hematológicas S.C.">
-                            <small class="cms-help-text">Nombre legal y oficial de la entidad utilizado en el encabezado accesible, reportes y metadatos.</small>
-                        </div>
-                        <div class="field-group">
-                            <label>Nombre Corto / Marca Comercial <small class="txt-muted">(_cfg_nombre_corto)</small></label>
-                            <input type="text" name="_cfg_nombre_corto"
-                                   value="<?= htmlspecialchars($config['nombre_corto'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
-                                   placeholder="LAESH">
-                            <small class="cms-help-text">Acrónimo o marca breve que se utiliza en el logotipo, títulos cortos y etiquetas de interfaz.</small>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `id="panel-`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 6:27 pm
 
 ---
 
-## Agent Response
-
-### Thinking
-
-Confirmed. The CMS panels are organized as follows: `panel-hero` represents the main banner, `panel-quienes-somos` the "About Us" section, `panel-especialidades` the studies/specializations, `panel-promociones` current promotions, `panel-calidad` quality and installations, `panel-ubicacion` location and contact information, `panel-footer` the footer, `panel-aviso-privacidad` the privacy notice, and `panel-video-promo` promo video. The list is complete.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.059836405s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1669-1749)</summary>
-
-**Path:** `Unknown file`
-
-```
-             Sección: aviso-privacidad | Fuente HTML: modal / página #privacidad
-             ================================================================ -->
-        <div id="panel-aviso-privacidad" class="cms-panel" role="tabpanel" aria-labelledby="tab-aviso-privacidad" tabindex="0" data-section="aviso-privacidad">
-            <div class="cms-panel-header">
-                <h3 class="cms-h3">Aviso de Privacidad — Contenido Legal (#privacidad)</h3>
-            </div>
-
-            <hr class="cms-section-sep">
-            <div class="editor-card mb-4" style="border: 2px solid #e11d48; background: #fafafa; border-radius: 8px; overflow: visible; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
-                <div class="editor-card-header" style="background: linear-gradient(135deg, #e11d48 0%, #be123c 100%); padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.2);">
-                    <div class="card-title" style="color: #ffffff; font-weight: 800; font-size: 0.95rem;">Documento Integral del Aviso de Privacidad (Editor RTE)</div>
-                </div>
-                <div class="editor-card-body" style="padding: 12px;">
-                    <p class="cms-p">
-                        Edita directamente el contenido completo del Aviso de Privacidad con formato enriquecido (encabezados, listas, negritas y párrafos). Los cambios se actualizarán automáticamente en la ventana modal de la página pública.
-                    </p>
-                    <div class="field-group">
-                        <div id="ck-aviso-privacidad" class="ck5-mount ck5-mount-lg"></div>
-                        <textarea id="ck-aviso-privacidad-data" name="contenido__cuerpo_html" class="ck5-hidden-data"><?= htmlspecialchars(cmsRaw($contenidos, 'aviso-privacidad', 'contenido', 'cuerpo_html')) ?></textarea>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ================================================================
-             PANEL 9: VIDEO PROMO
-             Sección: video-promo | RTE Completo con Enlaces y Medios (YouTube, Vimeo, etc.)
-             ================================================================ -->
-        <div id="panel-video-promo" class="cms-panel" role="tabpanel" aria-labelledby="tab-video-promo" tabindex="0" data-section="video-promo">
-            <div class="cms-panel-header">
-                <h3 class="cms-h3">9. Video Promo — Enlaces e Incrustación de Video (#video-promo)</h3>
-            </div>
-
-            <hr class="cms-section-sep">
-            <?php
-            $videoActive = ($config['video_active'] ?? '1') !== '0';
-            ?>
-            <div class="editor-card mb-4" style="border: 2px solid #0891b2; background: #fafafa; border-radius: 8px; overflow: visible; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
-                <div class="editor-card-header" style="background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%); padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.2); display:flex; justify-content:space-between; align-items:center;">
-                    <div class="card-title" style="color: #ffffff; font-weight: 800; font-size: 0.95rem;">Contenido del Video Promocional (Editor RTE Completo)</div>
-                    <div style="display:flex; align-items:center; gap:0.5rem;">
-                        <label for="chk-video-active" style="display:inline-flex; align-items:center; gap:0.45rem; cursor:pointer; margin:0; font-size:0.85rem; font-weight:700;">
-                            <input type="hidden" name="_cfg_video_active" value="0">
-                            <input type="checkbox" id="chk-video-active" name="_cfg_video_active" value="1" <?= $videoActive ? 'checked' : '' ?>
-                                   style="width:1.15rem; height:1.15rem; accent-color:#ffffff; cursor:pointer;"
-                                   onchange="var badge=this.nextElementSibling; if(this.checked){ badge.style.background='rgba(255,255,255,0.25)'; badge.style.color='#ffffff'; badge.textContent='Encendido'; } else { badge.style.background='#dc2626'; badge.style.color='#ffffff'; badge.textContent='Apagado'; }">
-                            <span class="operator-badge" style="background: <?= $videoActive ? 'rgba(255,255,255,0.25)' : '#dc2626' ?>; color: #ffffff; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; transition: all 0.2s ease;">
-                                <?= $videoActive ? 'Encendido' : 'Apagado' ?>
-                            </span>
-                        </label>
-                    </div>
-                </div>
-                <div class="editor-card-body" style="padding: 12px;">
-                    <p class="cms-p">
-                        Utiliza este editor con capacidades completas para insertar enlaces web e incrustar reproductores de video (YouTube, Spotify, Vimeo, etc.) para la promoción institucional.
-                    </p>
-                    <div class="field-group">
-                        <div id="ck-video-promo" class="ck5-mount ck5-mount-lg"></div>
-                        <textarea id="ck-video-promo-data" name="contenido__cuerpo_html" class="ck5-hidden-data"><?= htmlspecialchars(cmsRaw($contenidos, 'video-promo', 'contenido', 'cuerpo_html')) ?></textarea>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ================================================================
-             PANEL 10: CONFIGURACIÓN GENERAL — Orden de Secciones
-             Sección: configuracion-general | Campo: _cfg_seccion_order
-             Persiste en tabla configuraciones (clave='seccion_order') vía prefijo _cfg_
-             ================================================================ -->
-        <div id="panel-configuracion-general" class="cms-panel" role="tabpanel" aria-labelledby="tab-configuracion-general" tabindex="0" data-section="configuracion-general">
-            <div class="cms-panel-header">
-                <h3 class="cms-h3">Orden de Secciones — Página de Inicio</h3>
-            </div>
-
-            <hr class="cms-section-sep">
-            <div class="editor-card mb-4" style="border: 2px solid #4338ca; background: #fafafa; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
-                <div class="editor-card-header" style="background: linear-gradient(135deg, #4338ca 0%, #3730a3 100%); padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.2);">
-                    <div class="card-title" style="color: #ffffff; font-weight: 800; font-size: 0.95rem;">Orden Vertical de Secciones (#inicio)</div>
-                </div>
-                <div class="editor-card-body" style="padding: 12px;">
-                    <!-- Hidden input que serializa el orden para el POST /cms/save -->
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Analysis confirms that panels 8, 9, 10, and 11 do not support image uploads based on their respective functionalities. The focus has shifted to identifying CMS tabs that permit image uploads.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.102017446s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L284-389)</summary>
-
-**Path:** `Unknown file`
-
-```
-                            <small class="cms-help-text">0 = pausa fija · 1–90 s = autoplay.</small>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="editor-card" style="border: 2px solid #7c3aed; background: #fafafa; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
-                    <div class="editor-card-header" style="background: linear-gradient(135deg, #4c1d95 0%, #7c3aed 100%); padding: 10px 14px;"><div class="card-title" style="color: #ffffff; font-weight: 800; font-size: 0.9rem;">Comportamiento Banner</div></div>
-                    <div class="editor-card-body" style="padding: 12px;">
-                        <?php $sliderMode = cms($contenidos, 'hero', 'config', 'slider_mode', 'sync'); ?>
-                        <div class="field-group" style="margin-bottom: 0.75rem;">
-                            <select name="config__slider_mode" class="cms-input" style="padding:6px; font-size:0.85rem;" onchange="document.getElementById('fixed-image-selector').style.display = ['sync', 'sync_hidden'].includes(this.value) ? 'none' : 'block'; if(window.CmsDirtyTracker) CmsDirtyTracker.evalField(this);">
-                                <option value="sync" <?= in_array($sliderMode, ['sync', 'sync_hidden', 'sync_fixed_msg']) ? 'selected' : '' ?>>Carrusel de Imágenes Animadas (Transición)</option>
-                                <option value="decoupled" <?= in_array($sliderMode, ['decoupled', 'decoupled_hidden', 'fixed_all']) ? 'selected' : '' ?>>Imagen de Fondo Fija (Sin transición)</option>
-                            </select>
-                        </div>
-                        <div class="field-group" id="fixed-image-selector" style="display: <?= in_array($sliderMode, ['sync', 'sync_hidden', 'sync_fixed_msg']) ? 'none' : 'block' ?>; background:var(--bg-page); padding:0.5rem; border-radius:6px; border:1px solid var(--border);">
-                            <label class="cms-label" style="font-size:0.8rem;">Slide a fijar como fondo:</label>
-                            <select name="config__fixed_image" class="cms-input" style="padding:4px; font-size:0.85rem; height:auto;">
-                                <?php $fixedImg = cms($contenidos, 'hero', 'config', 'fixed_image', '1'); ?>
-                                <option value="1" <?= $fixedImg == '1' ? 'selected' : '' ?>>Slide 1</option>
-                                <option value="2" <?= $fixedImg == '2' ? 'selected' : '' ?>>Slide 2</option>
-                                <option value="3" <?= $fixedImg == '3' ? 'selected' : '' ?>>Slide 3</option>
-                                <option value="4" <?= $fixedImg == '4' ? 'selected' : '' ?>>Slide 4</option>
-                                <option value="5" <?= $fixedImg == '5' ? 'selected' : '' ?>>Slide 5</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-            </div><!-- /4col eslogan + autoplay + comportamiento -->
-
-            <hr class="cms-section-sep">
-
-            <!-- ══ GRID DE SLIDES — Gestión de Fondos WebP ══ -->
-            <div style="background:#f0f9ff; border:1px solid #bae6fd; border-radius:6px; padding:8px 12px; margin-bottom:1rem; font-size:0.82rem; color:#0369a1;">
-                📐 <strong>Especificaciones para Slides:</strong> Codec: <strong>WebP únicamente</strong> &nbsp;·&nbsp; Quality: 72–80 &nbsp;·&nbsp; Ancho: 1 280–1 920 px &nbsp;·&nbsp; Alto: 890–1 080 px sugerido &nbsp;·&nbsp; Orientación Horizontal &nbsp;·&nbsp; Peso: Máx. 150 KB, Óptimo 60 KB.
-            </div>
-            <?php
-            $_heroStyles = [
-                1 => ['bg' => 'linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%)', 'borderColor' => '#2563eb', 'tag' => 'Slide 1 — Institucional'],
-                2 => ['bg' => 'linear-gradient(135deg, #065f46 0%, #059669 100%)', 'borderColor' => '#059669', 'tag' => 'Slide 2 — Clínica'],
-                3 => ['bg' => 'linear-gradient(135deg, #581c87 0%, #7c3aed 100%)', 'borderColor' => '#7c3aed', 'tag' => 'Slide 3 — Excelencia'],
-                4 => ['bg' => 'linear-gradient(135deg, #78350f 0%, #d97706 100%)', 'borderColor' => '#d97706', 'tag' => 'Slide 4 — Promos'],
-                5 => ['bg' => 'linear-gradient(135deg, #134e4a 0%, #0d9488 100%)', 'borderColor' => '#0d9488', 'tag' => 'Slide 5 — Ubicación'],
-            ];
-            ?>
-            <div class="hero-slides-grid" style="gap: 1.25rem;">
-            <?php
-            $heroSlides = [
-                ['slide1', 'Slide 1'],
-                ['slide2', 'Slide 2'],
-                ['slide3', 'Slide 3'],
-                ['slide4', 'Slide 4'],
-                ['slide5', 'Slide 5'],
-            ];
-            $slidesTotal = count($heroSlides);
-            foreach ($heroSlides as $idx => [$sub, $cardTitle]):
-                $hSt = $_heroStyles[$idx + 1] ?? ['bg' => 'linear-gradient(135deg, #0f172a 0%, #334155 100%)', 'borderColor' => '#334155', 'tag' => 'Slide'];
-                // Separador de fila: antes del 4º slide (inicio de 2ª fila)
-                if ($idx === 3): ?>
-            <hr class="cms-section-sep">
-            <?php endif; ?>
-            <div class="editor-card" style="border: 2px solid <?= $hSt['borderColor'] ?>; background: #fafafa; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
-                <div class="editor-card-header" style="background: <?= $hSt['bg'] ?>; padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.2);">
-                    <div class="card-title" style="font-weight:800; color:#ffffff; font-size:0.95rem;">
-                        <?= htmlspecialchars($cardTitle, ENT_QUOTES, 'UTF-8') ?>
-                    </div>
-                </div>
-                <div class="editor-card-body" style="padding:12px;">
-                    <?php $heroImgUrl = cms($contenidos, 'hero', $sub, 'imagen_url'); ?>
-                    <div class="field-group">
-                        <label>Imagen de Fondo</label>
-                        <div class="image-upload-box">
-                            <img id="prev-<?= $sub ?>"
-                                 src="<?= h($heroImgUrl) ?>"
-                                 alt="Preview <?= htmlspecialchars($sub, ENT_QUOTES, 'UTF-8') ?>"
-                                 class="img-preview-sm"
-                                 onerror="this.hidden=true">
-                            
-                            <label for="file-<?= $sub ?>" class="btn btn-secondary">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-                                Cambiar Imagen
-                            </label>
-
-                            <input type="file" accept="image/webp"
-                                   id="file-<?= $sub ?>" class="d-none"
-                                   data-upload-slot="hero-<?= $sub ?>"
-                                   data-preview-id="prev-<?= $sub ?>"
-                                   data-target-input="url-img-<?= $sub ?>">
-                        </div>
-                        <input type="url" id="url-img-<?= $sub ?>"
-                               name="<?= $sub ?>__imagen_url"
-                               value="<?= h($heroImgUrl) ?>"
-                               class="cms-img-url-input" data-no-limit>
-                        <?php $imgBasename = $heroImgUrl ? basename($heroImgUrl) : 'Sin imagen'; ?>
-                        <span id="lbl-img-<?= $sub ?>" class="cms-img-filename-label"><?= h($imgBasename) ?></span>
-                    </div>
-                </div>
-            </div>
-            <?php endforeach; ?>
-            </div><!-- /hero-slides-grid -->
-
-
-        </div><!-- /panel-hero -->
-
-        <!-- ================================================================
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Initial assessment indicates specific image requirements for the hero slides, including WebP format and defined dimensions. Confirmed the front-end validation rules within the Javascript file `cms-upload.js` that enforces the format, size, and orientation restrictions. These restrictions appear to be consistent across both the user interface text and the Javascript rules.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.098303129s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L499-544)</summary>
-
-**Path:** `Unknown file`
-
-```
-                        <label style="font-weight:700; color:#1e293b; font-size:0.9rem;">Tarjeta Gráfica del Responsable Sanitario</label>
-                        <p class="cms-img-spec-hint" style="margin-top: 4px; margin-bottom: 8px; font-size: 0.78rem;">
-                            📷 <strong>Sube aquí tu imagen (JPEG, WebP o PNG)</strong> para alojarla en el servidor y obtener su URL lista para el editor.
-                        </p>
-                        <?php $curHistImg = cmsRaw($contenidos, 'quienes-somos', 'historia', 'img_tarjeta', ''); ?>
-                        <div class="image-upload-box" style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
-                            <img id="prev-historia-card"
-                                 src="<?= h($curHistImg) ?>"
-                                 alt="Preview Tarjeta"
-                                 class="img-preview-sm"
-                                 style="max-height: 60px; max-width: 90px; object-fit: contain; border-radius: 4px; border: 1px solid #cbd5e1; <?= empty($curHistImg) ? 'display:none;' : '' ?>"
-                                 onerror="this.style.display='none'">
-
-                            <label for="file-historia-card" class="btn btn-secondary" style="cursor:pointer; display:inline-flex; align-items:center; gap:6px;">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-                                Subir Tarjeta
-                            </label>
-
-                            <input type="file" accept="image/*"
-                                   id="file-historia-card" class="d-none"
-                                   data-upload-slot="historia-card"
-                                   data-preview-id="prev-historia-card"
-                                   data-target-input="url-img-historia-card">
-                        </div>
-                        <div style="display:flex; gap:8px; align-items:center; margin-top:8px;">
-                            <input type="url" id="url-img-historia-card"
-                                   name="historia__img_tarjeta"
-                                   value="<?= h($curHistImg) ?>"
-                                   class="cms-img-url-input" data-no-limit
-                                   style="flex:1;"
-                                   placeholder="URL generada de la imagen..." readonly>
-                            <button type="button" class="btn btn-secondary" style="font-size:0.8rem; padding:6px 12px; white-space:nowrap;"
-                                    onclick="var u=document.getElementById('url-img-historia-card'); if(u && u.value){ navigator.clipboard.writeText(u.value); alert('URL copiada al portapapeles: ' + u.value); } else { alert('Primero sube una imagen.'); }">
-                                📋 Copiar URL
-                            </button>
-                        </div>
-                        <span id="lbl-img-historia-card" class="cms-img-filename-label" style="font-size:0.75rem; color:#64748b;"><?= h($curHistImg ? basename($curHistImg) : 'Sin imagen subida') ?></span>
-                    </div>
-                    <div class="field-group">
-                        <div id="ck-historia" class="ck5-mount"></div>
-                        <textarea id="ck-historia-data" name="ficha1__texto" class="ck5-hidden-data"><?= htmlspecialchars(cmsRaw($contenidos, 'quienes-somos', 'ficha1', 'texto',
-                            '<p>LAESH, Laboratorio de Especialidades Hematológicas, es una empresa 100% de la Región Mixteca.</p>')) ?></textarea>
-                    </div>
-                </div>
-            </div>
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Examining the second tab, the `historia-card` slot is for uploading a graphics card file, while the `historia` slot integrates the CKEditor and image upload functionality. The UI includes instructions for image uploads (JPEG, WebP, or PNG) but doesn't specify minimum or maximum dimensions.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.204372571s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L639-684)</summary>
-
-**Path:** `Unknown file`
-
-```
-                    <div class="field-group">
-                        <label>Imagen de la Tarjeta <?= $ci ?></label>
-                        <div class="image-upload-box">
-                            <img id="prev-carousel-<?= $ci ?>"
-                                 src="<?= h($curImg) ?>"
-                                 alt="Preview Tarjeta <?= $ci ?>"
-                                 class="img-preview-sm"
-                                 <?= empty($curImg) ? 'hidden' : '' ?>
-                                 onerror="this.hidden=true">
-
-                            <label for="file-carousel-<?= $ci ?>" class="btn btn-secondary">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-                                Cambiar Imagen
-                            </label>
-
-                            <input type="file" accept="image/*"
-                                   id="file-carousel-<?= $ci ?>" class="d-none"
-                                   data-upload-slot="carousel-<?= $ci ?>"
-                                   data-preview-id="prev-carousel-<?= $ci ?>"
-                                   data-target-input="url-img-carousel-<?= $ci ?>">
-                        </div>
-                        <input type="url" id="url-img-carousel-<?= $ci ?>"
-                               name="config__carousel<?= $ci ?>_img"
-                               value="<?= h($curImg) ?>"
-                               class="cms-img-url-input" data-no-limit>
-                        <?php $imgBasename = $curImg ? basename($curImg) : 'Sin imagen'; ?>
-                        <span id="lbl-img-carousel-<?= $ci ?>" class="cms-img-filename-label"><?= h($imgBasename) ?></span>
-                    </div>
-
-                    <!-- Editor de Texto HTML con CKEditor 5 -->
-                    <div class="field-group">
-                        <label class="cms-label-bold mb-1" style="font-weight:700; display:block; font-size:0.88rem;">Contenido Editorial (Título H3 + Descripción)</label>
-                        <div id="ck-carousel-<?= $ci ?>" class="ck5-mount"></div>
-                        <textarea id="ck-carousel-<?= $ci ?>-data" name="carousel<?= $ci ?>__texto" class="ck5-hidden-data"><?= htmlspecialchars($curHtml) ?></textarea>
-                    </div>
-                </div>
-            </div>
-            <?php if ($ci % 2 === 0 && $ci < 15): ?>
-            <hr class="cms-section-sep">
-            <?php endif; ?>
-            <?php endfor; ?>
-            </div><!-- /hero-slides-grid -->
-
-
-
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L549-599)</summary>
-
-**Path:** `Unknown file`
-
-```
-             Sección: especialidades | Fuente HTML: #especialidades
-             ================================================================ -->
-        <div id="panel-especialidades" class="cms-panel" role="tabpanel" aria-labelledby="tab-especialidades" tabindex="0" data-section="especialidades">
-            <div class="cms-panel-header">
-                <h3 class="cms-h3">Edición de Carrusel y Catálogo Completo (#especialidades)</h3>
-            </div>
-
-            <!-- Encabezado de la sección y Catálogo Maestro -->
-            <div class="mb-4" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
-                <div class="editor-card" style="border: 2px solid #0284c7; background: #fafafa; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
-                    <div class="editor-card-header" style="background: linear-gradient(135deg, #0c4a6e 0%, #0284c7 100%); padding: 10px 14px;">
-                        <div class="card-title" style="color: #ffffff; font-weight: 800; font-size: 0.95rem;">Encabezado de la Sección (#especialidades)</div>
-                    </div>
-                    <div class="editor-card-body" style="padding: 12px;">
-                        <div class="field-group">
-                            <label>Título Principal (h2)</label>
-                            <input type="text" name="seccion__h2"
-                                   value="<?= cms($contenidos, 'especialidades', 'seccion', 'h2', 'Estudios de Rutina y Especialidades') ?>">
-                            <small class="cms-help-text">Encabezado visual dentro de la sección. No afecta el menú de navegación.</small>
-                        </div>
-                        <div class="field-group">
-                            <label>Subtítulo / Descripción</label>
-                            <input type="text" name="seccion__subtitulo"
-                                   value="<?= cms($contenidos, 'especialidades', 'seccion', 'subtitulo', 'Servicios clínicos diseñados con rigor científico para garantizar la máxima confiabilidad en el diagnóstico médico.') ?>">
-                        </div>
-                        <div class="field-group mt-2">
-                            <label>Etiqueta en menú de navegación</label>
-                            <input type="text" name="nav__label" maxlength="30"
-                                   value="<?= cms($contenidos, 'especialidades', 'nav', 'label', 'Estudios') ?>">
-                            <small class="cms-help-text">Texto corto que aparece en el menú del header (máx. 30 caracteres).</small>
-                        </div>
-                        <div class="field-group mt-2">
-                            <label>Nota al Encabezado de Catálogo de abanicos</label>
-                            <input type="text" name="catalogo__nota_pie"
-                                   value="<?= cms($contenidos, 'especialidades', 'catalogo', 'nota_pie', 'Listas de Estudios disponibles 2026 · Haz clic en cada grupo para expandir') ?>">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <hr class="cms-section-sep">
-
-            <!-- Carrusel de tarjetas de área fotográfica (carousel1–15) -->
-            <div class="cms-panel-header mt-4 mb-3">
-                <h4 class="cms-h3" style="font-size:1.1rem; color:var(--primary);">Tarjetas del Carrusel de Áreas del Laboratorio (1 a 15)</h4>
-                <p class="cms-help-text" style="margin-top:2px;">
-                    Cada tarjeta incluye su módulo de reemplazo de imagen (ranura <code>carousel-1</code> a <code>carousel-15</code>) y editor de texto enriquecido con CKEditor 5. Fichas 13 a 15 disponibles para posterior publicación.
-                </p>
-                <div style="background:#fffbeb; border:1px solid #fde68a; border-radius:6px; padding:6px 12px; margin-top:8px; font-size:0.8rem; color:#b45309; display:inline-flex; align-items:center; gap:6px;">
-                    <span>⚠️</span> <strong>[MODO PRUEBAS]:</strong> Restricciones de formato (WebP), dimensiones (800×580) y peso (150 KB) desactivadas temporalmente para todas las tarjetas.
-                </div>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Investigating line 599 reveals temporarily disabled format, dimension, and weight restrictions for all cards in test mode. Pestaña 3 reveals carousel slots range from 1 to 15 (or 16). The UI text includes "accept=\"image/*\"" and a yellow warning about the disabled restrictions.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.059522647s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L689-744)</summary>
-
-**Path:** `Unknown file`
-
-```
-             Sección: promociones | Fuente HTML: #promociones
-             ================================================================ -->
-        <div id="panel-promociones" class="cms-panel" role="tabpanel" aria-labelledby="tab-promociones" tabindex="0" data-section="promociones">
-            <div class="cms-panel-header">
-                <h3 class="cms-h3">Promociones Vigentes (#promociones)</h3>
-            </div>
-
-            <!-- Fila 1: Encabezado de la Sección + Mensaje WhatsApp Agendar -->
-            <hr class="cms-section-sep">
-            <div class="grid-2col mb-4">
-            <!-- Encabezado de la Sección Promociones -->
-            <div class="editor-card">
-                <div class="editor-card-header">
-                    <div class="card-title">Encabezado de la Sección (#promociones)</div>
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-group">
-                        <label>Título Principal (h2)</label>
-                        <input type="text" name="banner__titulo"
-                               value="<?= cms($contenidos, 'promociones', 'banner', 'titulo', 'Promociones Vigentes') ?>">
-                        <small class="cms-help-text">Encabezado visual dentro de la sección. No afecta el menú de navegación.</small>
-                    </div>
-                    <div class="field-group">
-                        <label>Subtítulo / Descripción de la Sección</label>
-                        <input type="text" name="banner__subtitulo"
-                               value="<?= cms($contenidos, 'promociones', 'banner', 'subtitulo', 'Aprovecha nuestros precios preferenciales en estudios de laboratorio seleccionados cada día de la semana.') ?>">
-                    </div>
-                    <div class="field-group mt-2">
-                        <label>Etiqueta en menú de navegación</label>
-                        <input type="text" name="nav__label" maxlength="30"
-                               value="<?= cms($contenidos, 'promociones', 'nav', 'label', 'Promociones') ?>">
-                        <small class="cms-help-text">Texto corto que aparece en el menú del header (máx. 30 caracteres).</small>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Mensaje WhatsApp para Agendar Promoción -->
-            <div class="editor-card">
-                <div class="editor-card-header">
-                    <div class="card-title">Plantilla del Mensaje de WhatsApp (Agendar)</div>
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-group">
-                        <label>Mensaje al Agendar Estudio <small class="txt-muted">usa <code>{estudio}</code> como marcador dinámico</small></label>
-                        <input type="text" name="_cfg_wa_texto_agendar"
-                               value="<?= htmlspecialchars($config['wa_texto_agendar'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                        <small class="cms-help-text">Texto pre-escrito en WhatsApp al agendar cualquier promoción del día. El comodín <code>{estudio}</code> se reemplaza dinámicamente con el nombre o clave del estudio promocionado (ej. <em>«Hola LAESH, deseo agendar {estudio}»</em> $\rightarrow$ <em>«Hola LAESH, deseo agendar Reticulocitos»</em>).</small>
-                    </div>
-                </div>
-            </div>
-            </div><!-- /grid-2col fila 1 -->
-
-            <!-- Fila 2: Promociones Relacionales (MariaDB — 7 Fichas: Lunes a Domingo) -->
-            <hr class="cms-section-sep">
-            <div class="editor-card mb-4">
-                <div class="editor-card-header" style="padding:12px 16px;">
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L744-854)</summary>
-
-**Path:** `Unknown file`
-
-```
-                <div class="editor-card-header" style="padding:12px 16px;">
-                    <div class="card-title" style="font-weight:800; font-size:1.15rem; color:#0052B7; background:#e0f2fe; padding:6px 14px; border-radius:6px; border-left:4px solid #0284c7; display:inline-block;">Gestión de las 7 Promociones</div>
-                </div>
-                <div class="editor-card-body">
-                    <style>
-                    /* Distribución uniforme a 2 columnas sin scroll horizontal en Promociones */
-                    #panel-promociones .promo-grid-2col {
-                        display: grid;
-                        grid-template-columns: repeat(2, minmax(0, 1fr));
-                        gap: 1.25rem;
-                        width: 100%;
-                        max-width: 100%;
-                        box-sizing: border-box;
-                    }
-                    @media (max-width: 992px) {
-                        #panel-promociones .promo-grid-2col {
-                            grid-template-columns: 1fr;
-                        }
-                    }
-                    #panel-promociones .promo-card-editor {
-                        width: 100%;
-                        max-width: 100%;
-                        box-sizing: border-box;
-                        overflow-x: hidden;
-                    }
-                    #panel-promociones .ck.ck-toolbar {
-                        flex-wrap: wrap !important;
-                        max-width: 100% !important;
-                        box-sizing: border-box !important;
-                    }
-                    #panel-promociones .ck.ck-editor__main {
-                        max-width: 100% !important;
-                        box-sizing: border-box !important;
-                    }
-                    #panel-promociones .ck.ck-content {
-                        word-break: break-word !important;
-                        overflow-wrap: break-word !important;
-                    }
-                    </style>
-
-                    <?php
-                    $_headerStyles = [
-                        1 => ['bg' => 'linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%)', 'borderColor' => '#2563eb', 'color' => '#ffffff', 'tag' => 'Lunes'],
-                        2 => ['bg' => 'linear-gradient(135deg, #065f46 0%, #059669 100%)', 'borderColor' => '#059669', 'color' => '#ffffff', 'tag' => 'Martes'],
-                        3 => ['bg' => 'linear-gradient(135deg, #78350f 0%, #d97706 100%)', 'borderColor' => '#d97706', 'color' => '#ffffff', 'tag' => 'Miércoles'],
-                        4 => ['bg' => 'linear-gradient(135deg, #581c87 0%, #7c3aed 100%)', 'borderColor' => '#7c3aed', 'color' => '#ffffff', 'tag' => 'Jueves'],
-                        5 => ['bg' => 'linear-gradient(135deg, #831843 0%, #db2777 100%)', 'borderColor' => '#db2777', 'color' => '#ffffff', 'tag' => 'Viernes'],
-                        6 => ['bg' => 'linear-gradient(135deg, #134e4a 0%, #0d9488 100%)', 'borderColor' => '#0d9488', 'color' => '#ffffff', 'tag' => 'Sábado'],
-                        7 => ['bg' => 'linear-gradient(135deg, #7c2d12 0%, #ea580c 100%)', 'borderColor' => '#ea580c', 'color' => '#ffffff', 'tag' => 'Domingo'],
-                    ];
-                    ?>
-                    <div class="promo-grid-2col">
-                    <div style="grid-column: 1 / -1; background:#f0f9ff; border:1px solid #bae6fd; border-radius:6px; padding:6px 12px; margin-bottom:0.25rem; font-size:0.8rem; color:#0369a1;">
-                        📐 <strong>Especificaciones para Imágenes de Promociones:</strong> Dimensiones: 1024 × 687 px (o 1200 × 600–675 px) &nbsp;·&nbsp; Codec: <strong>WebP únicamente</strong> &nbsp;·&nbsp; Peso: Máx. 150 KB, Óptimo 80–110 KB.
-                    </div>
-                    <?php if (!empty($promociones)): ?>
-                        <?php foreach ($promociones as $p): ?>
-                            <?php 
-                                $pId = (int)$p['id'];
-                                $diaLabel = ucfirst(trim(strip_tags($p['dia_semana'])));
-                                $imgUrl = $p['imagen_fondo'] ?? '';
-                                $hStyle = $_headerStyles[$pId] ?? ['bg' => '#0f172a', 'borderColor' => '#334155', 'color' => '#ffffff', 'tag' => 'Ficha'];
-                            ?>
-                            <div class="editor-card promo-card-editor" style="border: 2px solid <?= $hStyle['borderColor'] ?>; background: #fafafa; border-radius: 8px; overflow: visible; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
-                                <div class="editor-card-header" style="display:flex; justify-content:space-between; align-items:center; background: <?= $hStyle['bg'] ?>; padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.2);">
-                                    <div class="card-title" style="font-weight:800; color: <?= $hStyle['color'] ?>; font-size:0.95rem;">
-                                        Tarjeta <?= $pId ?>
-                                    </div>
-                                    <label style="display:flex; align-items:center; gap:6px; font-size:0.85rem; font-weight:700; cursor:pointer; color: <?= $hStyle['color'] ?>; background:rgba(0,0,0,0.2); padding:4px 10px; border-radius:20px;">
-                                        <input type="checkbox" name="promo_active_<?= $pId ?>" value="1" <?= (!empty($p['activo'])) ? 'checked' : '' ?> style="width:1.05rem; height:1.05rem; cursor:pointer; accent-color:#10b981;">
-                                        <span>Activa</span>
-                                    </label>
-                                </div>
-                                <div class="editor-card-body" style="padding:12px;">
-                                    <input type="hidden" name="promo_id[]" value="<?= $pId ?>">
-
-                                    <!-- Título / Etiqueta Superior -->
-                                    <div class="field-group mb-3">
-                                        <label>✍️ Título / Etiqueta Superior de la Ficha <small class="txt-muted">(✍️ Contenido y Estilos RTE Editables)</small></label>
-                                        <div id="ck-promo-day-<?= $pId ?>" class="ck5-mount"></div>
-                                        <textarea id="ck-promo-day-<?= $pId ?>-data" name="promo_dia_semana_<?= $pId ?>" class="ck5-hidden-data" rows="2"><?= h(trim($p['dia_semana'])) ?></textarea>
-                                    </div>
-
-                                    <!-- Imagen de Fondo -->
-                                    <div class="field-group mb-2">
-                                        <label>Imagen de Fondo</label>
-                                        <div class="image-upload-box">
-                                            <img id="prev-promo-<?= $pId ?>"
-                                                 src="<?= !empty($imgUrl) ? h($imgUrl) : 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="90" height="60" viewBox="0 0 90 60"><rect width="100%" height="100%" fill="%23f1f5f9"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%2394a3b8" font-size="10" font-family="sans-serif">Sin Imagen</text></svg>' ?>"
-                                                 alt="Promoción <?= h(trim(strip_tags($diaLabel))) ?>" class="img-preview-sm"
-                                                 onerror="this.hidden=true">
-                                            <label for="file-promo-<?= $pId ?>" class="btn btn-secondary btn-sm">
-                                                Cambiar Imagen
-                                            </label>
-                                            <input type="file" accept="image/webp"
-                                                   id="file-promo-<?= $pId ?>" class="d-none"
-                                                   data-upload-slot="promo-<?= $pId ?>"
-                                                   data-preview-id="prev-promo-<?= $pId ?>"
-                                                   data-target-input="input-img-promo-<?= $pId ?>">
-                                        </div>
-                                        <input type="url" id="input-img-promo-<?= $pId ?>"
-                                               name="promo_img_<?= $pId ?>"
-                                               value="<?= h($imgUrl) ?>"
-                                               placeholder="/laesh-web-assets-uipv1a/cms/promo-<?= h(strtolower(trim(strip_tags($p['dia_semana'])))) ?>.webp"
-                                               class="cms-img-url-input" data-no-limit>
-                                    </div>
-                                </div>
-                            </div>
-                        <?php endforeach; ?>
-                    <?php endif; ?>
-                    </div>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Image upload specifications are now clear. The UI text outlines dimensions, codec, and file size requirements for promotion images. JavaScript confirms these requirements for slots `promo-1` through `promo-7` and enforces WebP format.
-
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.062798240s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L863-959)</summary>
-
-**Path:** `Unknown file`
-
-```
-        <div id="panel-calidad" class="cms-panel" role="tabpanel" aria-labelledby="tab-calidad" tabindex="0" data-section="calidad">
-            <div class="cms-panel-header">
-                <h3 class="cms-h3">Galería de Instalaciones y Certificaciones (#calidad)</h3>
-            </div>
-
-            <!-- Fila 1: Encabezado de la Sección + Tarjeta 1 -->
-            <hr class="cms-section-sep">
-            <div class="grid-2col mb-4">
-            <!-- Encabezado de sección -->
-            <div style="grid-column: 1 / -1; background:#fffbeb; border:1px solid #fde68a; border-radius:6px; padding:6px 12px; margin-bottom:1rem; font-size:0.8rem; color:#b45309; display:inline-flex; align-items:center; gap:6px;">
-                <span>⚠️</span> <strong>[MODO PRUEBAS]:</strong> Restricciones de formato (WebP), dimensiones (800×580) y peso (150 KB) desactivadas temporalmente para la Galería de Calidad.
-            </div>
-            <div class="editor-card" style="border: 2px solid #0284c7; background: #fafafa; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
-                <div class="editor-card-header" style="background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%); padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.2);">
-                    <div class="card-title" style="color: #ffffff; font-weight: 800; font-size: 0.95rem;">Encabezado de la Sección</div>
-                </div>
-                <div class="editor-card-body" style="padding: 12px;">
-                    <div class="field-group">
-                        <label>Título Principal (h2)</label>
-                        <input type="text" name="seccion__h2"
-                               value="<?= cms($contenidos, 'calidad', 'seccion', 'h2', 'Calidad e Instalaciones') ?>">
-                        <small class="cms-help-text">Encabezado visual dentro de la sección. No afecta el menú de navegación.</small>
-                    </div>
-                    <div class="field-group">
-                        <label>Subtítulo / Descripción de la Sección</label>
-                        <input type="text" name="seccion__subtitulo"
-                               value="<?= cms($contenidos, 'calidad', 'seccion', 'subtitulo', 'Conoce nuestras instalaciones equipadas con tecnología de vanguardia y un equipo comprometido con la excelencia diagnóstica.') ?>">
-                    </div>
-                    <div class="field-group mt-2">
-                        <label>Etiqueta en menú de navegación</label>
-                        <input type="text" name="nav__label" maxlength="30"
-                               value="<?= cms($contenidos, 'calidad', 'nav', 'label', 'Calidad') ?>">
-                        <small class="cms-help-text">Texto corto que aparece en el menú del header (máx. 30 caracteres).</small>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Tarjeta 1 -->
-            <?php
-            $galImgUrl1 = cms($contenidos, 'calidad', 'gallery1', 'imagen_url');
-            $galActivo1 = cms($contenidos, 'calidad', 'gallery1', 'activo', '1');
-            $isActivo1  = ($galActivo1 !== '0');
-            $imgDef1    = ''; // sin fallback — imagen debe venir de CMS
-            ?>
-            <div class="editor-card" style="border: 2px solid #059669; background: #fafafa; border-radius: 8px; overflow: visible; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
-                <div class="editor-card-header" style="background: linear-gradient(135deg, #059669 0%, #047857 100%); padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.2); display:flex; justify-content:space-between; align-items:center;">
-                    <div class="card-title" style="color: #ffffff; font-weight: 800; font-size: 0.95rem;">Tarjeta 1</div>
-                    <div style="display:flex; align-items:center; gap:0.5rem;">
-                        <label for="chk-calidad-gallery1-activo" style="display:inline-flex; align-items:center; gap:0.45rem; cursor:pointer; margin:0; font-size:0.85rem; font-weight:700;">
-                            <input type="hidden" name="gallery1__activo" value="0">
-                            <input type="checkbox" id="chk-calidad-gallery1-activo" name="gallery1__activo" value="1" <?= $isActivo1 ? 'checked' : '' ?>
-                                   style="width:1.15rem; height:1.15rem; accent-color:#ffffff; cursor:pointer;"
-                                   onchange="var badge=this.nextElementSibling; if(this.checked){ badge.style.background='rgba(255,255,255,0.25)'; badge.style.color='#ffffff'; badge.textContent='Encendido'; } else { badge.style.background='#dc2626'; badge.style.color='#ffffff'; badge.textContent='Apagado'; }">
-                            <span class="operator-badge" style="background: <?= $isActivo1 ? 'rgba(255,255,255,0.25)' : '#dc2626' ?>; color: #ffffff; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; transition: all 0.2s ease;">
-                                <?= $isActivo1 ? 'Encendido' : 'Apagado' ?>
-                            </span>
-                        </label>
-                    </div>
-                </div>
-                <div class="editor-card-body" style="padding: 12px;">
-                    <div class="field-group">
-                        <label>Imagen de Galería</label>
-                        <div class="image-upload-box">
-                            <img id="prev-calidad-gallery1"
-                                  src="<?= h($galImgUrl1) ?>"
-                                  alt="Área de Hematología" class="img-preview-sm"
-                                  onerror="this.hidden=true">
-                            <label for="file-calidad-gallery1" class="btn btn-secondary">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-                                Cambiar Imagen
-                            </label>
-                            <input type="file" accept="image/*"
-                                   id="file-calidad-gallery1" class="d-none"
-                                   data-upload-slot="calidad-gallery1"
-                                   data-preview-id="prev-calidad-gallery1"
-                                   data-target-input="url-calidad-gallery1">
-                        </div>
-                        <input type="url" id="url-calidad-gallery1"
-                               name="gallery1__imagen_url"
-                               value="<?= h($galImgUrl1) ?>"
-                               placeholder="<?= $imgDef1 ?>"
-                               class="cms-img-url-input" data-no-limit>
-                        <?php $imgBasename1 = $galImgUrl1 ? basename($galImgUrl1) : basename($imgDef1); ?>
-                        <span id="lbl-img-calidad-gallery1" class="cms-img-filename-label"><?= h($imgBasename1) ?></span>
-                    </div>
-                    <!-- Editor de Texto HTML con CKEditor 5 (Título H3 + Descripción) -->
-                    <div class="field-group">
-                        <label class="cms-label-bold mb-1" style="font-weight:700; display:block; font-size:0.88rem;">Contenido Editorial (Título H3 + Descripción)</label>
-                        <?php
-                        $curTexto1 = cmsRaw($contenidos, 'calidad', 'gallery1', 'texto');
-                        if (trim($curTexto1) === '') {
-                            $t1 = cms($contenidos, 'calidad', 'gallery1', 'titulo', 'Galardón REY PACAL');
-                            $d1 = cms($contenidos, 'calidad', 'gallery1', 'descripcion', 'Se entrega a los MEJORES LABORATORIOS del país por demostrar EXCELENCIA en la CALIDAD');
-                            $curTexto1 = "<h3>{$t1}</h3><p>{$d1}</p>";
-                        }
-                        ?>
-                        <div id="ck-calidad-gallery1" class="ck5-mount"></div>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Examining the other "Calidad" cards, specifically cards 2 and 3, reveals the corresponding slots in the web management file are `calidad-gallery2` and `calidad-gallery3`, both accepting images.  The header indicates temporary deactivation of format, dimension, and weight restrictions for the "Calidad" gallery in test mode. Pestaña 5 has the slot `calidad-gallery1`.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.035204783s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1269-1329)</summary>
-
-**Path:** `Unknown file`
-
-```
-                            <label>Imagen del Croquis</label>
-                            <p class="cms-img-spec-hint" style="margin-top: 4px; margin-bottom: 8px;">
-                                📐 <strong>Codec:</strong> WebP únicamente &nbsp;·&nbsp;
-                                <strong>Quality:</strong> 85 &nbsp;·&nbsp;
-                                <strong>Effort:</strong> 6 &nbsp;·&nbsp;
-                                <strong>Dimensiones:</strong> 1284 px (máx) × 902 px (máx) &nbsp;·&nbsp;
-                                <strong>Alto:</strong> proporcional (auto) &nbsp;·&nbsp;
-                                <strong>Orientación Horizontal</strong> &nbsp;·&nbsp;
-                                <strong>Peso:</strong> Máximo 150 KB, Óptimo 60 KB
-                            </p>
-                            <?php $croquisImgUrl = cms($contenidos, 'ubicacion', 'croquis', 'imagen_url'); ?>
-                            <div class="image-upload-box">
-                                <img id="prev-croquis"
-                                     src="<?= h($croquisImgUrl) ?>"
-                                     alt="Croquis" class="img-preview-croquis"
-                                     onerror="this.hidden=true">
-
-                                <label for="file-croquis" class="btn btn-secondary">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-                                    Cambiar Imagen
-                                </label>
-
-                                <input type="file" accept="image/webp"
-                                       id="file-croquis" class="d-none"
-                                       data-upload-slot="ubicacion-croquis"
-                                       data-preview-id="prev-croquis"
-                                       data-target-input="url-img-croquis">
-                            </div>
-                            <input type="url" id="url-img-croquis"
-                                   name="croquis__imagen_url"
-                                   value="<?= h($croquisImgUrl) ?>"
-                                   placeholder="/laesh-web-assets-uipv1a/cms/ubicacion-croquis-....webp"
-                                   class="cms-img-url-input" data-no-limit>
-                            <?php $croquisBasename = basename($croquisImgUrl); ?>
-                            <span id="lbl-img-croquis" class="cms-img-filename-label"><?= h($croquisBasename) ?></span>
-                        </div>
-                    </div>
-                </div>
-            </div><!-- /grid-2col mapa+croquis -->
-
-            <!-- Fila 4: Canales de Atención, Redes Sociales y Chat Flotante -->
-            <hr class="cms-section-sep">
-            <div class="editor-card mb-4" style="border: 2px solid #16a34a; background: #fafafa; border-radius: 8px; overflow: visible; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
-                <div class="editor-card-header" style="background: linear-gradient(135deg, #16a34a 0%, #15803d 100%); padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.2);">
-                    <div class="card-title" style="color: #ffffff; font-weight: 800; font-size: 0.95rem;">Canales de Atención, Redes Sociales y Chat vía WhatsApp / Facebook</div>
-                </div>
-                <div class="editor-card-body" style="padding: 12px;">
-                    <div class="field-row">
-                        <div class="field-group">
-                            <label>URL Directa de WhatsApp <small class="txt-muted">(https://wa.me/52XXXXXXXXXX)</small></label>
-                            <input type="url" name="_cfg_whatsapp_url"
-                                   value="<?= htmlspecialchars($config['whatsapp_url'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
-                                   placeholder="https://wa.me/529531190074">
-                            <small class="cms-help-text">URL del chat en WhatsApp. Se utiliza en el botón flotante (pantalla inferior derecha).</small>
-                        </div>
-                        <div class="field-group">
-                            <label>Número WhatsApp para Mostrar / Chat <small class="txt-muted">(ej. 953 119 0074)</small></label>
-                            <input type="text" name="_cfg_whatsapp_numero"
-                                   value="<?= htmlspecialchars($config['whatsapp_numero'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                            <small class="cms-help-text">Número de teléfono en formato legible para el botón flotante.</small>
-                        </div>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-The UI text and JavaScript code within the relevant tab specify image upload constraints for a "ubicacion-croquis" slot. These constraints include a WebP codec requirement, specific dimensions, and a maximum file size of 150 KB. The JavaScript code enforces these limits upon upload.
-
-
-Analyzing backend constraints for "Croquis de Ubicación" reveals strict validation rules for image format, dimensions, and file size, aligning with the UI and JavaScript. Investigating the "footer" slot, however, shows that the backend allows varied image formats and lacks size/dimension checks, even though the UI uses a rich text editor with image upload functionality, suggesting a potential inconsistency. No client-side validation is present for the footer slot.
-
-
-
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 1.308486724s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 6:28 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 6:29 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 6:29 pm
 
 ---
 
-## Agent Response
-
-### Thinking
-
-Analyzing image quality parameters reveals a discrepancy between the legacy code's specifications and recently uploaded user images. The legacy code mandates `800×580 px` WebP format with a maximum size of 150 KB. The recently uploaded images require specific examination.
-
-
-The "Calidad" images are square JPGs, significantly exceeding the legacy size and format restrictions, which explains the testing mode and exemptions. "Estudios" images uploaded on 2026-10-06 are not the mandated dimensions, though they do satisfy the size requirement, further indicating a deviation from the original specifications. The "Quiénes somos" image also diverges from the legacy standard in both dimensions and format. The current implementation appears to be more permissive than the original rules.
-
-
-"Promociones", "Banner Principal", and "Ubicación" image sets consistently satisfy current size, format, and dimension restrictions across all system components. The footer's images bypass explicit dimension validation, and the backend utilizes a permissive exemption, which would benefit from an audit.
-
-
-
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 4.812778591s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-## User Request
-
-Realiza la Propuesta de Alineación (1  a la 3)
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `landing.css`
-**Language:** css
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-User confirmation received. Adhering to the established commitment, automated synchronization, committing, and pushing are strictly prohibited; these actions require explicit user direction. The focus remains on the correct files, specifically the frontend components.
-
-
-Focusing on the UI and frontend assets, the goal is to refine the image upload specifications for the "Quality" gallery. The current image realities and supported formats (WebP, JPG/JPEG, PNG) dictate minimum and maximum dimensions and a maximum file size. The UI element needs an updated specification card, replacing the temporary test mode alert. The `accept` attribute requires modification.
-
-
-The `accept` attribute in the upload component must be updated to explicitly allow "image/webp", "image/jpeg", and "image/png" formats.  The image size constraints are verified in the backend logic, covering both format and dimensional limits, ensuring files adhere to maximum size specifications. Carousel image dimensions require defining constraints within a range and incorporating a horizontal orientation requirement. The UI must be updated to clarify image format and dimensions.
-
-
-The JavaScript upload component needs updates to handle carousel image uploads, defining dimension and file size constraints within the component itself. Backend validation must enforce horizontal orientation, file size, and dimension rules for carousel images using WebP, JPEG, PNG, and AVIF formats. The "Who We Are" section requires separate image specifications for different use cases and file size reductions for the 'historia-card' image.
-
-
-The backend and UI elements require coordinated changes to enforce image size limitations and display appropriate messages. The image upload adapter needs modification to block uploads exceeding 600KB, providing an immediate visual cue before upload. Dimension and format validation will be implemented in the backend, allowing more image format options, but maintaining maximum size constraints.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 12.047802580s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L284-374)</summary>
-
-**Path:** `Unknown file`
-
-```
-    $slot = preg_replace('/[^a-z0-9\-]/', '', strtolower($_POST['slot'] ?? 'cms'));
-    $slot = $slot ?: 'cms';
-
-    // Flag de exención de restricciones estrictas (Estudios carousel-*, Calidad calidad-*, Historia Institucional y Footer)
-    $isExempt = (bool) (preg_match('/^carousel-/', $slot) || preg_match('/^historia/', $slot) || preg_match('/^calidad-/', $slot) || preg_match('/^footer/', $slot));
-
-    // Validar MIME por contenido real — solo WebP por defecto (alineado con Guía CMS §5.1–§5.6)
-    // Para slots carousel-* e historia, se aceptan formatos de imagen adicionales (WebP, JPG, PNG, GIF)
-    $allowedMimes = [
-        'image/webp' => 'webp',
-        'image/jpeg' => 'jpg',
-        'image/png'  => 'png',
-        'image/gif'  => 'gif',
-        'image/avif' => 'avif',
-    ];
-    $finfo = new \finfo(FILEINFO_MIME_TYPE);
-    $mime  = $finfo->file($file['tmp_name']);
-
-    if (!$isExempt) {
-        if ($mime !== 'image/webp') {
-            http_response_code(415);
-            echo json_encode(['ok' => false, 'msg' => 'Tipo no permitido. Solo se acepta WebP. Optimiza la imagen antes de subir.']);
-            exit;
-        }
-    } else {
-        if (!array_key_exists($mime, $allowedMimes)) {
-            http_response_code(415);
-            echo json_encode(['ok' => false, 'msg' => 'Tipo no permitido. Sube un archivo de imagen válido.']);
-            exit;
-        }
-    }
-
-    // Validar tamaño — 150 KB máximo (límite homologado, omitido para carousel-* e historia)
-    if (!$isExempt && $file['size'] > 150 * 1024) {
-        $sizeKb = round($file['size'] / 1024, 1);
-        http_response_code(413);
-        echo json_encode(['ok' => false, 'msg' => "El archivo ({$sizeKb} KB) supera el límite de 150 KB. Optimiza la imagen antes de subir."]);
-        exit;
-    }
-
-    // Validar dimensiones servidor — espejo de cms-upload.js slotRules()
-    $imgSize = @getimagesize($file['tmp_name']);
-    if ($imgSize === false && !$isExempt) {
-        http_response_code(422);
-        echo json_encode(['ok' => false, 'msg' => 'No se pudieron leer las dimensiones de la imagen. Verifica que el archivo WebP sea válido.']);
-        exit;
-    }
-    [$imgW, $imgH] = $imgSize ?: [0, 0];
-    $dimError = null;
-
-    if (!$isExempt) {
-        if (preg_match('/^hero-/', $slot)) {
-            if ($imgW < 1280 || $imgW > 1920)
-                $dimError = "Banner Hero: ancho {$imgW} px fuera del rango 1\u{202F}280–1\u{202F}920 px. Spec: 1\u{202F}280–1\u{202F}920 px ancho · Orientación Horizontal.";
-            elseif ($imgH >= $imgW)
-                $dimError = "Banner Hero: orientación debe ser Horizontal (ancho > alto). Recibido: {$imgW}×{$imgH}.";
-        } elseif ($slot === 'ubicacion-croquis') {
-            if ($imgW > 1284 || $imgH > 902)
-                $dimError = "Croquis de Ubicación: máximo 1284×902 px. Recibido: {$imgW}×{$imgH}.";
-            elseif ($imgH >= $imgW)
-                $dimError = "Croquis de Ubicación: orientación debe ser Horizontal (ancho > alto). Recibido: {$imgW}×{$imgH}.";
-        } elseif (preg_match('/^promo-/', $slot)) {
-            if ($imgH >= $imgW)
-                $dimError = "Card de Promociones: orientación debe ser Horizontal (ancho > alto). Recibido: {$imgW}×{$imgH}.";
-            elseif ($imgW < 1000 || $imgW > 1200 || $imgH < 600 || $imgH > 800)
-                $dimError = "Card de Promociones: dimensiones requeridas 1024×687 px (óptimo nativo) o 1200×(600–675) px. Recibido: {$imgW}×{$imgH}.";
-        } elseif (preg_match('/^calidad-/', $slot)) {
-            if ($imgW !== 800 || $imgH !== 580)
-                $dimError = "Galería de Calidad: se requiere exacto 800×580 px. Recibido: {$imgW}×{$imgH}.";
-        } elseif ($slot === 'seo-og') {
-            if ($imgW < 1200 || $imgW > 1920)
-                $dimError = "Open Graph (SEO): ancho {$imgW} px fuera del rango 1\u{202F}200–1\u{202F}920 px.";
-            elseif ($imgH >= $imgW)
-                $dimError = "Open Graph (SEO): orientación debe ser Horizontal (ancho > alto). Recibido: {$imgW}×{$imgH}.";
-        } else {
-            if ($imgW < 800)
-                $dimError = "Imagen CMS genérica: ancho mínimo 800 px. Recibido: {$imgW} px.";
-        }
-    } else {
-        // [TEMPORAL - PRUEBAS] Para carousel-*, se omiten restricciones de 800x580 px y horizontal
-        // if ($imgW !== 800 || $imgH !== 580)
-        //     $dimError = "Carrusel Especialidades: se requiere exacto 800×580 px. Recibido: {$imgW}×{$imgH}.";
-    }
-
-    if ($dimError !== null) {
-        http_response_code(422);
-        echo json_encode(['ok' => false, 'msg' => $dimError]);
-        exit;
-    }
-    $ext      = $allowedMimes[$mime] ?? 'webp';
-    $filename = $slot . '-' . date('Ymd') . '-' . bin2hex(random_bytes(4)) . '.' . $ext;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Each image slot needs clearly defined rules instead of a simple binary exemption flag. Strict slots should only allow WebP format, while multi-format slots should accept WebP, JPG, PNG, GIF, and AVIF. Implementing MIME type validation per slot ensures proper image format handling. This structured approach avoids ambiguity and allows for flexible format management.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.111211042s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 6:58 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 6:58 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `cms-upload.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L79-139)</summary>
-
-**Path:** `Unknown file`
-
-```
-                const previewId   = this.dataset.previewId    || null;
-                const targetInput = this.dataset.targetInput  || null;
-                const file        = this.files[0];
-
-                // [TEMPORAL - PRUEBAS] Para Tarjetas 1 a 15 de Estudios (carousel-*), Tarjeta Historia y Galería de Calidad (calidad-*) se omiten restricciones
-                const isExemptSlot = /^carousel-/.test(slot) || /^historia/.test(slot) || /^calidad-/.test(slot);
-
-                // ── Validación de formato — solo WebP para todos los slots (omitido para carousel-*, historia y calidad-*) ────────────
-                if (!isExemptSlot && file.type !== 'image/webp') {
-                    showToast(
-                        `Formato no permitido (${file.type || 'desconocido'}). Solo se acepta <strong>WebP</strong>.<br>` +
-                        'Usa Squoosh → Format: WebP antes de subir.',
-                        true
-                    );
-                    this.value = '';
-                    return;
-                }
-
-                // ── Reglas por slot (alineadas con Guía CMS §5.1–§5.6) ──────────────
-                // Slots reales (data-upload-slot en gestion_web.php):
-                //   hero-{slide1…5}       → Banner Hero
-                //   carousel-{1…16}       → Carrusel Especialidades
-                //   historia-{card}       → Tarjeta Responsable Sanitario
-                //   ubicacion-croquis     → Croquis de Ubicación
-                //   promo-{lun…dom}       → Cards de Promociones
-                //   calidad-gallery{1…3}  → Galería de Calidad
-                //   (default)             → Imagen CMS genérica
-                function slotRules(s) {
-                    if (/^hero-/.test(s))              return { maxKb: 150, minW: 1280, maxW: 1920,                              landscape: true, label: 'Banner Hero',             hint: 'WebP · Quality 72–80 · Effort 6 · 1 280–1 920 px ancho · Orientación Horizontal · alto proporcional · máx. 150 KB, óptimo 60 KB' };
-                    // [TEMPORAL - PRUEBAS] Restricción 800x580 y 150 KB comentada para pruebas
-                    // if (/^carousel-/.test(s))          return { maxKb: 150, exactW: 800, exactH: 580,                                        label: 'Carrusel Especialidades', hint: 'WebP · Quality 75 · Effort 6 · exacto 800×580 px · máx. 150 KB, óptimo 60 KB' };
-                    if (/^carousel-/.test(s))          return { maxKb: 999999, label: 'Carrusel Especialidades (Modo Pruebas)', hint: '[Pruebas] Sin restricciones de formato, dimensiones ni peso' };
-                    if (/^historia/.test(s))           return { maxKb: 999999, label: 'Tarjeta Responsable Sanitario (Historia)', hint: '[Historia] Sin restricciones de formato ni peso' };
-                    if (/^ubicacion-croquis$/.test(s)) return { maxKb: 150, maxW: 1284, maxH: 902, landscape: true,      label: 'Croquis de Ubicación',    hint: 'WebP · Quality 85 · Effort 6 · 1 284 × 902 px (máx) · Orientación Horizontal · máx. 150 KB, óptimo 60 KB' };
-                    if (/^promo-/.test(s))             return { maxKb: 150, minW: 1000, maxW: 1200, minH: 600, maxH: 800, landscape: true, label: 'Card de Promociones', hint: 'WebP · Quality 82 · 1 024 × 687 px (óptimo nativo) o 1 200 × (600–675) px · máx. 150 KB, óptimo 80–110 KB' };
-                    // [TEMPORAL - PRUEBAS] Restricción 800x580 y 150 KB comentada para pruebas
-                    // if (/^calidad-/.test(s))           return { maxKb: 150, exactW: 800, exactH: 580,                                       label: 'Galería de Calidad',      hint: 'WebP · Quality 75 · Effort 6 · exacto 800×580 px · máx. 150 KB, óptimo 60 KB' };
-                    if (/^calidad-/.test(s))           return { maxKb: 999999, label: 'Galería de Calidad (Modo Pruebas)', hint: '[Pruebas] Sin restricciones de formato, dimensiones ni peso' };
-                    if (/^seo-og$/.test(s))            return { maxKb: 150, minW: 1200, maxW: 1920,                              landscape: true, label: 'Imagen Open Graph (SEO)', hint: 'WebP · 1 200 × 630 px recomendado (ratio 1.91:1) · Orientación Horizontal · máx. 150 KB, óptimo 60 KB' };
-                    return                                    { maxKb: 150, minW: 800,                                                        label: 'Imagen CMS',              hint: 'WebP · mín. 800 px ancho · máx. 150 KB, óptimo 60 KB' };
-                }
-                const rules = slotRules(slot);
-
-                // ── Validación de tamaño ─────────────────────────────────────────────
-                const sizeKb = (file.size / 1024).toFixed(1);
-                if (!isExemptSlot && file.size > rules.maxKb * 1024) {
-                    showToast(
-                        `Peso ${sizeKb} KB supera el máximo de ${rules.maxKb} KB para ${rules.label}.<br>` +
-                        'Optimiza la imagen (baja Quality o reduce dimensiones).',
-                        true
-                    );
-                    this.value = '';
-                    return;
-                }
-
-                // ── Validación de dimensiones (requiere cargar la imagen) ────────────
-                // [TEMPORAL - PRUEBAS] Omitida para carousel-* e historia
-                if (!isExemptSlot) {
-                    try {
-                        const objUrl = URL.createObjectURL(file);
-                        const img    = new Image();
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-The code now defines `isMultiFormat` based on the slot name, replacing the deprecated `isExemptSlot`. It appears that image format validation is now conditional. If a slot is *not* `isMultiFormat`, the code rejects non-WebP images, likely restricting certain slots to only WebP format. This strongly suggests a targeted optimization or requirement for specific image types in those areas.
-
-
-Analyzing image format validation logic: If `isMultiFormat` is true and the image MIME type isn't in the allowed types, the image is rejected. Observed specific rules for different slots (`hero-`, `carousel-`, `historia`, `calidad-`, `ubicacion-croquis`, `promo-`, `seo-og`), which define allowed dimensions, orientations, and formats. These rules determine constraints based on image slot type and MIME type.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 18.558887660s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 6:58 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `cms-upload.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L169-204)</summary>
-
-**Path:** `Unknown file`
-
-```
-                            showToast(`Alto ${h} px menor al mínimo de ${rules.minH} px para ${rules.label}. Spec: ${rules.hint}`, true);
-                            this.value = ''; return;
-                        }
-                        if (rules.maxH !== undefined && h > rules.maxH) {
-                            showToast(`Alto ${h} px mayor al máximo de ${rules.maxH} px para ${rules.label}. Spec: ${rules.hint}`, true);
-                            this.value = ''; return;
-                        }
-
-                        // Orientación horizontal obligatoria
-                        if (rules.landscape && h >= w) {
-                            showToast(`La imagen (${w}×${h} px) debe tener Orientación Horizontal (ancho > alto). Spec: ${rules.hint}`, true);
-                            this.value = ''; return;
-                        }
-                    } catch (e) {
-                        console.error('[cms-upload] Error al verificar dimensiones:', e);
-                        showToast('Error técnico al leer las dimensiones de la imagen.', true);
-                        this.value = '';
-                        return;
-                    }
-                }
-
-                // Construir FormData
-                const fd = new FormData();
-                fd.append('file',       file);
-                fd.append('slot',       slot);
-                fd.append('csrf_token', getCsrf());
-
-                // Indicador visual
-                const box = this.closest('.image-upload-box');
-                if (box) box.style.opacity = '0.5';
-
-                try {
-                    const res = await fetch(UPLOAD_ENDPOINT, { method: 'POST', body: fd });
-                    const resText = await res.text();
-                    let data;
-                    try {
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `cms-upload.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L179-194)</summary>
-
-**Path:** `Unknown file`
-
-```
-                            showToast(`La imagen (${w}×${h} px) debe tener Orientación Horizontal (ancho > alto). Spec: ${rules.hint}`, true);
-                            this.value = ''; return;
-                        }
-                    } catch (e) {
-                        console.error('[cms-upload] Error al verificar dimensiones:', e);
-                        showToast('Error técnico al leer las dimensiones de la imagen.', true);
-                        this.value = '';
-                        return;
-                    }
-                }
-
-                // Construir FormData
-                const fd = new FormData();
-                fd.append('file',       file);
-                fd.append('slot',       slot);
-                fd.append('csrf_token', getCsrf());
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 6:59 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 6:59 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `ckeditor-init.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L144-194)</summary>
-
-**Path:** `Unknown file`
-
-```
-                dataEl.style.display  = 'block';
-            });
-    }
-
-    /**
-     * Upload adapter personalizado para CKEditor 5
-     * Sube imágenes directamente a /laesh/adrc/cms/upload asociadas al slot 'historia'
-     */
-    function _createUploadAdapter(loader, slot) {
-        slot = slot || 'historia';
-        return {
-            upload: function () {
-                return loader.file.then(function (file) {
-                    return new Promise(function (resolve, reject) {
-                        var fd = new FormData();
-                        fd.append('file', file);
-                        fd.append('slot', slot);
-                        var meta = document.querySelector('meta[name="csrf-token"]');
-                        var csrf = meta ? meta.content : '';
-                        if (!csrf) {
-                            var inp = document.querySelector('input[name="csrf_token"]');
-                            csrf = inp ? inp.value : '';
-                        }
-                        if (!csrf) {
-                            var btn = document.getElementById('btn-cms-save-action');
-                            csrf = btn ? (btn.dataset.csrf || '') : '';
-                        }
-                        fd.append('csrf_token', csrf);
-
-                        fetch('/laesh/adrc/cms/upload', {
-                            method: 'POST',
-                            body: fd
-                        })
-                        .then(function (res) { return res.json(); })
-                        .then(function (data) {
-                            if (data.ok && data.url) {
-                                if (window.refreshCsrf && data.csrf_token) {
-                                    window.refreshCsrf(data.csrf_token);
-                                }
-                                resolve({ default: data.url });
-                            } else {
-                                reject(data.msg || 'No se pudo subir la imagen.');
-                            }
-                        })
-                        .catch(function (err) {
-                            reject('Error de conexión al subir la imagen: ' + err);
-                        });
-                    });
-                });
-            },
-            abort: function () {}
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-The editor's upload function needs a size validation check before initiating the data transfer. A size constraint will prevent large files from being sent, improving performance. Adding this check helps safeguard against excessively large file uploads. Implementing this size validation helps streamline the upload process.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.156277915s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 6:59 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 6:59 pm
-
----
-
-## Agent Response
-
-### Thinking
-
-Targeting `gestion_web.php` to update the user interface across three sections. The initial focus is on the "Quiénes somos" (Who we are) section, specifically lines 501–504, which contain image specifications for the Health Officer's Graphic Card. This will likely involve adjusting the HTML for clarity or added features in this area.
-
-
-Updating the image specifications for "Quiénes somos" requires modifying the existing HTML to clearly state the supported image formats and dimensions. Specifically, this section requires a focus on clearly communicating that the available formats are WebP, JPEG, or PNG. The width should be 600–1920px (ideally 800–1600px), height is 400–1400px, and maximum size is 500KB (optimally ≤300KB).
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 1.768574165s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L499-524)</summary>
-
-**Path:** `Unknown file`
-
-```
-                        <label style="font-weight:700; color:#1e293b; font-size:0.9rem;">Tarjeta Gráfica del Responsable Sanitario</label>
-                        <p class="cms-img-spec-hint" style="margin-top: 4px; margin-bottom: 8px; font-size: 0.78rem;">
-                            📷 <strong>Sube aquí tu imagen (JPEG, WebP o PNG)</strong> para alojarla en el servidor y obtener su URL lista para el editor.
-                        </p>
-                        <?php $curHistImg = cmsRaw($contenidos, 'quienes-somos', 'historia', 'img_tarjeta', ''); ?>
-                        <div class="image-upload-box" style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
-                            <img id="prev-historia-card"
-                                 src="<?= h($curHistImg) ?>"
-                                 alt="Preview Tarjeta"
-                                 class="img-preview-sm"
-                                 style="max-height: 60px; max-width: 90px; object-fit: contain; border-radius: 4px; border: 1px solid #cbd5e1; <?= empty($curHistImg) ? 'display:none;' : '' ?>"
-                                 onerror="this.style.display='none'">
-
-                            <label for="file-historia-card" class="btn btn-secondary" style="cursor:pointer; display:inline-flex; align-items:center; gap:6px;">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-                                Subir Tarjeta
-                            </label>
-
-                            <input type="file" accept="image/*"
-                                   id="file-historia-card" class="d-none"
-                                   data-upload-slot="historia-card"
-                                   data-preview-id="prev-historia-card"
-                                   data-target-input="url-img-historia-card">
-                        </div>
-                        <div style="display:flex; gap:8px; align-items:center; margin-top:8px;">
-                            <input type="url" id="url-img-historia-card"
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 7:00 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L594-664)</summary>
-
-**Path:** `Unknown file`
-
-```
-                <p class="cms-help-text" style="margin-top:2px;">
-                    Cada tarjeta incluye su módulo de reemplazo de imagen (ranura <code>carousel-1</code> a <code>carousel-15</code>) y editor de texto enriquecido con CKEditor 5. Fichas 13 a 15 disponibles para posterior publicación.
-                </p>
-                <div style="background:#fffbeb; border:1px solid #fde68a; border-radius:6px; padding:6px 12px; margin-top:8px; font-size:0.8rem; color:#b45309; display:inline-flex; align-items:center; gap:6px;">
-                    <span>⚠️</span> <strong>[MODO PRUEBAS]:</strong> Restricciones de formato (WebP), dimensiones (800×580) y peso (150 KB) desactivadas temporalmente para todas las tarjetas.
-                </div>
-            </div>
-
-            <?php
-            $_estudiosStyles = [
-                0 => ['bg' => 'linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%)', 'borderColor' => '#2563eb'],
-                1 => ['bg' => 'linear-gradient(135deg, #065f46 0%, #059669 100%)', 'borderColor' => '#059669'],
-                2 => ['bg' => 'linear-gradient(135deg, #581c87 0%, #7c3aed 100%)', 'borderColor' => '#7c3aed'],
-                3 => ['bg' => 'linear-gradient(135deg, #78350f 0%, #d97706 100%)', 'borderColor' => '#d97706'],
-                4 => ['bg' => 'linear-gradient(135deg, #831843 0%, #db2777 100%)', 'borderColor' => '#db2777'],
-                5 => ['bg' => 'linear-gradient(135deg, #134e4a 0%, #0d9488 100%)', 'borderColor' => '#0d9488'],
-            ];
-            ?>
-            <div class="especialidades-cards-grid mb-4" style="gap: 1.25rem;">
-            <?php
-            for ($ci = 1; $ci <= 15; $ci++):
-                $curImg     = cms($contenidos, 'especialidades', 'config', "carousel{$ci}_img", '');
-                $curHtml    = cmsRaw($contenidos, 'especialidades', "carousel{$ci}", 'texto');
-                $defaultAct = ($ci <= 12 || trim($curHtml) !== '') ? '1' : '0';
-                $curActivo  = cms($contenidos, 'especialidades', "carousel{$ci}", 'activo', $defaultAct);
-                $isActivo   = ($curActivo !== '0');
-                $isNew      = $ci > 12;
-                $eSt        = $_estudiosStyles[($ci - 1) % 6];
-            ?>
-            <div class="editor-card" style="border: 2px solid <?= $eSt['borderColor'] ?>; background: #fafafa; border-radius: 8px; overflow: visible; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
-                <div class="editor-card-header" style="display:flex; justify-content:space-between; align-items:center; background: <?= $eSt['bg'] ?>; padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.2);">
-                    <div class="card-title" style="font-weight:800; color:#ffffff; font-size:0.95rem;">Tarjeta <?= $ci ?></div>
-                    <div style="display:flex; align-items:center; gap:0.5rem;">
-                        <label for="chk-carousel-<?= $ci ?>-activo" style="display:inline-flex; align-items:center; gap:0.45rem; cursor:pointer; margin:0; font-size:0.85rem; font-weight:700; color:#ffffff; background:rgba(0,0,0,0.2); padding:4px 10px; border-radius:20px;">
-                            <input type="hidden" name="carousel<?= $ci ?>__activo" value="0">
-                            <input type="checkbox" id="chk-carousel-<?= $ci ?>-activo" name="carousel<?= $ci ?>__activo" value="1" <?= $isActivo ? 'checked' : '' ?>
-                                    style="width:1.05rem; height:1.05rem; accent-color:#10b981; cursor:pointer;"
-                                    onchange="var badge=this.nextElementSibling; if(this.checked){ badge.style.color='#6ee7b7'; badge.textContent='Encendido'; } else { badge.style.color='#fca5a5'; badge.textContent='Apagado'; }">
-                            <span class="operator-badge" style="color: <?= $isActivo ? '#6ee7b7' : '#fca5a5' ?>; transition: color 0.2s ease;">
-                                <?= $isActivo ? 'Encendido' : 'Apagado' ?>
-                            </span>
-                        </label>
-                    </div>
-                </div>
-                <div class="editor-card-body" style="padding:12px;">
-                    <div class="field-group">
-                        <label>Imagen de la Tarjeta <?= $ci ?></label>
-                        <div class="image-upload-box">
-                            <img id="prev-carousel-<?= $ci ?>"
-                                 src="<?= h($curImg) ?>"
-                                 alt="Preview Tarjeta <?= $ci ?>"
-                                 class="img-preview-sm"
-                                 <?= empty($curImg) ? 'hidden' : '' ?>
-                                 onerror="this.hidden=true">
-
-                            <label for="file-carousel-<?= $ci ?>" class="btn btn-secondary">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-                                Cambiar Imagen
-                            </label>
-
-                            <input type="file" accept="image/*"
-                                   id="file-carousel-<?= $ci ?>" class="d-none"
-                                   data-upload-slot="carousel-<?= $ci ?>"
-                                   data-preview-id="prev-carousel-<?= $ci ?>"
-                                   data-target-input="url-img-carousel-<?= $ci ?>">
-                        </div>
-                        <input type="url" id="url-img-carousel-<?= $ci ?>"
-                               name="config__carousel<?= $ci ?>_img"
-                               value="<?= h($curImg) ?>"
-                               class="cms-img-url-input" data-no-limit>
-                        <?php $imgBasename = $curImg ? basename($curImg) : 'Sin imagen'; ?>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 7:01 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 7:01 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L869-944)</summary>
-
-**Path:** `Unknown file`
-
-```
-            <hr class="cms-section-sep">
-            <div class="grid-2col mb-4">
-            <!-- Encabezado de sección -->
-            <div style="grid-column: 1 / -1; background:#fffbeb; border:1px solid #fde68a; border-radius:6px; padding:6px 12px; margin-bottom:1rem; font-size:0.8rem; color:#b45309; display:inline-flex; align-items:center; gap:6px;">
-                <span>⚠️</span> <strong>[MODO PRUEBAS]:</strong> Restricciones de formato (WebP), dimensiones (800×580) y peso (150 KB) desactivadas temporalmente para la Galería de Calidad.
-            </div>
-            <div class="editor-card" style="border: 2px solid #0284c7; background: #fafafa; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
-                <div class="editor-card-header" style="background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%); padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.2);">
-                    <div class="card-title" style="color: #ffffff; font-weight: 800; font-size: 0.95rem;">Encabezado de la Sección</div>
-                </div>
-                <div class="editor-card-body" style="padding: 12px;">
-                    <div class="field-group">
-                        <label>Título Principal (h2)</label>
-                        <input type="text" name="seccion__h2"
-                               value="<?= cms($contenidos, 'calidad', 'seccion', 'h2', 'Calidad e Instalaciones') ?>">
-                        <small class="cms-help-text">Encabezado visual dentro de la sección. No afecta el menú de navegación.</small>
-                    </div>
-                    <div class="field-group">
-                        <label>Subtítulo / Descripción de la Sección</label>
-                        <input type="text" name="seccion__subtitulo"
-                               value="<?= cms($contenidos, 'calidad', 'seccion', 'subtitulo', 'Conoce nuestras instalaciones equipadas con tecnología de vanguardia y un equipo comprometido con la excelencia diagnóstica.') ?>">
-                    </div>
-                    <div class="field-group mt-2">
-                        <label>Etiqueta en menú de navegación</label>
-                        <input type="text" name="nav__label" maxlength="30"
-                               value="<?= cms($contenidos, 'calidad', 'nav', 'label', 'Calidad') ?>">
-                        <small class="cms-help-text">Texto corto que aparece en el menú del header (máx. 30 caracteres).</small>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Tarjeta 1 -->
-            <?php
-            $galImgUrl1 = cms($contenidos, 'calidad', 'gallery1', 'imagen_url');
-            $galActivo1 = cms($contenidos, 'calidad', 'gallery1', 'activo', '1');
-            $isActivo1  = ($galActivo1 !== '0');
-            $imgDef1    = ''; // sin fallback — imagen debe venir de CMS
-            ?>
-            <div class="editor-card" style="border: 2px solid #059669; background: #fafafa; border-radius: 8px; overflow: visible; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
-                <div class="editor-card-header" style="background: linear-gradient(135deg, #059669 0%, #047857 100%); padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.2); display:flex; justify-content:space-between; align-items:center;">
-                    <div class="card-title" style="color: #ffffff; font-weight: 800; font-size: 0.95rem;">Tarjeta 1</div>
-                    <div style="display:flex; align-items:center; gap:0.5rem;">
-                        <label for="chk-calidad-gallery1-activo" style="display:inline-flex; align-items:center; gap:0.45rem; cursor:pointer; margin:0; font-size:0.85rem; font-weight:700;">
-                            <input type="hidden" name="gallery1__activo" value="0">
-                            <input type="checkbox" id="chk-calidad-gallery1-activo" name="gallery1__activo" value="1" <?= $isActivo1 ? 'checked' : '' ?>
-                                   style="width:1.15rem; height:1.15rem; accent-color:#ffffff; cursor:pointer;"
-                                   onchange="var badge=this.nextElementSibling; if(this.checked){ badge.style.background='rgba(255,255,255,0.25)'; badge.style.color='#ffffff'; badge.textContent='Encendido'; } else { badge.style.background='#dc2626'; badge.style.color='#ffffff'; badge.textContent='Apagado'; }">
-                            <span class="operator-badge" style="background: <?= $isActivo1 ? 'rgba(255,255,255,0.25)' : '#dc2626' ?>; color: #ffffff; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; transition: all 0.2s ease;">
-                                <?= $isActivo1 ? 'Encendido' : 'Apagado' ?>
-                            </span>
-                        </label>
-                    </div>
-                </div>
-                <div class="editor-card-body" style="padding: 12px;">
-                    <div class="field-group">
-                        <label>Imagen de Galería</label>
-                        <div class="image-upload-box">
-                            <img id="prev-calidad-gallery1"
-                                  src="<?= h($galImgUrl1) ?>"
-                                  alt="Área de Hematología" class="img-preview-sm"
-                                  onerror="this.hidden=true">
-                            <label for="file-calidad-gallery1" class="btn btn-secondary">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-                                Cambiar Imagen
-                            </label>
-                            <input type="file" accept="image/*"
-                                   id="file-calidad-gallery1" class="d-none"
-                                   data-upload-slot="calidad-gallery1"
-                                   data-preview-id="prev-calidad-gallery1"
-                                   data-target-input="url-calidad-gallery1">
-                        </div>
-                        <input type="url" id="url-calidad-gallery1"
-                               name="gallery1__imagen_url"
-                               value="<?= h($galImgUrl1) ?>"
-                               placeholder="<?= $imgDef1 ?>"
-                               class="cms-img-url-input" data-no-limit>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L999-1084)</summary>
-
-**Path:** `Unknown file`
-
-```
-                            <label for="file-calidad-gallery2" class="btn btn-secondary">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-                                Cambiar Imagen
-                            </label>
-                            <input type="file" accept="image/*"
-                                   id="file-calidad-gallery2" class="d-none"
-                                   data-upload-slot="calidad-gallery2"
-                                   data-preview-id="prev-calidad-gallery2"
-                                   data-target-input="url-calidad-gallery2">
-                        </div>
-                        <input type="url" id="url-calidad-gallery2"
-                               name="gallery2__imagen_url"
-                               value="<?= h($galImgUrl2) ?>"
-                               placeholder="<?= $imgDef2 ?>"
-                               class="cms-img-url-input" data-no-limit>
-                        <?php $imgBasename2 = $galImgUrl2 ? basename($galImgUrl2) : basename($imgDef2); ?>
-                        <span id="lbl-img-calidad-gallery2" class="cms-img-filename-label"><?= h($imgBasename2) ?></span>
-                    </div>
-                    <!-- Editor de Texto HTML con CKEditor 5 (Título H3 + Descripción) -->
-                    <div class="field-group">
-                        <label class="cms-label-bold mb-1" style="font-weight:700; display:block; font-size:0.88rem;">Contenido Editorial (Título H3 + Descripción)</label>
-                        <?php
-                        $curTexto2 = cmsRaw($contenidos, 'calidad', 'gallery2', 'texto');
-                        if (trim($curTexto2) === '') {
-                            $t2 = cms($contenidos, 'calidad', 'gallery2', 'titulo', 'Excelencia en la Calidad');
-                            $d2 = cms($contenidos, 'calidad', 'gallery2', 'descripcion', 'Elegir un laboratorio evaluado con EXCELENCIA marca la diferencia en: calidad, seguridad y confianza');
-                            $curTexto2 = "<h3>{$t2}</h3><p>{$d2}</p>";
-                        }
-                        ?>
-                        <div id="ck-calidad-gallery2" class="ck5-mount"></div>
-                        <textarea id="ck-calidad-gallery2-data" name="gallery2__texto" class="ck5-hidden-data"><?= htmlspecialchars($curTexto2) ?></textarea>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Tarjeta 3 -->
-            <?php
-            $galImgUrl3 = cms($contenidos, 'calidad', 'gallery3', 'imagen_url');
-            $galActivo3 = cms($contenidos, 'calidad', 'gallery3', 'activo', '1');
-            $isActivo3  = ($galActivo3 !== '0');
-            $imgDef3    = ''; // sin fallback — imagen debe venir de CMS
-            ?>
-            <div class="editor-card" style="border: 2px solid #d97706; background: #fafafa; border-radius: 8px; overflow: visible; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
-                <div class="editor-card-header" style="background: linear-gradient(135deg, #d97706 0%, #b45309 100%); padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.2); display:flex; justify-content:space-between; align-items:center;">
-                    <div class="card-title" style="color: #ffffff; font-weight: 800; font-size: 0.95rem;">Tarjeta 3</div>
-                    <div style="display:flex; align-items:center; gap:0.5rem;">
-                        <label for="chk-calidad-gallery3-activo" style="display:inline-flex; align-items:center; gap:0.45rem; cursor:pointer; margin:0; font-size:0.85rem; font-weight:700;">
-                            <input type="hidden" name="gallery3__activo" value="0">
-                            <input type="checkbox" id="chk-calidad-gallery3-activo" name="gallery3__activo" value="1" <?= $isActivo3 ? 'checked' : '' ?>
-                                   style="width:1.15rem; height:1.15rem; accent-color:#ffffff; cursor:pointer;"
-                                   onchange="var badge=this.nextElementSibling; if(this.checked){ badge.style.background='rgba(255,255,255,0.25)'; badge.style.color='#ffffff'; badge.textContent='Encendido'; } else { badge.style.background='#dc2626'; badge.style.color='#ffffff'; badge.textContent='Apagado'; }">
-                            <span class="operator-badge" style="background: <?= $isActivo3 ? 'rgba(255,255,255,0.25)' : '#dc2626' ?>; color: #ffffff; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; transition: all 0.2s ease;">
-                                <?= $isActivo3 ? 'Encendido' : 'Apagado' ?>
-                            </span>
-                        </label>
-                    </div>
-                </div>
-                <div class="editor-card-body" style="padding: 12px;">
-                    <div class="field-group">
-                        <label>Imagen de Galería</label>
-                        <div class="image-upload-box">
-                            <img id="prev-calidad-gallery3"
-                                 src="<?= h($galImgUrl3) ?>"
-                                 alt="Microbiología y Cultivos" class="img-preview-sm"
-                                 onerror="this.hidden=true">
-                            <label for="file-calidad-gallery3" class="btn btn-secondary">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-                                Cambiar Imagen
-                            </label>
-                            <input type="file" accept="image/*"
-                                   id="file-calidad-gallery3" class="d-none"
-                                   data-upload-slot="calidad-gallery3"
-                                   data-preview-id="prev-calidad-gallery3"
-                                   data-target-input="url-calidad-gallery3">
-                        </div>
-                        <input type="url" id="url-calidad-gallery3"
-                               name="gallery3__imagen_url"
-                               value="<?= h($galImgUrl3) ?>"
-                               placeholder="<?= $imgDef3 ?>"
-                               class="cms-img-url-input" data-no-limit>
-                        <?php $imgBasename3 = $galImgUrl3 ? basename($galImgUrl3) : basename($imgDef3); ?>
-                        <span id="lbl-img-calidad-gallery3" class="cms-img-filename-label"><?= h($imgBasename3) ?></span>
-                    </div>
-                    <!-- Editor de Texto HTML con CKEditor 5 (Título H3 + Descripción) -->
-                    <div class="field-group">
-                        <label class="cms-label-bold mb-1" style="font-weight:700; display:block; font-size:0.88rem;">Contenido Editorial (Título H3 + Descripción)</label>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 7:01 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `multi_replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 7:01 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1409-1429)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-            <!-- Contenido del Pie de Página (RTE — Solo Estilos Visuales / Integración SSOT) -->
-            <div class="editor-card mb-4" style="border: 2px solid #7c3aed; background: #fafafa; border-radius: 8px; overflow: visible; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
-                <div class="editor-card-header d-flex justify-content-between align-items-center" style="background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%); padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.2);">
-                    <div class="card-title" style="color: #ffffff; font-weight: 800; font-size: 0.95rem;">Contenido del Pie de Página <small style="color:rgba(255,255,255,0.85); font-weight:400;">(Editor RTE Completo — Texto Libre)</small></div>
-                </div>
-                <div class="editor-card-body" style="padding: 12px;">
-                    <div class="cms-info-box" style="background:#f0f9ff;border:1.5px solid #0284c7;border-radius:8px;padding:0.65rem 1rem;margin-bottom:0.75rem;font-size:0.83rem;color:#0369a1;display:flex;align-items:center;gap:0.5rem;">
-                        💡 <strong>Texto Libre:</strong> El contenido de este editor es independiente. Para conservar el funcionamiento del modal del Aviso de Privacidad, mantén <code>id="link-privacy"</code> en el enlace.
-                    </div>
-
-                    <div class="field-group">
-                        <div id="ck-footer" class="ck5-mount ck5-mount-lg"></div>
-                        <textarea id="ck-footer-data" name="contenido__cuerpo_html" class="ck5-hidden-data"><?= htmlspecialchars(cmsRaw($contenidos, 'footer', 'contenido', 'cuerpo_html')) ?></textarea>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <!-- ================================================================
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-The instruction within the designated section requires an update. The specific HTML code snippet provides context related to image insertion, likely for logos or institutional seals. The update will refine this instruction.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.098323332s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 7:02 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 7:02 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 7:02 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 7:02 pm
-
----
-
-## Agent Response
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-## User Request
-
-. Corrige el unico formatos admitidos es: WebP.
-. Identifica que imagenes estan en otro formato y conviertelas a webp.
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `index.php`
-**Language:** php
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 7:05 pm
 
 ---
 
-## Agent Response
-
-### Thinking
-
-Available image conversion tools include both native and PHP-based options. The next task involves precisely identifying images not already in WebP format within the specified database tables and the designated file directory. Database queries will be used to begin this identification.
-
-
-
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.155132371s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 7:06 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 7:06 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 7:06 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 7:06 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 7:06 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 7:06 pm
 
 ---
 
-## Agent Response
-
-### Thinking
-
-Complete list of 10 non-WebP images in the specified directory now available. Active database references identified for 4 of these images. The conversion process will target these 4 images to create their WebP equivalents. These images are `calidad-gallery1-20261006-e8edebde.jpg`, `calidad-gallery2-20261006-ce2aa40b.jpg`, and `calidad-gallery3-20261006-bd23.jpg`, and potentially one more.
-
-
-
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.141714648s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 7:06 pm
 
 ---
 
-## Agent Response
-
-### Thinking
-
-The weight reduction achieved across multiple image assets is significant, demonstrating substantial optimization potential. Initial observations show reductions of 57-60% while maintaining the original dimensions. This suggests a successful compression strategy.
-
-
-
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.153630980s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 7:07 pm
 
 ---
 
-## Agent Response
+### Terminal Command Execution
 
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
+**Status:** Reset
+**Created:** 7 Oct 2026, 7:07 pm
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 7:07 pm
-
----
-
-## Agent Response
-
-### Thinking
-
-Permissions appear ideal for the expected operations, allowing read and update access to various processes. Database updates are needed for specific image URLs within the `laesh_db`. The task involves changing file extensions from `.jpg` to `.webp` across several image paths, which include those under `calidad/gallery1`, `calidad/gallery2`, `calidad/gallery3`, and `quienes-somos/historia`.
-
-
-
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.117145644s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 7:07 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 7 Oct 2026, 7:07 pm
-
----
-
-## Agent Response
-
-### Thinking
-
-All existing database images are now WebP format. The next step addresses the user's requirement for exclusive WebP support.
-
-The backend file will be updated: if an uploaded file's MIME type isn't WebP, it will be rejected with an error message. Also, the generated file extension will be hardcoded to 'webp'. Existing unsupported format handling will be removed.
-
-
-Frontend JavaScript will be updated to reject non-WebP files in the upload component and the rich text editor, displaying an appropriate error message. UI components will be modified to enforce WebP format, including setting the "accept" attribute on file inputs and updating descriptive text to reflect the WebP-only requirement.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.864438510s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L284-324)</summary>
-
-**Path:** `Unknown file`
-
-```
-    $slot = preg_replace('/[^a-z0-9\-]/', '', strtolower($_POST['slot'] ?? 'cms'));
-    $slot = $slot ?: 'cms';
-
-    // Clasificación de slots multiformato (WebP, JPG, PNG, GIF, AVIF)
-    $isMultiFormat = (bool) (preg_match('/^carousel-/', $slot) || preg_match('/^historia/', $slot) || preg_match('/^calidad-/', $slot) || preg_match('/^footer/', $slot));
-
-    // Validar MIME por contenido real (finfo)
-    $allowedMimes = [
-        'image/webp' => 'webp',
-        'image/jpeg' => 'jpg',
-        'image/png'  => 'png',
-        'image/gif'  => 'gif',
-        'image/avif' => 'avif',
-    ];
-    $finfo = new \finfo(FILEINFO_MIME_TYPE);
-    $mime  = $finfo->file($file['tmp_name']);
-
-    if (!$isMultiFormat) {
-        if ($mime !== 'image/webp') {
-            http_response_code(415);
-            echo json_encode(['ok' => false, 'msg' => 'Tipo no permitido. Solo se acepta WebP. Optimiza la imagen antes de subir.']);
-            exit;
-        }
-    } else {
-        if (!array_key_exists($mime, $allowedMimes)) {
-            http_response_code(415);
-            echo json_encode(['ok' => false, 'msg' => 'Tipo no permitido. Se requiere un archivo de imagen válido (WebP, JPEG o PNG).']);
-            exit;
-        }
-    }
-
-    // Determinar límite de peso máximo por slot
-    if (preg_match('/^calidad-/', $slot)) {
-        $maxBytes = 600 * 1024; // 600 KB para diplomas/galardones de Calidad
-        $labelSlot = 'Galería de Calidad';
-    } elseif (preg_match('/^historia-card$/', $slot)) {
-        $maxBytes = 500 * 1024; // 500 KB para tarjeta del Responsable Sanitario
-        $labelSlot = 'Tarjeta Responsable Sanitario';
-    } elseif ($slot === 'historia' || $slot === 'footer') {
-        $maxBytes = 600 * 1024; // 600 KB para imágenes incrustadas en editores RTE
-        $labelSlot = 'Editor de Contenido';
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L369-384)</summary>
-
-**Path:** `Unknown file`
-
-```
-        if ($imgW < 500 || $imgW > 1600 || $imgH < 400 || $imgH > 1600)
-            $dimError = "Galería de Calidad: dimensiones {$imgW}×{$imgH} px fuera de rango (ancho: 500–1\u{202F}600 px, alto: 400–1\u{202F}600 px).";
-    } elseif (preg_match('/^historia-card$/', $slot)) {
-        if ($imgW < 600 || $imgW > 1920 || $imgH < 400 || $imgH > 1400)
-            $dimError = "Tarjeta Responsable Sanitario: dimensiones {$imgW}×{$imgH} px fuera de rango (ancho: 600–1\u{202F}920 px, alto: 400–1\u{202F}400 px).";
-    } elseif ($slot === 'seo-og') {
-        if ($imgW < 1200 || $imgW > 1920)
-            $dimError = "Open Graph (SEO): ancho {$imgW} px fuera del rango 1\u{202F}200–1\u{202F}920 px.";
-        elseif ($imgH >= $imgW)
-            $dimError = "Open Graph (SEO): orientación debe ser Horizontal (ancho > alto). Recibido: {$imgW}×{$imgH}.";
-    } elseif ($slot !== 'historia' && $slot !== 'footer') {
-        if ($imgW < 500)
-            $dimError = "Imagen CMS genérica: ancho mínimo 500 px. Recibido: {$imgW} px.";
-    }
-
-    if ($dimError !== null) {
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-The existing MIME validation needs modification to enforce `image/webp` for all slots. The code will be updated to use `finfo` to determine the actual file content's MIME type. If the MIME type is not `image/webp`, a 415 error is returned.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.139572651s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 7:08 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L354-369)</summary>
-
-**Path:** `Unknown file`
-
-```
-        if ($imgW < 600 || $imgW > 1920 || $imgH < 400 || $imgH > 1400)
-            $dimError = "Tarjeta Responsable Sanitario: dimensiones {$imgW}×{$imgH} px fuera de rango (ancho: 600–1\u{202F}920 px, alto: 400–1\u{202F}400 px).";
-    } elseif ($slot === 'seo-og') {
-        if ($imgW < 1200 || $imgW > 1920)
-            $dimError = "Open Graph (SEO): ancho {$imgW} px fuera del rango 1\u{202F}200–1\u{202F}920 px.";
-        elseif ($imgH >= $imgW)
-            $dimError = "Open Graph (SEO): orientación debe ser Horizontal (ancho > alto). Recibido: {$imgW}×{$imgH}.";
-    } elseif ($slot !== 'historia' && $slot !== 'footer') {
-        if ($imgW < 500)
-            $dimError = "Imagen CMS genérica: ancho mínimo 500 px. Recibido: {$imgW} px.";
-    }
-
-    if ($dimError !== null) {
-        http_response_code(422);
-        echo json_encode(['ok' => false, 'msg' => $dimError]);
-        exit;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L369-379)</summary>
-
-**Path:** `Unknown file`
-
-```
-        exit;
-    }
-    $ext      = $allowedMimes[$mime] ?? 'webp';
-    $filename = $slot . '-' . date('Ymd') . '-' . bin2hex(random_bytes(4)) . '.' . $ext;
-
-    // Directorio de destino
-    $dbConfigDir = Flight::db()->query("SELECT valor FROM configuraciones WHERE clave = 'cms_upload_dir'")->fetchColumn();
-    $uploadDir   = trim($dbConfigDir ?: '');
-
-    // Fallback inicial si no hay valor o no es ruta absoluta de sistema de archivos
-    if (empty($uploadDir) || !str_starts_with($uploadDir, '/')) {
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 7:08 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 7:08 pm
 
 ---
 
-## Agent Response
+### Code Edit
 
-### Actions
-
-**Tool:** `view_file`
-**File:** `cms-upload.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L79-114)</summary>
-
-**Path:** `Unknown file`
-
-```
-                const previewId   = this.dataset.previewId    || null;
-                const targetInput = this.dataset.targetInput  || null;
-                const file        = this.files[0];
-
-                // ── Clasificación de slots multiformato (WebP, JPG, PNG, GIF, AVIF) ──
-                const isMultiFormat = /^carousel-/.test(slot) || /^historia/.test(slot) || /^calidad-/.test(slot) || /^footer/.test(slot);
-                const allowedMimes = ['image/webp', 'image/jpeg', 'image/png', 'image/gif', 'image/avif'];
-
-                // ── Validación de formato de archivo ──
-                if (!isMultiFormat && file.type !== 'image/webp') {
-                    showToast(
-                        `Formato no permitido (${file.type || 'desconocido'}). Para esta sección solo se acepta <strong>WebP</strong>.<br>` +
-                        'Usa Squoosh o convertidor de imagen a formato WebP antes de subir.',
-                        true
-                    );
-                    this.value = '';
-                    return;
-                } else if (isMultiFormat && !allowedMimes.includes(file.type)) {
-                    showToast(
-                        `Formato no permitido (${file.type || 'desconocido'}). Se requiere un archivo de imagen válido (WebP, JPEG o PNG).`,
-                        true
-                    );
-                    this.value = '';
-                    return;
-                }
-
-                // ── Reglas por slot (alineadas con Especificaciones del CMS) ──────────────
-                // Slots reales (data-upload-slot en gestion_web.php):
-                //   hero-{slide1…5}       → Banner Hero (1280–1920 px, horizontal, máx 150 KB, WebP)
-                //   carousel-{1…16}       → Carrusel Especialidades (500–1200 px, horizontal, máx 150 KB)
-                //   historia-{card}       → Tarjeta Responsable Sanitario (600–1920 px, máx 500 KB)
-                //   promo-{lun…dom}       → Cards de Promociones (1000–1200 px, 600–800 px alto, máx 150 KB, WebP)
-                //   calidad-gallery{1…3}  → Galería de Calidad (500–1600 px ancho/alto, máx 600 KB)
-                //   ubicacion-croquis     → Croquis de Ubicación (máx 1284×902 px, horizontal, máx 150 KB, WebP)
-                //   seo-og                → Imagen Open Graph (1200–1920 px, máx 150 KB, WebP)
-                //   (default)             → Imagen CMS genérica
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-The file format validation needs to be updated to strictly enforce `image/webp` acceptance. The existing code's logic, from lines 84 to 105, will be modified. This will prevent uploads of any other file types, ensuring only WebP images are permitted.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.137898663s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
+**Status:** Reset
+**Created:** 7 Oct 2026, 7:09 pm
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 7:09 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `ckeditor-init.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L149-174)</summary>
-
-**Path:** `Unknown file`
-
-```
-     * Upload adapter personalizado para CKEditor 5
-     * Sube imágenes directamente a /laesh/adrc/cms/upload asociadas al slot 'historia'
-     */
-    function _createUploadAdapter(loader, slot) {
-        slot = slot || 'historia';
-        return {
-            upload: function () {
-                return loader.file.then(function (file) {
-                    return new Promise(function (resolve, reject) {
-                        if (file && file.size > 600 * 1024) {
-                            var sizeKb = Math.round(file.size / 1024);
-                            reject('El archivo (' + sizeKb + ' KB) supera el límite máximo de 600 KB. Optimiza la imagen antes de subirla.');
-                            return;
-                        }
-                        var fd = new FormData();
-                        fd.append('file', file);
-                        fd.append('slot', slot);
-                        var meta = document.querySelector('meta[name="csrf-token"]');
-                        var csrf = meta ? meta.content : '';
-                        if (!csrf) {
-                            var inp = document.querySelector('input[name="csrf_token"]');
-                            csrf = inp ? inp.value : '';
-                        }
-                        if (!csrf) {
-                            var btn = document.getElementById('btn-cms-save-action');
-                            csrf = btn ? (btn.dataset.csrf || '') : '';
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 7 Oct 2026, 7:09 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 7:09 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `ckeditor-init.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L149-169)</summary>
-
-**Path:** `Unknown file`
-
-```
-     * Upload adapter personalizado para CKEditor 5
-     * Sube imágenes directamente a /laesh/adrc/cms/upload asociadas al slot 'historia'
-     */
-    function _createUploadAdapter(loader, slot) {
-        slot = slot || 'historia';
-        return {
-            upload: function () {
-                return loader.file.then(function (file) {
-                        if (file && file.type !== 'image/webp') {
-                            reject('Formato no permitido (' + (file.type || 'desconocido') + '). El único formato admitido es WebP. Convierte la imagen a WebP antes de insertarla.');
-                            return;
-                        }
-                        if (file && file.size > 600 * 1024) {
-                            var sizeKb = Math.round(file.size / 1024);
-                            reject('El archivo (' + sizeKb + ' KB) supera el límite máximo de 600 KB. Optimiza la imagen antes de subirla.');
-                            return;
-                        }
-                        var fd = new FormData();
-                        fd.append('file', file);
-                        fd.append('slot', slot);
-                        var meta = document.querySelector('meta[name="csrf-token"]');
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 7:09 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 7:09 pm
 
 ---
 
-## Agent Response
-
-### Thinking
-
-Verifying the syntax of `ckeditor-init.js` confirms its validity. The next step involves updating `restaurantb/www/laesh-swbldi/admrc/views/gestion_web.php`. The focus will be on reviewing the text and `accept` attributes, specifically on line 502 in the second tab (Tarjeta Responsable Sanitario).
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.081381966s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L499-524)</summary>
-
-**Path:** `Unknown file`
-
-```
-                        <label style="font-weight:700; color:#1e293b; font-size:0.9rem;">Tarjeta Gráfica del Responsable Sanitario</label>
-                        <p class="cms-img-spec-hint" style="margin-top: 4px; margin-bottom: 8px; font-size: 0.78rem;">
-                            📷 <strong>Especificaciones para Tarjeta Gráfica:</strong> Formato: <strong>WebP, JPEG o PNG</strong> &nbsp;·&nbsp; Ancho: 600 a 1 920 px (ideal 800–1 600 px) &nbsp;·&nbsp; Alto: 400 a 1 400 px &nbsp;·&nbsp; Peso: Máx. 500 KB, Óptimo ≤ 300 KB.
-                        </p>
-                        <?php $curHistImg = cmsRaw($contenidos, 'quienes-somos', 'historia', 'img_tarjeta', ''); ?>
-                        <div class="image-upload-box" style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
-                            <img id="prev-historia-card"
-                                 src="<?= h($curHistImg) ?>"
-                                 alt="Preview Tarjeta"
-                                 class="img-preview-sm"
-                                 style="max-height: 60px; max-width: 90px; object-fit: contain; border-radius: 4px; border: 1px solid #cbd5e1; <?= empty($curHistImg) ? 'display:none;' : '' ?>"
-                                 onerror="this.style.display='none'">
-
-                            <label for="file-historia-card" class="btn btn-secondary" style="cursor:pointer; display:inline-flex; align-items:center; gap:6px;">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-                                Subir Tarjeta
-                            </label>
-
-                            <input type="file" accept="image/webp,image/jpeg,image/png"
-                                   id="file-historia-card" class="d-none"
-                                   data-upload-slot="historia-card"
-                                   data-preview-id="prev-historia-card"
-                                   data-target-input="url-img-historia-card">
-                        </div>
-                        <div style="display:flex; gap:8px; align-items:center; margin-top:8px;">
-                            <input type="url" id="url-img-historia-card"
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 7:10 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L594-604)</summary>
-
-**Path:** `Unknown file`
-
-```
-                <p class="cms-help-text" style="margin-top:2px;">
-                    Cada tarjeta incluye su módulo de reemplazo de imagen (ranura <code>carousel-1</code> a <code>carousel-15</code>) y editor de texto enriquecido con CKEditor 5. Fichas 13 a 15 disponibles para posterior publicación.
-                </p>
-                <div style="background:#f0f9ff; border:1px solid #bae6fd; border-radius:6px; padding:6px 12px; margin-top:8px; font-size:0.8rem; color:#0369a1; display:inline-flex; align-items:center; gap:6px;">
-                    <span>📐</span> <strong>Especificaciones para Tarjetas de Estudios:</strong> Formato: <strong>WebP, JPEG o PNG</strong> &nbsp;·&nbsp; Ancho: 500 a 1 200 px (ideal 536–800 px) &nbsp;·&nbsp; Alto: 350 a 800 px &nbsp;·&nbsp; Orientación Horizontal &nbsp;·&nbsp; Peso: Máx. 150 KB, Óptimo 40–80 KB.
-                </div>
-            </div>
-
-            <?php
-            $_estudiosStyles = [
-                0 => ['bg' => 'linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%)', 'borderColor' => '#2563eb'],
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 7:10 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L649-661)</summary>
-
-**Path:** `Unknown file`
-
-```
-                            <label for="file-carousel-<?= $ci ?>" class="btn btn-secondary">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-                                Cambiar Imagen
-                            </label>
-
-                            <input type="file" accept="image/webp,image/jpeg,image/png"
-                                   id="file-carousel-<?= $ci ?>" class="d-none"
-                                   data-upload-slot="carousel-<?= $ci ?>"
-                                   data-preview-id="prev-carousel-<?= $ci ?>"
-                                   data-target-input="url-img-carousel-<?= $ci ?>">
-                        </div>
-                        <input type="url" id="url-img-carousel-<?= $ci ?>"
-                               name="config__carousel<?= $ci ?>_img"
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 7:10 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L869-879)</summary>
-
-**Path:** `Unknown file`
-
-```
-            <hr class="cms-section-sep">
-            <div class="grid-2col mb-4">
-            <!-- Encabezado de sección -->
-            <div style="grid-column: 1 / -1; background:#f0f9ff; border:1px solid #bae6fd; border-radius:6px; padding:6px 12px; margin-bottom:1rem; font-size:0.8rem; color:#0369a1; display:inline-flex; align-items:center; gap:6px;">
-                <span>📐</span> <strong>Especificaciones para Galería de Calidad:</strong> Formato: <strong>WebP, JPEG o PNG</strong> &nbsp;·&nbsp; Ancho: 500 a 1 600 px &nbsp;·&nbsp; Alto: 400 a 1 600 px (Horizontal o Cuadrado 1:1) &nbsp;·&nbsp; Peso: Máx. 600 KB, Óptimo ≤ 400 KB.
-            </div>
-            <div class="editor-card" style="border: 2px solid #0284c7; background: #fafafa; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
-                <div class="editor-card-header" style="background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%); padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.2);">
-                    <div class="card-title" style="color: #ffffff; font-weight: 800; font-size: 0.95rem;">Encabezado de la Sección</div>
-                </div>
-                <div class="editor-card-body" style="padding: 12px;">
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `multi_replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 7:11 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1414-1424)</summary>
-
-**Path:** `Unknown file`
-
-```
-                </div>
-                <div class="editor-card-body" style="padding: 12px;">
-                    <div class="cms-info-box" style="background:#f0f9ff;border:1.5px solid #0284c7;border-radius:8px;padding:0.65rem 1rem;margin-bottom:0.75rem;font-size:0.83rem;color:#0369a1;display:flex;align-items:center;gap:0.5rem;">
-                        💡 <strong>Texto Libre y Multimedia:</strong> Puedes insertar logotipos o sellos institucionales (WebP, JPEG o PNG, máx. 600 KB). Para conservar el funcionamiento del modal del Aviso de Privacidad, mantén <code>id="link-privacy"</code> en el enlace.
-                    </div>
-
-                    <div class="field-group">
-                        <div id="ck-footer" class="ck5-mount ck5-mount-lg"></div>
-                        <textarea id="ck-footer-data" name="contenido__cuerpo_html" class="ck5-hidden-data"><?= htmlspecialchars(cmsRaw($contenidos, 'footer', 'contenido', 'cuerpo_html')) ?></textarea>
-                    </div>
-                </div>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 7:11 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `accept=`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 7:11 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 7:11 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 7:11 pm
 
 ---
 
-## Agent Response
+### Terminal Command Execution
 
-### Thinking
-
-Ensuring the public landing page loads correctly is the primary focus, particularly verifying successful delivery (HTTP 200) of all content, including converted images. Employing `curl` requests, the delivery of the four converted `.webp` images will be directly checked to confirm correct serving.
-
-
-
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.121324769s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
+**Status:** Reset
+**Created:** 7 Oct 2026, 7:12 pm
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 7:12 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 7 Oct 2026, 7:12 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 7 Oct 2026, 7:12 pm
-
----
-
-## Agent Response
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L65-96)</summary>
-
-**Path:** `Unknown file`
-
-```
-        // Si NO es error, auto-ocultar tras 4 segundos. Si ES ERROR, PERMANECE ABIERTO INDEFINIDAMENTE.
-        if (!isError) {
-            toastTimer = setTimeout(() => {
-                toast.classList.remove('visible');
-            }, 4000);
-        }
-    }
-
-    document.addEventListener('DOMContentLoaded', function () {
-        document.querySelectorAll('input[type="file"][data-upload-slot]').forEach(function (input) {
-            input.addEventListener('change', async function () {
-                if (!this.files[0]) return;
-
-                const slot        = this.dataset.uploadSlot   || 'cms';
-                const previewId   = this.dataset.previewId    || null;
-                const targetInput = this.dataset.targetInput  || null;
-                const file        = this.files[0];
-
-                // ── Validación de formato de archivo — Único formato admitido: WebP ──
-                if (file.type !== 'image/webp') {
-                    showToast(
-                        `Formato no permitido (${file.type || 'desconocido'}). El único formato admitido es <strong>WebP</strong>.<br>` +
-                        'Convierte la imagen a formato WebP antes de subir.',
-                        true
-                    );
-                    this.value = '';
-                    return;
-                }
-
-                // ── Reglas por slot (alineadas con Especificaciones del CMS) ──────────────
-                // Slots reales (data-upload-slot en gestion_web.php):
-                //   hero-{slide1…5}       → Banner Hero (1280–1920 px, horizontal, máx 150 KB, WebP)
-```
-
-</details>
-
----
-
-## User Request
-
-que falta por realizar, respecto de:
-"Para todas las pestañas del cms php donde se hace upload de imagenes, excepto la 11. Metadatos. 
-. Analiza y determina cuales son las restricciones de: dimensiones y tamaño (alto y ancho).
-. Informa melas, listalas, asi como gaps/issues de haber.
-.. Yo te confirmare para alinear y reactivar/poner dichas restricciones de js y backend, y en las partes de las secciones del cms de los uploads caso ser diferentes." ?
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `cms-upload.js`
-**Language:** javascript
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-The task involves analyzing image upload restrictions (dimensions and size) across multiple CMS PHP tabs, excluding tab 11 (Metadatos). Need to identify existing restrictions, report them, and highlight any gaps or issues. The goal is to provide information for aligning and reactivating/implementing these restrictions in both JavaScript and backend components, potentially addressing differences between sections.
-
-
-Tab 1, "Banner Principal," appears fully aligned across UI, JavaScript, and backend with WebP format and dimension/size restrictions. Tab 2, "Quiénes somos," has discrepancies between JavaScript and backend file size limits, as well as distinct editor upload size validation. There might be some misalignment in the size restrictions between `historia-card` and the editor.
-
-
-Pestaña 3 ("Estudios") has complete alignment between UI, JavaScript, and backend, enforcing WebP format and specific dimension/size restrictions. Pestaña 4 ("Promociones Vigentes") also demonstrates full alignment with WebP and dimensions in the UI, JavaScript, and backend components. Proceeding to analyze Pestaña 5 ("Calidad e Instalaciones") to establish a comprehensive overview.
-
-
-Pestaña 5 ("Calidad e Instalaciones") exhibits complete alignment among UI, JavaScript, and backend, enforcing WebP format with dimension and size restrictions as specified. Pestaña 6 ("Ubicación y Contacto") also displays full alignment with WebP, dimension, and size limitations across the respective components. The final section, Pestaña 7 ("Pie de Página"), presents WebP validation in JavaScript and a 600 KB size limit, suggesting alignment will be checked to confirm backend restrictions.
-
-
-
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 10.798095969s
-- **Model:** Gemini 3.8 Flash (Medium)
-</details>
 
 ---
 
@@ -30864,8 +24737,4860 @@ In KVM2, migration `m010` cleaned up redundant indexes on the `catalogo_promocio
 
 ### Terminal Command Execution
 
-**Status:** CORTEX_STEP_STATUS_WAITING
+**Status:** Completed
 **Created:** 8 Oct 2026, 7:55 am
+
+---
+
+## Agent Response
+
+### Thinking
+
+The `dia_semana` field in KVM2 uses `varchar(255)`, implemented for in-row storage. New promotion texts, approximately 80 characters long, comfortably fit within this field's capacity. Now, the focus shifts to record debugging within `web_contenidos`.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.506147768s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 7:56 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 7:57 am
+
+---
+
+## Agent Response
+
+### Thinking
+
+Identifying precise key changes is the priority. Local additions missing in the target environment include several text entries for galleries, a navigation label, an image card, and HTML content. Conversely, a single key has been removed locally and needs deletion from the target.
+
+
+Several text entries for a new carousel (`carousel16`) were added locally, along with image URLs for galleries, refined text and images for existing carousels (1-15), and updates to various sections like the footer and "who we are". Additionally, configurations need updating; specifically, adding a fallback origin for maps and updating the `maps_url` key to maintain consistency with the target environment. Finally, titles for promotions need updating in a specific `h3` format for each day of the week.
+
+
+The next canonical migration number is determined to be `m011_sync_cms_contenidos_20261008.sql`, following the sequential numbering convention. Mandatory requirements include the `USE` statement for the database, idempotency using appropriate SQL constructs for data insertion and updates, registration in the migration `README.md`, and an incremental deployment.
+
+The migration involves 19 WebP images that need to be transferred to the destination server, requiring a dedicated rsync or adjusted permissions due to existing deployment exclusions. The application code (`admrc/index.php`) needs review as well for any potential updates.
+
+
+A thorough assessment is required, encompassing both code and static assets, and the post-deployment steps. The identified files require detailed review to determine the exact changes needed for synchronization, adhering to the database migration guidelines. The assessment must incorporate the user's restrictions regarding SQL-based database interaction and image handling.
+
+A comprehensive deployment plan necessitates outlining the specific SQL scripts for database updates, the image transfer strategy, and the cache invalidation process. The plan must incorporate checks on the live site and the administrative interface after deployment, which is a key part of validating the updates. This strategy prioritizes the constraints and user's request.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 11.775708296s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+## User Request
+
+. en paso Paso 3 — Despliegue de Base de Datos (deploy.sh bd), añade crear un backup de la bd en kvm2.
+. añadelo en los pendientes de runbook de Gemini y Claude
+
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `runbook-pendientes-laesh.md`
+**Language:** markdown
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The request involves two main actions: adding a database backup step to the database deployment plan, specifically within the designated deployment script, and adding this task to runbook documentation for specific AI models. The first step involves modifying the deployment procedure to include a backup creation before making changes to the live database, and this backup will reside on a separate KVM2 environment. Next, investigating the current procedure to find how to create a database backup on the target KVM2.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `runbook-pendientes-laesh.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.193311362s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L214-234)</summary>
+
+**Path:** `Unknown file`
+
+```
+- **Hallazgo:** la contraseña de `laesh_app` en KVM2 (la que usa PHP-FPM) es `laesh_2026_dev`, el valor por defecto de desarrollo, publicado en el repo (`config.php` y `00_database.sql`). Verificado con huellas SHA-256: el pool tiene exactamente ese valor y la BD lo acepta.
+- **Gravedad acotada:** MariaDB solo escucha en `127.0.0.1` (`bind-address`, `ss -ltn`) y el 3306 está cerrado desde internet; explotarlo requiere acceso local al servidor. `laesh_app` está limitado a DML + EXECUTE (Paso 3b).
+- **Revisar:** por qué el Paso 3 de `setup_hostinger.sh` ("Fijando contraseña laesh_app → producción") no dejó la contraseña de `/opt/laesh/configs/.env` (`LAESH_APP_PASS`), o si ese valor también es el de desarrollo.
+- **Corrección propuesta:** generar una contraseña nueva, guardarla en `.env` (`LAESH_APP_PASS`), en el pool (`env[LAESH_DB_PASS]`) y en `/etc/cron.d/laesh-*` (`LAESH_DB_PASS`); aplicarla con `ALTER USER` (Paso 3); recargar PHP-FPM, reiniciar swoole-laesh y validar con la suite de búsqueda (141/141) y un login real. Relacionado con PEN-LAESH-07 (contraseñas por defecto antes del Go-Live).
+
+---
+
+### PEN-LAESH-20: Geolocalización en Móviles para Botón "Mapa Interactivo" (Inicio en Chapultepec/CDMX con Ubicación activada)
+- **Fecha de registro:** 2026-10-08
+- **Módulo:** `www/laesh-web-assets-uipv1a/js/website.js` (`window.openGoogleMapsRoute`) · `www/laesh-swbldi/website/sections/ubicacion.php` (`#btn-map-interactive`)
+- **Estado:** 🟡 Pendiente de diagnóstico y estabilización en dispositivo real
+- **Reporte del usuario:** Al probar en móviles (en localhost) teniendo la ubicación activada, al pulsar "Mapa Interactivo ↗", Google Maps sigue dando como punto de inicio "Chapultepec" (CDMX) en lugar de usar la ubicación física real del usuario.
+- **Contexto técnico y posibles causas:**
+  1. Al probar en `localhost` o en redes Wi-Fi/celulares, si el navegador web resuelve la geolocalización mediante IP (o red Wi-Fi sin calibración satelital) en lugar de GPS satelital puro, las IPs de telecomunicaciones en México suelen estar enrutadas a través de nodos centrales en la Ciudad de México (frecuentemente ubicados geográficamente en la zona de Chapultepec / Polanco).
+  2. Si `navigator.geolocation` no obtiene coordenadas satelitales a tiempo o devuelve la posición aproximada del ISP/nodo de telecomunicaciones, la URL resultante o la llamada a Maps ubica al usuario en CDMX.
+  3. Por investigar/estabilizar:
+     - Comportamiento en dispositivo físico con GPS satelital exterior vs red Wi-Fi de desarrollo.
+     - Explorar el uso del esquema nativo de URI para mapas móviles (`geo:0,0?q=...` o `google.navigation:q=...`) frente a URLs web de Google Maps Directions (`/maps/dir/?api=1`).
+     - Asegurar que si la geolocalización detectada está fuera de un radio lógico o no tiene precisión suficiente, se notifique o se aplique el flujo adecuado.
+
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Registering task `PEN-LAESH-21`, a CMS synchronization from a local environment to KVM2. The process necessitates a complete database backup as a critical prerequisite. This synchronization involves PHP, CSS, JS, 19 WebP images, and delta updates for specific database tables (`web_contenidos`, `configuraciones`, `catalogo_promociones`).
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.022602708s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** CORTEX_STEP_STATUS_ERROR
+**Created:** 8 Oct 2026, 8:04 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `runbook-pendientes-laesh.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L227-234)</summary>
+
+**Path:** `Unknown file`
+
+```
+  1. Al probar en `localhost` o en redes Wi-Fi/celulares, si el navegador web resuelve la geolocalización mediante IP (o red Wi-Fi sin calibración satelital) en lugar de GPS satelital puro, las IPs de telecomunicaciones en México suelen estar enrutadas a través de nodos centrales en la Ciudad de México (frecuentemente ubicados geográficamente en la zona de Chapultepec / Polanco).
+  2. Si `navigator.geolocation` no obtiene coordenadas satelitales a tiempo o devuelve la posición aproximada del ISP/nodo de telecomunicaciones, la URL resultante o la llamada a Maps ubica al usuario en CDMX.
+  3. Por investigar/estabilizar:
+     - Comportamiento en dispositivo físico con GPS satelital exterior vs red Wi-Fi de desarrollo.
+     - Explorar el uso del esquema nativo de URI para mapas móviles (`geo:0,0?q=...` o `google.navigation:q=...`) frente a URLs web de Google Maps Directions (`/maps/dir/?api=1`).
+     - Asegurar que si la geolocalización detectada está fuera de un radio lógico o no tiene precisión suficiente, se notifique o se aplique el flujo adecuado.
+
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 8:04 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `runbook-pendientes-laesh.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L229-249)</summary>
+
+**Path:** `Unknown file`
+
+```
+  3. Por investigar/estabilizar:
+     - Comportamiento en dispositivo físico con GPS satelital exterior vs red Wi-Fi de desarrollo.
+     - Explorar el uso del esquema nativo de URI para mapas móviles (`geo:0,0?q=...` o `google.navigation:q=...`) frente a URLs web de Google Maps Directions (`/maps/dir/?api=1`).
+     - Asegurar que si la geolocalización detectada está fuera de un radio lógico o no tiene precisión suficiente, se notifique o se aplique el flujo adecuado.
+
+---
+
+### PEN-LAESH-21: Pase de CMS local a KVM2 con Respaldo Preventivo de BD (m011 + Assets + 19 WebP)
+- **Fecha de registro:** 2026-10-08
+- **Módulo:** `setup/deploy/laesh-kvm2-prod/deploy.sh` (`deploy_bd`) · `setup/bds/laesh/migrations/m011_sync_cms_contenidos_20261008.sql` · `www/laesh-web-assets-uipv1a/cms/`
+- **Estado:** 🟡 Preparado / Pendiente de ejecución
+- **Requerimiento mandatorio:** En el Paso 3 del despliegue (BD incremental vía `deploy.sh bd`), es **obligatorio ejecutar un snapshot de respaldo (dump gzip) de la base de datos `laesh_db` en KVM2** antes de disparar la aplicación de la migración `m011`.
+- **Alcance del pase:**
+  1. **Backup preventivo KVM2:** Ejecución de `/opt/laesh/scripts/backup_db.sh` (o dump directo a `/opt/laesh/backups/db/`) verificando archivo generado > 0 bytes.
+  2. **19 Imágenes WebP:** Transferencia de imágenes activas de calidad, 15 carruseles y tarjeta de responsable sanitario a `/opt/laesh/assets/laesh-web-assets-uipv1a/cms/` con permisos `www-data:www-data` (664).
+  3. **Migración SQL m011:** Aplicación idempotente de deltas en `web_contenidos` (6 claves nuevas, 2 claves depuradas de `carousel16`, ~35 valores actualizados), `configuraciones` (`maps_fallback_origen`), y `catalogo_promociones` (encabezados `h3`), preservando estrictamente las variables de infraestructura de producción.
+  4. **Código y Assets:** Sincronización de 9 PHPs (`laesh-swbldi`) y 8 WebAssets (`laesh-web-assets-uipv1a`).
+  5. **Purga de Caché L2:** Ejecución de `crons/cache_renew.php` para calentar `KEY_CMS`, `KEY_CFG`, `KEY_PROMOS` y `KEY_TREE`.
+
+
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Plan deployment update for Step 3 includes a database backup before changes are applied via a specific script executed on a remote server. Validation will ensure the backup file exists, is valid, and has a size greater than zero. The `deploy_bd()` function needs protection as well.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.303134749s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+## User Request
+
+Analiza:  Actualización del Paso 3 en el Plan de Despliegue (Backup Obligatorio de BD en KVM2) Y ESTAtus actual de kvm2 (bd, webapps, etc) y determian si hay gaps/issues aantes de proceder a ejecutar , informa me.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `cms-upload.js`
+**Language:** javascript
+
+**Open Files:**
+- `cms-upload.js`
+- `website.js`
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_SYSTEM_MESSAGE
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 2:59 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+I need to analyze Paso 3's backup process and KVM2's current status before executing anything, staying read-only. Checking backup_db.sh, I realize it runs as root via cron and requires a protected credentials file, so a sysadmin without root sudo access wouldn't be able to invoke it directly—meaning my earlier assumption about running it via SSH needs reconsidering.
+
+I also need to check whether sudoers grants NOPASSWD for specific deploy commands even if generic sudo checks failed, since sudo -l behavior depends on whether any entries are passwordless. More importantly, setup_hostinger.sh's Paso 3 might overwrite the production app password with the .env value, which could mismatch the PHP-FPM pool config and break things—I want to read through that script carefully before deciding anything. I also noticed the dry-run rsync only listed directory entries under md/ and rc/, not individual file changes.
+
+I should rerun the deploy dry-runs with --delete enabled to catch files that exist on KVM2 but not locally, both for webapp and assets. There are also config key mismatches between environments (local has maps_fallback_origen; KVM2 has extra keys like cms_upload_dir and horario_/responsable_ fields) that I need to verify don't break anything if unused locally, plus checking whether config-compiled.js needs regenerating and whether KVM2's carousel16 config entry has a local equivalent.
+
+Beyond that I need to confirm every image referenced in the local database — including ones embedded inside HTML fields like historia-card and quienes-somos ficha images — actually exists both locally and on KVM2, since the rsync dry-run only flagged one mismatched filename so far.
+
+I also need to double check icon references pointing to the general assets img/ path rather than cms/, to make sure those non-cms images are covered by the assets deploy too. The promo image mismatches from the dry-run just look like orphaned local files, so those are fine to ignore.
+
+On cache invalidation: running cache_renew.php directly as sysadmin would create files owned by sysadmin instead of www-data, which could break later writes, so I'd need sudo -u www-data or some admin UI purge button — I should check sistema.php for a cache purge option and grep for Cache::invalidate calls in admrc. Separately, I'm noting that the webapp deploy only restarts Swoole when commons/libs change.
+
+Reboot-required is pending but I'd avoid combining it with other actions. Disk space looks fine; last backup was 07 Oct 20:00 and today's order data isn't yet captured, so a fresh backup is needed before tonight's run. I also found a real drift: m010's schema change to catalogo_promociones.dia_semana (varchar 255) and the web_contenidos index changes were applied on KVM2 but not locally — local DB is still on the older TEXT/index state, meaning m010 was never applied there.
+
+More importantly, I need to check whether the client edited CMS content in KVM2 production after the last pull (the "Traer cms contenido de kvm2 hacia local" commit) — if so, m011 would overwrite those edits. I should query web_contenidos in KVM2 for rows with actualizado_en more recent than that pull date.
+
+Also comparing differing values between KVM2 and local — some fields like especialidades.nav.label and quienes-somos.seccion.subtitulo show small differences that look like intentional local edits rather than sync issues, but I should count and list all the differing keys to be thorough. And I need to verify whether the changed PHP files (admrc/index.php and sistema.php) actually differ from KVM2 or if I mischaracterized that earlier.
+
+Separately, there's an uncommitted geolocation fix in website.js and runbook edits sitting in the working tree — deploying from uncommitted changes isn't ideal, so I should flag that and recommend committing first before any deploy. I'm also noting a cron job on KVM2 at 01:00 that handles file cleanup, which could interact with the upload directory.
+
+Let me run through the checks now, batching them together.
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 28.472263431s
+- **Model:** Claude Opus 5.5 (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:00 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+I'm realizing sysadmin lacks NOPASSWD for backup_db.sh, so running it directly over SSH fails due to permission issues reading the credentials file and writing to the backups directory. I need to find an alternative—maybe using the laesh_app user's mariadb-dump access instead, since sysadmin can invoke that with the known password.
+
+But laesh_app's privileges are limited to DML and EXECUTE, missing SELECT/LOCK TABLES/SHOW VIEW/TRIGGER rights that mariadb-dump typically needs for views and routines, so a full dump via laesh_app would be incomplete. Since the m011 rollback only touches three specific tables, a targeted data-only dump of those tables should be sufficient, saved to the sysadmin home and copied locally. Other options include an interactive sudo prompt where the user types their password, or adding a NOPASSWD sudoers entry for the backup script — and I'm also flagging that the unrestricted NOPASSWD rsync entry is effectively a root-equivalent security hole worth noting separately.
+
+I should also check backup_db.sh's weekly-vs-daily naming logic around lines 28-35 — since today is Thursday, it should just produce a daily file with a 7-day retention, which seems fine. Now I'm moving on to read setup_hostinger.sh.
+
+`sysadmin` carece de `NOPASSWD` para `backup_db.sh` y de acceso a `/opt/laesh/configs/` y `/opt/laesh/backups/db/`, así que el Paso 3.1 fallaría. Reviso ahora el comportamiento de `setup_hostinger.sh` sin `--drop`.
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 9.345703027s
+- **Model:** Claude Opus 5.5 (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:00 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+I'm realizing step 3 alters the laesh_app user's password to whatever is in .env, but the pool currently uses laesh_2026_dev successfully — so if those values differ, running this step would break the live DB password and cascade into PHP-FPM, cron jobs, and swoole all failing against the site.
+
+Also, I can't verify whether the account is scoped to '%' or 'localhost', since an ALTER against the wrong host grants will fail silently with stderr suppressed, and I have no sudo access to confirm the .env value directly. This leaves real uncertainty, though step 3b's revoke/grant and step 4's seed logic both look idempotent and safe to rerun.
+
+I'm also checking Paso 2b's glob pattern for applying migration files — it only matches m*.sql, so other scripts in the directory like limpiar_pruebas_uat.sh or import_top20.sql won't get picked up, leaving just m011 to apply.
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 7.926813297s
+- **Model:** Claude Opus 5.5 (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:01 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+If set -e is active, a migration failure would properly abort before step 3 runs, which is good — though I notice the script doesn't wrap the migration in a transaction, so m011 should use START TRANSACTION/COMMIT for InnoDB DML to avoid partial application. Now I want to check the KVM2 web_contenidos edits made after the last local pull.
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.018314141s
+- **Model:** Claude Opus 5.5 (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:01 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+I see 62 rows edited on KVM2 by admin on 10-05 between 12:19 and 15:39, and the commit messages reference pulling CMS content from KVM2 to local. I need to pin down when that pull actually happened, then check the local actualizado_en timestamps for these same rows — if fields like quienes-somos.ficha1.texto were later edited locally on 10-06 or 10-07, that would create a conflict with the KVM2 source.
+
+Comparing value lengths between KVM2 and local, several fields differ meaningfully (ficha1 and ficha4 text lengths, especialidades carousel copy), suggesting local may have been cleaned up or edited separately rather than just mirroring the pull. I'm also trying to trace who made the 10-05 prod edits — the nginx logs show save requests around 14:44-14:47 from IP 187.149.130.255, which also shows up with a referrer pointing to the reception page, while a different IP, 187.149.151.36, was used for PDF uploads, likely by lab staff rather than the client.
+
+I want to figure out whether 187.149.130.255 belongs to Carlos, since it also hit the recepción route on 10-07 and 10-08 — checking my own public IP via an external lookup could help confirm that. I also need to pull the local database's actualizado_en timestamps for the 62 keys edited in KVM2 to see if the content matches and when local received them.
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 12.106801796s
+- **Model:** Claude Opus 5.5 (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:07 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Opus 5.5 (High)
+</details>
+
+---
+
+### Execution Error
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:07 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Opus 5.5 (High)
+</details>
+
+---
+
+### Execution Error
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:07 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Opus 5.5 (High)
+</details>
+
+---
+
+### Execution Error
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:07 pm
+
+---
+
+## User Request
+
+Continua.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `cms-upload.js`
+**Language:** javascript
+
+**Open Files:**
+- `cms-upload.js`
+- `website.js`
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Initial investigation focuses on the requested Step 3 update, specifically the mandatory database backup on KVM2. Must determine KVM2's current status, encompassing the database, web applications, and any potential gaps or issues before proceeding. The previous overload error requires a thorough assessment to avoid recurrence.
+
+
+The `sysadmin` user on KVM2 lacks the necessary permissions to execute the database backup script directly or with `sudo` due to restrictive file permissions and the absence of a `NOPASSWD` entry in the `sudoers` configuration.  Direct execution via SSH will fail due to file access restrictions. Executing with `sudo` also fails because the script isn't configured for passwordless sudo. A substantial permissions gap exists that must be addressed before proceeding with the backup.
+
+
+Two potential solutions exist: leverage existing `NOPASSWD` sudo access through a specific script or determine if the application user can execute the database dump directly. The former uses a script that already runs with root privileges and could incorporate the backup. The latter needs validation of the application user's dump permissions. The script's `sudo` privileges offer a clear path, if the backup operation is integrated before Step 2b.
+
+
+The `deploy.sh` script, executed with `sudo` NOPASSWD on KVM2, is critical. It calls `setup_hostinger.sh`, which runs database migrations, but the steps involving database dropping are skipped.  Crucially, there is no risk of overwriting the work done locally. Step 3 is therefore the relevant next step to examine after the database migrations.
+
+
+The database password `H_APP_PASS` is retrieved from the `.env` file on KVM2, specifically `laesh_2026_dev`. The `setup_hostinger.sh` script, running with root privileges, presents a suitable place to integrate the database backup before migrations. This approach avoids any disruption to PHP-FPM or Swoole connections.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 14.160814294s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:08 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+The `mariadb-dump` error indicates a permission issue; the `laesh_app` user lacks `LOCK TABLES` privileges. This aligns with the Least Privilege principle enforced by the system, where this user has restricted permissions. The `setup_hostinger.sh` script, running as root, is likely the context where the dump is attempted, and therefore the dump may be failing within this script.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.068280603s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:09 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+`sysadmin` can transfer files to `/opt/laesh/assets/laesh-web-assets-uipv1a/cms/` without permission issues because it has `777` permissions. Assessing the overall KVM2 status reveals `nginx` is active and responding via HTTPS, `mariadb` is active with 42 tables and 1.69MB of data, `php8.3-fpm` is active, and `swoole-laesh` is active on port 950.
+
+
+The most recent backup occurred yesterday, and the daily cron runs as scheduled. L2 cache files are present, and the cache renewal script ran successfully. Disk space utilization is low, but a system reboot is pending due to an unattended update. The backup script requires root privileges but `sysadmin` does not have direct `sudo` access. Integration of the backup should be handled within the setup script, as `sysadmin` has the appropriate permissions there.
+
+
+The database backup should be integrated directly into the setup script to ensure it runs with the necessary root privileges before migration. The standard asset deployment script explicitly excludes the `cms/` directory, so a separate transfer command is needed for the 19 new images before SQL migration.
+
+The SQL script `m011` must only insert the new key and update the URL, avoiding modification of any production environment or security variables in the `configuraciones` table. The setup script's user modification step must also be carefully reviewed and validated.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 4.334301217s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+## User Request
+
+Si, continua Crear el script SQL m011_sync_cms_contenidos_20261008.sql y preparar el backup preventivo en el script de despliegue.
+.. rectifica que se m011_sync_cms_contenidos_20261008.sql , contenga todos los cambios de contenido hechos en el cms local, este es mandatorio a lo que pueda existir de cms en kvm2.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `cms-upload.js`
+**Language:** javascript
+
+**Open Files:**
+- `website.js`
+- `cms-upload.js`
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Authorization received to proceed. The primary task is to create the SQL script `m011_sync_cms_contenidos_20261008.sql` and prepare a preventive backup within the deployment script.
+
+Crucially, the SQL script must incorporate *all* content changes made in the local CMS, ensuring synchronization and overriding any existing content on the target environment.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.097384311s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:15 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+Local data shows 139 records in `web_contenidos`, 7 in `catalogo_promociones`, and the `maps_fallback_origen` key in `configuraciones`. The current `web_contenidos` record count in KVM2 is 135.
+
+Considering KVM2 had 2 records too many and was missing 6 new records, the updated count in KVM2 will match the local count of 139 (135 - 2 + 6 = 139). This confirms data parity.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.059515690s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:16 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:16 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:16 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:17 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:17 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `README.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L37-59)</summary>
+
+**Path:** `Unknown file`
+
+```
+---
+
+## Estado de migraciones activas
+
+_Ninguna — directorio vacío de `m*.sql`. Toda migración aplicada y validada se folda al script base correspondiente (`00–09`) y se elimina de aquí._
+
+> `m010_optimizacion_indices_modelo.sql` (2026-10-02, **aplicada y foldeada**):
+> - `rel_igabinete_vinculos`: PK autoincremental física `id` + unicidad virtual `uq_vinculo_unico` sobre `(igabinete_id, gabinete_id, IFNULL(subgabinete_id, 0))`.
+> - Depuración de 6 índices secundarios redundantes (`idx_cms_sec_sub_clave`, `idx_seccion` en `web_contenidos`; `idx_medico`, `idx_estado` en `ordenes`; `idx_user` en `notificaciones`; `idx_orden` en `historial_estados_orden`).
+> - `jwt_jti_registry`: índice compuesto `idx_user_revoked (user_id, is_revoked)` y retiro de `idx_is_revoked` e `idx_user_id`.
+> - `catalogo_promociones`: tipo `dia_semana` optimizado a `VARCHAR(255)` (almacenamiento in-row sin off-page storage, preservando HTML de CKEditor).
+> - `vw_estudios_catalogo` y `UpsertEstudioCatalogo`: retiro de `descripcion_breve` y `fecha_modificacion`.
+> - `cat_estudios`: retiro de `categoria_id`, `descripcion_breve`, `detalle`, `fecha_creacion`, `fecha_modificacion` y estandarización a `created_at`/`updated_at`.
+> - `cat_categorias`: retiro de tabla obsoleta y FK `fk_estudio_categoria`.
+> Foldeada a `02_core_schema.sql`, `03_transactional_schema.sql`, `04_auth_extensions.sql`, `06_indexes.sql`, `08_stored_procedures.sql` y `09_views.sql`.
+
+> **Números reutilizados (m006–m009), 2026-10-01 tarde/noche** — no confundir con las entradas de
+> `m006`–`m009` de más abajo (mismo día, más temprano): esos ya se foldearon y se borraron, liberando
+> los números, que una sesión paralela de Claude Code volvió a usar para 4 migraciones nuevas y
+> distintas (autodiagnóstico post-PEN-LAESH-01/02/03/04):
+> - `m006_add_notificaciones_subtipo.sql`: columna `notificaciones.subtipo` + backfill por `tipo`/`titulo`/`mensaje`
+>   (P-LAESH-NOTIF-SUBTIPO-01). Ya vivía en `03_transactional_schema.sql` desde su creación — solo se
+>   confirmó la paridad y se borró el archivo de aquí.
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:18 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+Planning to integrate a preventative backup mechanism into the deployment script. The interaction between the deployment script and the setup script needs review. Focused on the database deployment function within the specific deployment script, specifically lines 196-225, where the incremental database deployment process is defined; this involves syncing database setup files to the staging environment.
+
+
+Focus shifted to the incremental database deployment process. Observed that the process involves syncing database scripts to the staging environment and executing a setup script without the `--drop` flag, ensuring only incremental migrations are applied. The setup script is designed to be idempotent for steps 3, 3b, and 4.
+
+
+Found an ideal location in the setup script for integrating the preventative database backup. This section is reached only when pending database migrations are detected. There is a conditional check that ensures a backup is performed unless the database is being dropped, adding protection to the data before migration.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `setup_hostinger.sh`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 5.550557317s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L174-204)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+# ── PASO 2b: Migraciones incrementales (migrations/m*.sql en orden) ──────────
+# Con --drop: no-op (BD recién creada desde 00-09, sin deltas pendientes).
+# Sin --drop: aplica los m*.sql que existan — deploy incremental a BD viva.
+# Cada m*.sql debe ser idempotente. Tras validar: fold al script base y eliminar.
+echo ""
+echo "── Paso 2b: Migraciones incrementales ─────────────────────────────"
+MIGRATIONS_DIR="${DIR}/migrations"
+if [ -d "${MIGRATIONS_DIR}" ]; then
+    mapfile -t MIGRATION_FILES < <(find "${MIGRATIONS_DIR}" -maxdepth 1 -name 'm*.sql' | sort)
+    if [ ${#MIGRATION_FILES[@]} -eq 0 ]; then
+        echo "  (sin migraciones pendientes)"
+    else
+        for mfile in "${MIGRATION_FILES[@]}"; do
+            mname="$(basename "${mfile}")"
+            echo "→ Aplicando migración ${mname}..."
+            ${MCMD} < "${mfile}"
+            echo "  ✓ ${mname} OK"
+        done
+    fi
+else
+    echo "  (directorio migrations/ no encontrado — omitiendo)"
+fi
+
+# ── PASO 3: Corregir contraseña laesh_app (dev→producción) ───────────────────
+echo ""
+echo "── Paso 3: Fijando contraseña laesh_app → producción ──────────────"
+${MCMD} -e "ALTER USER 'laesh_app'@'%' IDENTIFIED BY '${H_APP_PASS}'; FLUSH PRIVILEGES;" 2>/dev/null
+echo "  ✓ laesh_app password actualizada"
+
+# ── PASO 3b: Least Privilege — revocar GRANT ALL y aplicar solo DML+EXECUTE ──
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:18 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:18 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+Confirmed the shell script's syntactic validity. The next step involves validating the SQL script, `m011_sync_cms_contenidos_20261008.sql`, to ensure it encompasses all mandatory content from the local CMS. The focus is on verifying content within the "calidad" section (3 galleries with corresponding images, titles, descriptions, texts, and navigation tags).
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.151411183s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:19 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `m011_sync_cms_contenidos_20261008.sql`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+-- ============================================================================
+-- m011_sync_cms_contenidos_20261008.sql
+-- Sincronización mandatoria del CMS local hacia producción KVM2
+-- Fecha: 2026-10-08
+-- Cobertura: web_contenidos (139 filas), catalogo_promociones (7 filas),
+--            configuraciones (maps_fallback_origen, maps_url),
+--            depuración de claves huérfanas (carousel16).
+-- ============================================================================
+
+USE `laesh_db`;
+
+SET NAMES utf8mb4;
+SET FOREIGN_KEY_CHECKS = 0;
+
+-- 1. Depuración de claves obsoletas/huérfanas en web_contenidos
+DELETE FROM `web_contenidos` WHERE `seccion` = 'especialidades' AND `subseccion` = 'carousel16';
+
+-- 2. Inserción / Actualización mandatoria de web_contenidos (139 registros)
+INSERT INTO `web_contenidos` (`seccion`, `subseccion`, `clave`, `valor`, `tipo`, `actualizado_por`)
+VALUES
+  ('aviso-privacidad', 'contenido', 'cuerpo_html', '<p class="modal-p" style="-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);box-sizing:border-box;color:rgb(100, 116, 139);font-family:&quot;Gill Sans&quot;, &quot;Gill Sans MT&quot;, Cabin, Calibri, &quot;Trebuchet MS&quot;, sans-serif;font-size:0.9rem;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:400;letter-spacing:normal;line-height:1.75;margin:0px 0px 1rem;orphans:2;padding:0px;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;"><strong style="box-sizing:border-box;margin:0px;padding:0px;">LABORATORIO </strong><span style="color:#71CA11;"><strong style="box-sizing:border-box;margin:0px;padding:0px;">LAESH</strong></span>, con domicilio en Azucenas #8, Fraccionamiento Jardines del Sur, Huajuapan de León, Oaxaca.2, es responsable del tratamiento, uso, protección y resguardo de los datos personales que recaba de sus pacientes, usuarios y personas que solicitan nuestros servicios.</p><h4 class="aviso-h4" style="-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);box-sizing:border-box;color:rgb(0, 82, 183);font-family:&quot;Mosquito Std Black&quot;, &quot;Arial Black&quot;, Impact, sans-serif;font-size:0.9rem;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;letter-spacing:normal;margin:1.25rem 0px 0.35rem;orphans:2;padding:0px;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;">1. Datos personales que recabamos</h4><ul class="aviso-list" style="-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);box-sizing:border-box;color:rgb(100, 116, 139);font-family:&quot;Gill Sans&quot;, &quot;Gill Sans MT&quot;, Cabin, Calibri, &quot;Trebuchet MS&quot;, sans-serif;font-size:0.88rem;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:400;letter-spacing:normal;line-height:1.75;margin:0px 0px 0.75rem;orphans:2;padding:0px 0px 0px 1.2rem;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;"><li style="box-sizing:border-box;margin-bottom:0px;margin-right:0px;margin-top:0px;padding:0px;">Nombre completo.</li><li style="box-sizing:border-box;margin-bottom:0px;margin-right:0px;margin-top:0px;padding:0px;">Fecha de nacimiento y edad.</li><li style="box-sizing:border-box;margin-bottom:0px;margin-right:0px;margin-top:0px;padding:0px;">Sexo.</li><li style="box-sizing:border-box;margin-bottom:0px;margin-right:0px;margin-top:0px;padding:0px;">Datos de contacto, como teléfono, correo electrónico y domicilio.</li><li style="box-sizing:border-box;margin-bottom:0px;margin-right:0px;margin-top:0px;padding:0px;">Datos relacionados con la atención y solicitud de estudios de laboratorio.</li><li style="box-sizing:border-box;margin-bottom:0px;margin-right:0px;margin-top:0px;padding:0px;">Información necesaria para la identificación y entrega de resultados.</li></ul><p class="modal-p--main" style="-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);box-sizing:border-box;color:rgb(15, 23, 42);font-family:&quot;Gill Sans&quot;, &quot;Gill Sans MT&quot;, Cabin, Calibri, &quot;Trebuchet MS&quot;, sans-serif;font-size:0.88rem;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;letter-spacing:normal;margin:0px 0px 0.35rem;orphans:2;padding:0px;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;"><strong>Datos personales sensibles</strong></p><p class="aviso-p aviso-p--sm" style="-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);box-sizing:border-box;color:rgb(100, 116, 139);font-family:&quot;Gill Sans&quot;, &quot;Gill Sans MT&quot;, Cabin, Calibri, &quot;Trebuchet MS&quot;, sans-serif;font-size:0.88rem;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:400;letter-spacing:normal;line-height:1.7;margin:0px 0px 0.5rem;orphans:2;padding:0px;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;">Por la naturaleza de nuestros servicios, podremos tratar datos personales sensibles relacionados con el estado de salud. Estos datos serán tratados con medidas de seguridad y confidencialidad.</p><h4 class="aviso-h4" style="-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);box-sizing:border-box;color:rgb(0, 82, 183);font-family:&quot;Mosquito Std Black&quot;, &quot;Arial Black&quot;, Impact, sans-serif;font-size:0.9rem;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;letter-spacing:normal;margin:1.25rem 0px 0.35rem;orphans:2;padding:0px;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;">2. Finalidades del tratamiento</h4><ol class="aviso-list" style="-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);box-sizing:border-box;color:rgb(100, 116, 139);font-family:&quot;Gill Sans&quot;, &quot;Gill Sans MT&quot;, Cabin, Calibri, &quot;Trebuchet MS&quot;, sans-serif;font-size:0.88rem;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:400;letter-spacing:normal;line-height:1.75;margin:0px 0px 0.75rem;orphans:2;padding:0px 0px 0px 1.2rem;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;"><li style="box-sizing:border-box;margin-bottom:0px;margin-right:0px;margin-top:0px;padding:0px;">Identificar y registrar al paciente.</li><li style="box-sizing:border-box;margin-bottom:0px;margin-right:0px;margin-top:0px;padding:0px;">Solicitar, procesar y entregar estudios de laboratorio.</li><li style="box-sizing:border-box;margin-bottom:0px;margin-right:0px;margin-top:0px;padding:0px;">Elaborar y conservar los resultados correspondientes.</li><li style="box-sizing:border-box;margin-bottom:0px;margin-right:0px;margin-top:0px;padding:0px;">Dar seguimiento a los servicios solicitados.</li><li style="box-sizing:border-box;margin-bottom:0px;margin-right:0px;margin-top:0px;padding:0px;">Atender dudas, aclaraciones o solicitudes relacionadas con sus resultados.</li><li style="box-sizing:border-box;margin-bottom:0px;margin-right:0px;margin-top:0px;padding:0px;">Cumplir con las obligaciones legales y sanitarias aplicables.</li><li style="box-sizing:border-box;margin-bottom:0px;margin-right:0px;margin-top:0px;padding:0px;">Mantener registros administrativos, contables y relacionados con la prestación del servicio.</li></ol><h4 class="aviso-h4" style="-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);box-sizing:border-box;color:rgb(0, 82, 183);font-family:&quot;Mosquito Std Black&quot;, &quot;Arial Black&quot;, Impact, sans-serif;font-size:0.9rem;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;letter-spacing:normal;margin:1.25rem 0px 0.35rem;orphans:2;padding:0px;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;">3. Protección y confidencialidad</h4><p class="aviso-p aviso-p--sm" style="-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);box-sizing:border-box;color:rgb(100, 116, 139);font-family:&quot;Gill Sans&quot;, &quot;Gill Sans MT&quot;, Cabin, Calibri, &quot;Trebuchet MS&quot;, sans-serif;font-size:0.88rem;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:400;letter-spacing:normal;line-height:1.7;margin:0px 0px 0.5rem;orphans:2;padding:0px;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;">Laboratorio LAESH implementa medidas administrativas, técnicas y físicas destinadas a proteger los datos personales contra daño, pérdida, alteración, destrucción, acceso o tratamiento no autorizado.</p><h4 class="aviso-h4" style="-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);box-sizing:border-box;color:rgb(0, 82, 183);font-family:&quot;Mosquito Std Black&quot;, &quot;Arial Black&quot;, Impact, sans-serif;font-size:0.9rem;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;letter-spacing:normal;margin:1.25rem 0px 0.35rem;orphans:2;padding:0px;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;">4. Derechos ARCO</h4><p class="aviso-p aviso-p--sm" style="-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);box-sizing:border-box;color:rgb(100, 116, 139);font-family:&quot;Gill Sans&quot;, &quot;Gill Sans MT&quot;, Cabin, Calibri, &quot;Trebuchet MS&quot;, sans-serif;font-size:0.88rem;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:400;letter-spacing:normal;line-height:1.7;margin:0px 0px 0.5rem;orphans:2;padding:0px;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;">Usted tiene derecho a Acceder, Rectificar, Cancelar u Oponerse al tratamiento de sus datos personales. Para ejercer estos derechos contáctenos por:</p><ul class="aviso-list aviso-list--sm" style="-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);box-sizing:border-box;color:rgb(100, 116, 139);font-family:&quot;Gill Sans&quot;, &quot;Gill Sans MT&quot;, Cabin, Calibri, &quot;Trebuchet MS&quot;, sans-serif;font-size:0.88rem;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:400;letter-spacing:normal;line-height:1.75;margin:0px 0px 0.5rem;orphans:2;padding:0px 0px 0px 1.2rem;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;"><li style="box-sizing:border-box;margin-bottom:0px;margin-right:0px;margin-top:0px;padding:0px;">Correo: <a class="txt-primary-c" style="box-sizing:border-box;color:rgb(0, 82, 183);margin:0px;padding:0px;" href="mailto:11lab_laesh@hotmail.com">11lab_laesh@hotmail.com</a></li><li style="box-sizing:border-box;margin-bottom:0px;margin-right:0px;margin-top:0px;padding:0px;">Teléfono: <strong style="box-sizing:border-box;margin:0px;padding:0px;">953 688 769410</strong></li><li style="box-sizing:border-box;margin-bottom:0px;margin-right:0px;margin-top:0px;padding:0px;">Domicilio: Azucenas #8, Fraccionamiento Jardines del Sur, Huajuapan de León, Oaxaca.2</li></ul><h4 class="aviso-h4" style="-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);box-sizing:border-box;color:rgb(0, 82, 183);font-family:&quot;Mosquito Std Black&quot;, &quot;Arial Black&quot;, Impact, sans-serif;font-size:0.9rem;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;letter-spacing:normal;margin:1.25rem 0px 0.35rem;orphans:2;padding:0px;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;">5. Modificaciones</h4><p class="aviso-p aviso-p--sm" style="-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);box-sizing:border-box;color:rgb(100, 116, 139);font-family:&quot;Gill Sans&quot;, &quot;Gill Sans MT&quot;, Cabin, Calibri, &quot;Trebuchet MS&quot;, sans-serif;font-size:0.88rem;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:400;letter-spacing:normal;line-height:1.7;margin:0px 0px 0.5rem;orphans:2;padding:0px;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;">Laboratorio LAESH podrá modificar este Aviso cuando resulte necesario. Las modificaciones estarán disponibles en nuestro sitio web.</p><p class="modal-p--sm" style="-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);box-sizing:border-box;color:rgb(100, 116, 139);font-family:&quot;Gill Sans&quot;, &quot;Gill Sans MT&quot;, Cabin, Calibri, &quot;Trebuchet MS&quot;, sans-serif;font-size:0.8rem;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:400;letter-spacing:normal;margin:0px 0px 1rem;orphans:2;padding:0px;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;"><i>Última actualización: agosto de 2026</i></p><div class="highlight-block" style="-webkit-text-stroke-width:0px;background-color:rgba(113, 202, 17, 0.06);border-left:3px solid rgb(113, 202, 17);border-radius:0px 6px 6px 0px;box-sizing:border-box;color:rgb(15, 23, 42);font-family:&quot;Gill Sans&quot;, &quot;Gill Sans MT&quot;, Cabin, Calibri, &quot;Trebuchet MS&quot;, sans-serif;font-size:16.8px;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:400;letter-spacing:normal;margin:0.5rem 0px 0px;orphans:2;padding:0.85rem 1rem;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;"><p class="modal-p--pgd" style="box-sizing:border-box;color:rgb(0, 82, 183);font-size:0.88rem;margin:0px 0px 0.35rem;padding:0px;"><strong>Consentimiento</strong></p><p class="modal-p--tail" style="box-sizing:border-box;color:rgb(100, 116, 139);font-size:0.88rem;line-height:1.7;margin:0px;padding:0px;">Declaro que he leído y comprendido el presente Aviso de Privacidad y manifiesto mi consentimiento para el tratamiento de mis datos personales para las finalidades señaladas.</p></div>', 'html', 1),
+  ('calidad', 'gallery1', 'activo', '1', 'texto', 1),
+  ('calidad', 'gallery1', 'descripcion', 'Se entrega a los MEJORES LABORATORIOS del país por demostrar EXCELENCIA en la CALIDAD', 'texto', 1),
+  ('calidad', 'gallery1', 'imagen_url', '/laesh-web-assets-uipv1a/cms/calidad-gallery1-20261006-e8edebde.webp', 'imagen_url', 1),
+  ('calidad', 'gallery1', 'texto', '<h3 style="text-align:center;">Galardón REY PACAL</h3><p>Se entrega a los MEJORES LABORATORIOS del país por demostrar EXCELENCIA en la CALIDAD</p>', 'texto', 1),
+  ('calidad', 'gallery1', 'titulo', 'Galardón REY PACAL', 'texto', 1),
+  ('calidad', 'gallery2', 'activo', '1', 'texto', 1),
+  ('calidad', 'gallery2', 'descripcion', 'Elegir un laboratorio evaluado con EXCELENCIA marca la diferencia en: calidad, seguridad y confianza', 'texto', 1),
+  ('calidad', 'gallery2', 'imagen_url', '/laesh-web-assets-uipv1a/cms/calidad-gallery2-20261006-ce2aa40b.webp', 'imagen_url', 1),
+  ('calidad', 'gallery2', 'texto', '<h3 style="text-align:center;">Excelencia en la Calidad</h3><p>Elegir un laboratorio evaluado con EXCELENCIA marca la diferencia en: calidad, seguridad y confianza</p>', 'texto', 1),
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `m011_sync_cms_contenidos_20261008.sql`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L189-241)</summary>
+
+**Path:** `Unknown file`
+
+```
+  `activo` = VALUES(`activo`),
+  `orden` = VALUES(`orden`),
+  `actualizado_en` = NOW();
+
+INSERT INTO `catalogo_promociones` (`id`, `dia_semana`, `imagen_fondo`, `activo`, `orden`)
+VALUES (4, '<h3 style="text-align:center;"><span style="color:#71CA11;">Jueves</span></h3>', '/laesh-web-assets-uipv1a/cms/promo-4-20260925-df907bc0.webp', 1, 4)
+ON DUPLICATE KEY UPDATE
+  `dia_semana` = VALUES(`dia_semana`),
+  `imagen_fondo` = VALUES(`imagen_fondo`),
+  `activo` = VALUES(`activo`),
+  `orden` = VALUES(`orden`),
+  `actualizado_en` = NOW();
+
+INSERT INTO `catalogo_promociones` (`id`, `dia_semana`, `imagen_fondo`, `activo`, `orden`)
+VALUES (5, '<h3 style="text-align:center;"><span style="color:#A3C912;">Viernes</span></h3>', '/laesh-web-assets-uipv1a/cms/promo-5-20260925-425956c4.webp', 1, 5)
+ON DUPLICATE KEY UPDATE
+  `dia_semana` = VALUES(`dia_semana`),
+  `imagen_fondo` = VALUES(`imagen_fondo`),
+  `activo` = VALUES(`activo`),
+  `orden` = VALUES(`orden`),
+  `actualizado_en` = NOW();
+
+INSERT INTO `catalogo_promociones` (`id`, `dia_semana`, `imagen_fondo`, `activo`, `orden`)
+VALUES (6, '<h3 style="text-align:center;"><span style="color:#71CA11;">Sabado</span></h3>', '/laesh-web-assets-uipv1a/cms/promo-6-20260925-ffd85727.webp', 1, 6)
+ON DUPLICATE KEY UPDATE
+  `dia_semana` = VALUES(`dia_semana`),
+  `imagen_fondo` = VALUES(`imagen_fondo`),
+  `activo` = VALUES(`activo`),
+  `orden` = VALUES(`orden`),
+  `actualizado_en` = NOW();
+
+INSERT INTO `catalogo_promociones` (`id`, `dia_semana`, `imagen_fondo`, `activo`, `orden`)
+VALUES (7, '<h3 style="text-align:center;"><span style="color:#A3C912;">Domingo</span></h3>', '/laesh-web-assets-uipv1a/cms/promo-7-20260925-b19074a7.webp', 1, 7)
+ON DUPLICATE KEY UPDATE
+  `dia_semana` = VALUES(`dia_semana`),
+  `imagen_fondo` = VALUES(`imagen_fondo`),
+  `activo` = VALUES(`activo`),
+  `orden` = VALUES(`orden`),
+  `actualizado_en` = NOW();
+
+-- 4. Inserción / Actualización en configuraciones (Parámetros CMS)
+INSERT INTO `configuraciones` (`clave`, `valor`)
+VALUES ('maps_fallback_origen', 'Bodega Aurrera, Av. 5 de Febrero 26-A, Jardines del Sur, 69007 Heroica Cdad. de Huajuapan de León, Oax.')
+ON DUPLICATE KEY UPDATE `valor` = VALUES(`valor`), `actualizado_en` = NOW();
+
+INSERT INTO `configuraciones` (`clave`, `valor`)
+VALUES ('maps_url', 'https://www.google.com/maps/dir/?api=1&destination=Laboratorio+de+Especialidades+Hematol%C3%B3gicas+S.C.,+Calle+Azucenas+%238,+Jardines+del+Sur,+69007+Heroica+Cdad.+de+Huajuapan+de+Le%C3%B3n,+Oax.')
+ON DUPLICATE KEY UPDATE `valor` = VALUES(`valor`), `actualizado_en` = NOW();
+
+SET FOREIGN_KEY_CHECKS = 1;
+
+-- Fin de migración m011
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+`m011_sync_cms_contenidos_20261008.sql` script generated and syntax verified against the database system. Prepared the deployment script, `setup_hostinger.sh`, implementing the mandatory preventative backup step requiring root access, as specified in the instructions. This preparation is documented in the migrations README.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.204819984s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+## User Request
+
+y el paso/deploy de las phps, webassets implicados  ?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `cms-upload.js`
+**Language:** javascript
+
+**Open Files:**
+- `cms-upload.js`
+- `website.js`
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The user requires clarification on the deployment timing of PHP files and web assets within the outlined plan.  Considering the preceding steps, specifically the SQL script generation and WebP image upload, the PHP deployment is likely the next logical phase.  It is necessary to understand how the web assets integrate with the PHP deployment process, as these are related and will need to be deployed accordingly.
+
+
+Web assets are deployed in a two-stage process: synchronization to staging, followed by publishing to production with an exclusion for protected directories and specific permissions. PHP files undergo an rsync from the source location, followed by a reload to ensure the new code is active.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 2.358552137s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+## User Request
+
+SI, dale ; realiza de forma metodica y sin inyeción de bugs, gaps; y sin  retrocesos.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `cms-upload.js`
+**Language:** javascript
+
+**Open Files:**
+- `cms-upload.js`
+- `website.js`
+</details>
+
+---
+
+<details>
+<summary>Conversation History</summary>
+
+# Conversation History
+Here are the conversation IDs, titles, and summaries of your most recent 1 conversations, in reverse chronological order:
+
+<conversation_summaries>
+## Conversation 271cf0e5-208e-4450-991e-bc8c1276fb61: Diagnóstico Error Ordenamiento Estudios
+- Created: 2026-10-08T14:33:27Z
+- Last modified: 2026-10-08T20:54:38Z
+
+</conversation_summaries>
+
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:25 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+Reviewing the request, it's a confirmation to proceed methodically, avoiding bugs or regressions, in relation to PHP and web asset deployment. The user is affirming the action regarding a previous question about the deployment step or process for these elements. Thus, confirming the deployment instructions from before.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.003099024s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:25 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:26 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:26 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:26 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `deploy.sh`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+#!/usr/bin/env bash
+# ══════════════════════════════════════════════════════════════════════════════
+# deploy.sh — Despliegue canónico a KVM2 (laesh.mx producción)
+#
+# Todas las rutas se leen de SERVER_MAP.env (mismo directorio).
+# NO hardcodear rutas aquí — editar SERVER_MAP.env.
+#
+# USO (desde raíz del repo restaurantb):
+#   bash setup/deploy/laesh-kvm2-prod/deploy.sh webapp    # PHP app
+#   bash setup/deploy/laesh-kvm2-prod/deploy.sh assets    # CSS/JS/img
+#   bash setup/deploy/laesh-kvm2-prod/deploy.sh scripts   # setup/BD scripts
+#   bash setup/deploy/laesh-kvm2-prod/deploy.sh all       # las 3
+#
+# Actualizado: 2026-09-09
+# ══════════════════════════════════════════════════════════════════════════════
+set -euo pipefail
+
+# ── Cargar mapa de rutas canónico ─────────────────────────────────────────────
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "${SCRIPT_DIR}/SERVER_MAP.env"
+
+# ── Verificar raíz del repo ───────────────────────────────────────────────────
+REPO_ROOT="$(cd "${SCRIPT_DIR}/../../.." && pwd)"
+if [[ ! -d "${REPO_ROOT}/www/laesh-swbldi" ]]; then
+    echo "✗ ERROR: Ejecutar desde raíz del repo (no se encontró www/laesh-swbldi)"
+    exit 1
+fi
+
+# ── Opciones rsync comunes ────────────────────────────────────────────────────
+# --no-group --no-owner : sysadmin no puede chgrp/chown en dirs root/www-data del servidor.
+# --omit-dir-times      : sysadmin no puede utimes() en dirs que no son suyos.
+#   Rsync transfiere contenido de archivos sin tocar metadatos de directorios.
+RSYNC_OPTS=(-avz --checksum --delete
+    --no-group --no-owner --no-perms --omit-dir-times
+    --exclude='.git/'
+    --exclude='.env'
+    --exclude='*.log'
+    --exclude='node_modules/'
+    --exclude='vendor/'
+    --exclude='.DS_Store'
+    # 2026-10-01: certificados/llaves locales (p. ej. www/ca.crt de mkcert) nunca viajan
+    --exclude='*.crt'
+    --exclude='*.key'
+    --exclude='*.pem'
+)
+
+# ── Funciones ─────────────────────────────────────────────────────────────────
+_header() { echo ""; echo "══ $1 ══"; }
+_ok()     { echo "  ✓ $1"; }
+_err()    { echo "  ✗ ERROR: $1" >&2; exit 1; }
+
+# 2026-10-01 (PEN-LAESH-18): verifica que PHP-FPM y swoole-laesh usen la misma llave
+# interna del bridge. Ejecuta scripts/ws_bridge_check.sh en KVM2 vía 'bash -s' (no
+# depende de que el script esté instalado en /opt/laesh/scripts). Desfase → aborta.
+_check_ws_bridge() {
+    local out rc
+    # '&& rc=0 || rc=$?' — con set -e, una asignación que falla abortaría antes del case
+    out="$(ssh "${KVM2_SSH}" 'bash -s' < "${SCRIPT_DIR}/scripts/ws_bridge_check.sh" 2>&1)" && rc=0 || rc=$?
+    case $rc in
+        0) _ok "${out#ws_bridge_check: }" ;;
+        1) _err "${out} — las notificaciones en tiempo real fallarán con 403 hasta corregirlo." ;;
+        *) echo "  ⚠ ${out} (verificación omitida)" ;;
+    esac
+}
+
+_check_pending_migrations() {
+    # Hallazgo 2026-09-20 (auditoría de alineación bash↔SQL): setup_hostinger.sh
+    # sin --drop omite el Paso 2 (00-09) por completo — un `deploy.sh webapp`
+    # que despliegue PHP dependiente de un cambio de schema/SP sin que ese
+    # cambio ya esté en KVM2 (vía --drop o vía migrations/) rompe en el primer
+    # request real. No bloquea el deploy (puede haber migraciones pendientes
+    # no relacionadas con este PHP) — solo advierte fuerte y pide confirmar.
+    local pending
+    pending=$(find "${REPO_ROOT}/setup/bds/laesh/migrations" -maxdepth 1 -name 'm*.sql' 2>/dev/null | sort)
+    if [[ -n "${pending}" ]]; then
+        echo ""
+        echo "  ⚠️  ADVERTENCIA: hay migración(es) SQL pendiente(s) en tu copia local:"
+        echo "${pending}" | sed 's/^/       /'
+        echo "     Si el PHP que vas a desplegar depende de ese cambio de schema/SP"
+        echo "     (ej. llamadas a un stored procedure con firma nueva), aplica"
+        echo "     primero: bash $(basename "$0") bd"
+        echo ""
+        read -r -p "  ¿Continuar de todos modos con el deploy de webapp? [s/N] " _confirm
+        [[ "${_confirm}" =~ ^[sS]$ ]] || { echo "  Cancelado."; exit 1; }
+    fi
+}
+
+deploy_webapp() {
+    _check_pending_migrations
+    _header "WEBAPP PHP → ${KVM2_SSH}:${KVM2_WEBAPP}/"
+    local rsync_out
+    rsync_out="$(mktemp)"
+    rsync "${RSYNC_OPTS[@]}" \
+        --exclude='crons/*.log' \
+        --exclude='logs/'       \
+        --exclude='uploads/'    \
+        --exclude='docs-dev/'   \
+        "${REPO_ROOT}/www/laesh-swbldi/" \
+        "${KVM2_SSH}:${KVM2_WEBAPP}/" | tee "${rsync_out}"
+    _ok "webapp desplegada"
+
+    # cms-trash/ lo crea cms_cleanup.php en su primera ejecución real (www-data → ownership correcto)
+    echo "  → Recargando PHP-FPM..."
+    ssh "${KVM2_SSH}" "sudo systemctl reload ${KVM2_PHP_FPM_SERVICE}"
+    _ok "${KVM2_PHP_FPM_SERVICE} recargado"
+
+    # Hallazgo 2026-09-18: swoole-laesh es un proceso de larga duración (no por-request
+    # como PHP-FPM) — cambios en commons/swoole_server.php (o cualquier clase que
+    # importe, ej. notifier.php, JwtManager.php, Cache.php) no toman efecto hasta que
+    # el proceso vuelve a leer el código desde disco.
+    # VERIFICADO EMPÍRICAMENTE (2026-09-18): 'systemctl reload' (SIGHUP) NO recarga
+    # código — solo reabre file descriptors de log (por eso logrotate-laesh.conf lo usa
+    # para swoole.log, un propósito distinto). Confirmado con marcador de prueba: tras
+    # 'reload' el marcador no aparecía en /status; tras 'restart' sí. Tocar solo 'reload'
+    # aquí dejaría el proceso corriendo código viejo de forma silenciosa — se usa
+    # 'restart' a propósito, aunque cierra las conexiones WS activas (mitigado por el
+    # reintento automático + fallback a polling ya existente en ws-client.js).
+    # Hallazgo 2026-09-18: 'sudo systemctl restart ... 2>/dev/null || true' silenciaba
+    # un fallo REAL de sudo (faltaba entrada en /etc/sudoers.d/laesh-deploy — ver README
+    # §Sudoers) — el curl /status posterior solo confirmaba que el proceso VIEJO seguía
+    # vivo, reportando éxito falso mientras el código nuevo nunca se aplicaba. Ahora se
+    # verifica el exit code real del restart, y se aborta (no silenciar) si falla.
+    #
+    # 2026-10-01: el restart corría en CADA deploy de webapp (33 el 2026-09-30) y
+    # cada uno desconecta todas las pestañas abiertas. swoole_server.php solo carga
+    # commons/ (vía autoload.php + config.php) y libs/ — si el rsync no tocó nada
+    # ahí, el proceso no tiene código nuevo que leer y el restart se omite.
+    # Forzar: LAESH_FORCE_SWOOLE_RESTART=1 bash deploy.sh webapp
+    if [[ "${LAESH_FORCE_SWOOLE_RESTART:-0}" != "1" ]] \
+       && ! grep -Eq '^(deleting )?(commons|libs)/' "${rsync_out}"; then
+        rm -f "${rsync_out}"
+        _ok "swoole-laesh NO reiniciado — sin cambios en commons/ ni libs/ (conexiones WS intactas)"
+        _check_ws_bridge
+        return 0
+    fi
+    rm -f "${rsync_out}"
+    echo "  → Reiniciando swoole-laesh (código nuevo requiere restart, no reload)..."
+    if ! ssh "${KVM2_SSH}" "sudo systemctl restart swoole-laesh"; then
+        _err "systemctl restart swoole-laesh falló — verificar /etc/sudoers.d/laesh-deploy (ver README §Sudoers). swoole-laesh puede estar corriendo código VIEJO."
+    fi
+    sleep 3
+    ssh "${KVM2_SSH}" "curl -sf --max-time 5 http://127.0.0.1:9502/status > /dev/null" \
+        && _ok "swoole-laesh reiniciado y respondiendo" \
+        || _err "swoole-laesh reiniciado pero /status no respondió — verificar manualmente (journalctl -u swoole-laesh)"
+    _check_ws_bridge
+}
+
+deploy_assets() {
+    # Paso 1/2 — local → staging (revisar antes de publicar a producción)
+    # 2026-09-30 (DRIFT-COMPILED-JS-01): catalog-compiled.js y config-compiled.js
+    # son ARTEFACTOS GENERADOS por CatalogBuilder::build()/ConfigBuilder::build()
+    # a partir de la BD de CADA entorno (prod usa su propia BD, Docker local usa
+    # la suya, con datos de prueba distintos) — NUNCA deben viajar local→prod,
+    # o se sobreescribe el compilado real de producción con datos de prueba
+    # locales. Excluidos aquí igual que cms/ (contenido runtime, no fuente).
+    # Hallazgo de la auditoría de alineación KVM2↔SSOT del 2026-09-30.
+    _header "ASSETS paso 1/2 — local → staging: ${KVM2_SSH}:${KVM2_ASSETS_STAGING}/"
+    chmod 777 "${REPO_ROOT}/www/laesh-web-assets-uipv1a/js/"
+    rsync "${RSYNC_OPTS[@]}" \
+        --exclude='cms/' \
+        --exclude='js/catalog-compiled.js' \
+        --exclude='js/catalog-data.js' \
+        --exclude='js/config-compiled.js' \
+        "${REPO_ROOT}/www/laesh-web-assets-uipv1a/" \
+        "${KVM2_SSH}:${KVM2_ASSETS_STAGING}/"
+    _ok "assets en staging — revisar con: ssh ${KVM2_SSH} 'ls ${KVM2_ASSETS_STAGING}/'"
+    echo "  → Para publicar a producción: bash deploy.sh assets-publish"
+}
+
+deploy_assets_publish() {
+    # Paso 2/2 — staging → producción (ejecutar después de revisar staging)
+    # --exclude='cms/'       protege imágenes subidas por el CMS (www-data, no en repo)
+    # --exclude='cms-trash/' protege papelera de cms_cleanup.php (www-data, rsync no puede leer)
+    # --no-group --no-owner --omit-dir-times: sysadmin no es dueño de /opt/laesh/assets/
+    # js/*-compiled.js: excluidos de staging desde el paso 1 (DRIFT-COMPILED-JS-01)
+    # — deben excluirse TAMBIÉN aquí, o --delete los borraría de producción al no
+    # existir en staging (serían huérfanos, no "no deseados").
+    _header "ASSETS paso 2/2 — staging → producción: ${KVM2_SSH}:${KVM2_ASSETS}/"
+    ssh "${KVM2_SSH}" "rsync -avz --checksum --delete \
+        --no-group --no-owner --no-perms --omit-dir-times \
+        --exclude='cms/' \
+        --exclude='cms-trash/' \
+        --exclude='js/catalog-compiled.js' \
+        --exclude='js/catalog-data.js' \
+        --exclude='js/config-compiled.js' \
+        '${KVM2_ASSETS_STAGING}/' \
+        '${KVM2_ASSETS}/'"
+    # 2026-09-30: config-compiled.js (ConfigBuilder, análogo a catalog-compiled.js)
+    # sumado al mismo bloque de ownership — requiere su propia entrada NOPASSWD
+    # en /etc/sudoers.d/laesh-deploy (ver README §Sudoers) porque sudo hace match
+    # exacto del comando completo, no por patrón/wildcard.
+    ssh "${KVM2_SSH}" "sudo chmod 0775 ${KVM2_ASSETS}/js/ 2>/dev/null || true; sudo chown www-data:www-data ${KVM2_ASSETS}/js/catalog-compiled.js ${KVM2_ASSETS}/js/catalog-data.js 2>/dev/null || true; sudo chmod 0664 ${KVM2_ASSETS}/js/catalog-compiled.js ${KVM2_ASSETS}/js/catalog-data.js 2>/dev/null || true; sudo chown www-data:www-data ${KVM2_ASSETS}/js/config-compiled.js 2>/dev/null || true; sudo chmod 0664 ${KVM2_ASSETS}/js/config-compiled.js 2>/dev/null || true"
+    _ok "assets publicados a producción (cms/ y cms-trash/ excluidos — imágenes CMS intactas)"
+}
+
+deploy_bd() {
+    # Deploy incremental de BD — para cambios a BD viva sin --drop.
+    # Flujo:
+    #   1. Sincroniza setup/bds/laesh/ completo a KVM2 staging (incluye migrations/)
+    #   2. Corre setup_hostinger.sh SIN --drop en KVM2:
+    #      - Paso 2b aplica los m*.sql activos en migrations/
+    #      - Pasos 3, 3b, 4 son idempotentes (no-op si ya están aplicados)
+    # Prerrequisito: /opt/laesh/configs/.env y .mariadb-root.cnf en KVM2
+    _header "BD INCREMENTAL → ${KVM2_SSH} (setup_hostinger.sh sin --drop)"
+    # Paso 1: sincronizar scripts de BD al staging
+    rsync "${RSYNC_OPTS[@]}" \
+        --exclude='bds/voz_cocina_dual/' \
+        "${REPO_ROOT}/setup/bds/" \
+        "${KVM2_SSH}:${KVM2_SETUP_DIR}/bds/"
+    _ok "scripts BD sincronizados a staging"
+    # Paso 2: correr setup_hostinger.sh en KVM2 (lee creds desde .env + .mariadb-root.cnf)
+    # Hallazgo 2026-09-20 (auditoría): setup_hostinger.sh necesita leer
+    # /opt/laesh/configs/.mariadb-root.cnf (600 root:root) — sin sudo, sysadmin
+    # no puede abrirlo y el script aborta con "H_ROOT_PASS no definida", pese a
+    # que esta función se documenta como el camino BD incremental estándar.
+    # Requiere la entrada NOPASSWD de setup_hostinger.sh en
+    # /etc/sudoers.d/laesh-deploy (ver README §Sudoers) — si falta, sudo pedirá
+    # contraseña en una sesión SSH no interactiva y este paso fallará con
+    # "sudo: a password is required"; el mensaje ya apunta a la causa exacta.
+    echo "  → Ejecutando setup_hostinger.sh en KVM2 (sin --drop)..."
+    ssh "${KVM2_SSH}" "sudo /usr/bin/bash ${KVM2_SETUP_DIR}/bds/laesh/setup_hostinger.sh"
+    _ok "BD incremental aplicada — revisar output arriba"
+    echo ""
+    echo "  ⚠  Tras validar cada migración: fold al script base 00–09 + eliminar m*.sql"
+}
+
+deploy_scripts() {
+    _header "SCRIPTS/SETUP → ${KVM2_SSH}:${KVM2_SETUP_DIR}/"
+    rsync "${RSYNC_OPTS[@]}" \
+        --exclude='bds/voz_cocina_dual/' \
+        --exclude='deploy/deploy_oci_laesh.sh' \
+        "${REPO_ROOT}/setup/" \
+        "${KVM2_SSH}:${KVM2_SETUP_DIR}/"
+    _ok "scripts/setup desplegados (excluidos: bds/voz_cocina_dual, deploy_oci_laesh.sh)"
+}
+
+# ── Main ──────────────────────────────────────────────────────────────────────
+if [[ $# -eq 0 ]]; then
+    echo "Uso: bash deploy.sh [webapp|assets|assets-publish|bd|scripts|all]"
+    echo ""
+    echo "── Setup desde cero (servidor nuevo / --nuke) ──"
+    echo "  webapp          → rsync PHP   local → ${KVM2_SSH}:${KVM2_WEBAPP}/ + reload php-fpm"
+    echo "  assets          → rsync CSS/JS local → staging ${KVM2_SSH}:${KVM2_ASSETS_STAGING}/ (paso 1/2)"
+    echo "  assets-publish  → rsync staging → producción ${KVM2_SSH}:${KVM2_ASSETS}/ (paso 2/2)"
+    echo "  scripts         → rsync setup/ local → ${KVM2_SSH}:${KVM2_SETUP_DIR}/"
+    echo "  all             → webapp + assets (paso 1) + scripts  [assets-publish requiere paso explícito]"
+    echo ""
+    echo "  ⚠  Si agregas un cron nuevo (setup/deploy/laesh-kvm2-prod/crones/*.cron):"
+    echo "     'scripts' solo lo deja en staging — falta instalarlo. En KVM2, correr:"
+    echo "       sudo -E bash ${KVM2_SETUP_DIR}/deploy/laesh-kvm2-prod/07_security_harden.sh"
+    echo "     (ese script sincroniza staging → /opt/laesh/crones/ como primer paso"
+    echo "      y luego instala/actualiza cada cron.d — ver GAP-CRONES-STAGING-01)"
+    echo ""
+    echo "── Deploy incremental (BD viva, sin --drop) ────"
+    echo "  bd              → sync bds/ + corre setup_hostinger.sh sin --drop en KVM2"
+    echo "                    aplica migrations/m*.sql activos (idempotentes)"
+    echo "                    Prerreq: crear mNNN_*.sql en setup/bds/laesh/migrations/"
+    exit 0
+fi
+
+for ARG in "$@"; do
+    case "${ARG}" in
+        webapp)          deploy_webapp          ;;
+        assets)          deploy_assets          ;;
+        assets-publish)  deploy_assets_publish  ;;
+        bd)              deploy_bd              ;;
+        scripts)         deploy_scripts         ;;
+        all)
+            deploy_webapp
+            deploy_assets    # solo staging — correr assets-publish por separado tras revisar
+            deploy_scripts
+            ;;
+        *)
+            echo "Argumento desconocido: ${ARG}"
+            echo "Uso: bash deploy.sh [webapp|assets|assets-publish|bd|scripts|all]"
+            exit 1
+            ;;
+    esac
+done
+
+echo ""
+echo "══ Deploy completado $(date '+%Y-%m-%d %H:%M:%S') ══"
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `SERVER_MAP.env`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+#!/usr/bin/env bash
+# ══════════════════════════════════════════════════════════════════════════════
+# SERVER_MAP.env — Mapa canónico de rutas · LAESH KVM2 Producción
+#
+# PROPÓSITO
+#   Fuente de verdad única para TODAS las rutas del proyecto LAESH.
+#   Usada por humanos, IAs (Claude/Gemini) y scripts de bash por igual.
+#
+# USO EN BASH
+#   source "$(dirname "$0")/SERVER_MAP.env"
+#   echo "$KVM2_ASSETS"      # → /opt/laesh/assets/laesh-web-assets-uipv1a/
+#
+# REGLA DE ORO
+#   Antes de escribir cualquier ruta en un script, rsync, crontab o
+#   comentario: consultar este archivo. Si la ruta no está aquí,
+#   agregarla antes de usarla. Si difiere de lo aquí registrado,
+#   la que manda es ESTA.
+#
+# MANTENIMIENTO
+#   Actualizado: 2026-09-09
+#   Cualquier cambio de infra en KVM2 → actualizar aquí primero.
+# ══════════════════════════════════════════════════════════════════════════════
+
+# ── A. LOCAL (máquina de desarrollo / Carlos) ─────────────────────────────────
+
+# Raíz del repo contenedor (restaurantb)
+LOCAL_REPO_ROOT="/home/carlos/GitHub/caelitandem_home/restaurantb"
+
+# Repo anidado de la webapp PHP (propio .git, manejado por sync_all_repos.sh)
+LOCAL_WEBAPP_REPO="${LOCAL_REPO_ROOT}/www"
+
+# Webapp PHP — fuente para rsync
+LOCAL_WEBAPP="${LOCAL_REPO_ROOT}/www/laesh-swbldi"
+
+# Assets estáticos — fuente para rsync
+LOCAL_ASSETS="${LOCAL_REPO_ROOT}/www/laesh-web-assets-uipv1a"
+
+# Scripts de setup y migración
+LOCAL_SETUP="${LOCAL_REPO_ROOT}/setup"
+
+# Migraciones SQL
+LOCAL_MIGRATIONS="${LOCAL_REPO_ROOT}/setup/bds/laesh/migrations"
+
+# Script de deploy canónico (este directorio)
+LOCAL_DEPLOY_DIR="${LOCAL_REPO_ROOT}/setup/deploy/laesh-kvm2-prod"
+
+
+# ── B. KVM2 — SISTEMA (nivel SO, Nginx, PHP, MariaDB) ────────────────────────
+
+# Alias SSH — definido en ~/.ssh/config (Host laesh-kvm2)
+# El config maneja: HostName 83.136.219.193 · User sysadmin · Port 22
+#                   IdentityFile ~/.ssh/id_laesh_kvm2 · IdentitiesOnly yes
+# NO hardcodear host/user/port aquí — editar ~/.ssh/config si algo cambia.
+KVM2_SSH="laesh-kvm2"
+
+# Nginx — binario y configuración
+KVM2_NGINX_BIN="/usr/sbin/nginx"
+KVM2_NGINX_CONF_DIR="/etc/nginx"
+KVM2_NGINX_SITES="/etc/nginx/sites-available"
+KVM2_NGINX_ENABLED="/etc/nginx/sites-enabled"
+# 2026-09-30: corregido — el archivo real en KVM2 es "laesh" (sin ".mx"),
+# verificado con `ls /etc/nginx/sites-available/` (hallazgo de auditoría de
+# alineación KVM2↔SSOT). El Ground Truth tenía el nombre equivocado desde su
+# creación; no se renombró el archivo real, solo se corrigió esta referencia.
+KVM2_NGINX_LAESH_CONF="/etc/nginx/sites-available/laesh"
+
+# PHP-FPM 8.3
+KVM2_PHP_BIN="php8.3"
+KVM2_PHP_FPM_SERVICE="php8.3-fpm"
+KVM2_PHP_FPM_POOL="/etc/php/8.3/fpm/pool.d/laesh.conf"
+KVM2_PHP_INI_FPM="/etc/php/8.3/fpm/php.ini"
+KVM2_PHP_INI_CLI="/etc/php/8.3/cli/php.ini"
+KVM2_OPCACHE_INI_FPM="/etc/php/8.3/fpm/conf.d/10-opcache-laesh.ini"
+
+# MariaDB
+KVM2_MARIADB_SERVICE="mariadb"
+KVM2_MARIADB_DATA_DIR="/opt/laesh/laesh-db"
+KVM2_MARIADB_ROOT_CNF="/opt/laesh/configs/.mariadb-root.cnf"
+# Forma correcta de conectar como root (NO usar mysql -u root -p directamente):
+#   mariadb --defaults-extra-file=${KVM2_MARIADB_ROOT_CNF}
+#   mariadb-dump --defaults-extra-file=${KVM2_MARIADB_ROOT_CNF} laesh_db
+
+# TLS / Certificados
+KVM2_CERTBOT_CERTS="/etc/letsencrypt/live/laesh.mx"
+KVM2_CERT_PEM="${KVM2_CERTBOT_CERTS}/fullchain.pem"
+KVM2_KEY_PEM="${KVM2_CERTBOT_CERTS}/privkey.pem"
+KVM2_HTTPS_DIR="/opt/laesh/https"
+
+# Logrotate
+KVM2_LOGROTATE_CONF="/etc/logrotate.d/laesh"
+
+# Systemd — servicios propios
+KVM2_SWOOLE_SERVICE="swoole-laesh.service"
+KVM2_SWOOLE_UNIT="/etc/systemd/system/swoole-laesh.service"
+
+# Crontabs
+# www-data: sudo crontab -u www-data -l   (cron app: cleanup, cache, backup, etc.)
+# root:     sudo crontab -l               (cron sistema: certbot renew, etc.)
+
+
+# ── C. KVM2 — APLICACIÓN (rutas /opt/laesh/ — canónicas) ─────────────────────
+
+# Raíz de la instalación LAESH en producción
+KVM2_LAESH_ROOT="/opt/laesh"
+
+# Webapp PHP (PHP-FPM sirve desde aquí)
+KVM2_WEBAPP="/opt/laesh/www/laesh-swbldi"
+KVM2_WWW_DIR="/opt/laesh/www"                      # solo debe contener laesh-swbldi/
+
+# Assets estáticos — Nginx los sirve vía alias (ver KVM2_NGINX_LAESH_CONF línea ~127)
+# location ^~ /laesh-web-assets-uipv1a/ { alias /opt/laesh/assets/laesh-web-assets-uipv1a/; }
+KVM2_ASSETS="/opt/laesh/assets/laesh-web-assets-uipv1a"
+KVM2_ASSETS_CSS="${KVM2_ASSETS}/css"
+KVM2_ASSETS_JS="${KVM2_ASSETS}/js"
+KVM2_ASSETS_IMG="${KVM2_ASSETS}/img"
+KVM2_ASSETS_CMS="${KVM2_ASSETS}/cms"               # imágenes subidas por el CMS (webp con timestamp)
+KVM2_ASSETS_FONTS="${KVM2_ASSETS}/fonts"
+
+# Imágenes CMS — prefijo URL CANÓNICO (lo que se guarda en web_contenidos.valor)
+KVM2_CMS_URL_PREFIX="/laesh-web-assets-uipv1a/cms/"
+# PREFIJO LEGADO INCORRECTO (uploader antiguo) — NO usar para nuevas imágenes:
+KVM2_CMS_URL_PREFIX_LEGACY="/laesh-web-assets-uipv1a/img/cms/"
+
+# Backups de BD
+KVM2_BACKUPS_DB="/opt/laesh/backups/db"            # dumps .sql.gz generados por backup_db.sh
+
+# Cache PHP (OPcache/Flight)
+KVM2_CACHE_DIR="/opt/laesh/cache"
+
+# Logs de aplicación
+KVM2_LOGS_DIR="/opt/laesh/logs"
+# Archivos individuales:
+KVM2_LOG_APP="${KVM2_LOGS_DIR}/app.log"
+KVM2_LOG_CLEANUP="${KVM2_LOGS_DIR}/cms-cleanup.log"
+KVM2_LOG_CACHE="${KVM2_LOGS_DIR}/cache-renew.log"
+KVM2_LOG_BACKUP="${KVM2_LOGS_DIR}/backup-db.log"
+KVM2_LOG_CERTEXPIRY="${KVM2_LOGS_DIR}/cert-expiry.log"
+
+# Scripts operativos (cron scripts y utilidades)
+KVM2_SCRIPTS_DIR="/opt/laesh/scripts"
+KVM2_SCRIPT_BACKUP="${KVM2_SCRIPTS_DIR}/backup_db.sh"
+KVM2_SCRIPT_CERTCHECK="${KVM2_SCRIPTS_DIR}/cert_expiry_check.sh"
+
+# Cron scripts (PHP, ejecutados por www-data)
+KVM2_CRONES_DIR="/opt/laesh/crones"               # scripts .sh de cron del sistema
+# Los cron PHP viven en: ${KVM2_WEBAPP}/crons/
+
+# Configuraciones sensibles (no en git)
+KVM2_CONFIGS_DIR="/opt/laesh/configs"
+# ${KVM2_CONFIGS_DIR}/.mariadb-root.cnf   ← MariaDB root credentials
+# ${KVM2_CONFIGS_DIR}/.env                ← App secrets (LAESH_APP_PASS, etc.)
+
+# Uploads de usuarios (PDFs de resultados, etc.)
+KVM2_UPLOADS_DIR="/opt/laesh/uploads"
+KVM2_UPLOADS_PDF="${KVM2_UPLOADS_DIR}/pdfs"
+
+# Monitor interno
+KVM2_MONITOR_DIR="/opt/laesh/monitor"
+
+# Swoole socket/status
+KVM2_SWOOLE_HOST="127.0.0.1"
+KVM2_SWOOLE_PORT="9502"
+KVM2_SWOOLE_STATUS_URL="http://${KVM2_SWOOLE_HOST}:${KVM2_SWOOLE_PORT}/status"
+
+
+# ── D. KVM2 — STAGING (en home del sysadmin, bajo un único directorio padre) ──
+#
+# Todo el material intermedio vive bajo ~/staging/ con dos roles:
+#
+#   /home/sysadmin/staging/
+#   ├── setup/                           ← scripts/pipeline (físico, sin symlink)
+#   │   ├── bds/laesh/migrations/        #   m001, m002, m003... SQL idempotentes
+#   │   └── deploy/laesh-kvm2-prod/      #   pipeline 01–08 + SERVER_MAP.env + deploy.sh
+#   └── laesh-src/                       ← assets staging (paso 1 de deploy de assets)
+#       └── laesh-web-assets-uipv1a/     #   CSS/JS/img — revisar antes de assets-publish
+
+KVM2_STAGING_ROOT="/home/sysadmin/staging"
+
+# Assets estáticos en staging (paso 1 de deploy de assets — revisión antes de prod)
+# deploy.sh assets        → local → aquí  (staging, para revisión)
+# deploy.sh assets-publish → aquí → ${KVM2_ASSETS} (producción)
+KVM2_ASSETS_STAGING="${KVM2_STAGING_ROOT}/laesh-src/laesh-web-assets-uipv1a"
+
+# Scripts de setup/pipeline — movido de laesh-src/setup/ a staging/setup/ (sin symlink)
+# deploy.sh scripts sincroniza setup/ del repo directamente aquí
+KVM2_SETUP_DIR="${KVM2_STAGING_ROOT}/setup"
+
+# ── Estructura de staging aplicada el 2026-09-09 (ya ejecutado) ───────────────
+#   mv ~/staging/laesh-src/setup ~/staging/setup
+#   rm -rf ~/staging/laesh-setup
+#   rm -rf ~/staging/laesh-src/laesh-web-assets-uipv1a/img/cms/
+
+
+# ── E. KVM2 — DIRECTORIOS STRAY (historial de limpieza — ya eliminados) ───────
+#
+# ✅ Eliminados en 2026-09-06 / 2026-09-09:
+# ✅ /opt/laesh/laesh-web-assets-uipv1a/    — rsync erróneo sep-06; eliminado
+# ✅ /opt/laesh/www/laesh-web-assets-uipv1a/ — rsync erróneo; eliminado
+# ✅ /home/sysadmin/backups/                 — dumps vacíos; eliminado
+# ✅ /home/sysadmin/laesh-kvm2-prod/         — duplicado de laesh-setup/; eliminado
+# ✅ /home/sysadmin/laesh-src/               — movido a ~/staging/laesh-src/
+# ✅ /home/sysadmin/laesh-setup/             — eliminado (stale)
+# ✅ /home/sysadmin/staging/laesh-setup/     — eliminado (stale sep-09)
+# ✅ /home/sysadmin/staging/laesh-src/setup/ — movido a ~/staging/setup/ (sep-09)
+# ✅ ~/staging/laesh-src/laesh-web-assets-uipv1a/img/cms/ — eliminado (stray sep-09)
+
+
+# ── F. DEPLOY — CÓMO USARLO (desde raíz del repo) ────────────────────────────
+#
+# Siempre usar deploy.sh — nunca rsync manual (para evitar rutas incorrectas).
+# deploy.sh lee SERVER_MAP.env y usa el alias SSH ${KVM2_SSH} = laesh-kvm2.
+#
+#   bash setup/deploy/laesh-kvm2-prod/deploy.sh webapp    # PHP app + reload php-fpm
+#   bash setup/deploy/laesh-kvm2-prod/deploy.sh assets    # CSS/JS/img (excluye cms/)
+#   bash setup/deploy/laesh-kvm2-prod/deploy.sh scripts   # setup/BD scripts → staging
+#   bash setup/deploy/laesh-kvm2-prod/deploy.sh all       # las 3 anteriores
+#
+# Equivalencia (si se necesita rsync manual de emergencia):
+#   rsync -avz --checksum --delete --exclude='.git/' --exclude='*.log' \
+#       www/laesh-swbldi/              laesh-kvm2:/opt/laesh/www/laesh-swbldi/
+#   rsync -avz --checksum --delete --exclude='.git/' --exclude='cms/' \
+#       www/laesh-web-assets-uipv1a/   laesh-kvm2:/opt/laesh/assets/laesh-web-assets-uipv1a/
+#   rsync -avz --checksum --exclude='.git/' \
+#       setup/                         laesh-kvm2:~/staging/setup/
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:26 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:26 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:26 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+The assets are already in sync, which is unexpected. Suspect that deployment or a `git pull` occurred around commit `fc092f1`. Need to confirm which files were affected. Examining the `restaurantb/www` repository's recent history to pinpoint changes using `git log` and `git diff`.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.087081360s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:27 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:27 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:27 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:27 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:27 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+The PHP files and static assets are already deployed. The user explicitly asked about the deployment step, even though it appears completed. This suggests a need to verify and possibly re-state the deployment status. Reconfirming the deployment's successful execution, given the explicit user request for the deployment process, seems warranted.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.097776172s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:27 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:27 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:27 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:27 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+KVM2 lacks the expected 19 new webp files generated locally. These files were created on 2026-10-06 and 2026-10-05 within the CMS. The absence suggests a synchronization failure or delay.
+
+
+The database update relies on 19 missing image files, directly referenced in the SQL script.  The target directory has permissive 777 permissions, confirming `sysadmin` can directly transfer these files.  A deployment script exists, which can be used to synchronize assets and the web application code, potentially resolving the missing files and the database update.
+
+
+The deployment script contains a migration check that prompts for confirmation before proceeding if pending SQL migrations exist. This suggests a specific deployment order is required to avoid potential issues related to database schema changes before assets.  First, the image assets must be uploaded. Second, the database deployment script, which includes migration execution and asset synchronization, should be executed.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 6.110284421s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:28 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+The script `setup_hostinger.sh` is executed as root, ensuring that the script and its target directories are accessible. The script identifies a migration file and subsequently executes a database backup script, which suggests the intention is to apply database changes. This preparatory backup indicates a critical operation involving potentially significant data modifications.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.083449232s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:28 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:28 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+Deployment configuration appears valid. There is a need to verify any pending SQL migrations before proceeding. The `deploy.sh` script includes a check for this, so that section must be examined.
+
+
+The `deploy.sh` script's conditional check confirms the necessity of database migration prior to the web application deployment, preventing potential schema-related errors. Sequencing asset synchronization and publishing after the database migration, ensures the web application utilizes the updated database schema. The script will pause for input, but if piped, it can be bypassed to avoid the pause and continue deployment. Verify the contents of the assets transfer before proceeding.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 3.438309033s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:28 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+Examining the list, several assets are pre-existing, already residing in a known location, and dated. The focus shifts to the 19 new assets; identification of these new items is crucial.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.062644800s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:28 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:28 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:28 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:29 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:29 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+The response indicates a successful image retrieval with optimal caching. Proceeding to the next step: executing the database incremental migration. This involves synchronizing database setup files to a remote server and then running a host-specific script on that server. Examining the script to understand the migration process details is the next step.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.086446619s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:29 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:29 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:29 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+Database backup completed successfully before modification. This suggests a clean baseline for comparison after the 'm011' action. Verification will begin by querying record counts within specific tables on the target system to assess database integrity post-operation.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.084869316s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:29 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:29 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:29 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `DB.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+// DB.php - Clase para conexión PDO e interacción transaccional con la base de datos
+
+namespace Common;
+
+use PDO;
+use PDOException;
+
+class DB {
+    private static ?PDO $instance = null;
+
+    /**
+     * Establece la conexión PDO singleton
+     */
+    public static function connect(): PDO {
+        if (self::$instance === null) {
+            $config = require __DIR__ . '/config.php';
+            $dbConf = $config['db'];
+
+            $dsn = sprintf(
+                "mysql:host=%s;port=%d;dbname=%s;charset=%s",
+                $dbConf['host'],
+                $dbConf['port'],
+                $dbConf['name'],
+                $dbConf['charset']
+            );
+
+            try {
+                self::$instance = new PDO($dsn, $dbConf['user'], $dbConf['pass'], [
+                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:30 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:30 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:30 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:30 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:30 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:30 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:30 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:31 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:31 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:31 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+Key caches have been successfully warmed up, indicating the system is ready. The next step involves validating the KVM2 environment through an HTTP warm-up request to ensure basic functionality. This initial request targets the local address with a specified host, which will test connectivity.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.116602599s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:31 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:31 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+The page title is within the optimal SEO character range, indicating good initial optimization. Further investigation revealed a "historia" card with an image and enriched text, suggesting content organization. Quality images in a gallery, which is indicated to contain 3 images, are found in the specified paths.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.097738177s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:32 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:32 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `promociones.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+/**
+ * sections/promociones.php — Partial: Promociones diarias
+ * Incluido desde website/index.php; hereda su scope completo.
+ * Variables esperadas: $promoH2, $promoSub, $promos, $waBase, $waTextoAg, $waSvg
+ *
+ * Mejoras 2026-09-08:
+ *   · Badge "HOY" — derecha, violeta, detectado por dia() ISO-8601
+ *   · Precios en el mismo renglón que badges (derecha)
+ *   · "Ahorras $X" bajo precios cuando hay descuento
+ *   · Badge de muestra requerida (💉 / ☕ / 🔬 según texto)
+ *   · Descripción expandible si es larga (>220 chars)
+ *   · Overlay de imagen más visible (opacidad reducida)
+ *   · Mensaje WA incluye precio de oferta
+ */
+?>
+        <!-- ══════════════════════════════════════════ PROMOCIONES ══ -->
+        <section id="promociones" class="sec-promo scroll-sm-top">
+            <div class="section-header animate-on-scroll">
+                <h2><?= h($promoH2) ?></h2>
+                <p><?= h($promoSub) ?></p>
+            </div>
+            <div class="promo-catalog-wrap animate-on-scroll">
+                <div class="catalog-grid">
+                <?php
+                // Día actual para badge "HOY" (ISO-8601: 1=lunes … 7=domingo)
+                $todayMap = [1=>'lunes',2=>'martes',3=>'miercoles',4=>'jueves',5=>'viernes',6=>'sabado',7=>'domingo'];
+                $todayKey = $todayMap[(int)date('N')] ?? '';
+
+                /**
+                 * Normaliza un nombre de día eliminando acentos y espacios para comparación HOY.
+                 * Permite que "Miércoles" y "Sábado" (con acento) coincidan con las claves del mapa.
+                 */
+                function _normalizeDay(string $s): string {
+                    return strtr(strtolower(trim($s)),
+                        ['á'=>'a','é'=>'e','í'=>'i','ó'=>'o','ú'=>'u','ü'=>'u','ñ'=>'n']);
+                }
+
+                foreach ($promos as $p):
+                    // dia_semana contiene el Título / Etiqueta Superior de la Ficha
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `promociones.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L40-74)</summary>
+
+**Path:** `Unknown file`
+
+```
+                    $diaRaw    = $p['dia_semana'] ?? '';
+                    $diaKey    = _normalizeDay(strip_tags($diaRaw));
+                    $diaNombre = !empty($diaRaw) ? trim($diaRaw) : 'Promoción';
+                    $isHoy     = ($diaKey === $todayKey);
+                    $imgUrl    = $p['imagen_fondo'] ?? '';
+
+                    $diaPlain   = strip_tags($diaNombre);
+                    $waTextFull = $waTextoAg
+                        ? str_replace('{estudio}', $diaPlain, $waTextoAg)
+                        : '';
+                    $waCardUrl  = $waBase . ($waTextFull ? '?text=' . rawurlencode($waTextFull) : '');
+                ?>
+                    <div class="catalog-card <?= $isHoy ? 'catalog-card--hoy' : '' ?>"
+                         data-promo-img="<?= h($imgUrl) ?>"
+                         data-promo-title="<?= h($diaPlain) ?>"
+                         data-promo-title-html="<?= h($diaNombre) ?>"
+                         onclick="if(!event.target.closest('a')){ if(typeof window.openPromoModal==='function') window.openPromoModal('<?= h($imgUrl) ?>', this.getAttribute('data-promo-title-html')); }">
+
+                        <!-- Día / Título + badge HOY a la derecha -->
+                        <div class="catalog-card-day-row">
+                            <div class="catalog-card-day"><?= $diaNombre ?></div>
+                            <?php if ($isHoy): ?>
+                                <span class="catalog-badge badge-hoy">● HOY</span>
+                            <?php endif; ?>
+                        </div>
+
+                        <!-- Imagen rectangular completa horizontal con botón Agendar superpuesto transparente -->
+                        <?php if (!empty($imgUrl)): ?>
+                            <div class="catalog-card-img-wrap">
+                                <img src="<?= h($imgUrl) ?>" alt="<?= h($diaPlain) ?>" class="catalog-card-img" loading="lazy" decoding="async" width="1024" height="687" onerror="this.onerror=null; this.src='/laesh-web-assets-uipv1a/img/placeholder.webp';">
+                                <a href="<?= h($waCardUrl) ?>" target="_blank" rel="noopener noreferrer" class="catalog-card-btn-overlay" onclick="event.stopPropagation();">
+                                    Agendar <?= $waSvg ?>
+                                </a>
+                            </div>
+                        <?php else: ?>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:32 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:32 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `README.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# migrations/ — Deltas Incrementales de BD · LAESH
+
+## Propósito
+
+Este directorio contiene cambios de BD (**schema y/o datos**) que se aplican
+sobre una BD de producción existente **sin necesidad de `--drop`**.
+
+No confundir con los scripts base `00–09`: esos son el setup desde cero.
+Este directorio es solo para deltas incrementales a una BD viva.
+
+---
+
+## Cuándo usar cada flujo
+
+| Necesidad | Comando |
+|---|---|
+| Setup desde cero (servidor nuevo, `--nuke`) | `setup_hostinger.sh --drop` |
+| Cambio de schema o datos en BD viva | Crear `mNNN_*.sql` aquí → `deploy.sh bd` |
+| Solo PHP / Assets | `deploy.sh webapp` / `deploy.sh assets + assets-publish` |
+
+---
+
+## Cómo agregar una migración
+
+1. Crear `mNNN_descripcion_breve.sql` en este directorio (N = siguiente número)
+2. **Debe ser idempotente**: `IF NOT EXISTS`, `INSERT IGNORE`, `ON DUPLICATE KEY UPDATE`,
+   `ALTER TABLE ... MODIFY IF EXISTS`, etc.
+3. Registrar en este README (tabla de estado abajo)
+4. Hacer deploy y aplicar:
+   ```bash
+   # Desde local — envía scripts + aplica migraciones en KVM2:
+   bash setup/deploy/laesh-kvm2-prod/deploy.sh bd
+   ```
+5. Verificar en KVM2 que el cambio quedó correcto
+6. **Fold**: integrar el DDL/datos en el script base correspondiente (`00–09`)
+   y eliminar el `mNNN_*.sql` de este directorio
+
+---
+
+## Estado de migraciones activas
+
+- **`m011_sync_cms_contenidos_20261008.sql`** (2026-10-08, **activa / pendiente de deploy**):
+  - **Propósito**: Sincronización mandatoria y completa del contenido CMS local hacia producción KVM2 (`laesh_db`).
+  - **Alcance**:
+    - `web_contenidos`: Inserción/actualización de 139 registros canónicos (nuevas galerías de calidad, 15 áreas de especialidades, nueva tarjeta e historia de responsable sanitario, metadatos SEO/Schema.org actualizados y contacto sin bordes).
+    - Depuración de claves obsoletas: `DELETE FROM web_contenidos WHERE seccion = 'especialidades' AND subseccion = 'carousel16'`.
+    - `catalogo_promociones`: Actualización de los 7 días de la semana con encabezados estilizados `<h3>...</h3>`.
+    - `configuraciones`: Registro de `maps_fallback_origen` y actualización de `maps_url`.
+    - Blindaje de infraestructura: No altera variables de rutas, contraseñas ni tiempos de expiración de KVM2.
+  - **Prerrequisito**: Snapshot preventivo de BD (`backup_db.sh`) en KVM2 antes de su ejecución.
+
+
+> `m010_optimizacion_indices_modelo.sql` (2026-10-02, **aplicada y foldeada**):
+> - `rel_igabinete_vinculos`: PK autoincremental física `id` + unicidad virtual `uq_vinculo_unico` sobre `(igabinete_id, gabinete_id, IFNULL(subgabinete_id, 0))`.
+> - Depuración de 6 índices secundarios redundantes (`idx_cms_sec_sub_clave`, `idx_seccion` en `web_contenidos`; `idx_medico`, `idx_estado` en `ordenes`; `idx_user` en `notificaciones`; `idx_orden` en `historial_estados_orden`).
+> - `jwt_jti_registry`: índice compuesto `idx_user_revoked (user_id, is_revoked)` y retiro de `idx_is_revoked` e `idx_user_id`.
+> - `catalogo_promociones`: tipo `dia_semana` optimizado a `VARCHAR(255)` (almacenamiento in-row sin off-page storage, preservando HTML de CKEditor).
+> - `vw_estudios_catalogo` y `UpsertEstudioCatalogo`: retiro de `descripcion_breve` y `fecha_modificacion`.
+> - `cat_estudios`: retiro de `categoria_id`, `descripcion_breve`, `detalle`, `fecha_creacion`, `fecha_modificacion` y estandarización a `created_at`/`updated_at`.
+> - `cat_categorias`: retiro de tabla obsoleta y FK `fk_estudio_categoria`.
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:32 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:32 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+The seeding of catalogs and the presence of snapshot files are noted. The instruction regarding folding a specific SQL script requires review to ensure correct execution; the instruction set needs to be re-examined for proper sequence.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.087573671s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:32 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `runbook-pendientes-laesh.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L79-139)</summary>
+
+**Path:** `Unknown file`
+
+```
+- **Descripción:**
+  `deploy.sh bd` corre `setup_hostinger.sh` sin `--drop`, cuyo Paso 4 ejecuta `seed_first_users.php`. Para cada usuario semilla ya existente, el script restablecía la contraseña al valor del seed y sobrescribía `empleados` (nombre, apellidos, rol), los permisos RBAC y el perfil médico completo.
+  Impacto real medido en KVM2 (solo lectura): **2 de 7** registros editados en producción se habrían revertido (Elena y Sofía, apellidos). Las contraseñas **no** estaban cambiadas — ver PEN-LAESH-07.
+  (Rectificación: una primera medición indicó "7 contraseñas cambiadas" por usar `password_verify()` directo; Delight-Auth guarda hashes `$pa01$…` con prehash HMAC y se verifican con `\Delight\Auth\PasswordHash::verify()`.)
+- **Corrección:** un usuario existente ya **no se modifica en nada**; solo con `--reset-existing` (o `LAESH_SEED_RESET_EXISTING=1`) se restablece — nunca usarlo en producción. Ningún script del repo pasa ese flag.
+  Prueba: `bash www/tests/test_seed_no_resetea.sh` (BD local; respalda y restaura) → 9/9.
+- **Relacionado:** `m005_drop_detalle_ordenes.sql` se aplicó el 2026-09-30 directamente como root; ya está foldeada. Con esta corrección, `deploy.sh bd` vuelve a ser el camino normal para migraciones.
+
+---
+
+### PEN-LAESH-07: ⚠️ Cuentas de producción con contraseñas por defecto (públicas en el repo)
+- **Fecha de registro:** 2026-09-30
+- **Módulo:** usuarios de KVM2 · `www/laesh-swbldi/commons/seed_first_users.php`
+- **Estado:** 🔴 Bloqueante para Go-Live
+- **Descripción:**
+  Verificado en KVM2 (solo lectura, `PasswordHash::verify`): los **7** usuarios de producción — ADMIN, RECEPCION y 5 MEDICO — conservan la contraseña del seed, que está escrita en `seed_first_users.php` (versionado) y que el propio script imprime al terminar.
+- **Requerimiento (antes del Go-Live):**
+  1. Cambiar la contraseña de las 7 cuentas (pantallas de gestión de Personal/Médicos, que registran el reseteo según R14.14), o desactivar las cuentas demo que no se usarán.
+  2. Evaluar retirar las contraseñas reales del seed (leerlas de variables de entorno) y que el resumen final no las imprima.
+
+---
+
+### PEN-LAESH-08: Vistas `vw_ordenes_estadisticas` y `vw_notificaciones_pendientes` sin consumidores
+- **Fecha de registro:** 2026-10-01 (auditoría de código muerto)
+- **Módulo:** `setup/bds/laesh/09_views.sql` · BD local y KVM2
+- **Estado:** ✅ Resuelto 2026-10-01
+- **Descripción:** ningún PHP/JS, vista ni SP las consultaba. `09_views.sql` ya las retiraba (`DROP VIEW IF EXISTS`), pero sin migración: seguían vivas en KVM2 y en Docker local.
+- **Corrección:** `m008_drop_vistas_retiradas.sql` aplicada en local y KVM2 (`deploy.sh bd`), luego eliminada (ya foldeada en `09`). Verificado: KVM2, local y OCI con las mismas 8 vistas; smoke de 4 portales en producción sin errores.
+---
+
+### PEN-LAESH-09: Tabla `cat_categorias` sin lecturas ni escrituras
+- **Fecha de registro:** 2026-10-01 (auditoría; ya evaluada el 2026-09-30 y conservada)
+- **Módulo:** `setup/bds/laesh/02_core_schema.sql` / `07_seed_catalogs.sql` · `cat_estudios.categoria_id` (FK `fk_estudio_categoria`)
+- **Estado:** 🔵 Pendiente de decisión (se conserva)
+- **Descripción:** 24 filas sembradas; ninguna pantalla la lee desde m002 (el catálogo usa Gabinete/Subgabinete). Sigue referenciada por la FK de `cat_estudios.categoria_id` y por R14.2 (dos campos de categoría con propósitos distintos).
+- **Para retirarla:** migración que haga `DROP FOREIGN KEY fk_estudio_categoria`, `DROP COLUMN categoria_id` y `DROP TABLE cat_categorias`, actualizar R14.2 y los scripts 02/07. Antes, confirmar con el cliente que la categoría clínica no se usará (p. ej. en el sitio público o reportes).
+
+---
+
+### PEN-LAESH-10: Instalación limpia sin `users_audit_log` → login roto
+- **Fecha de registro:** 2026-10-01
+- **Módulo:** `setup/bds/laesh/01_auth_schema.sql`
+- **Estado:** ✅ Corregido (script base) · ✅ validado en OCI
+- **Descripción:** `01_auth_schema.sql` hacía `DROP TABLE users_audit_log` (auditoría 2026-09-27 la creyó sin uso), pero Delight-Auth (`Auth::logForAudit()`) inserta ahí en cada login. Toda instalación con `--drop` (KVM2 u OCI) quedaba con el login roto: `Table 'laesh_db.users_audit_log' doesn't exist`. KVM2 y local no se vieron afectados porque nunca se reinstalaron.
+- **Corrección:** el script ahora la crea (`CREATE TABLE IF NOT EXISTS`, columnas idénticas a producción). Validado reinstalando OCI con `--drop`: login, 4 portales y ciclo orden → PDF OK. Staging de KVM2 sincronizado (`deploy.sh scripts`).
+
+---
+
+### PEN-LAESH-11: CSS del hero sin uso vs. Regla 25 vigente
+- **Fecha de registro:** 2026-10-01 (auditoría CSS)
+- **Módulo:** `laesh-web-assets-uipv1a/css/landing.css`, `tablet-samsung-tabs10ultra.css` · `.agents/rules/25-laesh-hero-slider-lineamientos.md`
+- **Estado:** 🔵 Pendiente de decisión (no se tocó)
+- **Descripción:** las diapositivas del hero (`website/index.php`) hoy son `<div class="hero-slide">` vacíos (solo imagen de fondo). Clases sin uso en el HTML: `hero-glass-card` (~25 reglas en landing.css), `hero-slider-wrap`, `hero-slide-content`, `hero-full-img`, `d-none-mobile`. Pero la Regla 25 (2026-09-30) documenta `.hero-glass-card` como la tarjeta vigente.
+- **Decidir:** (a) se reintroducirá la tarjeta glass → conservar el CSS; (b) el hero quedará solo imagen → retirar esas reglas y actualizar la Regla 25 (§§5, 6, 7, 10, 12, 14).
+- **Contexto:** el resto de clases sin uso (~20, no-hero) ya se retiró y desplegó el 2026-10-01.
+
+---
+
+### PEN-LAESH-12: Validar las suites WebSocket contra producción
+- **Fecha de registro:** 2026-10-01
+- **Módulo:** `www/tests/laesh_ws_full_test_suite.py`, `www/tests/laesh_ws_extended_scenarios.py`
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `runbook-pendientes-laesh.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L189-249)</summary>
+
+**Path:** `Unknown file`
+
+```
+- **Estado:** ✅ Cerrado por instrucción del usuario (2026-10-01)
+- **Resolución:** Cerrado y descartado del backlog. El comportamiento de búsqueda mediante pulsación de tecla Enter o botón de limpieza (evento `search`), evitando peticiones automáticas intermedias al servidor durante la digitación, se acepta formalmente como definitivo y no requiere intervención.
+
+---
+
+### PEN-LAESH-18: Incidente 403 del puente PHP→Swoole (2026-09-30 21:42–22:00)
+- **Fecha de registro:** 2026-10-01
+- **Módulo:** `commons/notifier.php`, `commons/swoole_server.php`, `crons/notificaciones_retry.php` · `setup/deploy/laesh-kvm2-prod/deploy.sh`, `scripts/ws_bridge_check.sh`, `scripts/monitor_services.sh`
+- **Estado:** 🟡 Mitigado y vigilado — causa raíz exacta **no demostrable** con la evidencia existente
+- **Hechos:** 4 notificaciones (folio 23) terminaron con `http_error_403`: Swoole rechazó la llave interna en los 5 intentos del cron de reintentos (21:45–22:00, hora KVM2). Ocurrió durante 4 deploys seguidos de Gemini/Antigravity (21:15, 21:43, 21:54, 21:57 hora local; KVM2 va ~4 min adelantado), cada uno con reinicio de swoole-laesh (instancias de 21:19, 21:48 y 21:59). Impacto nulo: los destinatarios no estaban conectados y las recibieron por polling.
+- **Descartado con evidencia:** secretos distintos (las 4 copias — pool FPM, `.env` de Swoole y los 2 `cron.d` — tienen la misma huella SHA-256 y no cambian desde el 18–21/09); DNS (`systemd-resolved` no resuelve `swoole`); cambio de código en la llave/header (git + transcripción Gemini); tamaño del payload (<100 B); otro proceso en el puerto 9502 (journal).
+- **Correcciones aplicadas 2026-10-01 (desplegadas y verificadas en KVM2):**
+  1. **Huellas forenses:** Swoole registra cada 403 como `AUSENTE` o `DISTINTA` con la huella esperada y la recibida (8 hex del SHA-256, no reversibles); Notifier y el cron registran la huella enviada.
+  2. **Verificación automática:** `GET /status` expone `token_fp`; `scripts/ws_bridge_check.sh` lo compara con la huella de PHP-FPM (y de los crons si corre como root). `deploy.sh webapp` lo ejecuta al final y **falla el deploy** ante desfase; `monitor_services.sh` (cada 10 min) alerta por SMTP con cooldown.
+  3. **Sin DNS en el camino crítico:** la URL del bridge sale de `config.php` (`swoole.bridge_url`: `LAESH_WS_BRIDGE_URL`, contenedor `swoole` en Docker, `127.0.0.1` en nativo); se retiró `gethostbyname('swoole')` de `/publish` y `/revoke`.
+  4. **Menos reinicios:** `deploy.sh webapp` reinicia Swoole solo si cambió `commons/` o `libs/` (forzar: `LAESH_FORCE_SWOOLE_RESTART=1`).
+- **Si reaparece:** buscar `[bridge] 403` en `swoole.log` (Sistema → swoole) y `Huella enviada=` en `sys_logs`/`notificaciones-retry.log`. `AUSENTE` = el emisor no mandó la llave; `DISTINTA` = comparar huellas para saber qué lado cambió. Correr `bash /opt/laesh/scripts/ws_bridge_check.sh`.
+- **Recomendación operativa:** no hacer deploys de webapp en ráfaga desde dos agentes a la vez; coordinar en `pending.md`.
+
+---
+
+### PEN-LAESH-19: ⚠️ `laesh_app` en producción usa la contraseña de desarrollo
+- **Fecha de registro:** 2026-10-01
+- **Módulo:** MariaDB KVM2 (usuario `laesh_app`) · pool `/etc/php/8.3/fpm/pool.d/laesh.conf` · `setup_hostinger.sh` Paso 3 · `commons/config.php` (fallback) · `00_database.sql`
+- **Estado:** 🔴 Seguridad — pendiente de rotar (el usuario decidió dejarlo como pendiente el 2026-10-01; rotar solo con su autorización, antes del Go-Live)
+- **Hallazgo:** la contraseña de `laesh_app` en KVM2 (la que usa PHP-FPM) es `laesh_2026_dev`, el valor por defecto de desarrollo, publicado en el repo (`config.php` y `00_database.sql`). Verificado con huellas SHA-256: el pool tiene exactamente ese valor y la BD lo acepta.
+- **Gravedad acotada:** MariaDB solo escucha en `127.0.0.1` (`bind-address`, `ss -ltn`) y el 3306 está cerrado desde internet; explotarlo requiere acceso local al servidor. `laesh_app` está limitado a DML + EXECUTE (Paso 3b).
+- **Revisar:** por qué el Paso 3 de `setup_hostinger.sh` ("Fijando contraseña laesh_app → producción") no dejó la contraseña de `/opt/laesh/configs/.env` (`LAESH_APP_PASS`), o si ese valor también es el de desarrollo.
+- **Corrección propuesta:** generar una contraseña nueva, guardarla en `.env` (`LAESH_APP_PASS`), en el pool (`env[LAESH_DB_PASS]`) y en `/etc/cron.d/laesh-*` (`LAESH_DB_PASS`); aplicarla con `ALTER USER` (Paso 3); recargar PHP-FPM, reiniciar swoole-laesh y validar con la suite de búsqueda (141/141) y un login real. Relacionado con PEN-LAESH-07 (contraseñas por defecto antes del Go-Live).
+
+---
+
+### PEN-LAESH-20: Geolocalización en Móviles para Botón "Mapa Interactivo" (Inicio en Chapultepec/CDMX con Ubicación activada)
+- **Fecha de registro:** 2026-10-08
+- **Módulo:** `www/laesh-web-assets-uipv1a/js/website.js` (`window.openGoogleMapsRoute`) · `www/laesh-swbldi/website/sections/ubicacion.php` (`#btn-map-interactive`)
+- **Estado:** 🟡 Pendiente de diagnóstico y estabilización en dispositivo real
+- **Reporte del usuario:** Al probar en móviles (en localhost) teniendo la ubicación activada, al pulsar "Mapa Interactivo ↗", Google Maps sigue dando como punto de inicio "Chapultepec" (CDMX) en lugar de usar la ubicación física real del usuario.
+- **Contexto técnico y posibles causas:**
+  1. Al probar en `localhost` o en redes Wi-Fi/celulares, si el navegador web resuelve la geolocalización mediante IP (o red Wi-Fi sin calibración satelital) en lugar de GPS satelital puro, las IPs de telecomunicaciones en México suelen estar enrutadas a través de nodos centrales en la Ciudad de México (frecuentemente ubicados geográficamente en la zona de Chapultepec / Polanco).
+  2. Si `navigator.geolocation` no obtiene coordenadas satelitales a tiempo o devuelve la posición aproximada del ISP/nodo de telecomunicaciones, la URL resultante o la llamada a Maps ubica al usuario en CDMX.
+  3. Por investigar/estabilizar:
+     - Comportamiento en dispositivo físico con GPS satelital exterior vs red Wi-Fi de desarrollo.
+     - Explorar el uso del esquema nativo de URI para mapas móviles (`geo:0,0?q=...` o `google.navigation:q=...`) frente a URLs web de Google Maps Directions (`/maps/dir/?api=1`).
+     - Asegurar que si la geolocalización detectada está fuera de un radio lógico o no tiene precisión suficiente, se notifique o se aplique el flujo adecuado.
+
+---
+
+### PEN-LAESH-21: Pase de CMS local a KVM2 con Respaldo Preventivo de BD (m011 + Assets + 19 WebP)
+- **Fecha de registro:** 2026-10-08
+- **Módulo:** `setup/deploy/laesh-kvm2-prod/deploy.sh` (`deploy_bd`) · `setup/bds/laesh/migrations/m011_sync_cms_contenidos_20261008.sql` · `www/laesh-web-assets-uipv1a/cms/`
+- **Estado:** 🟡 Preparado / Pendiente de ejecución
+- **Requerimiento mandatorio:** En el Paso 3 del despliegue (BD incremental vía `deploy.sh bd`), es **obligatorio ejecutar un snapshot de respaldo (dump gzip) de la base de datos `laesh_db` en KVM2** antes de disparar la aplicación de la migración `m011`.
+- **Alcance del pase:**
+  1. **Backup preventivo KVM2:** Ejecución de `/opt/laesh/scripts/backup_db.sh` (o dump directo a `/opt/laesh/backups/db/`) verificando archivo generado > 0 bytes.
+  2. **19 Imágenes WebP:** Transferencia de imágenes activas de calidad, 15 carruseles y tarjeta de responsable sanitario a `/opt/laesh/assets/laesh-web-assets-uipv1a/cms/` con permisos `www-data:www-data` (664).
+  3. **Migración SQL m011:** Aplicación idempotente de deltas en `web_contenidos` (6 claves nuevas, 2 claves depuradas de `carousel16`, ~35 valores actualizados), `configuraciones` (`maps_fallback_origen`), y `catalogo_promociones` (encabezados `h3`), preservando estrictamente las variables de infraestructura de producción.
+  4. **Código y Assets:** Sincronización de 9 PHPs (`laesh-swbldi`) y 8 WebAssets (`laesh-web-assets-uipv1a`).
+  5. **Purga de Caché L2:** Ejecución de `crons/cache_renew.php` para calentar `KEY_CMS`, `KEY_CFG`, `KEY_PROMOS` y `KEY_TREE`.
+
+
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The task is complete. Database backup, image transfers, and database migration were successful. The runbook entry now needs updating to reflect the validated completion of the related item.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.100674752s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:33 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `README.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L39-51)</summary>
+
+**Path:** `Unknown file`
+
+```
+## Estado de migraciones activas
+
+- **`m011_sync_cms_contenidos_20261008.sql`** (2026-10-08, **activa / pendiente de deploy**):
+  - **Propósito**: Sincronización mandatoria y completa del contenido CMS local hacia producción KVM2 (`laesh_db`).
+  - **Alcance**:
+    - `web_contenidos`: Inserción/actualización de 139 registros canónicos (nuevas galerías de calidad, 15 áreas de especialidades, nueva tarjeta e historia de responsable sanitario, metadatos SEO/Schema.org actualizados y contacto sin bordes).
+    - Depuración de claves obsoletas: `DELETE FROM web_contenidos WHERE seccion = 'especialidades' AND subseccion = 'carousel16'`.
+    - `catalogo_promociones`: Actualización de los 7 días de la semana con encabezados estilizados `<h3>...</h3>`.
+    - `configuraciones`: Registro de `maps_fallback_origen` y actualización de `maps_url`.
+    - Blindaje de infraestructura: No altera variables de rutas, contraseñas ni tiempos de expiración de KVM2.
+  - **Prerrequisito**: Snapshot preventivo de BD (`backup_db.sh`) en KVM2 antes de su ejecución.
+
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The plan requires updating a migrations README to reflect the application and production verification of migration `m011`. Evaluating whether to retain `m011` as active is the next step.
+However, reviewing the user's plan indicates migration folding is the intended course of action, which would involve integrating its changes into base scripts and deleting related SQL files.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.096058360s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:33 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `07_seed_catalogs.sql`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1479-1519)</summary>
+
+**Path:** `Unknown file`
+
+```
+UPDATE `cat_estudios` SET `top20_orden` = 20 WHERE `id` = 599;  -- GLUCOSA POST PRANDIAL
+
+
+-- ---------------------------------------------------------------------------
+-- WEB_CONTENIDOS — Contenido Editorial
+-- SSOT: exportado de BD local (laesh_db) — 2026-09-17 15:25
+-- Regenerar con: bash setup/bds/laesh/bash/cms-sync/04_export_cms_seed.sh
+-- REPLACE INTO garantiza que el seed siempre sobreescriba ediciones CMS.
+-- ---------------------------------------------------------------------------
+
+REPLACE INTO `web_contenidos` (`seccion`, `subseccion`, `clave`, `valor`, `tipo`) VALUES
+    ('aviso-privacidad','contenido','cuerpo_html','<p class="modal-p" style="-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);box-sizing:border-box;color:rgb(100, 116, 139);font-family:&quot;Gill Sans&quot;, &quot;Gill Sans MT&quot;, Cabin, Calibri, &quot;Trebuchet MS&quot;, sans-serif;font-size:0.9rem;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:400;letter-spacing:normal;line-height:1.75;margin:0px 0px 1rem;orphans:2;padding:0px;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;"><strong style="box-sizing:border-box;margin:0px;padding:0px;">LABORATORIO </strong><span style="color:#71CA11;"><strong style="box-sizing:border-box;margin:0px;padding:0px;">LAESH</strong></span>, con domicilio en Azucenas #8, Fraccionamiento Jardines del Sur, Huajuapan de León, Oaxaca.2, es responsable del tratamiento, uso, protección y resguardo de los datos personales que recaba de sus pacientes, usuarios y personas que solicitan nuestros servicios.</p><h4 class="aviso-h4" style="-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);box-sizing:border-box;color:rgb(0, 82, 183);font-family:&quot;Mosquito Std Black&quot;, &quot;Arial Black&quot;, Impact, sans-serif;font-size:0.9rem;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;letter-spacing:normal;margin:1.25rem 0px 0.35rem;orphans:2;padding:0px;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;">1. Datos personales que recabamos</h4><ul class="aviso-list" style="-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);box-sizing:border-box;color:rgb(100, 116, 139);font-family:&quot;Gill Sans&quot;, &quot;Gill Sans MT&quot;, Cabin, Calibri, &quot;Trebuchet MS&quot;, sans-serif;font-size:0.88rem;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:400;letter-spacing:normal;line-height:1.75;margin:0px 0px 0.75rem;orphans:2;padding:0px 0px 0px 1.2rem;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;"><li style="box-sizing:border-box;margin-bottom:0px;margin-right:0px;margin-top:0px;padding:0px;">Nombre completo.</li><li style="box-sizing:border-box;margin-bottom:0px;margin-right:0px;margin-top:0px;padding:0px;">Fecha de nacimiento y edad.</li><li style="box-sizing:border-box;margin-bottom:0px;margin-right:0px;margin-top:0px;padding:0px;">Sexo.</li><li style="box-sizing:border-box;margin-bottom:0px;margin-right:0px;margin-top:0px;padding:0px;">Datos de contacto, como teléfono, correo electrónico y domicilio.</li><li style="box-sizing:border-box;margin-bottom:0px;margin-right:0px;margin-top:0px;padding:0px;">Datos relacionados con la atención y solicitud de estudios de laboratorio.</li><li style="box-sizing:border-box;margin-bottom:0px;margin-right:0px;margin-top:0px;padding:0px;">Información necesaria para la identificación y entrega de resultados.</li></ul><p class="modal-p--main" style="-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);box-sizing:border-box;color:rgb(15, 23, 42);font-family:&quot;Gill Sans&quot;, &quot;Gill Sans MT&quot;, Cabin, Calibri, &quot;Trebuchet MS&quot;, sans-serif;font-size:0.88rem;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;letter-spacing:normal;margin:0px 0px 0.35rem;orphans:2;padding:0px;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;"><strong>Datos personales sensibles</strong></p><p class="aviso-p aviso-p--sm" style="-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);box-sizing:border-box;color:rgb(100, 116, 139);font-family:&quot;Gill Sans&quot;, &quot;Gill Sans MT&quot;, Cabin, Calibri, &quot;Trebuchet MS&quot;, sans-serif;font-size:0.88rem;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:400;letter-spacing:normal;line-height:1.7;margin:0px 0px 0.5rem;orphans:2;padding:0px;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;">Por la naturaleza de nuestros servicios, podremos tratar datos personales sensibles relacionados con el estado de salud. Estos datos serán tratados con medidas de seguridad y confidencialidad.</p><h4 class="aviso-h4" style="-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);box-sizing:border-box;color:rgb(0, 82, 183);font-family:&quot;Mosquito Std Black&quot;, &quot;Arial Black&quot;, Impact, sans-serif;font-size:0.9rem;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;letter-spacing:normal;margin:1.25rem 0px 0.35rem;orphans:2;padding:0px;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;">2. Finalidades del tratamiento</h4><ol class="aviso-list" style="-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);box-sizing:border-box;color:rgb(100, 116, 139);font-family:&quot;Gill Sans&quot;, &quot;Gill Sans MT&quot;, Cabin, Calibri, &quot;Trebuchet MS&quot;, sans-serif;font-size:0.88rem;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:400;letter-spacing:normal;line-height:1.75;margin:0px 0px 0.75rem;orphans:2;padding:0px 0px 0px 1.2rem;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;"><li style="box-sizing:border-box;margin-bottom:0px;margin-right:0px;margin-top:0px;padding:0px;">Identificar y registrar al paciente.</li><li style="box-sizing:border-box;margin-bottom:0px;margin-right:0px;margin-top:0px;padding:0px;">Solicitar, procesar y entregar estudios de laboratorio.</li><li style="box-sizing:border-box;margin-bottom:0px;margin-right:0px;margin-top:0px;padding:0px;">Elaborar y conservar los resultados correspondientes.</li><li style="box-sizing:border-box;margin-bottom:0px;margin-right:0px;margin-top:0px;padding:0px;">Dar seguimiento a los servicios solicitados.</li><li style="box-sizing:border-box;margin-bottom:0px;margin-right:0px;margin-top:0px;padding:0px;">Atender dudas, aclaraciones o solicitudes relacionadas con sus resultados.</li><li style="box-sizing:border-box;margin-bottom:0px;margin-right:0px;margin-top:0px;padding:0px;">Cumplir con las obligaciones legales y sanitarias aplicables.</li><li style="box-sizing:border-box;margin-bottom:0px;margin-right:0px;margin-top:0px;padding:0px;">Mantener registros administrativos, contables y relacionados con la prestación del servicio.</li></ol><h4 class="aviso-h4" style="-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);box-sizing:border-box;color:rgb(0, 82, 183);font-family:&quot;Mosquito Std Black&quot;, &quot;Arial Black&quot;, Impact, sans-serif;font-size:0.9rem;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;letter-spacing:normal;margin:1.25rem 0px 0.35rem;orphans:2;padding:0px;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;">3. Protección y confidencialidad</h4><p class="aviso-p aviso-p--sm" style="-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);box-sizing:border-box;color:rgb(100, 116, 139);font-family:&quot;Gill Sans&quot;, &quot;Gill Sans MT&quot;, Cabin, Calibri, &quot;Trebuchet MS&quot;, sans-serif;font-size:0.88rem;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:400;letter-spacing:normal;line-height:1.7;margin:0px 0px 0.5rem;orphans:2;padding:0px;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;">Laboratorio LAESH implementa medidas administrativas, técnicas y físicas destinadas a proteger los datos personales contra daño, pérdida, alteración, destrucción, acceso o tratamiento no autorizado.</p><h4 class="aviso-h4" style="-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);box-sizing:border-box;color:rgb(0, 82, 183);font-family:&quot;Mosquito Std Black&quot;, &quot;Arial Black&quot;, Impact, sans-serif;font-size:0.9rem;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;letter-spacing:normal;margin:1.25rem 0px 0.35rem;orphans:2;padding:0px;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;">4. Derechos ARCO</h4><p class="aviso-p aviso-p--sm" style="-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);box-sizing:border-box;color:rgb(100, 116, 139);font-family:&quot;Gill Sans&quot;, &quot;Gill Sans MT&quot;, Cabin, Calibri, &quot;Trebuchet MS&quot;, sans-serif;font-size:0.88rem;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:400;letter-spacing:normal;line-height:1.7;margin:0px 0px 0.5rem;orphans:2;padding:0px;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;">Usted tiene derecho a Acceder, Rectificar, Cancelar u Oponerse al tratamiento de sus datos personales. Para ejercer estos derechos contáctenos por:</p><ul class="aviso-list aviso-list--sm" style="-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);box-sizing:border-box;color:rgb(100, 116, 139);font-family:&quot;Gill Sans&quot;, &quot;Gill Sans MT&quot;, Cabin, Calibri, &quot;Trebuchet MS&quot;, sans-serif;font-size:0.88rem;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:400;letter-spacing:normal;line-height:1.75;margin:0px 0px 0.5rem;orphans:2;padding:0px 0px 0px 1.2rem;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;"><li style="box-sizing:border-box;margin-bottom:0px;margin-right:0px;margin-top:0px;padding:0px;">Correo: <a class="txt-primary-c" style="box-sizing:border-box;color:rgb(0, 82, 183);margin:0px;padding:0px;" href="mailto:11lab_laesh@hotmail.com">11lab_laesh@hotmail.com</a></li><li style="box-sizing:border-box;margin-bottom:0px;margin-right:0px;margin-top:0px;padding:0px;">Teléfono: <strong style="box-sizing:border-box;margin:0px;padding:0px;">953 688 769410</strong></li><li style="box-sizing:border-box;margin-bottom:0px;margin-right:0px;margin-top:0px;padding:0px;">Domicilio: Azucenas #8, Fraccionamiento Jardines del Sur, Huajuapan de León, Oaxaca.2</li></ul><h4 class="aviso-h4" style="-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);box-sizing:border-box;color:rgb(0, 82, 183);font-family:&quot;Mosquito Std Black&quot;, &quot;Arial Black&quot;, Impact, sans-serif;font-size:0.9rem;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;letter-spacing:normal;margin:1.25rem 0px 0.35rem;orphans:2;padding:0px;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;">5. Modificaciones</h4><p class="aviso-p aviso-p--sm" style="-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);box-sizing:border-box;color:rgb(100, 116, 139);font-family:&quot;Gill Sans&quot;, &quot;Gill Sans MT&quot;, Cabin, Calibri, &quot;Trebuchet MS&quot;, sans-serif;font-size:0.88rem;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:400;letter-spacing:normal;line-height:1.7;margin:0px 0px 0.5rem;orphans:2;padding:0px;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;">Laboratorio LAESH podrá modificar este Aviso cuando resulte necesario. Las modificaciones estarán disponibles en nuestro sitio web.</p><p class="modal-p--sm" style="-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);box-sizing:border-box;color:rgb(100, 116, 139);font-family:&quot;Gill Sans&quot;, &quot;Gill Sans MT&quot;, Cabin, Calibri, &quot;Trebuchet MS&quot;, sans-serif;font-size:0.8rem;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:400;letter-spacing:normal;margin:0px 0px 1rem;orphans:2;padding:0px;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;"><i>Última actualización: agosto de 2026</i></p><div class="highlight-block" style="-webkit-text-stroke-width:0px;background-color:rgba(113, 202, 17, 0.06);border-left:3px solid rgb(113, 202, 17);border-radius:0px 6px 6px 0px;box-sizing:border-box;color:rgb(15, 23, 42);font-family:&quot;Gill Sans&quot;, &quot;Gill Sans MT&quot;, Cabin, Calibri, &quot;Trebuchet MS&quot;, sans-serif;font-size:16.8px;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:400;letter-spacing:normal;margin:0.5rem 0px 0px;orphans:2;padding:0.85rem 1rem;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;"><p class="modal-p--pgd" style="box-sizing:border-box;color:rgb(0, 82, 183);font-size:0.88rem;margin:0px 0px 0.35rem;padding:0px;"><strong>Consentimiento</strong></p><p class="modal-p--tail" style="box-sizing:border-box;color:rgb(100, 116, 139);font-size:0.88rem;line-height:1.7;margin:0px;padding:0px;">Declaro que he leído y comprendido el presente Aviso de Privacidad y manifiesto mi consentimiento para el tratamiento de mis datos personales para las finalidades señaladas.</p></div>','html');
+REPLACE INTO `web_contenidos` (`seccion`, `subseccion`, `clave`, `valor`, `tipo`) VALUES
+    ('calidad','gallery1','activo','1','texto');
+REPLACE INTO `web_contenidos` (`seccion`, `subseccion`, `clave`, `valor`, `tipo`) VALUES
+    ('calidad','gallery1','descripcion','Análisis de biometría hemática y células sanguíneas con rigor científico y alta precisión.','texto');
+REPLACE INTO `web_contenidos` (`seccion`, `subseccion`, `clave`, `valor`, `tipo`) VALUES
+    ('calidad','gallery1','imagen_url','/laesh-web-assets-uipv1a/cms/calidad-gallery1-20260913-153fe798.webp','imagen_url');
+REPLACE INTO `web_contenidos` (`seccion`, `subseccion`, `clave`, `valor`, `tipo`) VALUES
+    ('calidad','gallery1','titulo','Área de Hematología','texto');
+REPLACE INTO `web_contenidos` (`seccion`, `subseccion`, `clave`, `valor`, `tipo`) VALUES
+    ('calidad','gallery2','activo','1','texto');
+REPLACE INTO `web_contenidos` (`seccion`, `subseccion`, `clave`, `valor`, `tipo`) VALUES
+    ('calidad','gallery2','descripcion','Determinación automatizada de metabolitos, perfil lipídico y enzimas específicas.','texto');
+REPLACE INTO `web_contenidos` (`seccion`, `subseccion`, `clave`, `valor`, `tipo`) VALUES
+    ('calidad','gallery2','imagen_url','/laesh-web-assets-uipv1a/cms/calidad-gallery2-20260913-9d7a6baf.webp','imagen_url');
+REPLACE INTO `web_contenidos` (`seccion`, `subseccion`, `clave`, `valor`, `tipo`) VALUES
+    ('calidad','gallery2','titulo','Química Clínica','texto');
+REPLACE INTO `web_contenidos` (`seccion`, `subseccion`, `clave`, `valor`, `tipo`) VALUES
+    ('calidad','gallery3','activo','1','texto');
+REPLACE INTO `web_contenidos` (`seccion`, `subseccion`, `clave`, `valor`, `tipo`) VALUES
+    ('calidad','gallery3','descripcion','Aislamiento, tinción de Gram y pruebas de susceptibilidad a antimicrobianos.','texto');
+REPLACE INTO `web_contenidos` (`seccion`, `subseccion`, `clave`, `valor`, `tipo`) VALUES
+    ('calidad','gallery3','imagen_url','/laesh-web-assets-uipv1a/cms/calidad-gallery3-20260913-a20bc539.webp','imagen_url');
+REPLACE INTO `web_contenidos` (`seccion`, `subseccion`, `clave`, `valor`, `tipo`) VALUES
+    ('calidad','gallery3','titulo','Microbiología y Cultivos','texto');
+REPLACE INTO `web_contenidos` (`seccion`, `subseccion`, `clave`, `valor`, `tipo`) VALUES
+    ('calidad','seccion','h2','Calidad e Instalaciones','texto');
+REPLACE INTO `web_contenidos` (`seccion`, `subseccion`, `clave`, `valor`, `tipo`) VALUES
+    ('calidad','seccion','subtitulo','Conoce nuestras instalaciones equipadas con tecnología de vanguardia y un equipo comprometido con la excelencia diagnóstica.','texto');
+REPLACE INTO `web_contenidos` (`seccion`, `subseccion`, `clave`, `valor`, `tipo`) VALUES
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `04_export_cms_seed.sh`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+#!/usr/bin/env bash
+# ==============================================================================
+# 04_export_cms_seed.sh — Ciclo CMS → Seed (destinos: KVM2 producción · OCI pruebas)
+#
+# Exporta web_contenidos desde la BD local (fuente de verdad) y
+# regenera el bloque REPLACE INTO de 07_seed_catalogs.sql.
+#
+# Cuándo ejecutar:
+#   Después de editar contenido en el CMS local (ADMRC → Gestión Web)
+#   y antes de un rsync + DROP+recreate en OCI VM.
+#
+# Protocolo completo CMS → OCI:
+#   1. Editar en CMS local: https://192.168.1.71:8443/laesh/adrc/
+#   2. bash setup/bds/laesh/bash/cms-sync/04_export_cms_seed.sh
+#   3. Revisar el diff de 07_seed_catalogs.sql (git diff)
+#   4. rsync laesh-swbldi/ y setup/bds/laesh/ a OCI
+#   5. En OCI: bash setup_oci.sh --drop
+#
+# Variables sobreescribibles:
+#   DB_CONTAINER   Contenedor MariaDB local (default: restaurantb_db)
+#   DB_USER        Usuario raíz local (default: root)
+#   DB_PASS        Contraseña raíz local (default: comite_2026)
+#   DB_NAME        BD local (default: laesh_db)
+# ==============================================================================
+
+set -euo pipefail
+
+DB_CONTAINER="${DB_CONTAINER:-restaurantb_db}"
+DB_USER="${DB_USER:-root}"
+DB_PASS="${DB_PASS:-comite_2026}"
+DB_NAME="${DB_NAME:-laesh_db}"
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+SEED_FILE="${DIR}/../07_seed_catalogs.sql"
+TMP_EXPORT="${DIR}/../.tmp_web_contenidos_export.sql"
+
+# ── Verificar contenedor local corriendo ─────────────────────────────────────
+if ! docker ps --format '{{.Names}}' | grep -q "^${DB_CONTAINER}$"; then
+    echo "[ERROR] Contenedor '${DB_CONTAINER}' no está corriendo."
+    echo "        Ejecuta: docker compose up -d"
+    exit 1
+fi
+
+echo "=================================================================="
+echo " LAESH — Exportar web_contenidos → 07_seed_catalogs.sql"
+echo " Fuente: ${DB_CONTAINER} → ${DB_NAME}.web_contenidos"
+echo " Destino: $(basename ${SEED_FILE})"
+echo "=================================================================="
+echo ""
+
+# ── Contar filas actuales ─────────────────────────────────────────────────────
+ROW_COUNT=$(docker exec -i "${DB_CONTAINER}" \
+    mariadb -u"${DB_USER}" -p"${DB_PASS}" -N -e \
+    "SELECT COUNT(*) FROM ${DB_NAME}.web_contenidos;" 2>/dev/null)
+echo "  Filas en web_contenidos local: ${ROW_COUNT}"
+
+# ── Exportar web_contenidos como REPLACE INTO ─────────────────────────────────
+echo "  Exportando..."
+
+docker exec -i "${DB_CONTAINER}" \
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:33 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `04_export_cms_seed.sh`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L59-144)</summary>
+
+**Path:** `Unknown file`
+
+```
+docker exec -i "${DB_CONTAINER}" \
+    mariadb -u"${DB_USER}" -p"${DB_PASS}" "${DB_NAME}" \
+    --skip-column-names --batch 2>/dev/null <<'EOF' > "${TMP_EXPORT}"
+SELECT CONCAT(
+    'REPLACE INTO `web_contenidos` (`seccion`, `subseccion`, `clave`, `valor`, `tipo`) VALUES\n',
+    GROUP_CONCAT(
+        CONCAT(
+            "    ('", seccion, "', ",
+            IF(subseccion IS NULL, 'NULL', CONCAT("'", REPLACE(subseccion, "'", "''"), "'")), ", '",
+            REPLACE(clave,  "'", "''"), "', '",
+            REPLACE(REPLACE(valor, '\\', '\\\\'), "'", "''"), "', '",
+            tipo, "')"
+        )
+        ORDER BY seccion, subseccion, clave
+        SEPARATOR ',\n'
+    ),
+    ';'
+)
+FROM web_contenidos;
+EOF
+
+if [ ! -s "${TMP_EXPORT}" ]; then
+    echo "[ERROR] Export vacío — verificar conexión y datos en web_contenidos"
+    rm -f "${TMP_EXPORT}"
+    exit 1
+fi
+
+# ── Reemplazar sección web_contenidos en 07_seed_catalogs.sql ────────────────
+# La sección empieza con el marcador y termina con el siguiente marcador de sección.
+
+MARKER_START="-- ---------------------------------------------------------------------------"
+SECTION_HEADER="-- WEB_CONTENIDOS — Contenido Editorial"
+
+# Verificar que el marcador exista en el archivo
+if ! grep -q "${SECTION_HEADER}" "${SEED_FILE}"; then
+    echo "[ERROR] No se encontró el marcador '${SECTION_HEADER}' en $(basename ${SEED_FILE})"
+    echo "        El archivo puede haber cambiado de estructura."
+    rm -f "${TMP_EXPORT}"
+    exit 1
+fi
+
+# Obtener número de línea donde empieza la sección web_contenidos
+SECTION_LINE=$(grep -n "${SECTION_HEADER}" "${SEED_FILE}" | head -1 | cut -d: -f1)
+# La sección del separador empieza 1 línea antes
+START_LINE=$((SECTION_LINE - 1))
+TOTAL_LINES=$(wc -l < "${SEED_FILE}")
+
+echo "  Sección web_contenidos en ${SEED_FILE}:${START_LINE}–${TOTAL_LINES}"
+
+# Preservar todo hasta el marcador (inclusive la línea START_LINE - 1)
+BEFORE_SECTION=$(head -n $((START_LINE - 1)) "${SEED_FILE}")
+
+# Construir nueva sección
+NEW_SECTION="-- ---------------------------------------------------------------------------
+-- WEB_CONTENIDOS — Contenido Editorial
+-- SSOT: exportado de BD local (${DB_NAME}) — $(date '+%Y-%m-%d %H:%M')
+-- Regenerar con: bash setup/bds/laesh/bash/cms-sync/04_export_cms_seed.sh
+-- REPLACE INTO garantiza que el seed siempre sobreescriba ediciones CMS.
+-- ---------------------------------------------------------------------------
+
+$(cat "${TMP_EXPORT}")"
+
+# Escribir archivo resultante
+{
+    echo "${BEFORE_SECTION}"
+    echo ""
+    echo "${NEW_SECTION}"
+} > "${SEED_FILE}.tmp"
+
+mv "${SEED_FILE}.tmp" "${SEED_FILE}"
+rm -f "${TMP_EXPORT}"
+
+FINAL_LINES=$(wc -l < "${SEED_FILE}")
+echo ""
+echo "=================================================================="
+echo " ✅ Exportación completada"
+echo "    Filas web_contenidos: ${ROW_COUNT}"
+echo "    Archivo: $(basename ${SEED_FILE}) (${FINAL_LINES} líneas)"
+echo ""
+echo " Próximos pasos:"
+echo "   1. git diff setup/bds/laesh/07_seed_catalogs.sql"
+echo "   2. rsync setup/bds/laesh/ a OCI"
+echo "   3. En OCI: bash setup_oci.sh --drop"
+echo "   4. bash setup/bds/laesh/bash/verify/03_test_deploy.sh"
+echo "=================================================================="
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `07_seed_catalogs.sql`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1679-1713)</summary>
+
+**Path:** `Unknown file`
+
+```
+REPLACE INTO `web_contenidos` (`seccion`, `subseccion`, `clave`, `valor`, `tipo`) VALUES
+    ('seo','meta','title','LAESH — Laboratorio de Especialidades Hematológicas en Huajuapan de León, Oaxaca','texto');
+REPLACE INTO `web_contenidos` (`seccion`, `subseccion`, `clave`, `valor`, `tipo`) VALUES
+    ('seo','og','og_description','Diagnósticos clínicos de alta precisión con resultados confiables. Visítanos en Huajuapan de León, Oaxaca.','texto');
+REPLACE INTO `web_contenidos` (`seccion`, `subseccion`, `clave`, `valor`, `tipo`) VALUES
+    ('seo','og','og_image','/laesh-web-assets-uipv1a/cms/seo-og-20260913-1ab2c531.webp','imagen_url');
+REPLACE INTO `web_contenidos` (`seccion`, `subseccion`, `clave`, `valor`, `tipo`) VALUES
+    ('seo','og','og_title','LAESH — Laboratorio de Especialidades Hematológicas','texto');
+REPLACE INTO `web_contenidos` (`seccion`, `subseccion`, `clave`, `valor`, `tipo`) VALUES
+    ('seo','og','site_name','','texto');
+REPLACE INTO `web_contenidos` (`seccion`, `subseccion`, `clave`, `valor`, `tipo`) VALUES
+    ('seo','schema','schema_name','Laboratorio de Especialidades Hematológicas LAESH','texto');
+REPLACE INTO `web_contenidos` (`seccion`, `subseccion`, `clave`, `valor`, `tipo`) VALUES
+    ('seo','schema','schema_type','MedicalLaboratory','texto');
+REPLACE INTO `web_contenidos` (`seccion`, `subseccion`, `clave`, `valor`, `tipo`) VALUES
+    ('ubicacion','croquis','imagen_url','/laesh-web-assets-uipv1a/cms/ubicacion-croquis-20260925-271b1617.webp','imagen_url');
+REPLACE INTO `web_contenidos` (`seccion`, `subseccion`, `clave`, `valor`, `tipo`) VALUES
+    ('ubicacion','seccion','h2','Ubicación y Contacto','texto');
+REPLACE INTO `web_contenidos` (`seccion`, `subseccion`, `clave`, `valor`, `tipo`) VALUES
+    ('ubicacion','seccion','subtitulo','Visítenos en nuestras instalaciones, será un placer atenderle.','texto');
+REPLACE INTO `web_contenidos` (`seccion`, `subseccion`, `clave`, `valor`, `tipo`) VALUES
+    ('video-promo','contenido','cuerpo_html','<h2 style="text-align:center;"><span style="color:#71CA11;">Promo 2025</span></h2><figure class="media"><div data-oembed-url="https://youtu.be/6lkvdY6nAm4?si=E-Fk2UKWMcLDwl5W"><div style="position: relative; padding-bottom: 100%; height: 0; padding-bottom: 56.2493%;"><iframe src="https://www.youtube.com/embed/6lkvdY6nAm4" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0;" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe></div></div></figure>','texto');
+
+-- ---------------------------------------------------------------------------
+-- CATALOGO_PROMOCIONES — 7 días de la semana
+-- ---------------------------------------------------------------------------
+INSERT IGNORE INTO `catalogo_promociones` (`id`, `dia_semana`, `imagen_fondo`, `activo`, `orden`) VALUES
+(1,'<h2 style="text-align:center;">Lunes</h2>','/laesh-web-assets-uipv1a/cms/promo-1-20260925-3881904f.webp',1,1),
+(2,'<p>Martes</p>','/laesh-web-assets-uipv1a/cms/promo-2-20260925-617a645f.webp',1,2),
+(3,'<p>Miércoles</p>',NULL,1,3),
+(4,'<p>Jueves</p>',NULL,1,4),
+(5,'<p>Viernes</p>',NULL,1,5),
+(6,'<p>Sábado</p>',NULL,1,6),
+(7,'<p>Domingo</p>',NULL,1,7);
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The `CATALOGO_PROMOCIONES` section likely follows `web_contenidos` directly. Examination of `07_seed_catalogs.sql` reveals discrepancies in `catalogo_promociones` content, suggesting an outdated version. `04_export_cms_seed.sh` potentially truncates the catalog data because its processing logic appears to assume `web_contenidos` is the final section.
+
+
+The user explicitly requested the changes, which triggers the need to fold and deploy. Based on the documented workflow, folding `m011_sync_cms_contenidos_20261008.sql` into `07_seed_catalogs.sql` is the next step to prevent warnings during future deployments. The goal is to avoid leaving the migration file as pending in the local repository.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.554565305s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:34 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `07_seed_catalogs.sql`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L99-114)</summary>
+
+**Path:** `Unknown file`
+
+```
+    ('responsable_cedula_esp',  '8935780',
+                                 'Cédula de especialidad del responsable sanitario'),
+    -- Redes sociales y mapas
+    ('facebook_url',            'https://www.facebook.com/profile.php?id=100072263716098',
+                                 'URL de la página oficial de Facebook del laboratorio'),
+    ('maps_url',                'https://www.google.com/maps/dir/?api=1&destination=Laboratorio+de+Especialidades+Hematol%C3%B3gicas+S.C.,+Calle+Azucenas+%238,+Jardines+del+Sur,+69007+Heroica+Cdad.+de+Huajuapan+de+Le%C3%B3n,+Oax.',
+                                 'URL directa a la ubicación en Google Maps (Cómo llegar)'),
+    ('wa_texto_agendar',        'Hola LAESH, me interesa agendar el estudio de {estudio}',
+                                 'Texto pre-llenado de WhatsApp al agendar en Promociones'),
+    ('wa_texto_info',           'Hola LAESH, necesito información',
+                                 'Texto pre-llenado de WhatsApp para consultas generales'),
+    -- Operaciones internas y P2 Bloc Digital
+    ('tiempo_depuracion_pdf_meses', '12',
+                                 'Meses de retención de archivos PDF generados antes de la depuración automática'),
+    ('ruta_almacenamiento_pdf', '/var/www/html/laesh-bloc-assets/pdf/',
+                                 'Ruta física de almacenamiento seguro de PDFs de recibos'),
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+`maps_url` within `07_seed_catalogs.sql` still contains outdated links, and the `maps_fallback_origen` column is missing. The same file also has old content for `catalogo_promociones` and `web_contenidos`. A potential solution is in `m011_sync_cms_contenidos_20261008.sql`, which seems to have clean SQL statements for the problematic tables. Before proceeding, verifying that `07_seed_catal` does not also need a merge.
+
+
+Examined the `m011` file, observing its use of `INSERT ... ON DUPLICATE KEY UPDATE` for `web_contenidos`, confirming it contains the intended update logic.  Compared this with the `07_seed_catalogs.sql`'s `REPLACE INTO` statements, noting this is sufficient for initial database population. The `catalogo_promociones` table's data within `m011` also appears suitable.
+
+
+Determining if the instructions include merging `m011` immediately. Considering whether the specific request was related to the deployment of PHP files and web assets alongside database changes. Reviewing the updated `git status` information to assess the scope of recent changes and confirm the creation and application of `m011_sync_cms_contenidos_20261008.sql`.
+
+
+Verifying the process to fold the migration script into the seed file for synchronization to the staging environment using a deployment script.  Confirming the deployment script's actions include synchronizing the updated seed file and cleaned migrations directory. Ensuring that the updated seed file will be correctly deployed.
+
+Examined the exact SQL statements for `web_contenidos` in both the migration script and the seed file, comparing the `REPLACE INTO` statements versus `INSERT ... ON DUPLICATE KEY UPDATE` to ensure equivalence. This confirms the logic and data in the migration are effectively merged. The procedure ensures a consistent state across environments.
+
+
+The migration script employs an `INSERT ... ON DUPLICATE KEY UPDATE` strategy, considered more robust and efficient. Updating the existing seed file, the data insertion method in `catalogo_promociones` will be adjusted.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 16.062708233s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:34 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:34 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:34 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:35 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:35 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:35 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:35 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:35 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `README.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L39-64)</summary>
+
+**Path:** `Unknown file`
+
+```
+## Estado de migraciones activas
+
+- **`m011_sync_cms_contenidos_20261008.sql`** (2026-10-08, **activa / pendiente de deploy**):
+  - **Propósito**: Sincronización mandatoria y completa del contenido CMS local hacia producción KVM2 (`laesh_db`).
+  - **Alcance**:
+    - `web_contenidos`: Inserción/actualización de 139 registros canónicos (nuevas galerías de calidad, 15 áreas de especialidades, nueva tarjeta e historia de responsable sanitario, metadatos SEO/Schema.org actualizados y contacto sin bordes).
+    - Depuración de claves obsoletas: `DELETE FROM web_contenidos WHERE seccion = 'especialidades' AND subseccion = 'carousel16'`.
+    - `catalogo_promociones`: Actualización de los 7 días de la semana con encabezados estilizados `<h3>...</h3>`.
+    - `configuraciones`: Registro de `maps_fallback_origen` y actualización de `maps_url`.
+    - Blindaje de infraestructura: No altera variables de rutas, contraseñas ni tiempos de expiración de KVM2.
+  - **Prerrequisito**: Snapshot preventivo de BD (`backup_db.sh`) en KVM2 antes de su ejecución.
+
+
+> `m010_optimizacion_indices_modelo.sql` (2026-10-02, **aplicada y foldeada**):
+> - `rel_igabinete_vinculos`: PK autoincremental física `id` + unicidad virtual `uq_vinculo_unico` sobre `(igabinete_id, gabinete_id, IFNULL(subgabinete_id, 0))`.
+> - Depuración de 6 índices secundarios redundantes (`idx_cms_sec_sub_clave`, `idx_seccion` en `web_contenidos`; `idx_medico`, `idx_estado` en `ordenes`; `idx_user` en `notificaciones`; `idx_orden` en `historial_estados_orden`).
+> - `jwt_jti_registry`: índice compuesto `idx_user_revoked (user_id, is_revoked)` y retiro de `idx_is_revoked` e `idx_user_id`.
+> - `catalogo_promociones`: tipo `dia_semana` optimizado a `VARCHAR(255)` (almacenamiento in-row sin off-page storage, preservando HTML de CKEditor).
+> - `vw_estudios_catalogo` y `UpsertEstudioCatalogo`: retiro de `descripcion_breve` y `fecha_modificacion`.
+> - `cat_estudios`: retiro de `categoria_id`, `descripcion_breve`, `detalle`, `fecha_creacion`, `fecha_modificacion` y estandarización a `created_at`/`updated_at`.
+> - `cat_categorias`: retiro de tabla obsoleta y FK `fk_estudio_categoria`.
+> Foldeada a `02_core_schema.sql`, `03_transactional_schema.sql`, `04_auth_extensions.sql`, `06_indexes.sql`, `08_stored_procedures.sql` y `09_views.sql`.
+
+> **Números reutilizados (m006–m009), 2026-10-01 tarde/noche** — no confundir con las entradas de
+> `m006`–`m009` de más abajo (mismo día, más temprano): esos ya se foldearon y se borraron, liberando
+> los números, que una sesión paralela de Claude Code volvió a usar para 4 migraciones nuevas y
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:35 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:36 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:36 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:36 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:36 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+The `systemctl status php8.3` command will reveal the current operational state of the PHP service on KVM2. Analyzing the output will identify any active errors or failures that require attention, confirming the service's stability. Any abnormal state will be noted for potential debugging steps.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.110732620s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:36 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:36 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L323-362)</summary>
+
+**Path:** `Unknown file`
+
+```
+                dragging = false;
+                header.style.cursor = 'grab';
+                document.body.style.userSelect = '';
+            });
+            // Reset al cerrar
+            new MutationObserver(function() {
+                if (!modal.classList.contains('show')) {
+                    content.style.position = content.style.left = content.style.top =
+                    content.style.margin   = content.style.transform = '';
+                    modal.style.alignItems = modal.style.justifyContent = '';
+                }
+            }).observe(modal, { attributes: true, attributeFilter: ['class'] });
+        }
+    })();
+
+    // ─────────────────────────────────────────────────────────────
+    // Helper para abrir la ruta en Google Maps con Detección Inteligente:
+    // · Destino canónico: Se hereda directamente del href / BD (Pestaña 6):
+    //   "Laboratorio de Especialidades Hematológicas S.C., Calle Azucenas #8..."
+    // · Desktop/Laptop: Se traza directo desde el punto de referencia default:
+    //   "Bodega Aurrerá (Av. 5 de Febrero)" hacia LAESH.
+    // · Dispositivos Móviles:
+    //   - Si el usuario tiene la ubicación activada en su dispositivo:
+    //     Obtiene sus coordenadas GPS exactas (lat,lng) y traza la ruta desde su ubicación.
+    //   - Si la ubicación está desactivada, denegada o no responde:
+    //     Aplica el fallback canónico default (Bodega Aurrerá 5 de Feb).
+    //   - Se evita abrir pestañas about:blank previas para no desenfocar la página
+    //     (lo cual causaba que Chrome/Android denegara la geolocalización por seguridad).
+    // ─────────────────────────────────────────────────────────────
+    window.openGoogleMapsRoute = function() {
+        var btnEl = document.getElementById('btn-map-interactive');
+        var baseMapsUrl = (btnEl && btnEl.getAttribute('href')) ||
+            'https://www.google.com/maps/dir/?api=1&destination=Laboratorio+de+Especialidades+Hematol%C3%B3gicas+S.C.,+Calle+Azucenas+%238,+Jardines+del+Sur,+69007+Heroica+Cdad.+de+Huajuapan+de+Le%C3%B3n,+Oax.';
+
+        var fallbackOrigin = (btnEl && btnEl.dataset.fallbackOrigin) ||
+            "Bodega Aurrera, Av. 5 de Febrero 26-A, Jardines del Sur, 69007 Heroica Cdad. de Huajuapan de León, Oax.";
+
+        function buildMapsUrl(origin) {
+            try {
+                var u = new URL(baseMapsUrl, window.location.origin);
+```
+
+</details>
+
+---
+
+## User Request
+
+Que sigue ?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `website.js`
+**Language:** javascript
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Investigating the JavaScript code related to the interactive map functionality. The previous request indicates an issue with mobile location services; this warrants inspection of how location data is handled within this specific section of the script. The relevant lines likely contain the logic for obtaining and displaying user location on the map, so examining it is necessary to identify potential problems.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `website.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.119092793s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L339-429)</summary>
+
+**Path:** `Unknown file`
+
+```
+    // Helper para abrir la ruta en Google Maps con Detección Inteligente:
+    // · Destino canónico: Se hereda directamente del href / BD (Pestaña 6):
+    //   "Laboratorio de Especialidades Hematológicas S.C., Calle Azucenas #8..."
+    // · Desktop/Laptop: Se traza directo desde el punto de referencia default:
+    //   "Bodega Aurrerá (Av. 5 de Febrero)" hacia LAESH.
+    // · Dispositivos Móviles:
+    //   - Si el usuario tiene la ubicación activada en su dispositivo:
+    //     Obtiene sus coordenadas GPS exactas (lat,lng) y traza la ruta desde su ubicación.
+    //   - Si la ubicación está desactivada, denegada o no responde:
+    //     Aplica el fallback canónico default (Bodega Aurrerá 5 de Feb).
+    //   - Se evita abrir pestañas about:blank previas para no desenfocar la página
+    //     (lo cual causaba que Chrome/Android denegara la geolocalización por seguridad).
+    // ─────────────────────────────────────────────────────────────
+    window.openGoogleMapsRoute = function() {
+        var btnEl = document.getElementById('btn-map-interactive');
+        var baseMapsUrl = (btnEl && btnEl.getAttribute('href')) ||
+            'https://www.google.com/maps/dir/?api=1&destination=Laboratorio+de+Especialidades+Hematol%C3%B3gicas+S.C.,+Calle+Azucenas+%238,+Jardines+del+Sur,+69007+Heroica+Cdad.+de+Huajuapan+de+Le%C3%B3n,+Oax.';
+
+        var fallbackOrigin = (btnEl && btnEl.dataset.fallbackOrigin) ||
+            "Bodega Aurrera, Av. 5 de Febrero 26-A, Jardines del Sur, 69007 Heroica Cdad. de Huajuapan de León, Oax.";
+
+        function buildMapsUrl(origin) {
+            try {
+                var u = new URL(baseMapsUrl, window.location.origin);
+                if (origin) {
+                    u.searchParams.set('origin', origin);
+                }
+                return u.toString();
+            } catch (e) {
+                return origin ? (baseMapsUrl + '&origin=' + encodeURIComponent(origin)) : baseMapsUrl;
+            }
+        }
+
+        var fallbackUrl = buildMapsUrl(fallbackOrigin);
+
+        // Detección de dispositivo móvil (teléfonos, tablets o viewport táctil <= 768px)
+        var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent || navigator.vendor || window.opera) ||
+                       (navigator.maxTouchPoints > 1 && /Macintosh/i.test(navigator.userAgent)) ||
+                       (window.innerWidth <= 768);
+
+        // ── CASO A: Laptop / Computadora de Escritorio ──────────────
+        // Sin GPS satelital nativo; abrir directamente con origen Bodega Aurrerá (5 de Feb)
+        // manteniendo exactamente el destino canónico de LAESH configurado en Pestaña 6.
+        if (!isMobile) {
+            window.open(fallbackUrl, '_blank', 'noopener,noreferrer');
+            return;
+        }
+
+        // ── CASO B: Dispositivo Móvil (Smartphone / Tablet) ─────────
+        function navigate(url) {
+            var win = window.open(url, '_blank', 'noopener,noreferrer');
+            if (!win || win.closed || typeof win.closed === 'undefined') {
+                window.location.href = url;
+            }
+        }
+
+        // Si el dispositivo móvil no soporta geolocalización, dirigir al fallback de inmediato
+        if (!navigator.geolocation) {
+            navigate(fallbackUrl);
+            return;
+        }
+
+        // Indicador visual en el botón mientras se resuelve la ubicación
+        var originalHtml = btnEl ? btnEl.innerHTML : '';
+        if (btnEl) {
+            btnEl.classList.add('cursor-wait');
+            btnEl.setAttribute('aria-busy', 'true');
+        }
+        function cleanupBtn() {
+            if (btnEl) {
+                btnEl.classList.remove('cursor-wait');
+                btnEl.removeAttribute('aria-busy');
+                if (originalHtml) btnEl.innerHTML = originalHtml;
+            }
+        }
+
+        var resolved = false;
+        // Timeout de seguridad en móviles (3.8 segundos para dar margen al sensor GPS sin demorar al usuario)
+        var fallbackTimer = setTimeout(function() {
+            if (!resolved) {
+                resolved = true;
+                cleanupBtn();
+                navigate(fallbackUrl);
+            }
+        }, 3800);
+
+        // Pedir geolocalización DIRECTAMENTE con la pestaña enfocada
+        // maximumAge: 300000 (5 min) permite obtener al instante (0-5 ms) coordenadas si ya están en memoria
+        navigator.geolocation.getCurrentPosition(
+            function(pos) {
+                if (resolved) return;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `website.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L430-459)</summary>
+
+**Path:** `Unknown file`
+
+```
+                resolved = true;
+                clearTimeout(fallbackTimer);
+                cleanupBtn();
+                var coords = pos.coords.latitude + ',' + pos.coords.longitude;
+                var gpsUrl = buildMapsUrl(coords);
+                navigate(gpsUrl);
+            },
+            function(err) {
+                if (resolved) return;
+                resolved = true;
+                clearTimeout(fallbackTimer);
+                cleanupBtn();
+                // Si la ubicación está apagada, denegada o timeout, trazar desde Bodega Aurrerá (5 de Feb)
+                navigate(fallbackUrl);
+            },
+            {
+                enableHighAccuracy: true,
+                timeout: 3500,
+                maximumAge: 300000
+            }
+        );
+    };
+
+    // ─────────────────────────────────────────────────────────────
+    // 7. Carrusel Horizontal de Especialidades
+    //    Scroll snap por ancho de tarjeta + gap computado
+    // ─────────────────────────────────────────────────────────────
+    window.slideSpecialties = function(direction) {
+        const track = document.getElementById('specialties-track');
+        if (!track) return;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Initial geolocation attempt triggers. Checking if a resolution already exists; if so, abort. If not, the resolution flag is set, the fallback timer is cleared, and a cleanup function is called. The latitude and longitude coordinates are extracted from the successful position data and used to construct a URL.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.103010919s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:37 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+Initial investigation shows that "Chapultepec" is not within the codebase. The Google Maps behavior points to a geolocation issue specific to Mexico. This likely occurs when IP-based location services or cell tower triangulation in Mexico resolve to central switching centers in Mexico City.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `ubicacion.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.089238964s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+/**
+ * sections/ubicacion.php — Partial: Ubicación y Contacto
+ * Incluido desde website/index.php; hereda su scope completo.
+ * Variables esperadas: $ubH2, $ubSub, $cfgDir, $cfgTelDigit, $cfgTel, $cfgEmail,
+ *   $waContactUrl, $cfg, $cfgHorSem, $cfgHorDom, $cfgRespNom, $cfgRespProf,
+ *   $cfgRespEsp, $c, $cfgNombreC, $cfgMapsUrl, $mapsEmbed
+ */
+?>
+        <!-- ══════════════════════════════════════ UBICACIÓN Y CONTACTO ══ -->
+        <section id="ubicacion" class="sec-pad-1 scroll-sm-top">
+            <div class="section-header animate-on-scroll">
+                <!-- h2 y subtitulo desde web_contenidos (ubicacion/seccion) -->
+                <h2><?= h($ubH2) ?></h2>
+                <p><?= h($ubSub) ?></p>
+            </div>
+
+            <div class="location-stack-layout">
+                <!-- Datos de contacto — desde CKEditor (ubicacion/contacto/cuerpo_html) -->
+                <div class="card-premium animate-on-scroll delay-100 contact-card-horizontal">
+                    <div class="ck5-output">
+                        <?= safeHtml($c('ubicacion', 'contacto', 'cuerpo_html', '')) ?>
+                    </div>
+                </div>
+
+                <!-- Mapa — Croquis de ubicación con botón a Mapa Interactivo externo -->
+                <div class="card-premium animate-on-scroll delay-200 map-card">
+                    <div class="map-bottom-bar">
+                        <div class="map-bar-inner">
+                            <button type="button" id="btn-map-static" class="map-tab-btn active cursor-default">
+                                <img src="/laesh-web-assets-uipv1a/icons/eye.svg" alt="" loading="lazy" decoding="async">
+                                Croquis
+                            </button>
+                            <a href="<?= h($cfgMapsUrl) ?>"
+                               target="_blank" rel="noopener noreferrer"
+                               id="btn-map-interactive" class="map-tab-btn map-link-flex"
+                               data-fallback-origin="<?= h($cfgMapsFallback ?? 'Bodega Aurrera, Av. 5 de Febrero 26-A, Jardines del Sur, 69007 Heroica Cdad. de Huajuapan de León, Oax.') ?>">
+                                <img src="/laesh-web-assets-uipv1a/icons/map-pin.svg" alt="" loading="lazy" decoding="async">
+                                Mapa Interactivo ↗
+                            </a>
+                        </div>
+                    </div>
+                    <div id="map-static" class="map-static-wrap">
+                        <?php $croquisImg = $c('ubicacion','croquis','imagen_url'); ?>
+                        <div class="map-zoom-link"
+                             role="button"
+                             tabindex="0"
+                             aria-label="Ver croquis de ubicación en tamaño completo"
+                             title="Toca o haz clic para ver en tamaño completo"
+                             onclick="if(typeof window.openPromoModal==='function'){ window.openPromoModal('<?= h($croquisImg) ?>', 'Croquis de Ubicación — <?= h($cfgNombreC) ?>'); }"
+                             onkeydown="if(event.key==='Enter'||event.key===' '){ event.preventDefault(); if(typeof window.openPromoModal==='function'){ window.openPromoModal('<?= h($croquisImg) ?>', 'Croquis de Ubicación — <?= h($cfgNombreC) ?>'); } }">
+                            <?php if (!empty($croquisImg)): ?>
+                            <img src="<?= h($croquisImg) ?>"
+                                 alt="Croquis de Ubicación <?= h($cfgNombreC) ?>"
+                                 class="map-zoom-img" width="1284" height="902"
+                                 loading="lazy" decoding="async"
+                                 onerror="this.onerror=null; this.src='/laesh-web-assets-uipv1a/img/placeholder.webp';">
+                            <?php endif; ?>
+                        </div>
+                    </div>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Analyzing the HTML, the interactive map link uses a fallback origin defined within a `data-fallback-origin` attribute. This suggests a mechanism to provide a default location if the primary map URL, `cfgMapsUrl`, is unavailable. The fallback value appears to be a physical address.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.117429941s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 8 Oct 2026, 3:38 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `website.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L549-569)</summary>
+
+**Path:** `Unknown file`
+
+```
+    var btnCarouselPrev = document.getElementById('btn-carousel-prev');
+    var btnCarouselNext = document.getElementById('btn-carousel-next');
+    if (btnCarouselPrev) btnCarouselPrev.addEventListener('click', function() { slideSpecialties(-1); });
+    if (btnCarouselNext) btnCarouselNext.addEventListener('click', function() { slideSpecialties(1); });
+
+    // Map tabs / Direct external map trigger
+    var btnMapInteractive = document.getElementById('btn-map-interactive');
+    if (btnMapInteractive) {
+        btnMapInteractive.addEventListener('click', function(e) {
+            e.preventDefault();
+            openGoogleMapsRoute();
+        });
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    // CAT-ACC: Accordion del catálogo de estudios
+    // Alterna clase 'collapsed' en el body y rota el chevron del header.
+    // HTML: button[data-acc="cg1"] → #cg1 (body) · #arr-cg1 (chevron SVG)
+    // CSS:  .orden-acc-body.collapsed { max-height: 0 }
+    //       .chevron-open            { transform: rotate(-180deg) }
+    // ─────────────────────────────────────────────────────────────
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The code snippet reveals that clicking the "btn-map-interactive" button triggers a function that prevents default behavior and calls `openGoogleMapsRoute()`. This suggests the button's purpose is to launch a Google Maps route, potentially.  The next step is to examine `openGoogleMapsRoute()` to determine how it constructs and opens the route.
+
+
+The code checks for mobile devices and opens a fallback URL if not mobile.  The user's note about testing on localhost raises a red flag regarding geolocation. On non-secure contexts (like HTTP on a mobile device accessing localhost via IP), geolocation will be blocked, likely triggering an error handler that needs examination.
+
+
+`fallbackUrl` appears to be intended as a non-geolocation-based default, but it's crucial to understand how user context affects map interactions. Desktop Chrome with mobile emulation presents a misleading environment. The emulated `userAgent` could incorrectly trigger mobile logic. Also, the emulated geolocation can lead to incorrect behavior. The actual mobile Google Maps app or web behavior also needs consideration.
+
+
+It seems the existing JavaScript uses geolocation unnecessarily. The Google Maps URL scheme on mobile, using only a destination, automatically handles "Your Location" as the origin within the app, removing the need for `navigator.geolocation`. The implemented geolocation logic is likely an attempt to fulfill the requirement "Desktop should use Bodega Aurrera, but on mobiles it should use the user's location if enabled." However, it is an unnecessary implementation, because the Google Maps app inherently handles this functionality. The JavaScript's `fallbackUrl` likely serves as a secondary mechanism in scenarios where location access fails, triggering the "Bodega Aurrera" origin on desktop or when the user blocks location permissions.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 9.830370641s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
 
 ---
 
